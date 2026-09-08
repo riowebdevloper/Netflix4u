@@ -1,0 +1,131 @@
+{
+  "id": "dotmobiz-96000",
+  "record_id": "96000",
+  "provider": "dotmobiz",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "The Bay",
+  "rawTitle": "The Bay 2026 Hindi Multi Audio Webdl 720p 480p 1080p",
+  "originalTitle": "The Bay 2026 Hindi Multi Audio Webdl 720p 480p 1080p",
+  "slug": "96000-the-bay-2026-hindi-multi-audio-webdl-720p-480p-1080p",
+  "poster": "https://image.tmdb.org/t/p/w500/8QQUI4J2zLv6f96TOjbz9dcg8bc.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/8OQbUnXkEFtTMAakP6dg7bRvvip.jpg",
+  "year": 2026,
+  "rating": 5.8,
+  "votes": "28",
+  "quality": "FHD",
+  "runtime": "87",
+  "duration": "87",
+  "genres": [
+    "Action",
+    "Drama"
+  ],
+  "categories": [
+    "Action",
+    "Drama"
+  ],
+  "language": "Hindi",
+  "country": "India",
+  "cast": [],
+  "director": "Director",
+  "overview": "Best friends Emma and Lani, attending a destination wedding in Thailand, find themselves trapped on a sinking tour boat in the heart of a tiger shark sanctuary.",
+  "description": "Best friends Emma and Lani, attending a destination wedding in Thailand, find themselves trapped on a sinking tour boat in the heart of a tiger shark sanctuary.",
+  "shortDescription": "Best friends Emma and Lani, attending a destination wedding in Thailand, find themselves trapped on a sinking tour boat in the heart of a ti",
+  "imdbId": "tt30217600",
+  "screenshots": [
+    "/uploads/posts/covers/screenshot-The.-Bay.-2026-.1.webp",
+    "/uploads/posts/covers/screenshot-The.-Bay.-2026-.2.webp",
+    "/uploads/posts/covers/screenshot-The.-Bay.-2026-.3.webp",
+    "/uploads/posts/covers/screenshot-The.-Bay.-2026-.4.webp",
+    "/uploads/posts/covers/screenshot-The.-Bay.-2026-.5.webp"
+  ],
+  "downloadOptions": [
+    {
+      "id": "dl-0",
+      "quality": "480p x264",
+      "size": "430MB",
+      "url": "https://nexdrive.love/genxfm579785868256765/",
+      "label": "Click Here To Download [430MB]"
+    },
+    {
+      "id": "dl-1",
+      "quality": "720p HEVC x265",
+      "size": "1.3GB",
+      "url": "https://nexdrive.love/genxfm788530446415660/",
+      "label": "Click Here To Download [1.3GB]"
+    },
+    {
+      "id": "dl-2",
+      "quality": "720p AVC x264",
+      "size": "1.96GB",
+      "url": "https://nexdrive.love/genxfm648519592017724/",
+      "label": "Click Here To Download [1.96GB]"
+    },
+    {
+      "id": "dl-3",
+      "quality": "1080p HEVC x265",
+      "size": "3.49GB",
+      "url": "https://nexdrive.love/genxfm469470233140344/",
+      "label": "Click Here To Download [3.49GB]"
+    },
+    {
+      "id": "dl-4",
+      "quality": "1080p AVC x264",
+      "size": "6.13GB",
+      "url": "https://nexdrive.love/genxfm648777503621592/",
+      "label": "Click Here To Download [6.13GB]"
+    }
+  ],
+  "playbackSources": [
+    {
+      "serverName": "⚡ AllMovieLand / IndStream (Dotmobiz)",
+      "serverId": "dotmobiz-allmovieland",
+      "type": "iframe",
+      "url": "https://slast430did.com/play/tt30217600",
+      "quality": "FHD",
+      "language": "Hindi"
+    }
+  ],
+  "links": [
+    {
+      "url": "https://nexdrive.love/genxfm579785868256765/",
+      "quality": "480p x264",
+      "size": "430MB",
+      "label": "Click Here To Download [430MB]",
+      "isCloud": true
+    },
+    {
+      "url": "https://nexdrive.love/genxfm788530446415660/",
+      "quality": "720p HEVC x265",
+      "size": "1.3GB",
+      "label": "Click Here To Download [1.3GB]",
+      "isCloud": true
+    },
+    {
+      "url": "https://nexdrive.love/genxfm648519592017724/",
+      "quality": "720p AVC x264",
+      "size": "1.96GB",
+      "label": "Click Here To Download [1.96GB]",
+      "isCloud": true
+    },
+    {
+      "url": "https://nexdrive.love/genxfm469470233140344/",
+      "quality": "1080p HEVC x265",
+      "size": "3.49GB",
+      "label": "Click Here To Download [3.49GB]",
+      "isCloud": true
+    },
+    {
+      "url": "https://nexdrive.love/genxfm648777503621592/",
+      "quality": "1080p AVC x264",
+      "size": "6.13GB",
+      "label": "Click Here To Download [6.13GB]",
+      "isCloud": true
+    }
+  ],
+  "trending": true,
+  "featured": true,
+  "topRated": true,
+  "recentlyAdded": true,
+  "sourceUrl": "https://dotmobiz.com/96000-the-bay-2026-hindi-multi-audio-webdl-720p-480p-1080p.html"
+}

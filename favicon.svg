@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050711" />
+      <stop offset="100%" stop-color="#000000" />
+    </linearGradient>
+    <linearGradient id="nCenter" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF1A26" />
+      <stop offset="100%" stop-color="#D80812" />
+    </linearGradient>
+    <filter id="ribbonShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="-2" dy="0" stdDeviation="2.5" flood-color="#000000" flood-opacity="0.8" />
+    </filter>
+  </defs>
+  
+  <!-- Container background -->
+  <rect width="64" height="64" rx="14" fill="url(#bgGrad)" />
+  <rect width="64" height="64" rx="14" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="1.5" />
+
+  <!-- Iconic Netflix 'N' Ribbon Structure -->
+  <g transform="translate(6, 6) scale(0.8125)">
+    <!-- Left vertical bar (darker red) -->
+    <rect x="12" y="6" width="10" height="52" fill="#8E080F" rx="1" />
+    <!-- Right vertical bar (darker red) -->
+    <rect x="42" y="6" width="10" height="52" fill="#8E080F" rx="1" />
+    <!-- Diagonal sash (vibrant red with shadow) -->
+    <polygon points="12,6 22,6 52,58 42,58" fill="url(#nCenter)" filter="url(#ribbonShadow)" />
+    
+    <!-- 4U Badge on Bottom-Right -->
+    <rect x="36" y="38" width="28" height="22" rx="4" fill="#000000" stroke="#E50914" stroke-width="1.5" />
+    <text x="43" y="53" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="900" fill="#FFFFFF">4</text>
+    <!-- U with miniature red play triangle -->
+    <text x="52" y="53" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="900" fill="#FFFFFF">U</text>
+    <polygon points="56,45 59,47 56,49" fill="#E50914" />
+  </g>
+</svg>

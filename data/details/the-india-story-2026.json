@@ -1,0 +1,70 @@
+{
+  "id": "12113220",
+  "slug": "the-india-story-2026",
+  "title": "The India Story",
+  "year": 2026,
+  "poster": "https://storage.hicine.sbs/images/ko4h1RD5mtGsQSTcB05BL4cjNLJ.webp",
+  "backdrop": "https://storage.hicine.sbs/images/ko4h1RD5mtGsQSTcB05BL4cjNLJ.webp",
+  "updatedAt": "Jul 25, 2026",
+  "type": "movie",
+  "rating": 8.7,
+  "genres": [
+    "Action",
+    "Drama",
+    "Thriller"
+  ],
+  "director": "Director",
+  "overview": "The India Story (2026) - Watch and download in 480p, 720p, 1080p FHD with high speed Cloudflare R2 and HubCloud mirrors.",
+  "links": [
+    {
+      "quality": "480P",
+      "size": "455MB",
+      "label": "The India Story 480P [455MB]",
+      "url": "https://white-bush-34ba.grekot.workers.dev/?vcloud=https://vcloud.fit/w1aoaofeeeok3eh",
+      "source": "hicine",
+      "isCloud": true
+    },
+    {
+      "quality": "720P",
+      "size": "930MB",
+      "label": "The India Story 720P [930MB]",
+      "url": "https://white-bush-34ba.grekot.workers.dev/?vcloud=https://vcloud.fit/kndn6pa6l63qnpl",
+      "source": "hicine",
+      "isCloud": true
+    },
+    {
+      "quality": "1080P",
+      "size": "3GB",
+      "label": "The India Story 1080P [3GB]",
+      "url": "https://white-bush-34ba.grekot.workers.dev/?vcloud=https://vcloud.fit/14lzsmcxvby5h_z",
+      "source": "hicine",
+      "isCloud": true
+    }
+  ],
+  "downloadOptions": [
+    {
+      "quality": "480p",
+      "size": "630MB",
+      "label": "The India Story 480p [630MB]",
+      "url": "https://nexdrive.love/"
+    },
+    {
+      "quality": "720p x264",
+      "size": "1.5GB",
+      "label": "The India Story 720p x264 [1.5GB]",
+      "url": "https://nexdrive.love/"
+    },
+    {
+      "quality": "1080p x264",
+      "size": "3.6GB",
+      "label": "The India Story 1080p x264 [3.6GB]",
+      "url": "https://nexdrive.love/"
+    },
+    {
+      "quality": "1080p HQ",
+      "size": "19GB",
+      "label": "The India Story 1080p HQ [19GB]",
+      "url": "https://nexdrive.love/"
+    }
+  ]
+}

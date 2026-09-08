@@ -1,0 +1,28 @@
+{
+  "name": "netflix4u.fun",
+  "short_name": "Netflix4U",
+  "description": "Your ultimate streaming destination. Watch the latest movies, web series, anime, and K-dramas.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#060816",
+  "theme_color": "#0a0d1a",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/images/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["entertainment"],
+  "lang": "en-US",
+  "screenshots": [
+    {
+      "src": "/og-image.jpg",
+      "sizes": "1200x630",
+      "type": "image/jpeg",
+      "label": "Netflix4U Homepage"
+    }
+  ]
+}

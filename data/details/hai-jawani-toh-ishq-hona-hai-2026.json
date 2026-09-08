@@ -1,0 +1,70 @@
+{
+  "id": "12113250",
+  "slug": "hai-jawani-toh-ishq-hona-hai-2026",
+  "title": "Hai Jawani Toh Ishq...",
+  "year": 2026,
+  "poster": "https://storage.hicine.sbs/images/Hai-Jawani-Toh-Ishq-Hona-Hai.webp",
+  "backdrop": "https://storage.hicine.sbs/images/Hai-Jawani-Toh-Ishq-Hona-Hai.webp",
+  "updatedAt": "Jul 31, 2026",
+  "type": "movie",
+  "rating": 8.7,
+  "genres": [
+    "Action",
+    "Drama",
+    "Thriller"
+  ],
+  "director": "Director",
+  "overview": "Hai Jawani Toh Ishq... (2026) - Watch and download in 480p, 720p, 1080p FHD with high speed Cloudflare R2 and HubCloud mirrors.",
+  "links": [
+    {
+      "quality": "1080p",
+      "size": "2.5GB",
+      "label": "Hai Jawani Toh Ishq... (2026) 1080p FHD Direct Cloud",
+      "url": "/api/download/server?id=12113250&quality=1080p",
+      "source": "hicine",
+      "isCloud": true
+    },
+    {
+      "quality": "720p",
+      "size": "1.2GB",
+      "label": "Hai Jawani Toh Ishq... (2026) 720p HD Direct Cloud",
+      "url": "/api/download/server?id=12113250&quality=720p",
+      "source": "hicine",
+      "isCloud": true
+    },
+    {
+      "quality": "480p",
+      "size": "480MB",
+      "label": "Hai Jawani Toh Ishq... (2026) 480p SD Direct Cloud",
+      "url": "/api/download/server?id=12113250&quality=480p",
+      "source": "hicine",
+      "isCloud": true
+    }
+  ],
+  "downloadOptions": [
+    {
+      "quality": "480p",
+      "size": "630MB",
+      "label": "Hai Jawani Toh Ishq... 480p [630MB]",
+      "url": "https://nexdrive.love/"
+    },
+    {
+      "quality": "720p x264",
+      "size": "1.5GB",
+      "label": "Hai Jawani Toh Ishq... 720p x264 [1.5GB]",
+      "url": "https://nexdrive.love/"
+    },
+    {
+      "quality": "1080p x264",
+      "size": "3.6GB",
+      "label": "Hai Jawani Toh Ishq... 1080p x264 [3.6GB]",
+      "url": "https://nexdrive.love/"
+    },
+    {
+      "quality": "1080p HQ",
+      "size": "19GB",
+      "label": "Hai Jawani Toh Ishq... 1080p HQ [19GB]",
+      "url": "https://nexdrive.love/"
+    }
+  ]
+}

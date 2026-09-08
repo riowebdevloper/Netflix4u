@@ -1,0 +1,46 @@
+{
+  "id": "95840",
+  "slug": "bandar",
+  "title": "Bandar",
+  "originalTitle": "Bandar 2026 Hindi Dual Audio Webdl 720p 480p 1080p",
+  "type": "movie",
+  "year": 2026,
+  "rating": 6.5,
+  "votes": "15.4K",
+  "duration": "2h 05m",
+  "quality": "FHD",
+  "language": "Hindi / Dual Audio",
+  "genres": [],
+  "description": "Watch Bandar in full HD on FlixWorld.",
+  "poster": "https://image.tmdb.org/t/p/w500/3RRA8UBAdPC08spbDgnU0ykQ2MR.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/xS8tsJ8IvNkzBMu3kq3gZFReh7j.jpg",
+  "imdbId": "",
+  "tmdbId": "",
+  "cast": [],
+  "links": [
+    {
+      "url": "/api/download/server?id=95840&quality=1080p",
+      "quality": "1080p",
+      "size": "2.4GB",
+      "label": "Direct Cloud [1080p FHD]",
+      "source": "hicine",
+      "isCloud": true
+    },
+    {
+      "url": "/api/download/server?id=95840&quality=720p",
+      "quality": "720p",
+      "size": "1.2GB",
+      "label": "Direct Cloud [720p HD]",
+      "source": "hicine",
+      "isCloud": true
+    },
+    {
+      "url": "/api/download/server?id=95840&quality=480p",
+      "quality": "480p",
+      "size": "450MB",
+      "label": "Direct Cloud [480p SD]",
+      "source": "hicine",
+      "isCloud": true
+    }
+  ]
+}

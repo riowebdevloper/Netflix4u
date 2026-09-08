@@ -1,0 +1,46 @@
+{
+  "id": "95855",
+  "slug": "babita-singh-reporting",
+  "title": "Babita Singh Reporting",
+  "originalTitle": "Babita Singh Reporting 2026 Hindi Dual Audio Webdl 720p 480p 1080p",
+  "type": "movie",
+  "year": 2026,
+  "rating": 5,
+  "votes": "15.4K",
+  "duration": "2h 05m",
+  "quality": "FHD",
+  "language": "Hindi / Dual Audio",
+  "genres": [],
+  "description": "Watch Babita Singh Reporting in full HD on FlixWorld.",
+  "poster": "https://image.tmdb.org/t/p/w500/owuFDxJOG1nv3J2wMf5f5jQjqHn.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/t8DWZvl10Bhl1k39GPAHvxPOjr.jpg",
+  "imdbId": "",
+  "tmdbId": "",
+  "cast": [],
+  "links": [
+    {
+      "url": "/api/download/server?id=95855&quality=1080p",
+      "quality": "1080p",
+      "size": "2.4GB",
+      "label": "Direct Cloud [1080p FHD]",
+      "source": "hicine",
+      "isCloud": true
+    },
+    {
+      "url": "/api/download/server?id=95855&quality=720p",
+      "quality": "720p",
+      "size": "1.2GB",
+      "label": "Direct Cloud [720p HD]",
+      "source": "hicine",
+      "isCloud": true
+    },
+    {
+      "url": "/api/download/server?id=95855&quality=480p",
+      "quality": "480p",
+      "size": "450MB",
+      "label": "Direct Cloud [480p SD]",
+      "source": "hicine",
+      "isCloud": true
+    }
+  ]
+}

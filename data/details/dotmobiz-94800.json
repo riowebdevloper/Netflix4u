@@ -1,0 +1,116 @@
+{
+  "id": "dotmobiz-94800",
+  "record_id": "94800",
+  "provider": "dotmobiz",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "Awarapan 2",
+  "rawTitle": "Awarapan 2 2026 Hindi Line Audio Hdtc 720p 480p 1080p",
+  "originalTitle": "Awarapan 2 2026 Hindi Line Audio Hdtc 720p 480p 1080p",
+  "slug": "94800-awarapan-2-2026-hindi-line-audio-hdtc-720p-480p-1080p",
+  "poster": "https://image.tmdb.org/t/p/w500/lD3J6zTbWkVtPYuSUuuBwpuKMCO.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/dLw4YK72fW4dF82nnLFDbeXotSX.jpg",
+  "year": 2026,
+  "rating": 8.4,
+  "votes": "10.5K",
+  "quality": "FHD",
+  "runtime": "140",
+  "duration": "140",
+  "genres": [
+    "Action",
+    "Drama"
+  ],
+  "categories": [
+    "Action",
+    "Drama"
+  ],
+  "language": "Hindi",
+  "country": "India",
+  "cast": [],
+  "director": "Director",
+  "overview": "19 years later, Shivam is back. A man haunted by grief and loss, searching for a purpose for his life.",
+  "description": "19 years later, Shivam is back. A man haunted by grief and loss, searching for a purpose for his life.",
+  "shortDescription": "19 years later, Shivam is back. A man haunted by grief and loss, searching for a purpose for his life.",
+  "imdbId": "tt36300841",
+  "screenshots": [
+    "/uploads/posts/covers/screenshot-Awarap15.webp",
+    "/uploads/posts/covers/screenshot-Awarap13.webp",
+    "/uploads/posts/covers/screenshot-Awarap12.webp",
+    "/uploads/posts/covers/screenshot-Awarap11.webp"
+  ],
+  "downloadOptions": [
+    {
+      "id": "dl-0",
+      "quality": "480p",
+      "size": "460MB",
+      "url": "https://nexdrive.love/genxfm012952835960575/",
+      "label": "Click Here To Download [460MB]"
+    },
+    {
+      "id": "dl-1",
+      "quality": "720p HEVC",
+      "size": "790MB",
+      "url": "https://nexdrive.love/genxfm572271189148374/",
+      "label": "Click Here To Download [790MB]"
+    },
+    {
+      "id": "dl-2",
+      "quality": "720p x264",
+      "size": "1.1GB",
+      "url": "https://nexdrive.love/genxfm833272833950745/",
+      "label": "Click Here To Download [1.1GB]"
+    },
+    {
+      "id": "dl-3",
+      "quality": "1080p x264",
+      "size": "2.6GB",
+      "url": "https://nexdrive.love/genxfm802704339751433/",
+      "label": "Click Here To Download [2.6GB]"
+    }
+  ],
+  "playbackSources": [
+    {
+      "serverName": "⚡ AllMovieLand / IndStream (Dotmobiz)",
+      "serverId": "dotmobiz-allmovieland",
+      "type": "iframe",
+      "url": "https://slast430did.com/play/tt36300841",
+      "quality": "FHD",
+      "language": "Hindi"
+    }
+  ],
+  "links": [
+    {
+      "url": "https://nexdrive.love/genxfm012952835960575/",
+      "quality": "480p",
+      "size": "460MB",
+      "label": "Click Here To Download [460MB]",
+      "isCloud": true
+    },
+    {
+      "url": "https://nexdrive.love/genxfm572271189148374/",
+      "quality": "720p HEVC",
+      "size": "790MB",
+      "label": "Click Here To Download [790MB]",
+      "isCloud": true
+    },
+    {
+      "url": "https://nexdrive.love/genxfm833272833950745/",
+      "quality": "720p x264",
+      "size": "1.1GB",
+      "label": "Click Here To Download [1.1GB]",
+      "isCloud": true
+    },
+    {
+      "url": "https://nexdrive.love/genxfm802704339751433/",
+      "quality": "1080p x264",
+      "size": "2.6GB",
+      "label": "Click Here To Download [2.6GB]",
+      "isCloud": true
+    }
+  ],
+  "trending": true,
+  "featured": true,
+  "topRated": true,
+  "recentlyAdded": true,
+  "sourceUrl": "https://dotmobiz.com/94800-awarapan-2-2026-hindi-line-audio-hdtc-720p-480p-1080p.html"
+}

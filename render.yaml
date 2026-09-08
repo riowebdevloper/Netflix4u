@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: netflix4u
+    env: node
+    plan: standard
+    buildCommand: npm install --production
+    startCommand: node server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+    healthCheckPath: /api/summary
+    autoDeploy: true

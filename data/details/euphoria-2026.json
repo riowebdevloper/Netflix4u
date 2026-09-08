@@ -1,0 +1,70 @@
+{
+  "id": "12113305",
+  "slug": "euphoria-2026",
+  "title": "Euphoria",
+  "year": 2026,
+  "poster": "https://storage.hicine.sbs/images/Euphoria-Full-Movie.webp",
+  "backdrop": "https://storage.hicine.sbs/images/Euphoria-Full-Movie.webp",
+  "updatedAt": "Aug 15, 2026",
+  "type": "movie",
+  "rating": 8.7,
+  "genres": [
+    "Action",
+    "Drama",
+    "Thriller"
+  ],
+  "director": "Director",
+  "overview": "Euphoria (2026) - Watch and download in 480p, 720p, 1080p FHD with high speed Cloudflare R2 and HubCloud mirrors.",
+  "links": [
+    {
+      "quality": "480P",
+      "size": "500MB",
+      "label": "Euphoria 480P [500MB]",
+      "url": "https://white-bush-34ba.grekot.workers.dev/?vcloud=https://vcloud.fit/zvia17bcsabk2re",
+      "source": "hicine",
+      "isCloud": true
+    },
+    {
+      "quality": "720P",
+      "size": "1.4GB",
+      "label": "Euphoria 720P [1.4GB]",
+      "url": "https://white-bush-34ba.grekot.workers.dev/?vcloud=https://vcloud.fit/q11nvdfvk9e7pj9",
+      "source": "hicine",
+      "isCloud": true
+    },
+    {
+      "quality": "1080P",
+      "size": "2.8GB",
+      "label": "Euphoria 1080P [2.8GB]",
+      "url": "https://white-bush-34ba.grekot.workers.dev/?vcloud=https://vcloud.fit/kpiv2pnq7rjnviv",
+      "source": "hicine",
+      "isCloud": true
+    }
+  ],
+  "downloadOptions": [
+    {
+      "quality": "480p",
+      "size": "630MB",
+      "label": "Euphoria 480p [630MB]",
+      "url": "https://nexdrive.love/"
+    },
+    {
+      "quality": "720p x264",
+      "size": "1.5GB",
+      "label": "Euphoria 720p x264 [1.5GB]",
+      "url": "https://nexdrive.love/"
+    },
+    {
+      "quality": "1080p x264",
+      "size": "3.6GB",
+      "label": "Euphoria 1080p x264 [3.6GB]",
+      "url": "https://nexdrive.love/"
+    },
+    {
+      "quality": "1080p HQ",
+      "size": "19GB",
+      "label": "Euphoria 1080p HQ [19GB]",
+      "url": "https://nexdrive.love/"
+    }
+  ]
+}

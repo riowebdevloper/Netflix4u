@@ -1,0 +1,70 @@
+{
+  "id": "12113110",
+  "slug": "zunq-the-rust-2026",
+  "title": "Zunq: The Rust",
+  "year": 2026,
+  "poster": "https://storage.hicine.sbs/images/Screenshot_1.webp",
+  "backdrop": "https://storage.hicine.sbs/images/Screenshot_1.webp",
+  "updatedAt": "Apr 9, 2026",
+  "type": "movie",
+  "rating": 8.7,
+  "genres": [
+    "Action",
+    "Drama",
+    "Thriller"
+  ],
+  "director": "Director",
+  "overview": "Zunq: The Rust (2026) - Watch and download in 480p, 720p, 1080p FHD with high speed Cloudflare R2 and HubCloud mirrors.",
+  "links": [
+    {
+      "quality": "1080p",
+      "size": "2.5GB",
+      "label": "Zunq: The Rust (2026) 1080p FHD Direct Cloud",
+      "url": "/api/download/server?id=12113110&quality=1080p",
+      "source": "hicine",
+      "isCloud": true
+    },
+    {
+      "quality": "720p",
+      "size": "1.2GB",
+      "label": "Zunq: The Rust (2026) 720p HD Direct Cloud",
+      "url": "/api/download/server?id=12113110&quality=720p",
+      "source": "hicine",
+      "isCloud": true
+    },
+    {
+      "quality": "480p",
+      "size": "480MB",
+      "label": "Zunq: The Rust (2026) 480p SD Direct Cloud",
+      "url": "/api/download/server?id=12113110&quality=480p",
+      "source": "hicine",
+      "isCloud": true
+    }
+  ],
+  "downloadOptions": [
+    {
+      "quality": "480p",
+      "size": "630MB",
+      "label": "Zunq: The Rust 480p [630MB]",
+      "url": "https://nexdrive.love/"
+    },
+    {
+      "quality": "720p x264",
+      "size": "1.5GB",
+      "label": "Zunq: The Rust 720p x264 [1.5GB]",
+      "url": "https://nexdrive.love/"
+    },
+    {
+      "quality": "1080p x264",
+      "size": "3.6GB",
+      "label": "Zunq: The Rust 1080p x264 [3.6GB]",
+      "url": "https://nexdrive.love/"
+    },
+    {
+      "quality": "1080p HQ",
+      "size": "19GB",
+      "label": "Zunq: The Rust 1080p HQ [19GB]",
+      "url": "https://nexdrive.love/"
+    }
+  ]
+}

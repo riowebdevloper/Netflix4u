@@ -1,0 +1,70 @@
+{
+  "id": "12113130",
+  "slug": "hathras-2026",
+  "title": "Hathras",
+  "year": 2026,
+  "poster": "https://storage.hicine.sbs/images/Hathras.webp",
+  "backdrop": "https://storage.hicine.sbs/images/Hathras.webp",
+  "updatedAt": "May 15, 2026",
+  "type": "movie",
+  "rating": 8.7,
+  "genres": [
+    "Action",
+    "Drama",
+    "Thriller"
+  ],
+  "director": "Director",
+  "overview": "Hathras (2026) - Watch and download in 480p, 720p, 1080p FHD with high speed Cloudflare R2 and HubCloud mirrors.",
+  "links": [
+    {
+      "quality": "480P",
+      "size": "320MB",
+      "label": "Hathras 480P [320MB]",
+      "url": "https://white-bush-34ba.grekot.workers.dev/?vcloud=https://vcloud.fit/xghxj1xsc1-yx8i",
+      "source": "hicine",
+      "isCloud": true
+    },
+    {
+      "quality": "480P",
+      "size": "320MB",
+      "label": "Hathras 480P [320MB]",
+      "url": "https://white-bush-34ba.grekot.workers.dev/?vcloud=https://vcloud.fit/zd8tf0jky0zdjjo",
+      "source": "hicine",
+      "isCloud": true
+    },
+    {
+      "quality": "480P",
+      "size": "320MB",
+      "label": "Hathras 480P [320MB]",
+      "url": "https://white-bush-34ba.grekot.workers.dev/?vcloud=https://vcloud.fit/0blnnn-qnlnben-",
+      "source": "hicine",
+      "isCloud": true
+    }
+  ],
+  "downloadOptions": [
+    {
+      "quality": "480p",
+      "size": "630MB",
+      "label": "Hathras 480p [630MB]",
+      "url": "https://nexdrive.love/"
+    },
+    {
+      "quality": "720p x264",
+      "size": "1.5GB",
+      "label": "Hathras 720p x264 [1.5GB]",
+      "url": "https://nexdrive.love/"
+    },
+    {
+      "quality": "1080p x264",
+      "size": "3.6GB",
+      "label": "Hathras 1080p x264 [3.6GB]",
+      "url": "https://nexdrive.love/"
+    },
+    {
+      "quality": "1080p HQ",
+      "size": "19GB",
+      "label": "Hathras 1080p HQ [19GB]",
+      "url": "https://nexdrive.love/"
+    }
+  ]
+}

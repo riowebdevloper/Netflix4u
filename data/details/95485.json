@@ -1,0 +1,125 @@
+{
+  "id": "dotmobiz-95485",
+  "record_id": "95485",
+  "provider": "dotmobiz",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "Lockbox",
+  "rawTitle": "Lockbox 2026 English Audio Web Dl 720p 480p 1080p",
+  "originalTitle": "Lockbox 2026 English Audio Web Dl 720p 480p 1080p",
+  "slug": "95485-lockbox-2026-english-audio-web-dl-720p-480p-1080p",
+  "poster": "https://image.tmdb.org/t/p/w500/6feyDUp0QyOqukf2Hf9yXGLurD9.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/8YRMbO0OatB5J5KPEHuLhV1ZAhj.jpg",
+  "year": 2026,
+  "rating": 6.6,
+  "votes": "18",
+  "quality": "FHD",
+  "runtime": "1 hr 45 min",
+  "duration": "1 hr 45 min",
+  "genres": [
+    "Action",
+    "Drama"
+  ],
+  "categories": [
+    "Action",
+    "Drama"
+  ],
+  "language": "English",
+  "country": "International",
+  "cast": [
+    "Carla Gugino",
+    "Lou Taylor Pucci",
+    "Katharine Isabelle",
+    "Roman Kinsella",
+    "Donald Sales",
+    "Jason McKinnon",
+    "Darcey Johnson",
+    "Lee Tichon",
+    "Jecca Beauchamp",
+    "Aedan Edwards",
+    "Jason William Day",
+    "Kenny Wood-Schatz",
+    "Jed Rees",
+    "Madeleine Kelders",
+    "Olivia Ducayen",
+    "Samantha Ferris",
+    "Mercedes de la Zerda",
+    "Kevin McNulty",
+    "Susan Hanson",
+    "Cecilly Day"
+  ],
+  "director": "Director",
+  "overview": "A woman puts her life on the line to protect her troubled, enigmatic cousin, Winthrop, who has been targeted and hunted by a powerful supernatural force.",
+  "description": "A woman puts her life on the line to protect her troubled, enigmatic cousin, Winthrop, who has been targeted and hunted by a powerful supernatural force.",
+  "shortDescription": "A woman puts her life on the line to protect her troubled, enigmatic cousin, Winthrop, who has been targeted and hunted by a powerful supern",
+  "imdbId": "tt37369064",
+  "screenshots": [
+    "/uploads/posts/covers/screenshot-ockbox-2026-1.webp",
+    "/uploads/posts/covers/screenshot-ockbox-2026-2.webp",
+    "/uploads/posts/covers/screenshot-ockbox-2026-3.webp",
+    "/uploads/posts/covers/screenshot-ockbox-2026-4.webp",
+    "/uploads/posts/covers/screenshot-ockbox-2026-5.webp",
+    "/uploads/posts/covers/screenshot-ockbox-2026-6.webp"
+  ],
+  "downloadOptions": [
+    {
+      "id": "dl-0",
+      "quality": "480p",
+      "size": "320MB",
+      "url": "https://nexdrive.love/genxfm770205679241206/",
+      "label": "Click Here To Download [320MB]"
+    },
+    {
+      "id": "dl-1",
+      "quality": "720p",
+      "size": "850MB",
+      "url": "https://nexdrive.love/genxfm004115914252339/",
+      "label": "Click Here To Download [850MB]"
+    },
+    {
+      "id": "dl-2",
+      "quality": "1080p",
+      "size": "2GB",
+      "url": "https://nexdrive.love/genxfm878489841172363/",
+      "label": "Click Here To Download [2GB]"
+    }
+  ],
+  "playbackSources": [
+    {
+      "serverName": "⚡ AllMovieLand / IndStream (Dotmobiz)",
+      "serverId": "dotmobiz-allmovieland",
+      "type": "iframe",
+      "url": "https://slast430did.com/play/tt37369064",
+      "quality": "FHD",
+      "language": "English"
+    }
+  ],
+  "links": [
+    {
+      "url": "https://nexdrive.love/genxfm770205679241206/",
+      "quality": "480p",
+      "size": "320MB",
+      "label": "Click Here To Download [320MB]",
+      "isCloud": true
+    },
+    {
+      "url": "https://nexdrive.love/genxfm004115914252339/",
+      "quality": "720p",
+      "size": "850MB",
+      "label": "Click Here To Download [850MB]",
+      "isCloud": true
+    },
+    {
+      "url": "https://nexdrive.love/genxfm878489841172363/",
+      "quality": "1080p",
+      "size": "2GB",
+      "label": "Click Here To Download [2GB]",
+      "isCloud": true
+    }
+  ],
+  "trending": true,
+  "featured": true,
+  "topRated": true,
+  "recentlyAdded": true,
+  "sourceUrl": "https://dotmobiz.com/95485-lockbox-2026-english-audio-web-dl-720p-480p-1080p.html"
+}

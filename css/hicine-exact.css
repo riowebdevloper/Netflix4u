@@ -1,0 +1,862 @@
+/* ==========================================================================
+   HICINE.SBS 1:1 PIXEL PERFECT DESIGN SYSTEM FOR NETFLIX4U
+   Matching reference screenshots:
+   - Screenshot 1: 2-Column Movie Detail Modal with Download cards & tabs
+   - Screenshot 2: Human Verification Gate ("Welcome Back!" & anti-bot challenge)
+   - Screenshot 3: Full catalog & trending layout
+   - Screenshot 4: "Servers Ready" Multi-Server Fast Download Page
+   - Screenshot 5: Direct Download Options Popup Modal
+   ========================================================================== */
+
+:root {
+  --hicine-bg: #07080c;
+  --hicine-card-bg: #0e1017;
+  --hicine-modal-bg: #121319;
+  --hicine-inner-card: #090a0f;
+  --hicine-border: rgba(255, 255, 255, 0.08);
+  --hicine-border-hover: rgba(255, 255, 255, 0.18);
+  --hicine-red: #ff0b37;
+  --hicine-red-hover: #e00028;
+  --hicine-red-glow: rgba(255, 11, 55, 0.35);
+  --hicine-green: #22c55e;
+  --hicine-green-glow: rgba(34, 197, 94, 0.35);
+  --hicine-yellow: #facc15;
+  --hicine-text-muted: #94a3b8;
+  --hicine-font: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* ==========================================================================
+   1. SCREENSHOT 2: HUMAN VERIFICATION GATE (ANTI-BOT SYSTEM)
+   ========================================================================== */
+#hicine-gate-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  background: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.4s;
+  font-family: var(--hicine-font);
+}
+
+#hicine-gate-overlay.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.hicine-gate-card {
+  width: 100%;
+  max-width: 440px;
+  background: #111319;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 26px;
+  padding: 2.5rem 2rem 2rem 2rem;
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.8), 0 0 40px rgba(16, 185, 129, 0.04);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Glowing Checkmark Ring */
+.hicine-check-ring-wrapper {
+  position: relative;
+  width: 88px;
+  height: 88px;
+  margin: 0 auto 1.5rem auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hicine-check-ring-outer {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid rgba(34, 197, 94, 0.25);
+  animation: hicinePulseRing 2.4s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.hicine-check-ring-inner {
+  position: absolute;
+  inset: 8px;
+  border-radius: 50%;
+  border: 2px solid rgba(34, 197, 94, 0.5);
+}
+
+.hicine-check-circle {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: #22c55e;
+  box-shadow: 0 0 24px rgba(34, 197, 94, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes hicinePulseRing {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.08); opacity: 0.3; }
+  100% { transform: scale(0.95); opacity: 0.8; }
+}
+
+/* Verified Pill Badge */
+.hicine-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(34, 197, 94, 0.12);
+  color: #34d399;
+  border: 1px solid rgba(34, 197, 94, 0.28);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 5px 14px;
+  border-radius: 9999px;
+  margin-bottom: 1.25rem;
+  text-transform: uppercase;
+}
+
+.hicine-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 8px #22c55e;
+}
+
+.hicine-gate-title {
+  color: #ffffff;
+  font-size: 1.75rem;
+  font-weight: 800;
+  margin: 0 0 0.5rem 0;
+  letter-spacing: -0.02em;
+}
+
+.hicine-gate-subtitle {
+  color: #94a3b8;
+  font-size: 0.925rem;
+  line-height: 1.45;
+  margin: 0 0 1rem 0;
+}
+
+.hicine-accessed-time {
+  color: #22c55e;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 0.85rem;
+}
+
+.hicine-redirecting-text {
+  color: #64748b;
+  font-size: 0.85rem;
+  margin-bottom: 1.5rem;
+}
+
+.hicine-redirecting-text strong {
+  color: #f1f5f9;
+}
+
+/* Primary Green Entrance Button */
+.hicine-gate-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #22c55e;
+  color: #05160c;
+  font-size: 1.05rem;
+  font-weight: 700;
+  padding: 14px 20px;
+  border-radius: 14px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 8px 24px rgba(34, 197, 94, 0.35);
+}
+
+.hicine-gate-btn:hover {
+  background: #16a34a;
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 12px 30px rgba(34, 197, 94, 0.45);
+}
+
+.hicine-gate-btn:active {
+  transform: scale(0.98);
+}
+
+/* Access Expiry Bottom Card */
+.hicine-gate-expiry {
+  margin-top: 1.5rem;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  font-size: 0.825rem;
+  color: #94a3b8;
+}
+
+.hicine-gate-expiry p {
+  margin: 0 0 4px 0;
+}
+
+.hicine-countdown-yellow {
+  color: #facc15;
+  font-weight: 700;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+/* Interactive Human Slide Challenge (for first time / unverified) */
+.hicine-challenge-box {
+  margin: 1.5rem 0;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px dashed rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  padding: 18px;
+}
+
+.hicine-slider-track {
+  position: relative;
+  width: 100%;
+  height: 48px;
+  background: #090a0f;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  user-select: none;
+}
+
+.hicine-slider-label {
+  color: #64748b;
+  font-size: 0.825rem;
+  font-weight: 600;
+  pointer-events: none;
+}
+
+.hicine-slider-thumb {
+  position: absolute;
+  left: 3px;
+  top: 3px;
+  bottom: 3px;
+  width: 48px;
+  background: #22c55e;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  cursor: grab;
+  box-shadow: 0 2px 10px rgba(34, 197, 94, 0.5);
+  transition: background 0.2s;
+}
+
+.hicine-slider-thumb:active {
+  cursor: grabbing;
+}
+
+/* ==========================================================================
+   2. SCREENSHOT 1: 2-COLUMN MOVIE DETAIL MODAL
+   ========================================================================== */
+#hicine-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99990;
+  background: rgba(0, 0, 0, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  font-family: var(--hicine-font);
+}
+
+#hicine-modal-overlay.open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.hicine-modal-container {
+  width: 100%;
+  max-width: 1160px;
+  max-height: 90vh;
+  background: #111218;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  box-shadow: 0 35px 90px rgba(0, 0, 0, 0.95);
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  position: relative;
+  animation: hicineModalIn 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes hicineModalIn {
+  from { transform: scale(0.96) translateY(12px); opacity: 0; }
+  to { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+/* Modal Left Column (Poster) */
+.hicine-modal-poster-col {
+  width: 380px;
+  flex-shrink: 0;
+  position: relative;
+  background: #090a0f;
+  display: flex;
+  overflow: hidden;
+}
+
+.hicine-modal-poster-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Modal Right Column (Content) */
+.hicine-modal-content-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow-y: auto;
+  max-height: 90vh;
+  background: #111218;
+  padding: 2rem 2.25rem;
+}
+
+/* Close Button (X) */
+.hicine-modal-close-btn {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #cbd5e1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.hicine-modal-close-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+  transform: scale(1.08);
+}
+
+/* Header Area */
+.hicine-modal-title {
+  color: #ffffff;
+  font-size: 1.65rem;
+  font-weight: 800;
+  line-height: 1.25;
+  margin: 0 0 6px 0;
+  padding-right: 48px;
+}
+
+.hicine-modal-updated {
+  color: #64748b;
+  font-size: 0.85rem;
+  margin: 0 0 1.25rem 0;
+}
+
+/* Navigation Tabs Bar */
+.hicine-tabs-bar {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 1.5rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.hicine-tabs-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.hicine-tab-btn {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0 0 10px 0;
+  cursor: pointer;
+  position: relative;
+  white-space: nowrap;
+  transition: color 0.2s;
+}
+
+.hicine-tab-btn:hover {
+  color: #ffffff;
+}
+
+.hicine-tab-btn.active {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.hicine-tab-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 2.5px;
+  background: var(--hicine-red);
+  border-radius: 3px 3px 0 0;
+  box-shadow: 0 0 10px var(--hicine-red);
+}
+
+/* Download Blocks Container */
+.hicine-downloads-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Quality Download Card */
+.hicine-dl-card {
+  background: #0a0b10;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  padding: 1.25rem 1.4rem;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.hicine-dl-card:hover {
+  border-color: rgba(255, 255, 255, 0.14);
+  background: #0d0e14;
+}
+
+.hicine-dl-file-info {
+  font-size: 0.775rem;
+  color: #94a3b8;
+  margin-bottom: 0.85rem;
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.hicine-dl-file-info strong {
+  color: #cbd5e1;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.hicine-dl-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.hicine-dl-meta-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Pill badge (480p, 720p, 1080p) */
+.hicine-quality-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.hicine-dl-size-label {
+  color: #f1f5f9;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.hicine-dl-size-label span {
+  color: #64748b;
+  font-weight: 400;
+  margin: 0 4px;
+}
+
+/* Vibrant Red Download Button */
+.hicine-dl-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #ff0033;
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 10px 22px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px rgba(255, 0, 51, 0.4);
+  text-decoration: none;
+}
+
+.hicine-dl-btn:hover {
+  background: #e6002e;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(255, 0, 51, 0.55);
+}
+
+.hicine-dl-btn:active {
+  transform: scale(0.97);
+}
+
+/* ==========================================================================
+   3. SCREENSHOT 4: "SERVERS READY" FAST DOWNLOAD MODAL / PAGE
+   ========================================================================== */
+#hicine-servers-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 99995;
+  background: rgba(0, 0, 0, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  font-family: var(--hicine-font);
+}
+
+#hicine-servers-modal.open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.hicine-servers-card {
+  width: 100%;
+  max-width: 520px;
+  background: #0d0f15;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  padding: 1.75rem;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.95);
+  position: relative;
+  max-height: 92vh;
+  overflow-y: auto;
+}
+
+/* Top Countdown Banner ("Links expire in 4:53") */
+.hicine-expire-banner {
+  background: #151821;
+  border-left: 4px solid #ff0033;
+  border-radius: 10px;
+  padding: 10px 16px;
+  text-align: center;
+  color: #ff3355;
+  font-size: 0.875rem;
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.hicine-servers-header {
+  text-align: center;
+  margin-bottom: 1.25rem;
+}
+
+.hicine-servers-header h3 {
+  color: #ffffff;
+  font-size: 1.4rem;
+  font-weight: 800;
+  margin: 0 0 6px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* Movie Meta inside Servers card */
+.hicine-server-meta-box {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+  padding: 14px;
+  margin-bottom: 1.25rem;
+  font-size: 0.825rem;
+}
+
+.hicine-server-meta-box .label {
+  color: #64748b;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 2px;
+}
+
+.hicine-server-meta-box .title {
+  color: #f1f5f9;
+  font-weight: 600;
+  line-height: 1.35;
+  margin-bottom: 8px;
+}
+
+.hicine-server-meta-box .size {
+  color: #e2e8f0;
+  font-weight: 700;
+}
+
+/* Server Button List */
+.hicine-server-items {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 1.25rem;
+}
+
+.hicine-server-item {
+  background: #141720;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  transition: all 0.2s ease;
+}
+
+.hicine-server-item:hover {
+  border-color: rgba(255, 255, 255, 0.18);
+  background: #191d28;
+}
+
+.hicine-server-name {
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.hicine-server-badge {
+  font-size: 0.725rem;
+  background: rgba(255, 255, 255, 0.08);
+  color: #94a3b8;
+  padding: 2px 8px;
+  border-radius: 6px;
+  margin-left: 8px;
+}
+
+/* 10Gbps Notice Box */
+.hicine-ad-notice {
+  background: rgba(255, 0, 51, 0.08);
+  border-left: 3.5px solid #ff0033;
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 0.8rem;
+  color: #e2e8f0;
+  line-height: 1.45;
+  margin-bottom: 1rem;
+}
+
+.hicine-ad-notice strong {
+  color: #ff3355;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.hicine-servers-footer {
+  text-align: center;
+  font-size: 0.75rem;
+  color: #64748b;
+  margin: 0;
+}
+
+/* ==========================================================================
+   4. SCREENSHOT 5: DIRECT DOWNLOAD OPTIONS POPUP MODAL
+   ========================================================================== */
+#hicine-direct-popup {
+  position: fixed;
+  inset: 0;
+  z-index: 99996;
+  background: rgba(0, 0, 0, 0.88);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+  font-family: var(--hicine-font);
+}
+
+#hicine-direct-popup.open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.hicine-direct-card {
+  width: 100%;
+  max-width: 380px;
+  background: #14151c;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 18px;
+  padding: 1.5rem;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.9);
+  position: relative;
+}
+
+.hicine-direct-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 12px;
+  margin-bottom: 14px;
+}
+
+.hicine-direct-title {
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0 0 2px 0;
+}
+
+.hicine-direct-subtitle {
+  color: #64748b;
+  font-size: 0.8rem;
+  margin: 0;
+}
+
+.hicine-direct-sec-label {
+  color: #cbd5e1;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.hicine-direct-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #ff0033;
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 12px 18px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(255, 0, 51, 0.4);
+  transition: background 0.2s;
+}
+
+.hicine-direct-btn:hover {
+  background: #e6002e;
+}
+
+/* ==========================================================================
+   5. VIDEO STREAMING PLAYER & TRAILERS TAB
+   ========================================================================== */
+.hicine-player-tab-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.hicine-player-servers-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.hicine-stream-server-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #cbd5e1;
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-size: 0.825rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+
+.hicine-stream-server-btn.active {
+  background: #ff0033;
+  color: #ffffff;
+  border-color: #ff0033;
+  box-shadow: 0 4px 12px rgba(255, 0, 51, 0.35);
+}
+
+.hicine-iframe-container {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000000;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+}
+
+.hicine-iframe-container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Responsive Overrides */
+@media (max-width: 900px) {
+  .hicine-modal-container {
+    flex-direction: column;
+    max-height: 94vh;
+    border-radius: 20px;
+  }
+  .hicine-modal-poster-col {
+    width: 100%;
+    height: 220px;
+  }
+  .hicine-modal-content-col {
+    padding: 1.25rem;
+    max-height: none;
+  }
+  .hicine-modal-title {
+    font-size: 1.35rem;
+  }
+}

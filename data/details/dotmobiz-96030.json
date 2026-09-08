@@ -1,0 +1,111 @@
+{
+  "id": "dotmobiz-96030",
+  "record_id": "96030",
+  "provider": "dotmobiz",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "Ultorath 2026 1080 p",
+  "rawTitle": "Ultorath 2026 Bengali Audio Web Dl 720p 480p 1080p",
+  "originalTitle": "Ultorath 2026 Bengali Audio Web Dl 720p 480p 1080p",
+  "slug": "96030-ultorath-2026-bengali-audio-web-dl-720p-480p-1080p",
+  "poster": "https://image.tmdb.org/t/p/w500/rupbZs8tE5h8SyaUEMFJECkIXvF.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/w500/rupbZs8tE5h8SyaUEMFJECkIXvF.jpg",
+  "year": 2026,
+  "rating": 8.4,
+  "votes": "10.5K",
+  "quality": "FHD",
+  "runtime": "2h 10m",
+  "duration": "2h 10m",
+  "genres": [
+    "Action",
+    "Drama"
+  ],
+  "categories": [
+    "Action",
+    "Drama"
+  ],
+  "language": "English",
+  "country": "International",
+  "cast": [
+    "Priyanka Sarkar",
+    "Biswajit Chakraborty",
+    "Kaushik Sen"
+  ],
+  "director": "Director",
+  "overview": "Three generations confront conflict under one roof until one incident bridges their divide, proving patience and understanding can transform relationships.",
+  "description": "Three generations confront conflict under one roof until one incident bridges their divide, proving patience and understanding can transform relationships.",
+  "shortDescription": "Three generations confront conflict under one roof until one incident bridges their divide, proving patience and understanding can transform",
+  "imdbId": "tt44618406",
+  "screenshots": [
+    "/uploads/posts/covers/screenshot-ultorath-1.webp",
+    "/uploads/posts/covers/screenshot-ultorath-2.webp",
+    "/uploads/posts/covers/screenshot-ultorath-3.webp",
+    "/uploads/posts/covers/screenshot-ultorath-4.webp",
+    "/uploads/posts/covers/screenshot-ultorath-5.webp",
+    "/uploads/posts/covers/screenshot-ultorath-6.webp",
+    "/uploads/posts/covers/screenshot-ultorath-7.webp",
+    "/uploads/posts/covers/screenshot-ultorath-8.webp",
+    "/uploads/posts/covers/screenshot-ultorath-9.webp"
+  ],
+  "downloadOptions": [
+    {
+      "id": "dl-0",
+      "quality": "480p",
+      "size": "310MB",
+      "url": "https://nexdrive.love/genxfm670523064651634/",
+      "label": "Click Here To Download [310MB]"
+    },
+    {
+      "id": "dl-1",
+      "quality": "720p",
+      "size": "820MB",
+      "url": "https://nexdrive.love/genxfm460870929146272/",
+      "label": "Click Here To Download [820MB]"
+    },
+    {
+      "id": "dl-2",
+      "quality": "1080p",
+      "size": "1.8GB",
+      "url": "https://nexdrive.love/genxfm167203815721583/",
+      "label": "Click Here To Download [1.8GB]"
+    }
+  ],
+  "playbackSources": [
+    {
+      "serverName": "⚡ AllMovieLand / IndStream (Dotmobiz)",
+      "serverId": "dotmobiz-allmovieland",
+      "type": "iframe",
+      "url": "https://slast430did.com/play/tt44618406",
+      "quality": "FHD",
+      "language": "English"
+    }
+  ],
+  "links": [
+    {
+      "url": "https://nexdrive.love/genxfm670523064651634/",
+      "quality": "480p",
+      "size": "310MB",
+      "label": "Click Here To Download [310MB]",
+      "isCloud": true
+    },
+    {
+      "url": "https://nexdrive.love/genxfm460870929146272/",
+      "quality": "720p",
+      "size": "820MB",
+      "label": "Click Here To Download [820MB]",
+      "isCloud": true
+    },
+    {
+      "url": "https://nexdrive.love/genxfm167203815721583/",
+      "quality": "1080p",
+      "size": "1.8GB",
+      "label": "Click Here To Download [1.8GB]",
+      "isCloud": true
+    }
+  ],
+  "trending": true,
+  "featured": true,
+  "topRated": true,
+  "recentlyAdded": true,
+  "sourceUrl": "https://dotmobiz.com/96030-ultorath-2026-bengali-audio-web-dl-720p-480p-1080p.html"
+}

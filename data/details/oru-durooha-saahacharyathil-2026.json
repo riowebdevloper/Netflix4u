@@ -1,0 +1,70 @@
+{
+  "id": "12113280",
+  "slug": "oru-durooha-saahacharyathil-2026",
+  "title": "Oru Durooha Saahacharyam",
+  "year": 2026,
+  "poster": "https://storage.hicine.sbs/images/dCsQAElqfdiC0V2HK3n830QGqjT.webp",
+  "backdrop": "https://storage.hicine.sbs/images/dCsQAElqfdiC0V2HK3n830QGqjT.webp",
+  "updatedAt": "Aug 11, 2026",
+  "type": "movie",
+  "rating": 8.7,
+  "genres": [
+    "Action",
+    "Drama",
+    "Thriller"
+  ],
+  "director": "Director",
+  "overview": "Oru Durooha Saahacharyam (2026) - Watch and download in 480p, 720p, 1080p FHD with high speed Cloudflare R2 and HubCloud mirrors.",
+  "links": [
+    {
+      "quality": "1080p",
+      "size": "2.5GB",
+      "label": "Oru Durooha Saahacharyam (2026) 1080p FHD Direct Cloud",
+      "url": "/api/download/server?id=12113280&quality=1080p",
+      "source": "hicine",
+      "isCloud": true
+    },
+    {
+      "quality": "720p",
+      "size": "1.2GB",
+      "label": "Oru Durooha Saahacharyam (2026) 720p HD Direct Cloud",
+      "url": "/api/download/server?id=12113280&quality=720p",
+      "source": "hicine",
+      "isCloud": true
+    },
+    {
+      "quality": "480p",
+      "size": "480MB",
+      "label": "Oru Durooha Saahacharyam (2026) 480p SD Direct Cloud",
+      "url": "/api/download/server?id=12113280&quality=480p",
+      "source": "hicine",
+      "isCloud": true
+    }
+  ],
+  "downloadOptions": [
+    {
+      "quality": "480p",
+      "size": "630MB",
+      "label": "Oru Durooha Saahacharyam 480p [630MB]",
+      "url": "https://nexdrive.love/"
+    },
+    {
+      "quality": "720p x264",
+      "size": "1.5GB",
+      "label": "Oru Durooha Saahacharyam 720p x264 [1.5GB]",
+      "url": "https://nexdrive.love/"
+    },
+    {
+      "quality": "1080p x264",
+      "size": "3.6GB",
+      "label": "Oru Durooha Saahacharyam 1080p x264 [3.6GB]",
+      "url": "https://nexdrive.love/"
+    },
+    {
+      "quality": "1080p HQ",
+      "size": "19GB",
+      "label": "Oru Durooha Saahacharyam 1080p HQ [19GB]",
+      "url": "https://nexdrive.love/"
+    }
+  ]
+}

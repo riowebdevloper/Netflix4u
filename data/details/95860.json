@@ -1,0 +1,46 @@
+{
+  "id": "95860",
+  "slug": "nagabandham-the-secret-treasure",
+  "title": "Nagabandham The Secret Treasure",
+  "originalTitle": "Nagabandham The Secret Treasure 2026 Hindi Telugu Dual Audio Webdl 720p 480p 1080p",
+  "type": "movie",
+  "year": 2026,
+  "rating": 4.5,
+  "votes": "15.4K",
+  "duration": "2h 05m",
+  "quality": "FHD",
+  "language": "Hindi / Dual Audio",
+  "genres": [],
+  "description": "Watch Nagabandham The Secret Treasure in full HD on FlixWorld.",
+  "poster": "https://image.tmdb.org/t/p/w500/fsiQ0twZbmbLo0F2CDUt44riRxL.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/bZLEd10wI75F7u8eZKwi8WCZtFe.jpg",
+  "imdbId": "",
+  "tmdbId": "",
+  "cast": [],
+  "links": [
+    {
+      "url": "/api/download/server?id=95860&quality=1080p",
+      "quality": "1080p",
+      "size": "2.4GB",
+      "label": "Direct Cloud [1080p FHD]",
+      "source": "hicine",
+      "isCloud": true
+    },
+    {
+      "url": "/api/download/server?id=95860&quality=720p",
+      "quality": "720p",
+      "size": "1.2GB",
+      "label": "Direct Cloud [720p HD]",
+      "source": "hicine",
+      "isCloud": true
+    },
+    {
+      "url": "/api/download/server?id=95860&quality=480p",
+      "quality": "480p",
+      "size": "450MB",
+      "label": "Direct Cloud [480p SD]",
+      "source": "hicine",
+      "isCloud": true
+    }
+  ]
+}

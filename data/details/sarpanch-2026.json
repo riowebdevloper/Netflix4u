@@ -1,0 +1,78 @@
+{
+  "id": "12113359",
+  "slug": "sarpanch-2026",
+  "title": "Sarpanch",
+  "year": 2026,
+  "poster": "https://storage.hicine.sbs/images/1PvOjsvPdULtKRnfcS3zvg0ZeRe.webp",
+  "backdrop": "https://storage.hicine.sbs/images/1PvOjsvPdULtKRnfcS3zvg0ZeRe.webp",
+  "updatedAt": "Aug 26, 2026",
+  "type": "movie",
+  "rating": 8.7,
+  "genres": [
+    "Action",
+    "Drama",
+    "Thriller"
+  ],
+  "director": "Director",
+  "overview": "Sarpanch (2026) - Watch and download in 480p, 720p, 1080p FHD with high speed Cloudflare R2 and HubCloud mirrors.",
+  "links": [
+    {
+      "quality": "480P",
+      "size": "470MB",
+      "label": "Sarpanch 480P [470MB]",
+      "url": "https://white-bush-34ba.grekot.workers.dev/?vcloud=https://vcloud.fit/t1cn753qwi1nswc",
+      "source": "hicine",
+      "isCloud": true
+    },
+    {
+      "quality": "720P",
+      "size": "780MB",
+      "label": "Sarpanch 720P [780MB]",
+      "url": "https://white-bush-34ba.grekot.workers.dev/?vcloud=https://vcloud.fit/pxaow41zof-iz5q",
+      "source": "hicine",
+      "isCloud": true
+    },
+    {
+      "quality": "720P",
+      "size": "1.3GB",
+      "label": "Sarpanch 720P [1.3GB]",
+      "url": "https://white-bush-34ba.grekot.workers.dev/?vcloud=https://vcloud.fit/6k1iw10x1_7ygew",
+      "source": "hicine",
+      "isCloud": true
+    },
+    {
+      "quality": "1080P",
+      "size": "2.8GB",
+      "label": "Sarpanch 1080P [2.8GB]",
+      "url": "https://white-bush-34ba.grekot.workers.dev/?vcloud=https://vcloud.fit/zize1mfgl00m1ls",
+      "source": "hicine",
+      "isCloud": true
+    }
+  ],
+  "downloadOptions": [
+    {
+      "quality": "480p",
+      "size": "630MB",
+      "label": "Sarpanch 480p [630MB]",
+      "url": "https://nexdrive.love/"
+    },
+    {
+      "quality": "720p x264",
+      "size": "1.5GB",
+      "label": "Sarpanch 720p x264 [1.5GB]",
+      "url": "https://nexdrive.love/"
+    },
+    {
+      "quality": "1080p x264",
+      "size": "3.6GB",
+      "label": "Sarpanch 1080p x264 [3.6GB]",
+      "url": "https://nexdrive.love/"
+    },
+    {
+      "quality": "1080p HQ",
+      "size": "19GB",
+      "label": "Sarpanch 1080p HQ [19GB]",
+      "url": "https://nexdrive.love/"
+    }
+  ]
+}

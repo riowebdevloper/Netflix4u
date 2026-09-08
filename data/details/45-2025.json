@@ -1,0 +1,86 @@
+{
+  "id": "12113270",
+  "slug": "45-2025",
+  "title": "45",
+  "year": 2026,
+  "poster": "https://storage.hicine.sbs/images/98hoobMBgX8FNIMhaOYQKHZNrd5.webp",
+  "backdrop": "https://storage.hicine.sbs/images/98hoobMBgX8FNIMhaOYQKHZNrd5.webp",
+  "updatedAt": "Aug 5, 2026",
+  "type": "movie",
+  "rating": 8.7,
+  "genres": [
+    "Action",
+    "Drama",
+    "Thriller"
+  ],
+  "director": "Director",
+  "overview": "45 (2026) - Watch and download in 480p, 720p, 1080p FHD with high speed Cloudflare R2 and HubCloud mirrors.",
+  "links": [
+    {
+      "quality": "480P",
+      "size": "480MB",
+      "label": "45 480P [480MB]",
+      "url": "https://white-bush-34ba.grekot.workers.dev/?vcloud=https://vcloud.fit/qxgp0x0xpkm-ikr",
+      "source": "hicine",
+      "isCloud": true
+    },
+    {
+      "quality": "720P",
+      "size": "780MB",
+      "label": "45 720P [780MB]",
+      "url": "https://white-bush-34ba.grekot.workers.dev/?vcloud=https://vcloud.fit/0ntel1-cu7-alvk",
+      "source": "hicine",
+      "isCloud": true
+    },
+    {
+      "quality": "720P",
+      "size": "1.2GB",
+      "label": "45 720P [1.2GB]",
+      "url": "https://white-bush-34ba.grekot.workers.dev/?vcloud=https://vcloud.fit/p9vx9fpq9hvpahh",
+      "source": "hicine",
+      "isCloud": true
+    },
+    {
+      "quality": "1080P",
+      "size": "2.8GB",
+      "label": "45 1080P [2.8GB]",
+      "url": "https://white-bush-34ba.grekot.workers.dev/?vcloud=https://vcloud.fit/uwomccc0n-woux1",
+      "source": "hicine",
+      "isCloud": true
+    },
+    {
+      "quality": "2160P",
+      "size": "6.9GB",
+      "label": "45 2160P [6.9GB]",
+      "url": "https://white-bush-34ba.grekot.workers.dev/?vcloud=https://vcloud.fit/wwvj7nuohfxfhee",
+      "source": "hicine",
+      "isCloud": true
+    }
+  ],
+  "downloadOptions": [
+    {
+      "quality": "480p",
+      "size": "630MB",
+      "label": "45 480p [630MB]",
+      "url": "https://nexdrive.love/"
+    },
+    {
+      "quality": "720p x264",
+      "size": "1.5GB",
+      "label": "45 720p x264 [1.5GB]",
+      "url": "https://nexdrive.love/"
+    },
+    {
+      "quality": "1080p x264",
+      "size": "3.6GB",
+      "label": "45 1080p x264 [3.6GB]",
+      "url": "https://nexdrive.love/"
+    },
+    {
+      "quality": "1080p HQ",
+      "size": "19GB",
+      "label": "45 1080p HQ [19GB]",
+      "url": "https://nexdrive.love/"
+    }
+  ]
+}

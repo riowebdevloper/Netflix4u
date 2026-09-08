@@ -1,0 +1,86 @@
+{
+  "id": "12113330",
+  "slug": "lenin-2026",
+  "title": "Lenin",
+  "year": 2026,
+  "poster": "https://storage.hicine.sbs/images/3GER9CDJQMe3eG3CcQer0zvSIyc.webp",
+  "backdrop": "https://storage.hicine.sbs/images/3GER9CDJQMe3eG3CcQer0zvSIyc.webp",
+  "updatedAt": "Aug 21, 2026",
+  "type": "movie",
+  "rating": 8.7,
+  "genres": [
+    "Action",
+    "Drama",
+    "Thriller"
+  ],
+  "director": "Director",
+  "overview": "Lenin (2026) - Watch and download in 480p, 720p, 1080p FHD with high speed Cloudflare R2 and HubCloud mirrors.",
+  "links": [
+    {
+      "quality": "480P",
+      "size": "430MB",
+      "label": "Lenin 480P [430MB]",
+      "url": "https://white-bush-34ba.grekot.workers.dev/?vcloud=https://vcloud.fit/6sqqegugf14yeef",
+      "source": "hicine",
+      "isCloud": true
+    },
+    {
+      "quality": "720P",
+      "size": "680MB",
+      "label": "Lenin 720P [680MB]",
+      "url": "https://white-bush-34ba.grekot.workers.dev/?vcloud=https://vcloud.fit/-12_g27fltaetqu",
+      "source": "hicine",
+      "isCloud": true
+    },
+    {
+      "quality": "720P",
+      "size": "1.5GB",
+      "label": "Lenin 720P [1.5GB]",
+      "url": "https://white-bush-34ba.grekot.workers.dev/?vcloud=https://vcloud.fit/a-uf5yd2af20df1",
+      "source": "hicine",
+      "isCloud": true
+    },
+    {
+      "quality": "1080P",
+      "size": "3.2GB",
+      "label": "Lenin 1080P [3.2GB]",
+      "url": "https://white-bush-34ba.grekot.workers.dev/?vcloud=https://vcloud.fit/yryclbfjrniwiim",
+      "source": "hicine",
+      "isCloud": true
+    },
+    {
+      "quality": "1080P",
+      "size": "11.2GB",
+      "label": "Lenin 1080P [11.2GB]",
+      "url": "https://white-bush-34ba.grekot.workers.dev/?vcloud=https://vcloud.fit/qddomdne200ldeo",
+      "source": "hicine",
+      "isCloud": true
+    }
+  ],
+  "downloadOptions": [
+    {
+      "quality": "480p",
+      "size": "630MB",
+      "label": "Lenin 480p [630MB]",
+      "url": "https://nexdrive.love/"
+    },
+    {
+      "quality": "720p x264",
+      "size": "1.5GB",
+      "label": "Lenin 720p x264 [1.5GB]",
+      "url": "https://nexdrive.love/"
+    },
+    {
+      "quality": "1080p x264",
+      "size": "3.6GB",
+      "label": "Lenin 1080p x264 [3.6GB]",
+      "url": "https://nexdrive.love/"
+    },
+    {
+      "quality": "1080p HQ",
+      "size": "19GB",
+      "label": "Lenin 1080p HQ [19GB]",
+      "url": "https://nexdrive.love/"
+    }
+  ]
+}

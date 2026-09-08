@@ -1,0 +1,103 @@
+{
+  "id": "dotmobiz-96180",
+  "record_id": "96180",
+  "provider": "dotmobiz",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "The Hunted",
+  "rawTitle": "The Hunted 2003 Hindi Dual Audio Webdl 720p 480p 1080p",
+  "originalTitle": "The Hunted 2003 Hindi Dual Audio Webdl 720p 480p 1080p",
+  "slug": "96180-the-hunted-2003-hindi-dual-audio-webdl-720p-480p-1080p",
+  "poster": "https://image.tmdb.org/t/p/w500/AvdBPe2XSKm3cGyTKFgbquC2jCo.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/2T3k09YnrM03CQd1yK3ZQLEHEZH.jpg",
+  "year": 2003,
+  "rating": 6.2,
+  "votes": "948",
+  "quality": "FHD",
+  "runtime": "94",
+  "duration": "94",
+  "genres": [
+    "Action",
+    "Drama"
+  ],
+  "categories": [
+    "Action",
+    "Drama"
+  ],
+  "language": "Hindi / Dual Audio",
+  "country": "India",
+  "cast": [],
+  "director": "Director",
+  "overview": "In the wilderness of British Columbia, two hunters are tracked and viciously murdered by Aaron Hallam. A former Special Operations instructor is approached and asked to apprehend Hallam—his former student—who has 'gone rogue' after suffering severe battle stress from his time in Kosovo.",
+  "description": "In the wilderness of British Columbia, two hunters are tracked and viciously murdered by Aaron Hallam. A former Special Operations instructor is approached and asked to apprehend Hallam—his former student—who has 'gone rogue' after suffering severe battle stress from his time in Kosovo.",
+  "shortDescription": "In the wilderness of British Columbia, two hunters are tracked and viciously murdered by Aaron Hallam. A former Special Operations instructo",
+  "imdbId": "tt0269347",
+  "screenshots": [
+    "/uploads/posts/covers/screenshot-The.Hunted.webp",
+    "/uploads/posts/covers/screenshot-The.Hunted2.webp",
+    "/uploads/posts/covers/screenshot-The.Hunted3.webp",
+    "/uploads/posts/covers/screenshot-The.Hunted4.webp",
+    "/uploads/posts/covers/screenshot-The.Hunted5.webp"
+  ],
+  "downloadOptions": [
+    {
+      "id": "dl-0",
+      "quality": "480p",
+      "size": "286MB",
+      "url": "https://nexdrive.love/genxfm342266017591891/",
+      "label": "Click Here To Download [286MB]"
+    },
+    {
+      "id": "dl-1",
+      "quality": "720p",
+      "size": "822MB",
+      "url": "https://nexdrive.love/genxfm321832205560338/",
+      "label": "Click Here To Download [822MB]"
+    },
+    {
+      "id": "dl-2",
+      "quality": "1080p",
+      "size": "1.8GB",
+      "url": "https://nexdrive.love/genxfm950450957896993/",
+      "label": "Click Here To Download [1.8GB]"
+    }
+  ],
+  "playbackSources": [
+    {
+      "serverName": "⚡ AllMovieLand / IndStream (Dotmobiz)",
+      "serverId": "dotmobiz-allmovieland",
+      "type": "iframe",
+      "url": "https://slast430did.com/play/tt0269347",
+      "quality": "FHD",
+      "language": "Hindi / Dual Audio"
+    }
+  ],
+  "links": [
+    {
+      "url": "https://nexdrive.love/genxfm342266017591891/",
+      "quality": "480p",
+      "size": "286MB",
+      "label": "Click Here To Download [286MB]",
+      "isCloud": true
+    },
+    {
+      "url": "https://nexdrive.love/genxfm321832205560338/",
+      "quality": "720p",
+      "size": "822MB",
+      "label": "Click Here To Download [822MB]",
+      "isCloud": true
+    },
+    {
+      "url": "https://nexdrive.love/genxfm950450957896993/",
+      "quality": "1080p",
+      "size": "1.8GB",
+      "label": "Click Here To Download [1.8GB]",
+      "isCloud": true
+    }
+  ],
+  "trending": true,
+  "featured": true,
+  "topRated": true,
+  "recentlyAdded": true,
+  "sourceUrl": "https://dotmobiz.com/96180-the-hunted-2003-hindi-dual-audio-webdl-720p-480p-1080p.html"
+}

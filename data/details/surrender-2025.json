@@ -1,0 +1,78 @@
+{
+  "id": "12113360",
+  "slug": "surrender-2025",
+  "title": "Surrender",
+  "year": 2026,
+  "poster": "https://storage.hicine.sbs/images/f3AwYLiMptYq1H3Z1ErmtFFAJ3U.webp",
+  "backdrop": "https://storage.hicine.sbs/images/f3AwYLiMptYq1H3Z1ErmtFFAJ3U.webp",
+  "updatedAt": "Aug 26, 2026",
+  "type": "movie",
+  "rating": 8.7,
+  "genres": [
+    "Action",
+    "Drama",
+    "Thriller"
+  ],
+  "director": "Director",
+  "overview": "Surrender (2026) - Watch and download in 480p, 720p, 1080p FHD with high speed Cloudflare R2 and HubCloud mirrors.",
+  "links": [
+    {
+      "quality": "480P",
+      "size": "390MB",
+      "label": "Surrender 480P [390MB]",
+      "url": "https://white-bush-34ba.grekot.workers.dev/?vcloud=https://vcloud.fit/9eccwcbbt9xcbvt",
+      "source": "hicine",
+      "isCloud": true
+    },
+    {
+      "quality": "720P",
+      "size": "800MB",
+      "label": "Surrender 720P [800MB]",
+      "url": "https://white-bush-34ba.grekot.workers.dev/?vcloud=https://vcloud.fit/xrs1ryrk3yrxu6c",
+      "source": "hicine",
+      "isCloud": true
+    },
+    {
+      "quality": "720P",
+      "size": "1.2GB",
+      "label": "Surrender 720P [1.2GB]",
+      "url": "https://white-bush-34ba.grekot.workers.dev/?vcloud=https://vcloud.fit/dqxb-sevxdibise",
+      "source": "hicine",
+      "isCloud": true
+    },
+    {
+      "quality": "1080P",
+      "size": "2.8GB",
+      "label": "Surrender 1080P [2.8GB]",
+      "url": "https://white-bush-34ba.grekot.workers.dev/?vcloud=https://vcloud.fit/3_tkbt_zdph63rb",
+      "source": "hicine",
+      "isCloud": true
+    }
+  ],
+  "downloadOptions": [
+    {
+      "quality": "480p",
+      "size": "630MB",
+      "label": "Surrender 480p [630MB]",
+      "url": "https://nexdrive.love/"
+    },
+    {
+      "quality": "720p x264",
+      "size": "1.5GB",
+      "label": "Surrender 720p x264 [1.5GB]",
+      "url": "https://nexdrive.love/"
+    },
+    {
+      "quality": "1080p x264",
+      "size": "3.6GB",
+      "label": "Surrender 1080p x264 [3.6GB]",
+      "url": "https://nexdrive.love/"
+    },
+    {
+      "quality": "1080p HQ",
+      "size": "19GB",
+      "label": "Surrender 1080p HQ [19GB]",
+      "url": "https://nexdrive.love/"
+    }
+  ]
+}

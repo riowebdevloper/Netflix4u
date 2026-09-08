@@ -1,0 +1,101 @@
+{
+  "id": "dotmobiz-95990",
+  "record_id": "95990",
+  "provider": "dotmobiz",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "The Mad Game",
+  "rawTitle": "The Mad Game 2022 Hindi Dual Audio Web Dl 720p 480p 1080p",
+  "originalTitle": "The Mad Game 2022 Hindi Dual Audio Web Dl 720p 480p 1080p",
+  "slug": "95990-the-mad-game-2022-hindi-dual-audio-web-dl-720p-480p-1080p",
+  "poster": "https://image.tmdb.org/t/p/w500/t56c5Urhq7DHuWZAg7dtsRoL5UY.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/4tpZCUdBYN5prHgv2GVtolBw8gc.jpg",
+  "year": 2022,
+  "rating": 2,
+  "votes": "3",
+  "quality": "FHD",
+  "runtime": "1 hr 15 min",
+  "duration": "1 hr 15 min",
+  "genres": [
+    "Action",
+    "Drama"
+  ],
+  "categories": [
+    "Action",
+    "Drama"
+  ],
+  "language": "Hindi / Dual Audio",
+  "country": "India",
+  "cast": [
+    "Pamiga Sooksawee",
+    "Wang Chengsi",
+    "Yan Jiaying",
+    "Long Zezhi",
+    "Gong Yuquan"
+  ],
+  "director": "Director",
+  "overview": "We don't have an overview translated in English. Help us expand our database by adding one.",
+  "description": "We don't have an overview translated in English. Help us expand our database by adding one.",
+  "shortDescription": "We don't have an overview translated in English. Help us expand our database by adding one.",
+  "imdbId": "",
+  "screenshots": [
+    "/uploads/posts/covers/screenshot-the-mad-game-2022.webp",
+    "/uploads/posts/covers/screenshot-the-mad-game-2023.webp",
+    "/uploads/posts/covers/screenshot-the-mad-game-2024.webp",
+    "/uploads/posts/covers/screenshot-the-mad-game-2025.webp",
+    "/uploads/posts/covers/screenshot-the-mad-game-2026.webp",
+    "/uploads/posts/covers/screenshot-the-mad-game-2027.webp"
+  ],
+  "downloadOptions": [
+    {
+      "id": "dl-0",
+      "quality": "480p",
+      "size": "250MB",
+      "url": "https://nexdrive.love/genxfm885839055850467/",
+      "label": "Click Here To Download [250MB]"
+    },
+    {
+      "id": "dl-1",
+      "quality": "720p",
+      "size": "690MB",
+      "url": "https://nexdrive.love/genxfm515155380530530/",
+      "label": "Click Here To Download [690MB]"
+    },
+    {
+      "id": "dl-2",
+      "quality": "1080p",
+      "size": "1.3GB",
+      "url": "https://nexdrive.love/genxfm746602028581710/",
+      "label": "Click Here To Download [1.3GB]"
+    }
+  ],
+  "playbackSources": [],
+  "links": [
+    {
+      "url": "https://nexdrive.love/genxfm885839055850467/",
+      "quality": "480p",
+      "size": "250MB",
+      "label": "Click Here To Download [250MB]",
+      "isCloud": true
+    },
+    {
+      "url": "https://nexdrive.love/genxfm515155380530530/",
+      "quality": "720p",
+      "size": "690MB",
+      "label": "Click Here To Download [690MB]",
+      "isCloud": true
+    },
+    {
+      "url": "https://nexdrive.love/genxfm746602028581710/",
+      "quality": "1080p",
+      "size": "1.3GB",
+      "label": "Click Here To Download [1.3GB]",
+      "isCloud": true
+    }
+  ],
+  "trending": true,
+  "featured": true,
+  "topRated": true,
+  "recentlyAdded": true,
+  "sourceUrl": "https://dotmobiz.com/95990-the-mad-game-2022-hindi-dual-audio-web-dl-720p-480p-1080p.html"
+}

@@ -1,0 +1,120 @@
+{
+  "id": "dotmobiz-58980",
+  "record_id": "58980",
+  "provider": "dotmobiz",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "Wanted Man",
+  "rawTitle": "Wanted Man 2024 Hindi Dual Audio Hdrip 1080p 720p 480p",
+  "originalTitle": "Wanted Man 2024 Hindi Dual Audio Hdrip 1080p 720p 480p",
+  "slug": "58980-wanted-man-2024-hindi-dual-audio-hdrip-1080p-720p-480p",
+  "poster": "https://image.tmdb.org/t/p/w500/pmdgdb8biQLLzTjySZLPdK13KwM.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/ahYDVW0ReOTKI6sbI6du9SoXdX9.jpg",
+  "year": 2024,
+  "rating": 6.5,
+  "votes": "105",
+  "quality": "FHD",
+  "runtime": "85",
+  "duration": "85",
+  "genres": [
+    "Action",
+    "Drama"
+  ],
+  "categories": [
+    "Action",
+    "Drama"
+  ],
+  "language": "Hindi / Dual Audio",
+  "country": "India",
+  "cast": [
+    "Dolph Lundgren as Travis Johansen",
+    "Kelsey Grammer as Brynner",
+    "Michael Paré as Tinelli",
+    "Roger Cross as Hernandez",
+    "Aaron McPherson as Adam Hilts",
+    "Christina Villa as Rosa Barranco",
+    "Rocko Reyes as Miguel",
+    "James Joseph Pulido as Officer De La Cruz",
+    "Jose Trujillo as Salvador",
+    "Daniela Soto Vell as Leticia",
+    "Erma Giron as Louisa",
+    "Tony Messenger as Leo",
+    "Jay Stratton as Kahane",
+    "Jack Lutz as Faloona",
+    "Sherrie Prose as Secretary",
+    "Emma Krokdal as Justine",
+    "Julian Cavett as Fernando",
+    "Molly Reed as Reporter #1",
+    "Pam Moralde as Mayor",
+    "Bourke Floyd as Brynner Double",
+    "Ben Steele as Leo Double",
+    "Xzavier Estrada as Sidewalk Smoker"
+  ],
+  "director": "Dolph Lundgren",
+  "overview": "Follows a police officer who must retrieve an eyewitness and escort her after a cartel shooting leaves several DEA agents dead, but then he must decide who to trust when they discover that the attack was executed by American forces.",
+  "description": "Follows a police officer who must retrieve an eyewitness and escort her after a cartel shooting leaves several DEA agents dead, but then he must decide who to trust when they discover that the attack was executed by American forces.",
+  "shortDescription": "Follows a police officer who must retrieve an eyewitness and escort her after a cartel shooting leaves several DEA agents dead, but then he ",
+  "imdbId": "tt15791574",
+  "screenshots": [],
+  "downloadOptions": [
+    {
+      "id": "dl-0",
+      "quality": "720p",
+      "size": "800MB",
+      "url": "https://nexdrive.my/6651def355801",
+      "label": "Click Here To Download [800MB]"
+    },
+    {
+      "id": "dl-1",
+      "quality": "1080p",
+      "size": "1.7GB",
+      "url": "https://nexdrive.my/6651df112316d",
+      "label": "Click Here To Download [1.7GB]"
+    },
+    {
+      "id": "dl-2",
+      "quality": "480p",
+      "size": "300MB",
+      "url": "https://nexdrive.my/6651ded4685d6",
+      "label": "Click Here To Download [300MB]"
+    }
+  ],
+  "playbackSources": [
+    {
+      "serverName": "⚡ AllMovieLand / IndStream (Dotmobiz)",
+      "serverId": "dotmobiz-allmovieland",
+      "type": "iframe",
+      "url": "https://slast430did.com/play/tt15791574",
+      "quality": "FHD",
+      "language": "Hindi / Dual Audio"
+    }
+  ],
+  "links": [
+    {
+      "url": "https://nexdrive.my/6651def355801",
+      "quality": "720p",
+      "size": "800MB",
+      "label": "Click Here To Download [800MB]",
+      "isCloud": true
+    },
+    {
+      "url": "https://nexdrive.my/6651df112316d",
+      "quality": "1080p",
+      "size": "1.7GB",
+      "label": "Click Here To Download [1.7GB]",
+      "isCloud": true
+    },
+    {
+      "url": "https://nexdrive.my/6651ded4685d6",
+      "quality": "480p",
+      "size": "300MB",
+      "label": "Click Here To Download [300MB]",
+      "isCloud": true
+    }
+  ],
+  "trending": true,
+  "featured": true,
+  "topRated": true,
+  "recentlyAdded": true,
+  "sourceUrl": "https://dotmobiz.com/58980-wanted-man-2024-hindi-dual-audio-hdrip-1080p-720p-480p.html"
+}

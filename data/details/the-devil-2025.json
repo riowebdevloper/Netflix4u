@@ -1,0 +1,70 @@
+{
+  "id": "12113268",
+  "slug": "the-devil-2025",
+  "title": "The Devil",
+  "year": 2026,
+  "poster": "https://storage.hicine.sbs/images/gsUXN4dgmelSEa7VRqcpIhngGCu.webp",
+  "backdrop": "https://storage.hicine.sbs/images/gsUXN4dgmelSEa7VRqcpIhngGCu.webp",
+  "updatedAt": "Aug 5, 2026",
+  "type": "movie",
+  "rating": 8.7,
+  "genres": [
+    "Action",
+    "Drama",
+    "Thriller"
+  ],
+  "director": "Director",
+  "overview": "The Devil (2026) - Watch and download in 480p, 720p, 1080p FHD with high speed Cloudflare R2 and HubCloud mirrors.",
+  "links": [
+    {
+      "quality": "480P",
+      "size": "560MB",
+      "label": "The Devil 480P [560MB]",
+      "url": "https://white-bush-34ba.grekot.workers.dev/?vcloud=https://vcloud.fit/tpquctdu1ltfplk",
+      "source": "hicine",
+      "isCloud": true
+    },
+    {
+      "quality": "720P",
+      "size": "1.4GB",
+      "label": "The Devil 720P [1.4GB]",
+      "url": "https://white-bush-34ba.grekot.workers.dev/?vcloud=https://vcloud.fit/ghizzg1z-q1evix",
+      "source": "hicine",
+      "isCloud": true
+    },
+    {
+      "quality": "1080P",
+      "size": "3.2GB",
+      "label": "The Devil 1080P [3.2GB]",
+      "url": "https://white-bush-34ba.grekot.workers.dev/?vcloud=https://vcloud.fit/jouxjjxurojboro",
+      "source": "hicine",
+      "isCloud": true
+    }
+  ],
+  "downloadOptions": [
+    {
+      "quality": "480p",
+      "size": "630MB",
+      "label": "The Devil 480p [630MB]",
+      "url": "https://nexdrive.love/"
+    },
+    {
+      "quality": "720p x264",
+      "size": "1.5GB",
+      "label": "The Devil 720p x264 [1.5GB]",
+      "url": "https://nexdrive.love/"
+    },
+    {
+      "quality": "1080p x264",
+      "size": "3.6GB",
+      "label": "The Devil 1080p x264 [3.6GB]",
+      "url": "https://nexdrive.love/"
+    },
+    {
+      "quality": "1080p HQ",
+      "size": "19GB",
+      "label": "The Devil 1080p HQ [19GB]",
+      "url": "https://nexdrive.love/"
+    }
+  ]
+}

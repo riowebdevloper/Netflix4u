@@ -1,0 +1,78 @@
+{
+  "id": "12113200",
+  "slug": "royal-2026",
+  "title": "Royal",
+  "year": 2026,
+  "poster": "https://storage.hicine.sbs/images/uCt5k3coJbOF02hwXVT9gV59a2W.webp",
+  "backdrop": "https://storage.hicine.sbs/images/uCt5k3coJbOF02hwXVT9gV59a2W.webp",
+  "updatedAt": "Jul 15, 2026",
+  "type": "movie",
+  "rating": 8.7,
+  "genres": [
+    "Action",
+    "Drama",
+    "Thriller"
+  ],
+  "director": "Director",
+  "overview": "Royal (2026) - Watch and download in 480p, 720p, 1080p FHD with high speed Cloudflare R2 and HubCloud mirrors.",
+  "links": [
+    {
+      "quality": "480P",
+      "size": "415MB",
+      "label": "Royal 480P [415MB]",
+      "url": "https://white-bush-34ba.grekot.workers.dev/?vcloud=https://vcloud.fit/ifhf0t9o72f99bp",
+      "source": "hicine",
+      "isCloud": true
+    },
+    {
+      "quality": "720P",
+      "size": "750MB",
+      "label": "Royal 720P [750MB]",
+      "url": "https://white-bush-34ba.grekot.workers.dev/?vcloud=https://vcloud.fit/nsjhffye1ffehug",
+      "source": "hicine",
+      "isCloud": true
+    },
+    {
+      "quality": "720P",
+      "size": "1.2GB",
+      "label": "Royal 720P [1.2GB]",
+      "url": "https://white-bush-34ba.grekot.workers.dev/?vcloud=https://vcloud.fit/s3vd3s2r3r2qqke",
+      "source": "hicine",
+      "isCloud": true
+    },
+    {
+      "quality": "1080P",
+      "size": "2.6GB",
+      "label": "Royal 1080P [2.6GB]",
+      "url": "https://white-bush-34ba.grekot.workers.dev/?vcloud=https://vcloud.fit/fqtzzzdyfytqfed",
+      "source": "hicine",
+      "isCloud": true
+    }
+  ],
+  "downloadOptions": [
+    {
+      "quality": "480p",
+      "size": "630MB",
+      "label": "Royal 480p [630MB]",
+      "url": "https://nexdrive.love/"
+    },
+    {
+      "quality": "720p x264",
+      "size": "1.5GB",
+      "label": "Royal 720p x264 [1.5GB]",
+      "url": "https://nexdrive.love/"
+    },
+    {
+      "quality": "1080p x264",
+      "size": "3.6GB",
+      "label": "Royal 1080p x264 [3.6GB]",
+      "url": "https://nexdrive.love/"
+    },
+    {
+      "quality": "1080p HQ",
+      "size": "19GB",
+      "label": "Royal 1080p HQ [19GB]",
+      "url": "https://nexdrive.love/"
+    }
+  ]
+}

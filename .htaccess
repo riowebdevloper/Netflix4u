@@ -1,0 +1,66 @@
+# ==========================================
+# 🚀 Netflix4U cPanel Apache & SPA Routing
+# ==========================================
+
+DirectoryIndex index.html index.php
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # 1. 🔒 Security: Block sensitive system files and bulk raw database dumps
+  RewriteRule ^\.env - [F,L]
+  RewriteRule ^\.git - [F,L]
+  RewriteRule ^package\.json$ - [F,L]
+  RewriteRule ^package-lock\.json$ - [F,L]
+  RewriteRule ^data/details_map\.json$ - [F,L]
+  RewriteRule ^data/movies\.json$ - [F,L]
+  RewriteRule ^data/series\.json$ - [F,L]
+  RewriteRule ^scratch/ - [F,L]
+
+  # 2. ⚡ Dynamic API Resolvers for cPanel / LiteSpeed & Apache
+  RewriteRule ^api/download/hicine/?$ api/download.php [QSA,L]
+  RewriteRule ^api/download/server/?$ api/download.php [QSA,L]
+  RewriteRule ^api/download/?$ api/download.php [QSA,L]
+  RewriteRule ^api/health/?$ api/health.php [QSA,L]
+
+  # 3. 🛑 Terminal Guard: Stop processing if request is already for index.html
+  RewriteRule ^index\.html$ - [L]
+
+  # 4. 📁 Allow existing physical files and directories (js, css, images, fonts, data, php)
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # 5. 🚫 Missing Static Asset Guard: Return 404 for missing assets so they never serve index.html (prevents MIME SyntaxError and image loops)
+  RewriteCond %{REQUEST_URI} \.(?:js|css|png|jpg|jpeg|gif|webp|svg|ico|woff2?|ttf|json|map)$ [NC]
+  RewriteRule ^ - [R=404,L]
+
+  # 6. 🎯 SPA React Fallback: Route only genuine frontend client routes to index.html safely
+  RewriteCond %{REQUEST_URI} !^/api/
+  RewriteCond %{REQUEST_URI} !^/index\.html$
+  RewriteRule ^.*$ /index.html [L]
+</IfModule>
+
+# ==========================================
+# ⚡ High-Speed Browser Caching
+# ==========================================
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/webp "access plus 1 month"
+  ExpiresByType image/jpeg "access plus 1 month"
+  ExpiresByType image/png "access plus 1 month"
+  ExpiresByType image/svg+xml "access plus 1 month"
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType font/woff "access plus 1 year"
+  ExpiresByType font/ttf "access plus 1 year"
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+</IfModule>
+
+# ==========================================
+# 📦 Gzip Compression for Ultra-Fast Loads
+# ==========================================
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/javascript application/json
+</IfModule>

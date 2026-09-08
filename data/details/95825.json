@@ -1,0 +1,46 @@
+{
+  "id": "95825",
+  "slug": "anbe-diana",
+  "title": "Anbe Diana",
+  "originalTitle": "Anbe Diana 2026 Hindi Tamil Dual Audio Webdl 720p 480p 1080p",
+  "type": "movie",
+  "year": 2026,
+  "rating": 6,
+  "votes": "15.4K",
+  "duration": "2h 05m",
+  "quality": "FHD",
+  "language": "Hindi / Dual Audio",
+  "genres": [],
+  "description": "Watch Anbe Diana in full HD on FlixWorld.",
+  "poster": "https://image.tmdb.org/t/p/w500/201CEvG6ayNj71iSLxxEk7pUv0N.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/l4xqxKS7nlOni6bnTHWi3USyp4o.jpg",
+  "imdbId": "",
+  "tmdbId": "",
+  "cast": [],
+  "links": [
+    {
+      "url": "/api/download/server?id=95825&quality=1080p",
+      "quality": "1080p",
+      "size": "2.4GB",
+      "label": "Direct Cloud [1080p FHD]",
+      "source": "hicine",
+      "isCloud": true
+    },
+    {
+      "url": "/api/download/server?id=95825&quality=720p",
+      "quality": "720p",
+      "size": "1.2GB",
+      "label": "Direct Cloud [720p HD]",
+      "source": "hicine",
+      "isCloud": true
+    },
+    {
+      "url": "/api/download/server?id=95825&quality=480p",
+      "quality": "480p",
+      "size": "450MB",
+      "label": "Direct Cloud [480p SD]",
+      "source": "hicine",
+      "isCloud": true
+    }
+  ]
+}
