@@ -27,6 +27,21 @@
       image.decoding = 'async';
     });
   }
+  const style = document.createElement('style');
+  style.textContent = `
+    #nav-logo img { width: clamp(96px, 30vw, 132px) !important; height: auto !important; max-height: 34px !important; object-fit: contain !important; }
+    @media (max-width: 639px) {
+      footer > div { padding: 2.25rem 1rem 6rem !important; }
+      footer .grid { grid-template-columns: 1fr 1fr !important; gap: 2rem 1.25rem !important; }
+      footer .grid > :first-child { grid-column: 1 / -1; }
+      footer .grid h3 { margin-bottom: .65rem !important; }
+      footer .grid li { margin-bottom: .35rem; }
+      header nav { padding-left: .75rem !important; padding-right: .75rem !important; gap: .5rem !important; }
+      header nav > * { min-width: 0; }
+      body, #root { overflow-x: clip !important; max-width: 100vw !important; }
+    }
+  `;
+  document.head.append(style);
   const observe = () => { syncMetadata(); repairDom(); };
   addEventListener('popstate', observe);
   addEventListener('DOMContentLoaded', () => { observe(); new MutationObserver(repairDom).observe(document.body, { childList: true, subtree: true }); });
