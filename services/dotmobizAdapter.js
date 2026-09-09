@@ -140,18 +140,9 @@ function normalizeDotmobizPost(raw) {
     backdrop = '/' + backdrop;
   }
 
-  // Normalized Playback Servers
+  // A catalog source is not proof of distribution rights. Playback sources
+  // are supplied only by the licensed integration admission gate.
   const playbackSources = [];
-  if (raw.imdbId) {
-    playbackSources.push({
-      serverName: '⚡ AllMovieLand / IndStream (Dotmobiz)',
-      serverId: 'dotmobiz-allmovieland',
-      type: 'iframe',
-      url: `https://slast430did.com/play/${raw.imdbId}`,
-      quality: quality,
-      language: language
-    });
-  }
 
   // Normalized Downloads
   const downloadOptions = (raw.downloads || []).map((dl, idx) => ({

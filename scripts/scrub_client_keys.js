@@ -12,6 +12,7 @@ const targetFiles = [
 
 const TMDB_KEY = '445f2b5a8941c1d4bd5a869761a916e3';
 const HICINE_KEY = 'hicine_website_secret_2025_exi9epdmrns';
+const UNLICENSED_PLAYER_KEY = 'nx_bc4a3fc0ea9461c6e5baf0153d8e768d';
 
 for (const file of targetFiles) {
   if (!fs.existsSync(file)) continue;
@@ -43,6 +44,14 @@ for (const file of targetFiles) {
     code = code.split(TMDB_KEY).join('');
     changed = true;
     console.log('✅ Scrubbed stray TMDB key in:', path.basename(file));
+  }
+
+  // Remove a bundled third-party player credential. Playback is now served
+  // only by explicitly licensed integrations, never by client-side keys.
+  if (code.includes(UNLICENSED_PLAYER_KEY)) {
+    code = code.split(UNLICENSED_PLAYER_KEY).join('');
+    changed = true;
+    console.log('✅ Removed third-party player key in:', path.basename(file));
   }
 
   if (changed) {

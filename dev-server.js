@@ -3,8 +3,8 @@ const https = require('https');
 const fs = require('fs');
 const path = require('path');
 const { getPlaybackSources } = require('./services/playbackService');
-const { resolveDotmobizOnDemand } = require('./services/onDemandResolver');
 const { resolveContentId } = require('./services/canonicalResolver');
+const { isPublicRecord, publicOnly } = require('./services/contentValidationService');
 
 const PORT = process.env.PORT || 4173;
 const ROOT = path.resolve(__dirname);
@@ -23,9 +23,7 @@ process.on('unhandledRejection', (reason) => {
 // 🔐 SERVER-SIDE SECRETS (NEVER SENT TO CLIENT)
 // ==========================================
 const SECRETS = {
-  HICINE_API_BASE: process.env.HICINE_API_BASE || 'https://api.hicine.sbs',
-  HICINE_KEY: process.env.HICINE_KEY || 'hicine_website_secret_2025_exi9epdmrns',
-  TMDB_API_KEY: process.env.TMDB_API_KEY || '445f2b5a8941c1d4bd5a869761a916e3'
+  TMDB_API_KEY: process.env.TMDB_API_KEY || ''
 };
 
 // ==========================================
@@ -112,7 +110,7 @@ function getCatalogSummary() {
       catalogSummary = [];
     }
   }
-  return catalogSummary;
+  return publicOnly(catalogSummary);
 }
 
 // Fast on-demand detail lookup without keeping 38MB in RAM
@@ -561,66 +559,13 @@ async function resolveTitleCast(title, tmdbId, year, type = 'movie', imdbId = ''
   });
 }
 
-// Secure TMDB & YouTube Trailer Resolver (Guarantees real, embeddable video URL)
-async function resolveYouTubeTrailer(title, year, type = 'movie') {
-  const cacheKey = `${title}_${year}_${type}`.toLowerCase();
-  if (trailerCache.has(cacheKey)) {
-    return trailerCache.get(cacheKey);
-  }
-
-  const clean = title.replace(/\(\d{4}\)/g, '').replace(/^(NetFlix|Prime|Disney\+|Hotstar|SonyLIV|ZEE5)\s+/i, '').trim();
-  const endpoint = (type === 'series' || type === 'kdrama' || type === 'anime') ? 'tv' : 'movie';
-  const searchUrl = `https://api.tmdb.org/3/search/${endpoint}?api_key=${SECRETS.TMDB_API_KEY}&query=${encodeURIComponent(clean)}`;
-
-  let foundUrl = null;
-
-  try {
-    const tmdbData = await new Promise(resolve => {
-      https.get(searchUrl, res => {
-        let d = '';
-        res.on('data', c => d += c);
-        res.on('end', () => {
-          try { resolve(JSON.parse(d)); } catch(e) { resolve(null); }
-        });
-      }).on('error', () => resolve(null));
-    });
-
-    const first = tmdbData && tmdbData.results && tmdbData.results[0];
-    if (first && first.id) {
-      const vidUrl = `https://api.tmdb.org/3/${endpoint}/${first.id}/videos?api_key=${SECRETS.TMDB_API_KEY}`;
-      const vidData = await new Promise(resolve => {
-        https.get(vidUrl, vres => {
-          let vd = '';
-          vres.on('data', c => vd += c);
-          vres.on('end', () => {
-            try { resolve(JSON.parse(vd)); } catch(e) { resolve(null); }
-          });
-        }).on('error', () => resolve(null));
-      });
-
-      if (vidData && vidData.results) {
-        const tr = vidData.results.find(x => x.type === 'Trailer' && x.site === 'YouTube')
-          || vidData.results.find(x => x.site === 'YouTube');
-        if (tr && tr.key) {
-          foundUrl = `https://www.youtube.com/embed/${tr.key}`;
-        }
-      }
-    }
-  } catch(e) {}
-
-  // Fallback 1: Scrape real YouTube video ID with clean title + year + trailer
-  if (!foundUrl) {
-    foundUrl = await fetchYouTubeVideoId(`${clean} ${year || ''} official trailer`);
-  }
-  // Fallback 2: Scrape real YouTube video ID with clean title + trailer
-  if (!foundUrl) {
-    foundUrl = await fetchYouTubeVideoId(`${clean} trailer`);
-  }
-
-  if (foundUrl) {
-    trailerCache.set(cacheKey, foundUrl);
-  }
-  return foundUrl || '';
+// Trailer URLs are accepted only when an ingestion job persisted an exact,
+// canonical relationship. Title-search fallbacks are intentionally forbidden.
+function getVerifiedTrailer(item) {
+  const trailer = item && item.trailerVerification;
+  if (!trailer || trailer.status !== 'VERIFIED' || trailer.canonicalId !== item.canonicalId) return null;
+  if (trailer.provider !== 'youtube' || !/^[A-Za-z0-9_-]{11}$/.test(trailer.videoId || '')) return null;
+  return `https://www.youtube-nocookie.com/embed/${trailer.videoId}`;
 }
 
 const server = http.createServer(async (req, res) => {
@@ -632,12 +577,11 @@ const server = http.createServer(async (req, res) => {
   res.setHeader('X-XSS-Protection', '1; mode=block');
   res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
   res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
+  res.setHeader('Content-Security-Policy', "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; form-action 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' https://image.tmdb.org https://m.media-amazon.com data:; connect-src 'self' https://api.tmdb.org; frame-src https://www.youtube-nocookie.com; media-src 'self'");
 
   const reqOrigin = req.headers['origin'];
-  if (reqOrigin && (reqOrigin.includes('netflix4u.fun') || reqOrigin.includes('localhost') || reqOrigin.includes('127.0.0.1'))) {
+  if (reqOrigin && (/^https:\/\/netflix4u\.in$/i.test(reqOrigin) || /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/i.test(reqOrigin))) {
     res.setHeader('Access-Control-Allow-Origin', reqOrigin);
-  } else {
-    res.setHeader('Access-Control-Allow-Origin', 'https://netflix4u.fun');
   }
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
@@ -693,22 +637,21 @@ const server = http.createServer(async (req, res) => {
 
   // 4. API: YouTube Trailer Proxy (Protects TMDB key from client-side exposure)
   if (reqPath === '/api/trailer') {
-    const title = queryParams.get('title') || '';
-    const year = queryParams.get('year') || '';
-    const type = queryParams.get('type') || 'movie';
-
-    if (!title) {
-      res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
-      res.end(JSON.stringify({ error: 'Title parameter required' }));
+    const id = queryParams.get('id') || '';
+    if (!id) {
+      // Legacy clients may still send title/year. Do not fuzzy-match them;
+      // return the same clean unavailable state rather than a broken player.
+      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' });
+      res.end(JSON.stringify({ success: false, trailerUrl: null, state: 'unavailable' }));
       return;
     }
-
-    const trailerUrl = await resolveYouTubeTrailer(title, year, type);
+    const item = await resolveContentId(id);
+    const trailerUrl = isPublicRecord(item) ? getVerifiedTrailer(item) : null;
     res.writeHead(200, {
       'Content-Type': 'application/json; charset=utf-8',
       'Cache-Control': 'public, max-age=86400'
     });
-    res.end(JSON.stringify({ success: true, trailerUrl }));
+    res.end(JSON.stringify({ success: Boolean(trailerUrl), trailerUrl, state: trailerUrl ? 'ready' : 'unavailable' }));
     return;
   }
 
@@ -934,14 +877,9 @@ const server = http.createServer(async (req, res) => {
     const isApprovedDomain =
       hostname.endsWith('tmdb.org') ||
       hostname.endsWith('themoviedb.org') ||
-      hostname.endsWith('youtube.com') ||
       hostname.endsWith('ytimg.com') ||
-      hostname.endsWith('hicine.sbs') ||
-      hostname.endsWith('dotmobiz.com') ||
       hostname.endsWith('media-amazon.com') ||
-      hostname.endsWith('nocookie.net') ||
-      hostname.endsWith('gravatar.com') ||
-      hostname.endsWith('netflix4u.fun');
+      hostname === 'netflix4u.in';
 
     if (!isApprovedDomain) {
       res.writeHead(403, { 'Content-Type': 'text/plain' });
@@ -1017,7 +955,7 @@ const server = http.createServer(async (req, res) => {
   if (detailMatch && targetDetailId) {
     const id = targetDetailId;
     let item = await resolveContentId(id);
-    if (item) {
+    if (item && isPublicRecord(item)) {
       item = enrichItemMetadataAndLinks(item);
       if (!item.tmdbId && (item.title || item.imdbId)) {
         item.tmdbId = await resolveTmdbId(item.title, item.year, item.type, item.imdbId);
@@ -1049,8 +987,7 @@ const server = http.createServer(async (req, res) => {
   if (playbackMatch && targetPlaybackId) {
     const id = targetPlaybackId;
     let item = await resolveContentId(id);
-    if (item) {
-      item = enrichItemMetadataAndLinks(item);
+    if (item && isPublicRecord(item)) {
       const season = parseInt(queryParams.get('season') || '1', 10);
       const episode = parseInt(queryParams.get('episode') || '1', 10);
       const sources = getPlaybackSources(item, season, episode);
@@ -1066,49 +1003,10 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
-  // 5c. API: Hicine Fast Cloud Direct Download Resolver (/api/download/hicine?vcloud=... or ?slug=...)
+  // Download resolving is disabled until a licensed distribution integration is configured.
   if (reqPath === '/api/download/hicine' || reqPath === '/api/download') {
-    const vcloud = queryParams.get('vcloud') || queryParams.get('url') || '';
-    const slug = queryParams.get('slug') || '';
-    const id = queryParams.get('id') || '';
-    if (vcloud) {
-      if (!vcloud.includes('vcloud') && !vcloud.includes('workers.dev') && vcloud.startsWith('http')) {
-        res.writeHead(302, { 'Location': vcloud });
-        res.end();
-        return;
-      }
-      if (vcloud.includes('vcloud') || vcloud.includes('workers.dev')) {
-        const directUrl = await resolveHicineFastLink(vcloud);
-        if (directUrl) {
-          res.writeHead(302, { 'Location': directUrl });
-          res.end();
-          return;
-        }
-      }
-    }
-
-    // If slug or id is provided, look up authentic detail file and redirect to first real link
-    const targetId = id || slug;
-    if (targetId) {
-      let item = getTitleDetails(targetId);
-      if (item && item.links && item.links.length > 0) {
-        const first = item.links[0];
-        if (first && first.url) {
-          if (first.url.includes('vcloud') || first.url.includes('workers.dev')) {
-            const direct = await resolveHicineFastLink(first.url);
-            res.writeHead(302, { 'Location': direct || first.url });
-            res.end();
-            return;
-          }
-          res.writeHead(302, { 'Location': first.url });
-          res.end();
-          return;
-        }
-      }
-    }
-
-    res.writeHead(302, { 'Location': 'https://netflix4u.fun/' });
-    res.end();
+    res.writeHead(410, { 'Content-Type': 'application/json; charset=utf-8' });
+    res.end(JSON.stringify({ success: false, error: 'Downloads are unavailable until licensed sources are configured.' }));
     return;
   }
 
@@ -1181,7 +1079,7 @@ const server = http.createServer(async (req, res) => {
       if (match) {
         const id = match[1];
         const item = await resolveContentId(id);
-        if (item) {
+        if (item && isPublicRecord(item)) {
           const enriched = enrichItemMetadataAndLinks(item);
           if (!enriched.tmdbId && (enriched.title || enriched.imdbId)) {
             enriched.tmdbId = await resolveTmdbId(enriched.title, enriched.year, enriched.type, enriched.imdbId);
@@ -1203,10 +1101,27 @@ const server = http.createServer(async (req, res) => {
           return;
         }
       }
+      res.writeHead(404, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ error: 'Title not found' }));
+      return;
     }
 
     let dataFilePath = path.join(ROOT, reqPath);
     if (isSafePath(DATA_DIR, reqPath.replace(/^\/data\//, '')) && fs.existsSync(dataFilePath) && fs.statSync(dataFilePath).isFile()) {
+      // Never serve raw feeds: all public data must pass the same admission gate.
+      if (/\.(json)$/i.test(dataFilePath)) {
+        try {
+          const raw = JSON.parse(fs.readFileSync(dataFilePath, 'utf8'));
+          const filtered = Array.isArray(raw) ? publicOnly(raw) : Object.fromEntries(Object.entries(raw).map(([key, value]) => [key, publicOnly(value)]));
+          res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'public, max-age=300' });
+          res.end(JSON.stringify(filtered));
+          return;
+        } catch (_) {
+          res.writeHead(500, { 'Content-Type': 'application/json; charset=utf-8' });
+          res.end(JSON.stringify({ error: 'Invalid catalog data' }));
+          return;
+        }
+      }
       res.writeHead(200, {
         'Content-Type': 'application/json; charset=utf-8',
         'Cache-Control': 'public, max-age=3600'
@@ -1386,13 +1301,13 @@ const server = http.createServer(async (req, res) => {
     if (isBot && movieRouteMatch) {
       const [, rType, rId] = movieRouteMatch;
       const item = getTitleDetails(rId);
-      if (item) {
+      if (item && isPublicRecord(item)) {
         let indexHtml = fs.readFileSync(indexPath, 'utf8');
-        const title = `${item.title || 'Watch Online'} (${item.year || 'HD'}) | Netflix4U`;
-        const desc = (item.description || 'Watch latest movies, web series, anime and K-dramas in HD with direct downloads.').slice(0, 160);
-        const image = item.backdrop || item.poster || 'https://netflix4u.fun/og-image.jpg';
+        const title = `${item.title || 'Title'} (${item.year || ''}) | Netflix4U`;
+        const desc = (item.description || 'Discover verified entertainment catalog information.').slice(0, 160);
+        const image = item.backdrop || item.poster || 'https://netflix4u.in/og-image.jpg';
         const type = (rType === 'series' || rType === 'anime' || rType === 'kdrama') ? 'video.tv_show' : 'video.movie';
-        const canonicalUrl = `https://netflix4u.fun/${rType}/${rId}`;
+        const canonicalUrl = `https://netflix4u.in/${rType}/${rId}`;
 
         const escapeOg = str => String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 

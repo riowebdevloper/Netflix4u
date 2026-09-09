@@ -6,7 +6,6 @@
 
 const fs = require('fs');
 const path = require('path');
-const { resolveDotmobizOnDemand } = require('./onDemandResolver');
 
 const DATA_DIR = path.resolve(__dirname, '..', 'data');
 const DETAILS_DIR = path.join(DATA_DIR, 'details');
@@ -163,23 +162,8 @@ async function resolveContentId(rawId) {
       if (item) return item;
     }
 
-    // If still not on disk, trigger on-demand resolver for dotmobiz titles
-    if (catalogEntry.provider === 'dotmobiz' || String(catalogEntry.id).startsWith('dotmobiz-') || catalogEntry.url) {
-      try {
-        const resolved = await resolveDotmobizOnDemand(String(catalogEntry.id || catalogEntry.record_id || id));
-        if (resolved) return resolved;
-      } catch (e) {
-        console.error('On-demand resolution failed for', id, e.message);
-      }
-    }
-  }
-
-  // 5. Fallback on-demand attempt if input looks like a dotmobiz ID or slug
-  if (id.startsWith('dotmobiz-') || /^\d+$/.test(id) || id.includes('-')) {
-    try {
-      const resolved = await resolveDotmobizOnDemand(id);
-      if (resolved) return resolved;
-    } catch (e) {}
+    // Network discovery is not a detail-page fallback. Only persisted records
+    // with a canonical relationship may be returned here.
   }
 
   return null;

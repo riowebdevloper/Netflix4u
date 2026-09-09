@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const { isPublicRecord } = require('../services/contentValidationService');
 
 const SITE_URL = 'https://netflix4u.in';
 const ROOT = path.resolve(__dirname, '..');
@@ -49,8 +50,8 @@ if (fs.existsSync(catalogPath)) {
   let skipped = 0;
 
   for (const item of catalog) {
-    // Quality Gate: Only index content with verified real posters
-    if (!item.poster || item.poster.includes('no-poster') || item.poster.includes('placeholder') || item.poster.includes('data:image')) {
+    // The sitemap uses the exact same canonical/poster admission gate as HTTP.
+    if (!isPublicRecord(item)) {
       skipped++;
       continue;
     }
