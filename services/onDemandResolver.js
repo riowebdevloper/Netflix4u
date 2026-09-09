@@ -6,7 +6,7 @@ const { cleanDotmobizTitle, normalizeDotmobizPost } = require('./dotmobizAdapter
 const DATA_DIR = path.resolve(__dirname, '..', 'data');
 const DETAILS_DIR = path.join(DATA_DIR, 'details');
 const COMPLETE_CATALOG_PATH = path.join(DATA_DIR, 'dotmobiz_complete_catalog.json');
-const TMDB_API_KEY = '445f2b5a8941c1d4bd5a869761a916e3';
+const TMDB_API_KEY = process.env.TMDB_API_KEY || '';
 
 let completeCatalogMap = null;
 
@@ -149,8 +149,8 @@ async function resolveDotmobizOnDemand(id) {
 
   let poster = (summaryEntry.poster && !summaryEntry.poster.includes('placehold.co')) ? summaryEntry.poster : dotmobizCover;
   let backdrop = (summaryEntry.backdrop && !summaryEntry.backdrop.includes('placehold.co')) ? summaryEntry.backdrop : poster;
-  let rating = ratingMatch ? parseFloat(ratingMatch[1]) : 8.4;
-  let votes = votesMatch ? votesMatch[1] : '10.5K';
+  let rating = ratingMatch ? parseFloat(ratingMatch[1]) : null;
+  let votes = votesMatch ? votesMatch[1] : null;
   let overview = synMatch ? synMatch[1].trim() : '';
 
   if (tmdb) {

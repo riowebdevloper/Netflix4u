@@ -32,4 +32,4 @@ User-agent: Applebot
 Allow: /
 
 # Sitemap Location
-Sitemap: https://netflix4u.fun/sitemap.xml
+Sitemap: https://netflix4u.in/sitemap.xml

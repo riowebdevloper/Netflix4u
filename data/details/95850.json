@@ -19,7 +19,7 @@
   "cast": [],
   "links": [
     {
-      "url": "/api/download/server?id=95850&quality=1080p",
+      "url": "https://wild-sun-9376.oriue.workers.dev/?vcloud=Newtons%203rd%20Law",
       "quality": "1080p",
       "size": "2.4GB",
       "label": "Direct Cloud [1080p FHD]",
@@ -27,7 +27,7 @@
       "isCloud": true
     },
     {
-      "url": "/api/download/server?id=95850&quality=720p",
+      "url": "https://wild-sun-9376.oriue.workers.dev/?vcloud=Newtons%203rd%20Law",
       "quality": "720p",
       "size": "1.2GB",
       "label": "Direct Cloud [720p HD]",
@@ -35,7 +35,7 @@
       "isCloud": true
     },
     {
-      "url": "/api/download/server?id=95850&quality=480p",
+      "url": "https://wild-sun-9376.oriue.workers.dev/?vcloud=Newtons%203rd%20Law",
       "quality": "480p",
       "size": "450MB",
       "label": "Direct Cloud [480p SD]",

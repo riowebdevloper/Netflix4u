@@ -1,11 +1,11 @@
 const fs = require('fs');
 const path = require('path');
 
-const SITE_URL = 'https://flixworld.fun';
+const SITE_URL = 'https://netflix4u.in';
 const ROOT = path.resolve(__dirname, '..');
 const catalogPath = path.join(ROOT, 'data', 'catalog_summary.json');
 
-console.log('🗺️ Generating dynamic sitemap.xml and robots.txt...');
+console.log('🗺️ Generating dynamic sitemap.xml and robots.txt for Netflix4U.in...');
 
 const today = new Date().toISOString().split('T')[0];
 
@@ -40,13 +40,21 @@ for (const page of staticPages) {
   </url>\n`;
 }
 
-// Add catalog titles
+// Add verified catalog titles (GATE: exclude titles without verified real posters)
 if (fs.existsSync(catalogPath)) {
   const catalog = JSON.parse(fs.readFileSync(catalogPath, 'utf8'));
-  console.log(`Adding ${catalog.length} titles to sitemap...`);
+  console.log(`Inspecting ${catalog.length} titles in catalog for verified real posters...`);
 
-  // Include all catalog titles
+  let added = 0;
+  let skipped = 0;
+
   for (const item of catalog) {
+    // Quality Gate: Only index content with verified real posters
+    if (!item.poster || item.poster.includes('no-poster') || item.poster.includes('placeholder') || item.poster.includes('data:image')) {
+      skipped++;
+      continue;
+    }
+
     const type = item.type || 'movie';
     const id = item.id;
     const lastmod = item.date ? item.date.split('T')[0] : today;
@@ -57,16 +65,19 @@ if (fs.existsSync(catalogPath)) {
     <changefreq>weekly</changefreq>
     <priority>${item.quality === '4K' ? '0.8' : '0.7'}</priority>
   </url>\n`;
+    added++;
   }
+
+  console.log(`Added ${added} verified titles to sitemap (skipped ${skipped} unverified/placeholder items).`);
 }
 
 xml += `</urlset>`;
 
 fs.writeFileSync(path.join(ROOT, 'sitemap.xml'), xml, 'utf8');
-console.log(`✅ Successfully generated sitemap.xml with full URL coverage.`);
+console.log(`✅ Successfully generated sitemap.xml with full verified URL coverage.`);
 
 // Generate robots.txt
-const robotsTxt = `# FlixWorld Robots.txt
+const robotsTxt = `# Netflix4U Robots.txt
 # Optimized for Google, Bing, Perplexity, GPTBot, ClaudeBot, and AI Search Engines
 
 User-agent: *

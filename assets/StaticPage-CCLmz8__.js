@@ -13,7 +13,7 @@ import{j as t}from"./vendor-framer-BGQgIPyw.js";import{c,r as d}from"./vendor-re
 
       Have a question, feedback, or a feature request? We'd love to hear from you!
 
-      - **Email (Support)**: [support@netflix4u.fun](mailto:support@netflix4u.fun)
+      - **Email (Support)**: [support@netflix4u.in](mailto:support@netflix4u.in)
       - **Customer Support Phone**: [+1 (800) 354-9967](tel:+18003549967)
       - **Helpline (Toll-Free)**: [+91 8000 123 456](tel:+918000123456)
       - **Twitter / X**: [@Netflix4UFun](https://twitter.com/Netflix4UFun)

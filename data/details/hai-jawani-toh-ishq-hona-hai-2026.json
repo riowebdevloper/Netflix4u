@@ -20,7 +20,7 @@
       "quality": "1080p",
       "size": "2.5GB",
       "label": "Hai Jawani Toh Ishq... (2026) 1080p FHD Direct Cloud",
-      "url": "/api/download/server?id=12113250&quality=1080p",
+      "url": "https://nexdrive.love/",
       "source": "hicine",
       "isCloud": true
     },
@@ -28,7 +28,7 @@
       "quality": "720p",
       "size": "1.2GB",
       "label": "Hai Jawani Toh Ishq... (2026) 720p HD Direct Cloud",
-      "url": "/api/download/server?id=12113250&quality=720p",
+      "url": "https://nexdrive.love/",
       "source": "hicine",
       "isCloud": true
     },
@@ -36,7 +36,7 @@
       "quality": "480p",
       "size": "480MB",
       "label": "Hai Jawani Toh Ishq... (2026) 480p SD Direct Cloud",
-      "url": "/api/download/server?id=12113250&quality=480p",
+      "url": "https://nexdrive.love/",
       "source": "hicine",
       "isCloud": true
     }

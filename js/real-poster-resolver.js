@@ -1,7 +1,8 @@
 /**
- * Netflix4U Real Poster & Backdrop Resolver
+ * Netflix4U Real Poster & Backdrop Resolver & Publish Gate
  * Securely fetches high-res artwork via server proxy /api/poster-resolver
  * Zero client-side API key exposure.
+ * Enforces domain allowlist and prevents placeholder/fake poster rendering.
  */
 
 (function() {
@@ -9,6 +10,38 @@
 
   const memoryCache = new Map();
   const pendingRequests = new Map();
+
+  const ALLOWED_HOSTS = [
+    'image.tmdb.org',
+    'storage.hicine.sbs',
+    'm.media-amazon.com'
+  ];
+
+  function isAllowedPoster(url) {
+    if (!url || typeof url !== 'string') return false;
+    const lower = url.trim().toLowerCase();
+    if (
+      lower.includes('no-poster') ||
+      lower.includes('placeholder') ||
+      lower.includes('data:image') ||
+      lower.includes('unavailable') ||
+      lower.includes('dummy') ||
+      lower === ''
+    ) {
+      return false;
+    }
+    if (lower.startsWith('/uploads/') || lower.startsWith('/images/covers/')) {
+      return true;
+    }
+    try {
+      const parsed = new URL(url, window.location.origin);
+      return ALLOWED_HOSTS.some(host => parsed.hostname === host || parsed.hostname.endsWith('.' + host));
+    } catch(e) {
+      return false;
+    }
+  }
+
+  window.isAllowedPoster = isAllowedPoster;
 
   function cleanTitle(raw) {
     if (!raw) return '';
@@ -36,13 +69,14 @@
     try {
       const url = `/api/poster-resolver?title=${encodeURIComponent(clean)}&imdbId=${encodeURIComponent(imdbId || '')}&type=${encodeURIComponent(type || 'movie')}`;
       const res = await fetch(url);
-      if (res.ok) {
+      if (res.ok && (!res.headers.get("content-type") || res.headers.get("content-type").indexOf("json") !== -1)) {
         const data = await res.json();
         if (data && (data.poster || data.backdrop)) {
-          return {
-            poster: data.poster || null,
-            backdrop: data.backdrop || data.poster || null
-          };
+          const poster = isAllowedPoster(data.poster) ? data.poster : null;
+          const backdrop = isAllowedPoster(data.backdrop) ? data.backdrop : (poster || null);
+          if (poster || backdrop) {
+            return { poster, backdrop };
+          }
         }
       }
     } catch(e) {}
@@ -70,9 +104,11 @@
       const sess = sessionStorage.getItem('rp_' + key);
       if (sess) {
         const parsed = JSON.parse(sess);
-        memoryCache.set(key, parsed);
-        callback(parsed.poster, parsed.backdrop);
-        return;
+        if (isAllowedPoster(parsed.poster)) {
+          memoryCache.set(key, parsed);
+          callback(parsed.poster, parsed.backdrop);
+          return;
+        }
       }
     } catch(e) {}
 
@@ -107,4 +143,45 @@
       });
     });
   };
+
+  // --- Poster Publish Gate ---
+  // Hides any cards in catalog/listing that fail poster resolution
+  function runPublishGate() {
+    try {
+      const images = document.querySelectorAll('img');
+      images.forEach(img => {
+        const src = img.getAttribute('src') || '';
+        if (src.includes('no-poster') || src.includes('placeholder')) {
+          const card = img.closest('.group, [data-card], .relative.rounded-xl, .aspect-\\[2\\/3\\]');
+          if (card && !card.closest('.hero-section')) {
+            // Check if card has title to attempt resolve
+            const titleEl = card.querySelector('h3, h4, p.font-bold, .card-title');
+            const title = titleEl ? titleEl.textContent.trim() : '';
+            if (title) {
+              window.resolveRealPoster(title, '', 'movie', (realPoster) => {
+                if (realPoster) {
+                  img.src = realPoster;
+                  card.style.display = '';
+                } else {
+                  card.style.display = 'none';
+                }
+              });
+            } else {
+              card.style.display = 'none';
+            }
+          }
+        }
+      });
+    } catch(e) {}
+  }
+
+  if (typeof document !== 'undefined') {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => {
+        setTimeout(runPublishGate, 1000);
+      });
+    } else {
+      setTimeout(runPublishGate, 1000);
+    }
+  }
 })();

@@ -21,7 +21,7 @@ This option runs the built-in Node.js server with all features: dynamic TMDB tra
    - **Node.js version**: Select `18.x`, `20.x`, or higher.
    - **Application mode**: `Production`
    - **Application root**: Path where files were extracted (e.g., `netflix4u` or `public_html`).
-   - **Application URL**: Your domain (e.g., `netflix4u.fun` or `yourdomain.com`).
+   - **Application URL**: Your domain (e.g., `netflix4u.in` or `yourdomain.com`).
    - **Application startup file**: `server.js` (or `app.js`).
 4. (Optional) Under **Environment variables**, you can add:
    - `PORT`: Leave default or let cPanel assign port/socket automatically.
