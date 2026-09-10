@@ -290,28 +290,7 @@ async function handleDetails(req, res) {
     return sendJson(res, 400, { success: false, error: 'ID parameter required' });
   }
 
-  // CRITICAL: If the ID is a bare numeric string AND type hint is series/anime/kdrama/tv,
-  // resolve via TMDB first to prevent local dotmobiz-{sameNumber} collision.
-  // Example: /api/details/90545?type=series → TMDB "The Sandman", not dotmobiz-90545 "Thukra Ke Mera Pyaar"
-  let item = null;
-  const isNumeric = /^\d+$/.test(id);
-  const isTvHint = (typeHint === 'series' || typeHint === 'anime' || typeHint === 'kdrama' || typeHint === 'tv');
-  const isMovieHint = (typeHint === 'movie');
-
-  if (isNumeric && (isTvHint || isMovieHint) && !id.startsWith('dotmobiz-')) {
-    // Try TMDB first when type is explicitly provided
-    const tmdbType = isTvHint ? 'tv' : 'movie';
-    const { fetchTmdbRecord } = require('./canonicalResolver');
-    const tmdbRecord = await fetchTmdbRecord(tmdbType, id);
-    if (tmdbRecord) {
-      item = tmdbRecord;
-    }
-  }
-
-  // Fallback to normal canonical resolver if TMDB shortcut didn't match
-  if (!item) {
-    item = await resolveContentId(id);
-  }
+  const item = await resolveContentId(id);
 
   if (!item) {
     return sendJson(res, 404, { success: false, error: 'Title not found' });

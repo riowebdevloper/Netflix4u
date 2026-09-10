@@ -279,15 +279,9 @@ const Rg=async(s=1)=>{
   try {
     const p = new URLSearchParams(typeof window !== "undefined" ? window.location.search : "");
     const qLang = (p.get("language") || p.get("category") || "").toLowerCase().trim();
-    if (!qLang && s === 1) {
-      const feed = await getHomeFeed();
-      if (feed && feed.popularMovies && feed.popularMovies.length > 0) {
-        return feed.popularMovies.map(t => mapHicineItem(t, "movie"));
-      }
-    }
-    const summary = await getSummaryCatalog();
-    if (summary.length > 0) {
-      let movies = summary.filter(x => x.type === "movie");
+    if (!HICINE_DATA.movies) HICINE_DATA.movies = await getLocalJson("movies.json");
+    if (HICINE_DATA.movies && HICINE_DATA.movies.length > 0) {
+      let movies = HICINE_DATA.movies;
       if (qLang === "bollywood") {
         movies = movies.filter(x => {
           const hay = ((x.language||"")+" "+(x.originalTitle||"")+" "+(x.rawTitle||"")+" "+(x.title||"")+" "+(x.categories||[]).join(" ")).toLowerCase();
@@ -315,17 +309,14 @@ const Rg=async(s=1)=>{
 // 8. Yg -> TV Shows Explorer
 const Yg=async(s=1)=>{
   try {
-    if (s === 1) {
-      const feed = await getHomeFeed();
-      if (feed && feed.popularSeries && feed.popularSeries.length > 0) {
-        return feed.popularSeries.map(t => mapHicineItem(t, "series"));
-      }
-    }
-    const summary = await getSummaryCatalog();
-    if (summary.length > 0) {
-      const shows = summary.filter(x => x.type === "series");
+    if (!HICINE_DATA.series) HICINE_DATA.series = await getLocalJson("series.json");
+    if (HICINE_DATA.series && HICINE_DATA.series.length > 0) {
       const start = (s - 1) * 20;
-      return shows.slice(start, start + 20).map(t => mapHicineItem(t, "series"));
+      return HICINE_DATA.series.slice(start, start + 20).map(t => mapHicineItem(t, "series"));
+    }
+    const feed = await getHomeFeed();
+    if (feed && feed.popularSeries && feed.popularSeries.length > 0) {
+      return feed.popularSeries.map(t => mapHicineItem(t, "series"));
     }
   } catch(e) {}
   const v=await Ht("/discover/tv",{page:s,sort_by:"popularity.desc",without_genres:"16"});return v?v?.results?v.results.map(z=>Pt(z,"series")):[]:qd();
@@ -334,16 +325,14 @@ const Yg=async(s=1)=>{
 // 9. Gg -> Anime
 const Gg=async(s=1)=>{
   try {
-    if (s === 1) {
-      const feed = await getHomeFeed();
-      if (feed && feed.anime && feed.anime.length > 0) {
-        return feed.anime.map(t => mapHicineItem(t, "anime"));
-      }
-    }
     if (!HICINE_DATA.anime) HICINE_DATA.anime = await getLocalJson("anime.json");
     if (HICINE_DATA.anime && HICINE_DATA.anime.length > 0) {
       const start = (s - 1) * 20;
       return HICINE_DATA.anime.slice(start, start + 20).map(t => mapHicineItem(t, "anime"));
+    }
+    const feed = await getHomeFeed();
+    if (feed && feed.anime && feed.anime.length > 0) {
+      return feed.anime.map(t => mapHicineItem(t, "anime"));
     }
   } catch(e) {}
   const v=await Ht("/discover/tv",{page:s,sort_by:"popularity.desc",with_genres:"16",with_original_language:"ja"});return v?v?.results?v.results.map(z=>Pt(z,"anime")):[]:q0();
@@ -352,17 +341,14 @@ const Gg=async(s=1)=>{
 // 10. Xg -> KDrama
 const Xg=async(s=1)=>{
   try {
-    if (s === 1) {
-      const feed = await getHomeFeed();
-      if (feed && feed.kdrama && feed.kdrama.length > 0) {
-        return feed.kdrama.map(t => mapHicineItem(t, "kdrama"));
-      }
-    }
-    const summary = await getSummaryCatalog();
-    if (summary.length > 0) {
-      const kdrama = summary.filter(x => x.categories && x.categories.some(c => /korean|kdrama|k-drama/i.test(c)));
+    if (!HICINE_DATA.kdrama) HICINE_DATA.kdrama = await getLocalJson("kdrama.json");
+    if (HICINE_DATA.kdrama && HICINE_DATA.kdrama.length > 0) {
       const start = (s - 1) * 20;
-      return kdrama.slice(start, start + 20).map(t => mapHicineItem(t, "kdrama"));
+      return HICINE_DATA.kdrama.slice(start, start + 20).map(t => mapHicineItem(t, "kdrama"));
+    }
+    const feed = await getHomeFeed();
+    if (feed && feed.kdrama && feed.kdrama.length > 0) {
+      return feed.kdrama.map(t => mapHicineItem(t, "kdrama"));
     }
   } catch(e) {}
   const v=await Ht("/discover/tv",{page:s,sort_by:"popularity.desc",with_original_language:"ko"});return v?v?.results?v.results.map(z=>Pt(z,"kdrama")):[]:B0();
@@ -370,19 +356,11 @@ const Xg=async(s=1)=>{
 
 const fetchBollywood = async (s = 1) => {
   try {
-    const summary = await getSummaryCatalog();
-    if (summary.length > 0) {
-      const items = summary.filter(x => {
-        const hay = ((x.language||"")+" "+(x.originalTitle||"")+" "+(x.rawTitle||"")+" "+(x.title||"")+" "+(x.categories||[]).join(" ")+" "+(x.country||"")).toLowerCase();
-        const isSouth = hay.includes("south") || hay.includes("tamil") || hay.includes("telugu") || hay.includes("malayalam") || hay.includes("kannada") || hay.includes("tollywood") || hay.includes("kollywood");
-        if (isSouth) return false;
-        const isHollywood = (Array.isArray(x.categories) && x.categories.some(c => /hollywood/i.test(c))) || hay.includes("hollywood");
-        if (isHollywood) return false;
-        return hay.includes("bollywood") || (!hay.includes("english") && hay.includes("hindi")) || ((x.country||"").toLowerCase().includes("india") && !hay.includes("english"));
-      });
+    if (!HICINE_DATA.bollywood) HICINE_DATA.bollywood = await getLocalJson("bollywood.json");
+    if (HICINE_DATA.bollywood && HICINE_DATA.bollywood.length > 0) {
       const pageSize = 24;
       const start = (s - 1) * pageSize;
-      return items.slice(start, start + pageSize).map(t => mapHicineItem(t, t.type || "movie"));
+      return HICINE_DATA.bollywood.slice(start, start + pageSize).map(t => mapHicineItem(t, t.type || "movie"));
     }
   } catch(e) {}
   return [];
@@ -390,18 +368,11 @@ const fetchBollywood = async (s = 1) => {
 
 const fetchHollywood = async (s = 1) => {
   try {
-    const summary = await getSummaryCatalog();
-    if (summary.length > 0) {
-      const items = summary.filter(x => {
-        const hay = ((x.language||"")+" "+(x.originalTitle||"")+" "+(x.rawTitle||"")+" "+(x.title||"")+" "+(x.categories||[]).join(" ")).toLowerCase();
-        const isSouth = hay.includes("south") || hay.includes("tamil") || hay.includes("telugu") || hay.includes("malayalam") || hay.includes("kannada") || hay.includes("tollywood") || hay.includes("kollywood");
-        const isBolly = !isSouth && (hay.includes("bollywood") || (!hay.includes("english") && hay.includes("hindi")) || ((x.country||"").toLowerCase().includes("india") && !hay.includes("english")));
-        if (isSouth || isBolly) return false;
-        return hay.includes("hollywood") || hay.includes("english") || (x.country && (x.country.includes("USA") || x.country.includes("United States") || x.country.includes("UK")));
-      });
+    if (!HICINE_DATA.hollywood) HICINE_DATA.hollywood = await getLocalJson("hollywood.json");
+    if (HICINE_DATA.hollywood && HICINE_DATA.hollywood.length > 0) {
       const pageSize = 24;
       const start = (s - 1) * pageSize;
-      return items.slice(start, start + pageSize).map(t => mapHicineItem(t, t.type || "movie"));
+      return HICINE_DATA.hollywood.slice(start, start + pageSize).map(t => mapHicineItem(t, t.type || "movie"));
     }
   } catch(e) {}
   return [];
@@ -409,15 +380,11 @@ const fetchHollywood = async (s = 1) => {
 
 const fetchSouthIndian = async (s = 1) => {
   try {
-    const summary = await getSummaryCatalog();
-    if (summary.length > 0) {
-      const items = summary.filter(x => {
-        const hay = ((x.language||"")+" "+(x.originalTitle||"")+" "+(x.rawTitle||"")+" "+(x.title||"")+" "+(x.categories||[]).join(" ")+" "+(x.genres||[]).join(" ")).toLowerCase();
-        return hay.includes("south") || hay.includes("tamil") || hay.includes("telugu") || hay.includes("malayalam") || hay.includes("kannada") || hay.includes("tollywood") || hay.includes("kollywood");
-      });
+    if (!HICINE_DATA.southIndian) HICINE_DATA.southIndian = await getLocalJson("south-indian.json");
+    if (HICINE_DATA.southIndian && HICINE_DATA.southIndian.length > 0) {
       const pageSize = 24;
       const start = (s - 1) * pageSize;
-      return items.slice(start, start + pageSize).map(t => mapHicineItem(t, t.type || "movie"));
+      return HICINE_DATA.southIndian.slice(start, start + pageSize).map(t => mapHicineItem(t, t.type || "movie"));
     }
   } catch(e) {}
   return [];
@@ -425,15 +392,11 @@ const fetchSouthIndian = async (s = 1) => {
 
 const fetchHindiDubbed = async (s = 1) => {
   try {
-    const summary = await getSummaryCatalog();
-    if (summary.length > 0) {
-      const items = summary.filter(x => {
-        const hay = ((x.language||"")+" "+(x.originalTitle||"")+" "+(x.rawTitle||"")+" "+(x.title||"")+" "+(x.categories||[]).join(" ")).toLowerCase();
-        return hay.includes("dubbed") || hay.includes("dual audio") || hay.includes("dual") || hay.includes("hindi dubbed");
-      });
+    if (!HICINE_DATA.hindiDubbed) HICINE_DATA.hindiDubbed = await getLocalJson("hindi-dubbed.json");
+    if (HICINE_DATA.hindiDubbed && HICINE_DATA.hindiDubbed.length > 0) {
       const pageSize = 24;
       const start = (s - 1) * pageSize;
-      return items.slice(start, start + pageSize).map(t => mapHicineItem(t, t.type || "movie"));
+      return HICINE_DATA.hindiDubbed.slice(start, start + pageSize).map(t => mapHicineItem(t, t.type || "movie"));
     }
   } catch(e) {}
   return [];

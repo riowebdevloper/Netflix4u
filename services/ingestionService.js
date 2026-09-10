@@ -582,12 +582,42 @@ function rebuildCategories(catalogList) {
   const kdrama = published.filter(i => i.type === 'kdrama' || (i.categories && i.categories.some(c => /korean|kdrama/i.test(c)))).slice(0, 100);
   const trending = published.slice(0, 100);
 
+  const bollywood = published.filter(x => {
+    const hay = ((x.language||'')+' '+(x.originalTitle||'')+' '+(x.rawTitle||'')+' '+(x.title||'')+' '+(x.categories||[]).join(' ')+' '+(x.country||'')).toLowerCase();
+    const isSouth = hay.includes('south') || hay.includes('tamil') || hay.includes('telugu') || hay.includes('malayalam') || hay.includes('kannada') || hay.includes('tollywood') || hay.includes('kollywood');
+    if (isSouth) return false;
+    const isHollywood = (Array.isArray(x.categories) && x.categories.some(c => /hollywood/i.test(c))) || hay.includes('hollywood');
+    if (isHollywood) return false;
+    return hay.includes('bollywood') || (!hay.includes('english') && hay.includes('hindi')) || ((x.country||'').toLowerCase().includes('india') && !hay.includes('english'));
+  }).slice(0, 100);
+
+  const hollywood = published.filter(x => {
+    const hay = ((x.language||'')+' '+(x.originalTitle||'')+' '+(x.rawTitle||'')+' '+(x.title||'')+' '+(x.categories||[]).join(' ')).toLowerCase();
+    const isHollywood = (Array.isArray(x.categories) && x.categories.some(c => /hollywood/i.test(c))) || hay.includes('hollywood');
+    const isEnglish = (x.language||'').toLowerCase().includes('english') || hay.includes('english');
+    return isHollywood || (isEnglish && !hay.includes('bollywood') && !hay.includes('punjabi'));
+  }).slice(0, 100);
+
+  const southIndian = published.filter(x => {
+    const hay = ((x.language||'')+' '+(x.originalTitle||'')+' '+(x.rawTitle||'')+' '+(x.title||'')+' '+(x.categories||[]).join(' ')).toLowerCase();
+    return hay.includes('south') || hay.includes('tamil') || hay.includes('telugu') || hay.includes('malayalam') || hay.includes('kannada') || hay.includes('tollywood') || hay.includes('kollywood');
+  }).slice(0, 100);
+
+  const hindiDubbed = published.filter(x => {
+    const hay = ((x.language||'')+' '+(x.originalTitle||'')+' '+(x.rawTitle||'')+' '+(x.title||'')+' '+(x.categories||[]).join(' ')).toLowerCase();
+    return hay.includes('dual audio') || hay.includes('hindi dubbed') || hay.includes('dubbed') || hay.includes('multi audio');
+  }).slice(0, 100);
+
   fs.writeFileSync(path.join(DATA_DIR, 'movies.json'), JSON.stringify(movies, null, 2), 'utf8');
   fs.writeFileSync(path.join(DATA_DIR, 'series.json'), JSON.stringify(series, null, 2), 'utf8');
   fs.writeFileSync(path.join(DATA_DIR, 'anime.json'), JSON.stringify(anime, null, 2), 'utf8');
   fs.writeFileSync(path.join(DATA_DIR, 'kdrama.json'), JSON.stringify(kdrama, null, 2), 'utf8');
   fs.writeFileSync(path.join(DATA_DIR, 'trending.json'), JSON.stringify(trending, null, 2), 'utf8');
-  console.log('[IngestionPipeline] Rebuilt category JSON files.');
+  fs.writeFileSync(path.join(DATA_DIR, 'bollywood.json'), JSON.stringify(bollywood, null, 2), 'utf8');
+  fs.writeFileSync(path.join(DATA_DIR, 'hollywood.json'), JSON.stringify(hollywood, null, 2), 'utf8');
+  fs.writeFileSync(path.join(DATA_DIR, 'south-indian.json'), JSON.stringify(southIndian, null, 2), 'utf8');
+  fs.writeFileSync(path.join(DATA_DIR, 'hindi-dubbed.json'), JSON.stringify(hindiDubbed, null, 2), 'utf8');
+  console.log('[IngestionPipeline] Rebuilt category JSON files (including Bollywood, Hollywood, South Indian, Hindi Dubbed).');
 }
 
 // ----------------------------------------------------
