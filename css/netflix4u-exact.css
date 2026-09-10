@@ -1,0 +1,353 @@
+/* =============================================================================
+   NETFLIX4U — EXACT NETFLIX DESIGN SYSTEM
+   Pixel-perfect recreation of Netflix's UI/UX
+   ============================================================================= */
+
+/* ─── 1. DESIGN TOKENS ─────────────────────────────────────────────────────── */
+:root {
+  --nf-black:        #000000;
+  --nf-bg:           #141414;
+  --nf-card:         #181818;
+  --nf-red:          #E50914;
+  --nf-red-hover:    #f40612;
+  --nf-white:        #ffffff;
+  --nf-grey:         #808080;
+  --nf-text:         #e5e5e5;
+  --nf-header-h:     68px;
+  --nf-mobile-nav-h: 60px;
+  --color-accent:       #E50914;
+  --color-accent-hover: #f40612;
+  --color-navy-950:     #141414;
+  --color-navy-900:     #181818;
+  --color-navy-800:     #181818;
+  --color-bg:           #141414;
+  --color-card:         #181818;
+}
+
+/* ─── 2. BASE ────────────────────────────────────────────────────────────────── */
+html, body {
+  background-color: #141414 !important;
+  color: #e5e5e5 !important;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+  overflow-x: hidden !important;
+}
+#root { background-color: #141414 !important; min-height: 100vh !important; }
+.scrollbar-hide { -ms-overflow-style: none !important; scrollbar-width: none !important; }
+.scrollbar-hide::-webkit-scrollbar { display: none !important; }
+
+/* ─── 3. HEADER / NAVBAR ────────────────────────────────────────────────────── */
+header {
+  position: fixed !important;
+  top: 0 !important; left: 0 !important; right: 0 !important;
+  height: var(--nf-header-h) !important;
+  z-index: 1000 !important;
+  background: linear-gradient(180deg, rgba(0,0,0,0.7) 10%, transparent 100%) !important;
+  transition: background-color 0.4s ease !important;
+  display: flex !important;
+  align-items: center !important;
+  padding: 0 4% !important;
+}
+header.nf-scrolled {
+  background: #141414 !important;
+}
+
+#nav-logo { display: flex !important; align-items: center !important; flex-shrink: 0 !important; }
+#nav-logo img, header a[href="/"] img {
+  height: 32px !important; max-height: 32px !important;
+  width: auto !important; max-width: 120px !important;
+  object-fit: contain !important; display: block !important;
+}
+
+header nav a {
+  color: #e5e5e5 !important; font-size: 14px !important;
+  font-weight: 400 !important; transition: color 0.15s !important;
+}
+header nav a:hover { color: #b3b3b3 !important; }
+header nav a[class*="active"] { color: #ffffff !important; font-weight: 700 !important; }
+
+#nav-sign-in {
+  background-color: #E50914 !important; color: #ffffff !important;
+  font-size: 14px !important; font-weight: 600 !important;
+  border: none !important; border-radius: 4px !important;
+  padding: 7px 17px !important; cursor: pointer !important;
+  transition: background-color 0.15s !important;
+}
+#nav-sign-in:hover { background-color: #f40612 !important; transform: none !important; }
+
+#nav-search-trigger {
+  background: transparent !important; border: none !important;
+  color: #e5e5e5 !important; cursor: pointer !important; padding: 6px !important;
+  border-radius: 50% !important; transition: color 0.15s !important;
+}
+#nav-search-trigger:hover { color: #ffffff !important; }
+
+@media (max-width: 640px) {
+  #nav-logo img { height: 22px !important; max-height: 22px !important; max-width: 90px !important; }
+  header { padding: 0 4% !important; height: 56px !important; }
+}
+
+/* ─── 4. HERO / BILLBOARD ────────────────────────────────────────────────────── */
+.hero-section-container, #hero-banner {
+  position: relative !important;
+  width: 100% !important; background-color: #141414 !important;
+  overflow: hidden !important;
+  height: 56.25vw !important; min-height: 350px !important; max-height: 720px !important;
+}
+
+.hero-bg-img { position: absolute !important; inset: 0 !important; }
+.hero-bg-img img {
+  width: 100% !important; height: 100% !important;
+  object-fit: cover !important; object-position: center top !important;
+}
+
+/* Netflix left+bottom gradient */
+.hero-gradient-desktop {
+  position: absolute !important; inset: 0 !important; z-index: 2 !important;
+  pointer-events: none !important;
+  background:
+    linear-gradient(to right, rgba(20,20,20,0.98) 0%, rgba(20,20,20,0.7) 40%, rgba(20,20,20,0) 80%),
+    linear-gradient(to top, #141414 0%, rgba(20,20,20,0.5) 30%, rgba(20,20,20,0) 60%) !important;
+}
+.hero-gradient-mobile { display: none !important; }
+.hero-gradient-bottom { display: none !important; }
+
+/* Content: bottom-left like Netflix */
+.hero-content-area {
+  position: absolute !important; inset: 0 !important;
+  display: flex !important; flex-direction: column !important; justify-content: flex-end !important;
+  padding: 0 4% 11% 4% !important; z-index: 10 !important;
+}
+.hero-content-inner {
+  display: flex !important; align-items: flex-end !important;
+  justify-content: flex-start !important; width: 100% !important;
+}
+.hero-text-col {
+  flex: 0 0 auto !important; max-width: 560px !important; text-align: left !important; z-index: 10 !important;
+}
+.hero-tag-row { display: flex !important; align-items: center !important; gap: 0.4rem !important; margin-bottom: 0.5rem !important; }
+
+#hero-banner h1, .hero-title {
+  font-size: clamp(1.8rem, 3.5vw, 3.2rem) !important;
+  font-weight: 700 !important; color: #ffffff !important; line-height: 1.1 !important;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.45) !important;
+  margin: 0 0 0.75rem 0 !important; letter-spacing: -0.01em !important;
+}
+.hero-meta-row { display: flex !important; flex-wrap: wrap !important; align-items: center !important; gap: 0.5rem !important; margin-bottom: 0.75rem !important; }
+.hero-description {
+  font-size: 1rem !important; color: rgba(255,255,255,0.85) !important;
+  line-height: 1.5 !important; max-width: 480px !important; margin-bottom: 1.25rem !important;
+  display: -webkit-box !important; -webkit-line-clamp: 3 !important;
+  -webkit-box-orient: vertical !important; overflow: hidden !important;
+}
+.hero-buttons-row {
+  display: flex !important; align-items: center !important;
+  gap: 0.625rem !important; flex-wrap: nowrap !important;
+}
+
+/* Netflix PLAY — WHITE bg, BLACK text */
+.hero-buttons-row .btn-primary, #hero-banner .btn-primary, .btn-primary {
+  display: inline-flex !important; align-items: center !important; gap: 0.4rem !important;
+  background-color: #ffffff !important; color: #000000 !important;
+  font-size: 1rem !important; font-weight: 700 !important;
+  padding: 0.5rem 1.6rem !important; border-radius: 4px !important;
+  border: none !important; cursor: pointer !important; min-height: 44px !important;
+  transition: background-color 0.15s !important; white-space: nowrap !important;
+}
+.hero-buttons-row .btn-primary svg, #hero-banner .btn-primary svg { fill: #000 !important; color: #000 !important; }
+.hero-buttons-row .btn-primary:hover, #hero-banner .btn-primary:hover {
+  background-color: rgba(255,255,255,0.75) !important; color: #000 !important; transform: none !important;
+}
+
+/* Netflix MORE INFO — grey translucent */
+.hero-buttons-row .btn-secondary, #hero-banner .btn-secondary, .btn-secondary {
+  display: inline-flex !important; align-items: center !important; gap: 0.4rem !important;
+  background-color: rgba(109,109,110,0.7) !important; color: #ffffff !important;
+  font-size: 1rem !important; font-weight: 600 !important;
+  padding: 0.5rem 1.6rem !important; border-radius: 4px !important;
+  border: none !important; cursor: pointer !important; min-height: 44px !important;
+  transition: background-color 0.15s !important; backdrop-filter: blur(8px) !important;
+  white-space: nowrap !important;
+}
+.hero-buttons-row .btn-secondary svg, #hero-banner .btn-secondary svg { fill: #fff !important; color: #fff !important; }
+.hero-buttons-row .btn-secondary:hover, #hero-banner .btn-secondary:hover {
+  background-color: rgba(109,109,110,0.4) !important;
+}
+
+/* Hide side poster on desktop */
+.hero-poster-card { display: none !important; }
+
+/* Icon buttons */
+.btn-icon {
+  display: inline-flex !important; align-items: center !important; justify-content: center !important;
+  width: 42px !important; height: 42px !important; border-radius: 50% !important;
+  background-color: rgba(42,42,42,0.6) !important; border: 2px solid rgba(255,255,255,0.7) !important;
+  color: #ffffff !important; padding: 0 !important; cursor: pointer !important; transition: all 0.15s !important;
+}
+.btn-icon:hover { background-color: rgba(42,42,42,0.9) !important; border-color: #ffffff !important; transform: scale(1.08) !important; }
+
+/* Dots — bottom right like Netflix */
+.hero-dots-container {
+  position: absolute !important; bottom: 1rem !important; right: 4% !important;
+  left: auto !important; transform: none !important;
+  display: flex !important; align-items: center !important; gap: 4px !important; z-index: 30 !important;
+}
+.hero-dot {
+  height: 2px !important; width: 12px !important; border-radius: 1px !important;
+  background-color: rgba(255,255,255,0.35) !important; border: none !important;
+  padding: 0 !important; cursor: pointer !important; transition: all 0.3s !important;
+}
+.hero-dot:hover { background-color: rgba(255,255,255,0.6) !important; }
+.hero-dot-active { background-color: #E50914 !important; width: 24px !important; box-shadow: 0 0 8px rgba(229,9,20,0.6) !important; }
+
+.hero-nav-arrow { position: absolute !important; top: 50% !important; transform: translateY(-50%) !important; z-index: 25 !important; opacity: 0 !important; transition: opacity 0.2s !important; }
+.hero-section-container:hover .hero-nav-arrow { opacity: 1 !important; }
+.hero-arrow-left { left: 1rem !important; }
+.hero-arrow-right { right: 1rem !important; }
+
+/* Mobile hero */
+@media (max-width: 767px) {
+  .hero-section-container, #hero-banner { height: auto !important; min-height: 0 !important; max-height: none !important; }
+  .hero-gradient-desktop { display: none !important; }
+  .hero-gradient-mobile {
+    display: block !important; position: absolute !important; inset: 0 !important; z-index: 2 !important;
+    background: linear-gradient(to bottom, rgba(20,20,20,0.2) 0%, rgba(20,20,20,0.9) 70%, #141414 100%) !important;
+    pointer-events: none !important;
+  }
+  .hero-content-area { position: relative !important; inset: auto !important; padding: 0 !important; }
+  .hero-poster-card {
+    display: block !important; width: 100% !important; aspect-ratio: 16/9 !important;
+    border-radius: 0 !important; border: none !important; box-shadow: none !important;
+    position: relative !important; overflow: hidden !important;
+  }
+  .hero-poster-img { width: 100% !important; height: 100% !important; object-fit: cover !important; }
+  .hero-content-inner { flex-direction: column !important; align-items: center !important; padding: 1rem 4% 1.5rem !important; }
+  .hero-poster-card { order: 1 !important; }
+  .hero-text-col { order: 2 !important; max-width: 100% !important; text-align: center !important; }
+  .hero-title { font-size: 1.5rem !important; margin-bottom: 0.5rem !important; }
+  .hero-description { display: none !important; }
+  .hero-tag-row { justify-content: center !important; }
+  .hero-meta-row { justify-content: center !important; }
+  .hero-buttons-row { justify-content: center !important; flex-wrap: wrap !important; gap: 0.5rem !important; }
+  .hero-buttons-row .btn-primary, .hero-buttons-row .btn-secondary { padding: 0.45rem 1.2rem !important; font-size: 0.9rem !important; }
+  .hero-watchlist-text { display: none !important; }
+  .hero-nav-arrow { display: none !important; }
+  .hero-dots-container { display: none !important; }
+}
+
+/* ─── 5. MAIN & SECTION HEADERS ─────────────────────────────────────────────── */
+main { background-color: #141414 !important; }
+span.w-1.h-7 { display: none !important; }
+section h2 { font-size: clamp(1rem, 1.4vw, 1.4rem) !important; font-weight: 700 !important; color: #e5e5e5 !important; }
+
+/* "View All" on section hover */
+section a[class*="flex items-center gap-1 text-gray"] {
+  color: #54b9c5 !important; font-size: 0.8rem !important;
+  font-weight: 700 !important; letter-spacing: 0.1em !important;
+  opacity: 0 !important; transition: opacity 0.3s !important;
+}
+section:hover a[class*="flex items-center gap-1 text-gray"] { opacity: 1 !important; }
+
+/* Row overflow for card expansion */
+section [class*="overflow-x-auto"] {
+  padding-top: 1rem !important; padding-bottom: 3.5rem !important; overflow-y: visible !important;
+}
+section > div[class*="relative group"] { overflow: visible !important; }
+
+/* ─── 6. MOVIE CARDS — NETFLIX HOVER EXPAND ──────────────────────────────────── */
+.group.relative.flex-shrink-0 {
+  width: 185px !important; transform-origin: center bottom !important; z-index: 1 !important; cursor: pointer !important;
+  transition: transform 0.35s ease 0.3s, z-index 0s 0.3s !important;
+}
+.group.relative.flex-shrink-0:hover {
+  transform: scale(1.5) !important; z-index: 100 !important;
+  transition: transform 0.35s ease 0.4s, z-index 0s 0.4s !important;
+}
+.group.relative.flex-shrink-0 [class*="rounded-xl"][class*="overflow-hidden"] { border-radius: 4px !important; }
+.group.relative.flex-shrink-0:hover [class*="rounded-xl"][class*="overflow-hidden"] {
+  border-radius: 4px 4px 0 0 !important;
+  box-shadow: 0 0 0 2px rgba(255,255,255,0.12), 0 8px 32px rgba(0,0,0,0.9) !important;
+}
+.group.relative.flex-shrink-0 span[class*="absolute top-2 left-2"] {
+  background: #E50914 !important; color: #fff !important;
+  font-size: 9px !important; font-weight: 700 !important; padding: 2px 5px !important; border-radius: 2px !important; border: none !important;
+}
+.group.relative.flex-shrink-0:hover [class*="mt-2 px-0.5"] { opacity: 0 !important; }
+
+/* Edge card origins */
+section [class*="overflow-x-auto"] > div:first-child .group.relative.flex-shrink-0:hover,
+section [class*="overflow-x-auto"] > div:nth-child(2) .group.relative.flex-shrink-0:hover { transform-origin: left bottom !important; }
+section [class*="overflow-x-auto"] > div:last-child .group.relative.flex-shrink-0:hover,
+section [class*="overflow-x-auto"] > div:nth-last-child(2) .group.relative.flex-shrink-0:hover { transform-origin: right bottom !important; }
+
+/* ─── 7. TOP 10 ──────────────────────────────────────────────────────────────── */
+.top-number, #top-10-section .top-number {
+  font-family: 'Impact', 'Arial Black', sans-serif !important;
+  font-size: 120px !important; font-weight: 900 !important; line-height: 0.8 !important;
+  color: #141414 !important; -webkit-text-stroke: 4px rgba(255,255,255,0.6) !important;
+  user-select: none !important; text-shadow: none !important;
+  filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.9)) !important;
+}
+
+/* ─── 8. SKELETONS ───────────────────────────────────────────────────────────── */
+.skeleton {
+  background: linear-gradient(90deg, #1a1a1a 25%, #222 50%, #1a1a1a 75%) !important;
+  background-size: 200% 100% !important; animation: nf-shimmer 1.5s infinite !important; border-radius: 4px !important;
+}
+@keyframes nf-shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+/* ─── 9. FOOTER ─────────────────────────────────────────────────────────────── */
+footer {
+  background-color: #141414 !important; border-top: none !important;
+  padding: 3rem 4% !important; color: #808080 !important;
+}
+footer a { color: #808080 !important; font-size: 0.8125rem !important; transition: color 0.15s !important; }
+footer a:hover { color: #e5e5e5 !important; }
+footer h3 { color: #808080 !important; font-size: 0.8125rem !important; font-weight: 400 !important; margin-bottom: 0.75rem !important; }
+footer ul li { margin-bottom: 0.5rem !important; }
+footer ul li a { color: #808080 !important; font-size: 0.8125rem !important; }
+footer ul li a:hover { color: #e5e5e5 !important; }
+footer [class*="text-3xl"], footer [class*="text-2xl"] { font-size: 1.25rem !important; color: #E50914 !important; }
+footer .grid { grid-template-columns: repeat(4, 1fr) !important; gap: 1rem !important; }
+
+@media (max-width: 767px) {
+  footer { padding: 2rem 4% 5.5rem 4% !important; }
+  footer .grid { grid-template-columns: 1fr 1fr !important; gap: 1.5rem 1rem !important; }
+  footer .grid > div:first-child {
+    grid-column: 1 / -1 !important; margin-bottom: 0.5rem !important;
+    padding-bottom: 0.75rem !important; border-bottom: 1px solid rgba(255,255,255,0.08) !important;
+  }
+  footer .grid h3 { font-size: 0.75rem !important; font-weight: 700 !important; text-transform: uppercase !important; letter-spacing: 0.06em !important; color: #fff !important; }
+  footer .grid li a { font-size: 0.8rem !important; color: #808080 !important; }
+}
+
+/* ─── 10. MOBILE BOTTOM NAV ──────────────────────────────────────────────────── */
+nav[class*="fixed bottom-0"] {
+  background-color: rgba(20,20,20,0.95) !important;
+  border-top: 1px solid rgba(255,255,255,0.08) !important;
+  backdrop-filter: blur(10px) !important;
+}
+.mobile-nav-item { color: #808080 !important; font-size: 10px !important; transition: color 0.15s !important; }
+.mobile-nav-item:hover, .mobile-nav-item[class*="active"] { color: #ffffff !important; }
+
+/* ─── 11. FILTER PILLS ───────────────────────────────────────────────────────── */
+.btn-pill {
+  background-color: #181818 !important; border: none !important;
+  color: #e5e5e5 !important; font-size: 0.875rem !important;
+  padding: 6px 16px !important; border-radius: 4px !important; cursor: pointer !important;
+  transition: background-color 0.15s !important;
+}
+.btn-pill:hover { background-color: #2f2f2f !important; }
+
+/* ─── 12. MISC ───────────────────────────────────────────────────────────────── */
+[class*="bg-[var(--color-navy-800)]"],
+[class*="bg-[var(--color-navy-900)]"],
+[class*="bg-[var(--color-navy-950)]"] { background-color: #181818 !important; }
+.text-gray-500 { color: #b3b3b3 !important; }
+.text-gray-400 { color: #cccccc !important; }
+.text-gray-600 { color: #b3b3b3 !important; }
+::-webkit-scrollbar { width: 6px !important; height: 4px !important; }
+::-webkit-scrollbar-track { background: #141414 !important; }
+::-webkit-scrollbar-thumb { background: #404040 !important; border-radius: 3px !important; }
+::-webkit-scrollbar-thumb:hover { background: #606060 !important; }
+section > div[class*="flex items-center justify-between"] { padding-left: 4% !important; padding-right: 4% !important; }
+section [class*="overflow-x-auto"] { padding-left: 4% !important; padding-right: 4% !important; }

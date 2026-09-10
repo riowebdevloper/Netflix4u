@@ -52,6 +52,8 @@
     <link rel="preconnect" href="https://www.youtube.com" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@700;800;900&display=swap" rel="stylesheet">
     <link rel="preload" as="font" crossorigin="" href="/fonts/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2">
+    <!-- Netflix4U Exact Design System -->
+    <link rel="stylesheet" href="/css/netflix4u-exact.css">
 
     <title>Netflix4U — Stream Movies, Series, Anime & K-Dramas</title>
 
@@ -431,7 +433,7 @@
       .hero-section-container {
         position: relative !important;
         width: 100% !important;
-        background-color: #0a0d1a !important;
+        background-color: #141414 !important;
         overflow: hidden !important;
       }
 
@@ -452,7 +454,7 @@
         left: 0 !important;
         right: 0 !important;
         height: 140px !important;
-        background: linear-gradient(to top, #0a0d1a 0%, transparent 100%) !important;
+        background: linear-gradient(to top, #141414 0%, transparent 100%) !important;
         pointer-events: none !important;
         z-index: 3 !important;
       }
@@ -823,18 +825,21 @@
       }
 
       /* =========================================================
-         🎬 NETFLIX REDESIGN & STRICT MOBILE GUARANTEES
+         🎬 NETFLIX EXACT — TOKEN OVERRIDE
          ========================================================= */
       :root {
-        --color-accent: #E50914 !important;
-        --color-accent-hover: #b80710 !important;
-        --color-navy-950: #141414 !important;
-        --color-navy-900: #181818 !important;
-        --color-card: #181818 !important;
-        --color-card-hover: #232323 !important;
+        --color-accent:       #E50914 !important;
+        --color-accent-hover: #f40612 !important;
+        --color-navy-950:     #141414 !important;
+        --color-navy-900:     #181818 !important;
+        --color-navy-800:     #181818 !important;
+        --color-card:         #181818 !important;
+        --color-card-hover:   #2f2f2f !important;
+        --color-bg:           #141414 !important;
       }
-      body {
+      body, html {
         background-color: #141414 !important;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
       }
 
       /* Strict Header Logo Bounding - Desktop & Mobile */
@@ -956,5 +961,24 @@
   </head>
   <body>
     <div id="root"></div>
+    <!-- Netflix4U — Transparent→Solid Navbar Scroll Listener -->
+    <script>
+      (function() {
+        function updateNav() {
+          var header = document.querySelector('header');
+          if (!header) return;
+          if (window.scrollY > 50) {
+            header.classList.add('nf-scrolled');
+          } else {
+            header.classList.remove('nf-scrolled');
+          }
+        }
+        window.addEventListener('scroll', updateNav, { passive: true });
+        // Initial check
+        window.addEventListener('DOMContentLoaded', updateNav);
+        // Also check after React mounts
+        setTimeout(updateNav, 500);
+      })();
+    </script>
   </body>
 </html>

@@ -1303,6 +1303,23 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
+  // 9b. CSS / Fonts / Images subdirectory serving
+  const ALLOWED_SUBDIRS = ['css', 'fonts', 'images', 'public'];
+  const reqSegments = reqPath.replace(/^\//, '').split('/');
+  if (reqSegments.length >= 2 && ALLOWED_SUBDIRS.includes(reqSegments[0])) {
+    const subFilePath = path.join(ROOT, ...reqSegments);
+    if (isSafePath(ROOT, reqPath) && fs.existsSync(subFilePath) && fs.statSync(subFilePath).isFile()) {
+      const ext = path.extname(subFilePath).toLowerCase();
+      const mime = MIME_TYPES[ext] || 'application/octet-stream';
+      const cacheControl = ['.css', '.js', '.woff', '.woff2'].includes(ext)
+        ? 'public, max-age=86400'
+        : 'public, max-age=3600';
+      res.writeHead(200, { 'Content-Type': mime, 'Cache-Control': cacheControl });
+      fs.createReadStream(subFilePath).pipe(res);
+      return;
+    }
+  }
+
   // 10. Assets / JS resolution
   const baseName = path.basename(reqPath);
   const inJs = path.join(ROOT, 'js', baseName);
