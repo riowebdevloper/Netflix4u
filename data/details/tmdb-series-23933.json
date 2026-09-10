@@ -1,0 +1,48 @@
+{
+  "id": "tmdb-series-23933",
+  "canonicalId": "tmdb-series-23933",
+  "externalProvider": "tmdb",
+  "externalId": "23933",
+  "tmdbId": "23933",
+  "imdbId": "",
+  "type": "series",
+  "contentType": "series",
+  "title": "Sam's Game",
+  "canonicalTitle": "Sam's Game",
+  "originalTitle": "Sam's Game",
+  "overview": "Sam's Game was a short lived sitcom, featuring Davina McCall and Ed Byrne.",
+  "description": "Sam's Game was a short lived sitcom, featuring Davina McCall and Ed Byrne.",
+  "shortDescription": "Sam's Game was a short lived sitcom, featuring Davina McCall and Ed Byrne.",
+  "year": 2001,
+  "rating": 8,
+  "votes": "1.2K",
+  "quality": "FHD",
+  "duration": "30m/ep",
+  "genres": [],
+  "categories": [],
+  "language": "English",
+  "country": "GB",
+  "director": "Director",
+  "poster": null,
+  "backdrop": null,
+  "trailerUrl": null,
+  "trailer": null,
+  "cast": [
+    {
+      "id": "129053",
+      "name": "Davina McCall",
+      "character": "Sam",
+      "photo": "https://image.tmdb.org/t/p/w185/bHW7MFrvqDBfBZmXRU90rFXPfLs.jpg"
+    },
+    {
+      "id": "95664",
+      "name": "Ed Byrne",
+      "character": "Alex",
+      "photo": "https://image.tmdb.org/t/p/w185/4qoJeUpstjDwwrihVChx6JxQX9I.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 6,
+  "status": "PUBLISHED",
+  "links": []
+}
