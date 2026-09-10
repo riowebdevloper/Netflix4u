@@ -41,7 +41,7 @@ if (!is_dir($rateLimitDir)) @mkdir($rateLimitDir, 0755, true);
 $clientIp = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
 $rlFile = $rateLimitDir . '/pr_' . md5($clientIp) . '.json';
 $rlWindow = 60; // seconds
-$rlMax = 60;    // max requests per window
+$rlMax = 600;   // generous limit for normal catalog browsing
 
 $rlData = ['count' => 0, 'start' => time()];
 if (file_exists($rlFile)) {

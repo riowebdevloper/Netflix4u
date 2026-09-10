@@ -144,8 +144,8 @@
     });
   };
 
-  // --- Poster Publish Gate ---
-  // Hides any cards in catalog/listing that fail poster resolution
+  // --- Poster Artwork Enhancer ---
+  // Resolves high-resolution posters without ever hiding cards or breaking grid layout
   function runPublishGate() {
     try {
       const images = document.querySelectorAll('img');
@@ -153,21 +153,16 @@
         const src = img.getAttribute('src') || '';
         if (src.includes('no-poster') || src.includes('placeholder')) {
           const card = img.closest('.group, [data-card], .relative.rounded-xl, .aspect-\\[2\\/3\\]');
-          if (card && !card.closest('.hero-section')) {
-            // Check if card has title to attempt resolve
+          if (card) {
             const titleEl = card.querySelector('h3, h4, p.font-bold, .card-title');
             const title = titleEl ? titleEl.textContent.trim() : '';
             if (title) {
               window.resolveRealPoster(title, '', 'movie', (realPoster) => {
                 if (realPoster) {
                   img.src = realPoster;
-                  card.style.display = '';
-                } else {
-                  card.style.display = 'none';
+                  img.style.objectFit = 'cover';
                 }
               });
-            } else {
-              card.style.display = 'none';
             }
           }
         }

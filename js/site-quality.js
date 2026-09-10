@@ -1,79 +1,375 @@
-/* Small framework-agnostic production quality layer for the bundled UI. */
+/* Netflix-Style Production UI/UX & Mobile Responsive Quality Layer */
 (() => {
   const routes = {
-    '/': ['Netflix4U — Movies, Series, Anime & K-Drama', 'Discover verified movies, series, anime, and K-dramas on Netflix4U.'],
-    '/movies': ['Movies | Netflix4U', 'Browse verified movie information on Netflix4U.'],
-    '/series': ['Web Series | Netflix4U', 'Browse verified web-series information on Netflix4U.'],
-    '/anime': ['Anime | Netflix4U', 'Browse verified anime information on Netflix4U.'],
-    '/kdrama': ['K-Drama | Netflix4U', 'Browse verified K-drama information on Netflix4U.'],
-    '/contact': ['Contact Netflix4U', 'Contact the Netflix4U support team.'],
-    '/401': ['Access Restricted | Netflix4U', 'This page requires an authorized Netflix4U account.']
+    '/': ['Netflix4U — Watch Movies, TV Series, Anime & K-Dramas', 'Watch and discover verified movies, series, anime, and K-dramas on Netflix4U.'],
+    '/movies': ['Movies | Netflix4U', 'Stream and download verified movies on Netflix4U.'],
+    '/series': ['Web Series | Netflix4U', 'Stream and download verified TV web series on Netflix4U.'],
+    '/anime': ['Anime | Netflix4U', 'Watch high quality anime series with multi-audio on Netflix4U.'],
+    '/kdrama': ['K-Drama | Netflix4U', 'Watch trending Korean dramas with subtitles on Netflix4U.'],
+    '/bollywood': ['Bollywood Movies | Netflix4U', 'Discover top Bollywood Hindi movies on Netflix4U.'],
+    '/hollywood': ['Hollywood Movies | Netflix4U', 'Discover top Hollywood English & Dubbed movies on Netflix4U.'],
+    '/south-indian': ['South Indian Movies | Netflix4U', 'Discover top South Indian Hindi Dubbed movies on Netflix4U.'],
+    '/hindi-dubbed': ['Hindi Dubbed Movies | Netflix4U', 'Discover Hindi Dubbed movies and series on Netflix4U.'],
+    '/trending': ['Trending Now | Netflix4U', 'The most watched movies and shows today on Netflix4U.'],
+    '/genres': ['Browse Genres | Netflix4U', 'Explore movies and series by genre on Netflix4U.'],
+    '/watchlist': ['My Watchlist | Netflix4U', 'Your saved movies and series to watch later.'],
+    '/about': ['About Us | Netflix4U', 'About the Netflix4U entertainment platform.'],
+    '/contact': ['Contact Us | Netflix4U', 'Contact the Netflix4U team.'],
+    '/privacy': ['Privacy Policy | Netflix4U', 'Privacy policy for Netflix4U users.'],
+    '/dmca': ['DMCA Disclaimer | Netflix4U', 'DMCA copyright policy and content disclaimer.']
   };
+
   function syncMetadata() {
-    const entry = routes[location.pathname] || ['Netflix4U — Entertainment Catalog', 'Discover verified entertainment information on Netflix4U.'];
+    const entry = routes[location.pathname] || ['Netflix4U — Entertainment Catalog', 'Discover verified entertainment on Netflix4U.'];
     document.title = entry[0];
     let description = document.querySelector('meta[name="description"]');
-    if (!description) { description = document.createElement('meta'); description.name = 'description'; document.head.append(description); }
+    if (!description) { 
+      description = document.createElement('meta'); 
+      description.name = 'description'; 
+      document.head.append(description); 
+    }
     description.content = entry[1];
   }
+
   function repairDom() {
-    document.querySelectorAll('#nav-logo img').forEach((image) => {
-      image.src = '/images/netflix4u-logo-nav.svg';
-      image.alt = 'Netflix4U home';
+    // 1. Strict logo sizing and src enforcement
+    document.querySelectorAll('#nav-logo').forEach(logo => {
+      logo.style.display = 'flex';
+      logo.style.alignItems = 'center';
+      logo.style.overflow = 'hidden';
+      const img = logo.querySelector('img');
+      if (img) {
+        if (!img.src.includes('netflix4u-logo-nav.svg')) {
+          img.src = '/images/netflix4u-logo-nav.svg';
+        }
+        img.alt = 'Netflix4U';
+        img.style.objectFit = 'contain';
+        img.style.display = 'block';
+      }
     });
-    document.querySelectorAll('footer img[alt="Netflix4U"]').forEach((image) => {
-      image.src = '/images/netflix4u-logo.svg';
+
+    // 2. Footer logo
+    document.querySelectorAll('footer img[alt="Netflix4U"]').forEach(img => {
+      if (!img.src.includes('netflix4u-logo.svg')) {
+        img.src = '/images/netflix4u-logo.svg';
+      }
     });
-    document.querySelectorAll('a[href="/bollywood"], a[href="/hollywood"], a[href="/south-indian"], a[href="/hindi-dubbed"]').forEach((link) => {
-      link.href = '/movies';
-      link.setAttribute('aria-label', `${link.textContent.trim() || 'Movies'} movies`);
+
+    // 3. Clean empty hash links
+    document.querySelectorAll('a[href="#"], a[href=""]').forEach(link => {
+      if (!link.getAttribute('onClick') && !link.id) {
+        link.setAttribute('href', 'javascript:void(0)');
+      }
     });
-    document.querySelectorAll('a[href="#"], a[href=""]').forEach((link) => link.remove());
-    document.querySelectorAll('img').forEach((image) => {
-      if (!image.alt) image.alt = 'Netflix4U artwork';
-      image.decoding = 'async';
+
+    // 4. Default alt and decoding
+    document.querySelectorAll('img:not([alt])').forEach(img => {
+      img.alt = 'Netflix4U media';
+      img.decoding = 'async';
     });
   }
+
   const style = document.createElement('style');
+  style.id = 'netflix4u-theme-engine';
   style.textContent = `
-    :root { --color-accent: #e11d48; --color-accent-hover: #be123c; --color-navy-950: #08090d; --color-navy-900: #101116; --color-card: #17181f; --color-card-hover: #242630; }
-    body { background: radial-gradient(1000px 520px at 80% -10%, rgba(225,29,72,.17), transparent 55%), #08090d !important; }
-    header { background: linear-gradient(180deg, rgba(8,9,13,.98), rgba(8,9,13,.84) 70%, transparent) !important; border: 0 !important; }
-    header nav { max-width: 1720px !important; height: 72px !important; }
-    header .btn-icon, header button { border-radius: 999px !important; }
-    header a.btn-pill { background: rgba(255,255,255,.07) !important; border: 1px solid rgba(255,255,255,.08) !important; }
-    header a.btn-pill:hover, header a.btn-pill:focus-visible { background: rgba(255,255,255,.14) !important; color: white !important; }
-    #hero-banner { border-bottom: 1px solid rgba(255,255,255,.06); box-shadow: inset 0 -100px 100px -80px #08090d; }
-    #hero-banner .btn-primary { border-radius: .6rem !important; box-shadow: 0 10px 28px rgba(225,29,72,.24); }
-    #hero-banner .btn-secondary { border-radius: .6rem !important; background: rgba(255,255,255,.12) !important; }
-    main > div > section, main section { scroll-margin-top: 6rem; }
-    section h2 { letter-spacing: -.025em; }
-    .group\/card > a, .group\/card .rounded-xl { border-radius: .65rem !important; }
-    .group\/card { transition: transform .22s ease, filter .22s ease !important; }
-    @media (hover:hover) { .group\/card:hover { transform: scale(1.045); z-index: 2; filter: brightness(1.08); } }
-    footer { margin-top: 4rem !important; background: linear-gradient(180deg, #111217, #08090d 70%) !important; }
-    footer a { color: #9ca3af !important; } footer a:hover { color: white !important; }
-    .safe-area-pb { padding-bottom: max(.75rem, env(safe-area-inset-bottom, 0px)) !important; }
-    header img, #nav-logo img { width: auto !important; max-width: min(132px, 38vw) !important; height: auto !important; max-height: 34px !important; object-fit: contain !important; }
-    @media (max-width: 639px) {
-      footer > div { padding: 2.25rem 1rem 6rem !important; }
-      footer .grid { grid-template-columns: 1fr 1fr !important; gap: 2rem 1.25rem !important; }
-      footer .grid > :first-child { grid-column: 1 / -1; }
-      footer .grid > :not(:first-child) { min-width: 0 !important; }
-      footer .grid h3 { margin-bottom: .65rem !important; }
-      footer .grid li { margin-bottom: .35rem; }
-      header nav { padding-left: .75rem !important; padding-right: .75rem !important; gap: .5rem !important; }
-      header nav > * { min-width: 0; }
-      body, #root { overflow-x: clip !important; max-width: 100vw !important; }
-      #hero-banner, #hero-banner * { max-width: 100vw; }
-      #hero-banner { min-height: 530px !important; height: min(78svh, 650px) !important; }
-      #hero-banner h1 { font-size: clamp(2rem, 9vw, 3.1rem) !important; line-height: 1.04 !important; }
-      .mobile-nav-item { min-width: 0 !important; padding-inline: .3rem !important; }
-      .mobile-nav-item span:last-child { font-size: 9px !important; white-space: nowrap; }
+    /* =========================================================
+       🎬 AUTHENTIC NETFLIX DESIGN SYSTEM TOKENS
+       ========================================================= */
+    :root {
+      --color-accent: #E50914 !important;
+      --color-accent-hover: #b80710 !important;
+      --color-navy-950: #141414 !important;
+      --color-navy-900: #181818 !important;
+      --color-card: #181818 !important;
+      --color-card-hover: #232323 !important;
+      --netflix-red: #E50914 !important;
+      --netflix-black: #141414 !important;
+      --netflix-dark: #000000 !important;
+      --netflix-gray: #808080 !important;
+      --netflix-white: #ffffff !important;
+    }
+
+    body {
+      background-color: #141414 !important;
+      background-image: none !important;
+      color: #ffffff !important;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
+      -webkit-font-smoothing: antialiased !important;
+    }
+
+    /* =========================================================
+       1. HEADER & LOGO MOBILE STABILITY (Zero Explosion)
+       ========================================================= */
+    header {
+      background: linear-gradient(180deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.45) 60%, transparent 100%) !important;
+      border: none !important;
+      box-shadow: none !important;
+    }
+    header.bg-\\[var\\(--color-navy-950\\)\\]\\/95,
+    header.backdrop-blur-xl {
+      background-color: rgba(20, 20, 20, 0.95) !important;
+      backdrop-filter: blur(12px) !important;
+      border-bottom: 1px solid rgba(255,255,255,0.08) !important;
+    }
+
+    #nav-logo {
+      display: flex !important;
+      align-items: center !important;
+      height: 32px !important;
+      max-width: 125px !important;
+      flex-shrink: 0 !important;
+      overflow: hidden !important;
+      cursor: pointer !important;
+    }
+
+    #nav-logo img,
+    header nav img {
+      width: auto !important;
+      height: 28px !important;
+      max-height: 28px !important;
+      max-width: 120px !important;
+      object-fit: contain !important;
+      display: block !important;
+    }
+
+    @media (max-width: 640px) {
+      #nav-logo {
+        max-width: 95px !important;
+        height: 24px !important;
+      }
+      #nav-logo img,
+      header nav img {
+        max-width: 95px !important;
+        height: 22px !important;
+        max-height: 22px !important;
+      }
+    }
+
+    /* =========================================================
+       2. NETFLIX BILLBOARD HERO (White Play, Gray Info)
+       ========================================================= */
+    #hero-banner {
+      position: relative !important;
+      box-shadow: inset 0 -90px 80px -40px #141414 !important;
+      border: none !important;
+    }
+    .hero-gradient-desktop {
+      background: linear-gradient(to right, #141414 0%, rgba(20,20,20,0.85) 25%, rgba(20,20,20,0.4) 55%, transparent 100%),
+                  linear-gradient(to top, #141414 0%, rgba(20,20,20,0.6) 20%, transparent 50%) !important;
+    }
+    .hero-gradient-bottom {
+      background: linear-gradient(to top, #141414 0%, rgba(20,20,20,0.8) 35%, transparent 100%) !important;
+    }
+
+    /* Netflix Official White Play Button */
+    .hero-buttons-row .btn-primary,
+    #hero-banner .btn-primary {
+      background-color: #ffffff !important;
+      color: #000000 !important;
+      font-weight: 700 !important;
+      border-radius: 4px !important;
+      border: none !important;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.4) !important;
+      transition: background-color 0.2s ease, transform 0.15s ease !important;
+    }
+    .hero-buttons-row .btn-primary svg,
+    #hero-banner .btn-primary svg {
+      fill: #000000 !important;
+      color: #000000 !important;
+    }
+    .hero-buttons-row .btn-primary:hover,
+    #hero-banner .btn-primary:hover {
+      background-color: rgba(255, 255, 255, 0.75) !important;
+      color: #000000 !important;
+      transform: scale(1.03) !important;
+    }
+
+    /* Netflix Official Translucent Gray Info Button */
+    .hero-buttons-row .btn-secondary,
+    #hero-banner .btn-secondary {
+      background-color: rgba(109, 109, 110, 0.7) !important;
+      color: #ffffff !important;
+      font-weight: 600 !important;
+      border-radius: 4px !important;
+      border: none !important;
+      backdrop-filter: blur(8px) !important;
+      transition: background-color 0.2s ease, transform 0.15s ease !important;
+    }
+    .hero-buttons-row .btn-secondary:hover,
+    #hero-banner .btn-secondary:hover {
+      background-color: rgba(109, 109, 110, 0.45) !important;
+      transform: scale(1.03) !important;
+    }
+
+    /* =========================================================
+       3. NETFLIX TOP 10 NUMBERED CARDS
+       ========================================================= */
+    #top-10-section .top-number {
+      font-family: 'Impact', 'Arial Black', sans-serif !important;
+      font-size: 110px !important;
+      font-weight: 900 !important;
+      line-height: 0.75 !important;
+      color: #000000 !important;
+      -webkit-text-stroke: 4px #8c8c8c !important;
+      filter: drop-shadow(2px 4px 8px rgba(0,0,0,0.9)) !important;
+      text-shadow: 0 0 12px rgba(0,0,0,0.9) !important;
+    }
+    @media (max-width: 640px) {
+      #top-10-section .top-number {
+        font-size: 80px !important;
+        -webkit-text-stroke: 3px #8c8c8c !important;
+      }
+    }
+
+    /* =========================================================
+       4. CARDS & HOVER EFFECTS (Netflix Card Scaling)
+       ========================================================= */
+    .group\\/card,
+    .group.relative.flex-shrink-0 {
+      border-radius: 4px !important;
+      transition: transform 0.25s cubic-bezier(0.2, 0, 0.2, 1), box-shadow 0.25s ease !important;
+    }
+    .group\\/card .rounded-xl,
+    .group\\/card a,
+    .group.relative.flex-shrink-0 a,
+    .group.relative.flex-shrink-0 .rounded-xl {
+      border-radius: 4px !important;
+    }
+    @media (hover: hover) {
+      .group\\/card:hover,
+      .group.relative.flex-shrink-0:hover {
+        transform: scale(1.06) !important;
+        z-index: 20 !important;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.8) !important;
+      }
+    }
+
+    /* =========================================================
+       5. ORGANIZED MOBILE FOOTER (Clean 2-Column Netflix Layout)
+       ========================================================= */
+    footer {
+      background: #0f0f0f !important;
+      border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+      margin-top: 4rem !important;
+    }
+    footer a {
+      color: #808080 !important;
+      transition: color 0.15s ease !important;
+    }
+    footer a:hover {
+      color: #ffffff !important;
+      text-decoration: underline !important;
+    }
+
+    @media (max-width: 767.98px) {
+      footer {
+        padding-top: 2rem !important;
+        padding-bottom: 5.5rem !important; /* Clears mobile bottom navigation bar */
+      }
+      footer > div {
+        padding: 0 1.25rem !important;
+      }
+      footer .grid {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 1.5rem 1rem !important;
+      }
+      footer .grid > div:first-child {
+        grid-column: 1 / -1 !important;
+        padding-bottom: 0.75rem !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+      }
+      footer .grid > div:first-child img {
+        height: 24px !important;
+        width: auto !important;
+        margin-bottom: 0.5rem !important;
+      }
+      footer .grid > div:first-child p {
+        font-size: 0.8rem !important;
+        line-height: 1.35 !important;
+        color: #808080 !important;
+        margin-bottom: 0.75rem !important;
+      }
+      footer .grid h3 {
+        font-size: 0.75rem !important;
+        font-weight: 700 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.06em !important;
+        color: #ffffff !important;
+        margin-bottom: 0.65rem !important;
+      }
+      footer .grid ul {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 0.4rem !important;
+      }
+      footer .grid li a {
+        font-size: 0.8rem !important;
+        color: #808080 !important;
+      }
+      footer .border-t {
+        margin-top: 1.5rem !important;
+        padding-top: 1rem !important;
+        flex-direction: column !important;
+        gap: 0.5rem !important;
+        text-align: center !important;
+      }
+      footer .border-t p,
+      footer .border-t span {
+        font-size: 0.75rem !important;
+        color: #666666 !important;
+      }
+    }
+
+    /* =========================================================
+       6. MOBILE NAVIGATION BAR (Netflix Clean Red Highlights)
+       ========================================================= */
+    .mobile-nav-item {
+      touch-action: manipulation !important;
+    }
+    nav.fixed.bottom-0 {
+      background-color: rgba(18, 18, 18, 0.96) !important;
+      backdrop-filter: blur(16px) !important;
+      border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+    }
+
+    /* =========================================================
+       7. GLOBAL SCROLLBAR & OVERFLOW LOCK
+       ========================================================= */
+    html, body {
+      overflow-x: clip !important;
+      max-width: 100vw !important;
+    }
+    #root {
+      overflow-x: clip !important;
+      max-width: 100vw !important;
+    }
+    .scrollbar-hide {
+      -ms-overflow-style: none !important;
+      scrollbar-width: none !important;
+      overflow-x: auto !important;
+      overscroll-behavior-x: contain !important;
+    }
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none !important;
     }
   `;
+
   document.head.append(style);
-  const observe = () => { syncMetadata(); repairDom(); };
+
+  const observe = () => {
+    syncMetadata();
+    repairDom();
+  };
+
   addEventListener('popstate', observe);
-  addEventListener('DOMContentLoaded', () => { observe(); new MutationObserver(repairDom).observe(document.body, { childList: true, subtree: true }); });
+  if (document.readyState === 'loading') {
+    addEventListener('DOMContentLoaded', () => {
+      observe();
+      new MutationObserver(repairDom).observe(document.body, { childList: true, subtree: true });
+    });
+  } else {
+    observe();
+    new MutationObserver(repairDom).observe(document.body, { childList: true, subtree: true });
+  }
 })();

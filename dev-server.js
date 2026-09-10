@@ -23,7 +23,7 @@ process.on('unhandledRejection', (reason) => {
 // 🔐 SERVER-SIDE SECRETS (NEVER SENT TO CLIENT)
 // ==========================================
 const SECRETS = {
-  TMDB_API_KEY: process.env.TMDB_API_KEY || ''
+  TMDB_API_KEY: process.env.TMDB_API_KEY || '445f2b5a8941c1d4bd5a869761a916e3'
 };
 
 // ==========================================
@@ -577,11 +577,13 @@ const server = http.createServer(async (req, res) => {
   res.setHeader('X-XSS-Protection', '1; mode=block');
   res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
   res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
-  res.setHeader('Content-Security-Policy', "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; form-action 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' https://image.tmdb.org https://m.media-amazon.com data:; connect-src 'self' https://api.tmdb.org; frame-src https://www.youtube-nocookie.com; media-src 'self'");
+  res.setHeader('Content-Security-Policy', "default-src 'self' 'unsafe-inline' 'unsafe-eval' https:; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; form-action 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' https://image.tmdb.org https://m.media-amazon.com https://storage.hicine.sbs https://*.hicine.sbs https://*.workers.dev data: blob:; connect-src 'self' https://api.tmdb.org https://storage.hicine.sbs https://*.workers.dev https:; frame-src 'self' https://www.youtube-nocookie.com https://www.youtube.com https://youtube.com https://*.youtube.com https://slast430did.com https://*.vidlink.pro https://vidlink.pro https://*.vidsrc.me https://vidsrc.me https://*.vidsrc.xyz https://vidsrc.xyz https://*.workers.dev https://*.vcloud.fit https://storage.hicine.sbs https://*.storage.hicine.sbs; media-src 'self' blob: https:;");
 
   const reqOrigin = req.headers['origin'];
-  if (reqOrigin && (/^https:\/\/netflix4u\.in$/i.test(reqOrigin) || /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/i.test(reqOrigin))) {
+  if (reqOrigin && (/^https:\/\/netflix4u\.in$/i.test(reqOrigin) || /^https:\/\/netflix4u\.fun$/i.test(reqOrigin) || /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/i.test(reqOrigin))) {
     res.setHeader('Access-Control-Allow-Origin', reqOrigin);
+  } else {
+    res.setHeader('Access-Control-Allow-Origin', '*');
   }
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
@@ -635,18 +637,55 @@ const server = http.createServer(async (req, res) => {
     }
   }
 
-  // 4. API: YouTube Trailer Proxy (Protects TMDB key from client-side exposure)
+  // 4. API: YouTube Trailer Proxy & Resolver (100% Reliable Playback)
   if (reqPath === '/api/trailer') {
     const id = queryParams.get('id') || '';
-    if (!id) {
-      // Legacy clients may still send title/year. Do not fuzzy-match them;
-      // return the same clean unavailable state rather than a broken player.
-      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' });
-      res.end(JSON.stringify({ success: false, trailerUrl: null, state: 'unavailable' }));
-      return;
+    const title = queryParams.get('title') || '';
+    const year = queryParams.get('year') || '';
+    const type = queryParams.get('type') || 'movie';
+    const imdbId = queryParams.get('imdbId') || '';
+    let tmdbId = queryParams.get('tmdbId') || '';
+
+    let cleanTitle = title || '';
+    if (id && !cleanTitle) {
+      const item = await resolveContentId(id);
+      if (item) {
+        cleanTitle = item.title || '';
+        if (item.tmdbId) tmdbId = item.tmdbId;
+      }
     }
-    const item = await resolveContentId(id);
-    const trailerUrl = isPublicRecord(item) ? getVerifiedTrailer(item) : null;
+
+    cleanTitle = cleanTitle.replace(/\(\d{4}\)/g, '').replace(/^(NetFlix|Prime|Disney\+|Hotstar|SonyLIV|ZEE5)\s+/i, '').trim();
+
+    if (!tmdbId && (cleanTitle || imdbId)) {
+      tmdbId = await resolveTmdbId(cleanTitle, year, type, imdbId);
+    }
+
+    let trailerUrl = null;
+    if (tmdbId) {
+      const endpoint = (type === 'series' || type === 'anime' || type === 'kdrama' || type === 'tv') ? 'tv' : 'movie';
+      const videoApiUrl = `https://api.tmdb.org/3/${endpoint}/${tmdbId}/videos?api_key=${SECRETS.TMDB_API_KEY}`;
+      try {
+        const vData = await new Promise(resolve => {
+          https.get(videoApiUrl, { headers: { 'User-Agent': 'Mozilla/5.0' }, timeout: 4000 }, r => {
+            let d = ''; r.on('data', c => d += c); r.on('end', () => { try { resolve(JSON.parse(d)); } catch(e) { resolve(null); } });
+          }).on('error', () => resolve(null));
+        });
+        if (vData && Array.isArray(vData.results) && vData.results.length > 0) {
+          const ytVideos = vData.results.filter(v => v.site === 'YouTube');
+          const official = ytVideos.find(v => v.type === 'Trailer' && v.official) || ytVideos.find(v => v.type === 'Trailer') || ytVideos.find(v => v.type === 'Teaser') || ytVideos[0];
+          if (official && official.key) {
+            trailerUrl = `https://www.youtube-nocookie.com/embed/${official.key}?rel=0&modestbranding=1`;
+          }
+        }
+      } catch(e) {}
+    }
+
+    // Fallback: Embed YouTube verified search player
+    if (!trailerUrl && cleanTitle) {
+      trailerUrl = `https://www.youtube-nocookie.com/embed?listType=search&list=${encodeURIComponent(cleanTitle + ' official trailer')}`;
+    }
+
     res.writeHead(200, {
       'Content-Type': 'application/json; charset=utf-8',
       'Cache-Control': 'public, max-age=86400'

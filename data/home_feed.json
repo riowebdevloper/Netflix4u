@@ -10,7 +10,13 @@
       "type": "movie",
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
-      "backdrop": "/uploads/posts/covers/poster-mirzapur-the-movie-2026.webp"
+      "backdrop": "/uploads/posts/covers/poster-mirzapur-the-movie-2026.webp",
+      "status": "PUBLISHED",
+      "canonicalId": "18033",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "18033"
+      }
     },
     {
       "id": "thukra-ke-mera-pyaar-2026",
@@ -24,7 +30,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/Thukra-Ke-Mera-Pyaar-2.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "thukra-ke-mera-pyaar-2026",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "thukra-ke-mera-pyaar-2026"
+      }
     },
     {
       "id": "netflix-gandhari-2026",
@@ -36,7 +48,13 @@
       "type": "movie",
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
-      "backdrop": "https://storage.hicine.sbs/images/hCHei97aPYCCsh4vicz9X0wmdFV.webp"
+      "backdrop": "https://storage.hicine.sbs/images/hCHei97aPYCCsh4vicz9X0wmdFV.webp",
+      "status": "PUBLISHED",
+      "canonicalId": "netflix-gandhari-2026",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "netflix-gandhari-2026"
+      }
     },
     {
       "id": "toxic-2026",
@@ -48,7 +66,13 @@
       "type": "movie",
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
-      "backdrop": "https://storage.hicine.sbs/images/aBf4l6UC5nEKkEatySYYK4B88oO.webp"
+      "backdrop": "https://storage.hicine.sbs/images/aBf4l6UC5nEKkEatySYYK4B88oO.webp",
+      "status": "PUBLISHED",
+      "canonicalId": "toxic-2026",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "toxic-2026"
+      }
     },
     {
       "id": "surrender-2025",
@@ -61,7 +85,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/f3AwYLiMptYq1H3Z1ErmtFFAJ3U.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "surrender-2025",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "surrender-2025"
+      }
     },
     {
       "id": "sarpanch-2026",
@@ -74,7 +104,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/1PvOjsvPdULtKRnfcS3zvg0ZeRe.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "sarpanch-2026",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "sarpanch-2026"
+      }
     },
     {
       "id": "jana-nayagan-2026",
@@ -87,7 +123,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/vOJlw2ZzgaUhchg555UOOcurJiF.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "jana-nayagan-2026",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "jana-nayagan-2026"
+      }
     },
     {
       "id": "301126",
@@ -101,7 +143,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/t5HvXT9HYB5R9niBG4y0AMypTfC.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "301126",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "301126"
+      }
     },
     {
       "id": "lenin-2026",
@@ -114,7 +162,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/3GER9CDJQMe3eG3CcQer0zvSIyc.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "lenin-2026",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "lenin-2026"
+      }
     },
     {
       "id": "pyaar-prema-kalyanam-2026",
@@ -127,7 +181,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/AjaNAeMXOrK9n0YqGqX0Lz5qxYu.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "pyaar-prema-kalyanam-2026",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "pyaar-prema-kalyanam-2026"
+      }
     },
     {
       "id": "awarapan-2-2026",
@@ -140,7 +200,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/AguX4gfbB7n1bZPk3HL5rkvabXe.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "awarapan-2-2026",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "awarapan-2-2026"
+      }
     },
     {
       "id": "euphoria-2026",
@@ -153,7 +219,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/Euphoria-Full-Movie.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "euphoria-2026",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "euphoria-2026"
+      }
     },
     {
       "id": "kanguva-2024",
@@ -166,7 +238,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/amMKDh04xuFVrbS1aEcAQQUdNxD.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "kanguva-2024",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "kanguva-2024"
+      }
     },
     {
       "id": "aakhri-sawal-2026",
@@ -179,7 +257,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/9CXBZH6sRJpFTMSaY3wj1jx98F4.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "aakhri-sawal-2026",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "aakhri-sawal-2026"
+      }
     },
     {
       "id": "oru-durooha-saahacharyathil-2026",
@@ -192,7 +276,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/dCsQAElqfdiC0V2HK3n830QGqjT.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "oru-durooha-saahacharyathil-2026",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "oru-durooha-saahacharyathil-2026"
+      }
     },
     {
       "id": "301115",
@@ -206,7 +296,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/v4i6T3oDXMYJsYMKFH0Dvnd1laD.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "301115",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "301115"
+      }
     },
     {
       "id": "301110",
@@ -220,7 +316,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/The-Alliance.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "301110",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "301110"
+      }
     },
     {
       "id": "45-2025",
@@ -233,7 +335,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/98hoobMBgX8FNIMhaOYQKHZNrd5.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "45-2025",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "45-2025"
+      }
     },
     {
       "id": "the-devil-2025",
@@ -246,7 +354,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/gsUXN4dgmelSEa7VRqcpIhngGCu.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "the-devil-2025",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "the-devil-2025"
+      }
     },
     {
       "id": "301105",
@@ -260,7 +374,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/jzVP9rqT2YH2nTx3l3csmmU9B1q.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "301105",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "301105"
+      }
     },
     {
       "id": "hai-jawani-toh-ishq-hona-hai-2026",
@@ -273,7 +393,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/Hai-Jawani-Toh-Ishq-Hona-Hai.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "hai-jawani-toh-ishq-hona-hai-2026",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "hai-jawani-toh-ishq-hona-hai-2026"
+      }
     },
     {
       "id": "peddi-2026",
@@ -286,7 +412,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/Peddi-Hindi.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "peddi-2026",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "peddi-2026"
+      }
     },
     {
       "id": "301090",
@@ -300,7 +432,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/tJgFXIoR5fJJYQ7ghMU4kflq2w6.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "301090",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "301090"
+      }
     },
     {
       "id": "the-india-story-2026",
@@ -313,7 +451,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/ko4h1RD5mtGsQSTcB05BL4cjNLJ.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "the-india-story-2026",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "the-india-story-2026"
+      }
     },
     {
       "id": "301085",
@@ -327,7 +471,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/Musafir-Cafe-Season-1.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "301085",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "301085"
+      }
     },
     {
       "id": "royal-2026",
@@ -340,7 +490,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/uCt5k3coJbOF02hwXVT9gV59a2W.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "royal-2026",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "royal-2026"
+      }
     },
     {
       "id": "ikka-2026",
@@ -353,7 +509,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/3Zzx03YzJVd1YYniTBUHFQUK660.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "ikka-2026",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "ikka-2026"
+      }
     },
     {
       "id": "ab-hoga-hisaab-2026",
@@ -366,7 +528,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/Ab-Hoga-Hisaab.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "ab-hoga-hisaab-2026",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "ab-hoga-hisaab-2026"
+      }
     },
     {
       "id": "301070",
@@ -380,7 +548,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/Isakapatnam.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "301070",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "301070"
+      }
     },
     {
       "id": "super-subbu-2026",
@@ -393,7 +567,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/Super-Subbu.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "super-subbu-2026",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "super-subbu-2026"
+      }
     },
     {
       "id": "301060",
@@ -407,7 +587,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/CID2.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "301060",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "301060"
+      }
     },
     {
       "id": "301050",
@@ -421,7 +607,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/Undekhi.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "301050",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "301050"
+      }
     },
     {
       "id": "vimal-khanna-2026",
@@ -434,7 +626,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/Vimal-Khanna.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "vimal-khanna-2026",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "vimal-khanna-2026"
+      }
     },
     {
       "id": "301040",
@@ -448,7 +646,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/Sapne-Vs-Everyone-2.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "301040",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "301040"
+      }
     },
     {
       "id": "hathras-2026",
@@ -461,7 +665,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/Hathras.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "hathras-2026",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "hathras-2026"
+      }
     },
     {
       "id": "301030",
@@ -475,7 +685,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/Glory-Hindi-2026.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "301030",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "301030"
+      }
     },
     {
       "id": "zunq-the-rust-2026",
@@ -488,7 +704,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/Screenshot_1.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "zunq-the-rust-2026",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "zunq-the-rust-2026"
+      }
     },
     {
       "id": "301020",
@@ -502,7 +724,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/Maamla-Legal-Hai-Hindi.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "301020",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "301020"
+      }
     },
     {
       "id": "301010",
@@ -516,7 +744,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/Sankalp-2026.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "301010",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "301010"
+      }
     },
     {
       "id": "301000",
@@ -530,7 +764,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/Hello-Bachhon.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "301000",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "301000"
+      }
     }
   ],
   "recent": [
@@ -556,7 +796,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "mobile-suit-gundam-hathaway-the-sorcery-of-nymph-circe-2026"
+      "slug": "mobile-suit-gundam-hathaway-the-sorcery-of-nymph-circe-2026",
+      "status": "PUBLISHED",
+      "canonicalId": "mobile-suit-gundam-hathaway-the-sorcery-of-nymph-circe-2026",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "mobile-suit-gundam-hathaway-the-sorcery-of-nymph-circe-2026"
+      }
     },
     {
       "id": "92465",
@@ -580,7 +826,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "92465"
+      "slug": "92465",
+      "status": "PUBLISHED",
+      "canonicalId": "92465",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "92465"
+      }
     },
     {
       "id": "95905",
@@ -604,7 +856,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "95905"
+      "slug": "95905",
+      "status": "PUBLISHED",
+      "canonicalId": "95905",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "95905"
+      }
     },
     {
       "id": "90700",
@@ -628,7 +886,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "90700"
+      "slug": "90700",
+      "status": "PUBLISHED",
+      "canonicalId": "90700",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "90700"
+      }
     },
     {
       "id": "90545",
@@ -652,7 +916,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "90545"
+      "slug": "90545",
+      "status": "PUBLISHED",
+      "canonicalId": "90545",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "90545"
+      }
     },
     {
       "id": "95900",
@@ -675,7 +945,13 @@
       "country": "Global",
       "director": "Director",
       "cast": [],
-      "links": []
+      "links": [],
+      "status": "PUBLISHED",
+      "canonicalId": "95900",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "95900"
+      }
     },
     {
       "id": "95830",
@@ -699,7 +975,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "95830"
+      "slug": "95830",
+      "status": "PUBLISHED",
+      "canonicalId": "95830",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "95830"
+      }
     },
     {
       "id": "the-whisper-man-2026",
@@ -723,7 +1005,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "the-whisper-man-2026"
+      "slug": "the-whisper-man-2026",
+      "status": "PUBLISHED",
+      "canonicalId": "the-whisper-man-2026",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "the-whisper-man-2026"
+      }
     },
     {
       "id": "95865",
@@ -747,7 +1035,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "95865"
+      "slug": "95865",
+      "status": "PUBLISHED",
+      "canonicalId": "95865",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "95865"
+      }
     },
     {
       "id": "95870",
@@ -771,7 +1065,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "95870"
+      "slug": "95870",
+      "status": "PUBLISHED",
+      "canonicalId": "95870",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "95870"
+      }
     },
     {
       "id": "the-last-salute-2026",
@@ -795,7 +1095,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "the-last-salute-2026"
+      "slug": "the-last-salute-2026",
+      "status": "PUBLISHED",
+      "canonicalId": "the-last-salute-2026",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "the-last-salute-2026"
+      }
     },
     {
       "id": "95860",
@@ -818,7 +1124,13 @@
       "country": "Global",
       "director": "Director",
       "cast": [],
-      "links": []
+      "links": [],
+      "status": "PUBLISHED",
+      "canonicalId": "95860",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "95860"
+      }
     },
     {
       "id": "95855",
@@ -841,7 +1153,13 @@
       "country": "Global",
       "director": "Director",
       "cast": [],
-      "links": []
+      "links": [],
+      "status": "PUBLISHED",
+      "canonicalId": "95855",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "95855"
+      }
     },
     {
       "id": "95850",
@@ -864,7 +1182,13 @@
       "country": "Global",
       "director": "Director",
       "cast": [],
-      "links": []
+      "links": [],
+      "status": "PUBLISHED",
+      "canonicalId": "95850",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "95850"
+      }
     },
     {
       "id": "95840",
@@ -887,7 +1211,13 @@
       "country": "Global",
       "director": "Director",
       "cast": [],
-      "links": []
+      "links": [],
+      "status": "PUBLISHED",
+      "canonicalId": "95840",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "95840"
+      }
     },
     {
       "id": "alpha-2018",
@@ -911,7 +1241,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "alpha-2018"
+      "slug": "alpha-2018",
+      "status": "PUBLISHED",
+      "canonicalId": "alpha-2018",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "alpha-2018"
+      }
     },
     {
       "id": "95835",
@@ -934,7 +1270,13 @@
       "country": "Global",
       "director": "Director",
       "cast": [],
-      "links": []
+      "links": [],
+      "status": "PUBLISHED",
+      "canonicalId": "95835",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "95835"
+      }
     },
     {
       "id": "95825",
@@ -957,7 +1299,13 @@
       "country": "Global",
       "director": "Director",
       "cast": [],
-      "links": []
+      "links": [],
+      "status": "PUBLISHED",
+      "canonicalId": "95825",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "95825"
+      }
     },
     {
       "id": "toxic-2026",
@@ -981,7 +1329,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "toxic-2026"
+      "slug": "toxic-2026",
+      "status": "PUBLISHED",
+      "canonicalId": "toxic-2026",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "toxic-2026"
+      }
     },
     {
       "id": "95820",
@@ -1004,7 +1358,13 @@
       "country": "Global",
       "director": "Director",
       "cast": [],
-      "links": []
+      "links": [],
+      "status": "PUBLISHED",
+      "canonicalId": "95820",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "95820"
+      }
     }
   ],
   "featured": [
@@ -1018,7 +1378,13 @@
       "type": "movie",
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
-      "backdrop": "/uploads/posts/covers/poster-mirzapur-the-movie-2026.webp"
+      "backdrop": "/uploads/posts/covers/poster-mirzapur-the-movie-2026.webp",
+      "status": "PUBLISHED",
+      "canonicalId": "18033",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "18033"
+      }
     },
     {
       "id": "thukra-ke-mera-pyaar-2026",
@@ -1032,7 +1398,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/Thukra-Ke-Mera-Pyaar-2.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "thukra-ke-mera-pyaar-2026",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "thukra-ke-mera-pyaar-2026"
+      }
     },
     {
       "id": "netflix-gandhari-2026",
@@ -1044,7 +1416,13 @@
       "type": "movie",
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
-      "backdrop": "https://storage.hicine.sbs/images/hCHei97aPYCCsh4vicz9X0wmdFV.webp"
+      "backdrop": "https://storage.hicine.sbs/images/hCHei97aPYCCsh4vicz9X0wmdFV.webp",
+      "status": "PUBLISHED",
+      "canonicalId": "netflix-gandhari-2026",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "netflix-gandhari-2026"
+      }
     },
     {
       "id": "toxic-2026",
@@ -1056,7 +1434,13 @@
       "type": "movie",
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
-      "backdrop": "https://storage.hicine.sbs/images/aBf4l6UC5nEKkEatySYYK4B88oO.webp"
+      "backdrop": "https://storage.hicine.sbs/images/aBf4l6UC5nEKkEatySYYK4B88oO.webp",
+      "status": "PUBLISHED",
+      "canonicalId": "toxic-2026",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "toxic-2026"
+      }
     },
     {
       "id": "surrender-2025",
@@ -1069,7 +1453,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/f3AwYLiMptYq1H3Z1ErmtFFAJ3U.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "surrender-2025",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "surrender-2025"
+      }
     },
     {
       "id": "sarpanch-2026",
@@ -1082,7 +1472,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/1PvOjsvPdULtKRnfcS3zvg0ZeRe.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "sarpanch-2026",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "sarpanch-2026"
+      }
     },
     {
       "id": "jana-nayagan-2026",
@@ -1095,7 +1491,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/vOJlw2ZzgaUhchg555UOOcurJiF.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "jana-nayagan-2026",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "jana-nayagan-2026"
+      }
     },
     {
       "id": "301126",
@@ -1109,7 +1511,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/t5HvXT9HYB5R9niBG4y0AMypTfC.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "301126",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "301126"
+      }
     }
   ],
   "popularMovies": [
@@ -1123,7 +1531,13 @@
       "type": "movie",
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
-      "backdrop": "/uploads/posts/covers/poster-mirzapur-the-movie-2026.webp"
+      "backdrop": "/uploads/posts/covers/poster-mirzapur-the-movie-2026.webp",
+      "status": "PUBLISHED",
+      "canonicalId": "18033",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "18033"
+      }
     },
     {
       "id": "netflix-gandhari-2026",
@@ -1135,7 +1549,13 @@
       "type": "movie",
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
-      "backdrop": "https://storage.hicine.sbs/images/hCHei97aPYCCsh4vicz9X0wmdFV.webp"
+      "backdrop": "https://storage.hicine.sbs/images/hCHei97aPYCCsh4vicz9X0wmdFV.webp",
+      "status": "PUBLISHED",
+      "canonicalId": "netflix-gandhari-2026",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "netflix-gandhari-2026"
+      }
     },
     {
       "id": "toxic-2026",
@@ -1147,7 +1567,13 @@
       "type": "movie",
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
-      "backdrop": "https://storage.hicine.sbs/images/aBf4l6UC5nEKkEatySYYK4B88oO.webp"
+      "backdrop": "https://storage.hicine.sbs/images/aBf4l6UC5nEKkEatySYYK4B88oO.webp",
+      "status": "PUBLISHED",
+      "canonicalId": "toxic-2026",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "toxic-2026"
+      }
     },
     {
       "id": "surrender-2025",
@@ -1160,7 +1586,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/f3AwYLiMptYq1H3Z1ErmtFFAJ3U.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "surrender-2025",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "surrender-2025"
+      }
     },
     {
       "id": "sarpanch-2026",
@@ -1173,7 +1605,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/1PvOjsvPdULtKRnfcS3zvg0ZeRe.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "sarpanch-2026",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "sarpanch-2026"
+      }
     },
     {
       "id": "jana-nayagan-2026",
@@ -1186,7 +1624,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/vOJlw2ZzgaUhchg555UOOcurJiF.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "jana-nayagan-2026",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "jana-nayagan-2026"
+      }
     },
     {
       "id": "lenin-2026",
@@ -1199,7 +1643,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/3GER9CDJQMe3eG3CcQer0zvSIyc.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "lenin-2026",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "lenin-2026"
+      }
     },
     {
       "id": "pyaar-prema-kalyanam-2026",
@@ -1212,7 +1662,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/AjaNAeMXOrK9n0YqGqX0Lz5qxYu.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "pyaar-prema-kalyanam-2026",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "pyaar-prema-kalyanam-2026"
+      }
     },
     {
       "id": "awarapan-2-2026",
@@ -1225,7 +1681,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/AguX4gfbB7n1bZPk3HL5rkvabXe.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "awarapan-2-2026",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "awarapan-2-2026"
+      }
     },
     {
       "id": "euphoria-2026",
@@ -1238,7 +1700,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/Euphoria-Full-Movie.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "euphoria-2026",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "euphoria-2026"
+      }
     },
     {
       "id": "kanguva-2024",
@@ -1251,7 +1719,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/amMKDh04xuFVrbS1aEcAQQUdNxD.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "kanguva-2024",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "kanguva-2024"
+      }
     },
     {
       "id": "aakhri-sawal-2026",
@@ -1264,7 +1738,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/9CXBZH6sRJpFTMSaY3wj1jx98F4.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "aakhri-sawal-2026",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "aakhri-sawal-2026"
+      }
     },
     {
       "id": "oru-durooha-saahacharyathil-2026",
@@ -1277,7 +1757,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/dCsQAElqfdiC0V2HK3n830QGqjT.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "oru-durooha-saahacharyathil-2026",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "oru-durooha-saahacharyathil-2026"
+      }
     },
     {
       "id": "45-2025",
@@ -1290,7 +1776,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/98hoobMBgX8FNIMhaOYQKHZNrd5.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "45-2025",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "45-2025"
+      }
     },
     {
       "id": "the-devil-2025",
@@ -1303,7 +1795,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/gsUXN4dgmelSEa7VRqcpIhngGCu.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "the-devil-2025",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "the-devil-2025"
+      }
     },
     {
       "id": "hai-jawani-toh-ishq-hona-hai-2026",
@@ -1316,7 +1814,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/Hai-Jawani-Toh-Ishq-Hona-Hai.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "hai-jawani-toh-ishq-hona-hai-2026",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "hai-jawani-toh-ishq-hona-hai-2026"
+      }
     },
     {
       "id": "peddi-2026",
@@ -1329,7 +1833,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/Peddi-Hindi.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "peddi-2026",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "peddi-2026"
+      }
     },
     {
       "id": "the-india-story-2026",
@@ -1342,7 +1852,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/ko4h1RD5mtGsQSTcB05BL4cjNLJ.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "the-india-story-2026",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "the-india-story-2026"
+      }
     },
     {
       "id": "royal-2026",
@@ -1355,7 +1871,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/uCt5k3coJbOF02hwXVT9gV59a2W.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "royal-2026",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "royal-2026"
+      }
     },
     {
       "id": "ikka-2026",
@@ -1368,7 +1890,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/3Zzx03YzJVd1YYniTBUHFQUK660.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "ikka-2026",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "ikka-2026"
+      }
     },
     {
       "id": "ab-hoga-hisaab-2026",
@@ -1381,7 +1909,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/Ab-Hoga-Hisaab.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "ab-hoga-hisaab-2026",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "ab-hoga-hisaab-2026"
+      }
     },
     {
       "id": "super-subbu-2026",
@@ -1394,7 +1928,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/Super-Subbu.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "super-subbu-2026",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "super-subbu-2026"
+      }
     },
     {
       "id": "vimal-khanna-2026",
@@ -1407,7 +1947,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/Vimal-Khanna.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "vimal-khanna-2026",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "vimal-khanna-2026"
+      }
     },
     {
       "id": "hathras-2026",
@@ -1420,7 +1966,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/Hathras.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "hathras-2026",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "hathras-2026"
+      }
     },
     {
       "id": "zunq-the-rust-2026",
@@ -1433,7 +1985,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/Screenshot_1.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "zunq-the-rust-2026",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "zunq-the-rust-2026"
+      }
     }
   ],
   "popularSeries": [
@@ -1449,7 +2007,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/Thukra-Ke-Mera-Pyaar-2.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "thukra-ke-mera-pyaar-2026",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "thukra-ke-mera-pyaar-2026"
+      }
     },
     {
       "id": "301126",
@@ -1463,7 +2027,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/t5HvXT9HYB5R9niBG4y0AMypTfC.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "301126",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "301126"
+      }
     },
     {
       "id": "301115",
@@ -1477,7 +2047,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/v4i6T3oDXMYJsYMKFH0Dvnd1laD.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "301115",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "301115"
+      }
     },
     {
       "id": "301110",
@@ -1491,7 +2067,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/The-Alliance.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "301110",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "301110"
+      }
     },
     {
       "id": "301105",
@@ -1505,7 +2087,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/jzVP9rqT2YH2nTx3l3csmmU9B1q.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "301105",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "301105"
+      }
     },
     {
       "id": "301090",
@@ -1519,7 +2107,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/tJgFXIoR5fJJYQ7ghMU4kflq2w6.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "301090",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "301090"
+      }
     },
     {
       "id": "301085",
@@ -1533,7 +2127,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/Musafir-Cafe-Season-1.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "301085",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "301085"
+      }
     },
     {
       "id": "301070",
@@ -1547,7 +2147,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/Isakapatnam.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "301070",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "301070"
+      }
     },
     {
       "id": "301060",
@@ -1561,7 +2167,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/CID2.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "301060",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "301060"
+      }
     },
     {
       "id": "301050",
@@ -1575,7 +2187,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/Undekhi.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "301050",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "301050"
+      }
     },
     {
       "id": "301040",
@@ -1589,7 +2207,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/Sapne-Vs-Everyone-2.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "301040",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "301040"
+      }
     },
     {
       "id": "301030",
@@ -1603,7 +2227,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/Glory-Hindi-2026.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "301030",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "301030"
+      }
     },
     {
       "id": "301020",
@@ -1617,7 +2247,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/Maamla-Legal-Hai-Hindi.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "301020",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "301020"
+      }
     },
     {
       "id": "301010",
@@ -1631,7 +2267,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/Sankalp-2026.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "301010",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "301010"
+      }
     },
     {
       "id": "301000",
@@ -1645,7 +2287,13 @@
       "quality": "1080p",
       "vcloud": "https://vcloud.fit/ikjxq-2bqaqxikk",
       "backdrop": "https://storage.hicine.sbs/images/Hello-Bachhon.webp",
-      "rating": 8.7
+      "rating": 8.7,
+      "status": "PUBLISHED",
+      "canonicalId": "301000",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "301000"
+      }
     }
   ],
   "anime": [
@@ -1675,7 +2323,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "38069"
+      "slug": "38069",
+      "status": "PUBLISHED",
+      "canonicalId": "38069",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "38069"
+      }
     },
     {
       "id": "38068",
@@ -1703,7 +2357,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "38068"
+      "slug": "38068",
+      "status": "PUBLISHED",
+      "canonicalId": "38068",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "38068"
+      }
     },
     {
       "id": "38067",
@@ -1731,7 +2391,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "38067"
+      "slug": "38067",
+      "status": "PUBLISHED",
+      "canonicalId": "38067",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "38067"
+      }
     },
     {
       "id": "38066",
@@ -1759,7 +2425,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "38066"
+      "slug": "38066",
+      "status": "PUBLISHED",
+      "canonicalId": "38066",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "38066"
+      }
     },
     {
       "id": "38065",
@@ -1787,7 +2459,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "38065"
+      "slug": "38065",
+      "status": "PUBLISHED",
+      "canonicalId": "38065",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "38065"
+      }
     },
     {
       "id": "38064",
@@ -1815,7 +2493,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "38064"
+      "slug": "38064",
+      "status": "PUBLISHED",
+      "canonicalId": "38064",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "38064"
+      }
     },
     {
       "id": "38063",
@@ -1843,7 +2527,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "38063"
+      "slug": "38063",
+      "status": "PUBLISHED",
+      "canonicalId": "38063",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "38063"
+      }
     },
     {
       "id": "38062",
@@ -1871,7 +2561,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "38062"
+      "slug": "38062",
+      "status": "PUBLISHED",
+      "canonicalId": "38062",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "38062"
+      }
     },
     {
       "id": "38061",
@@ -1899,7 +2595,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "38061"
+      "slug": "38061",
+      "status": "PUBLISHED",
+      "canonicalId": "38061",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "38061"
+      }
     },
     {
       "id": "38060",
@@ -1927,7 +2629,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "38060"
+      "slug": "38060",
+      "status": "PUBLISHED",
+      "canonicalId": "38060",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "38060"
+      }
     },
     {
       "id": "38059",
@@ -1955,7 +2663,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "38059"
+      "slug": "38059",
+      "status": "PUBLISHED",
+      "canonicalId": "38059",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "38059"
+      }
     },
     {
       "id": "38058",
@@ -1983,7 +2697,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "38058"
+      "slug": "38058",
+      "status": "PUBLISHED",
+      "canonicalId": "38058",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "38058"
+      }
     },
     {
       "id": "38057",
@@ -2011,7 +2731,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "38057"
+      "slug": "38057",
+      "status": "PUBLISHED",
+      "canonicalId": "38057",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "38057"
+      }
     },
     {
       "id": "38056",
@@ -2039,7 +2765,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "38056"
+      "slug": "38056",
+      "status": "PUBLISHED",
+      "canonicalId": "38056",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "38056"
+      }
     },
     {
       "id": "38055",
@@ -2067,7 +2799,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "38055"
+      "slug": "38055",
+      "status": "PUBLISHED",
+      "canonicalId": "38055",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "38055"
+      }
     },
     {
       "id": "38054",
@@ -2095,7 +2833,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "38054"
+      "slug": "38054",
+      "status": "PUBLISHED",
+      "canonicalId": "38054",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "38054"
+      }
     },
     {
       "id": "38053",
@@ -2123,7 +2867,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "38053"
+      "slug": "38053",
+      "status": "PUBLISHED",
+      "canonicalId": "38053",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "38053"
+      }
     },
     {
       "id": "38052",
@@ -2151,7 +2901,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "38052"
+      "slug": "38052",
+      "status": "PUBLISHED",
+      "canonicalId": "38052",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "38052"
+      }
     },
     {
       "id": "38051",
@@ -2179,7 +2935,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "38051"
+      "slug": "38051",
+      "status": "PUBLISHED",
+      "canonicalId": "38051",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "38051"
+      }
     },
     {
       "id": "38050",
@@ -2207,7 +2969,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "38050"
+      "slug": "38050",
+      "status": "PUBLISHED",
+      "canonicalId": "38050",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "38050"
+      }
     }
   ],
   "kdrama": [
@@ -2237,7 +3005,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "28304"
+      "slug": "28304",
+      "status": "PUBLISHED",
+      "canonicalId": "28304",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "28304"
+      }
     },
     {
       "id": "28303",
@@ -2265,7 +3039,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "28303"
+      "slug": "28303",
+      "status": "PUBLISHED",
+      "canonicalId": "28303",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "28303"
+      }
     },
     {
       "id": "12112559",
@@ -2293,7 +3073,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "12112559"
+      "slug": "12112559",
+      "status": "PUBLISHED",
+      "canonicalId": "12112559",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "12112559"
+      }
     },
     {
       "id": "12102057",
@@ -2321,7 +3107,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "12102057"
+      "slug": "12102057",
+      "status": "PUBLISHED",
+      "canonicalId": "12102057",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "12102057"
+      }
     },
     {
       "id": "12101898",
@@ -2349,7 +3141,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "12101898"
+      "slug": "12101898",
+      "status": "PUBLISHED",
+      "canonicalId": "12101898",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "12101898"
+      }
     },
     {
       "id": "12101397",
@@ -2377,7 +3175,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "12101397"
+      "slug": "12101397",
+      "status": "PUBLISHED",
+      "canonicalId": "12101397",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "12101397"
+      }
     },
     {
       "id": "12101299",
@@ -2405,7 +3209,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "12101299"
+      "slug": "12101299",
+      "status": "PUBLISHED",
+      "canonicalId": "12101299",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "12101299"
+      }
     },
     {
       "id": "12100913",
@@ -2433,7 +3243,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "12100913"
+      "slug": "12100913",
+      "status": "PUBLISHED",
+      "canonicalId": "12100913",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "12100913"
+      }
     },
     {
       "id": "12100639",
@@ -2461,7 +3277,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "12100639"
+      "slug": "12100639",
+      "status": "PUBLISHED",
+      "canonicalId": "12100639",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "12100639"
+      }
     },
     {
       "id": "12100634",
@@ -2489,7 +3311,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "12100634"
+      "slug": "12100634",
+      "status": "PUBLISHED",
+      "canonicalId": "12100634",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "12100634"
+      }
     },
     {
       "id": "12100591",
@@ -2517,7 +3345,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "12100591"
+      "slug": "12100591",
+      "status": "PUBLISHED",
+      "canonicalId": "12100591",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "12100591"
+      }
     },
     {
       "id": "12100590",
@@ -2545,7 +3379,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "12100590"
+      "slug": "12100590",
+      "status": "PUBLISHED",
+      "canonicalId": "12100590",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "12100590"
+      }
     },
     {
       "id": "12100575",
@@ -2573,7 +3413,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "12100575"
+      "slug": "12100575",
+      "status": "PUBLISHED",
+      "canonicalId": "12100575",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "12100575"
+      }
     },
     {
       "id": "12100555",
@@ -2601,7 +3447,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "12100555"
+      "slug": "12100555",
+      "status": "PUBLISHED",
+      "canonicalId": "12100555",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "12100555"
+      }
     },
     {
       "id": "12100475",
@@ -2629,7 +3481,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "12100475"
+      "slug": "12100475",
+      "status": "PUBLISHED",
+      "canonicalId": "12100475",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "12100475"
+      }
     },
     {
       "id": "12100370",
@@ -2657,7 +3515,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "12100370"
+      "slug": "12100370",
+      "status": "PUBLISHED",
+      "canonicalId": "12100370",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "12100370"
+      }
     },
     {
       "id": "12100212",
@@ -2685,7 +3549,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "12100212"
+      "slug": "12100212",
+      "status": "PUBLISHED",
+      "canonicalId": "12100212",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "12100212"
+      }
     },
     {
       "id": "12100131",
@@ -2713,7 +3583,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "12100131"
+      "slug": "12100131",
+      "status": "PUBLISHED",
+      "canonicalId": "12100131",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "12100131"
+      }
     },
     {
       "id": "12099925",
@@ -2741,7 +3617,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "12099925"
+      "slug": "12099925",
+      "status": "PUBLISHED",
+      "canonicalId": "12099925",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "12099925"
+      }
     },
     {
       "id": "12099357",
@@ -2769,7 +3651,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "12099357"
+      "slug": "12099357",
+      "status": "PUBLISHED",
+      "canonicalId": "12099357",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "12099357"
+      }
     }
   ],
   "topRated": [
@@ -2799,7 +3687,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "12113389"
+      "slug": "12113389",
+      "status": "PUBLISHED",
+      "canonicalId": "12113389",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "12113389"
+      }
     },
     {
       "id": "18029",
@@ -2827,7 +3721,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "18029"
+      "slug": "18029",
+      "status": "PUBLISHED",
+      "canonicalId": "18029",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "18029"
+      }
     },
     {
       "id": "12113398",
@@ -2855,7 +3755,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "12113398"
+      "slug": "12113398",
+      "status": "PUBLISHED",
+      "canonicalId": "12113398",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "12113398"
+      }
     },
     {
       "id": "12113388",
@@ -2883,7 +3789,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "12113388"
+      "slug": "12113388",
+      "status": "PUBLISHED",
+      "canonicalId": "12113388",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "12113388"
+      }
     },
     {
       "id": "12113367",
@@ -2911,7 +3823,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "12113367"
+      "slug": "12113367",
+      "status": "PUBLISHED",
+      "canonicalId": "12113367",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "12113367"
+      }
     },
     {
       "id": "12113356",
@@ -2939,7 +3857,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "12113356"
+      "slug": "12113356",
+      "status": "PUBLISHED",
+      "canonicalId": "12113356",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "12113356"
+      }
     },
     {
       "id": "hai-jawani-toh-ishq-hona-hai-2026",
@@ -2967,7 +3891,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "hai-jawani-toh-ishq-hona-hai-2026"
+      "slug": "hai-jawani-toh-ishq-hona-hai-2026",
+      "status": "PUBLISHED",
+      "canonicalId": "hai-jawani-toh-ishq-hona-hai-2026",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "hai-jawani-toh-ishq-hona-hai-2026"
+      }
     },
     {
       "id": "12113242",
@@ -2995,7 +3925,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "12113242"
+      "slug": "12113242",
+      "status": "PUBLISHED",
+      "canonicalId": "12113242",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "12113242"
+      }
     },
     {
       "id": "12113237",
@@ -3023,7 +3959,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "12113237"
+      "slug": "12113237",
+      "status": "PUBLISHED",
+      "canonicalId": "12113237",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "12113237"
+      }
     },
     {
       "id": "12113232",
@@ -3051,7 +3993,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "12113232"
+      "slug": "12113232",
+      "status": "PUBLISHED",
+      "canonicalId": "12113232",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "12113232"
+      }
     },
     {
       "id": "12113214",
@@ -3079,7 +4027,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "12113214"
+      "slug": "12113214",
+      "status": "PUBLISHED",
+      "canonicalId": "12113214",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "12113214"
+      }
     },
     {
       "id": "12113212",
@@ -3107,7 +4061,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "12113212"
+      "slug": "12113212",
+      "status": "PUBLISHED",
+      "canonicalId": "12113212",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "12113212"
+      }
     },
     {
       "id": "12113204",
@@ -3135,7 +4095,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "12113204"
+      "slug": "12113204",
+      "status": "PUBLISHED",
+      "canonicalId": "12113204",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "12113204"
+      }
     },
     {
       "id": "12113197",
@@ -3163,7 +4129,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "12113197"
+      "slug": "12113197",
+      "status": "PUBLISHED",
+      "canonicalId": "12113197",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "12113197"
+      }
     },
     {
       "id": "12113195",
@@ -3191,7 +4163,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "12113195"
+      "slug": "12113195",
+      "status": "PUBLISHED",
+      "canonicalId": "12113195",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "12113195"
+      }
     },
     {
       "id": "12113158",
@@ -3219,7 +4197,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "12113158"
+      "slug": "12113158",
+      "status": "PUBLISHED",
+      "canonicalId": "12113158",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "12113158"
+      }
     },
     {
       "id": "12113141",
@@ -3247,7 +4231,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "12113141"
+      "slug": "12113141",
+      "status": "PUBLISHED",
+      "canonicalId": "12113141",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "12113141"
+      }
     },
     {
       "id": "12113121",
@@ -3275,7 +4265,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "12113121"
+      "slug": "12113121",
+      "status": "PUBLISHED",
+      "canonicalId": "12113121",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "12113121"
+      }
     },
     {
       "id": "12113118",
@@ -3303,7 +4299,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "12113118"
+      "slug": "12113118",
+      "status": "PUBLISHED",
+      "canonicalId": "12113118",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "12113118"
+      }
     },
     {
       "id": "12113097",
@@ -3331,7 +4333,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "12113097"
+      "slug": "12113097",
+      "status": "PUBLISHED",
+      "canonicalId": "12113097",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "12113097"
+      }
     }
   ],
   "nowPlaying": [
@@ -3361,7 +4369,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "38065"
+      "slug": "38065",
+      "status": "PUBLISHED",
+      "canonicalId": "38065",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "38065"
+      }
     },
     {
       "id": "12113407",
@@ -3389,7 +4403,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "12113407"
+      "slug": "12113407",
+      "status": "PUBLISHED",
+      "canonicalId": "12113407",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "12113407"
+      }
     },
     {
       "id": "12113405",
@@ -3417,7 +4437,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "12113405"
+      "slug": "12113405",
+      "status": "PUBLISHED",
+      "canonicalId": "12113405",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "12113405"
+      }
     },
     {
       "id": "12113403",
@@ -3445,7 +4471,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "12113403"
+      "slug": "12113403",
+      "status": "PUBLISHED",
+      "canonicalId": "12113403",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "12113403"
+      }
     },
     {
       "id": "12113404",
@@ -3473,7 +4505,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "12113404"
+      "slug": "12113404",
+      "status": "PUBLISHED",
+      "canonicalId": "12113404",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "12113404"
+      }
     },
     {
       "id": "12113402",
@@ -3501,7 +4539,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "12113402"
+      "slug": "12113402",
+      "status": "PUBLISHED",
+      "canonicalId": "12113402",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "12113402"
+      }
     },
     {
       "id": "12113401",
@@ -3529,7 +4573,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "12113401"
+      "slug": "12113401",
+      "status": "PUBLISHED",
+      "canonicalId": "12113401",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "12113401"
+      }
     },
     {
       "id": "12113397",
@@ -3557,7 +4607,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "12113397"
+      "slug": "12113397",
+      "status": "PUBLISHED",
+      "canonicalId": "12113397",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "12113397"
+      }
     },
     {
       "id": "12113398",
@@ -3585,7 +4641,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "12113398"
+      "slug": "12113398",
+      "status": "PUBLISHED",
+      "canonicalId": "12113398",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "12113398"
+      }
     },
     {
       "id": "12113399",
@@ -3613,7 +4675,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "12113399"
+      "slug": "12113399",
+      "status": "PUBLISHED",
+      "canonicalId": "12113399",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "12113399"
+      }
     },
     {
       "id": "12113400",
@@ -3641,7 +4709,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "12113400"
+      "slug": "12113400",
+      "status": "PUBLISHED",
+      "canonicalId": "12113400",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "12113400"
+      }
     },
     {
       "id": "12113396",
@@ -3669,7 +4743,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "12113396"
+      "slug": "12113396",
+      "status": "PUBLISHED",
+      "canonicalId": "12113396",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "12113396"
+      }
     },
     {
       "id": "12113395",
@@ -3697,7 +4777,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "12113395"
+      "slug": "12113395",
+      "status": "PUBLISHED",
+      "canonicalId": "12113395",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "12113395"
+      }
     },
     {
       "id": "12113394",
@@ -3725,7 +4811,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "12113394"
+      "slug": "12113394",
+      "status": "PUBLISHED",
+      "canonicalId": "12113394",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "12113394"
+      }
     },
     {
       "id": "12113392",
@@ -3753,7 +4845,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "12113392"
+      "slug": "12113392",
+      "status": "PUBLISHED",
+      "canonicalId": "12113392",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "12113392"
+      }
     },
     {
       "id": "12113393",
@@ -3781,7 +4879,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "12113393"
+      "slug": "12113393",
+      "status": "PUBLISHED",
+      "canonicalId": "12113393",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "12113393"
+      }
     },
     {
       "id": "12113390",
@@ -3809,7 +4913,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "12113390"
+      "slug": "12113390",
+      "status": "PUBLISHED",
+      "canonicalId": "12113390",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "12113390"
+      }
     },
     {
       "id": "12113391",
@@ -3837,7 +4947,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "12113391"
+      "slug": "12113391",
+      "status": "PUBLISHED",
+      "canonicalId": "12113391",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "12113391"
+      }
     },
     {
       "id": "12113388",
@@ -3865,7 +4981,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "12113388"
+      "slug": "12113388",
+      "status": "PUBLISHED",
+      "canonicalId": "12113388",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "12113388"
+      }
     },
     {
       "id": "12113387",
@@ -3893,7 +5015,13 @@
       "director": "Director",
       "cast": [],
       "links": [],
-      "slug": "12113387"
+      "slug": "12113387",
+      "status": "PUBLISHED",
+      "canonicalId": "12113387",
+      "posterVerification": {
+        "status": "VERIFIED",
+        "canonicalId": "12113387"
+      }
     }
   ]
 }

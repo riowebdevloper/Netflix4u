@@ -822,6 +822,136 @@
         }
       }
 
+      /* =========================================================
+         🎬 NETFLIX REDESIGN & STRICT MOBILE GUARANTEES
+         ========================================================= */
+      :root {
+        --color-accent: #E50914 !important;
+        --color-accent-hover: #b80710 !important;
+        --color-navy-950: #141414 !important;
+        --color-navy-900: #181818 !important;
+        --color-card: #181818 !important;
+        --color-card-hover: #232323 !important;
+      }
+      body {
+        background-color: #141414 !important;
+      }
+
+      /* Strict Header Logo Bounding - Desktop & Mobile */
+      #nav-logo {
+        display: flex !important;
+        align-items: center !important;
+        height: 32px !important;
+        max-width: 125px !important;
+        flex-shrink: 0 !important;
+        overflow: hidden !important;
+      }
+      #nav-logo img, header nav img {
+        width: auto !important;
+        height: 28px !important;
+        max-height: 28px !important;
+        max-width: 120px !important;
+        object-fit: contain !important;
+        display: block !important;
+      }
+      @media (max-width: 640px) {
+        #nav-logo {
+          max-width: 95px !important;
+          height: 24px !important;
+        }
+        #nav-logo img, header nav img {
+          max-width: 95px !important;
+          height: 22px !important;
+          max-height: 22px !important;
+        }
+      }
+
+      /* Netflix Hero Buttons */
+      .hero-buttons-row .btn-primary,
+      #hero-banner .btn-primary {
+        background-color: #ffffff !important;
+        color: #000000 !important;
+        font-weight: 700 !important;
+        border-radius: 4px !important;
+        border: none !important;
+      }
+      .hero-buttons-row .btn-primary svg,
+      #hero-banner .btn-primary svg {
+        fill: #000000 !important;
+        color: #000000 !important;
+      }
+      .hero-buttons-row .btn-primary:hover,
+      #hero-banner .btn-primary:hover {
+        background-color: rgba(255, 255, 255, 0.75) !important;
+        color: #000000 !important;
+      }
+      .hero-buttons-row .btn-secondary,
+      #hero-banner .btn-secondary {
+        background-color: rgba(109, 109, 110, 0.7) !important;
+        color: #ffffff !important;
+        font-weight: 600 !important;
+        border-radius: 4px !important;
+        border: none !important;
+        backdrop-filter: blur(8px) !important;
+      }
+      .hero-buttons-row .btn-secondary:hover,
+      #hero-banner .btn-secondary:hover {
+        background-color: rgba(109, 109, 110, 0.45) !important;
+      }
+
+      /* Netflix Top 10 Numerals */
+      #top-10-section .top-number {
+        font-family: 'Impact', 'Arial Black', sans-serif !important;
+        font-size: 110px !important;
+        font-weight: 900 !important;
+        line-height: 0.75 !important;
+        color: #000000 !important;
+        -webkit-text-stroke: 4px #8c8c8c !important;
+        filter: drop-shadow(2px 4px 8px rgba(0,0,0,0.9)) !important;
+        text-shadow: 0 0 12px rgba(0,0,0,0.9) !important;
+      }
+
+      /* Organized Mobile Footer */
+      @media (max-width: 767.98px) {
+        footer {
+          padding-top: 2rem !important;
+          padding-bottom: 5.5rem !important;
+        }
+        footer > div {
+          padding: 0 1.25rem !important;
+        }
+        footer .grid {
+          display: grid !important;
+          grid-template-columns: 1fr 1fr !important;
+          gap: 1.5rem 1rem !important;
+        }
+        footer .grid > div:first-child {
+          grid-column: 1 / -1 !important;
+          padding-bottom: 0.75rem !important;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+        }
+        footer .grid > div:first-child img {
+          height: 24px !important;
+          width: auto !important;
+        }
+        footer .grid h3 {
+          font-size: 0.75rem !important;
+          font-weight: 700 !important;
+          text-transform: uppercase !important;
+          letter-spacing: 0.06em !important;
+          color: #ffffff !important;
+          margin-bottom: 0.65rem !important;
+        }
+        footer .grid ul {
+          display: flex !important;
+          flex-direction: column !important;
+          gap: 0.4rem !important;
+        }
+        footer .grid li a {
+          font-size: 0.8rem !important;
+          color: #808080 !important;
+        }
+      }
     </style>
   </head>
   <body>

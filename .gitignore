@@ -25,6 +25,7 @@ audit_artifacts/
 
 # Screenshots & debugging assets
 screenshot*.png
+favicon
 
 # OS & Editor generated files
 .DS_Store
