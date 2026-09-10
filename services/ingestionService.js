@@ -426,33 +426,111 @@ function getCatalogList() {
 // ----------------------------------------------------
 // 6. Automated Homepage Feed Rebuilder
 // ----------------------------------------------------
+const DETAILS_MAP_PATH = path.join(DATA_DIR, 'details_map.json');
+
+function proxyTmdbImage(url) {
+  if (!url || typeof url !== 'string') return url;
+  if (url.startsWith('https://image.tmdb.org/') || url.startsWith('http://image.tmdb.org/')) {
+    return `https://wsrv.nl/?url=${encodeURIComponent(url)}&output=webp`;
+  }
+  return url;
+}
+
+function normalizeFeedItem(item) {
+  if (!item) return item;
+  return {
+    ...item,
+    poster: proxyTmdbImage(item.poster),
+    backdrop: proxyTmdbImage(item.backdrop || item.poster)
+  };
+}
+
 function rebuildHomeFeed(catalogList) {
   if (!catalogList || !Array.isArray(catalogList)) {
     catalogList = getCatalogList();
   }
-  const published = catalogList.filter(item => item.status === 'PUBLISHED' && verifyPosterUrl(item.poster));
 
-  // 1. Featured (Hero Carousel): High quality, with valid backdrop, newest or top-rated (max 8)
-  const featured = published
+  // Load details_map to verify active download links & playback sources
+  let detailsMap = new Map();
+  if (fs.existsSync(DETAILS_MAP_PATH)) {
+    try {
+      const raw = JSON.parse(fs.readFileSync(DETAILS_MAP_PATH, 'utf8'));
+      for (const [k, v] of Object.entries(raw)) {
+        if (v) {
+          detailsMap.set(String(k), v);
+          if (v.record_id) detailsMap.set(String(v.record_id), v);
+          if (v.canonicalId) detailsMap.set(String(v.canonicalId), v);
+          if (v.slug) detailsMap.set(String(v.slug), v);
+        }
+      }
+    } catch(e) {
+      console.error('Error loading details_map in rebuildHomeFeed:', e.message);
+    }
+  }
+
+  function hasVerifiedContent(item) {
+    if (!item) return false;
+    if (item.provider === 'dotmobiz') return true;
+    const rawId = String(item.id || item.record_id || '').replace(/^dotmobiz-/, '');
+    if (/^\d{3,8}$/.test(rawId)) return true;
+    const mapped = detailsMap.get(rawId) || detailsMap.get(item.id) || detailsMap.get(item.canonicalId) || (item.slug && detailsMap.get(item.slug));
+    if (mapped) {
+      if (mapped.links && mapped.links.length > 0) return true;
+      if (mapped.downloadOptions && mapped.downloadOptions.length > 0) return true;
+      if (mapped.rawLinks && mapped.rawLinks.trim().length > 0) return true;
+      if (mapped.playbackSources && mapped.playbackSources.length > 0) return true;
+    }
+    if (item.links && item.links.length > 0) return true;
+    if (item.downloadOptions && item.downloadOptions.length > 0) return true;
+    return false;
+  }
+
+  const published = catalogList
+    .filter(item => item.status === 'PUBLISHED' && verifyPosterUrl(item.poster))
+    .map(normalizeFeedItem);
+
+  // Top high-demand blockbuster titles with verified downloads to headline the Hero Carousel
+  const priorityIds = ['18013', '23933', '18025', '18029', '83865', '18026', '18027', '90545'];
+
+  const withPlayback = published.filter(i => hasVerifiedContent(i) && i.backdrop && !i.backdrop.includes('no-poster'));
+  
+  // Sort priority titles first
+  const priorityItems = [];
+  for (const pid of priorityIds) {
+    const match = withPlayback.find(i => String(i.id).includes(pid) || String(i.record_id).includes(pid));
+    if (match && !priorityItems.some(p => p.id === match.id)) {
+      priorityItems.push(match);
+    }
+  }
+
+  const otherPlayback = withPlayback.filter(i => !priorityItems.some(p => p.id === i.id));
+
+  // Balanced mix of movies and series
+  const featured = [...priorityItems, ...otherPlayback]
     .filter(i => i.backdrop && !i.backdrop.includes('no-poster'))
     .slice(0, 8);
 
-  // 2. Trending: Top rating / recent (first 20)
-  const trending = published.slice(0, 20);
+  // 2. Trending: Verified high-demand titles first, followed by top rating
+  const trending = [
+    ...featured,
+    ...withPlayback.filter(i => !featured.some(f => f.id === i.id))
+  ].slice(0, 20);
 
   // 3. Recent Releases: Sorted by year / date
   const recent = [...published]
     .sort((a, b) => (b.year || 0) - (a.year || 0))
     .slice(0, 20);
 
-  // 4. Popular Movies
+  // 4. Popular Movies: Movies with verified links or top ratings
   const popularMovies = published
     .filter(i => i.type === 'movie')
+    .sort((a, b) => (hasVerifiedContent(b) ? 1 : 0) - (hasVerifiedContent(a) ? 1 : 0) || (b.rating || 0) - (a.rating || 0))
     .slice(0, 20);
 
-  // 5. Popular Series
+  // 5. Popular Series: Series with verified links or top ratings
   const popularSeries = published
     .filter(i => i.type === 'series')
+    .sort((a, b) => (hasVerifiedContent(b) ? 1 : 0) - (hasVerifiedContent(a) ? 1 : 0) || (b.rating || 0) - (a.rating || 0))
     .slice(0, 20);
 
   // 6. Anime
@@ -494,7 +572,9 @@ function rebuildCategories(catalogList) {
   if (!catalogList || !Array.isArray(catalogList)) {
     catalogList = getCatalogList();
   }
-  const published = catalogList.filter(item => item.status === 'PUBLISHED' && verifyPosterUrl(item.poster));
+  const published = catalogList
+    .filter(item => item.status === 'PUBLISHED' && verifyPosterUrl(item.poster))
+    .map(normalizeFeedItem);
 
   const movies = published.filter(i => i.type === 'movie').slice(0, 100);
   const series = published.filter(i => i.type === 'series').slice(0, 100);

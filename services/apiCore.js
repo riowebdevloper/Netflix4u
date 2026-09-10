@@ -546,14 +546,14 @@ async function handlePosterResolver(req, res) {
     });
     if (findData) {
       const item = (findData.movie_results && findData.movie_results[0]) || (findData.tv_results && findData.tv_results[0]);
-      if (item) {
+        const pUrl = item.poster_path ? `https://image.tmdb.org/t/p/w500${item.poster_path}` : null;
+        const bUrl = item.backdrop_path ? `https://image.tmdb.org/t/p/original${item.backdrop_path}` : null;
         return sendJson(res, 200, {
           success: true,
-          poster: item.poster_path ? `https://image.tmdb.org/t/p/w500${item.poster_path}` : null,
-          backdrop: item.backdrop_path ? `https://image.tmdb.org/t/p/original${item.backdrop_path}` : null,
+          poster: pUrl ? `https://wsrv.nl/?url=${encodeURIComponent(pUrl)}&output=webp` : null,
+          backdrop: bUrl ? `https://wsrv.nl/?url=${encodeURIComponent(bUrl)}&output=webp` : null,
           tmdbId: item.id
         }, { 'Cache-Control': 'public, max-age=86400' });
-      }
     }
   }
 

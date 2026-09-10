@@ -17,6 +17,7 @@
     { "source": "/genres/:match*", "destination": "/index.html" },
     { "source": "/search/:match*", "destination": "/index.html" },
     { "source": "/watchlist/:match*", "destination": "/index.html" },
+    { "source": "/category/:match*", "destination": "/index.html" },
     { "source": "/about", "destination": "/index.html" },
     { "source": "/contact", "destination": "/index.html" },
     { "source": "/privacy", "destination": "/index.html" },

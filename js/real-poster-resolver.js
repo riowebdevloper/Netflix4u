@@ -14,12 +14,23 @@
   const ALLOWED_HOSTS = [
     'image.tmdb.org',
     'media.themoviedb.org',
+    'wsrv.nl',
+    'images.weserv.nl',
     'storage.hicine.sbs',
     'img.hicine.sbs',
     'm.media-amazon.com',
     'images-na.ssl-images-amazon.com',
     'i.imgur.com'
   ];
+
+  function proxyTmdbImage(url) {
+    if (!url || typeof url !== 'string') return url;
+    if (url.includes('image.tmdb.org') || url.includes('media.themoviedb.org')) {
+      return 'https://wsrv.nl/?url=' + encodeURIComponent(url) + '&output=webp';
+    }
+    return url;
+  }
+  window.proxyTmdbImage = proxyTmdbImage;
 
   function isAllowedPoster(url) {
     if (!url || typeof url !== 'string') return false;
@@ -76,8 +87,10 @@
       if (res.ok && (!res.headers.get("content-type") || res.headers.get("content-type").indexOf("json") !== -1)) {
         const data = await res.json();
         if (data && (data.poster || data.backdrop)) {
-          const poster = isAllowedPoster(data.poster) ? data.poster : null;
-          const backdrop = isAllowedPoster(data.backdrop) ? data.backdrop : (poster || null);
+          const rawPoster = isAllowedPoster(data.poster) ? data.poster : null;
+          const rawBackdrop = isAllowedPoster(data.backdrop) ? data.backdrop : (rawPoster || null);
+          const poster = rawPoster ? proxyTmdbImage(rawPoster) : null;
+          const backdrop = rawBackdrop ? proxyTmdbImage(rawBackdrop) : (poster || null);
           if (poster || backdrop) {
             return { poster, backdrop };
           }
