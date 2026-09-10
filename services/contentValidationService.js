@@ -20,6 +20,8 @@ function hasSafePoster(record) {
         h.endsWith('media-amazon.com') ||
         h.endsWith('ytimg.com') ||
         h === 'netflix4u.in' ||
+        h === 'wsrv.nl' ||
+        h.endsWith('.wsrv.nl') ||
         h.endsWith('workers.dev');
       return isApproved;
     } catch(e) {

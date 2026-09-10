@@ -72,11 +72,10 @@ function checkRateLimit(ip) {
   return record.count <= MAX_REQUESTS_PER_WINDOW;
 }
 
-// Protected files that must NEVER be downloaded directly in bulk
+// Protected internal database files that must NEVER be downloaded directly in bulk
 const PROTECTED_DATA_FILES = new Set([
   'details_map.json',
-  'movies.json',
-  'series.json'
+  'dotmobiz_complete_catalog.json'
 ]);
 
 const MIME_TYPES = {
@@ -966,7 +965,9 @@ const server = http.createServer(async (req, res) => {
       hostname.endsWith('themoviedb.org') ||
       hostname.endsWith('ytimg.com') ||
       hostname.endsWith('media-amazon.com') ||
-      hostname === 'netflix4u.in';
+      hostname === 'netflix4u.in' ||
+      hostname === 'wsrv.nl' ||
+      hostname.endsWith('.wsrv.nl');
 
     if (!isApprovedDomain) {
       res.writeHead(403, { 'Content-Type': 'text/plain' });
