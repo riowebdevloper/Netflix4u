@@ -18,11 +18,38 @@ const DATA_DIR = path.resolve(__dirname, '..', 'data');
 const DETAILS_DIR = path.join(DATA_DIR, 'details');
 const CATALOG_SUMMARY_PATH = path.join(DATA_DIR, 'catalog_summary.json');
 const COMPLETE_CATALOG_PATH = path.join(DATA_DIR, 'dotmobiz_complete_catalog.json');
+const DETAILS_MAP_PATH = path.join(DATA_DIR, 'details_map.json');
 const TMDB_API_KEY = process.env.TMDB_API_KEY || '445f2b5a8941c1d4bd5a869761a916e3';
 
 // In-Memory Fast Lookup Index
 let catalogIndex = null;
+let detailsMapCache = null;
 const tmdbMemoryCache = new Map();
+
+function getDetailsMap() {
+  if (detailsMapCache) return detailsMapCache;
+  detailsMapCache = new Map();
+  if (fs.existsSync(DETAILS_MAP_PATH)) {
+    try {
+      const raw = JSON.parse(fs.readFileSync(DETAILS_MAP_PATH, 'utf8'));
+      for (const [k, v] of Object.entries(raw)) {
+        if (!v) continue;
+        detailsMapCache.set(String(k), v);
+        if (v.slug) detailsMapCache.set(v.slug, v);
+        if (v.record_id) detailsMapCache.set(String(v.record_id), v);
+        if (v.title) {
+          const clean = v.title.toLowerCase().replace(/[^a-z0-9]/g, '');
+          if (clean.length >= 4 && !detailsMapCache.has(clean)) {
+            detailsMapCache.set(clean, v);
+          }
+        }
+      }
+    } catch(e) {
+      console.error('Failed to index details_map.json:', e.message);
+    }
+  }
+  return detailsMapCache;
+}
 
 function buildCatalogIndex() {
   if (catalogIndex) return catalogIndex;
@@ -243,11 +270,65 @@ function fetchTmdbRecord(mediaType, tmdbId) {
 function standardizeLocalRecord(item, rawId) {
   if (!item) return null;
   const rawNum = String(item.record_id || item.id || '').replace(/^dotmobiz-/, '');
-  const canonicalId = `dotmobiz-${rawNum || rawId.replace(/^dotmobiz-/, '')}`;
+  const canonicalId = `dotmobiz-${rawNum || String(rawId || '').replace(/^dotmobiz-/, '')}`;
   const rawTitle = item.rawTitle || item.title || 'Untitled';
   
   // Clean title for display
   const title = item.title || rawTitle;
+
+  // Retrieve raw links
+  let links = Array.isArray(item.links) && item.links.length > 0
+    ? item.links
+    : (Array.isArray(item.downloadOptions) && item.downloadOptions.length > 0 ? item.downloadOptions : []);
+
+  // If links are empty, query details_map.json fallback
+  if (links.length === 0) {
+    const dMap = getDetailsMap();
+    const mapEntry = dMap.get(rawNum) || (rawId ? dMap.get(String(rawId).replace(/^dotmobiz-/, '')) : null) || (item.slug ? dMap.get(item.slug) : null);
+    if (mapEntry && Array.isArray(mapEntry.links) && mapEntry.links.length > 0) {
+      links = mapEntry.links;
+    }
+  }
+
+  // Normalize links: enforce canonicalId, quality tiers, and valid provider source
+  const normalizedLinks = links.filter(l => l && l.url).map(l => {
+    let q = (l.quality || 'HD').toUpperCase();
+    if (/2160|4K|UHD/i.test(q) || /2160|4K|UHD/i.test(l.label || '')) q = '2160p / 4K';
+    else if (/1440|2K/i.test(q) || /1440|2K/i.test(l.label || '')) q = '1440p';
+    else if (/1080|FHD/i.test(q) || /1080|FHD/i.test(l.label || '')) q = '1080p';
+    else if (/720|HD/i.test(q) || /720|HD/i.test(l.label || '')) q = '720p';
+    else if (/480|SD/i.test(q) || /480|SD/i.test(l.label || '')) q = '480p';
+
+    const isCloud = Boolean(l.isCloud || (l.url && (l.url.includes('vcloud') || l.url.includes('workers.dev'))));
+    const source = isCloud ? 'Fast Cloud' : (l.url && l.url.includes('nexdrive') ? 'AllMovieLand' : (l.source || 'Direct Mirror'));
+
+    let season = l.season !== undefined ? l.season : null;
+    let episode = l.episode !== undefined ? l.episode : null;
+    let isPack = Boolean(l.isPack);
+
+    const label = l.label || '';
+    if (season === null) {
+      const sMatch = label.match(/(?:season|s)\s*(\d+)/i);
+      if (sMatch) season = parseInt(sMatch[1], 10);
+      else if (item.type === 'series' || item.type === 'anime' || item.type === 'kdrama') season = 1;
+    }
+    if (episode === null) {
+      const epMatch = label.match(/(?:episode|ep|e)\s*(\d+)/i);
+      if (epMatch) episode = parseInt(epMatch[1], 10);
+      else if (/complete|pack|zip|batch|full\s*season/i.test(label)) isPack = true;
+    }
+
+    return {
+      ...l,
+      canonicalId,
+      quality: q,
+      source,
+      isCloud,
+      season,
+      episode,
+      isPack
+    };
+  });
 
   return {
     ...item,
@@ -264,7 +345,7 @@ function standardizeLocalRecord(item, rawId) {
     year: item.year || parseInt((rawTitle.match(/\b(19\d{2}|20\d{2})\b/) || [0, 2026])[1], 10),
     slug: item.slug || `${canonicalId}-${title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`,
     status: item.status || 'PUBLISHED',
-    links: item.links || item.downloadOptions || []
+    links: normalizedLinks
   };
 }
 
@@ -329,6 +410,14 @@ async function resolveContentId(rawId) {
     if (catalogEntry.title) {
       return standardizeLocalRecord(catalogEntry, catalogEntry.canonicalId || id);
     }
+  }
+
+  // 5b. Check details_map.json directly
+  const dMap = getDetailsMap();
+  const rawNum = id.replace(/^dotmobiz-/, '');
+  const mapEntry = dMap.get(rawNum) || dMap.get(id) || (catalogEntry?.slug ? dMap.get(catalogEntry.slug) : null);
+  if (mapEntry) {
+    return standardizeLocalRecord(mapEntry, id);
   }
 
   // 6. Fallback for TMDB numeric IDs only if NOT in local catalog (e.g., 90545 for Sandman)

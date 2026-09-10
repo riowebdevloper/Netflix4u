@@ -1448,28 +1448,6 @@
     "publishedAt": "2026-09-10T08:30:22.107Z"
   },
   {
-    "id": "dotmobiz-96070",
-    "canonicalId": "dotmobiz-96070",
-    "record_id": "96070",
-    "title": "Srirastu Subhamastu Jabardast Aashiq 3",
-    "rawTitle": "Srirastu Subhamastu Jabardast Aashiq 3 2016 Hindi Telugu Dual Audio Webdl 720p 480p 1080p",
-    "slug": "96070-srirastu-subhamastu-jabardast-aashiq-3-2016-hindi-telugu-dual-audio-webdl-720p-480p-1080p",
-    "type": "movie",
-    "year": 2016,
-    "quality": "FHD",
-    "provider": "dotmobiz",
-    "rating": 8.4,
-    "poster": "https://placehold.co/500x750/111427/ffffff?text=Srirastu%20Subhamastu%20Jabardast%20Aashiq%203",
-    "backdrop": "https://placehold.co/1280x720/111427/ffffff?text=Srirastu%20Subhamastu%20Jabardast%20Aashiq%203",
-    "categories": [
-      "Bollywood",
-      "Hollywood",
-      "Movies"
-    ],
-    "status": "PUBLISHED",
-    "publishedAt": "2026-09-10T08:30:22.107Z"
-  },
-  {
     "id": "dotmobiz-96055",
     "canonicalId": "dotmobiz-96055",
     "record_id": "96055",
@@ -1866,28 +1844,6 @@
     "publishedAt": "2026-09-10T08:30:22.107Z"
   },
   {
-    "id": "dotmobiz-95955",
-    "canonicalId": "dotmobiz-95955",
-    "record_id": "95955",
-    "title": "Missing Mahila Kajodu",
-    "rawTitle": "Missing Mahila Kajodu 2026 Season 1 Hindi Shemaroo Audio Web Dl 720p 480p 1080p All Episodes",
-    "slug": "95955-missing-mahila-kajodu-2026-season-1-hindi-shemaroo-audio-web-dl-720p-480p-1080p-all-episodes",
-    "type": "series",
-    "year": 2026,
-    "quality": "FHD",
-    "provider": "dotmobiz",
-    "rating": 8.4,
-    "poster": "https://placehold.co/500x750/111427/ffffff?text=Missing%20Mahila%20Kajodu",
-    "backdrop": "https://placehold.co/1280x720/111427/ffffff?text=Missing%20Mahila%20Kajodu",
-    "categories": [
-      "Web Series",
-      "Drama",
-      "TV Shows"
-    ],
-    "status": "PUBLISHED",
-    "publishedAt": "2026-09-10T08:30:22.107Z"
-  },
-  {
     "id": "dotmobiz-95910",
     "canonicalId": "dotmobiz-95910",
     "record_id": "95910",
@@ -2209,6 +2165,50 @@
     "rating": 4.8,
     "poster": "https://image.tmdb.org/t/p/w500/bPtRt3ajQ0EkyeQ1O6iJwAIi9Py.jpg",
     "backdrop": "https://image.tmdb.org/t/p/original/b4WXm5ahmtubYXy3wqHUG2nUKoM.jpg",
+    "categories": [
+      "Bollywood",
+      "Hollywood",
+      "Movies"
+    ],
+    "status": "PUBLISHED",
+    "publishedAt": "2026-09-10T08:30:22.107Z"
+  },
+  {
+    "id": "dotmobiz-95835",
+    "canonicalId": "dotmobiz-95835",
+    "record_id": "95835",
+    "title": "Beauty In Black",
+    "rawTitle": "Beauty In Black 2026 Season 3 Hindi English Audio Web Dl 720p 480p 1080p All Episodes",
+    "slug": "95835-beauty-in-black-2026-season-3-hindi-english-audio-web-dl-720p-480p-1080p-all-episodes",
+    "type": "series",
+    "year": 2026,
+    "quality": "FHD",
+    "provider": "dotmobiz",
+    "rating": 8.4,
+    "poster": "https://image.tmdb.org/t/p/w500/xKk4bFCCpZ9tvjUykvvMYLSBnjo.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/original/ywJcUIMTCjstPLvvyIiPWP3G3m3.jpg",
+    "categories": [
+      "Web Series",
+      "Drama",
+      "TV Shows"
+    ],
+    "status": "PUBLISHED",
+    "publishedAt": "2026-09-10T08:30:22.107Z"
+  },
+  {
+    "id": "dotmobiz-95825",
+    "canonicalId": "dotmobiz-95825",
+    "record_id": "95825",
+    "title": "Anbe Diana",
+    "rawTitle": "Anbe Diana 2026 Hindi Tamil Dual Audio Webdl 720p 480p 1080p",
+    "slug": "95825-anbe-diana-2026-hindi-tamil-dual-audio-webdl-720p-480p-1080p",
+    "type": "movie",
+    "year": 2026,
+    "quality": "FHD",
+    "provider": "dotmobiz",
+    "rating": 6,
+    "poster": "https://image.tmdb.org/t/p/w500/201CEvG6ayNj71iSLxxEk7pUv0N.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/original/l4xqxKS7nlOni6bnTHWi3USyp4o.jpg",
     "categories": [
       "Bollywood",
       "Hollywood",

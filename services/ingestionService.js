@@ -430,7 +430,7 @@ function rebuildHomeFeed(catalogList) {
   if (!catalogList || !Array.isArray(catalogList)) {
     catalogList = getCatalogList();
   }
-  const published = catalogList.filter(item => (item.status === 'PUBLISHED' || !item.status) && item.poster && !item.poster.includes('no-poster'));
+  const published = catalogList.filter(item => item.status === 'PUBLISHED' && verifyPosterUrl(item.poster));
 
   // 1. Featured (Hero Carousel): High quality, with valid backdrop, newest or top-rated (max 8)
   const featured = published
@@ -494,7 +494,7 @@ function rebuildCategories(catalogList) {
   if (!catalogList || !Array.isArray(catalogList)) {
     catalogList = getCatalogList();
   }
-  const published = catalogList.filter(item => item.status === 'PUBLISHED' || !item.status);
+  const published = catalogList.filter(item => item.status === 'PUBLISHED' && verifyPosterUrl(item.poster));
 
   const movies = published.filter(i => i.type === 'movie').slice(0, 100);
   const series = published.filter(i => i.type === 'series').slice(0, 100);
@@ -517,7 +517,7 @@ function rebuildSitemap(catalogList) {
   if (!catalogList || !Array.isArray(catalogList)) {
     catalogList = getCatalogList();
   }
-  const published = catalogList.filter(item => item.status === 'PUBLISHED' || !item.status);
+  const published = catalogList.filter(item => item.status === 'PUBLISHED' && verifyPosterUrl(item.poster));
   const now = new Date().toISOString().slice(0, 10);
 
   const staticUrls = [
@@ -579,6 +579,7 @@ function recordAuditLog(metrics) {
 module.exports = {
   runIngestionPipeline,
   discoverCandidates,
+  verifyPosterUrl,
   rebuildHomeFeed,
   rebuildCategories,
   rebuildSitemap,
