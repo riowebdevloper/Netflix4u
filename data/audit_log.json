@@ -1,0 +1,46 @@
+[
+  {
+    "timestamp": "2026-09-10T08:41:35.746Z",
+    "discovered": 90,
+    "added": 0,
+    "updated": 0,
+    "skipped": 90,
+    "published": 0,
+    "poster_pending": 0,
+    "failed": 0,
+    "durationMs": 1843
+  },
+  {
+    "timestamp": "2026-09-10T08:41:33.884Z",
+    "discovered": 90,
+    "added": 0,
+    "updated": 0,
+    "skipped": 90,
+    "published": 0,
+    "poster_pending": 0,
+    "failed": 0,
+    "durationMs": 2326
+  },
+  {
+    "timestamp": "2026-09-10T08:30:40.204Z",
+    "discovered": 90,
+    "added": 0,
+    "updated": 1,
+    "skipped": 89,
+    "published": 0,
+    "poster_pending": 0,
+    "failed": 0,
+    "durationMs": 3671
+  },
+  {
+    "timestamp": "2026-09-10T08:30:23.512Z",
+    "discovered": 90,
+    "added": 48,
+    "updated": 38,
+    "skipped": 4,
+    "published": 48,
+    "poster_pending": 0,
+    "failed": 0,
+    "durationMs": 20806
+  }
+]

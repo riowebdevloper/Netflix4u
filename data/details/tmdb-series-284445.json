@@ -1,0 +1,72 @@
+{
+  "id": "tmdb-series-284445",
+  "canonicalId": "tmdb-series-284445",
+  "externalProvider": "tmdb",
+  "externalId": "284445",
+  "tmdbId": "284445",
+  "imdbId": "tt36988358",
+  "type": "series",
+  "contentType": "series",
+  "title": "Takopi's Original Sin",
+  "canonicalTitle": "Takopi's Original Sin",
+  "originalTitle": "タコピーの原罪",
+  "overview": "A Happy alien, Takopi, lands on Earth with one mission: to spread happiness! When he meets Shizuka, a lonely fourth grader, he vows to bring back her smile using his magical Happy Gadgets. But as he uncovers the pain in her life, Takopi learns that true happiness may require more than gadgets.",
+  "description": "A Happy alien, Takopi, lands on Earth with one mission: to spread happiness! When he meets Shizuka, a lonely fourth grader, he vows to bring back her smile using his magical Happy Gadgets. But as he uncovers the pain in her life, Takopi learns that true happiness may require more than gadgets.",
+  "shortDescription": "A Happy alien, Takopi, lands on Earth with one mission: to spread happiness! When he meets Shizuka, a lonely fourth grad",
+  "year": 2025,
+  "releaseDate": "2025-06-28",
+  "rating": 8.8,
+  "votes": "0.2K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Animation",
+    "Drama",
+    "Sci-Fi & Fantasy"
+  ],
+  "categories": [
+    "Animation",
+    "Drama",
+    "Sci-Fi & Fantasy"
+  ],
+  "language": "Japanese",
+  "country": "JP",
+  "director": "Director",
+  "poster": "https://image.tmdb.org/t/p/w500/xPXDVhVKt0XM34ihoUVMHtLYTw8.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/6omimfVty4JD3LXzI5LHEGhXjwn.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/j7dxZjwIhu0?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/j7dxZjwIhu0?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "114918",
+      "name": "Kurumi Mamiya",
+      "character": "Takopi (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/69HpNCiAU2AXwNhltWgFrDnM7a9.jpg"
+    },
+    {
+      "id": "1452028",
+      "name": "Reina Ueda",
+      "character": "Shizuka Kuze (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/2WV61uVU7y6XGYqNHLMpP0sApdu.jpg"
+    },
+    {
+      "id": "1820616",
+      "name": "Konomi Kohara",
+      "character": "Marina Kirarazaka (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/3wjTzpJpBiTkLexdMmo9a3wfgRT.jpg"
+    },
+    {
+      "id": "2889712",
+      "name": "Anna Nagase",
+      "character": "Naoki Azuma (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/748FmLCklgnN8hrlBZ4bNsF4zpk.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 6,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-10T08:30:19.354Z",
+  "createdAt": "2026-09-10T08:30:19.354Z",
+  "updatedAt": "2026-09-10T08:30:19.354Z",
+  "links": []
+}

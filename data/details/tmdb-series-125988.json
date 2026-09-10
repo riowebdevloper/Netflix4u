@@ -1,0 +1,118 @@
+{
+  "id": "tmdb-series-125988",
+  "canonicalId": "tmdb-series-125988",
+  "externalProvider": "tmdb",
+  "externalId": "125988",
+  "tmdbId": "125988",
+  "imdbId": "tt14688458",
+  "type": "series",
+  "contentType": "series",
+  "title": "Silo",
+  "canonicalTitle": "Silo",
+  "originalTitle": "Silo",
+  "overview": "In a ruined and toxic future, thousands live in a giant silo deep underground. After its sheriff breaks a cardinal rule and residents die mysteriously, engineer Juliette starts to uncover shocking secrets and the truth about the silo.",
+  "description": "In a ruined and toxic future, thousands live in a giant silo deep underground. After its sheriff breaks a cardinal rule and residents die mysteriously, engineer Juliette starts to uncover shocking secrets and the truth about the silo.",
+  "shortDescription": "In a ruined and toxic future, thousands live in a giant silo deep underground. After its sheriff breaks a cardinal rule ",
+  "year": 2023,
+  "releaseDate": "2023-05-04",
+  "rating": 8.2,
+  "votes": "2.6K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Sci-Fi & Fantasy",
+    "Drama"
+  ],
+  "categories": [
+    "Sci-Fi & Fantasy",
+    "Drama"
+  ],
+  "language": "English",
+  "country": "US",
+  "director": "Director",
+  "poster": "https://image.tmdb.org/t/p/w500/gMYZZvnkVNTqSVnVCphWbPXwWwb.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/uTWhbLc7Bj4qNSdW3ZvZKL8cOHv.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/8ZYhuvIv1pA?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/8ZYhuvIv1pA?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "933238",
+      "name": "Rebecca Ferguson",
+      "character": "Juliette Nichols",
+      "photo": "https://image.tmdb.org/t/p/w185/ra53cM1aNmdH0aFhj8yBqPOj2fb.jpg"
+    },
+    {
+      "id": "4238",
+      "name": "Common",
+      "character": "Robert Sims",
+      "photo": "https://image.tmdb.org/t/p/w185/7Gk5L3rg6uZAGp7SWWTJRP32IJ3.jpg"
+    },
+    {
+      "id": "1717255",
+      "name": "Chinaza Uche",
+      "character": "Paul Billings",
+      "photo": "https://image.tmdb.org/t/p/w185/5fbbLI9BPiByyIIRYu9pbRQwyUN.jpg"
+    },
+    {
+      "id": "219960",
+      "name": "Ashley Zukerman",
+      "character": "Daniel Keene",
+      "photo": "https://image.tmdb.org/t/p/w185/tKT5ybCjMOV4whEQ6jy8ZQnrP7C.jpg"
+    },
+    {
+      "id": "83222",
+      "name": "Shane McRae",
+      "character": "Knox",
+      "photo": "https://image.tmdb.org/t/p/w185/ixNSdZDJ6fZzZc2Pdx4Dwr8wHir.jpg"
+    },
+    {
+      "id": "2298156",
+      "name": "Remmie Milner",
+      "character": "Shirley Campbell",
+      "photo": "https://image.tmdb.org/t/p/w185/4LDy6vhBZ11kOevBdAGBRM34d3L.jpg"
+    },
+    {
+      "id": "2189998",
+      "name": "Alexandria Riley",
+      "character": "Camille Sims",
+      "photo": "https://image.tmdb.org/t/p/w185/7rEJ2m0ur4uFPG0YzBQpYQB8Crt.jpg"
+    },
+    {
+      "id": "163774",
+      "name": "Reed Birney",
+      "character": "Henry",
+      "photo": "https://image.tmdb.org/t/p/w185/dfLgNLUt6Xs2MJJTi6B1iWdXjU6.jpg"
+    },
+    {
+      "id": "454973",
+      "name": "Laura Innes",
+      "character": "Senator Thurman",
+      "photo": "https://image.tmdb.org/t/p/w185/eO6hk2e7rowODSAgAq61mnv62Cv.jpg"
+    },
+    {
+      "id": "567269",
+      "name": "Jessica Brown Findlay",
+      "character": "Charlotte Keene",
+      "photo": "https://image.tmdb.org/t/p/w185/zaqkavcb9ur0W1h1QAxJfKnCJ2h.jpg"
+    },
+    {
+      "id": "1642036",
+      "name": "Billy Postlethwaite",
+      "character": "Hank Murphy",
+      "photo": "https://image.tmdb.org/t/p/w185/62omaRURpSOCZZr0yP0KowgrjkE.jpg"
+    },
+    {
+      "id": "1202689",
+      "name": "Jessica Henwick",
+      "character": "Helen Drew",
+      "photo": "https://image.tmdb.org/t/p/w185/rfUrgDyHWHlrfvdxiVg8Vooudnd.jpg"
+    }
+  ],
+  "seasons": 4,
+  "episodes": 31,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-10T08:30:08.617Z",
+  "createdAt": "2026-09-10T08:30:08.617Z",
+  "updatedAt": "2026-09-10T08:30:08.617Z",
+  "links": []
+}

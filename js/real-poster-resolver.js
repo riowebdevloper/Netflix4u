@@ -172,90 +172,17 @@
     return 'movie';
   }
 
-  // --- Poster Artwork Enhancer ---
-  // Resolves high-resolution posters without ever hiding cards or breaking grid layout
-  function runPublishGate() {
-    try {
-      const images = document.querySelectorAll('img');
-      images.forEach(img => {
-        const src = img.getAttribute('src') || '';
-        if (!src || src.includes('no-poster') || src.includes('placeholder') || src.includes('undefined') || src.includes('null')) {
-          const card = img.closest('.group, [data-card], .relative.rounded-xl, .aspect-\\[2\\/3\\]') || img.parentElement;
-          if (card) {
-            const titleEl = card.querySelector('h3, h4, p.font-bold, .card-title') || card.querySelector('a[title]') || card.querySelector('p');
-            const title = titleEl ? (titleEl.getAttribute('title') || titleEl.textContent || '').trim() : (img.getAttribute('alt') || '').trim();
-            if (title && !img.dataset.resolving) {
-              img.dataset.resolving = '1';
-              const type = detectCardType(card);
-              window.resolveRealPoster(title, '', type, (realPoster) => {
-                if (realPoster) {
-                  img.src = realPoster;
-                  img.style.objectFit = 'cover';
-                }
-                delete img.dataset.resolving;
-              });
-            }
-          }
-        }
-      });
-    } catch(e) {}
-  }
-
-  // Handle runtime image loading failures
+  // Handle runtime image loading failures gracefully by falling back to branded SVG
   if (typeof window !== 'undefined') {
     window.addEventListener('error', function(e) {
       if (e && e.target && e.target.tagName === 'IMG') {
         const img = e.target;
         if (img.dataset.failedResolved) return;
         img.dataset.failedResolved = '1';
-        const card = img.closest('.group, [data-card], .relative.rounded-xl, .aspect-\\[2\\/3\\]') || img.parentElement;
-        const titleEl = card ? (card.querySelector('h3, h4, p.font-bold, .card-title') || card.querySelector('p')) : null;
-        const title = titleEl ? (titleEl.textContent || '').trim() : (img.getAttribute('alt') || '').trim();
-        if (title) {
-          const type = detectCardType(card);
-          window.resolveRealPoster(title, '', type, function(realPoster) {
-            if (realPoster) {
-              img.src = realPoster;
-              img.style.objectFit = 'cover';
-            }
-          });
-        }
+        // Fall back directly to branded placeholder to prevent showing wrong title's artwork
+        img.src = window.FLIX_TERMINAL_POSTER || '/images/no-poster.svg';
+        img.style.objectFit = 'cover';
       }
     }, true);
-  }
-
-  // Continuous monitoring via MutationObserver and throttled scanning
-  if (typeof document !== 'undefined') {
-    let gateTimer = null;
-    function debouncedGate() {
-      if (gateTimer) clearTimeout(gateTimer);
-      gateTimer = setTimeout(runPublishGate, 250);
-    }
-
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', () => {
-        setTimeout(runPublishGate, 300);
-        setTimeout(runPublishGate, 1500);
-      });
-    } else {
-      setTimeout(runPublishGate, 300);
-      setTimeout(runPublishGate, 1500);
-    }
-
-    // Set up MutationObserver to catch dynamically rendered catalog items
-    if (typeof MutationObserver !== 'undefined') {
-      const observer = new MutationObserver((mutations) => {
-        for (let i = 0; i < mutations.length; i++) {
-          if (mutations[i].addedNodes.length > 0) {
-            debouncedGate();
-            break;
-          }
-        }
-      });
-      observer.observe(document.documentElement, { childList: true, subtree: true });
-    }
-
-    // Fallback periodic scan for smooth infinite-scroll experiences
-    setInterval(runPublishGate, 3000);
   }
 })();

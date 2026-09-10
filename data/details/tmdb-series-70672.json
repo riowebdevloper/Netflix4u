@@ -1,0 +1,88 @@
+{
+  "id": "tmdb-series-70672",
+  "canonicalId": "tmdb-series-70672",
+  "externalProvider": "tmdb",
+  "externalId": "70672",
+  "tmdbId": "70672",
+  "imdbId": "tt5247622",
+  "type": "series",
+  "contentType": "series",
+  "title": "Men on a Mission",
+  "canonicalTitle": "Men on a Mission",
+  "originalTitle": "아는 형님",
+  "overview": "Male celebs play make-believe as high schoolers, welcoming star transfer students every week and engaging in battles of witty humor and slapstick.",
+  "description": "Male celebs play make-believe as high schoolers, welcoming star transfer students every week and engaging in battles of witty humor and slapstick.",
+  "shortDescription": "Male celebs play make-believe as high schoolers, welcoming star transfer students every week and engaging in battles of ",
+  "year": 2015,
+  "releaseDate": "2015-12-05",
+  "rating": 7.4,
+  "votes": "0.0K",
+  "quality": "FHD",
+  "duration": "90m/ep",
+  "genres": [
+    "Reality",
+    "Comedy"
+  ],
+  "categories": [
+    "Reality",
+    "Comedy"
+  ],
+  "language": "Korean",
+  "country": "KR",
+  "director": "Park Da-eun",
+  "poster": "https://image.tmdb.org/t/p/w500/2jIi55JtYKJTL1km8qHMuUilOWo.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/a8a8z4aJr40zYgRMfmSESppX2eO.jpg",
+  "trailerUrl": null,
+  "trailer": null,
+  "cast": [
+    {
+      "id": "1421009",
+      "name": "Kim Young-cheol",
+      "character": "Self",
+      "photo": "https://image.tmdb.org/t/p/w185/f0O90cm6qFi8PvBKYuD2ugRLNlD.jpg"
+    },
+    {
+      "id": "1622151",
+      "name": "Min Kyung-hoon",
+      "character": "Self",
+      "photo": "https://image.tmdb.org/t/p/w185/pRaOrGX36dTTnnxrswegaCoSCYI.jpg"
+    },
+    {
+      "id": "1250840",
+      "name": "Kang Ho-dong",
+      "character": "Self",
+      "photo": "https://image.tmdb.org/t/p/w185/tceyY4cqTxkiar4jFjPnEaZ6QRZ.jpg"
+    },
+    {
+      "id": "1250841",
+      "name": "Lee Su-geun",
+      "character": "Self",
+      "photo": "https://image.tmdb.org/t/p/w185/zwEmEAS7CAuJLwhLhvSB09La1QM.jpg"
+    },
+    {
+      "id": "1241032",
+      "name": "Kim Hee-chul",
+      "character": "Self",
+      "photo": "https://image.tmdb.org/t/p/w185/w521FQ30VXdvjEfj0sZcn1sON5b.jpg"
+    },
+    {
+      "id": "1662829",
+      "name": "Seo Jang-hoon",
+      "character": "Self",
+      "photo": "https://image.tmdb.org/t/p/w185/w0sGoIEqQE1cKAgL7vlBxwbNDSd.jpg"
+    },
+    {
+      "id": "1253793",
+      "name": "Lee Sang-min",
+      "character": "Self",
+      "photo": "https://image.tmdb.org/t/p/w185/y9is5HFbPIyZtUpuKlbWyJPMlFn.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 546,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-10T08:30:16.630Z",
+  "createdAt": "2026-09-10T08:30:16.630Z",
+  "updatedAt": "2026-09-10T08:30:16.630Z",
+  "links": []
+}

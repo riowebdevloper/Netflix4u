@@ -1,0 +1,118 @@
+{
+  "id": "tmdb-series-113962",
+  "canonicalId": "tmdb-series-113962",
+  "externalProvider": "tmdb",
+  "externalId": "113962",
+  "tmdbId": "113962",
+  "imdbId": "tt13111078",
+  "type": "series",
+  "contentType": "series",
+  "title": "Lioness",
+  "canonicalTitle": "Lioness",
+  "originalTitle": "Lioness",
+  "overview": "Cruz Manuelos, a rough-around-the-edges but passionate young Marine, is recruited to join the CIA's Lioness Engagement Team to help bring down a terrorist organization from within. Joe, the station chief of the Lioness program, is tasked with training, managing and leading her female undercover operatives.",
+  "description": "Cruz Manuelos, a rough-around-the-edges but passionate young Marine, is recruited to join the CIA's Lioness Engagement Team to help bring down a terrorist organization from within. Joe, the station chief of the Lioness program, is tasked with training, managing and leading her female undercover operatives.",
+  "shortDescription": "Cruz Manuelos, a rough-around-the-edges but passionate young Marine, is recruited to join the CIA's Lioness Engagement T",
+  "year": 2023,
+  "releaseDate": "2023-07-23",
+  "rating": 8.1,
+  "votes": "1.5K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Drama",
+    "War & Politics"
+  ],
+  "categories": [
+    "Drama",
+    "War & Politics"
+  ],
+  "language": "English",
+  "country": "US",
+  "director": "Director",
+  "poster": "https://image.tmdb.org/t/p/w500/rzpHPSEgPTpRs8EHbygwsOw7jC0.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/4NBYDOnEjAzyuP7CMkD5s7fs44K.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/uEjcXhW7CXo?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/uEjcXhW7CXo?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "8691",
+      "name": "Zoe Saldaña",
+      "character": "Joe McNamara",
+      "photo": "https://image.tmdb.org/t/p/w185/vQBwmsSOAd0JDaEcZ5p43J9xzsY.jpg"
+    },
+    {
+      "id": "2034922",
+      "name": "Laysla De Oliveira",
+      "character": "Cruz Manuelos",
+      "photo": "https://image.tmdb.org/t/p/w185/3hWOSY5ZXoyzp94OzGaooURK9hn.jpg"
+    },
+    {
+      "id": "176653",
+      "name": "Dave Annable",
+      "character": "Neal McNamara",
+      "photo": "https://image.tmdb.org/t/p/w185/5DXu9ZiB4dfqNmHIOGnhXMBouPP.jpg"
+    },
+    {
+      "id": "82943",
+      "name": "Jill Wagner",
+      "character": "Bobby",
+      "photo": "https://image.tmdb.org/t/p/w185/gFtPDkS14CoDqNGnHsxNmaXZcGj.jpg"
+    },
+    {
+      "id": "1094385",
+      "name": "LaMonica Garrett",
+      "character": "Tucker",
+      "photo": "https://image.tmdb.org/t/p/w185/yE5TBZ2qC5LAPDduBQAERo7EF3r.jpg"
+    },
+    {
+      "id": "1224342",
+      "name": "James Jordan",
+      "character": "Two Cups",
+      "photo": "https://image.tmdb.org/t/p/w185/8flzkBpcrl0QqjDnXhbg52rsNOY.jpg"
+    },
+    {
+      "id": "589162",
+      "name": "Genesis Rodriguez",
+      "character": "Captain Josephina 'Josie' Carrillo",
+      "photo": "https://image.tmdb.org/t/p/w185/gUI9KADVjfHiI8nMc87hkeaWEF3.jpg"
+    },
+    {
+      "id": "50217",
+      "name": "Michael Kelly",
+      "character": "Byron Westfield",
+      "photo": "https://image.tmdb.org/t/p/w185/6MI8HhX1GWbcrWG8DiHffzmqaVm.jpg"
+    },
+    {
+      "id": "1367847",
+      "name": "Austin Hébert",
+      "character": "Randy",
+      "photo": "https://image.tmdb.org/t/p/w185/vOuRMtOtPVd8vuNCCxxavQSdGIC.jpg"
+    },
+    {
+      "id": "1315619",
+      "name": "Jonah Wharton",
+      "character": "Tex",
+      "photo": "https://image.tmdb.org/t/p/w185/4wisMOLFgPPQxm7gQO9wSI72O08.jpg"
+    },
+    {
+      "id": "3647727",
+      "name": "Hannah Love Lanier",
+      "character": "Kate McNamara",
+      "photo": "https://image.tmdb.org/t/p/w185/9Jwa7ko0GoMi1TPRgwmrPUXWRuO.jpg"
+    },
+    {
+      "id": "2227",
+      "name": "Nicole Kidman",
+      "character": "Kaitlyn Meade",
+      "photo": "https://image.tmdb.org/t/p/w185/4KSQDodyBtTDMaREYgMdWD1LbH1.jpg"
+    }
+  ],
+  "seasons": 3,
+  "episodes": 24,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-10T08:30:13.421Z",
+  "createdAt": "2026-09-10T08:30:13.421Z",
+  "updatedAt": "2026-09-10T08:30:13.421Z",
+  "links": []
+}

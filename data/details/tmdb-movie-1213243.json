@@ -1,0 +1,120 @@
+{
+  "id": "tmdb-movie-1213243",
+  "canonicalId": "tmdb-movie-1213243",
+  "externalProvider": "tmdb",
+  "externalId": "1213243",
+  "tmdbId": "1213243",
+  "imdbId": "tt27530512",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "Toxic: A Fairy Tale for Grown-ups",
+  "canonicalTitle": "Toxic: A Fairy Tale for Grown-ups",
+  "originalTitle": "ಟಾಕ್ಸಿಕ್",
+  "overview": "A powerful drug cartel pulls the strings behind a facade of sun-soaked beaches as a gritty, violent underworld power struggle emerges during the crumbling of Portuguese colonial rule.",
+  "description": "A powerful drug cartel pulls the strings behind a facade of sun-soaked beaches as a gritty, violent underworld power struggle emerges during the crumbling of Portuguese colonial rule.",
+  "shortDescription": "A powerful drug cartel pulls the strings behind a facade of sun-soaked beaches as a gritty, violent underworld power str",
+  "year": 2026,
+  "releaseDate": "2026-08-26",
+  "rating": 7.9,
+  "votes": "0.1K",
+  "quality": "FHD",
+  "duration": "3h 12m",
+  "genres": [
+    "Action",
+    "Crime",
+    "Drama"
+  ],
+  "categories": [
+    "Action",
+    "Crime",
+    "Drama"
+  ],
+  "language": "Kannada",
+  "country": "IN",
+  "director": "Geetu Mohandas",
+  "poster": "https://image.tmdb.org/t/p/w500/oiIPU4lvnI0Ag2K9cyAi44eCaoE.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/tBRSSfgqOAq7YlG8udcoJIBm2FG.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/EfluEyQ5QIA?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/EfluEyQ5QIA?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "1293681",
+      "name": "Yash",
+      "character": "Raya / Ticket",
+      "photo": "https://image.tmdb.org/t/p/w185/ixHvgN8hGh8YgWd3j9RqUATvBiy.jpg"
+    },
+    {
+      "id": "1340978",
+      "name": "Kiara Advani",
+      "character": "Nadia",
+      "photo": "https://image.tmdb.org/t/p/w185/2xmU03a6kTWUvuTPMdofiFLxdAw.jpg"
+    },
+    {
+      "id": "91548",
+      "name": "Nayanthara",
+      "character": "Ganga",
+      "photo": "https://image.tmdb.org/t/p/w185/sYUzvjsSsqeOgBblSzda6ZwwbEa.jpg"
+    },
+    {
+      "id": "1108805",
+      "name": "Huma Qureshi",
+      "character": "Elizabeth",
+      "photo": "https://image.tmdb.org/t/p/w185/nJWauZQdRjMJxwY3UP4SXrqh9CM.jpg"
+    },
+    {
+      "id": "2030881",
+      "name": "Tara Sutaria",
+      "character": "Rebecca",
+      "photo": "https://image.tmdb.org/t/p/w185/tF2OxFzOaDOMX1Sn4k17qZxhvFL.jpg"
+    },
+    {
+      "id": "2252714",
+      "name": "Rukmini Vasanth",
+      "character": "Mellisa",
+      "photo": "https://image.tmdb.org/t/p/w185/sQrlyh8YSnqFKsZ80E0HUWtx7Um.jpg"
+    },
+    {
+      "id": "1544619",
+      "name": "Sudev Nair",
+      "character": "Karmadi",
+      "photo": "https://image.tmdb.org/t/p/w185/6x111KVuthpPOGJYTvdXLmh3J3p.jpg"
+    },
+    {
+      "id": "1342538",
+      "name": "Akshay Oberoi",
+      "character": "Tony",
+      "photo": "https://image.tmdb.org/t/p/w185/dsFqDJzSzUiKZpicmj05Iv1YbOs.jpg"
+    },
+    {
+      "id": "101865",
+      "name": "Balaji Manohar",
+      "character": "Bheera",
+      "photo": "https://image.tmdb.org/t/p/w185/7lHQhTKtoOM1GeEmRqOqj8jOyMe.jpg"
+    },
+    {
+      "id": "186396",
+      "name": "Darrell D'Silva",
+      "character": "Salvador",
+      "photo": "https://image.tmdb.org/t/p/w185/9T8nhJYRCvEVXsSdbI9MFqBkwQm.jpg"
+    },
+    {
+      "id": "1731535",
+      "name": "Amit Kumar Tiwari",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/razxVbGJjULO7pW2r0AXpcS9mFg.jpg"
+    },
+    {
+      "id": "1235179",
+      "name": "Sanjeeda Sheikh",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/rz92hLtWoj1OCCchAZLtZvPwp0o.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 1,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-10T08:30:10.544Z",
+  "createdAt": "2026-09-10T08:30:10.544Z",
+  "updatedAt": "2026-09-10T08:30:10.544Z",
+  "links": []
+}

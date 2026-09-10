@@ -1,0 +1,120 @@
+{
+  "id": "tmdb-movie-1522689",
+  "canonicalId": "tmdb-movie-1522689",
+  "externalProvider": "tmdb",
+  "externalId": "1522689",
+  "tmdbId": "1522689",
+  "imdbId": "tt38061210",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "Why Did I Get Married Again?",
+  "canonicalTitle": "Why Did I Get Married Again?",
+  "originalTitle": "Why Did I Get Married Again?",
+  "overview": "The couples reunite for the destination wedding of Marcus and Angela's daughter, bringing drama old and new as they ask, \"Why did we get married again?\"",
+  "description": "The couples reunite for the destination wedding of Marcus and Angela's daughter, bringing drama old and new as they ask, \"Why did we get married again?\"",
+  "shortDescription": "The couples reunite for the destination wedding of Marcus and Angela's daughter, bringing drama old and new as they ask,",
+  "year": 2026,
+  "releaseDate": "2026-09-08",
+  "rating": 7.7,
+  "votes": "0.0K",
+  "quality": "FHD",
+  "duration": "1h 52m",
+  "genres": [
+    "Romance",
+    "Comedy",
+    "Drama"
+  ],
+  "categories": [
+    "Romance",
+    "Comedy",
+    "Drama"
+  ],
+  "language": "English",
+  "country": "US",
+  "director": "Tyler Perry",
+  "poster": "https://image.tmdb.org/t/p/w500/bgZN3gniRohjfKdsw1Q7EGBAyqz.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/lJYniNRM2i9wXnfWVHOB4PxygFZ.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/VylsOZBYxQA?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/VylsOZBYxQA?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "80602",
+      "name": "Tyler Perry",
+      "character": "Terry",
+      "photo": "https://image.tmdb.org/t/p/w185/8KU0OizemVLrERXt5HJIa0PAkIN.jpg"
+    },
+    {
+      "id": "40036",
+      "name": "Taraji P. Henson",
+      "character": "Roselyn",
+      "photo": "https://image.tmdb.org/t/p/w185/jUU2X9mDwJaAniEmJOfvImBS9qb.jpg"
+    },
+    {
+      "id": "4721",
+      "name": "Jill Scott",
+      "character": "Sheila",
+      "photo": "https://image.tmdb.org/t/p/w185/vfq3acT3sWG1b2M4ior10zqXFd1.jpg"
+    },
+    {
+      "id": "55755",
+      "name": "Richard T. Jones",
+      "character": "Mike",
+      "photo": "https://image.tmdb.org/t/p/w185/hdko2C45Wr5G03Z8JwGjWMynP84.jpg"
+    },
+    {
+      "id": "74610",
+      "name": "Tasha Smith",
+      "character": "Angela",
+      "photo": "https://image.tmdb.org/t/p/w185/viJnHL3BjQ5oqisXklQWGlh29Hx.jpg"
+    },
+    {
+      "id": "64856",
+      "name": "Michael Jai White",
+      "character": "Marcus",
+      "photo": "https://image.tmdb.org/t/p/w185/YPoHYuzR37wFpPpwEXZYQlhLln.jpg"
+    },
+    {
+      "id": "15566",
+      "name": "Sharon Leal",
+      "character": "Diane",
+      "photo": "https://image.tmdb.org/t/p/w185/3dJCnAZDG2ZN7Hxct8UAdPePpuz.jpg"
+    },
+    {
+      "id": "1218183",
+      "name": "Lamman Rucker",
+      "character": "Troy",
+      "photo": "https://image.tmdb.org/t/p/w185/97JGsO3FR13MLa3hrs9A0cIzGBo.jpg"
+    },
+    {
+      "id": "5147758",
+      "name": "Armani Greer",
+      "character": "Jasmine",
+      "photo": null
+    },
+    {
+      "id": "3518995",
+      "name": "Everett Osborne",
+      "character": "Wesley",
+      "photo": "https://image.tmdb.org/t/p/w185/mDBkxdX8p0fc1wEFNyAF5MFTHGG.jpg"
+    },
+    {
+      "id": "1994105",
+      "name": "Da'Vinchi",
+      "character": "Marcus Jr.",
+      "photo": "https://image.tmdb.org/t/p/w185/9CHXT3NKUZDPUyNMkwDj5zLMUTT.jpg"
+    },
+    {
+      "id": "1392542",
+      "name": "Laya DeLeon Hayes",
+      "character": "Kenya",
+      "photo": "https://image.tmdb.org/t/p/w185/85lPEUEjpO4WcxbBs9ba9I1ZEPp.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 1,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-10T08:30:07.260Z",
+  "createdAt": "2026-09-10T08:30:07.260Z",
+  "updatedAt": "2026-09-10T08:30:07.260Z",
+  "links": []
+}

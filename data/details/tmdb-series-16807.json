@@ -1,0 +1,56 @@
+{
+  "id": "tmdb-series-16807",
+  "canonicalId": "tmdb-series-16807",
+  "externalProvider": "tmdb",
+  "externalId": "16807",
+  "tmdbId": "16807",
+  "imdbId": "tt0466513",
+  "type": "series",
+  "contentType": "series",
+  "title": "Jornal Nacional",
+  "canonicalTitle": "Jornal Nacional",
+  "originalTitle": "Jornal Nacional",
+  "overview": "Jornal Nacional is a Brazilian Emmy-winning primetime news program aired by Rede Globo since September 1, 1969. It was the first news program broadcast live by a television network throughout Brazil.",
+  "description": "Jornal Nacional is a Brazilian Emmy-winning primetime news program aired by Rede Globo since September 1, 1969. It was the first news program broadcast live by a television network throughout Brazil.",
+  "shortDescription": "Jornal Nacional is a Brazilian Emmy-winning primetime news program aired by Rede Globo since September 1, 1969. It was t",
+  "year": 1969,
+  "releaseDate": "1969-09-01",
+  "rating": 7,
+  "votes": "0.0K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "News"
+  ],
+  "categories": [
+    "News"
+  ],
+  "language": "Portuguese",
+  "country": "BR",
+  "director": "Director",
+  "poster": "https://image.tmdb.org/t/p/w500/g0x9tcHp8SV8UH4yq40g5zu6phu.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/m9lBl3aEn2nGt8qHQYL2sIJbvcB.jpg",
+  "trailerUrl": null,
+  "trailer": null,
+  "cast": [
+    {
+      "id": "2880178",
+      "name": "Renata Vasconcellos",
+      "character": "Self - Host",
+      "photo": "https://image.tmdb.org/t/p/w185/pxbPvH81X12QknuN4FAYUCoygtL.jpg"
+    },
+    {
+      "id": "3968215",
+      "name": "César Tralli",
+      "character": "Self - Host",
+      "photo": "https://image.tmdb.org/t/p/w185/rsgX6mHBt7hP540uUZ4CBwR21ru.jpg"
+    }
+  ],
+  "seasons": 58,
+  "episodes": 11371,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-10T08:30:15.878Z",
+  "createdAt": "2026-09-10T08:30:15.878Z",
+  "updatedAt": "2026-09-10T08:30:15.878Z",
+  "links": []
+}

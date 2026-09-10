@@ -1,0 +1,90 @@
+{
+  "id": "tmdb-movie-1323244",
+  "canonicalId": "tmdb-movie-1323244",
+  "externalProvider": "tmdb",
+  "externalId": "1323244",
+  "tmdbId": "1323244",
+  "imdbId": "tt29512655",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "Rage of Stars",
+  "canonicalTitle": "Rage of Stars",
+  "originalTitle": "Rage of Stars",
+  "overview": "A story about a woman from the International Special Forces Unit, who has a premonition about the impending end of humanity.",
+  "description": "A story about a woman from the International Special Forces Unit, who has a premonition about the impending end of humanity.",
+  "shortDescription": "A story about a woman from the International Special Forces Unit, who has a premonition about the impending end of human",
+  "year": 2026,
+  "releaseDate": "2026-08-06",
+  "rating": 5.9,
+  "votes": "0.1K",
+  "quality": "FHD",
+  "duration": "1h 46m",
+  "genres": [
+    "Action",
+    "Science Fiction",
+    "Thriller"
+  ],
+  "categories": [
+    "Action",
+    "Science Fiction",
+    "Thriller"
+  ],
+  "language": "English",
+  "country": "PL",
+  "director": "Łukasz Róg",
+  "poster": "https://image.tmdb.org/t/p/w500/oLld47ZT1I3iecM3OWhIphohQUJ.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/z7lZgL5tzefTfhyRtouThFhsuUS.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/F5bYhuO2Rkg?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/F5bYhuO2Rkg?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "1631815",
+      "name": "Andrea Tivadar",
+      "character": "Jemma",
+      "photo": "https://image.tmdb.org/t/p/w185/iYtFxJGcrNmxYTq6rhivdFsotMx.jpg"
+    },
+    {
+      "id": "1475710",
+      "name": "Jord Knotter",
+      "character": "Luk",
+      "photo": "https://image.tmdb.org/t/p/w185/f0ufZ6YbyWnu36kFg1d2OOjcM2S.jpg"
+    },
+    {
+      "id": "2385575",
+      "name": "Jack McEvoy",
+      "character": "Kriss",
+      "photo": "https://image.tmdb.org/t/p/w185/pmE0tQiPxQT5yI6DZlnnjd8m8nB.jpg"
+    },
+    {
+      "id": "2037498",
+      "name": "Elijah Rowen",
+      "character": "Tom",
+      "photo": "https://image.tmdb.org/t/p/w185/9aa2UljPdCZlp7meRE4dIzeu4Ej.jpg"
+    },
+    {
+      "id": "1613074",
+      "name": "Małgorzata Klara",
+      "character": "Commander",
+      "photo": "https://image.tmdb.org/t/p/w185/aOpwXHLkh2KrctgTX7cD7Cs1QN0.jpg"
+    },
+    {
+      "id": "2199010",
+      "name": "Mayu Gralińska Sakai",
+      "character": "Maya",
+      "photo": null
+    },
+    {
+      "id": "3036669",
+      "name": "Jakub Ormaniec",
+      "character": "Mike",
+      "photo": null
+    }
+  ],
+  "seasons": 1,
+  "episodes": 1,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-10T08:30:10.232Z",
+  "createdAt": "2026-09-10T08:30:10.232Z",
+  "updatedAt": "2026-09-10T08:30:10.232Z",
+  "links": []
+}

@@ -1,0 +1,52 @@
+{
+  "id": "tmdb-series-2912",
+  "canonicalId": "tmdb-series-2912",
+  "externalProvider": "tmdb",
+  "externalId": "2912",
+  "tmdbId": "2912",
+  "imdbId": "tt0159881",
+  "type": "series",
+  "contentType": "series",
+  "title": "Jeopardy!",
+  "canonicalTitle": "Jeopardy!",
+  "originalTitle": "Jeopardy!",
+  "overview": "America's favorite quiz show where contestants are presented with general knowledge clues in the form of answers, and must phrase their responses in question form.",
+  "description": "America's favorite quiz show where contestants are presented with general knowledge clues in the form of answers, and must phrase their responses in question form.",
+  "shortDescription": "America's favorite quiz show where contestants are presented with general knowledge clues in the form of answers, and mu",
+  "year": 1984,
+  "releaseDate": "1984-09-10",
+  "rating": 6.9,
+  "votes": "0.2K",
+  "quality": "FHD",
+  "duration": "22m/ep",
+  "genres": [
+    "Reality",
+    "Family"
+  ],
+  "categories": [
+    "Reality",
+    "Family"
+  ],
+  "language": "English",
+  "country": "US",
+  "director": "Director",
+  "poster": "https://image.tmdb.org/t/p/w500/hfz0IgebqGENG6ZnuqKQKMFk2vy.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/55tcKzl0gZ0lR1q7TrVJm0h9lkT.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/UNiCrolP7hA?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/UNiCrolP7hA?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "1213789",
+      "name": "Johnny Gilbert",
+      "character": "Self - Announcer (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/kaemnryG3n9coES6AwsU2YJHRnD.jpg"
+    }
+  ],
+  "seasons": 43,
+  "episodes": 9394,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-10T08:30:18.584Z",
+  "createdAt": "2026-09-10T08:30:18.584Z",
+  "updatedAt": "2026-09-10T08:30:18.584Z",
+  "links": []
+}

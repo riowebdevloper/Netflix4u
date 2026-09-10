@@ -1,0 +1,68 @@
+{
+  "id": "tmdb-series-37528",
+  "canonicalId": "tmdb-series-37528",
+  "externalProvider": "tmdb",
+  "externalId": "37528",
+  "tmdbId": "37528",
+  "imdbId": "tt0281446",
+  "type": "series",
+  "contentType": "series",
+  "title": "Gran hermano",
+  "canonicalTitle": "Gran hermano",
+  "originalTitle": "Gran hermano",
+  "overview": "Argentina's version of the Big Brother franchise.",
+  "description": "Argentina's version of the Big Brother franchise.",
+  "shortDescription": "Argentina's version of the Big Brother franchise.",
+  "year": 2001,
+  "releaseDate": "2001-03-10",
+  "rating": 4.5,
+  "votes": "0.0K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Reality"
+  ],
+  "categories": [
+    "Reality"
+  ],
+  "language": "Spanish",
+  "country": "AR",
+  "director": "Pablo Milutinovic",
+  "poster": "https://image.tmdb.org/t/p/w500/snIRCY6Qhei08YUNQjjZI2gc4CK.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/1E8PabwfDIaxREyfe9fxfINqauu.jpg",
+  "trailerUrl": null,
+  "trailer": null,
+  "cast": [
+    {
+      "id": "3467694",
+      "name": "Santiago del Moro",
+      "character": "Host",
+      "photo": "https://image.tmdb.org/t/p/w185/zPnVAp9dX7df0GPp3B68iP3XVNc.jpg"
+    },
+    {
+      "id": "3465867",
+      "name": "Gastón Trezeguet",
+      "character": "Panelist",
+      "photo": null
+    },
+    {
+      "id": "6342326",
+      "name": "Ceferino Reato",
+      "character": "Panelist",
+      "photo": null
+    },
+    {
+      "id": "2071118",
+      "name": "Maria Sol Perez",
+      "character": "Panelist",
+      "photo": "https://image.tmdb.org/t/p/w185/fCLyI8x6fnrq0gIYqyLsc567lJH.jpg"
+    }
+  ],
+  "seasons": 13,
+  "episodes": 883,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-10T08:30:13.675Z",
+  "createdAt": "2026-09-10T08:30:13.675Z",
+  "updatedAt": "2026-09-10T08:30:13.675Z",
+  "links": []
+}

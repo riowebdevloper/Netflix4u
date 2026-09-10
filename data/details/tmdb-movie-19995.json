@@ -1,0 +1,134 @@
+{
+  "id": "tmdb-movie-19995",
+  "canonicalId": "tmdb-movie-19995",
+  "externalProvider": "tmdb",
+  "externalId": "19995",
+  "tmdbId": "19995",
+  "imdbId": "tt0499549",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "Avatar",
+  "canonicalTitle": "Avatar",
+  "originalTitle": "Avatar",
+  "overview": "In the 22nd century, a paraplegic Marine is dispatched to the moon Pandora on a unique mission, but becomes torn between following orders and protecting an alien civilization.",
+  "description": "In the 22nd century, a paraplegic Marine is dispatched to the moon Pandora on a unique mission, but becomes torn between following orders and protecting an alien civilization.",
+  "shortDescription": "In the 22nd century, a paraplegic Marine is dispatched to the moon Pandora on a unique mission, but becomes torn between",
+  "year": 2009,
+  "rating": 7.6,
+  "votes": "34.6K",
+  "quality": "FHD",
+  "duration": "2h 42m",
+  "genres": [
+    "Science Fiction",
+    "Action",
+    "Adventure"
+  ],
+  "categories": [
+    "Science Fiction",
+    "Action",
+    "Adventure"
+  ],
+  "language": "English",
+  "country": "US",
+  "director": "James Cameron",
+  "poster": "https://image.tmdb.org/t/p/w500/gKY6q7SjCkAU6FqvqWybDYgUKIF.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/vL5LR6WdxWPjLPFRLe133jXWsh5.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/jm2sNLIPPvA?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/jm2sNLIPPvA?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "65731",
+      "name": "Sam Worthington",
+      "character": "Jake Sully",
+      "photo": "https://image.tmdb.org/t/p/w185/mflBcox36s9ZPbsZPVOuhf6axaJ.jpg"
+    },
+    {
+      "id": "8691",
+      "name": "Zoe Saldaña",
+      "character": "Neytiri",
+      "photo": "https://image.tmdb.org/t/p/w185/vQBwmsSOAd0JDaEcZ5p43J9xzsY.jpg"
+    },
+    {
+      "id": "10205",
+      "name": "Sigourney Weaver",
+      "character": "Dr. Grace Augustine",
+      "photo": "https://image.tmdb.org/t/p/w185/wTSnfktNBLd6kwQxgvkqYw6vEon.jpg"
+    },
+    {
+      "id": "32747",
+      "name": "Stephen Lang",
+      "character": "Colonel Miles Quaritch",
+      "photo": "https://image.tmdb.org/t/p/w185/gnO5VfkDgA2fsHweD0622LUY3Hu.jpg"
+    },
+    {
+      "id": "17647",
+      "name": "Michelle Rodriguez",
+      "character": "Trudy Chacon",
+      "photo": "https://image.tmdb.org/t/p/w185/wVcbrae4eRqGMFZz8Eh52Dl1biP.jpg"
+    },
+    {
+      "id": "1771",
+      "name": "Giovanni Ribisi",
+      "character": "Parker Selfridge",
+      "photo": "https://image.tmdb.org/t/p/w185/8EAiS9D3YtGOrwNM0OrwmDpWK7s.jpg"
+    },
+    {
+      "id": "59231",
+      "name": "Joel David Moore",
+      "character": "Norm Spellman",
+      "photo": "https://image.tmdb.org/t/p/w185/mMVhVglj6BZFuvqAXnEibce08k7.jpg"
+    },
+    {
+      "id": "30485",
+      "name": "CCH Pounder",
+      "character": "Mo'at",
+      "photo": "https://image.tmdb.org/t/p/w185/yLOU0qA5MwJyoKMc0e4HyZz4oFV.jpg"
+    },
+    {
+      "id": "15853",
+      "name": "Wes Studi",
+      "character": "Eytukan",
+      "photo": "https://image.tmdb.org/t/p/w185/28vlZlyIVR4B1p5knjbzj4CtNPE.jpg"
+    },
+    {
+      "id": "10964",
+      "name": "Laz Alonso",
+      "character": "Tsu'Tey",
+      "photo": "https://image.tmdb.org/t/p/w185/nmgOd3X2Xn3jIp9OLCRJzLExRWN.jpg"
+    },
+    {
+      "id": "95697",
+      "name": "Dileep Rao",
+      "character": "Dr. Max Patel",
+      "photo": "https://image.tmdb.org/t/p/w185/jRNn8SZqFXuI5wOOlHwYsWh0hXs.jpg"
+    },
+    {
+      "id": "98215",
+      "name": "Matt Gerald",
+      "character": "Corporal Lyle Wainfleet",
+      "photo": "https://image.tmdb.org/t/p/w185/six7c3aZpiEomHjj4ZYokq8Vgtx.jpg"
+    },
+    {
+      "id": "154153",
+      "name": "Sean Anthony Moran",
+      "character": "Private Fike",
+      "photo": "https://image.tmdb.org/t/p/w185/9bsNN91o9iNVLK3W7js99kvg26L.jpg"
+    },
+    {
+      "id": "397312",
+      "name": "Jason Whyte",
+      "character": "Cryo Vault Med Tech",
+      "photo": "https://image.tmdb.org/t/p/w185/lCZ5Z3RJG6BxP05FPf7kCoQGZdI.jpg"
+    },
+    {
+      "id": "42317",
+      "name": "Scott Lawrence",
+      "character": "Venture Star Crew Chief",
+      "photo": "https://image.tmdb.org/t/p/w185/8lwnmlHN6QPK75NwfufsIFZZhmB.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 1,
+  "status": "PUBLISHED",
+  "links": []
+}

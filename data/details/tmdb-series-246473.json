@@ -1,0 +1,70 @@
+{
+  "id": "tmdb-series-246473",
+  "canonicalId": "tmdb-series-246473",
+  "externalProvider": "tmdb",
+  "externalId": "246473",
+  "tmdbId": "246473",
+  "imdbId": "tt33298903",
+  "type": "series",
+  "contentType": "series",
+  "title": "Made in Korea",
+  "canonicalTitle": "Made in Korea",
+  "originalTitle": "메이드 인 코리아",
+  "overview": "In 1970s South Korea, follow two men on opposite sides of power — one driven by ambition, the other by justice. As their worlds collide, greed, loyalty, and survival intertwine in a battle that will shape a nation.",
+  "description": "In 1970s South Korea, follow two men on opposite sides of power — one driven by ambition, the other by justice. As their worlds collide, greed, loyalty, and survival intertwine in a battle that will shape a nation.",
+  "shortDescription": "In 1970s South Korea, follow two men on opposite sides of power — one driven by ambition, the other by justice. As their",
+  "year": 2025,
+  "releaseDate": "2025-12-24",
+  "rating": 8.1,
+  "votes": "0.0K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Crime",
+    "Drama"
+  ],
+  "categories": [
+    "Crime",
+    "Drama"
+  ],
+  "language": "Korean",
+  "country": "KR",
+  "director": "Director",
+  "poster": "https://image.tmdb.org/t/p/w500/2yEXTvaCPUe9In5MZJBLFwiq0NL.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/3GmRS3efCTp6jumogKOxYBrV5mO.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/GRlEArXazfM?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/GRlEArXazfM?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "544107",
+      "name": "Hyun Bin",
+      "character": "Baek Kitae",
+      "photo": "https://image.tmdb.org/t/p/w185/JQFzhO9j8HRiyr7leGPj6cqhvM.jpg"
+    },
+    {
+      "id": "17120",
+      "name": "Jung Woo-sung",
+      "character": "Jang Geonyoung",
+      "photo": "https://image.tmdb.org/t/p/w185/tI0ANQSwcOBfQUeHgfcwn7VmHRO.jpg"
+    },
+    {
+      "id": "3509455",
+      "name": "Cha Hee",
+      "character": "Baek So Yeong",
+      "photo": "https://image.tmdb.org/t/p/w185/bZBjbIBxYj2uiLivLluOk5Lcd5R.jpg"
+    },
+    {
+      "id": "2692444",
+      "name": "Lee Se-ho",
+      "character": "Lee Ju Im",
+      "photo": "https://image.tmdb.org/t/p/w185/75a945zgCaCP6Mib6EynICgZO6b.jpg"
+    }
+  ],
+  "seasons": 2,
+  "episodes": 12,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-10T08:30:07.510Z",
+  "createdAt": "2026-09-10T08:30:07.510Z",
+  "updatedAt": "2026-09-10T08:30:07.510Z",
+  "links": []
+}

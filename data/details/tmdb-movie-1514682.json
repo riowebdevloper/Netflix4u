@@ -1,0 +1,122 @@
+{
+  "id": "tmdb-movie-1514682",
+  "canonicalId": "tmdb-movie-1514682",
+  "externalProvider": "tmdb",
+  "externalId": "1514682",
+  "tmdbId": "1514682",
+  "imdbId": "tt37603783",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "Above & Below",
+  "canonicalTitle": "Above & Below",
+  "originalTitle": "Above & Below",
+  "overview": "A group of friends set off for an unforgettable vacation. What begins as an adventure of partying and diving quickly turns into a nightmare when they are attacked by criminals in open waters.",
+  "description": "A group of friends set off for an unforgettable vacation. What begins as an adventure of partying and diving quickly turns into a nightmare when they are attacked by criminals in open waters.",
+  "shortDescription": "A group of friends set off for an unforgettable vacation. What begins as an adventure of partying and diving quickly tur",
+  "year": 2026,
+  "releaseDate": "2026-07-29",
+  "rating": 6.2,
+  "votes": "0.0K",
+  "quality": "FHD",
+  "duration": "1h 36m",
+  "genres": [
+    "Action",
+    "Thriller",
+    "Horror",
+    "Crime"
+  ],
+  "categories": [
+    "Action",
+    "Thriller",
+    "Horror",
+    "Crime"
+  ],
+  "language": "English",
+  "country": "US",
+  "director": "Jesse V. Johnson",
+  "poster": "https://image.tmdb.org/t/p/w500/7bOuu1SRALGwsG2fLCTvRkCmQBj.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/lSd6nEnlaeQkswLLUgHC5gyuXyU.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/18wdUGRPUY4?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/18wdUGRPUY4?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "54722",
+      "name": "Laura Marano",
+      "character": "Tatiana",
+      "photo": "https://image.tmdb.org/t/p/w185/fpW1Swq6BfAoAw88ZhKf1pssu30.jpg"
+    },
+    {
+      "id": "1817942",
+      "name": "Christina Ochoa",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/msIxEVC8HljvbigzzHVkJFCwuyA.jpg"
+    },
+    {
+      "id": "1316401",
+      "name": "Mario Tardón",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/x2tq4GYBlk4e912IBI2mA4u0BhW.jpg"
+    },
+    {
+      "id": "3131",
+      "name": "Antonio Banderas",
+      "character": "Burns",
+      "photo": "https://image.tmdb.org/t/p/w185/fce7zl6elUzsv7wudHFc7RgFtjD.jpg"
+    },
+    {
+      "id": "100258",
+      "name": "Ramiro Alonso",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/qq2ogOAPi0MPZRUkcWbMMkvO26K.jpg"
+    },
+    {
+      "id": "2676371",
+      "name": "Ryan Bertroche",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/23CRyCVIgpuzMvaoSbybXmRzF8O.jpg"
+    },
+    {
+      "id": "88630",
+      "name": "Jess Liaudin",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/9YUopTXfT9HCQsGyXONwmqKFDz1.jpg"
+    },
+    {
+      "id": "6310598",
+      "name": "Diego Llinás",
+      "character": "",
+      "photo": null
+    },
+    {
+      "id": "54649",
+      "name": "Louis Mandylor",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/skvNBR83wxjbFj6XuLxWAhCZTmh.jpg"
+    },
+    {
+      "id": "92949",
+      "name": "Timothy V. Murphy",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/4WMz4UUMeexgP1ddfC2j7pqf8hU.jpg"
+    },
+    {
+      "id": "1074701",
+      "name": "Rodrigo Poisón",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/2fWGOpybjl8P54cTiH5DF60YgjX.jpg"
+    },
+    {
+      "id": "3971657",
+      "name": "Donncha Tynan",
+      "character": "TJ",
+      "photo": "https://image.tmdb.org/t/p/w185/d3P1ztVKWbOd8ZR5lw1iYFG9n6k.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 1,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-10T08:30:09.963Z",
+  "createdAt": "2026-09-10T08:30:09.963Z",
+  "updatedAt": "2026-09-10T08:30:09.963Z",
+  "links": []
+}

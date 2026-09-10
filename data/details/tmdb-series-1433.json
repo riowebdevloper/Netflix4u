@@ -1,0 +1,76 @@
+{
+  "id": "tmdb-series-1433",
+  "canonicalId": "tmdb-series-1433",
+  "externalProvider": "tmdb",
+  "externalId": "1433",
+  "tmdbId": "1433",
+  "imdbId": "tt0397306",
+  "type": "series",
+  "contentType": "series",
+  "title": "American Dad!",
+  "canonicalTitle": "American Dad!",
+  "originalTitle": "American Dad!",
+  "overview": "The series focuses on an eccentric motley crew that is the Smith family and their three housemates: Father, husband, and breadwinner Stan Smith; his better half housewife, Francine Smith; their college-aged daughter, Hayley Smith; and their high-school-aged son, Steve Smith. Outside of the Smith family, there are three additional main characters, including Hayley's boyfriend turned husband, Jeff Fischer; the family's man-in-a-goldfish-body pet, Klaus; and most notably the family's zany alien, Roger, who is \"full of masquerades, brazenness, and shocking antics.\"",
+  "description": "The series focuses on an eccentric motley crew that is the Smith family and their three housemates: Father, husband, and breadwinner Stan Smith; his better half housewife, Francine Smith; their college-aged daughter, Hayley Smith; and their high-school-aged son, Steve Smith. Outside of the Smith family, there are three additional main characters, including Hayley's boyfriend turned husband, Jeff Fischer; the family's man-in-a-goldfish-body pet, Klaus; and most notably the family's zany alien, Roger, who is \"full of masquerades, brazenness, and shocking antics.\"",
+  "shortDescription": "The series focuses on an eccentric motley crew that is the Smith family and their three housemates: Father, husband, and",
+  "year": 2005,
+  "releaseDate": "2005-02-06",
+  "rating": 7,
+  "votes": "2.4K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Animation",
+    "Comedy"
+  ],
+  "categories": [
+    "Animation",
+    "Comedy"
+  ],
+  "language": "English",
+  "country": "US",
+  "director": "Director",
+  "poster": "https://image.tmdb.org/t/p/w500/eb9sH2am9IUSQ8GhXTNAVoujk8W.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/iixxhk3ycXmFqBn616pAsC3lu53.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/apr31MFjg08?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/apr31MFjg08?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "52139",
+      "name": "Seth MacFarlane",
+      "character": "Stan Smith / Roger (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/8oQJqM51Z0Qtdb7sE6ZfX1peNCB.jpg"
+    },
+    {
+      "id": "37600",
+      "name": "Wendy Schaal",
+      "character": "Francine Smith (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/qq9Jc77KD24FxxJrR7O2F3E6c8A.jpg"
+    },
+    {
+      "id": "81668",
+      "name": "Rachael MacFarlane",
+      "character": "Hayley Smith (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/AnLEvMh9pl94uJOO2MnZFQB44b4.jpg"
+    },
+    {
+      "id": "35091",
+      "name": "Scott Grimes",
+      "character": "Steve Smith (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/k5OCDhwZoFuNtN0o4EDkpBXQsFp.jpg"
+    },
+    {
+      "id": "23680",
+      "name": "Dee Bradley Baker",
+      "character": "Klaus (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/9oFnToDZWp0I484s7Ua1EzNQQ2m.jpg"
+    }
+  ],
+  "seasons": 22,
+  "episodes": 401,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-10T08:30:17.819Z",
+  "createdAt": "2026-09-10T08:30:17.819Z",
+  "updatedAt": "2026-09-10T08:30:17.819Z",
+  "links": []
+}

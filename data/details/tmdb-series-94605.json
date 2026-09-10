@@ -1,0 +1,60 @@
+{
+  "id": "tmdb-series-94605",
+  "canonicalId": "tmdb-series-94605",
+  "externalProvider": "tmdb",
+  "externalId": "94605",
+  "tmdbId": "94605",
+  "imdbId": "tt11126994",
+  "type": "series",
+  "contentType": "series",
+  "title": "Arcane",
+  "canonicalTitle": "Arcane",
+  "originalTitle": "Arcane",
+  "overview": "Amid the stark discord of twin cities Piltover and Zaun, two sisters fight on rival sides of a war between magic technologies and clashing convictions.",
+  "description": "Amid the stark discord of twin cities Piltover and Zaun, two sisters fight on rival sides of a war between magic technologies and clashing convictions.",
+  "shortDescription": "Amid the stark discord of twin cities Piltover and Zaun, two sisters fight on rival sides of a war between magic technol",
+  "year": 2021,
+  "releaseDate": "2021-11-06",
+  "rating": 8.7,
+  "votes": "6.2K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Animation",
+    "Action & Adventure",
+    "Sci-Fi & Fantasy"
+  ],
+  "categories": [
+    "Animation",
+    "Action & Adventure",
+    "Sci-Fi & Fantasy"
+  ],
+  "language": "English",
+  "country": "US",
+  "director": "Director",
+  "poster": "https://image.tmdb.org/t/p/w500/fqldf2t8ztc9aiwn3k6mlX3tvRT.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/5cvnxEHT3e39DvT6ARw4GNCFrB0.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/W4gLFBNGgiY?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/W4gLFBNGgiY?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "130640",
+      "name": "Hailee Steinfeld",
+      "character": "Vi (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/qDInsG0cxWNxS1X4t59TBZ5S6x5.jpg"
+    },
+    {
+      "id": "989325",
+      "name": "Ella Purnell",
+      "character": "Jinx (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/jqrYg35GHuMGwGqEVUthqTLQnay.jpg"
+    }
+  ],
+  "seasons": 2,
+  "episodes": 18,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-10T08:30:21.579Z",
+  "createdAt": "2026-09-10T08:30:21.579Z",
+  "updatedAt": "2026-09-10T08:30:21.579Z",
+  "links": []
+}

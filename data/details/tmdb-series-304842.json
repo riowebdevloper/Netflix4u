@@ -1,0 +1,116 @@
+{
+  "id": "tmdb-series-304842",
+  "canonicalId": "tmdb-series-304842",
+  "externalProvider": "tmdb",
+  "externalId": "304842",
+  "tmdbId": "304842",
+  "imdbId": "tt36210894",
+  "type": "series",
+  "contentType": "series",
+  "title": "The Drop: A Snowfall Saga",
+  "canonicalTitle": "The Drop: A Snowfall Saga",
+  "originalTitle": "The Drop: A Snowfall Saga",
+  "overview": "In 1990s Los Angeles, Wanda and Leon fight to take West Coast rap mainstream while gang wars erupt and record labels move to exploit hip hop culture for their own gain.",
+  "description": "In 1990s Los Angeles, Wanda and Leon fight to take West Coast rap mainstream while gang wars erupt and record labels move to exploit hip hop culture for their own gain.",
+  "shortDescription": "In 1990s Los Angeles, Wanda and Leon fight to take West Coast rap mainstream while gang wars erupt and record labels mov",
+  "year": 2026,
+  "releaseDate": "2026-09-08",
+  "rating": 5.4,
+  "votes": "0.0K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Drama"
+  ],
+  "categories": [
+    "Drama"
+  ],
+  "language": "English",
+  "country": "US",
+  "director": "Director",
+  "poster": "https://image.tmdb.org/t/p/w500/tiLqDZQdVILCIt00MLwDvnXAttr.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/ycLQYTgWfBq53fIkws0qIQOp62g.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/3Yy_6OaAk3Q?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/3Yy_6OaAk3Q?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "1389367",
+      "name": "Gail Bean",
+      "character": "Wanda Bell",
+      "photo": "https://image.tmdb.org/t/p/w185/8Ez5A8hoDwTLiWXZ7xSNlJAvCu7.jpg"
+    },
+    {
+      "id": "1855369",
+      "name": "Isaiah John",
+      "character": "Leon Simmons",
+      "photo": "https://image.tmdb.org/t/p/w185/mKCuf0BZFsBUYnSTPTHaUtxmKa0.jpg"
+    },
+    {
+      "id": "2104697",
+      "name": "Asante Blackk",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/mB0FG4VH5HXvjFuZ3W8aJO1bfVu.jpg"
+    },
+    {
+      "id": "1517472",
+      "name": "Peyton Alex Smith",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/AkP5ljWX0zMVG2OUXu4Wk4KDyou.jpg"
+    },
+    {
+      "id": "5795295",
+      "name": "Simmie Sims III",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/m2Z6wlw0b3T8RHvEyJGFiX80jJS.jpg"
+    },
+    {
+      "id": "34",
+      "name": "Mykelti Williamson",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/dR16zD9AjnHWbeN5OVmJWE0vSax.jpg"
+    },
+    {
+      "id": "81725",
+      "name": "Nicki Micheaux",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/xA92gKGUnnujmUrdjf7o9PLAaZb.jpg"
+    },
+    {
+      "id": "427978",
+      "name": "Brandon Mychal Smith",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/5nKqpvHatEEjyQWXWIH3fABDDSe.jpg"
+    },
+    {
+      "id": "1677397",
+      "name": "Isidora Goreshter",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/rLy8wmjYw7LewisNawiuRuMtJCu.jpg"
+    },
+    {
+      "id": "34489",
+      "name": "Eric Balfour",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/tqlyRVgkNYIePcunx4johOOxY8h.jpg"
+    },
+    {
+      "id": "4255",
+      "name": "Richard Portnow",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/uQZ3vSa2HHXywkDjGY8dN0oH5oY.jpg"
+    },
+    {
+      "id": "2684483",
+      "name": "Zaire Adams",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/1uki22lSe8XzbA6AjMcv2DBPeeM.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 8,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-10T08:30:08.335Z",
+  "createdAt": "2026-09-10T08:30:08.335Z",
+  "updatedAt": "2026-09-10T08:30:08.335Z",
+  "links": []
+}

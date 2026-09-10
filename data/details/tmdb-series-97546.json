@@ -1,0 +1,118 @@
+{
+  "id": "tmdb-series-97546",
+  "canonicalId": "tmdb-series-97546",
+  "externalProvider": "tmdb",
+  "externalId": "97546",
+  "tmdbId": "97546",
+  "imdbId": "tt10986410",
+  "type": "series",
+  "contentType": "series",
+  "title": "Ted Lasso",
+  "canonicalTitle": "Ted Lasso",
+  "originalTitle": "Ted Lasso",
+  "overview": "Ted Lasso, an American football coach, moves to England when he's hired to manage a soccer team—despite having no experience. With cynical players and a doubtful town, will he get them to see the Ted Lasso Way?",
+  "description": "Ted Lasso, an American football coach, moves to England when he's hired to manage a soccer team—despite having no experience. With cynical players and a doubtful town, will he get them to see the Ted Lasso Way?",
+  "shortDescription": "Ted Lasso, an American football coach, moves to England when he's hired to manage a soccer team—despite having no experi",
+  "year": 2020,
+  "releaseDate": "2020-08-14",
+  "rating": 8.4,
+  "votes": "2.6K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Drama",
+    "Comedy"
+  ],
+  "categories": [
+    "Drama",
+    "Comedy"
+  ],
+  "language": "English",
+  "country": "US",
+  "director": "Director",
+  "poster": "https://image.tmdb.org/t/p/w500/uRHsiw1wLxPHFXkkv4Ix1s0O6f4.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/nE94ejEbzNCU48bW1oju0dqBONz.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/BwPcMIDFVKw?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/BwPcMIDFVKw?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "58224",
+      "name": "Jason Sudeikis",
+      "character": "Ted Lasso",
+      "photo": "https://image.tmdb.org/t/p/w185/uuacnP9DOHMsmj8FhBi0cWWDgrn.jpg"
+    },
+    {
+      "id": "1278487",
+      "name": "Hannah Waddingham",
+      "character": "Rebecca Welton",
+      "photo": "https://image.tmdb.org/t/p/w185/eHAICyhvjiRZCgzKyJCk9hWnnjr.jpg"
+    },
+    {
+      "id": "3555",
+      "name": "Jeremy Swift",
+      "character": "Leslie Higgins",
+      "photo": "https://image.tmdb.org/t/p/w185/muRh4WbyEE4S2763bv777ywpKP3.jpg"
+    },
+    {
+      "id": "21422",
+      "name": "Brett Goldstein",
+      "character": "Roy Kent",
+      "photo": "https://image.tmdb.org/t/p/w185/xYdFNE7EkncE8uiPJzT3RrkqcAQ.jpg"
+    },
+    {
+      "id": "1113365",
+      "name": "Brendan Hunt",
+      "character": "Coach Beard",
+      "photo": "https://image.tmdb.org/t/p/w185/7Z8q2WUop3q5BdyaBD6YvweGWrZ.jpg"
+    },
+    {
+      "id": "36594",
+      "name": "Juno Temple",
+      "character": "Keeley Jones",
+      "photo": "https://image.tmdb.org/t/p/w185/vwCjlWQLQWbmcUT2Lwn9G0O8r2.jpg"
+    },
+    {
+      "id": "1731959",
+      "name": "Tanya Reynolds",
+      "character": "Alice Chilton",
+      "photo": "https://image.tmdb.org/t/p/w185/m5FP6lzbxYon8W6hEvj9d4h21i4.jpg"
+    },
+    {
+      "id": "3593833",
+      "name": "Jude Mack",
+      "character": "Katie Quinn",
+      "photo": "https://image.tmdb.org/t/p/w185/iZbW7IkBCFkt164Hh3Oa2PBpNr8.jpg"
+    },
+    {
+      "id": "6406927",
+      "name": "Rex Hayes",
+      "character": "Siobhan Harrigan",
+      "photo": null
+    },
+    {
+      "id": "1715074",
+      "name": "Sophie Simnett",
+      "character": "Claudine",
+      "photo": "https://image.tmdb.org/t/p/w185/7J57MF1xaLfKHcod4b0U6b1biAX.jpg"
+    },
+    {
+      "id": "3593833",
+      "name": "Jude Mack",
+      "character": "Katie 'Boots' Quinn",
+      "photo": "https://image.tmdb.org/t/p/w185/iZbW7IkBCFkt164Hh3Oa2PBpNr8.jpg"
+    },
+    {
+      "id": "2458098",
+      "name": "Aisling Sharkey",
+      "character": "Niamh Harrigan",
+      "photo": "https://image.tmdb.org/t/p/w185/5jZWUV3VyKwEzxIOsffgk8lJLrM.jpg"
+    }
+  ],
+  "seasons": 4,
+  "episodes": 44,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-10T08:30:14.777Z",
+  "createdAt": "2026-09-10T08:30:14.777Z",
+  "updatedAt": "2026-09-10T08:30:14.777Z",
+  "links": []
+}

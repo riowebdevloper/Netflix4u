@@ -1,0 +1,118 @@
+{
+  "id": "tmdb-series-259666",
+  "canonicalId": "tmdb-series-259666",
+  "externalProvider": "tmdb",
+  "externalId": "259666",
+  "tmdbId": "259666",
+  "imdbId": "tt32896333",
+  "type": "series",
+  "contentType": "series",
+  "title": "No One Will Miss Us",
+  "canonicalTitle": "No One Will Miss Us",
+  "originalTitle": "Nadie nos va a extrañar",
+  "overview": "It's the '90s, and five losers run an illegal business at their high school. They sell homework and assignments to their classmates. The advantage is that no one ever suspects the nerds. Their business brings them money and popularity. But hormones and an unexpected death threaten to ruin everything. If the business collapses, their futures and their friendships are at risk.",
+  "description": "It's the '90s, and five losers run an illegal business at their high school. They sell homework and assignments to their classmates. The advantage is that no one ever suspects the nerds. Their business brings them money and popularity. But hormones and an unexpected death threaten to ruin everything. If the business collapses, their futures and their friendships are at risk.",
+  "shortDescription": "It's the '90s, and five losers run an illegal business at their high school. They sell homework and assignments to their",
+  "year": 2024,
+  "releaseDate": "2024-08-09",
+  "rating": 8.8,
+  "votes": "0.4K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Drama",
+    "Comedy"
+  ],
+  "categories": [
+    "Drama",
+    "Comedy"
+  ],
+  "language": "Spanish",
+  "country": "MX",
+  "director": "Director",
+  "poster": "https://image.tmdb.org/t/p/w500/5U3WiAz67fJn5gnvFk4zOJAx9Sc.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/jmV6NIzZxGzRoljFPwao6sh4Nny.jpg",
+  "trailerUrl": null,
+  "trailer": null,
+  "cast": [
+    {
+      "id": "4185019",
+      "name": "Nicolás Haza",
+      "character": "Alex",
+      "photo": "https://image.tmdb.org/t/p/w185/6bG2rNRo0sUVP2nNdT9HbDJzm6a.jpg"
+    },
+    {
+      "id": "2761259",
+      "name": "Virgilio Delgado",
+      "character": "Tenoch",
+      "photo": "https://image.tmdb.org/t/p/w185/2KuS5JNmwghcZZMSkUIVQAY5mbZ.jpg"
+    },
+    {
+      "id": "3674963",
+      "name": "Camila Calónico",
+      "character": "Marifer",
+      "photo": "https://image.tmdb.org/t/p/w185/oSSpmL7yh8sY0qNKsJw29SNG5RG.jpg"
+    },
+    {
+      "id": "1319017",
+      "name": "Macarena Oz",
+      "character": "Daniela",
+      "photo": "https://image.tmdb.org/t/p/w185/5Ewx5jEU8bd4eP144fEO1GRfafI.jpg"
+    },
+    {
+      "id": "4348932",
+      "name": "Axel Madrazo",
+      "character": "Memo",
+      "photo": "https://image.tmdb.org/t/p/w185/xeSOm4hh6pVrknxu8OValNKqIdz.jpg"
+    },
+    {
+      "id": "3546682",
+      "name": "Eduardo Maruri",
+      "character": "Diego",
+      "photo": "https://image.tmdb.org/t/p/w185/mZj9jwEDxvtBVrLSvjy9ZWu22a0.jpg"
+    },
+    {
+      "id": "4076913",
+      "name": "Regina Cedeño",
+      "character": "Susana",
+      "photo": "https://image.tmdb.org/t/p/w185/riawANaQyvoZ7AroJls6Mt9693G.jpg"
+    },
+    {
+      "id": "4926429",
+      "name": "Ela Valim",
+      "character": "Mariana",
+      "photo": "https://image.tmdb.org/t/p/w185/1K2H4ADN3myJg5rYH1q5tVWJAtM.jpg"
+    },
+    {
+      "id": "2458843",
+      "name": "Alejandro Puente",
+      "character": "Rafa",
+      "photo": "https://image.tmdb.org/t/p/w185/8dqOlNGhPfQR3JENOVCFB0ef1Hq.jpg"
+    },
+    {
+      "id": "974827",
+      "name": "Ernesto Laguardia",
+      "character": "Director",
+      "photo": "https://image.tmdb.org/t/p/w185/1OgxQEYGys4wBq5TQzR8v2hUyMp.jpg"
+    },
+    {
+      "id": "4876631",
+      "name": "Daniela Luque",
+      "character": "Maestra Ilse",
+      "photo": "https://image.tmdb.org/t/p/w185/imV6yKMrAuNVOGHwNPmjvgbednn.jpg"
+    },
+    {
+      "id": "3194680",
+      "name": "Asbel Ramses",
+      "character": "Benny",
+      "photo": "https://image.tmdb.org/t/p/w185/oinJceFP3ueB6rdUOo0362jT8mg.jpg"
+    }
+  ],
+  "seasons": 2,
+  "episodes": 16,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-10T08:30:20.566Z",
+  "createdAt": "2026-09-10T08:30:20.566Z",
+  "updatedAt": "2026-09-10T08:30:20.566Z",
+  "links": []
+}

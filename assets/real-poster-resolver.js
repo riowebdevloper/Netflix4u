@@ -13,8 +13,12 @@
 
   const ALLOWED_HOSTS = [
     'image.tmdb.org',
+    'media.themoviedb.org',
     'storage.hicine.sbs',
-    'm.media-amazon.com'
+    'img.hicine.sbs',
+    'm.media-amazon.com',
+    'images-na.ssl-images-amazon.com',
+    'i.imgur.com'
   ];
 
   function isAllowedPoster(url) {
@@ -144,44 +148,41 @@
     });
   };
 
-  // --- Poster Publish Gate ---
-  // Hides any cards in catalog/listing that fail poster resolution
-  function runPublishGate() {
-    try {
-      const images = document.querySelectorAll('img');
-      images.forEach(img => {
-        const src = img.getAttribute('src') || '';
-        if (src.includes('no-poster') || src.includes('placeholder')) {
-          const card = img.closest('.group, [data-card], .relative.rounded-xl, .aspect-\\[2\\/3\\]');
-          if (card && !card.closest('.hero-section')) {
-            // Check if card has title to attempt resolve
-            const titleEl = card.querySelector('h3, h4, p.font-bold, .card-title');
-            const title = titleEl ? titleEl.textContent.trim() : '';
-            if (title) {
-              window.resolveRealPoster(title, '', 'movie', (realPoster) => {
-                if (realPoster) {
-                  img.src = realPoster;
-                  card.style.display = '';
-                } else {
-                  card.style.display = 'none';
-                }
-              });
-            } else {
-              card.style.display = 'none';
-            }
-          }
-        }
-      });
-    } catch(e) {}
+  // Detect content type from card elements, links, and badges
+  function detectCardType(card) {
+    if (!card) return 'movie';
+    const dataType = card.getAttribute('data-type');
+    if (dataType) return dataType;
+
+    const link = card.querySelector('a[href]');
+    if (link) {
+      const href = link.getAttribute('href') || '';
+      if (href.includes('/series/')) return 'series';
+      if (href.includes('/tv/')) return 'series';
+      if (href.includes('/anime/')) return 'anime';
+      if (href.includes('/kdrama/')) return 'kdrama';
+      if (href.includes('/movie/')) return 'movie';
+    }
+
+    const text = card.textContent || '';
+    if (/\b(?:K-Drama|Kdrama)\b/i.test(text)) return 'kdrama';
+    if (/\b(?:Anime)\b/i.test(text)) return 'anime';
+    if (/\b(?:Series|Web Series|Season\s*\d+|S\d{1,2})\b/i.test(text)) return 'series';
+
+    return 'movie';
   }
 
-  if (typeof document !== 'undefined') {
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', () => {
-        setTimeout(runPublishGate, 1000);
-      });
-    } else {
-      setTimeout(runPublishGate, 1000);
-    }
+  // Handle runtime image loading failures gracefully by falling back to branded SVG
+  if (typeof window !== 'undefined') {
+    window.addEventListener('error', function(e) {
+      if (e && e.target && e.target.tagName === 'IMG') {
+        const img = e.target;
+        if (img.dataset.failedResolved) return;
+        img.dataset.failedResolved = '1';
+        // Fall back directly to branded placeholder to prevent showing wrong title's artwork
+        img.src = window.FLIX_TERMINAL_POSTER || '/images/no-poster.svg';
+        img.style.objectFit = 'cover';
+      }
+    }, true);
   }
 })();

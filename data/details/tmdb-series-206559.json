@@ -1,0 +1,104 @@
+{
+  "id": "tmdb-series-206559",
+  "canonicalId": "tmdb-series-206559",
+  "externalProvider": "tmdb",
+  "externalId": "206559",
+  "tmdbId": "206559",
+  "imdbId": "tt1527854",
+  "type": "series",
+  "contentType": "series",
+  "title": "Binnelanders",
+  "canonicalTitle": "Binnelanders",
+  "originalTitle": "Binnelanders",
+  "overview": "A South African Afrikaans soap opera. It is set in and around the fictional private hospital, Binneland Kliniek, in Pretoria, and the storyline follows the trials, trauma and tribulations of the staff and patients of the hospital.",
+  "description": "A South African Afrikaans soap opera. It is set in and around the fictional private hospital, Binneland Kliniek, in Pretoria, and the storyline follows the trials, trauma and tribulations of the staff and patients of the hospital.",
+  "shortDescription": "A South African Afrikaans soap opera. It is set in and around the fictional private hospital, Binneland Kliniek, in Pret",
+  "year": 2005,
+  "releaseDate": "2005-10-13",
+  "rating": 5.5,
+  "votes": "0.1K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Soap"
+  ],
+  "categories": [
+    "Soap"
+  ],
+  "language": "Afrikaans",
+  "country": "ZA",
+  "director": "Director",
+  "poster": "https://image.tmdb.org/t/p/w500/3bzECfllho8PphdYujLUIuhncJD.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/s1dTt4M31q2HwD5Fkl1tf5tQzJg.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/Uegxh8K8g3E?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/Uegxh8K8g3E?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "70966",
+      "name": "Hans Strydom",
+      "character": "Dr. At Koster",
+      "photo": "https://image.tmdb.org/t/p/w185/o5MURlJJCC67EvJ2hYXMFpvwFEb.jpg"
+    },
+    {
+      "id": "2057047",
+      "name": "Germandt Geldenhuys",
+      "character": "Louis Koster",
+      "photo": "https://image.tmdb.org/t/p/w185/7ektNcRTOtIr4eopAybV00JiRN.jpg"
+    },
+    {
+      "id": "1854858",
+      "name": "Je-ani Swiegelaar",
+      "character": "Naomi Koster",
+      "photo": "https://image.tmdb.org/t/p/w185/7ikfkseBLPdPD55NFWW4hJlwS9L.jpg"
+    },
+    {
+      "id": "3947231",
+      "name": "Gerald Steyn",
+      "character": "Dr. Uys Wagener",
+      "photo": "https://image.tmdb.org/t/p/w185/dYnfi6UYok930QgcqECBhKRdiWg.jpg"
+    },
+    {
+      "id": "230817",
+      "name": "Marlee van der Merwe",
+      "character": "Dr. Ella Swart",
+      "photo": "https://image.tmdb.org/t/p/w185/epCX7JDvUxDI7JCrRFXw2FhQZ4.jpg"
+    },
+    {
+      "id": "3182686",
+      "name": "Roberto Kyle",
+      "character": "Dr. Joe Olivier",
+      "photo": "https://image.tmdb.org/t/p/w185/6uQJc7epTqEJ1BsSrSpFFJ6YMyi.jpg"
+    },
+    {
+      "id": "4195190",
+      "name": "Melinda Viljoen",
+      "character": "Tracy Jonker",
+      "photo": "https://image.tmdb.org/t/p/w185/8VviPGl59PZhHDXO4R5q0HrP95Q.jpg"
+    },
+    {
+      "id": "4266950",
+      "name": "Antoinette Modise",
+      "character": "Bonnie Jacobs",
+      "photo": "https://image.tmdb.org/t/p/w185/5OEpJvTOpDh4snWx6eKWKcDgryV.jpg"
+    },
+    {
+      "id": "4268808",
+      "name": "Megan Troskie",
+      "character": "Thalia Ferreira",
+      "photo": "https://image.tmdb.org/t/p/w185/84kqZzeWF8L397qMQM2lcSZ9IFa.jpg"
+    },
+    {
+      "id": "4526442",
+      "name": "Izette Blignaut",
+      "character": "Petro van Zyl",
+      "photo": "https://image.tmdb.org/t/p/w185/5DtYuUg1dsQvWG2ReArFuR1DdrY.jpg"
+    }
+  ],
+  "seasons": 22,
+  "episodes": 5199,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-10T08:30:15.087Z",
+  "createdAt": "2026-09-10T08:30:15.087Z",
+  "updatedAt": "2026-09-10T08:30:15.087Z",
+  "links": []
+}

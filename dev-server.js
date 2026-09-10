@@ -5,6 +5,7 @@ const path = require('path');
 const { getPlaybackSources } = require('./services/playbackService');
 const { resolveContentId } = require('./services/canonicalResolver');
 const { isPublicRecord, publicOnly } = require('./services/contentValidationService');
+const { handleDetails, handlePlayback, handleSearch } = require('./services/apiCore');
 
 const PORT = process.env.PORT || 4173;
 const ROOT = path.resolve(__dirname);
@@ -1036,57 +1037,13 @@ const server = http.createServer(async (req, res) => {
   }
 
   // 5. API: Details Endpoint (/api/details/:id or /api/title?id=...) - Fast Canonical Lookup
-  const detailMatch = reqPath.match(/^\/api\/(?:details|title|movie|series|item)(?:\/([^/]+)|$)/i);
-  const targetDetailId = (detailMatch && detailMatch[1]) || queryParams.get('id') || queryParams.get('movieId');
-  if (detailMatch && targetDetailId) {
-    const id = targetDetailId;
-    let item = await resolveContentId(id);
-    if (item && isPublicRecord(item)) {
-      item = enrichItemMetadataAndLinks(item);
-      if (!item.tmdbId && (item.title || item.imdbId)) {
-        item.tmdbId = await resolveTmdbId(item.title, item.year, item.type, item.imdbId);
-      }
-      const hasRichCast = Array.isArray(item.cast) && item.cast.length > 0 && typeof item.cast[0] === 'object' && item.cast[0] !== null && Boolean(item.cast[0].photo);
-      if (!hasRichCast && (item.title || item.imdbId)) {
-        const resolvedCast = await resolveTitleCast(item.title, item.tmdbId, item.year, item.type, item.imdbId);
-        if (resolvedCast && resolvedCast.length > 0) {
-          item.cast = resolvedCast;
-        } else if (Array.isArray(item.cast)) {
-          item.cast = item.cast.map((c, idx) => typeof c === 'string' ? { id: 'c_' + idx, name: c, character: '', photo: null } : c);
-        }
-      }
-      res.writeHead(200, {
-        'Content-Type': 'application/json; charset=utf-8',
-        'Cache-Control': 'public, max-age=1800'
-      });
-      res.end(JSON.stringify({ success: true, data: item, ...item }));
-      return;
-    }
-    res.writeHead(404, { 'Content-Type': 'application/json; charset=utf-8' });
-    res.end(JSON.stringify({ success: false, error: 'Title not found' }));
-    return;
+  if (reqPath.startsWith('/api/details') || reqPath.startsWith('/api/title') || reqPath.startsWith('/api/item')) {
+    return handleDetails(req, res);
   }
 
   // 5b. API: Playback Sources (/api/playback/:id or /api/playback?id=...)
-  const playbackMatch = reqPath.match(/^\/api\/playback(?:\/([^/]+)|$)/i);
-  const targetPlaybackId = (playbackMatch && playbackMatch[1]) || queryParams.get('id') || queryParams.get('movieId');
-  if (playbackMatch && targetPlaybackId) {
-    const id = targetPlaybackId;
-    let item = await resolveContentId(id);
-    if (item && isPublicRecord(item)) {
-      const season = parseInt(queryParams.get('season') || '1', 10);
-      const episode = parseInt(queryParams.get('episode') || '1', 10);
-      const sources = getPlaybackSources(item, season, episode);
-      res.writeHead(200, {
-        'Content-Type': 'application/json; charset=utf-8',
-        'Cache-Control': 'public, max-age=1800'
-      });
-      res.end(JSON.stringify({ success: true, sources }));
-      return;
-    }
-    res.writeHead(404, { 'Content-Type': 'application/json; charset=utf-8' });
-    res.end(JSON.stringify({ success: false, error: 'Title not found' }));
-    return;
+  if (reqPath.startsWith('/api/playback')) {
+    return handlePlayback(req, res);
   }
 
   // Download resolving is disabled until a licensed distribution integration is configured.
@@ -1098,30 +1055,7 @@ const server = http.createServer(async (req, res) => {
 
   // 6. API: Search Endpoint (/api/search?q=...)
   if (reqPath === '/api/search') {
-    const q = (queryParams.get('q') || '').trim().toLowerCase();
-    if (!q) {
-      res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
-      res.end(JSON.stringify({ success: true, results: [] }));
-      return;
-    }
-
-    const catalog = getCatalogSummary();
-    const results = [];
-    for (const item of catalog) {
-      const matchTitle = item.title && item.title.toLowerCase().includes(q);
-      const matchRaw = item.rawTitle && item.rawTitle.toLowerCase().includes(q);
-      const matchSlug = item.slug && item.slug.toLowerCase().includes(q);
-      const matchCat = item.categories && item.categories.some(c => c.toLowerCase().includes(q));
-
-      if (matchTitle || matchRaw || matchSlug || matchCat) {
-        results.push(item);
-        if (results.length >= 40) break;
-      }
-    }
-
-    res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
-    res.end(JSON.stringify({ success: true, results }));
-    return;
+    return handleSearch(req, res);
   }
 
   // 7. Static sitemap.xml & robots.txt

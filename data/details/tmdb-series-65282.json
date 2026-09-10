@@ -1,0 +1,116 @@
+{
+  "id": "tmdb-series-65282",
+  "canonicalId": "tmdb-series-65282",
+  "externalProvider": "tmdb",
+  "externalId": "65282",
+  "tmdbId": "65282",
+  "imdbId": "tt7997010",
+  "type": "series",
+  "contentType": "series",
+  "title": "Home Alone",
+  "canonicalTitle": "Home Alone",
+  "originalTitle": "나 혼자 산다",
+  "overview": "It can be a badge of honor to be “single.” “I Live Alone” is a documentary-style South Korean reality series that follows the members of a self-formed club called Rainbow, which is comprised of  celebrities who are single and live alone.",
+  "description": "It can be a badge of honor to be “single.” “I Live Alone” is a documentary-style South Korean reality series that follows the members of a self-formed club called Rainbow, which is comprised of  celebrities who are single and live alone.",
+  "shortDescription": "It can be a badge of honor to be “single.” “I Live Alone” is a documentary-style South Korean reality series that follow",
+  "year": 2013,
+  "releaseDate": "2013-03-22",
+  "rating": 7.5,
+  "votes": "0.0K",
+  "quality": "FHD",
+  "duration": "90m/ep",
+  "genres": [
+    "Reality"
+  ],
+  "categories": [
+    "Reality"
+  ],
+  "language": "Korean",
+  "country": "KR",
+  "director": "Heo Hang",
+  "poster": "https://image.tmdb.org/t/p/w500/1hqGagr94soBq70Lq7tPHvNmmxy.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/sztoil0XfQ0cSHy4PXmYW6uAdfQ.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/HlhfxNkfROE?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/HlhfxNkfROE?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "1703375",
+      "name": "Park Na-rae",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/dUqQeDICulymBkia4eqQ40LKHPa.jpg"
+    },
+    {
+      "id": "1594539",
+      "name": "Jeon Hyun-moo",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/rJ1890Fh0ln5IQ4JywD3pkdlALY.jpg"
+    },
+    {
+      "id": "1620765",
+      "name": "Key",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/2f2n3A2cDtc8lgKfkd1NdsvEKhB.jpg"
+    },
+    {
+      "id": "2332076",
+      "name": "Hwasa",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/zfIgRBmgxUZB5ASKfKWw30KEsQm.jpg"
+    },
+    {
+      "id": "2318652",
+      "name": "Code Kunst",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/jrNqyZRJpNfYypaChI5yFZkhp3g.jpg"
+    },
+    {
+      "id": "2332082",
+      "name": "Kian84",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/wjNKFnCPaEEuhXVmgWUbi4qgdWq.jpg"
+    },
+    {
+      "id": "1348986",
+      "name": "Lee Jang-woo",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/bZq5YpRBgtVflLvoDQU8nivrpCz.jpg"
+    },
+    {
+      "id": "1134769",
+      "name": "Lee Ju-seung",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/6yJqT18fiQDEPtMEoU2OWU5x4tG.jpg"
+    },
+    {
+      "id": "224673",
+      "name": "Kim Kwang-kyu",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/5X3oJA1NaesYHeX3LfuC7t3j7VV.jpg"
+    },
+    {
+      "id": "2207537",
+      "name": "Cha Seo-won",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/tyezR9xwN8QF6lOSURL34cRMMzB.jpg"
+    },
+    {
+      "id": "3257709",
+      "name": "Honey J",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/5df3PalY0ecRTQDyPA13z15Pcda.jpg"
+    },
+    {
+      "id": "5758179",
+      "name": "Park Ji-hyeon",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/s8m2uN6Q6SrBxfQh3j6jAJfeXd3.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 665,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-10T08:30:15.333Z",
+  "createdAt": "2026-09-10T08:30:15.333Z",
+  "updatedAt": "2026-09-10T08:30:15.333Z",
+  "links": []
+}

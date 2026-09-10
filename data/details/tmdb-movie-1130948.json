@@ -1,0 +1,120 @@
+{
+  "id": "tmdb-movie-1130948",
+  "canonicalId": "tmdb-movie-1130948",
+  "externalProvider": "tmdb",
+  "externalId": "1130948",
+  "tmdbId": "1130948",
+  "imdbId": "tt27844906",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "Rosebush Pruning",
+  "canonicalTitle": "Rosebush Pruning",
+  "originalTitle": "Rosebush Pruning",
+  "overview": "In a Spanish villa, American siblings Jack, Ed, Anna and Robert wallow in isolation and their inherited fortune. When Jack wants to move in with his girlfriend and Ed uncovers the truth about their mother’s death, the fabric of the family begins to unravel.",
+  "description": "In a Spanish villa, American siblings Jack, Ed, Anna and Robert wallow in isolation and their inherited fortune. When Jack wants to move in with his girlfriend and Ed uncovers the truth about their mother’s death, the fabric of the family begins to unravel.",
+  "shortDescription": "In a Spanish villa, American siblings Jack, Ed, Anna and Robert wallow in isolation and their inherited fortune. When Ja",
+  "year": 2026,
+  "releaseDate": "2026-04-23",
+  "rating": 6.1,
+  "votes": "0.0K",
+  "quality": "FHD",
+  "duration": "1h 35m",
+  "genres": [
+    "Comedy",
+    "Drama",
+    "Thriller"
+  ],
+  "categories": [
+    "Comedy",
+    "Drama",
+    "Thriller"
+  ],
+  "language": "English",
+  "country": "GB",
+  "director": "Karim Aïnouz",
+  "poster": "https://image.tmdb.org/t/p/w500/rsHEVjzxU8cxz1sm3vboj99daNv.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/vcZ3UUVmFNk90DBSrTBlTKCdbbE.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/rmHD9gZbF7A?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/rmHD9gZbF7A?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "1371041",
+      "name": "Callum Turner",
+      "character": "Ed",
+      "photo": "https://image.tmdb.org/t/p/w185/1QqpyYbX6zyyrtlKAJLbKM4B4k9.jpg"
+    },
+    {
+      "id": "98522",
+      "name": "Riley Keough",
+      "character": "Anna",
+      "photo": "https://image.tmdb.org/t/p/w185/wsodGduU4frFdMy1roqeDmj4kZ.jpg"
+    },
+    {
+      "id": "478",
+      "name": "Jamie Bell",
+      "character": "Jack",
+      "photo": "https://image.tmdb.org/t/p/w185/xAfNYOJYOy5ee9PHbBF8Y6xzZ9I.jpg"
+    },
+    {
+      "id": "1371509",
+      "name": "Lukas Gage",
+      "character": "Robert",
+      "photo": "https://image.tmdb.org/t/p/w185/xXknCnXtRBmqg38TkMuPFtugt5s.jpg"
+    },
+    {
+      "id": "72638",
+      "name": "Tracy Letts",
+      "character": "Father",
+      "photo": "https://image.tmdb.org/t/p/w185/x318yEddF10ASORC5U958C2kowf.jpg"
+    },
+    {
+      "id": "18050",
+      "name": "Elle Fanning",
+      "character": "Martha",
+      "photo": "https://image.tmdb.org/t/p/w185/ucC5faqfEYVhoC25M6Hi3znZmab.jpg"
+    },
+    {
+      "id": "6736",
+      "name": "Pamela Anderson",
+      "character": "Mother",
+      "photo": "https://image.tmdb.org/t/p/w185/uqZP8OUpPOoRG9kFp38OJSh8TiT.jpg"
+    },
+    {
+      "id": "3623",
+      "name": "Elena Anaya",
+      "character": "Emma",
+      "photo": "https://image.tmdb.org/t/p/w185/hSkjzOfvRQ8DUJdhWveIKgRlyXb.jpg"
+    },
+    {
+      "id": "100657",
+      "name": "Lolo Herrero",
+      "character": "Mourning Friend",
+      "photo": "https://image.tmdb.org/t/p/w185/dBHeeGmFtZKmkMpEL9OqYOeBeDL.jpg"
+    },
+    {
+      "id": "2635246",
+      "name": "Teo Jansen",
+      "character": "Hitchhiking Man",
+      "photo": null
+    },
+    {
+      "id": "4230763",
+      "name": "Yorgos Stefanakos",
+      "character": "George",
+      "photo": "https://image.tmdb.org/t/p/w185/e7ygPq2TRrNGd04RrWjZZbAH8VG.jpg"
+    },
+    {
+      "id": "1269653",
+      "name": "Carlos Conde",
+      "character": "Butcher",
+      "photo": null
+    }
+  ],
+  "seasons": 1,
+  "episodes": 1,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-10T08:30:10.813Z",
+  "createdAt": "2026-09-10T08:30:10.813Z",
+  "updatedAt": "2026-09-10T08:30:10.813Z",
+  "links": []
+}

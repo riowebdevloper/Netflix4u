@@ -1,0 +1,110 @@
+{
+  "id": "tmdb-series-253941",
+  "canonicalId": "tmdb-series-253941",
+  "externalProvider": "tmdb",
+  "externalId": "253941",
+  "tmdbId": "253941",
+  "imdbId": "tt32159809",
+  "type": "series",
+  "contentType": "series",
+  "title": "The Paper",
+  "canonicalTitle": "The Paper",
+  "originalTitle": "The Paper",
+  "overview": "The documentary crew that immortalized Dunder Mifflin's Scranton branch is in search of a new subject when they discover a historic Toledo newspaper, The Truth Teller, and the eager publisher trying to revive it.",
+  "description": "The documentary crew that immortalized Dunder Mifflin's Scranton branch is in search of a new subject when they discover a historic Toledo newspaper, The Truth Teller, and the eager publisher trying to revive it.",
+  "shortDescription": "The documentary crew that immortalized Dunder Mifflin's Scranton branch is in search of a new subject when they discover",
+  "year": 2025,
+  "releaseDate": "2025-09-04",
+  "rating": 7.1,
+  "votes": "0.1K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Comedy"
+  ],
+  "categories": [
+    "Comedy"
+  ],
+  "language": "English",
+  "country": "US",
+  "director": "Director",
+  "poster": "https://image.tmdb.org/t/p/w500/ySA5MvhoxTdezNUMe0ifPmhxH4w.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/qtMVO0McAXN4IV30SMFAVmXraBL.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/c5v4LJJkvUU?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/c5v4LJJkvUU?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "93210",
+      "name": "Domhnall Gleeson",
+      "character": "Ned Sampson",
+      "photo": "https://image.tmdb.org/t/p/w185/a63BgOBKzJ9XPaLFyu7u5Ge3REG.jpg"
+    },
+    {
+      "id": "124679",
+      "name": "Sabrina Impacciatore",
+      "character": "Esmeralda Grand",
+      "photo": "https://image.tmdb.org/t/p/w185/6g88MTxghHRPuhwxgnxsttTmFEC.jpg"
+    },
+    {
+      "id": "2092967",
+      "name": "Chelsea Frei",
+      "character": "Mare Pritti",
+      "photo": "https://image.tmdb.org/t/p/w185/pjZlTBba5osblt12xWoMj3YzNrv.jpg"
+    },
+    {
+      "id": "1181339",
+      "name": "Melvin Gregg",
+      "character": "Detrick Moore",
+      "photo": "https://image.tmdb.org/t/p/w185/tIeYOezPPBpUmVuzYO7idcWPuUz.jpg"
+    },
+    {
+      "id": "2185256",
+      "name": "Gbemisola Ikumelo",
+      "character": "Adelola Olofin",
+      "photo": "https://image.tmdb.org/t/p/w185/cQaVvpCkBM3vaO7iE8YPSCV6yCM.jpg"
+    },
+    {
+      "id": "1748393",
+      "name": "Alex Edelman",
+      "character": "Adam Cooper",
+      "photo": "https://image.tmdb.org/t/p/w185/dBWmHCZ7sTh3JyWmVDYgNaEuV06.jpg"
+    },
+    {
+      "id": "1685831",
+      "name": "Ramona Young",
+      "character": "Nicole Lee",
+      "photo": "https://image.tmdb.org/t/p/w185/3ZVDaqAKw3wjXBnT62FZn1hbock.jpg"
+    },
+    {
+      "id": "1016119",
+      "name": "Tim Key",
+      "character": "Ken Davies",
+      "photo": "https://image.tmdb.org/t/p/w185/5qaZxWpm3lXDbngjZJvnSbVS9I0.jpg"
+    },
+    {
+      "id": "76094",
+      "name": "Oscar Nuñez",
+      "character": "Oscar Martinez",
+      "photo": "https://image.tmdb.org/t/p/w185/UBILHiRphJdlshvsyH920QSAhk.jpg"
+    },
+    {
+      "id": "3707208",
+      "name": "Eric Rahill",
+      "character": "Travis Bienlien",
+      "photo": "https://image.tmdb.org/t/p/w185/zJGmDvV5avrr9cta8wkdkU7irRu.jpg"
+    },
+    {
+      "id": "1356753",
+      "name": "Duane R. Shepard Sr.",
+      "character": "Barry Strokes",
+      "photo": "https://image.tmdb.org/t/p/w185/jSde1OY1EVDivOlAs7sJHqiBlkL.jpg"
+    }
+  ],
+  "seasons": 2,
+  "episodes": 20,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-10T08:30:07.776Z",
+  "createdAt": "2026-09-10T08:30:07.776Z",
+  "updatedAt": "2026-09-10T08:30:07.776Z",
+  "links": []
+}

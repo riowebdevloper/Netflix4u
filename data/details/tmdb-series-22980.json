@@ -1,0 +1,52 @@
+{
+  "id": "tmdb-series-22980",
+  "canonicalId": "tmdb-series-22980",
+  "externalProvider": "tmdb",
+  "externalId": "22980",
+  "tmdbId": "22980",
+  "imdbId": "tt2057880",
+  "type": "series",
+  "contentType": "series",
+  "title": "Watch What Happens Live with Andy Cohen",
+  "canonicalTitle": "Watch What Happens Live with Andy Cohen",
+  "originalTitle": "Watch What Happens Live with Andy Cohen",
+  "overview": "Bravo network executive Andy Cohen discusses pop culture topics with celebrities and reality show personalities.",
+  "description": "Bravo network executive Andy Cohen discusses pop culture topics with celebrities and reality show personalities.",
+  "shortDescription": "Bravo network executive Andy Cohen discusses pop culture topics with celebrities and reality show personalities.",
+  "year": 2009,
+  "releaseDate": "2009-07-16",
+  "rating": 4.9,
+  "votes": "0.1K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Talk",
+    "Comedy"
+  ],
+  "categories": [
+    "Talk",
+    "Comedy"
+  ],
+  "language": "English",
+  "country": "US",
+  "director": "Director",
+  "poster": "https://image.tmdb.org/t/p/w500/onSD9UXfJwrMXWhq7UY7hGF2S1h.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/hINekSpbcBxjnjGqmIm6I4bz2ab.jpg",
+  "trailerUrl": null,
+  "trailer": null,
+  "cast": [
+    {
+      "id": "54772",
+      "name": "Andy Cohen",
+      "character": "Self - Host",
+      "photo": "https://image.tmdb.org/t/p/w185/eZrNjW7RQgkhwfcBw0qGTLPVgf4.jpg"
+    }
+  ],
+  "seasons": 23,
+  "episodes": 3197,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-10T08:30:12.853Z",
+  "createdAt": "2026-09-10T08:30:12.853Z",
+  "updatedAt": "2026-09-10T08:30:12.853Z",
+  "links": []
+}

@@ -1,0 +1,120 @@
+{
+  "id": "tmdb-movie-19404",
+  "canonicalId": "tmdb-movie-19404",
+  "externalProvider": "tmdb",
+  "externalId": "19404",
+  "tmdbId": "19404",
+  "imdbId": "tt0112870",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "Dilwale Dulhania Le Jayenge",
+  "canonicalTitle": "Dilwale Dulhania Le Jayenge",
+  "originalTitle": "दिलवाले दुल्हनिया ले जायेंगे",
+  "overview": "Raj is a rich, carefree, happy-go-lucky second generation NRI. Simran is the daughter of Chaudhary Baldev Singh, who in spite of being an NRI is very strict about adherence to Indian values. Simran has left for India to be married to her childhood fiancé. Raj leaves for India with a mission at his hands, to claim his lady love under the noses of her whole family. Thus begins a saga.",
+  "description": "Raj is a rich, carefree, happy-go-lucky second generation NRI. Simran is the daughter of Chaudhary Baldev Singh, who in spite of being an NRI is very strict about adherence to Indian values. Simran has left for India to be married to her childhood fiancé. Raj leaves for India with a mission at his hands, to claim his lady love under the noses of her whole family. Thus begins a saga.",
+  "shortDescription": "Raj is a rich, carefree, happy-go-lucky second generation NRI. Simran is the daughter of Chaudhary Baldev Singh, who in ",
+  "year": 1995,
+  "releaseDate": "1995-10-20",
+  "rating": 8.5,
+  "votes": "4.6K",
+  "quality": "FHD",
+  "duration": "3h 10m",
+  "genres": [
+    "Comedy",
+    "Drama",
+    "Romance"
+  ],
+  "categories": [
+    "Comedy",
+    "Drama",
+    "Romance"
+  ],
+  "language": "Hindi",
+  "country": "IN",
+  "director": "Aditya Chopra",
+  "poster": "https://image.tmdb.org/t/p/w500/lfRkUr7DYdHldAqi3PwdQGBRBPM.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/84beTJf26mfhoasUlKSOiNSutyS.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/oIZ4U21DRlM?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/oIZ4U21DRlM?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "55061",
+      "name": "Kajol",
+      "character": "Simran Singh",
+      "photo": "https://image.tmdb.org/t/p/w185/h4m0TkDuEMCUNaPrQxMRyFb2AQ7.jpg"
+    },
+    {
+      "id": "35742",
+      "name": "Shah Rukh Khan",
+      "character": "Raj Malhotra",
+      "photo": "https://image.tmdb.org/t/p/w185/tCEppfUu0g2Luu0rS5VKMoL4eSw.jpg"
+    },
+    {
+      "id": "691",
+      "name": "Amrish Puri",
+      "character": "Chaudhry Baldev Singh",
+      "photo": "https://image.tmdb.org/t/p/w185/uhMGFS7tuG71LDv2wk9LfZZ4EG6.jpg"
+    },
+    {
+      "id": "146971",
+      "name": "Farida Jalal",
+      "character": "Lajwanti 'Lajjo' Singh",
+      "photo": "https://image.tmdb.org/t/p/w185/tJdqL4BRSAWVFX1W6cmwxFs9IFh.jpg"
+    },
+    {
+      "id": "6217",
+      "name": "Anupam Kher",
+      "character": "Dharamvir Malhotra",
+      "photo": "https://image.tmdb.org/t/p/w185/kgU5Ap1Kf9RnicB5DMcXEZqed2f.jpg"
+    },
+    {
+      "id": "146973",
+      "name": "Pooja Ruparel",
+      "character": "Rajeshwari \"Chutki\" Singh",
+      "photo": "https://image.tmdb.org/t/p/w185/evHnj6s0Z2sbV1Mq0dfXxQQU8Mf.jpg"
+    },
+    {
+      "id": "85696",
+      "name": "Parmeet Sethi",
+      "character": "Kuljeet Singh",
+      "photo": "https://image.tmdb.org/t/p/w185/paTrHCbnwMxBZREfoGcfY5TlvyY.jpg"
+    },
+    {
+      "id": "35759",
+      "name": "Satish Shah",
+      "character": "Ajit Singh, Kuljeet's Father",
+      "photo": "https://image.tmdb.org/t/p/w185/AaXbQI0fAoTW4Qjg4dAtC5xkK1G.jpg"
+    },
+    {
+      "id": "146974",
+      "name": "Mandira Bedi",
+      "character": "Preeti Singh, Kuljeet's Sister",
+      "photo": "https://image.tmdb.org/t/p/w185/l50tq0OwzIxE4Z5JXDUSQvqCltN.jpg"
+    },
+    {
+      "id": "146972",
+      "name": "Achala Sachdev",
+      "character": "Simran's Grandmother",
+      "photo": "https://image.tmdb.org/t/p/w185/6kgq6Mnmd01HZzvbsEDQAFBurog.jpg"
+    },
+    {
+      "id": "78248",
+      "name": "Himani Shivpuri",
+      "character": "Simran's Aunt",
+      "photo": "https://image.tmdb.org/t/p/w185/iEgl4ME7OfMJ8CVKxpeMiC4Wv5w.jpg"
+    },
+    {
+      "id": "35736",
+      "name": "Karan Johar",
+      "character": "Rocky, Raj's friend",
+      "photo": "https://image.tmdb.org/t/p/w185/zip1x7OXOBxXxcdYvKOgw6MnAWm.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 1,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-10T08:30:12.607Z",
+  "createdAt": "2026-09-10T08:30:12.607Z",
+  "updatedAt": "2026-09-10T08:30:12.607Z",
+  "links": []
+}

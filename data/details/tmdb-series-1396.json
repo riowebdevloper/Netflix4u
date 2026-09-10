@@ -1,0 +1,94 @@
+{
+  "id": "tmdb-series-1396",
+  "canonicalId": "tmdb-series-1396",
+  "externalProvider": "tmdb",
+  "externalId": "1396",
+  "tmdbId": "1396",
+  "imdbId": "tt0903747",
+  "type": "series",
+  "contentType": "series",
+  "title": "Breaking Bad",
+  "canonicalTitle": "Breaking Bad",
+  "originalTitle": "Breaking Bad",
+  "overview": "Walter White, a New Mexico chemistry teacher, is diagnosed with Stage III cancer and given a prognosis of only two years left to live. He becomes filled with a sense of fearlessness and an unrelenting desire to secure his family's financial future at any cost as he enters the dangerous world of drugs and crime.",
+  "description": "Walter White, a New Mexico chemistry teacher, is diagnosed with Stage III cancer and given a prognosis of only two years left to live. He becomes filled with a sense of fearlessness and an unrelenting desire to secure his family's financial future at any cost as he enters the dangerous world of drugs and crime.",
+  "shortDescription": "Walter White, a New Mexico chemistry teacher, is diagnosed with Stage III cancer and given a prognosis of only two years",
+  "year": 2008,
+  "releaseDate": "2008-01-20",
+  "rating": 8.9,
+  "votes": "18.6K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Drama",
+    "Crime"
+  ],
+  "categories": [
+    "Drama",
+    "Crime"
+  ],
+  "language": "English",
+  "country": "US",
+  "director": "Director",
+  "poster": "https://image.tmdb.org/t/p/w500/anFx9aTOOYqgS3v7x3R84Kz67ly.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/tsRy63Mu5cu8etL1X7ZLyf7UP1M.jpg",
+  "trailerUrl": null,
+  "trailer": null,
+  "cast": [
+    {
+      "id": "17419",
+      "name": "Bryan Cranston",
+      "character": "Walter White",
+      "photo": "https://image.tmdb.org/t/p/w185/npIIZJGSrcJIJ6yHdmbqO6Jzo5I.jpg"
+    },
+    {
+      "id": "84497",
+      "name": "Aaron Paul",
+      "character": "Jesse Pinkman",
+      "photo": "https://image.tmdb.org/t/p/w185/8Ac9uuoYwZoYVAIJfRLzzLsGGJn.jpg"
+    },
+    {
+      "id": "134531",
+      "name": "Anna Gunn",
+      "character": "Skyler White",
+      "photo": "https://image.tmdb.org/t/p/w185/adppyeu1a4REN3khtgmXusrapFi.jpg"
+    },
+    {
+      "id": "209674",
+      "name": "RJ Mitte",
+      "character": "Walter White Jr.",
+      "photo": "https://image.tmdb.org/t/p/w185/sNPA92ZrssYhlaB1UA2pWcLD9db.jpg"
+    },
+    {
+      "id": "14329",
+      "name": "Dean Norris",
+      "character": "Hank Schrader",
+      "photo": "https://image.tmdb.org/t/p/w185/mKRrEbsxAX3ro700HsViFArRM7l.jpg"
+    },
+    {
+      "id": "1217934",
+      "name": "Betsy Brandt",
+      "character": "Marie Schrader",
+      "photo": "https://image.tmdb.org/t/p/w185/xAnuzyjdMbQq9L1c4JNwXL52Wm4.jpg"
+    },
+    {
+      "id": "59410",
+      "name": "Bob Odenkirk",
+      "character": "Saul Goodman",
+      "photo": "https://image.tmdb.org/t/p/w185/rF0Lb6SBhGSTvjRffmlKRSeI3jE.jpg"
+    },
+    {
+      "id": "783",
+      "name": "Jonathan Banks",
+      "character": "Mike Ehrmantraut",
+      "photo": "https://image.tmdb.org/t/p/w185/bswk26L13PvY4iMTwUTAsepXCLv.jpg"
+    }
+  ],
+  "seasons": 5,
+  "episodes": 62,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-10T08:30:18.838Z",
+  "createdAt": "2026-09-10T08:30:18.838Z",
+  "updatedAt": "2026-09-10T08:30:18.838Z",
+  "links": []
+}

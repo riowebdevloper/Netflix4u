@@ -1,0 +1,118 @@
+{
+  "id": "tmdb-movie-1632181",
+  "canonicalId": "tmdb-movie-1632181",
+  "externalProvider": "tmdb",
+  "externalId": "1632181",
+  "tmdbId": "1632181",
+  "imdbId": "tt40187050",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "Accidental Partners",
+  "canonicalTitle": "Accidental Partners",
+  "originalTitle": "Socias por accidente",
+  "overview": "Two women discover they were both scammed by the same man (who also got them pregnant). They form an alliance to take revenge.",
+  "description": "Two women discover they were both scammed by the same man (who also got them pregnant). They form an alliance to take revenge.",
+  "shortDescription": "Two women discover they were both scammed by the same man (who also got them pregnant). They form an alliance to take re",
+  "year": 2026,
+  "releaseDate": "2026-03-12",
+  "rating": 8.9,
+  "votes": "0.4K",
+  "quality": "FHD",
+  "duration": "1h 50m",
+  "genres": [
+    "Comedy",
+    "Romance"
+  ],
+  "categories": [
+    "Comedy",
+    "Romance"
+  ],
+  "language": "Spanish",
+  "country": "MX",
+  "director": "Ihtzi Hurtado",
+  "poster": "https://image.tmdb.org/t/p/w500/j0CIVzeR7hRAPBPGR54qDZoOQpp.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/iCML6fBe3X0y06P33bM7dyYXPKZ.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/tsjsPgnCM2U?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/tsjsPgnCM2U?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "1244197",
+      "name": "Angelique Boyer",
+      "character": "Alexa Hernández",
+      "photo": "https://image.tmdb.org/t/p/w185/c73CU85L1sHganTpVUHnjw3gbba.jpg"
+    },
+    {
+      "id": "1310902",
+      "name": "Bárbara de Regil",
+      "character": "Regina",
+      "photo": "https://image.tmdb.org/t/p/w185/2Oy7SFBIUtj4Qe2O6Ys9Bf8LJ86.jpg"
+    },
+    {
+      "id": "2990871",
+      "name": "Diego Klein",
+      "character": "Roy / Sebastián Benavides / Erick López",
+      "photo": "https://image.tmdb.org/t/p/w185/zUSgyUwiQVMqX5iuVrqXCtbdC7F.jpg"
+    },
+    {
+      "id": "1301500",
+      "name": "Lucía Uribe",
+      "character": "Claudia",
+      "photo": "https://image.tmdb.org/t/p/w185/zyuMAnbyG2a48B4602eoFI094pT.jpg"
+    },
+    {
+      "id": "1415550",
+      "name": "Isabella Camil",
+      "character": "Leticia Letram",
+      "photo": "https://image.tmdb.org/t/p/w185/jpRcrulEFlsy1ZMb1U9SY5ZPv0w.jpg"
+    },
+    {
+      "id": "942853",
+      "name": "Gabriela Platas",
+      "character": "Majo",
+      "photo": "https://image.tmdb.org/t/p/w185/kU9Qpq7uLHsEQR4ECZsl3D0KsXD.jpg"
+    },
+    {
+      "id": "941028",
+      "name": "Laura Flores",
+      "character": "Paty",
+      "photo": "https://image.tmdb.org/t/p/w185/rJqyCEBqB4ua2SjQ7PlDvzjlsby.jpg"
+    },
+    {
+      "id": "6220742",
+      "name": "Elena Pérez",
+      "character": "Nadia Letram",
+      "photo": null
+    },
+    {
+      "id": "1472484",
+      "name": "César Rodríguez",
+      "character": "Moncho",
+      "photo": "https://image.tmdb.org/t/p/w185/jDClj2dOXVaMNl1ky8FO8K3bsg8.jpg"
+    },
+    {
+      "id": "1869532",
+      "name": "Rolando Breme",
+      "character": "Ratero",
+      "photo": "https://image.tmdb.org/t/p/w185/iCGyKDH0ogBxf7Ha5VBDwlbIn36.jpg"
+    },
+    {
+      "id": "4251145",
+      "name": "Cecilia de los Santos Vargas",
+      "character": "Olivia",
+      "photo": "https://image.tmdb.org/t/p/w185/hfbQ8W1v2axJSX1XmB1iihn2z9d.jpg"
+    },
+    {
+      "id": "985540",
+      "name": "Tomihuatzi Xelhuantzi",
+      "character": "Don Onofre",
+      "photo": "https://image.tmdb.org/t/p/w185/nmWEjGTnyqExEb8QYku88sGhBve.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 1,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-10T08:30:11.141Z",
+  "createdAt": "2026-09-10T08:30:11.141Z",
+  "updatedAt": "2026-09-10T08:30:11.141Z",
+  "links": []
+}

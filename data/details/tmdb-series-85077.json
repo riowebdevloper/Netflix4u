@@ -1,0 +1,120 @@
+{
+  "id": "tmdb-series-85077",
+  "canonicalId": "tmdb-series-85077",
+  "externalProvider": "tmdb",
+  "externalId": "85077",
+  "tmdbId": "85077",
+  "imdbId": "tt5622316",
+  "type": "series",
+  "contentType": "series",
+  "title": "The Chosen",
+  "canonicalTitle": "The Chosen",
+  "originalTitle": "The Chosen",
+  "overview": "The life of Christ through the eyes of those who encountered him.",
+  "description": "The life of Christ through the eyes of those who encountered him.",
+  "shortDescription": "The life of Christ through the eyes of those who encountered him.",
+  "year": 2019,
+  "releaseDate": "2019-04-21",
+  "rating": 8.8,
+  "votes": "1.0K",
+  "quality": "FHD",
+  "duration": "60m/ep",
+  "genres": [
+    "Action & Adventure",
+    "Family",
+    "Drama"
+  ],
+  "categories": [
+    "Action & Adventure",
+    "Family",
+    "Drama"
+  ],
+  "language": "English",
+  "country": "US",
+  "director": "Dallas Jenkins",
+  "poster": "https://image.tmdb.org/t/p/w500/dqVUFuNrMFWt7uGNWlpo91VKYOI.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/3siv3RaQrdr2tQiv9jHq71sLlzo.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/5CVj41dtkIA?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/5CVj41dtkIA?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "1495825",
+      "name": "Jonathan Roumie",
+      "character": "Jesus of Nazareth",
+      "photo": "https://image.tmdb.org/t/p/w185/3YNwBebw2jNzV0FvbhAsDZoOjuQ.jpg"
+    },
+    {
+      "id": "1410477",
+      "name": "Shahar Isaac",
+      "character": "Simon Peter",
+      "photo": "https://image.tmdb.org/t/p/w185/5pkfXfiSHfA6Fcgs0nvHnjRx5Oz.jpg"
+    },
+    {
+      "id": "1355937",
+      "name": "Elizabeth Tabish",
+      "character": "Mary Magdalene",
+      "photo": "https://image.tmdb.org/t/p/w185/gG1aYOUzruR0f3wyYGuYa0xxcqO.jpg"
+    },
+    {
+      "id": "1598773",
+      "name": "Paras Patel",
+      "character": "Matthew",
+      "photo": "https://image.tmdb.org/t/p/w185/lZXovS6lvhBuAT5hQppOcT1LyYa.jpg"
+    },
+    {
+      "id": "1314134",
+      "name": "Noah James",
+      "character": "Andrew",
+      "photo": "https://image.tmdb.org/t/p/w185/j2s00uBQ0BOqSnIzRI4ecAthVTP.jpg"
+    },
+    {
+      "id": "1689733",
+      "name": "George H. Xanthis",
+      "character": "John",
+      "photo": "https://image.tmdb.org/t/p/w185/7P2faHqF2kAEREImeH7E7MpHRJz.jpg"
+    },
+    {
+      "id": "1673618",
+      "name": "Abe Bueno-Jallad",
+      "character": "Big James",
+      "photo": "https://image.tmdb.org/t/p/w185/l7RSI8NPKsyszCWr8MB2kI6hvTi.jpg"
+    },
+    {
+      "id": "2652467",
+      "name": "Joey Vahedi",
+      "character": "Thomas",
+      "photo": "https://image.tmdb.org/t/p/w185/ah79IVOuQ3oIooAmRhPv02vDUnf.jpg"
+    },
+    {
+      "id": "2253349",
+      "name": "Giavani Cairo",
+      "character": "Thaddeus",
+      "photo": "https://image.tmdb.org/t/p/w185/yA99DJRJvQSwHc7QoP6WqtzzYMG.jpg"
+    },
+    {
+      "id": "2698361",
+      "name": "Jordan Walker Ross",
+      "character": "Little James",
+      "photo": "https://image.tmdb.org/t/p/w185/4xKPN9nHnHCb6lkknIVmQkBBn0w.jpg"
+    },
+    {
+      "id": "1184226",
+      "name": "Shaan Sharma",
+      "character": "Shmuel",
+      "photo": "https://image.tmdb.org/t/p/w185/xuAYRVltME3At6WGkbnk8l3dgW4.jpg"
+    },
+    {
+      "id": "6864",
+      "name": "Kirk B.R. Woller",
+      "character": "Gaius",
+      "photo": "https://image.tmdb.org/t/p/w185/gpgNGpjja5gRowL1wmCPqSIRSVz.jpg"
+    }
+  ],
+  "seasons": 6,
+  "episodes": 47,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-10T08:30:19.879Z",
+  "createdAt": "2026-09-10T08:30:19.879Z",
+  "updatedAt": "2026-09-10T08:30:19.879Z",
+  "links": []
+}

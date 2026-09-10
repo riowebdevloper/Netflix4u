@@ -1,0 +1,43 @@
+{
+  "id": "tmdb-series-11890",
+  "canonicalId": "tmdb-series-11890",
+  "externalProvider": "tmdb",
+  "externalId": "11890",
+  "tmdbId": "11890",
+  "imdbId": "tt0096597",
+  "type": "series",
+  "contentType": "series",
+  "title": "Goede Tijden, Slechte Tijden",
+  "canonicalTitle": "Goede Tijden, Slechte Tijden",
+  "originalTitle": "Goede Tijden, Slechte Tijden",
+  "overview": "Goede tijden, slechte tijden, also known as GTST, is the longest-running Dutch soap opera,  revolving around the lives of the families Alberts, Sanders, De Jong, Van Houten and Bouwhuis. It all takes place in the fictional town of Meerdijk.",
+  "description": "Goede tijden, slechte tijden, also known as GTST, is the longest-running Dutch soap opera,  revolving around the lives of the families Alberts, Sanders, De Jong, Van Houten and Bouwhuis. It all takes place in the fictional town of Meerdijk.",
+  "shortDescription": "Goede tijden, slechte tijden, also known as GTST, is the longest-running Dutch soap opera,  revolving around the lives o",
+  "year": 1990,
+  "releaseDate": "1990-10-01",
+  "rating": 5.3,
+  "votes": "0.0K",
+  "quality": "FHD",
+  "duration": "30m/ep",
+  "genres": [
+    "Soap"
+  ],
+  "categories": [
+    "Soap"
+  ],
+  "language": "Dutch",
+  "country": "NL",
+  "director": "Director",
+  "poster": "https://image.tmdb.org/t/p/w500/p1oXgtJ0q0wAcEp3tHA5DpiynxL.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/hlVfglhjnlCP5tp8hFvTQKQVaMp.jpg",
+  "trailerUrl": null,
+  "trailer": null,
+  "cast": [],
+  "seasons": 37,
+  "episodes": 7325,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-10T08:30:18.070Z",
+  "createdAt": "2026-09-10T08:30:18.070Z",
+  "updatedAt": "2026-09-10T08:30:18.070Z",
+  "links": []
+}

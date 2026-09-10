@@ -1,0 +1,84 @@
+{
+  "id": "tmdb-series-246",
+  "canonicalId": "tmdb-series-246",
+  "externalProvider": "tmdb",
+  "externalId": "246",
+  "tmdbId": "246",
+  "imdbId": "tt0417299",
+  "type": "series",
+  "contentType": "series",
+  "title": "Avatar: The Last Airbender",
+  "canonicalTitle": "Avatar: The Last Airbender",
+  "originalTitle": "Avatar: The Last Airbender",
+  "overview": "In a war-torn world of elemental magic, a young boy reawakens to undertake a dangerous mystic quest to fulfill his destiny as the Avatar, and bring peace to the world.",
+  "description": "In a war-torn world of elemental magic, a young boy reawakens to undertake a dangerous mystic quest to fulfill his destiny as the Avatar, and bring peace to the world.",
+  "shortDescription": "In a war-torn world of elemental magic, a young boy reawakens to undertake a dangerous mystic quest to fulfill his desti",
+  "year": 2005,
+  "releaseDate": "2005-02-21",
+  "rating": 8.8,
+  "votes": "5.1K",
+  "quality": "FHD",
+  "duration": "24m/ep",
+  "genres": [
+    "Animation",
+    "Action & Adventure",
+    "Sci-Fi & Fantasy"
+  ],
+  "categories": [
+    "Animation",
+    "Action & Adventure",
+    "Sci-Fi & Fantasy"
+  ],
+  "language": "English",
+  "country": "US",
+  "director": "Director",
+  "poster": "https://image.tmdb.org/t/p/w500/yaGt4GIutpbXHsv48tWceWg6s56.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/7oBGhqJIghRBvOwo5Qe0yM0cnMc.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/d1EnW4kn1kg?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/d1EnW4kn1kg?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "60251",
+      "name": "Zach Tyler Eisen",
+      "character": "Aang (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/ifHd2Yoovlvu6FFEIxUsXVyrYUf.jpg"
+    },
+    {
+      "id": "52404",
+      "name": "Mae Whitman",
+      "character": "Katara (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/y7fg9R5zvqDCZCUt3uwcyOoCOFp.jpg"
+    },
+    {
+      "id": "60230",
+      "name": "Jack De Sena",
+      "character": "Sokka (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/i9VlMsPol6XIicnRZRiwmYSyE4P.jpg"
+    },
+    {
+      "id": "13391",
+      "name": "Dante Basco",
+      "character": "Zuko (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/2bfQho7MEo4wAQTmC687FkXUoKU.jpg"
+    },
+    {
+      "id": "61304",
+      "name": "Michaela Jill Murphy",
+      "character": "Toph Beifong (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/4ghTS2mkdfHt4vNHIzDIyU1mVxT.jpg"
+    },
+    {
+      "id": "23680",
+      "name": "Dee Bradley Baker",
+      "character": "Appa / Momo (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/9oFnToDZWp0I484s7Ua1EzNQQ2m.jpg"
+    }
+  ],
+  "seasons": 3,
+  "episodes": 61,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-10T08:30:20.134Z",
+  "createdAt": "2026-09-10T08:30:20.134Z",
+  "updatedAt": "2026-09-10T08:30:20.134Z",
+  "links": []
+}

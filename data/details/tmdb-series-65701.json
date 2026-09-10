@@ -1,0 +1,56 @@
+{
+  "id": "tmdb-series-65701",
+  "canonicalId": "tmdb-series-65701",
+  "externalProvider": "tmdb",
+  "externalId": "65701",
+  "tmdbId": "65701",
+  "imdbId": "tt4087032",
+  "type": "series",
+  "contentType": "series",
+  "title": "Good Mythical Morning",
+  "canonicalTitle": "Good Mythical Morning",
+  "originalTitle": "Good Mythical Morning",
+  "overview": "Two \"Internetainers\" (Rhett & Link) go far out and do the weirdest things, giving you a daily dose of casual comedy every Monday-Friday.",
+  "description": "Two \"Internetainers\" (Rhett & Link) go far out and do the weirdest things, giving you a daily dose of casual comedy every Monday-Friday.",
+  "shortDescription": "Two \"Internetainers\" (Rhett & Link) go far out and do the weirdest things, giving you a daily dose of casual comedy ever",
+  "year": 2012,
+  "releaseDate": "2012-01-09",
+  "rating": 6.9,
+  "votes": "0.1K",
+  "quality": "FHD",
+  "duration": "10m/ep",
+  "genres": [
+    "Comedy"
+  ],
+  "categories": [
+    "Comedy"
+  ],
+  "language": "English",
+  "country": "US",
+  "director": "Director",
+  "poster": "https://image.tmdb.org/t/p/w500/jMpBQr2aNOFAI6wsC47zsOG6qOh.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/hvFCS0dMeC3ffiF4uYTKzUAkvYL.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/1iLbfGIygO0?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/1iLbfGIygO0?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "1176586",
+      "name": "Link Neal",
+      "character": "Self - Host",
+      "photo": "https://image.tmdb.org/t/p/w185/kRGfDZxFM1TLoovPY0gTrMWw6Tc.jpg"
+    },
+    {
+      "id": "1176585",
+      "name": "Rhett McLaughlin",
+      "character": "Self - Host",
+      "photo": "https://image.tmdb.org/t/p/w185/kbo15Tdm0nxLSdgoXL30dBsNSiG.jpg"
+    }
+  ],
+  "seasons": 31,
+  "episodes": 3440,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-10T08:30:17.538Z",
+  "createdAt": "2026-09-10T08:30:17.538Z",
+  "updatedAt": "2026-09-10T08:30:17.538Z",
+  "links": []
+}

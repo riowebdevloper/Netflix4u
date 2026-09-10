@@ -1,0 +1,43 @@
+{
+  "id": "tmdb-series-291",
+  "canonicalId": "tmdb-series-291",
+  "externalProvider": "tmdb",
+  "externalId": "291",
+  "tmdbId": "291",
+  "imdbId": "tt0053494",
+  "type": "series",
+  "contentType": "series",
+  "title": "Coronation Street",
+  "canonicalTitle": "Coronation Street",
+  "originalTitle": "Coronation Street",
+  "overview": "The residents of Coronation Street are ordinary, working-class people, and the show follows them through regular social and family interactions at home, in the workplace, and in their local pub, the Rovers Return Inn. Britain's longest-running soap.",
+  "description": "The residents of Coronation Street are ordinary, working-class people, and the show follows them through regular social and family interactions at home, in the workplace, and in their local pub, the Rovers Return Inn. Britain's longest-running soap.",
+  "shortDescription": "The residents of Coronation Street are ordinary, working-class people, and the show follows them through regular social ",
+  "year": 1960,
+  "releaseDate": "1960-12-09",
+  "rating": 5.4,
+  "votes": "0.1K",
+  "quality": "FHD",
+  "duration": "22m/ep",
+  "genres": [
+    "Soap"
+  ],
+  "categories": [
+    "Soap"
+  ],
+  "language": "English",
+  "country": "GB",
+  "director": "Director",
+  "poster": "https://image.tmdb.org/t/p/w500/5x1HXqYqPyYw7oc7Isu1lvVmwRP.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/5APjn4LnV5wWk5DXq7ZewT6zzP1.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/t6sBZ2Lvz6Q?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/t6sBZ2Lvz6Q?rel=0&modestbranding=1",
+  "cast": [],
+  "seasons": 67,
+  "episodes": 4735,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-10T08:30:14.287Z",
+  "createdAt": "2026-09-10T08:30:14.287Z",
+  "updatedAt": "2026-09-10T08:30:14.287Z",
+  "links": []
+}

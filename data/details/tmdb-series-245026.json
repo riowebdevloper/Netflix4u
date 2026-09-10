@@ -1,0 +1,84 @@
+{
+  "id": "tmdb-series-245026",
+  "canonicalId": "tmdb-series-245026",
+  "externalProvider": "tmdb",
+  "externalId": "245026",
+  "tmdbId": "245026",
+  "imdbId": "tt31867798",
+  "type": "series",
+  "contentType": "series",
+  "title": "Wizards Beyond Waverly Place",
+  "canonicalTitle": "Wizards Beyond Waverly Place",
+  "originalTitle": "Wizards Beyond Waverly Place",
+  "overview": "Justin Russo has chosen to lead a normal, mortal life with his family, Giada, Roman and Milo. But when Justin's sister Alex brings Billie to his home seeking help, Justin realizes he must dust off his magical skills to mentor the wizard-in-training while also juggling his everyday responsibilities — and safeguarding the future of the Wizard World.",
+  "description": "Justin Russo has chosen to lead a normal, mortal life with his family, Giada, Roman and Milo. But when Justin's sister Alex brings Billie to his home seeking help, Justin realizes he must dust off his magical skills to mentor the wizard-in-training while also juggling his everyday responsibilities — and safeguarding the future of the Wizard World.",
+  "shortDescription": "Justin Russo has chosen to lead a normal, mortal life with his family, Giada, Roman and Milo. But when Justin's sister A",
+  "year": 2024,
+  "releaseDate": "2024-10-29",
+  "rating": 8.8,
+  "votes": "0.2K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Comedy",
+    "Sci-Fi & Fantasy",
+    "Family"
+  ],
+  "categories": [
+    "Comedy",
+    "Sci-Fi & Fantasy",
+    "Family"
+  ],
+  "language": "English",
+  "country": "US",
+  "director": "Director",
+  "poster": "https://image.tmdb.org/t/p/w500/5hrBpjFzIqmN9k7QxEC610gwZGw.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/TxicZcsiP9VHYXMYHm4IEHnwv9.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/M_3dQ6ofXwI?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/M_3dQ6ofXwI?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "3387856",
+      "name": "Janice LeAnn Brown",
+      "character": "Billie",
+      "photo": "https://image.tmdb.org/t/p/w185/7lTiuUJ5XoMMVQaSuuHf0mWeEy5.jpg"
+    },
+    {
+      "id": "3788842",
+      "name": "Alkaio Thiele",
+      "character": "Roman Russo",
+      "photo": "https://image.tmdb.org/t/p/w185/umGJFRItwlF6cejtv9Xglzxk4Vl.jpg"
+    },
+    {
+      "id": "2000339",
+      "name": "Max Matenko",
+      "character": "Milo Russo",
+      "photo": "https://image.tmdb.org/t/p/w185/hQPrzI9XohrsyfVe8c7aHj5Unus.jpg"
+    },
+    {
+      "id": "4714792",
+      "name": "Taylor Cora",
+      "character": "Winter",
+      "photo": "https://image.tmdb.org/t/p/w185/jgoN5sy9Kb0lkc6kDDFV0UKBgyo.jpg"
+    },
+    {
+      "id": "1427681",
+      "name": "Mimi Gianopulos",
+      "character": "Giada Russo",
+      "photo": "https://image.tmdb.org/t/p/w185/1uIioPyiGp4XeOjbeJt9Yswf6rA.jpg"
+    },
+    {
+      "id": "95136",
+      "name": "David Henrie",
+      "character": "Justin Russo",
+      "photo": "https://image.tmdb.org/t/p/w185/kW4AKTC23wSLOkzVi7lca9Ixcl5.jpg"
+    }
+  ],
+  "seasons": 3,
+  "episodes": 35,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-10T08:30:19.094Z",
+  "createdAt": "2026-09-10T08:30:19.094Z",
+  "updatedAt": "2026-09-10T08:30:19.094Z",
+  "links": []
+}

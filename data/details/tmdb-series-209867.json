@@ -1,0 +1,86 @@
+{
+  "id": "tmdb-series-209867",
+  "canonicalId": "tmdb-series-209867",
+  "externalProvider": "tmdb",
+  "externalId": "209867",
+  "tmdbId": "209867",
+  "imdbId": "tt22248376",
+  "type": "series",
+  "contentType": "series",
+  "title": "Frieren: Beyond Journey's End",
+  "canonicalTitle": "Frieren: Beyond Journey's End",
+  "originalTitle": "葬送のフリーレン",
+  "overview": "After the party of heroes defeated the Demon King, they restored peace to the land and returned to lives of solitude.  Generations pass, and the elven mage Frieren comes face to face with humanity’s mortality. She takes on a new apprentice and promises to fulfill old friends’ dying wishes. Can an elven mind make peace with the nature of life and death? Frieren embarks on her quest to find out.",
+  "description": "After the party of heroes defeated the Demon King, they restored peace to the land and returned to lives of solitude.  Generations pass, and the elven mage Frieren comes face to face with humanity’s mortality. She takes on a new apprentice and promises to fulfill old friends’ dying wishes. Can an elven mind make peace with the nature of life and death? Frieren embarks on her quest to find out.",
+  "shortDescription": "After the party of heroes defeated the Demon King, they restored peace to the land and returned to lives of solitude.  G",
+  "year": 2023,
+  "releaseDate": "2023-09-29",
+  "rating": 8.8,
+  "votes": "1.0K",
+  "quality": "FHD",
+  "duration": "25m/ep",
+  "genres": [
+    "Animation",
+    "Action & Adventure",
+    "Drama",
+    "Sci-Fi & Fantasy"
+  ],
+  "categories": [
+    "Animation",
+    "Action & Adventure",
+    "Drama",
+    "Sci-Fi & Fantasy"
+  ],
+  "language": "Japanese",
+  "country": "JP",
+  "director": "Director",
+  "poster": "https://image.tmdb.org/t/p/w500/dqZENchTd7lp5zht7BdlqM7RBhD.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/rBOnrVlck7BIlGeWVlzYiZeg4l2.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/01WEqntM1NI?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/01WEqntM1NI?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "1588597",
+      "name": "Atsumi Tanezaki",
+      "character": "Frieren (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/6tM8GU7QvrdUCvR4kxqVUZivtvO.jpg"
+    },
+    {
+      "id": "1972402",
+      "name": "Kana Ichinose",
+      "character": "Fern (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/hBJx5tpLA2vkXqfkPZosGjW4e8C.jpg"
+    },
+    {
+      "id": "2279389",
+      "name": "Chiaki Kobayashi",
+      "character": "Stark (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/o0XZFXc50z28ICUpvfZ1QcTL2Yt.jpg"
+    },
+    {
+      "id": "1245094",
+      "name": "Nobuhiko Okamoto",
+      "character": "Himmel (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/7s1K2yQVF5iIWILaOfG7QrMZkXA.jpg"
+    },
+    {
+      "id": "89832",
+      "name": "Hiroki Touchi",
+      "character": "Heiter (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/bU2vogWmnTWiQEwUADWlnBqAPhJ.jpg"
+    },
+    {
+      "id": "1264228",
+      "name": "Yoji Ueda",
+      "character": "Eisen (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/fHvIfE0Q7ab0DFlkNVFcXvTKX9y.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 38,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-10T08:30:19.615Z",
+  "createdAt": "2026-09-10T08:30:19.615Z",
+  "updatedAt": "2026-09-10T08:30:19.615Z",
+  "links": []
+}

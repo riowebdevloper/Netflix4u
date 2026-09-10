@@ -1,0 +1,102 @@
+{
+  "id": "tmdb-movie-1302904",
+  "canonicalId": "tmdb-movie-1302904",
+  "externalProvider": "tmdb",
+  "externalId": "1302904",
+  "tmdbId": "1302904",
+  "imdbId": "tt32588798",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "Practical Magic 2",
+  "canonicalTitle": "Practical Magic 2",
+  "originalTitle": "Practical Magic 2",
+  "overview": "The Owens sisters must confront the dark curse that threatens to unravel their family once and for all.",
+  "description": "The Owens sisters must confront the dark curse that threatens to unravel their family once and for all.",
+  "shortDescription": "The Owens sisters must confront the dark curse that threatens to unravel their family once and for all.",
+  "year": 2026,
+  "releaseDate": "2026-09-09",
+  "rating": 6.5,
+  "votes": "0.0K",
+  "quality": "FHD",
+  "duration": "2h 10m",
+  "genres": [
+    "Romance",
+    "Fantasy",
+    "Comedy"
+  ],
+  "categories": [
+    "Romance",
+    "Fantasy",
+    "Comedy"
+  ],
+  "language": "English",
+  "country": "US",
+  "director": "Susanne Bier",
+  "poster": "https://image.tmdb.org/t/p/w500/ogwQOLbCfncjvBhFb5l0OmQH8KC.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/wE6syT1vv6W24iLGfhR4kQHnIDN.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/Ho10_4IX1jE?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/Ho10_4IX1jE?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "18277",
+      "name": "Sandra Bullock",
+      "character": "Sally Owens",
+      "photo": "https://image.tmdb.org/t/p/w185/4rfjISL3Flx16jfiusXoHbpt87X.jpg"
+    },
+    {
+      "id": "2227",
+      "name": "Nicole Kidman",
+      "character": "Gillian Owens",
+      "photo": "https://image.tmdb.org/t/p/w185/4KSQDodyBtTDMaREYgMdWD1LbH1.jpg"
+    },
+    {
+      "id": "125025",
+      "name": "Joey King",
+      "character": "Kylie Owens",
+      "photo": "https://image.tmdb.org/t/p/w185/94c69mPYSK9jFsAEu0OKB7Qs684.jpg"
+    },
+    {
+      "id": "1181313",
+      "name": "Maisie Williams",
+      "character": "Antonia Owens",
+      "photo": "https://image.tmdb.org/t/p/w185/zk1rlBVci2fmnFhMezaPpa4kwZF.jpg"
+    },
+    {
+      "id": "1185997",
+      "name": "Xolo Maridueña",
+      "character": "Gideon",
+      "photo": "https://image.tmdb.org/t/p/w185/tJMI7BpjlhHSMpzSz9e1XxygnKd.jpg"
+    },
+    {
+      "id": "72095",
+      "name": "Lee Pace",
+      "character": "Ian Wright",
+      "photo": "https://image.tmdb.org/t/p/w185/eeTc0d2AX1vFYVxZ6Qw7qZpg4Tz.jpg"
+    },
+    {
+      "id": "1902",
+      "name": "Dianne Wiest",
+      "character": "Aunt Jet",
+      "photo": "https://image.tmdb.org/t/p/w185/p9mfzY68FtEbedOMNB5X4eBShhx.jpg"
+    },
+    {
+      "id": "8893",
+      "name": "Stockard Channing",
+      "character": "Aunt Frances",
+      "photo": "https://image.tmdb.org/t/p/w185/qAYBGvapAnnhpoZuYFyoqetncs5.jpg"
+    },
+    {
+      "id": "3060978",
+      "name": "Solly McLeod",
+      "character": "Thomas Lockland",
+      "photo": "https://image.tmdb.org/t/p/w185/6aMA4kUV1ji4uu3zzBzQ9fwgUDO.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 1,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-10T08:30:08.073Z",
+  "createdAt": "2026-09-10T08:30:08.073Z",
+  "updatedAt": "2026-09-10T08:30:08.073Z",
+  "links": []
+}

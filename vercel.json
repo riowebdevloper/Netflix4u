@@ -1,6 +1,9 @@
 {
   "version": 2,
   "rewrites": [
+    { "source": "/api/details/:id", "destination": "/api/details?id=:id" },
+    { "source": "/api/playback/:id", "destination": "/api/playback?id=:id" },
+    { "source": "/api/cron/sync", "destination": "/api/cron/sync" },
     { "source": "/movie/:match*", "destination": "/index.html" },
     { "source": "/series/:match*", "destination": "/index.html" },
     { "source": "/anime/:match*", "destination": "/index.html" },
@@ -19,6 +22,12 @@
     { "source": "/privacy", "destination": "/index.html" },
     { "source": "/terms", "destination": "/index.html" },
     { "source": "/dmca", "destination": "/index.html" }
+  ],
+  "crons": [
+    {
+      "path": "/api/cron/sync",
+      "schedule": "0 3 * * *"
+    }
   ],
   "headers": [
     {

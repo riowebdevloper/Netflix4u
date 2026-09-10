@@ -1,0 +1,62 @@
+{
+  "id": "tmdb-series-301507",
+  "canonicalId": "tmdb-series-301507",
+  "externalProvider": "tmdb",
+  "externalId": "301507",
+  "tmdbId": "301507",
+  "imdbId": "tt35495073",
+  "type": "series",
+  "contentType": "series",
+  "title": "Heated Rivalry",
+  "canonicalTitle": "Heated Rivalry",
+  "originalTitle": "Heated Rivalry",
+  "overview": "Two of the biggest stars in Major League Hockey are bound by ambition, rivalry, and a magnetic pull neither of them fully understands. What begins as a secret fling between two fresh faced rookies evolves into a years-long journey of love, denial, and self-discovery. Over the next eight years, as they chase glory on the ice, they struggle to navigate their feelings for each other. Torn between the sport they live for and the love they can’t ignore, they must decide if there’s room in their fiercely competitive world for something as fragile – and powerful – as real love.",
+  "description": "Two of the biggest stars in Major League Hockey are bound by ambition, rivalry, and a magnetic pull neither of them fully understands. What begins as a secret fling between two fresh faced rookies evolves into a years-long journey of love, denial, and self-discovery. Over the next eight years, as they chase glory on the ice, they struggle to navigate their feelings for each other. Torn between the sport they live for and the love they can’t ignore, they must decide if there’s room in their fiercely competitive world for something as fragile – and powerful – as real love.",
+  "shortDescription": "Two of the biggest stars in Major League Hockey are bound by ambition, rivalry, and a magnetic pull neither of them full",
+  "year": 2025,
+  "releaseDate": "2025-11-28",
+  "rating": 8.7,
+  "votes": "0.6K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Drama"
+  ],
+  "categories": [
+    "Drama"
+  ],
+  "language": "English",
+  "country": "CA",
+  "director": "Jacob Tierney",
+  "poster": "https://image.tmdb.org/t/p/w500/3YCKbtAkYWCMDLHvkUjGhG7eWoS.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/3vuBfAuAltIR6UdANUQ1lLXOeia.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/ADi1iextoUM?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/ADi1iextoUM?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "4194612",
+      "name": "Hudson Williams",
+      "character": "Shane Hollander",
+      "photo": "https://image.tmdb.org/t/p/w185/qahFJFc6RFExOlf0lDeHau0iEol.jpg"
+    },
+    {
+      "id": "4270366",
+      "name": "Connor Storrie",
+      "character": "Ilya Rozanov",
+      "photo": "https://image.tmdb.org/t/p/w185/ApBEzGlTz7sM839eT4vMQV3xmdg.jpg"
+    },
+    {
+      "id": "469462",
+      "name": "François Arnaud",
+      "character": "Scott Hunter",
+      "photo": "https://image.tmdb.org/t/p/w185/2aPDGUGRcrBYmrQLc8AklEqp7xI.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 6,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-10T08:30:21.839Z",
+  "createdAt": "2026-09-10T08:30:21.839Z",
+  "updatedAt": "2026-09-10T08:30:21.839Z",
+  "links": []
+}
