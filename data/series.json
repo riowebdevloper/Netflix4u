@@ -1,5 +1,26 @@
 [
   {
+    "id": "tmdb-series-300507",
+    "canonicalId": "tmdb-series-300507",
+    "title": "Crew Girl",
+    "rawTitle": "Crew Girl",
+    "slug": "tmdb-series-300507-crew-girl",
+    "type": "series",
+    "year": 2026,
+    "quality": "FHD",
+    "provider": "tmdb",
+    "rating": 8,
+    "poster": "https://image.tmdb.org/t/p/w500/jkPZW1iHNvlI6077NxSxwITa1tj.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/original/lmtTtOjsIBxwKD7LsAD5eeyhq1g.jpg",
+    "imdbId": "tt38218082",
+    "tmdbId": "300507",
+    "categories": [
+      "Drama"
+    ],
+    "status": "PUBLISHED",
+    "publishedAt": "2026-09-10T10:02:17.340Z"
+  },
+  {
     "id": "tmdb-series-60059",
     "canonicalId": "tmdb-series-60059",
     "title": "Better Call Saul",
@@ -2172,28 +2193,6 @@
     "rating": 8.4,
     "poster": "https://image.tmdb.org/t/p/w500/mxa7YxVln3Rwnd2Va82PoclTznj.jpg",
     "backdrop": "https://image.tmdb.org/t/p/w500/mxa7YxVln3Rwnd2Va82PoclTznj.jpg",
-    "categories": [
-      "Web Series",
-      "Drama",
-      "TV Shows"
-    ],
-    "status": "PUBLISHED",
-    "publishedAt": "2026-09-10T08:30:22.111Z"
-  },
-  {
-    "id": "dotmobiz-78820",
-    "canonicalId": "dotmobiz-78820",
-    "record_id": "78820",
-    "title": "Laughter Chefs Unlimited Entertainment",
-    "rawTitle": "Laughter Chefs Unlimited Entertainment Season 3 2025 Hindi Web Dl 720p 480p 1080p Ep 10 Added",
-    "slug": "78820-laughter-chefs-unlimited-entertainment-season-3-2025-hindi-web-dl-720p-480p-1080p-ep-10-added",
-    "type": "series",
-    "year": 2025,
-    "quality": "FHD",
-    "provider": "dotmobiz",
-    "rating": 8.4,
-    "poster": "https://image.tmdb.org/t/p/w500/zu9yTo3VOY5k7b3PQT5RT74W4GU.jpg",
-    "backdrop": "https://image.tmdb.org/t/p/w500/zu9yTo3VOY5k7b3PQT5RT74W4GU.jpg",
     "categories": [
       "Web Series",
       "Drama",

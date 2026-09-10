@@ -14,8 +14,8 @@
   function extractVcloudUrl(rawUrl) {
     if (!rawUrl || typeof rawUrl !== 'string') return '';
     var cur = rawUrl;
-    while (cur.indexOf('vcloud=') !== -1) {
-      var m = cur.match(/vcloud=([^&]+)/);
+    while (cur.indexOf('vcloud=') !== -1 || cur.indexOf('url=') !== -1) {
+      var m = cur.match(/[?&](?:vcloud|url)=([^&#]+)/);
       if (m) {
         cur = decodeURIComponent(m[1]);
       } else {
@@ -28,10 +28,28 @@
   window.getFastCloudDownloadHref = function(rawUrl) {
     if (!rawUrl) return '#';
     var vcloud = extractVcloudUrl(rawUrl);
-    if (vcloud.indexOf('vcloud') === -1 && vcloud.indexOf('workers.dev') === -1) {
-      return rawUrl;
+
+    // If it's a direct external download link (like nexdrive, google drive, direct mp4, etc.)
+    if (vcloud.indexOf('vcloud') === -1 && vcloud.indexOf('workers.dev') === -1 && (vcloud.indexOf('http://') === 0 || vcloud.indexOf('https://') === 0)) {
+      return vcloud;
     }
-    return WORKER_HOSTS[0] + '/?vcloud=' + encodeURIComponent(vcloud);
+
+    if (vcloud.indexOf('vcloud') !== -1 || vcloud.indexOf('workers.dev') !== -1) {
+      // Ensure clean unwrapped vcloud URL for the worker
+      var cleanTarget = vcloud;
+      if (cleanTarget.indexOf('vcloud=') !== -1) {
+        var m = cleanTarget.match(/vcloud=([^&#]+)/);
+        if (m) cleanTarget = decodeURIComponent(m[1]);
+      }
+      return WORKER_HOSTS[0] + '/?vcloud=' + encodeURIComponent(cleanTarget);
+    }
+
+    // Safety guard: Never return internal /api/download path
+    if (rawUrl.indexOf('/api/download') === 0 || rawUrl.indexOf('api/download') === 0) {
+      return WORKER_HOSTS[0] + '/?vcloud=' + encodeURIComponent(rawUrl);
+    }
+
+    return rawUrl;
   };
 
   window.handleFastCloudDownload = async function(event, rawUrl) {
@@ -68,10 +86,16 @@
     var cleanVcloud = extractVcloudUrl(rawUrl);
 
     // If direct link (not vcloud or workers), open directly
-    if (cleanVcloud.indexOf('vcloud') === -1 && cleanVcloud.indexOf('workers.dev') === -1) {
+    if (cleanVcloud.indexOf('vcloud') === -1 && cleanVcloud.indexOf('workers.dev') === -1 && (cleanVcloud.indexOf('http://') === 0 || cleanVcloud.indexOf('https://') === 0)) {
       window.open(cleanVcloud, '_blank', 'noopener,noreferrer');
       restore();
       return;
+    }
+
+    // Ensure we have the raw target for workers
+    if (cleanVcloud.indexOf('vcloud=') !== -1) {
+      var m = cleanVcloud.match(/vcloud=([^&#]+)/);
+      if (m) cleanVcloud = decodeURIComponent(m[1]);
     }
 
     // Try high-speed direct resolution via Workers

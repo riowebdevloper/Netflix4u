@@ -135,7 +135,11 @@ function cleanMovieTitle(raw) {
 
 function mapHicineItem(item, defaultType = "movie") {
   if (!item) return null;
-  const id = String(item.record_id || item.id || item._id);
+  const rawStr = String(item.canonicalId || item.id || item.record_id || item._id || '').trim();
+  const rawNum = String(item.record_id || item.id || '').replace(/^dotmobiz-/, '');
+  const canonicalId = (rawStr.startsWith('tmdb-') || rawStr.startsWith('dotmobiz-'))
+    ? rawStr
+    : (rawNum ? `dotmobiz-${rawNum}` : rawStr);
   const rawTitle = item.rawTitle || item.title || "Untitled";
   const cleanTitle = cleanMovieTitle(item.title || item.rawTitle || "Untitled");
   const poster = item.poster || item.featured_image || "/images/no-poster.svg";
@@ -148,7 +152,8 @@ function mapHicineItem(item, defaultType = "movie") {
   const type = isAnime ? "anime" : (isKdrama ? "kdrama" : (isSeries ? "series" : (item.type || defaultType)));
 
   return {
-    id,
+    id: canonicalId,
+    canonicalId,
     imdbId: item.imdbId || "",
     tmdbId: item.tmdbId || "",
     type,
@@ -371,6 +376,8 @@ const fetchBollywood = async (s = 1) => {
         const hay = ((x.language||"")+" "+(x.originalTitle||"")+" "+(x.rawTitle||"")+" "+(x.title||"")+" "+(x.categories||[]).join(" ")+" "+(x.country||"")).toLowerCase();
         const isSouth = hay.includes("south") || hay.includes("tamil") || hay.includes("telugu") || hay.includes("malayalam") || hay.includes("kannada") || hay.includes("tollywood") || hay.includes("kollywood");
         if (isSouth) return false;
+        const isHollywood = (Array.isArray(x.categories) && x.categories.some(c => /hollywood/i.test(c))) || hay.includes("hollywood");
+        if (isHollywood) return false;
         return hay.includes("bollywood") || (!hay.includes("english") && hay.includes("hindi")) || ((x.country||"").toLowerCase().includes("india") && !hay.includes("english"));
       });
       const pageSize = 24;
@@ -445,10 +452,11 @@ const $0=async s=>{
   if(!s)return[];
   try {
     const res = await fetch('/api/search?q=' + encodeURIComponent(s));
-    if (res.ok && res.headers.get('content-type')?.includes('application/json')) {
+    if (res.ok) {
       const json = await res.json();
-      if (json && json.results && json.results.length > 0) {
-        return json.results.map(t => mapHicineItem(t));
+      const list = Array.isArray(json) ? json : (json && (json.results || json.data));
+      if (Array.isArray(list) && list.length > 0) {
+        return list.map(t => mapHicineItem(t));
       }
     }
     const summary = await getSummaryCatalog();

@@ -54,7 +54,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@700;800;900&display=swap" rel="stylesheet">
     <link rel="preload" as="font" crossorigin="" href="/fonts/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2">
     <!-- Netflix4U Exact Design System -->
-    <link rel="stylesheet" href="/css/netflix4u-exact.css?v=2.5">
+    <link rel="stylesheet" href="/css/netflix4u-exact.css?v=3.2.0">
 
     <title>Netflix4U — Stream Movies, Series, Anime & K-Dramas</title>
 
@@ -174,18 +174,31 @@
     }
     </script>
 
-    <!-- Runtime compatibility shim -->
+    <!-- Runtime compatibility shim & Automatic Cache Invalidation -->
     <script>
       window.process = window.process || { env: { NODE_ENV: 'production' } };
+      (function() {
+        var APP_VER = '3.2.0';
+        try {
+          if (localStorage.getItem('n4u_version') !== APP_VER) {
+            localStorage.setItem('n4u_version', APP_VER);
+            if ('caches' in window) {
+              caches.keys().then(function(names) {
+                names.forEach(function(n) { caches.delete(n); });
+              });
+            }
+          }
+        } catch(e) {}
+      })();
     </script>
-    <script src="/js/site-quality.js?v=2.5" defer></script>
-    <script src="/js/real-poster-resolver.js?v=2.5"></script>
-    <script src="/js/download-resolver.js?v=2.5"></script>
-    <script type="module" src="/js/index-CQL8lqua.js"></script>
-    <link rel="modulepreload" crossorigin="" href="/js/vendor-react-h5WnBHGl.js">
-    <link rel="modulepreload" crossorigin="" href="/js/vendor-framer-BGQgIPyw.js">
-    <link rel="modulepreload" crossorigin="" href="/js/vendor-ui-BbvII91P.js">
-    <link rel="stylesheet" crossorigin="" href="/css/index-usTMTSwH.css">
+    <script src="/js/site-quality.js?v=3.2.0" defer></script>
+    <script src="/js/real-poster-resolver.js?v=3.2.0"></script>
+    <script src="/js/download-resolver.js?v=3.2.0"></script>
+    <script type="module" src="/js/index-CQL8lqua.js?v=3.2.0"></script>
+    <link rel="modulepreload" crossorigin="" href="/js/vendor-react-h5WnBHGl.js?v=3.2.0">
+    <link rel="modulepreload" crossorigin="" href="/js/vendor-framer-BGQgIPyw.js?v=3.2.0">
+    <link rel="modulepreload" crossorigin="" href="/js/vendor-ui-BbvII91P.js?v=3.2.0">
+    <link rel="stylesheet" crossorigin="" href="/css/index-usTMTSwH.css?v=3.2.0">
   
     <!-- Global Design System: Consistent Typographic Scale & Harmonized Button Styles -->
     <style>

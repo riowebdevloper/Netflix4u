@@ -1,0 +1,74 @@
+{
+  "id": "tmdb-series-300507",
+  "canonicalId": "tmdb-series-300507",
+  "externalProvider": "tmdb",
+  "externalId": "300507",
+  "tmdbId": "300507",
+  "imdbId": "tt38218082",
+  "type": "series",
+  "contentType": "series",
+  "title": "Crew Girl",
+  "canonicalTitle": "Crew Girl",
+  "originalTitle": "Crew Girl",
+  "overview": "16-year-old rower Teagan becomes coxswain of a troubled boys' crew at an elite prep school. She navigates team drama, romance, rival crews, and a complex relationship with her mom while trying to lead them to victory.",
+  "description": "16-year-old rower Teagan becomes coxswain of a troubled boys' crew at an elite prep school. She navigates team drama, romance, rival crews, and a complex relationship with her mom while trying to lead them to victory.",
+  "shortDescription": "16-year-old rower Teagan becomes coxswain of a troubled boys' crew at an elite prep school. She navigates team drama, ro",
+  "year": 2026,
+  "releaseDate": "2026-09-10",
+  "rating": 8,
+  "votes": "1.2K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Drama"
+  ],
+  "categories": [
+    "Drama"
+  ],
+  "language": "English",
+  "country": "CA",
+  "director": "Director",
+  "poster": "https://image.tmdb.org/t/p/w500/jkPZW1iHNvlI6077NxSxwITa1tj.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/lmtTtOjsIBxwKD7LsAD5eeyhq1g.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/Xs5qsfqp-tA?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/Xs5qsfqp-tA?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "2417570",
+      "name": "Miku Martineau",
+      "character": "Teagan Tao",
+      "photo": "https://image.tmdb.org/t/p/w185/58S1hYHe1TuHgxxaddzCbqxjJNJ.jpg"
+    },
+    {
+      "id": "82096",
+      "name": "Jessica Paré",
+      "character": "Ella Emerson-Tao",
+      "photo": "https://image.tmdb.org/t/p/w185/udvHIbFPW646vDkbnipb82wPUxs.jpg"
+    },
+    {
+      "id": "1272885",
+      "name": "Samuel Braun",
+      "character": "Josh Regis",
+      "photo": "https://image.tmdb.org/t/p/w185/8nP9SqKpvVgJcw9mgANPdMKHf72.jpg"
+    },
+    {
+      "id": "4708640",
+      "name": "Kyle Clark",
+      "character": "Cam Dillinger",
+      "photo": "https://image.tmdb.org/t/p/w185/yFkg5ClOTqc6ca643bOeaUtnDb3.jpg"
+    },
+    {
+      "id": "1858370",
+      "name": "Thomas Cadrot",
+      "character": "Coach Matt Hayden",
+      "photo": "https://image.tmdb.org/t/p/w185/2klFFu6ZSunZPGC51Bg2kSdx7Xg.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 8,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-10T10:02:17.340Z",
+  "createdAt": "2026-09-10T10:02:17.340Z",
+  "updatedAt": "2026-09-10T10:02:17.340Z",
+  "links": []
+}

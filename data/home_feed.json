@@ -1,6 +1,27 @@
 {
   "trending": [
     {
+      "id": "tmdb-series-300507",
+      "canonicalId": "tmdb-series-300507",
+      "title": "Crew Girl",
+      "rawTitle": "Crew Girl",
+      "slug": "tmdb-series-300507-crew-girl",
+      "type": "series",
+      "year": 2026,
+      "quality": "FHD",
+      "provider": "tmdb",
+      "rating": 8,
+      "poster": "https://image.tmdb.org/t/p/w500/jkPZW1iHNvlI6077NxSxwITa1tj.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/original/lmtTtOjsIBxwKD7LsAD5eeyhq1g.jpg",
+      "imdbId": "tt38218082",
+      "tmdbId": "300507",
+      "categories": [
+        "Drama"
+      ],
+      "status": "PUBLISHED",
+      "publishedAt": "2026-09-10T10:02:17.340Z"
+    },
+    {
       "id": "tmdb-series-60059",
       "canonicalId": "tmdb-series-60059",
       "title": "Better Call Saul",
@@ -424,28 +445,6 @@
       ],
       "status": "PUBLISHED",
       "publishedAt": "2026-09-10T08:30:16.381Z"
-    },
-    {
-      "id": "tmdb-series-14610",
-      "canonicalId": "tmdb-series-14610",
-      "title": "Secret Lives",
-      "rawTitle": "Secret Lives",
-      "slug": "tmdb-series-14610-secret-lives",
-      "type": "series",
-      "year": 1999,
-      "quality": "FHD",
-      "provider": "tmdb",
-      "rating": 4.2,
-      "poster": "https://image.tmdb.org/t/p/w500/ugYAGyxwajuplDUUYT8Bzbj8eNR.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/original/nG2im8JKKNB6dXg9ZmVTuiYqFJI.jpg",
-      "imdbId": "tt0185819",
-      "tmdbId": "14610",
-      "categories": [
-        "Soap",
-        "Drama"
-      ],
-      "status": "PUBLISHED",
-      "publishedAt": "2026-09-10T08:30:16.125Z"
     }
   ],
   "recent": [
@@ -606,6 +605,27 @@
       ],
       "status": "PUBLISHED",
       "publishedAt": "2022-08-28T13:22:56.000Z"
+    },
+    {
+      "id": "tmdb-series-300507",
+      "canonicalId": "tmdb-series-300507",
+      "title": "Crew Girl",
+      "rawTitle": "Crew Girl",
+      "slug": "tmdb-series-300507-crew-girl",
+      "type": "series",
+      "year": 2026,
+      "quality": "FHD",
+      "provider": "tmdb",
+      "rating": 8,
+      "poster": "https://image.tmdb.org/t/p/w500/jkPZW1iHNvlI6077NxSxwITa1tj.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/original/lmtTtOjsIBxwKD7LsAD5eeyhq1g.jpg",
+      "imdbId": "tt38218082",
+      "tmdbId": "300507",
+      "categories": [
+        "Drama"
+      ],
+      "status": "PUBLISHED",
+      "publishedAt": "2026-09-10T10:02:17.340Z"
     },
     {
       "id": "tmdb-movie-1632181",
@@ -824,7 +844,7 @@
       "year": 2026,
       "quality": "FHD",
       "provider": "tmdb",
-      "rating": 8,
+      "rating": 7.1,
       "poster": "https://image.tmdb.org/t/p/w500/bgZN3gniRohjfKdsw1Q7EGBAyqz.jpg",
       "backdrop": "https://image.tmdb.org/t/p/original/lJYniNRM2i9wXnfWVHOB4PxygFZ.jpg",
       "imdbId": "tt38061210",
@@ -905,31 +925,30 @@
       ],
       "status": "PUBLISHED",
       "publishedAt": "2026-09-10T08:30:22.107Z"
-    },
-    {
-      "id": "dotmobiz-94180",
-      "canonicalId": "dotmobiz-94180",
-      "record_id": "94180",
-      "title": "My Bias My Boss",
-      "rawTitle": "My Bias My Boss 2026 Season 1 Hindi Korean Dual Audio Web Dl 720p 480p 1080p Ep 01 Added",
-      "slug": "94180-my-bias-my-boss-2026-season-1-hindi-korean-dual-audio-web-dl-720p-480p-1080p-ep-01-added",
-      "type": "kdrama",
-      "year": 2026,
-      "quality": "FHD",
-      "provider": "dotmobiz",
-      "rating": 7.8,
-      "poster": "https://image.tmdb.org/t/p/w500/A4Y4xlDHS4xi2WI9265vRyIYLoo.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/original/eBD46F44qKGPZiRLffO4q3JF8Hc.jpg",
-      "categories": [
-        "K-Drama",
-        "Drama",
-        "Asian"
-      ],
-      "status": "PUBLISHED",
-      "publishedAt": "2026-09-10T08:30:22.107Z"
     }
   ],
   "featured": [
+    {
+      "id": "tmdb-series-300507",
+      "canonicalId": "tmdb-series-300507",
+      "title": "Crew Girl",
+      "rawTitle": "Crew Girl",
+      "slug": "tmdb-series-300507-crew-girl",
+      "type": "series",
+      "year": 2026,
+      "quality": "FHD",
+      "provider": "tmdb",
+      "rating": 8,
+      "poster": "https://image.tmdb.org/t/p/w500/jkPZW1iHNvlI6077NxSxwITa1tj.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/original/lmtTtOjsIBxwKD7LsAD5eeyhq1g.jpg",
+      "imdbId": "tt38218082",
+      "tmdbId": "300507",
+      "categories": [
+        "Drama"
+      ],
+      "status": "PUBLISHED",
+      "publishedAt": "2026-09-10T10:02:17.340Z"
+    },
     {
       "id": "tmdb-series-60059",
       "canonicalId": "tmdb-series-60059",
@@ -1084,29 +1103,6 @@
       ],
       "status": "PUBLISHED",
       "publishedAt": "2026-09-10T08:30:20.134Z"
-    },
-    {
-      "id": "tmdb-series-85077",
-      "canonicalId": "tmdb-series-85077",
-      "title": "The Chosen",
-      "rawTitle": "The Chosen",
-      "slug": "tmdb-series-85077-the-chosen",
-      "type": "series",
-      "year": 2019,
-      "quality": "FHD",
-      "provider": "tmdb",
-      "rating": 8.8,
-      "poster": "https://image.tmdb.org/t/p/w500/dqVUFuNrMFWt7uGNWlpo91VKYOI.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/original/3siv3RaQrdr2tQiv9jHq71sLlzo.jpg",
-      "imdbId": "tt5622316",
-      "tmdbId": "85077",
-      "categories": [
-        "Action & Adventure",
-        "Family",
-        "Drama"
-      ],
-      "status": "PUBLISHED",
-      "publishedAt": "2026-09-10T08:30:19.879Z"
     }
   ],
   "popularMovies": [
@@ -1373,7 +1369,7 @@
       "year": 2026,
       "quality": "FHD",
       "provider": "tmdb",
-      "rating": 8,
+      "rating": 7.1,
       "poster": "https://image.tmdb.org/t/p/w500/bgZN3gniRohjfKdsw1Q7EGBAyqz.jpg",
       "backdrop": "https://image.tmdb.org/t/p/original/lJYniNRM2i9wXnfWVHOB4PxygFZ.jpg",
       "imdbId": "tt38061210",
@@ -1567,6 +1563,27 @@
     }
   ],
   "popularSeries": [
+    {
+      "id": "tmdb-series-300507",
+      "canonicalId": "tmdb-series-300507",
+      "title": "Crew Girl",
+      "rawTitle": "Crew Girl",
+      "slug": "tmdb-series-300507-crew-girl",
+      "type": "series",
+      "year": 2026,
+      "quality": "FHD",
+      "provider": "tmdb",
+      "rating": 8,
+      "poster": "https://image.tmdb.org/t/p/w500/jkPZW1iHNvlI6077NxSxwITa1tj.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/original/lmtTtOjsIBxwKD7LsAD5eeyhq1g.jpg",
+      "imdbId": "tt38218082",
+      "tmdbId": "300507",
+      "categories": [
+        "Drama"
+      ],
+      "status": "PUBLISHED",
+      "publishedAt": "2026-09-10T10:02:17.340Z"
+    },
     {
       "id": "tmdb-series-60059",
       "canonicalId": "tmdb-series-60059",
@@ -1991,28 +2008,6 @@
       ],
       "status": "PUBLISHED",
       "publishedAt": "2026-09-10T08:30:16.381Z"
-    },
-    {
-      "id": "tmdb-series-14610",
-      "canonicalId": "tmdb-series-14610",
-      "title": "Secret Lives",
-      "rawTitle": "Secret Lives",
-      "slug": "tmdb-series-14610-secret-lives",
-      "type": "series",
-      "year": 1999,
-      "quality": "FHD",
-      "provider": "tmdb",
-      "rating": 4.2,
-      "poster": "https://image.tmdb.org/t/p/w500/ugYAGyxwajuplDUUYT8Bzbj8eNR.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/original/nG2im8JKKNB6dXg9ZmVTuiYqFJI.jpg",
-      "imdbId": "tt0185819",
-      "tmdbId": "14610",
-      "categories": [
-        "Soap",
-        "Drama"
-      ],
-      "status": "PUBLISHED",
-      "publishedAt": "2026-09-10T08:30:16.125Z"
     }
   ],
   "anime": [
@@ -3692,6 +3687,27 @@
       "publishedAt": "2022-08-28T13:22:56.000Z"
     },
     {
+      "id": "tmdb-series-300507",
+      "canonicalId": "tmdb-series-300507",
+      "title": "Crew Girl",
+      "rawTitle": "Crew Girl",
+      "slug": "tmdb-series-300507-crew-girl",
+      "type": "series",
+      "year": 2026,
+      "quality": "FHD",
+      "provider": "tmdb",
+      "rating": 8,
+      "poster": "https://image.tmdb.org/t/p/w500/jkPZW1iHNvlI6077NxSxwITa1tj.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/original/lmtTtOjsIBxwKD7LsAD5eeyhq1g.jpg",
+      "imdbId": "tt38218082",
+      "tmdbId": "300507",
+      "categories": [
+        "Drama"
+      ],
+      "status": "PUBLISHED",
+      "publishedAt": "2026-09-10T10:02:17.340Z"
+    },
+    {
       "id": "tmdb-movie-1632181",
       "canonicalId": "tmdb-movie-1632181",
       "title": "Accidental Partners",
@@ -3897,30 +3913,7 @@
       ],
       "status": "PUBLISHED",
       "publishedAt": "2026-09-10T08:30:08.073Z"
-    },
-    {
-      "id": "tmdb-movie-1522689",
-      "canonicalId": "tmdb-movie-1522689",
-      "title": "Why Did I Get Married Again?",
-      "rawTitle": "Why Did I Get Married Again?",
-      "slug": "tmdb-movie-1522689-why-did-i-get-married-again-",
-      "type": "movie",
-      "year": 2026,
-      "quality": "FHD",
-      "provider": "tmdb",
-      "rating": 8,
-      "poster": "https://image.tmdb.org/t/p/w500/bgZN3gniRohjfKdsw1Q7EGBAyqz.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/original/lJYniNRM2i9wXnfWVHOB4PxygFZ.jpg",
-      "imdbId": "tt38061210",
-      "tmdbId": "1522689",
-      "categories": [
-        "Romance",
-        "Comedy",
-        "Drama"
-      ],
-      "status": "PUBLISHED",
-      "publishedAt": "2026-09-10T08:30:07.260Z"
     }
   ],
-  "updatedAt": "2026-09-10T09:21:44.465Z"
+  "updatedAt": "2026-09-10T10:02:17.513Z"
 }

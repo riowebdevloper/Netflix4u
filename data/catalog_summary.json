@@ -1,5 +1,26 @@
 [
   {
+    "id": "tmdb-series-300507",
+    "canonicalId": "tmdb-series-300507",
+    "title": "Crew Girl",
+    "rawTitle": "Crew Girl",
+    "slug": "tmdb-series-300507-crew-girl",
+    "type": "series",
+    "year": 2026,
+    "quality": "FHD",
+    "provider": "tmdb",
+    "rating": 8,
+    "poster": "https://image.tmdb.org/t/p/w500/jkPZW1iHNvlI6077NxSxwITa1tj.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/original/lmtTtOjsIBxwKD7LsAD5eeyhq1g.jpg",
+    "imdbId": "tt38218082",
+    "tmdbId": "300507",
+    "categories": [
+      "Drama"
+    ],
+    "status": "PUBLISHED",
+    "publishedAt": "2026-09-10T10:02:17.340Z"
+  },
+  {
     "id": "tmdb-series-60059",
     "canonicalId": "tmdb-series-60059",
     "title": "Better Call Saul",
@@ -1012,7 +1033,7 @@
     "year": 2026,
     "quality": "FHD",
     "provider": "tmdb",
-    "rating": 8,
+    "rating": 7.1,
     "poster": "https://image.tmdb.org/t/p/w500/bgZN3gniRohjfKdsw1Q7EGBAyqz.jpg",
     "backdrop": "https://image.tmdb.org/t/p/original/lJYniNRM2i9wXnfWVHOB4PxygFZ.jpg",
     "imdbId": "tt38061210",
