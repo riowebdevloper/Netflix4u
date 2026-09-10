@@ -107,8 +107,12 @@ if (file_exists($cacheFile) && (time() - filemtime($cacheFile) < 1209600)) {
 // --- Poster URL Domain Allowlist ---
 $ALLOWED_POSTER_DOMAINS = [
     'image.tmdb.org',
+    'media.themoviedb.org',
     'storage.hicine.sbs',
-    'i.imgur.com'
+    'img.hicine.sbs',
+    'i.imgur.com',
+    'm.media-amazon.com',
+    'images-na.ssl-images-amazon.com'
 ];
 
 function isAllowedPosterUrl($url) {
@@ -144,7 +148,7 @@ function cleanTitle($t) {
     $t = preg_replace('/\[[^\]]*\]|\([^\)]*\)|\{[^\}]*\}/', ' ', $t);
     $t = preg_replace('/\b(?:Season\s*\d+|S\d{1,2}|Ep(?:isode)?\s*\d+|All\s*Episodes?|Complete\s*Season).*$/i', '', $t);
     $t = preg_replace('/\b(19\d{2}|20\d{2})\b.*$/i', '', $t);
-    $t = preg_replace('/\b(?:Hindi|English|Tamil|Telugu|Dual|Audio|Dubbed|Web|FHD|HD|4K).*$/i', '', $t);
+    $t = preg_replace('/\b(?:Hindi|English|Tamil|Telugu|Malayalam|Kannada|Korean|Japanese|Dual|Audio|Dubbed|Web|FHD|HD|4K).*$/i', '', $t);
     return trim(preg_replace('/\s+/', ' ', $t));
 }
 
@@ -153,7 +157,7 @@ $backdrop = null;
 
 // 1. If IMDb ID is available, try /find
 if (!empty($imdbId) && strpos($imdbId, 'tt') === 0) {
-    $findUrl = "https://api.themoviedb.org/3/find/" . urlencode($imdbId) . "?api_key={$apiKey}&external_source=imdb_id";
+    $findUrl = "https://api.tmdb.org/3/find/" . urlencode($imdbId) . "?api_key={$apiKey}&external_source=imdb_id";
     $findRaw = fetchTMDB($findUrl);
     if ($findRaw) {
         $findJson = @json_decode($findRaw, true);
@@ -173,17 +177,27 @@ if (!empty($imdbId) && strpos($imdbId, 'tt') === 0) {
 if (empty($poster) && !empty($title)) {
     $clean = cleanTitle($title);
     if (!empty($clean)) {
-        $searchUrl = "https://api.themoviedb.org/3/search/{$endpoint}?api_key={$apiKey}&query=" . urlencode($clean);
+        // Try primary endpoint first
+        $searchUrl = "https://api.tmdb.org/3/search/{$endpoint}?api_key={$apiKey}&query=" . urlencode($clean);
         $searchRaw = fetchTMDB($searchUrl);
-        if ($searchRaw) {
-            $searchJson = @json_decode($searchRaw, true);
-            if (!empty($searchJson['results'][0])) {
-                $item = $searchJson['results'][0];
-                $candidatePoster = !empty($item['poster_path']) ? 'https://image.tmdb.org/t/p/w500' . $item['poster_path'] : null;
-                $candidateBackdrop = !empty($item['backdrop_path']) ? 'https://image.tmdb.org/t/p/original' . $item['backdrop_path'] : null;
-                if (isAllowedPosterUrl($candidatePoster)) $poster = $candidatePoster;
-                if (isAllowedPosterUrl($candidateBackdrop)) $backdrop = $candidateBackdrop;
+        $searchJson = $searchRaw ? @json_decode($searchRaw, true) : null;
+        
+        // Fallback to alternate endpoint if no results found
+        if (empty($searchJson['results'][0])) {
+            $altEndpoint = ($endpoint === 'tv') ? 'movie' : 'tv';
+            $altSearchUrl = "https://api.tmdb.org/3/search/{$altEndpoint}?api_key={$apiKey}&query=" . urlencode($clean);
+            $altRaw = fetchTMDB($altSearchUrl);
+            if ($altRaw) {
+                $searchJson = @json_decode($altRaw, true);
             }
+        }
+
+        if (!empty($searchJson['results'][0])) {
+            $item = $searchJson['results'][0];
+            $candidatePoster = !empty($item['poster_path']) ? 'https://image.tmdb.org/t/p/w500' . $item['poster_path'] : null;
+            $candidateBackdrop = !empty($item['backdrop_path']) ? 'https://image.tmdb.org/t/p/original' . $item['backdrop_path'] : null;
+            if (isAllowedPosterUrl($candidatePoster)) $poster = $candidatePoster;
+            if (isAllowedPosterUrl($candidateBackdrop)) $backdrop = $candidateBackdrop;
         }
     }
 }

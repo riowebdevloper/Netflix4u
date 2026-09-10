@@ -25,6 +25,8 @@ DirectoryIndex index.html index.php
   RewriteRule ^api/health/?$ api/health.php [QSA,L]
   RewriteRule ^api/cast/?$ api/cast.php [QSA,L]
   RewriteRule ^api/poster-resolver/?$ api/poster-resolver.php [QSA,L]
+  RewriteRule ^api/trailer/?$ api/trailer.php [QSA,L]
+  RewriteRule ^api/tmdb/(.*)$ api/tmdb.php?endpoint=$1 [QSA,L]
 
   # 3. 🛑 Terminal Guard: Stop processing if request is already for index.html
   RewriteRule ^index\.html$ - [L]

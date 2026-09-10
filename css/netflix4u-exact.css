@@ -39,21 +39,29 @@ html, body {
 header {
   position: fixed !important;
   top: 0 !important; left: 0 !important; right: 0 !important;
-  height: var(--nf-header-h) !important;
   z-index: 1000 !important;
-  background: linear-gradient(180deg, rgba(0,0,0,0.7) 10%, transparent 100%) !important;
+  background: linear-gradient(180deg, rgba(0,0,0,0.8) 10%, transparent 100%) !important;
   transition: background-color 0.4s ease !important;
   display: flex !important;
-  align-items: center !important;
-  padding: 0 4% !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  padding: 0 !important;
 }
 header.nf-scrolled {
   background: #141414 !important;
 }
+header nav {
+  width: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 0 4% !important;
+  box-sizing: border-box !important;
+}
 
 #nav-logo { display: flex !important; align-items: center !important; flex-shrink: 0 !important; }
 #nav-logo img, header a[href="/"] img {
-  height: 32px !important; max-height: 32px !important;
+  height: 30px !important; max-height: 30px !important;
   width: auto !important; max-width: 120px !important;
   object-fit: contain !important; display: block !important;
 }
@@ -82,8 +90,8 @@ header nav a[class*="active"] { color: #ffffff !important; font-weight: 700 !imp
 #nav-search-trigger:hover { color: #ffffff !important; }
 
 @media (max-width: 640px) {
-  #nav-logo img { height: 22px !important; max-height: 22px !important; max-width: 90px !important; }
-  header { padding: 0 4% !important; height: 56px !important; }
+  #nav-logo img { height: 22px !important; max-height: 22px !important; max-width: 95px !important; }
+  header nav { padding: 0 1rem !important; height: 54px !important; }
 }
 
 /* ─── 4. HERO / BILLBOARD ────────────────────────────────────────────────────── */
@@ -231,7 +239,25 @@ header nav a[class*="active"] { color: #ffffff !important; font-weight: 700 !imp
   .hero-buttons-row .btn-primary, .hero-buttons-row .btn-secondary { padding: 0.45rem 1.2rem !important; font-size: 0.9rem !important; }
   .hero-watchlist-text { display: none !important; }
   .hero-nav-arrow { display: none !important; }
-  .hero-dots-container { display: none !important; }
+  .hero-dots-container {
+    max-width: 85vw !important;
+    overflow: hidden !important;
+    justify-content: center !important;
+    gap: 5px !important;
+    bottom: 1rem !important;
+  }
+  .hero-dot {
+    width: 5px !important;
+    height: 5px !important;
+    border-radius: 9999px !important;
+  }
+  .hero-dot-active {
+    width: 16px !important;
+    height: 5px !important;
+  }
+  .hero-dots-container button:nth-child(n+7) {
+    display: none !important;
+  }
 }
 
 /* ─── 5. MAIN & SECTION HEADERS ─────────────────────────────────────────────── */
@@ -254,30 +280,47 @@ section [class*="overflow-x-auto"] {
 section > div[class*="relative group"] { overflow: visible !important; }
 
 /* ─── 6. MOVIE CARDS — NETFLIX HOVER EXPAND ──────────────────────────────────── */
-.group.relative.flex-shrink-0 {
-  width: 185px !important; transform-origin: center bottom !important; z-index: 1 !important; cursor: pointer !important;
-  transition: transform 0.35s ease 0.3s, z-index 0s 0.3s !important;
+@media (hover: hover) and (pointer: fine) and (min-width: 1024px) {
+  .group.relative.flex-shrink-0 {
+    width: 185px !important; transform-origin: center bottom !important; z-index: 1 !important; cursor: pointer !important;
+    transition: transform 0.35s ease 0.3s, z-index 0s 0.3s !important;
+  }
+  .group.relative.flex-shrink-0:hover {
+    transform: scale(1.5) !important; z-index: 100 !important;
+    transition: transform 0.35s ease 0.4s, z-index 0s 0.4s !important;
+  }
+  .group.relative.flex-shrink-0 [class*="rounded-xl"][class*="overflow-hidden"] { border-radius: 4px !important; }
+  .group.relative.flex-shrink-0:hover [class*="rounded-xl"][class*="overflow-hidden"] {
+    border-radius: 4px 4px 0 0 !important;
+    box-shadow: 0 0 0 2px rgba(255,255,255,0.12), 0 8px 32px rgba(0,0,0,0.9) !important;
+  }
+  .group.relative.flex-shrink-0:hover [class*="mt-2 px-0.5"] { opacity: 0 !important; }
+
+  /* Edge card origins */
+  section [class*="overflow-x-auto"] > div:first-child .group.relative.flex-shrink-0:hover,
+  section [class*="overflow-x-auto"] > div:nth-child(2) .group.relative.flex-shrink-0:hover { transform-origin: left bottom !important; }
+  section [class*="overflow-x-auto"] > div:last-child .group.relative.flex-shrink-0:hover,
+  section [class*="overflow-x-auto"] > div:nth-last-child(2) .group.relative.flex-shrink-0:hover { transform-origin: right bottom !important; }
 }
-.group.relative.flex-shrink-0:hover {
-  transform: scale(1.5) !important; z-index: 100 !important;
-  transition: transform 0.35s ease 0.4s, z-index 0s 0.4s !important;
+
+@media (hover: none), (pointer: coarse), (max-width: 1023px) {
+  .group.relative.flex-shrink-0,
+  .group.relative.flex-shrink-0:hover,
+  .group.relative.flex-shrink-0:focus,
+  .group.relative.flex-shrink-0:active {
+    transform: none !important;
+    transition: none !important;
+    z-index: 1 !important;
+  }
+  .group.relative.flex-shrink-0:active {
+    opacity: 0.85 !important;
+  }
 }
-.group.relative.flex-shrink-0 [class*="rounded-xl"][class*="overflow-hidden"] { border-radius: 4px !important; }
-.group.relative.flex-shrink-0:hover [class*="rounded-xl"][class*="overflow-hidden"] {
-  border-radius: 4px 4px 0 0 !important;
-  box-shadow: 0 0 0 2px rgba(255,255,255,0.12), 0 8px 32px rgba(0,0,0,0.9) !important;
-}
+
 .group.relative.flex-shrink-0 span[class*="absolute top-2 left-2"] {
   background: #E50914 !important; color: #fff !important;
   font-size: 9px !important; font-weight: 700 !important; padding: 2px 5px !important; border-radius: 2px !important; border: none !important;
 }
-.group.relative.flex-shrink-0:hover [class*="mt-2 px-0.5"] { opacity: 0 !important; }
-
-/* Edge card origins */
-section [class*="overflow-x-auto"] > div:first-child .group.relative.flex-shrink-0:hover,
-section [class*="overflow-x-auto"] > div:nth-child(2) .group.relative.flex-shrink-0:hover { transform-origin: left bottom !important; }
-section [class*="overflow-x-auto"] > div:last-child .group.relative.flex-shrink-0:hover,
-section [class*="overflow-x-auto"] > div:nth-last-child(2) .group.relative.flex-shrink-0:hover { transform-origin: right bottom !important; }
 
 /* ─── 7. TOP 10 ──────────────────────────────────────────────────────────────── */
 .top-number, #top-10-section .top-number {
@@ -298,7 +341,8 @@ section [class*="overflow-x-auto"] > div:nth-last-child(2) .group.relative.flex-
 /* ─── 9. FOOTER ─────────────────────────────────────────────────────────────── */
 footer {
   background-color: #141414 !important; border-top: none !important;
-  padding: 3rem 4% !important; color: #808080 !important;
+  margin-top: 2rem !important;
+  padding: 2.5rem 4% !important; color: #808080 !important;
 }
 footer a { color: #808080 !important; font-size: 0.8125rem !important; transition: color 0.15s !important; }
 footer a:hover { color: #e5e5e5 !important; }
@@ -310,14 +354,35 @@ footer [class*="text-3xl"], footer [class*="text-2xl"] { font-size: 1.25rem !imp
 footer .grid { grid-template-columns: repeat(4, 1fr) !important; gap: 1rem !important; }
 
 @media (max-width: 767px) {
-  footer { padding: 2rem 4% 5.5rem 4% !important; }
-  footer .grid { grid-template-columns: 1fr 1fr !important; gap: 1.5rem 1rem !important; }
+  footer { margin-top: 1rem !important; padding: 2rem 4% 5.5rem 4% !important; }
+  footer .grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 1.5rem 1rem !important;
+  }
   footer .grid > div:first-child {
     grid-column: 1 / -1 !important; margin-bottom: 0.5rem !important;
     padding-bottom: 0.75rem !important; border-bottom: 1px solid rgba(255,255,255,0.08) !important;
   }
+  footer .grid > div:nth-child(2) { grid-column: 1 !important; }
+  footer .grid > div:nth-child(3) { grid-column: 2 !important; }
+  footer .grid > div:nth-child(4) { grid-column: 1 !important; }
+  footer .grid > div:nth-child(5) { grid-column: 2 !important; }
   footer .grid h3 { font-size: 0.75rem !important; font-weight: 700 !important; text-transform: uppercase !important; letter-spacing: 0.06em !important; color: #fff !important; }
   footer .grid li a { font-size: 0.8rem !important; color: #808080 !important; }
+}
+
+/* Remove excessive spacing before footer */
+@media (max-width: 1023px) {
+  main {
+    padding-bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px)) !important;
+  }
+  div[class*="max-w-[1600px]"][class*="py-12"] {
+    padding-bottom: 1.5rem !important;
+  }
+  div[class*="space-y-14"] {
+    margin-bottom: 0 !important;
+  }
 }
 
 /* ─── 10. MOBILE BOTTOM NAV ──────────────────────────────────────────────────── */

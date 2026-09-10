@@ -655,42 +655,61 @@ const server = http.createServer(async (req, res) => {
       }
     }
 
-    cleanTitle = cleanTitle.replace(/\(\d{4}\)/g, '').replace(/^(NetFlix|Prime|Disney\+|Hotstar|SonyLIV|ZEE5)\s+/i, '').trim();
+    cleanTitle = cleanTitle
+      .replace(/&#039;|&apos;|&quot;|&amp;/g, ' ')
+      .replace(/\[[^\]]*\]|\([^\)]*\)|\{[^\}]*\}/g, ' ')
+      .replace(/\b(?:Season\s*\d+|S\d{1,2}|Ep(?:isode)?\s*\d+|All\s*Episodes?|Complete\s*Season).*$/i, '')
+      .replace(/\b(19\d{2}|20\d{2})\b.*$/i, '')
+      .replace(/\b(?:Hindi|English|Tamil|Telugu|Malayalam|Kannada|Korean|Japanese|Dual|Audio|Dubbed|Web|FHD|HD|4K|HQ).*$/i, '')
+      .replace(/\s+/g, ' ')
+      .trim();
 
     if (!tmdbId && (cleanTitle || imdbId)) {
       tmdbId = await resolveTmdbId(cleanTitle, year, type, imdbId);
     }
 
     let trailerUrl = null;
+    let videoKey = null;
+    let videoName = '';
+
     if (tmdbId) {
       const endpoint = (type === 'series' || type === 'anime' || type === 'kdrama' || type === 'tv') ? 'tv' : 'movie';
-      const videoApiUrl = `https://api.tmdb.org/3/${endpoint}/${tmdbId}/videos?api_key=${SECRETS.TMDB_API_KEY}`;
-      try {
-        const vData = await new Promise(resolve => {
-          https.get(videoApiUrl, { headers: { 'User-Agent': 'Mozilla/5.0' }, timeout: 4000 }, r => {
-            let d = ''; r.on('data', c => d += c); r.on('end', () => { try { resolve(JSON.parse(d)); } catch(e) { resolve(null); } });
-          }).on('error', () => resolve(null));
-        });
-        if (vData && Array.isArray(vData.results) && vData.results.length > 0) {
-          const ytVideos = vData.results.filter(v => v.site === 'YouTube');
-          const official = ytVideos.find(v => v.type === 'Trailer' && v.official) || ytVideos.find(v => v.type === 'Trailer') || ytVideos.find(v => v.type === 'Teaser') || ytVideos[0];
-          if (official && official.key) {
-            trailerUrl = `https://www.youtube-nocookie.com/embed/${official.key}?rel=0&modestbranding=1`;
-          }
-        }
-      } catch(e) {}
-    }
+      const endpointsToTry = [endpoint, endpoint === 'tv' ? 'movie' : 'tv'];
 
-    // Fallback: Embed YouTube verified search player
-    if (!trailerUrl && cleanTitle) {
-      trailerUrl = `https://www.youtube-nocookie.com/embed?listType=search&list=${encodeURIComponent(cleanTitle + ' official trailer')}`;
+      for (const ep of endpointsToTry) {
+        if (trailerUrl) break;
+        const videoApiUrl = `https://api.tmdb.org/3/${ep}/${tmdbId}/videos?api_key=${SECRETS.TMDB_API_KEY}`;
+        try {
+          const vData = await new Promise(resolve => {
+            https.get(videoApiUrl, { headers: { 'User-Agent': 'Mozilla/5.0' }, timeout: 4000 }, r => {
+              let d = ''; r.on('data', c => d += c); r.on('end', () => { try { resolve(JSON.parse(d)); } catch(e) { resolve(null); } });
+            }).on('error', () => resolve(null));
+          });
+          if (vData && Array.isArray(vData.results) && vData.results.length > 0) {
+            const ytVideos = vData.results.filter(v => v.site === 'YouTube' && v.key);
+            const official = ytVideos.find(v => v.type === 'Trailer' && v.official) || ytVideos.find(v => v.type === 'Trailer') || ytVideos.find(v => v.type === 'Teaser') || ytVideos[0];
+            if (official && official.key) {
+              videoKey = official.key;
+              videoName = official.name || '';
+              trailerUrl = `https://www.youtube-nocookie.com/embed/${official.key}?rel=0&modestbranding=1`;
+            }
+          }
+        } catch(e) {}
+      }
     }
 
     res.writeHead(200, {
       'Content-Type': 'application/json; charset=utf-8',
       'Cache-Control': 'public, max-age=86400'
     });
-    res.end(JSON.stringify({ success: Boolean(trailerUrl), trailerUrl, state: trailerUrl ? 'ready' : 'unavailable' }));
+    res.end(JSON.stringify({
+      success: Boolean(trailerUrl),
+      trailerUrl,
+      key: videoKey,
+      name: videoName,
+      state: trailerUrl ? 'ready' : 'unavailable',
+      searchUrl: `https://www.youtube.com/results?search_query=${encodeURIComponent(cleanTitle + ' official trailer')}`
+    }));
     return;
   }
 
@@ -758,9 +777,23 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
-  // 4a-2. API: Generic TMDB Proxy (/api/tmdb/*) - Eliminates client-side TMDB API key exposure
+  // 4a-4. API: Generic TMDB Proxy (/api/tmdb/*) - Eliminates client-side TMDB API key exposure
   if (reqPath.startsWith('/api/tmdb/')) {
-    const tmdbSubPath = reqPath.replace('/api/tmdb', '');
+    let tmdbSubPath = reqPath.replace('/api/tmdb', '');
+
+    // Map local catalog IDs to TMDB IDs for /tv/:id and /movie/:id
+    const mediaMatch = tmdbSubPath.match(/^\/(tv|movie)\/(\d+)(.*)$/);
+    if (mediaMatch) {
+      const [, mediaType, idStr, rest] = mediaMatch;
+      const localItem = await resolveContentId(idStr);
+      if (localItem) {
+        const resolvedId = localItem.tmdbId || await resolveTmdbId(localItem.title, localItem.year, localItem.type, localItem.imdbId);
+        if (resolvedId && String(resolvedId) !== idStr) {
+          tmdbSubPath = `/${mediaType}/${resolvedId}${rest}`;
+        }
+      }
+    }
+
     const clientQuery = new URLSearchParams(queryParams);
     clientQuery.delete('api_key'); // Never trust client key
     clientQuery.set('api_key', SECRETS.TMDB_API_KEY);
@@ -785,6 +818,20 @@ const server = http.createServer(async (req, res) => {
       tmdbRes.on('data', c => d += c);
       tmdbRes.on('end', () => {
         if (tmdbRes.statusCode >= 200 && tmdbRes.statusCode < 300) {
+          try {
+            const parsed = JSON.parse(d);
+            // Ensure sequential episode numbers if episodes are present
+            if (Array.isArray(parsed.episodes)) {
+              parsed.episodes = parsed.episodes.map((ep, idx) => {
+                if (!ep.episode_number || typeof ep.episode_number !== 'number') {
+                  ep.episode_number = idx + 1;
+                }
+                return ep;
+              });
+              d = JSON.stringify(parsed);
+            }
+          } catch(e) {}
+
           trailerCache.set(cacheKey, d);
           res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'public, max-age=3600' });
           res.end(d);
