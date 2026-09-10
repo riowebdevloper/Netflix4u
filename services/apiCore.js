@@ -426,86 +426,97 @@ async function handleTmdb(req, res, customSubPath = '') {
     return sendJson(res, 400, { error: 'TMDB subpath required' });
   }
 
-  // Map local catalog IDs to TMDB IDs for /tv/:id and /movie/:id
-  const mediaMatch = subPath.match(/^\/(tv|movie)\/(\d+)(.*)$/);
-  if (mediaMatch) {
-    const [, mediaType, idStr, rest] = mediaMatch;
-    let resolvedId = null;
-
-    // Check direct detail file if present
-    const detailFile = path.join(DETAILS_DIR, idStr + '.json');
-    if (fs.existsSync(detailFile)) {
-      try {
-        const d = JSON.parse(fs.readFileSync(detailFile, 'utf8'));
-        if (d && d.tmdbId) resolvedId = d.tmdbId;
-      } catch(e) {}
-    }
-
-    // Check catalog summary
-    if (!resolvedId) {
-      const catalog = getCatalogSummary();
-      const localItem = catalog.find(x => String(x.id) === idStr || String(x.record_id) === idStr);
-      if (localItem) {
-        resolvedId = localItem.tmdbId;
-        if (!resolvedId && localItem.title) {
-          resolvedId = await resolveTmdbId(localItem.title, localItem.year, mediaType === 'tv' ? 'series' : 'movie', localItem.imdbId);
-        }
-      }
-    }
-
-    if (resolvedId && String(resolvedId) !== idStr) {
-      subPath = `/${mediaType}/${resolvedId}${rest}`;
-    }
-  }
-
   // Remove slug from client query parameters
   const clientQuery = new URLSearchParams(q);
   clientQuery.delete('slug');
   clientQuery.delete('api_key'); // Never trust client key
   clientQuery.set('api_key', TMDB_API_KEY);
 
-  const targetUrl = `https://api.tmdb.org/3${subPath}?${clientQuery.toString()}`;
   const cacheKey = `tmdb_${subPath}_${clientQuery.toString()}`;
-
   if (trailerCache.has(cacheKey)) {
     return sendJson(res, 200, JSON.parse(trailerCache.get(cacheKey)), { 'Cache-Control': 'public, max-age=3600' });
   }
 
-  https.get(targetUrl, {
-    headers: {
-      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
-      'Accept': 'application/json'
-    },
-    timeout: 6000
-  }, tmdbRes => {
-    let d = '';
-    tmdbRes.on('data', c => d += c);
-    tmdbRes.on('end', () => {
-      if (tmdbRes.statusCode >= 200 && tmdbRes.statusCode < 300) {
-        try {
-          const parsed = JSON.parse(d);
-          // Ensure sequential episode numbers
-          if (Array.isArray(parsed.episodes)) {
-            parsed.episodes = parsed.episodes.map((ep, idx) => {
-              if (!ep.episode_number || typeof ep.episode_number !== 'number') {
-                ep.episode_number = idx + 1;
-              }
-              return ep;
-            });
-            d = JSON.stringify(parsed);
-          }
-          trailerCache.set(cacheKey, d);
-          return sendJson(res, 200, JSON.parse(d), { 'Cache-Control': 'public, max-age=3600' });
-        } catch(e) {
-          return sendJson(res, 500, { error: 'Failed to parse TMDB response' });
-        }
-      } else {
-        return sendJson(res, tmdbRes.statusCode || 500, { error: 'TMDB upstream error', code: tmdbRes.statusCode });
-      }
+  function fetchTmdb(pathStr) {
+    const targetUrl = `https://api.tmdb.org/3${pathStr}?${clientQuery.toString()}`;
+    return new Promise((resolve, reject) => {
+      https.get(targetUrl, {
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
+          'Accept': 'application/json'
+        },
+        timeout: 6000
+      }, tmdbRes => {
+        let d = '';
+        tmdbRes.on('data', c => d += c);
+        tmdbRes.on('end', () => {
+          resolve({ status: tmdbRes.statusCode, data: d });
+        });
+      }).on('error', reject);
     });
-  }).on('error', (err) => {
+  }
+
+  try {
+    let result = await fetchTmdb(subPath);
+
+    // If 404, check if this is a local catalog ID that needs mapping to TMDB ID
+    if (result.status === 404) {
+      const mediaMatch = subPath.match(/^\/(tv|movie)\/(\d+)(.*)$/);
+      if (mediaMatch) {
+        const [, mediaType, idStr, rest] = mediaMatch;
+        let resolvedId = null;
+
+        // Check direct detail file
+        const detailFile = path.join(DETAILS_DIR, idStr + '.json');
+        if (fs.existsSync(detailFile)) {
+          try {
+            const d = JSON.parse(fs.readFileSync(detailFile, 'utf8'));
+            if (d && d.tmdbId) resolvedId = d.tmdbId;
+          } catch(e) {}
+        }
+
+        // Check catalog summary
+        if (!resolvedId) {
+          const catalog = getCatalogSummary();
+          const localItem = catalog.find(x => String(x.id) === idStr || String(x.record_id) === idStr);
+          if (localItem) {
+            resolvedId = localItem.tmdbId;
+            if (!resolvedId && localItem.title) {
+              resolvedId = await resolveTmdbId(localItem.title, localItem.year, mediaType === 'tv' ? 'series' : 'movie', localItem.imdbId);
+            }
+          }
+        }
+
+        if (resolvedId && String(resolvedId) !== idStr) {
+          const mappedSubPath = `/${mediaType}/${resolvedId}${rest}`;
+          result = await fetchTmdb(mappedSubPath);
+        }
+      }
+    }
+
+    if (result.status >= 200 && result.status < 300) {
+      try {
+        const parsed = JSON.parse(result.data);
+        if (Array.isArray(parsed.episodes)) {
+          parsed.episodes = parsed.episodes.map((ep, idx) => {
+            if (!ep.episode_number || typeof ep.episode_number !== 'number') {
+              ep.episode_number = idx + 1;
+            }
+            return ep;
+          });
+        }
+        const finalStr = JSON.stringify(parsed);
+        trailerCache.set(cacheKey, finalStr);
+        return sendJson(res, 200, parsed, { 'Cache-Control': 'public, max-age=3600' });
+      } catch(e) {
+        return sendJson(res, 500, { error: 'Failed to parse TMDB response' });
+      }
+    } else {
+      return sendJson(res, result.status || 500, { error: 'TMDB upstream error', code: result.status });
+    }
+  } catch(err) {
     sendJson(res, 502, { error: 'Failed to contact TMDB upstream: ' + (err.message || '') });
-  });
+  }
 }
 
 // 4. Cast Resolver (/api/cast)

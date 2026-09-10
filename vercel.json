@@ -1,13 +1,9 @@
 {
   "version": 2,
-  "functions": {
-    "api/**/*.js": {
-      "includeFiles": "data/catalog_summary.json",
-      "maxDuration": 15
-    }
-  },
   "rewrites": [
-    { "source": "/api/tmdb/(.*)", "destination": "/api/tmdb?slug=$1" },
+    { "source": "/api/tmdb/:slug*", "destination": "/api/tmdb?slug=:slug*" },
+    { "source": "/api/details/:id", "destination": "/api/details?id=:id" },
+    { "source": "/api/playback/:id", "destination": "/api/playback?id=:id" },
     { "source": "/movie/:match*", "destination": "/index.html" },
     { "source": "/series/:match*", "destination": "/index.html" },
     { "source": "/anime/:match*", "destination": "/index.html" },
