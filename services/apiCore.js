@@ -666,23 +666,7 @@ async function handleTmdb(req, res, customSubPath = '') {
   }
 }
 
-// 6. Cast Resolver (/api/cast)
-async function handleCast(req, res) {
-  if (handleCors(req, res)) return;
-  const q = getQueryParams(req);
 
-  const title = q.get('title') || '';
-  const tmdbId = q.get('tmdbId') || '';
-  const year = q.get('year') || '';
-  const type = q.get('type') || 'movie';
-  const imdbId = q.get('imdbId') || '';
-  sendJson(res, 200, {
-    status: 'ok',
-    uptime: Math.floor(process.uptime()),
-    timestamp: new Date().toISOString(),
-    service: 'Netflix4U Streaming Platform'
-  }, { 'Cache-Control': 'no-cache, no-store' });
-}
 
 // 9. Catalog Summary (/api/catalog & /api/summary)
 async function handleSummary(req, res) {
