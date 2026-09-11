@@ -1152,6 +1152,67 @@ async function handleCatalogApi(req, res) {
   sendJson(res, 404, { error: 'Catalog endpoint not found', path: rawPath });
 }
 
+// 11c. Net27 Authentic Embed Proxy & Stream Resolver (/api/embed-tmdb/:id)
+async function handleEmbedTmdb(req, res) {
+  if (handleCors(req, res)) return;
+  const q = getQueryParams(req);
+  const [rawPath] = (req.url || '').split('?');
+  const match = rawPath.match(/^\/api\/embed-tmdb(?:\/([^\/?#]+)|$)/i);
+  const id = (match && match[1]) || q.get('id') || '1339713';
+  const type = q.get('type') || 'movie';
+  const isTv = type === 'tv' || type === 'series';
+  const se = q.get('se') || q.get('season') || '1';
+  const ep = q.get('ep') || q.get('episode') || '1';
+
+  try {
+    const upstreamUrl = `https://net27.cc/api/embed-tmdb/${id}?type=${type}&se=${se}&ep=${ep}`;
+    const data = await new Promise((resolve) => {
+      const uReq = https.get(upstreamUrl, {
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
+          'Referer': 'https://net27.cc/',
+          'Accept': 'application/json'
+        },
+        timeout: 4000
+      }, uRes => {
+        let buf = '';
+        uRes.on('data', chunk => buf += chunk);
+        uRes.on('end', () => {
+          try {
+            resolve(JSON.parse(buf));
+          } catch(e) {
+            resolve(null);
+          }
+        });
+      });
+      uReq.on('error', () => resolve(null));
+      uReq.on('timeout', () => { uReq.destroy(); resolve(null); });
+    });
+
+    if (data && data.ok) {
+      return sendJson(res, 200, data);
+    }
+  } catch(e) {}
+
+  // Resilient Fallback to Peachify Embed (Net27's authentic embed fallback)
+  const peachifyUrl = isTv
+    ? `https://peachify.top/embed/tv/${id}/${se}/${ep}`
+    : `https://peachify.top/embed/movie/${id}`;
+
+  return sendJson(res, 200, {
+    ok: true,
+    tmdbId: Number(id) || id,
+    type: type,
+    currentSeason: Number(se) || 1,
+    currentEpisode: Number(ep) || 1,
+    mode: 'embed',
+    embedUrl: peachifyUrl,
+    fallback: true,
+    cdn: 'peachify.top',
+    source: 'net27-peachify'
+  });
+}
+
 async function handleWatchTmdb(req, res) {
   if (handleCors(req, res)) return;
   const q = getQueryParams(req);
@@ -1163,15 +1224,23 @@ async function handleWatchTmdb(req, res) {
   const season = q.get('se') || q.get('season') || '1';
   const episode = q.get('ep') || q.get('episode') || '1';
 
+  // Server 1: Net27 Authentic Embed (Peachify)
   const s1 = isTv
+    ? `https://peachify.top/embed/tv/${id}/${season}/${episode}`
+    : `https://peachify.top/embed/movie/${id}`;
+
+  // Server 2: VidLink Multi-Audio (Hindi + English + Multilingual)
+  const s2 = isTv
     ? `https://vidlink.pro/tv/${id}/${season}/${episode}?multiLang=true`
     : `https://vidlink.pro/movie/${id}?multiLang=true`;
 
-  const s2 = isTv
+  // Server 3: VidSrc Global
+  const s3 = isTv
     ? `https://vidsrc.me/embed/tv?tmdb=${id}&season=${season}&episode=${episode}`
     : `https://vidsrc.me/embed/movie?tmdb=${id}`;
 
-  const s3 = isTv
+  // Server 4: SuperStream
+  const s4 = isTv
     ? `https://vidsrc.cc/v2/embed/tv/${id}/${season}/${episode}`
     : `https://vidsrc.cc/v2/embed/movie/${id}`;
 
@@ -1215,9 +1284,10 @@ async function handleWatchTmdb(req, res) {
       <span>Back</span>
     </button>
     <div class="server-tabs">
-      <button class="server-btn active" onclick="switchServer('${s1}', this)">Server 1 (Multi-Audio)</button>
-      <button class="server-btn" onclick="switchServer('${s2}', this)">Server 2 (VidSrc)</button>
-      <button class="server-btn" onclick="switchServer('${s3}', this)">Server 3 (SuperStream)</button>
+      <button class="server-btn active" onclick="switchServer('${s1}', this)">🟢 Server 1 (Net27 Peachify)</button>
+      <button class="server-btn" onclick="switchServer('${s2}', this)">🔵 Server 2 (VidLink Multi-Audio)</button>
+      <button class="server-btn" onclick="switchServer('${s3}', this)">🟣 Server 3 (VidSrc)</button>
+      <button class="server-btn" onclick="switchServer('${s4}', this)">🟠 Server 4 (SuperStream)</button>
     </div>
   </div>
   <iframe id="player-frame" src="${s1}" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
@@ -1255,6 +1325,7 @@ async function handleUniversalApi(req, res) {
   const cleanPath = rawPath.replace(/^\/api\/?/, '').toLowerCase();
 
   if (rawPath.startsWith('/watch-tmdb')) return handleWatchTmdb(req, res);
+  if (cleanPath === 'embed-tmdb' || cleanPath.startsWith('embed-tmdb/')) return handleEmbedTmdb(req, res);
   if (cleanPath === 'details' || cleanPath.startsWith('details/')) return handleDetails(req, res);
   if (cleanPath === 'playback' || cleanPath.startsWith('playback/')) return handlePlayback(req, res);
   if (cleanPath === 'trailer') return handleTrailer(req, res);
@@ -1278,6 +1349,7 @@ module.exports = {
   handleDetails,
   handlePlayback,
   handleWatchTmdb,
+  handleEmbedTmdb,
   handleTrailer,
   handlePosterResolver,
   handleTmdb,

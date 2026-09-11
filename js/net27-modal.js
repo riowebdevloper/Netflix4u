@@ -445,12 +445,15 @@
 
     activeWatchServers = {
       s1: isTv
+        ? 'https://peachify.top/embed/tv/' + tmdbId + '/' + season + '/' + episode
+        : 'https://peachify.top/embed/movie/' + tmdbId,
+      s2: isTv
         ? 'https://vidlink.pro/tv/' + tmdbId + '/' + season + '/' + episode + '?multiLang=true'
         : 'https://vidlink.pro/movie/' + tmdbId + '?multiLang=true',
-      s2: isTv
+      s3: isTv
         ? 'https://vidsrc.me/embed/tv?tmdb=' + tmdbId + '&season=' + season + '&episode=' + episode
         : 'https://vidsrc.me/embed/movie?tmdb=' + tmdbId,
-      s3: isTv
+      s4: isTv
         ? 'https://vidsrc.cc/v2/embed/tv/' + tmdbId + '/' + season + '/' + episode
         : 'https://vidsrc.cc/v2/embed/movie/' + tmdbId
     };
@@ -458,9 +461,10 @@
     // Render Server Switcher in Watch Modal Header
     if (watchPlayerBar) {
       watchPlayerBar.innerHTML =
-        '<button type="button" class="server-tab-btn is-active" data-server="s1">🟢 Server 1 (Multi-Audio)</button>' +
-        '<button type="button" class="server-tab-btn" data-server="s2">🔵 Server 2 (VidSrc)</button>' +
-        '<button type="button" class="server-tab-btn" data-server="s3">🟣 Server 3 (SuperStream)</button>';
+        '<button type="button" class="server-tab-btn is-active" data-server="s1">🟢 Server 1 (Net27 Peachify)</button>' +
+        '<button type="button" class="server-tab-btn" data-server="s2">🔵 Server 2 (VidLink Multi-Audio)</button>' +
+        '<button type="button" class="server-tab-btn" data-server="s3">🟣 Server 3 (VidSrc Global)</button>' +
+        '<button type="button" class="server-tab-btn" data-server="s4">🟠 Server 4 (SuperStream)</button>';
 
       watchPlayerBar.querySelectorAll('.server-tab-btn').forEach(function(btn) {
         btn.addEventListener('click', function() {
