@@ -1,6 +1,7 @@
 {
   "version": 2,
   "rewrites": [
+    { "source": "/api/embed-tmdb/:match*", "destination": "/api/embed-tmdb.js" },
     { "source": "/api/catalog/:match*", "destination": "/api/catalog.js" },
     { "source": "/watch-tmdb/:match*", "destination": "/api/playback.js" },
     { "source": "/api/details/:id", "destination": "/api/details?id=:id" },
