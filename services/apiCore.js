@@ -8,7 +8,7 @@ const https = require('https');
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
-const { resolveContentId } = require('./canonicalResolver');
+const { resolveContentId, fetchTmdbRecord, findMatchingCatalogLinks, normalizeRawLinks } = require('./canonicalResolver');
 
 // 🔐 Secure TMDB API Key (Environment variable or fallback)
 const TMDB_API_KEY = process.env.TMDB_API_KEY || '445f2b5a8941c1d4bd5a869761a916e3';
@@ -301,6 +301,39 @@ async function handleDetails(req, res) {
   item.canonicalId = canonicalId;
   item.id = canonicalId;
 
+  const isTv = (item.type === 'series' || item.type === 'anime' || item.type === 'kdrama' || typeHint === 'series');
+
+  // Enrich missing TMDB ID and Description/Overview
+  const needsDesc = !item.description || item.description.startsWith('Watch ') || item.description.length < 35;
+  if (!item.tmdbId && (item.title || item.imdbId)) {
+    try {
+      item.tmdbId = await resolveTmdbId(item.title, item.year, isTv ? 'series' : 'movie', item.imdbId);
+    } catch(e) {}
+  }
+
+  if (item.tmdbId && needsDesc) {
+    try {
+      const tmdbRec = await fetchTmdbRecord(isTv ? 'tv' : 'movie', item.tmdbId);
+      if (tmdbRec && tmdbRec.overview) {
+        item.description = tmdbRec.overview;
+        item.overview = tmdbRec.overview;
+        if (!item.director && tmdbRec.director) item.director = tmdbRec.director;
+        if ((!item.genres || item.genres.length === 0) && tmdbRec.genres) item.genres = tmdbRec.genres;
+        if ((!item.cast || item.cast.length === 0) && tmdbRec.cast) item.cast = tmdbRec.cast;
+      }
+    } catch(e) {}
+  }
+
+  // Enrich missing download links if empty
+  if (!item.links || item.links.length === 0) {
+    try {
+      const matched = findMatchingCatalogLinks(item.title, item.year, item.imdbId, item.slug);
+      if (matched && matched.length > 0) {
+        item.links = normalizeRawLinks(matched, canonicalId, isTv);
+      }
+    } catch(e) {}
+  }
+
   sendJson(res, 200, { success: true, data: item, ...item }, { 'Cache-Control': 'public, max-age=1800' });
 }
 
@@ -326,43 +359,19 @@ async function handlePlayback(req, res) {
 
   const canonicalId = item.canonicalId || (item.record_id ? `dotmobiz-${item.record_id}` : `dotmobiz-${item.id}`);
   const isTv = (item.type === 'series' || item.type === 'anime' || item.type === 'kdrama');
-  const sources = [];
 
-  // 1. Direct verified cloud stream (Fast Cloud)
-  if (item.links && Array.isArray(item.links) && item.links.length > 0) {
-    const cloudLink = item.links.find(l => l.isCloud || /1080|720|HD/i.test(l.quality)) || item.links[0];
-    if (cloudLink && cloudLink.url) {
-      sources.push({
-        id: 'hicine',
-        name: 'Server 2 (Fast Cloud)',
-        label: 'Fast Cloud',
-        canonicalId,
-        provider: 'direct',
-        url: cloudLink.url,
-        embedUrl: cloudLink.url,
-        isDirect: true
-      });
-    }
+  // Dynamically resolve TMDB ID if missing on this title
+  if (!item.tmdbId && (item.title || item.imdbId)) {
+    try {
+      item.tmdbId = await resolveTmdbId(item.title, item.year, isTv ? 'series' : 'movie', item.imdbId);
+    } catch(e) {}
   }
 
-  // 2. Verified TMDB / IMDb external embeds
-  // CRITICAL: Only allow external embeds if tmdbId or imdbId is verified for THIS item!
+  const sources = [];
   const hasVerifiedTmdb = Boolean(item.externalProvider === 'tmdb' || (item.tmdbId && String(item.tmdbId).length >= 2));
   const hasVerifiedImdb = Boolean(item.imdbId && item.imdbId.startsWith('tt'));
 
-  if (hasVerifiedImdb) {
-    sources.push({
-      id: 'allmovieland',
-      name: 'Server 1 (AllMovieLand)',
-      label: 'Server 1',
-      canonicalId,
-      provider: 'allmovieland',
-      url: `https://slast430did.com/play/${item.imdbId}`,
-      embedUrl: `https://slast430did.com/play/${item.imdbId}`,
-      isDirect: false
-    });
-  }
-
+  // 1. Server 1 (VidLink) - Premier ultra-fast streaming player with multi-audio
   if (hasVerifiedTmdb) {
     const tid = item.tmdbId;
     const vidlinkUrl = isTv
@@ -371,8 +380,8 @@ async function handlePlayback(req, res) {
 
     sources.push({
       id: 'vidlink',
-      name: 'Server 3 (VidLink)',
-      label: 'Server 2',
+      name: 'Server 1 (VidLink)',
+      label: 'Server 1 (VidLink)',
       canonicalId,
       provider: 'vidlink',
       url: vidlinkUrl,
@@ -380,20 +389,52 @@ async function handlePlayback(req, res) {
       isDirect: false
     });
 
+    // 2. Server 2 (VidSrc) - Primary reliable backup mirror
     const vidsrcUrl = isTv
       ? `https://vidsrc.me/embed/tv?tmdb=${tid}&season=${season}&episode=${episode}`
       : `https://vidsrc.me/embed/movie?tmdb=${tid}`;
 
     sources.push({
       id: 'vidsrcme',
-      name: 'Server 4 (VidSrc)',
-      label: 'Server 3',
+      name: 'Server 2 (VidSrc)',
+      label: 'Server 2 (VidSrc)',
       canonicalId,
       provider: 'vidsrcme',
       url: vidsrcUrl,
       embedUrl: vidsrcUrl,
       isDirect: false
     });
+  }
+
+  // 3. Server 3 (AllMovieLand) - If verified IMDb ID exists
+  if (hasVerifiedImdb) {
+    sources.push({
+      id: 'allmovieland',
+      name: 'Server 3 (AllMovieLand)',
+      label: 'Server 3 (AllMovieLand)',
+      canonicalId,
+      provider: 'allmovieland',
+      url: `https://slast430did.com/play/${item.imdbId}`,
+      embedUrl: `https://slast430did.com/play/${item.imdbId}`,
+      isDirect: false
+    });
+  }
+
+  // 4. Fast Cloud Stream
+  if (item.links && Array.isArray(item.links) && item.links.length > 0) {
+    const cloudLink = item.links.find(l => l.isCloud || /1080|720|HD/i.test(l.quality)) || item.links[0];
+    if (cloudLink && cloudLink.url) {
+      sources.push({
+        id: 'hicine',
+        name: 'Server 4 (Fast Cloud)',
+        label: 'Fast Cloud',
+        canonicalId,
+        provider: 'direct',
+        url: cloudLink.url,
+        embedUrl: cloudLink.url,
+        isDirect: true
+      });
+    }
   }
 
   sendJson(res, 200, {

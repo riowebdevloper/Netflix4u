@@ -54,7 +54,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@700;800;900&display=swap" rel="stylesheet">
     <link rel="preload" as="font" crossorigin="" href="/fonts/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2">
     <!-- Netflix4U Exact Design System -->
-    <link rel="stylesheet" href="/css/netflix4u-exact.css?v=3.3.4">
+    <link rel="stylesheet" href="/css/netflix4u-exact.css?v=3.3.5">
 
     <title>Netflix4U — Stream Movies, Series, Anime & K-Dramas</title>
 
@@ -178,7 +178,7 @@
     <script>
       window.process = window.process || { env: { NODE_ENV: 'production' } };
       (function() {
-        var APP_VER = '3.3.4';
+        var APP_VER = '3.3.5';
         try {
           if (localStorage.getItem('n4u_version') !== APP_VER) {
             localStorage.setItem('n4u_version', APP_VER);
@@ -191,14 +191,14 @@
         } catch(e) {}
       })();
     </script>
-    <script src="/js/site-quality.js?v=3.3.4" defer></script>
-    <script src="/js/real-poster-resolver.js?v=3.3.4"></script>
-    <script src="/js/download-resolver.js?v=3.3.4"></script>
-    <script type="module" src="/js/index-CQL8lqua.js?v=3.3.4"></script>
+    <script src="/js/site-quality.js?v=3.3.5" defer></script>
+    <script src="/js/real-poster-resolver.js?v=3.3.5"></script>
+    <script src="/js/download-resolver.js?v=3.3.5"></script>
+    <script type="module" src="/js/index-CQL8lqua.js?v=3.3.5"></script>
     <link rel="modulepreload" crossorigin="" href="/js/vendor-react-h5WnBHGl.js">
     <link rel="modulepreload" crossorigin="" href="/js/vendor-framer-BGQgIPyw.js">
     <link rel="modulepreload" crossorigin="" href="/js/vendor-ui-BbvII91P.js">
-    <link rel="stylesheet" crossorigin="" href="/css/index-usTMTSwH.css?v=3.3.4">
+    <link rel="stylesheet" crossorigin="" href="/css/index-usTMTSwH.css?v=3.3.5">
   
     <!-- Global Design System: Consistent Typographic Scale & Harmonized Button Styles -->
     <style>
@@ -1033,6 +1033,33 @@
       .grid .group.relative {
         width: 100% !important;
       }
+      /* Detail page hero poster constraint: MUST NOT take 100% of the entire viewport! */
+      div[class*="min-h"] .aspect-\[2\/3\],
+      .hero-detail-poster {
+        width: 100% !important;
+        max-width: 240px !important;
+        height: auto !important;
+        aspect-ratio: 2 / 3 !important;
+        flex-shrink: 0 !important;
+      }
+      @media (max-width: 1024px) {
+        div[class*="min-h"] .aspect-\[2\/3\],
+        .hero-detail-poster {
+          max-width: 200px !important;
+        }
+      }
+      @media (max-width: 768px) {
+        div[class*="min-h"] .aspect-\[2\/3\],
+        .hero-detail-poster {
+          max-width: 170px !important;
+        }
+      }
+      @media (max-width: 639px) {
+        div[class*="min-h"] .aspect-\[2\/3\],
+        .hero-detail-poster {
+          max-width: 140px !important;
+        }
+      }
       .skeleton.aspect-\[2\/3\] {
         aspect-ratio: 2 / 3 !important;
         width: 100% !important;
@@ -1054,6 +1081,67 @@
         #top-10-section .aspect-\[2\/3\] {
           width: 95px !important;
           min-width: 95px !important;
+        }
+      }
+
+      /* ─── Footer Display Restoration ─── */
+      @media (min-width: 768px) {
+        footer .md\:grid,
+        footer div.hidden,
+        footer div[class*="md:grid"] {
+          display: grid !important;
+        }
+        footer div.md\:hidden,
+        footer div[class*="md:hidden"] {
+          display: none !important;
+        }
+      }
+      @media (max-width: 767.98px) {
+        footer .md\:grid,
+        footer div.hidden,
+        footer div[class*="md:grid"] {
+          display: none !important;
+        }
+        footer div.md\:hidden,
+        footer div[class*="md:hidden"] {
+          display: flex !important;
+        }
+      }
+
+      /* ─── Detail Page Sleek UI & Back Button ─── */
+      .back-btn-pill {
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 0.5rem !important;
+        background: rgba(15, 15, 15, 0.75) !important;
+        backdrop-filter: blur(16px) !important;
+        -webkit-backdrop-filter: blur(16px) !important;
+        color: #ffffff !important;
+        border: 1px solid rgba(255, 255, 255, 0.18) !important;
+        border-radius: 9999px !important;
+        padding: 0.45rem 1.1rem !important;
+        font-size: 0.8125rem !important;
+        font-weight: 600 !important;
+        text-decoration: none !important;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6) !important;
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        cursor: pointer !important;
+      }
+      .back-btn-pill:hover {
+        background: #E50914 !important;
+        border-color: #E50914 !important;
+        color: #ffffff !important;
+        box-shadow: 0 8px 24px rgba(229, 9, 20, 0.4) !important;
+        transform: translateX(-3px) !important;
+      }
+      div[class*="relative min-h-\[80vh\]"] {
+        min-height: 60vh !important;
+        max-height: 720px !important;
+      }
+      @media (max-width: 767.98px) {
+        div[class*="relative min-h-\[80vh\]"] {
+          min-height: auto !important;
+          max-height: none !important;
         }
       }
     </style>

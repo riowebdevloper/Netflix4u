@@ -348,18 +348,8 @@ footer a { color: #808080 !important; font-size: 0.8125rem !important; transitio
 footer a:hover { color: #e5e5e5 !important; }
 footer h3 { color: #808080 !important; font-size: 0.8125rem !important; font-weight: 400 !important; margin-bottom: 0.75rem !important; }
 footer ul li { margin-bottom: 0.5rem !important; }
-footer ul li a { color: #808080 !important; font-size: 0.8125rem !important; }
-footer ul li a:hover { color: #e5e5e5 !important; }
-footer [class*="text-3xl"], footer [class*="text-2xl"] { font-size: 1.25rem !important; color: #E50914 !important; }
-footer .grid { grid-template-columns: repeat(4, 1fr) !important; gap: 1rem !important; }
-
 @media (max-width: 767px) {
-  footer { margin-top: 1rem !important; padding: 2rem 4% 5.5rem 4% !important; }
-  footer .grid {
-    display: grid !important;
-    grid-template-columns: 1fr 1fr !important;
-    gap: 1.5rem 1rem !important;
-  }
+  footer { margin-top: 3.5rem !important; padding: 2.5rem 4% 6.5rem 4% !important; }
   footer .grid > div:first-child {
     grid-column: 1 / -1 !important; margin-bottom: 0.5rem !important;
     padding-bottom: 0.75rem !important; border-bottom: 1px solid rgba(255,255,255,0.08) !important;
@@ -611,6 +601,34 @@ section [class*="overflow-x-auto"] { padding-left: 4% !important; padding-right:
   width: 100% !important;
 }
 
+/* Detail page hero poster constraint: MUST NOT take 100% of the entire viewport! */
+div[class*="min-h"] .aspect-\[2\/3\],
+.hero-detail-poster {
+  width: 100% !important;
+  max-width: 240px !important;
+  height: auto !important;
+  aspect-ratio: 2 / 3 !important;
+  flex-shrink: 0 !important;
+}
+@media (max-width: 1024px) {
+  div[class*="min-h"] .aspect-\[2\/3\],
+  .hero-detail-poster {
+    max-width: 200px !important;
+  }
+}
+@media (max-width: 768px) {
+  div[class*="min-h"] .aspect-\[2\/3\],
+  .hero-detail-poster {
+    max-width: 170px !important;
+  }
+}
+@media (max-width: 639px) {
+  div[class*="min-h"] .aspect-\[2\/3\],
+  .hero-detail-poster {
+    max-width: 140px !important;
+  }
+}
+
 /* Skeleton poster 2:3 ratio support */
 .skeleton.aspect-\[2\/3\] {
   aspect-ratio: 2 / 3 !important;
@@ -636,4 +654,68 @@ section [class*="overflow-x-auto"] { padding-left: 4% !important; padding-right:
     min-width: 95px !important;
   }
 }
+
+/* ─── 15. FOOTER DISPLAY RESTORATION ────────────────────────────────────────── */
+@media (min-width: 768px) {
+  footer .md\:grid,
+  footer div.hidden,
+  footer div[class*="md:grid"] {
+    display: grid !important;
+  }
+  footer div.md\:hidden,
+  footer div[class*="md:hidden"] {
+    display: none !important;
+  }
+}
+@media (max-width: 767.98px) {
+  footer .md\:grid,
+  footer div.hidden,
+  footer div[class*="md:grid"] {
+    display: none !important;
+  }
+  footer div.md\:hidden,
+  footer div[class*="md:hidden"] {
+    display: flex !important;
+  }
+}
+
+/* ─── 16. DETAIL PAGE SLEEK UI & BACK BUTTON ────────────────────────────────── */
+.back-btn-pill {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  background: rgba(15, 15, 15, 0.75) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  border-radius: 9999px !important;
+  padding: 0.45rem 1.1rem !important;
+  font-size: 0.8125rem !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6) !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  cursor: pointer !important;
+}
+.back-btn-pill:hover {
+  background: #E50914 !important;
+  border-color: #E50914 !important;
+  color: #ffffff !important;
+  box-shadow: 0 8px 24px rgba(229, 9, 20, 0.4) !important;
+  transform: translateX(-3px) !important;
+}
+
+/* Detail Hero Layout Caps to prevent blank scrolling */
+div[class*="relative min-h-\[80vh\]"] {
+  min-height: 60vh !important;
+  max-height: 720px !important;
+}
+@media (max-width: 767.98px) {
+  div[class*="relative min-h-\[80vh\]"] {
+    min-height: auto !important;
+    max-height: none !important;
+  }
+}
+
 

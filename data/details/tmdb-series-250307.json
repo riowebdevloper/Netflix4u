@@ -1,0 +1,99 @@
+{
+  "id": "tmdb-series-250307",
+  "canonicalId": "tmdb-series-250307",
+  "externalProvider": "tmdb",
+  "externalId": "250307",
+  "tmdbId": "250307",
+  "imdbId": "tt31938062",
+  "type": "series",
+  "contentType": "series",
+  "title": "The Pitt",
+  "canonicalTitle": "The Pitt",
+  "originalTitle": "The Pitt",
+  "overview": "The staff of Pittsburgh's Trauma Medical Center work around the clock to save lives in an overcrowded and underfunded emergency department.",
+  "description": "The staff of Pittsburgh's Trauma Medical Center work around the clock to save lives in an overcrowded and underfunded emergency department.",
+  "shortDescription": "The staff of Pittsburgh's Trauma Medical Center work around the clock to save lives in an overcrowded and underfunded em",
+  "year": 2025,
+  "rating": 8.7,
+  "votes": "1.0K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Drama"
+  ],
+  "categories": [
+    "Drama"
+  ],
+  "language": "English",
+  "country": "US",
+  "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FkvFSpESyBZMjaeOJDx7RS3P1jey.jpg&output=webp",
+  "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2Fz3BkMbCy5ajZPMyKEUwsPHuz2cV.jpg&output=webp",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/ufR_08V38sQ?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/ufR_08V38sQ?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "13526",
+      "name": "Noah Wyle",
+      "character": "Dr. Michael 'Robby' Robinavitch",
+      "photo": "https://image.tmdb.org/t/p/w185/nwyLCQepwg8FX7OXJ4AT4ej8c7i.jpg"
+    },
+    {
+      "id": "2126992",
+      "name": "Patrick Ball",
+      "character": "Dr. Frank Langdon",
+      "photo": "https://image.tmdb.org/t/p/w185/288Y2VT4f5UUvt8DZ877KWzPCnY.jpg"
+    },
+    {
+      "id": "169337",
+      "name": "Katherine LaNasa",
+      "character": "Charge Nurse Dana Evans",
+      "photo": "https://image.tmdb.org/t/p/w185/7X3f4MG24XLG2fNPJt5H38d8YCV.jpg"
+    },
+    {
+      "id": "2288895",
+      "name": "Supriya Ganesh",
+      "character": "Dr. Samira Mohan",
+      "photo": "https://image.tmdb.org/t/p/w185/575OVjibWikBVA3kOqQ6Jdxn5qi.jpg"
+    },
+    {
+      "id": "204468",
+      "name": "Fiona Dourif",
+      "character": "Dr. Cassie McKay",
+      "photo": "https://image.tmdb.org/t/p/w185/54wAh4mfzmT6NqGpghDKjYRgES2.jpg"
+    },
+    {
+      "id": "1731714",
+      "name": "Taylor Dearden",
+      "character": "Dr. Melissa King",
+      "photo": "https://image.tmdb.org/t/p/w185/rlPbthwKOeWR99wfdKinFvwIm2Z.jpg"
+    },
+    {
+      "id": "2290706",
+      "name": "Isa Briones",
+      "character": "Dr. Trinity Santos",
+      "photo": "https://image.tmdb.org/t/p/w185/jSCzOMZ0z5wvHIuD0wncr19Ktd9.jpg"
+    },
+    {
+      "id": "1234583",
+      "name": "Gerran Howell",
+      "character": "Student Doctor Dennis Whitaker",
+      "photo": "https://image.tmdb.org/t/p/w185/tl0qUpzS4mVhQmjRklrtNiJwuHY.jpg"
+    },
+    {
+      "id": "2716907",
+      "name": "Shabana Azeez",
+      "character": "Student Doctor Victoria Javadi",
+      "photo": "https://image.tmdb.org/t/p/w185/r5MWHqX1cxibytL7KGXNaT2NlD1.jpg"
+    },
+    {
+      "id": "1344374",
+      "name": "Sepideh Moafi",
+      "character": "Dr. Baran Al-Hashimi",
+      "photo": "https://image.tmdb.org/t/p/w185/b5rwbpV8K5g5jP5ZVVtOXyweigF.jpg"
+    }
+  ],
+  "seasons": 3,
+  "episodes": 30,
+  "status": "PUBLISHED",
+  "links": []
+}

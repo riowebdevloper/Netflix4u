@@ -37,10 +37,18 @@ function getDetailsMap() {
         detailsMapCache.set(String(k), v);
         if (v.slug) detailsMapCache.set(v.slug, v);
         if (v.record_id) detailsMapCache.set(String(v.record_id), v);
+        if (v.imdbId && typeof v.imdbId === 'string' && v.imdbId.startsWith('tt')) {
+          detailsMapCache.set(v.imdbId, v);
+        }
         if (v.title) {
           const clean = v.title.toLowerCase().replace(/[^a-z0-9]/g, '');
-          if (clean.length >= 4 && !detailsMapCache.has(clean)) {
-            detailsMapCache.set(clean, v);
+          if (clean.length >= 3) {
+            if (!detailsMapCache.has(clean)) {
+              detailsMapCache.set(clean, v);
+            }
+            if (v.year) {
+              detailsMapCache.set(clean + v.year, v);
+            }
           }
         }
       }
@@ -49,6 +57,40 @@ function getDetailsMap() {
     }
   }
   return detailsMapCache;
+}
+
+function findMatchingCatalogLinks(title, year, imdbId, slug) {
+  const dMap = getDetailsMap();
+  // 1. Check by authentic IMDb ID
+  if (imdbId && typeof imdbId === 'string' && imdbId.startsWith('tt')) {
+    const entry = dMap.get(imdbId);
+    if (entry && Array.isArray(entry.links) && entry.links.length > 0) return entry.links;
+  }
+  // 2. Check by slug
+  if (slug) {
+    const entry = dMap.get(slug);
+    if (entry && Array.isArray(entry.links) && entry.links.length > 0) return entry.links;
+  }
+  // 3. Check by normalized alphanumeric title
+  const clean = String(title || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+  if (clean.length >= 3) {
+    if (year) {
+      const entryYear = dMap.get(clean + year);
+      if (entryYear && Array.isArray(entryYear.links) && entryYear.links.length > 0) return entryYear.links;
+    }
+    const entry = dMap.get(clean);
+    if (entry && Array.isArray(entry.links) && entry.links.length > 0) return entry.links;
+
+    // Fuzzy prefix/containment match for popular series/movies
+    for (const [key, val] of dMap.entries()) {
+      if (val && Array.isArray(val.links) && val.links.length > 0 && typeof key === 'string') {
+        if (key.length >= 6 && (clean.startsWith(key) || key.startsWith(clean))) {
+          return val.links;
+        }
+      }
+    }
+  }
+  return [];
 }
 
 function buildCatalogIndex() {
@@ -242,7 +284,7 @@ function fetchTmdbRecord(mediaType, tmdbId) {
               seasons: raw.number_of_seasons || 1,
               episodes: raw.number_of_episodes || (raw.number_of_seasons ? raw.number_of_seasons * 10 : 1),
               status: 'PUBLISHED',
-              links: []
+              links: normalizeRawLinks(findMatchingCatalogLinks(raw.title || raw.name, year, raw.imdb_id || raw.external_ids?.imdb_id, null), canonicalId, isTv)
             };
 
             tmdbMemoryCache.set(cacheKey, record);
@@ -260,6 +302,51 @@ function fetchTmdbRecord(mediaType, tmdbId) {
         resolve(null);
       });
     }).on('error', () => resolve(null));
+  });
+}
+
+/**
+ * Universal Link Normalizer
+ */
+function normalizeRawLinks(links, canonicalId, isSeries = false) {
+  if (!Array.isArray(links)) return [];
+  return links.filter(l => l && l.url).map(l => {
+    let q = (l.quality || 'HD').toUpperCase();
+    if (/2160|4K|UHD/i.test(q) || /2160|4K|UHD/i.test(l.label || '')) q = '2160p / 4K';
+    else if (/1440|2K/i.test(q) || /1440|2K/i.test(l.label || '')) q = '1440p';
+    else if (/1080|FHD/i.test(q) || /1080|FHD/i.test(l.label || '')) q = '1080p';
+    else if (/720|HD/i.test(q) || /720|HD/i.test(l.label || '')) q = '720p';
+    else if (/480|SD/i.test(q) || /480|SD/i.test(l.label || '')) q = '480p';
+
+    const isCloud = Boolean(l.isCloud || (l.url && (l.url.includes('vcloud') || l.url.includes('workers.dev'))));
+    const source = isCloud ? 'Fast Cloud' : (l.url && l.url.includes('nexdrive') ? 'AllMovieLand' : (l.source || 'Direct Mirror'));
+
+    let season = l.season !== undefined ? l.season : null;
+    let episode = l.episode !== undefined ? l.episode : null;
+    let isPack = Boolean(l.isPack);
+
+    const label = l.label || '';
+    if (season === null) {
+      const sMatch = label.match(/(?:season|s)\s*(\d+)/i);
+      if (sMatch) season = parseInt(sMatch[1], 10);
+      else if (isSeries) season = 1;
+    }
+    if (episode === null) {
+      const epMatch = label.match(/(?:episode|ep|e)\s*(\d+)/i);
+      if (epMatch) episode = parseInt(epMatch[1], 10);
+      else if (/complete|pack|zip|batch|full\s*season/i.test(label)) isPack = true;
+    }
+
+    return {
+      ...l,
+      canonicalId,
+      quality: q,
+      source,
+      isCloud,
+      season,
+      episode,
+      isPack
+    };
   });
 }
 
@@ -282,52 +369,18 @@ function standardizeLocalRecord(item, rawId) {
 
   // If links are empty, query details_map.json fallback
   if (links.length === 0) {
-    const dMap = getDetailsMap();
-    const mapEntry = dMap.get(rawNum) || (rawId ? dMap.get(String(rawId).replace(/^dotmobiz-/, '')) : null) || (item.slug ? dMap.get(item.slug) : null);
-    if (mapEntry && Array.isArray(mapEntry.links) && mapEntry.links.length > 0) {
-      links = mapEntry.links;
+    links = findMatchingCatalogLinks(title, item.year, item.imdbId, item.slug);
+    if (links.length === 0 && rawNum) {
+      const dMap = getDetailsMap();
+      const mapEntry = dMap.get(rawNum) || (rawId ? dMap.get(String(rawId).replace(/^dotmobiz-/, '')) : null) || (item.slug ? dMap.get(item.slug) : null);
+      if (mapEntry && Array.isArray(mapEntry.links) && mapEntry.links.length > 0) {
+        links = mapEntry.links;
+      }
     }
   }
 
-  // Normalize links: enforce canonicalId, quality tiers, and valid provider source
-  const normalizedLinks = links.filter(l => l && l.url).map(l => {
-    let q = (l.quality || 'HD').toUpperCase();
-    if (/2160|4K|UHD/i.test(q) || /2160|4K|UHD/i.test(l.label || '')) q = '2160p / 4K';
-    else if (/1440|2K/i.test(q) || /1440|2K/i.test(l.label || '')) q = '1440p';
-    else if (/1080|FHD/i.test(q) || /1080|FHD/i.test(l.label || '')) q = '1080p';
-    else if (/720|HD/i.test(q) || /720|HD/i.test(l.label || '')) q = '720p';
-    else if (/480|SD/i.test(q) || /480|SD/i.test(l.label || '')) q = '480p';
-
-    const isCloud = Boolean(l.isCloud || (l.url && (l.url.includes('vcloud') || l.url.includes('workers.dev'))));
-    const source = isCloud ? 'Fast Cloud' : (l.url && l.url.includes('nexdrive') ? 'AllMovieLand' : (l.source || 'Direct Mirror'));
-
-    let season = l.season !== undefined ? l.season : null;
-    let episode = l.episode !== undefined ? l.episode : null;
-    let isPack = Boolean(l.isPack);
-
-    const label = l.label || '';
-    if (season === null) {
-      const sMatch = label.match(/(?:season|s)\s*(\d+)/i);
-      if (sMatch) season = parseInt(sMatch[1], 10);
-      else if (item.type === 'series' || item.type === 'anime' || item.type === 'kdrama') season = 1;
-    }
-    if (episode === null) {
-      const epMatch = label.match(/(?:episode|ep|e)\s*(\d+)/i);
-      if (epMatch) episode = parseInt(epMatch[1], 10);
-      else if (/complete|pack|zip|batch|full\s*season/i.test(label)) isPack = true;
-    }
-
-    return {
-      ...l,
-      canonicalId,
-      quality: q,
-      source,
-      isCloud,
-      season,
-      episode,
-      isPack
-    };
-  });
+  const isSeries = item.type === 'series' || item.type === 'anime' || item.type === 'kdrama' || Boolean(item.seasons || item.season_1);
+  const normalizedLinks = normalizeRawLinks(links, canonicalId, isSeries);
 
   return {
     ...item,
@@ -436,5 +489,7 @@ module.exports = {
   buildCatalogIndex,
   readDetailFile,
   fetchTmdbRecord,
-  standardizeLocalRecord
+  standardizeLocalRecord,
+  findMatchingCatalogLinks,
+  normalizeRawLinks
 };
