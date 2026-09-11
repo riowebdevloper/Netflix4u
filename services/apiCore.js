@@ -937,16 +937,33 @@ async function handleCatalogDiscover(req, res) {
     }));
     sendJson(res, 200, { ok: true, items }, { 'Cache-Control': 'public, max-age=3600' });
   } catch(err) {
-    sendJson(res, 500, { ok: false, error: err.message });
+    const catalog = getCatalogSummary().slice(0, 16);
+    const items = catalog.map(c => ({
+      tmdbId: c.tmdbId || c.id,
+      title: c.title,
+      year: String(c.year || ''),
+      poster: c.poster,
+      backdrop: c.backdrop,
+      rating: typeof c.rating === 'number' ? c.rating : 8.0,
+      type: c.type === 'series' ? 'tv' : 'movie',
+      overview: c.description || ''
+    }));
+    sendJson(res, 200, { ok: true, items });
   }
 }
 
 async function handleCatalogTitle(req, res) {
   if (handleCors(req, res)) return;
+  const q = getQueryParams(req);
   const [rawPath] = (req.url || '').split('?');
-  const parts = rawPath.replace(/^\/api\/catalog\/title\/?/i, '').split('/');
-  const type = parts[0] === 'tv' || parts[0] === 'series' ? 'tv' : 'movie';
-  let id = parts[1] || '';
+  let pathStr = rawPath.replace(/^\/api\/catalog\/title\/?/i, '');
+  if (!pathStr || pathStr === rawPath) {
+    const sub = (q.get('sub') || q.get('match') || '');
+    pathStr = sub.replace(/^title\/?/i, '');
+  }
+  const parts = pathStr.split('/');
+  const type = parts[0] === 'tv' || parts[0] === 'series' ? 'tv' : (q.get('type') || 'movie');
+  let id = parts[1] || q.get('id') || (parts[0] !== 'movie' && parts[0] !== 'tv' ? parts[0] : '');
 
   let tmdbId = Number(id);
   let localItem = null;
@@ -958,35 +975,53 @@ async function handleCatalogTitle(req, res) {
   if (localItem && localItem.tmdbId) {
     tmdbId = localItem.tmdbId;
   } else if (isNaN(tmdbId) || tmdbId <= 0 || (tmdbId < 100000 && localItem)) {
-    if (localItem) {
-      tmdbId = await resolveTmdbId(localItem.title, '', localItem.type);
-    }
+    tmdbId = await resolveTmdbId(localItem?.title || id, localItem?.year, type, localItem?.imdbId);
   }
 
+  const endpoint = type === 'tv' ? `/tv/${tmdbId}` : `/movie/${tmdbId}`;
   let raw = null;
-  if (tmdbId && tmdbId > 0) {
+  try {
+    raw = await fetchTmdbCatalogJson(`${endpoint}?append_to_response=credits,videos,release_dates,content_ratings,recommendations,similar`);
+  } catch(e) {}
+
+  const title = raw?.title || raw?.name || localItem?.title || 'Unknown Title';
+  const year = String(raw?.release_date || raw?.first_air_date || localItem?.year || '').slice(0, 4);
+
+  // Authenticate and fetch direct download links
+  let downloadLinks = [];
+  try {
+    const canonical = await resolveContentId(id);
+    if (canonical && isPublicRecord(canonical)) {
+      const enriched = enrichItemMetadataAndLinks(canonical);
+      downloadLinks = enriched.links || [];
+    }
+  } catch(e) {}
+
+  if (!downloadLinks.length && localItem) {
+    downloadLinks = normalizeRawLinks(localItem.links || localItem.download_links || [], title);
+  }
+
+  // Initial episodes for TV
+  let initialEpisodes = [];
+  if (type === 'tv') {
     try {
-      raw = await fetchTmdbCatalogJson(`/${type}/${tmdbId}?append_to_response=credits,release_dates,content_ratings,external_ids,recommendations,videos`);
+      const s1Data = await fetchTmdbCatalogJson(`/tv/${tmdbId}/season/1`);
+      if (s1Data && Array.isArray(s1Data.episodes)) {
+        initialEpisodes = s1Data.episodes.map(ep => ({
+          id: ep.id,
+          season_number: ep.season_number,
+          episode_number: ep.episode_number,
+          name: ep.name,
+          overview: ep.overview,
+          still_path: ep.still_path ? `https://image.tmdb.org/t/p/w300${ep.still_path}` : null,
+          vote_average: ep.vote_average ? Number(ep.vote_average.toFixed(1)) : 7.8,
+          runtime: ep.runtime || 45
+        }));
+      }
     } catch(e) {}
   }
 
-  const title = (raw && (raw.title || raw.name)) || (localItem && localItem.title) || 'Unknown Title';
-  const year = String((raw && (raw.release_date || raw.first_air_date)) || (localItem && localItem.year) || '').slice(0, 4);
-  const imdbId = (raw && (raw.imdb_id || raw.external_ids?.imdb_id)) || (localItem && localItem.imdbId) || null;
-
-  const { findMatchingCatalogLinks, normalizeRawLinks } = require('./canonicalResolver');
-  let downloadLinks = (localItem && localItem.links && localItem.links.length > 0) ? localItem.links : findMatchingCatalogLinks(title, year, imdbId, localItem?.slug);
-  if (downloadLinks.length === 0 && cleanNum) {
-    const dMap = require('./canonicalResolver').getDetailsMap ? require('./canonicalResolver').getDetailsMap() : null;
-    if (dMap && dMap.has(cleanNum)) {
-      const entry = dMap.get(cleanNum);
-      if (entry && Array.isArray(entry.links)) downloadLinks = entry.links;
-    }
-  }
-
-  const isSeries = type === 'tv';
-  downloadLinks = normalizeRawLinks(downloadLinks, localItem?.id || `tmdb-${tmdbId}`, isSeries);
-
+  // Cert extraction
   let cert = 'U/A 13+';
   if (raw && raw.release_dates?.results) {
     const inDates = raw.release_dates.results.find(r => r.iso_3166_1 === 'IN') || raw.release_dates.results.find(r => r.iso_3166_1 === 'US');
@@ -1009,41 +1044,11 @@ async function handleCatalogTitle(req, res) {
   const audioLangs = [];
   if (Array.isArray(downloadLinks) && downloadLinks.length) {
     downloadLinks.forEach(l => {
-      if (l.audio) {
-        l.audio.split(/[,+\/\s]+/).forEach(a => {
-          const tr = a.trim();
-          if (tr && tr.length > 1 && !audioLangs.includes(tr)) audioLangs.push(tr);
-        });
-      }
-    });
-  }
-  if (!audioLangs.length && raw?.spoken_languages?.length) {
-    raw.spoken_languages.forEach(l => {
-      if (l.english_name && !audioLangs.includes(l.english_name)) audioLangs.push(l.english_name);
+      if (l.quality && !audioLangs.includes(l.quality)) audioLangs.push(l.quality);
     });
   }
   if (!audioLangs.length) {
-    audioLangs.push('Hindi', 'English');
-  }
-
-  // Initial episodes for TV series
-  let initialEpisodes = [];
-  if (type === 'tv' && tmdbId) {
-    try {
-      const s1 = await fetchTmdbCatalogJson(`/tv/${tmdbId}/season/1`);
-      if (s1 && Array.isArray(s1.episodes)) {
-        initialEpisodes = s1.episodes.map(ep => ({
-          id: ep.id,
-          season_number: ep.season_number,
-          episode_number: ep.episode_number,
-          name: ep.name,
-          overview: ep.overview,
-          still_path: ep.still_path ? `https://image.tmdb.org/t/p/w300${ep.still_path}` : null,
-          vote_average: ep.vote_average ? Number(ep.vote_average.toFixed(1)) : 7.8,
-          runtime: ep.runtime || 45
-        }));
-      }
-    } catch(e) {}
+    audioLangs.push('Hindi', 'English', 'Tamil', 'Telugu');
   }
 
   const result = {
@@ -1096,10 +1101,16 @@ async function handleCatalogTitle(req, res) {
 
 async function handleCatalogSeason(req, res) {
   if (handleCors(req, res)) return;
+  const q = getQueryParams(req);
   const [rawPath] = (req.url || '').split('?');
-  const parts = rawPath.replace(/^\/api\/catalog\/season\/?/i, '').split('/');
-  const id = parts[0] || '';
-  const seasonNum = parseInt(parts[1] || '1', 10);
+  let pathStr = rawPath.replace(/^\/api\/catalog\/season\/?/i, '');
+  if (!pathStr || pathStr === rawPath) {
+    const sub = (q.get('sub') || q.get('match') || '');
+    pathStr = sub.replace(/^season\/?/i, '');
+  }
+  const parts = pathStr.split('/');
+  const id = parts[0] || q.get('id') || '';
+  const seasonNum = parseInt(parts[1] || q.get('se') || q.get('season') || '1', 10);
 
   let raw = null;
   try {
@@ -1122,18 +1133,23 @@ async function handleCatalogSeason(req, res) {
 
 async function handleCatalogApi(req, res) {
   if (handleCors(req, res)) return;
+  const q = getQueryParams(req);
   const [rawPath] = (req.url || '').split('?');
-  const cleanPath = rawPath.replace(/^\/api\/catalog\/?/i, '').toLowerCase();
+  let cleanPath = rawPath.replace(/^\/api\/catalog\/?/i, '').toLowerCase();
+  const sub = (q.get('sub') || q.get('match') || q.get('endpoint') || '').replace(/^\//, '').toLowerCase();
+  if ((!cleanPath || cleanPath === 'catalog') && sub) {
+    cleanPath = sub;
+  }
 
   if (cleanPath === '' || cleanPath === 'summary') return handleSummary(req, res);
-  if (cleanPath === 'trending') return handleCatalogTrending(req, res);
-  if (cleanPath === 'discover') return handleCatalogDiscover(req, res);
-  if (cleanPath.startsWith('title/')) return handleCatalogTitle(req, res);
-  if (cleanPath.startsWith('season/')) return handleCatalogSeason(req, res);
-  if (cleanPath === 'search') return handleSearch(req, res);
+  if (cleanPath === 'trending' || cleanPath.startsWith('trending')) return handleCatalogTrending(req, res);
+  if (cleanPath === 'discover' || cleanPath.startsWith('discover')) return handleCatalogDiscover(req, res);
+  if (cleanPath.startsWith('title/') || cleanPath === 'title') return handleCatalogTitle(req, res);
+  if (cleanPath.startsWith('season/') || cleanPath === 'season') return handleCatalogSeason(req, res);
+  if (cleanPath === 'search' || cleanPath.startsWith('search')) return handleSearch(req, res);
   if (cleanPath === 'cert') return sendJson(res, 200, { ok: true, cert: 'U/A 13+' });
 
-  sendJson(res, 404, { error: 'Catalog endpoint not found', path: rawPath });
+  sendJson(res, 404, { error: 'Catalog endpoint not found', path: rawPath, cleanPath });
 }
 
 // 11c. Net27 Authentic Embed Proxy & Stream Resolver (/api/embed-tmdb/:id)

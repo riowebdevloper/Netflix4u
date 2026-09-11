@@ -102,10 +102,12 @@
       setTimeout(function() { loader.style.display = 'none'; }, 450);
     }
     window.__nmHideLoader = hideLoader;
-    if (document.readyState === 'complete') {
-      setTimeout(hideLoader, 350);
+    setTimeout(hideLoader, 600); // Safety fallback: guarantee loader never gets stuck
+    if (document.readyState === 'complete' || document.readyState === 'interactive') {
+      setTimeout(hideLoader, 200);
     } else {
-      window.addEventListener('load', function() { setTimeout(hideLoader, 350); });
+      document.addEventListener('DOMContentLoaded', function() { setTimeout(hideLoader, 200); });
+      window.addEventListener('load', function() { setTimeout(hideLoader, 200); });
     }
   }
 
@@ -384,6 +386,26 @@
         if (!contentDiv) return;
 
         if (!validItems.length) {
+          var fbFeed = cfg.ranked ? '/data/trending.json' : '/data/home_feed.json';
+          try {
+            var fbRes = await fetch(fbFeed);
+            var fbData = await fbRes.json();
+            var fbRaw = Array.isArray(fbData) ? fbData : (fbData.items || fbData.results || []);
+            validItems = fbRaw.map(function(it) {
+              return {
+                tmdbId: it.tmdbId || it.id,
+                title: it.title,
+                year: it.year,
+                poster: it.poster,
+                backdrop: it.backdrop,
+                rating: it.rating || 8.0,
+                type: it.type === 'series' ? 'tv' : 'movie'
+              };
+            }).filter(function(it) { return it && (it.poster || it.title); });
+          } catch(e) {}
+        }
+
+        if (!validItems.length) {
           railSection.style.display = 'none';
           return;
         }
@@ -400,7 +422,37 @@
         initRailScrollButtons(railSection);
       } catch(err) {
         var sec = railsView.querySelector('[data-rail-key="' + cfg.key + '"]');
-        if (sec) sec.style.display = 'none';
+        if (!sec) return;
+        try {
+          var fbRes = await fetch(cfg.ranked ? '/data/trending.json' : '/data/home_feed.json');
+          var fbData = await fbRes.json();
+          var fbRaw = Array.isArray(fbData) ? fbData : (fbData.items || fbData.results || []);
+          var fbItems = fbRaw.map(function(it) {
+            return {
+              tmdbId: it.tmdbId || it.id,
+              title: it.title,
+              year: it.year,
+              poster: it.poster,
+              backdrop: it.backdrop,
+              rating: it.rating || 8.0,
+              type: it.type === 'series' ? 'tv' : 'movie'
+            };
+          }).filter(function(it) { return it && (it.poster || it.title); });
+
+          var cd = sec.querySelector('[data-rail-content]');
+          if (cd && fbItems.length) {
+            var mi = cfg.ranked ? 10 : 20;
+            var wc = cfg.ranked ? 'w-40 sm:w-48' : 'w-[150px] sm:w-[200px]';
+            cd.innerHTML = fbItems.slice(0, mi).map(function(item, idx) {
+              return '<div class="shrink-0 ' + wc + '">' +
+                renderCard(item, cfg.ranked ? { rank: idx + 1 } : {}) +
+              '</div>';
+            }).join('');
+            initRailScrollButtons(sec);
+            return;
+          }
+        } catch(e) {}
+        sec.style.display = 'none';
       }
     });
   }

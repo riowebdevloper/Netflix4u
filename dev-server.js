@@ -767,7 +767,7 @@ const server = http.createServer(async (req, res) => {
   }
 
   // 4a-2b. Catalog Engine, Net27 Embed TMDB & Watch TMDB
-  if (reqPath.startsWith('/api/catalog/') || reqPath.startsWith('/api/embed-tmdb') || reqPath.startsWith('/watch-tmdb')) {
+  if (reqPath.startsWith('/api/catalog') || reqPath.startsWith('/api/embed-tmdb') || reqPath.startsWith('/watch-tmdb')) {
     return handleUniversalApi(req, res);
   }
 
