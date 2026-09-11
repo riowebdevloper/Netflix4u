@@ -676,50 +676,6 @@ async function handleCast(req, res) {
   const year = q.get('year') || '';
   const type = q.get('type') || 'movie';
   const imdbId = q.get('imdbId') || '';
-
-  const cast = await resolveTitleCast(title, tmdbId, year, type, imdbId);
-  sendJson(res, 200, { success: true, cast }, { 'Cache-Control': 'public, max-age=86400' });
-}
-
-// 7. Search Catalog (/api/search)
-async function handleSearch(req, res) {
-  if (handleCors(req, res)) return;
-  const q = getQueryParams(req);
-  const query = (q.get('q') || '').trim().toLowerCase();
-
-  if (!query) {
-    return sendJson(res, 200, { success: true, results: [] });
-  }
-
-  const catalog = getCatalogSummary();
-  const results = [];
-  for (const item of catalog) {
-    const matchTitle = item.title && item.title.toLowerCase().includes(query);
-    const matchRaw = item.rawTitle && item.rawTitle.toLowerCase().includes(query);
-    const matchSlug = item.slug && item.slug.toLowerCase().includes(query);
-    const matchCat = item.categories && item.categories.some(c => c.toLowerCase().includes(query));
-
-    if (matchTitle || matchRaw || matchSlug || matchCat) {
-      const canonicalId = normalizeCanonicalId(item);
-      const contentType = item.type || 'movie';
-      results.push({
-        ...item,
-        id: canonicalId,
-        canonicalId,
-        type: contentType,
-        contentType,
-        url: `/${contentType}/${canonicalId}`
-      });
-      if (results.length >= 40) break;
-    }
-  }
-
-  sendJson(res, 200, { success: true, results }, { 'Cache-Control': 'public, max-age=1800' });
-}
-
-// 8. Server Health Check (/api/health)
-async function handleHealth(req, res) {
-  if (handleCors(req, res)) return;
   sendJson(res, 200, {
     status: 'ok',
     uptime: Math.floor(process.uptime()),
@@ -774,6 +730,523 @@ async function handleRecommendations(req, res) {
   sendJson(res, 200, { success: true, results: recs }, { 'Cache-Control': 'public, max-age=3600' });
 }
 
+
+// ─── 13. NET27 / NETMIRROR CATALOG API ENGINE ───────────────────────────────────
+const net27CatalogCache = new Map();
+
+function fetchTmdbCatalogJson(endpoint) {
+  const cacheKey = `tmdb_cat_${endpoint}`;
+  if (net27CatalogCache.has(cacheKey)) {
+    const entry = net27CatalogCache.get(cacheKey);
+    if (Date.now() - entry.at < 30 * 60 * 1000) {
+      return Promise.resolve(entry.data);
+    }
+  }
+  return new Promise((resolve, reject) => {
+    const sep = endpoint.includes('?') ? '&' : '?';
+    const url = `https://api.tmdb.org/3${endpoint}${sep}api_key=${TMDB_API_KEY}`;
+    https.get(url, {
+      headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)', 'Accept': 'application/json' },
+      timeout: 8000
+    }, (res) => {
+      let d = '';
+      res.on('data', c => d += c);
+      res.on('end', () => {
+        if (res.statusCode >= 200 && res.statusCode < 300) {
+          try {
+            const parsed = JSON.parse(d);
+            net27CatalogCache.set(cacheKey, { at: Date.now(), data: parsed });
+            resolve(parsed);
+          } catch(e) { reject(e); }
+        } else {
+          reject(new Error(`TMDB HTTP ${res.statusCode}`));
+        }
+      });
+    }).on('error', reject);
+  });
+}
+
+// 6. Cast Resolver (/api/cast)
+async function handleCast(req, res) {
+  if (handleCors(req, res)) return;
+  const q = getQueryParams(req);
+
+  const title = q.get('title') || '';
+  const tmdbId = q.get('tmdbId') || '';
+  const year = q.get('year') || '';
+  const type = q.get('type') || 'movie';
+  const imdbId = q.get('imdbId') || '';
+
+  const cast = await resolveTitleCast(title, tmdbId, year, type, imdbId);
+  sendJson(res, 200, { success: true, cast }, { 'Cache-Control': 'public, max-age=86400' });
+}
+
+// 7. Search Catalog (/api/search & /api/catalog/search)
+async function handleSearch(req, res) {
+  if (handleCors(req, res)) return;
+  const q = getQueryParams(req);
+  const query = (q.get('q') || '').trim();
+
+  if (!query) {
+    return sendJson(res, 200, { success: true, results: [], items: [] });
+  }
+
+  const catalog = getCatalogSummary();
+  const results = [];
+  const queryLower = query.toLowerCase();
+
+  for (const item of catalog) {
+    const matchTitle = item.title && item.title.toLowerCase().includes(queryLower);
+    const matchRaw = item.rawTitle && item.rawTitle.toLowerCase().includes(queryLower);
+    const matchSlug = item.slug && item.slug.toLowerCase().includes(queryLower);
+    const matchCat = item.categories && item.categories.some(c => c.toLowerCase().includes(queryLower));
+
+    if (matchTitle || matchRaw || matchSlug || matchCat) {
+      const canonicalId = normalizeCanonicalId(item);
+      const contentType = item.type || 'movie';
+      results.push({
+        ...item,
+        id: canonicalId,
+        canonicalId,
+        tmdbId: item.tmdbId || canonicalId,
+        type: contentType,
+        contentType,
+        url: `/${contentType}/${canonicalId}`
+      });
+      if (results.length >= 10) break;
+    }
+  }
+
+  // Also query TMDB multi search so user can search any title across 500k+ global titles
+  try {
+    const tmdbData = await fetchTmdbCatalogJson(`/search/multi?query=${encodeURIComponent(query)}&include_adult=false&region=IN`);
+    if (tmdbData && Array.isArray(tmdbData.results)) {
+      for (const t of tmdbData.results) {
+        if (t.media_type === 'person') continue;
+        if (!t.poster_path && !t.backdrop_path) continue;
+        const exists = results.some(r => r.tmdbId == t.id || (r.title && (r.title.toLowerCase() === (t.title || t.name || '').toLowerCase())));
+        if (!exists) {
+          results.push({
+            id: String(t.id),
+            tmdbId: t.id,
+            title: t.title || t.name,
+            type: t.media_type === 'tv' ? 'tv' : 'movie',
+            poster: t.poster_path ? `https://image.tmdb.org/t/p/w342${t.poster_path}` : null,
+            backdrop: t.backdrop_path ? `https://image.tmdb.org/t/p/w780${t.backdrop_path}` : null,
+            year: String(t.release_date || t.first_air_date || '').slice(0, 4),
+            rating: t.vote_average ? Number(t.vote_average.toFixed(1)) : 7.5,
+            overview: t.overview || ''
+          });
+        }
+        if (results.length >= 30) break;
+      }
+    }
+  } catch(e) {}
+
+  sendJson(res, 200, { success: true, results, items: results }, { 'Cache-Control': 'public, max-age=1800' });
+}
+
+// 8. Server Health Check (/api/health)
+async function handleHealth(req, res) {
+  if (handleCors(req, res)) return;
+  sendJson(res, 200, {
+    status: 'ok',
+    uptime: Math.floor(process.uptime()),
+    timestamp: new Date().toISOString(),
+    service: 'Netflix4U Streaming Platform'
+  }, { 'Cache-Control': 'no-cache, no-store' });
+}
+
+async function handleCatalogTrending(req, res) {
+  if (handleCors(req, res)) return;
+  const q = getQueryParams(req);
+  const window = q.get('window') === 'week' ? 'week' : 'day';
+
+  try {
+    const raw = await fetchTmdbCatalogJson(`/trending/all/${window}`);
+    const items = (raw?.results || []).map(r => ({
+      tmdbId: r.id,
+      title: r.title || r.name,
+      year: String(r.release_date || r.first_air_date || '').slice(0, 4),
+      poster: r.poster_path ? `https://image.tmdb.org/t/p/w500${r.poster_path}` : null,
+      backdrop: r.backdrop_path ? `https://image.tmdb.org/t/p/w1280${r.backdrop_path}` : null,
+      rating: r.vote_average ? Number(r.vote_average.toFixed(1)) : 8.0,
+      type: r.media_type === 'tv' ? 'tv' : 'movie',
+      overview: r.overview || ''
+    }));
+    sendJson(res, 200, { ok: true, items }, { 'Cache-Control': 'public, max-age=1800' });
+  } catch(err) {
+    const catalog = getCatalogSummary().slice(0, 10);
+    const items = catalog.map(c => ({
+      tmdbId: c.tmdbId || c.id,
+      title: c.title,
+      year: String(c.year || ''),
+      poster: c.poster,
+      backdrop: c.backdrop,
+      rating: typeof c.rating === 'number' ? c.rating : 8.5,
+      type: c.type === 'series' ? 'tv' : 'movie',
+      overview: c.description || ''
+    }));
+    sendJson(res, 200, { ok: true, items });
+  }
+}
+
+async function handleCatalogDiscover(req, res) {
+  if (handleCors(req, res)) return;
+  const q = getQueryParams(req);
+  const platform = q.get('platform') || '';
+  const mediaType = q.get('type') === 'tv' ? 'tv' : 'movie';
+  const sort = q.get('sort') || 'popularity';
+  const genre = q.get('genre') || '';
+  const country = q.get('country') || '';
+  const yearFrom = q.get('year_from') || '';
+  const yearTo = q.get('year_to') || '';
+
+  const params = new URLSearchParams();
+  params.set('watch_region', 'IN');
+
+  const providerMap = {
+    'Netflix': '8',
+    'PrimeVideo': '119',
+    'Prime': '119',
+    'JioHotstar': '122',
+    'Hotstar': '122',
+    'SonyLIV': '237',
+    'Crunchyroll': '283',
+    'MX': '515'
+  };
+
+  if (platform && providerMap[platform]) {
+    params.set('with_watch_providers', providerMap[platform]);
+  }
+  if (genre) params.set('with_genres', genre);
+  if (country) params.set('with_origin_country', country);
+
+  if (mediaType === 'movie') {
+    if (yearFrom) params.set('primary_release_date.gte', `${yearFrom}-01-01`);
+    if (yearTo) params.set('primary_release_date.lte', `${yearTo}-12-31`);
+  } else {
+    if (yearFrom) params.set('first_air_date.gte', `${yearFrom}-01-01`);
+    if (yearTo) params.set('first_air_date.lte', `${yearTo}-12-31`);
+  }
+
+  if (sort === 'release') {
+    params.set('sort_by', mediaType === 'movie' ? 'primary_release_date.desc' : 'first_air_date.desc');
+  } else if (sort === 'rating') {
+    params.set('sort_by', 'vote_average.desc');
+    params.set('vote_count.gte', '100');
+  } else {
+    params.set('sort_by', 'popularity.desc');
+  }
+
+  try {
+    const raw = await fetchTmdbCatalogJson(`/discover/${mediaType}?${params.toString()}`);
+    const items = (raw?.results || []).map(r => ({
+      tmdbId: r.id,
+      title: r.title || r.name,
+      year: String(r.release_date || r.first_air_date || '').slice(0, 4),
+      poster: r.poster_path ? `https://image.tmdb.org/t/p/w500${r.poster_path}` : null,
+      backdrop: r.backdrop_path ? `https://image.tmdb.org/t/p/w1280${r.backdrop_path}` : null,
+      rating: r.vote_average ? Number(r.vote_average.toFixed(1)) : 8.0,
+      type: mediaType,
+      overview: r.overview || ''
+    }));
+    sendJson(res, 200, { ok: true, items }, { 'Cache-Control': 'public, max-age=3600' });
+  } catch(err) {
+    sendJson(res, 500, { ok: false, error: err.message });
+  }
+}
+
+async function handleCatalogTitle(req, res) {
+  if (handleCors(req, res)) return;
+  const [rawPath] = (req.url || '').split('?');
+  const parts = rawPath.replace(/^\/api\/catalog\/title\/?/i, '').split('/');
+  const type = parts[0] === 'tv' || parts[0] === 'series' ? 'tv' : 'movie';
+  let id = parts[1] || '';
+
+  let tmdbId = Number(id);
+  let localItem = null;
+  const catalog = getCatalogSummary();
+
+  const cleanNum = String(id).replace(/^dotmobiz-/, '');
+  localItem = catalog.find(c => String(c.record_id) === cleanNum || c.id === id || c.id === `dotmobiz-${cleanNum}` || c.slug === id);
+
+  if (localItem && localItem.tmdbId) {
+    tmdbId = localItem.tmdbId;
+  } else if (isNaN(tmdbId) || tmdbId <= 0 || (tmdbId < 100000 && localItem)) {
+    if (localItem) {
+      tmdbId = await resolveTmdbId(localItem.title, '', localItem.type);
+    }
+  }
+
+  let raw = null;
+  if (tmdbId && tmdbId > 0) {
+    try {
+      raw = await fetchTmdbCatalogJson(`/${type}/${tmdbId}?append_to_response=credits,release_dates,content_ratings,external_ids,recommendations,videos`);
+    } catch(e) {}
+  }
+
+  const title = (raw && (raw.title || raw.name)) || (localItem && localItem.title) || 'Unknown Title';
+  const year = String((raw && (raw.release_date || raw.first_air_date)) || (localItem && localItem.year) || '').slice(0, 4);
+  const imdbId = (raw && (raw.imdb_id || raw.external_ids?.imdb_id)) || (localItem && localItem.imdbId) || null;
+
+  const { findMatchingCatalogLinks, normalizeRawLinks } = require('./canonicalResolver');
+  let downloadLinks = (localItem && localItem.links && localItem.links.length > 0) ? localItem.links : findMatchingCatalogLinks(title, year, imdbId, localItem?.slug);
+  if (downloadLinks.length === 0 && cleanNum) {
+    const dMap = require('./canonicalResolver').getDetailsMap ? require('./canonicalResolver').getDetailsMap() : null;
+    if (dMap && dMap.has(cleanNum)) {
+      const entry = dMap.get(cleanNum);
+      if (entry && Array.isArray(entry.links)) downloadLinks = entry.links;
+    }
+  }
+
+  const isSeries = type === 'tv';
+  downloadLinks = normalizeRawLinks(downloadLinks, localItem?.id || `tmdb-${tmdbId}`, isSeries);
+
+  let cert = 'U/A 13+';
+  if (raw && raw.release_dates?.results) {
+    const inDates = raw.release_dates.results.find(r => r.iso_3166_1 === 'IN') || raw.release_dates.results.find(r => r.iso_3166_1 === 'US');
+    if (inDates && inDates.release_dates && inDates.release_dates[0]) {
+      cert = inDates.release_dates[0].certification || cert;
+    }
+  } else if (raw && raw.content_ratings?.results) {
+    const inRate = raw.content_ratings.results.find(r => r.iso_3166_1 === 'IN') || raw.content_ratings.results.find(r => r.iso_3166_1 === 'US');
+    if (inRate) cert = inRate.rating || cert;
+  }
+
+  // Trailer key extraction
+  let trailerKey = null;
+  if (raw?.videos?.results?.length) {
+    const vid = raw.videos.results.find(v => v.site === 'YouTube' && (v.type === 'Trailer' || v.type === 'Teaser')) || raw.videos.results[0];
+    if (vid && vid.key) trailerKey = vid.key;
+  }
+
+  // Audio languages extraction
+  const audioLangs = [];
+  if (Array.isArray(downloadLinks) && downloadLinks.length) {
+    downloadLinks.forEach(l => {
+      if (l.audio) {
+        l.audio.split(/[,+\/\s]+/).forEach(a => {
+          const tr = a.trim();
+          if (tr && tr.length > 1 && !audioLangs.includes(tr)) audioLangs.push(tr);
+        });
+      }
+    });
+  }
+  if (!audioLangs.length && raw?.spoken_languages?.length) {
+    raw.spoken_languages.forEach(l => {
+      if (l.english_name && !audioLangs.includes(l.english_name)) audioLangs.push(l.english_name);
+    });
+  }
+  if (!audioLangs.length) {
+    audioLangs.push('Hindi', 'English');
+  }
+
+  // Initial episodes for TV series
+  let initialEpisodes = [];
+  if (type === 'tv' && tmdbId) {
+    try {
+      const s1 = await fetchTmdbCatalogJson(`/tv/${tmdbId}/season/1`);
+      if (s1 && Array.isArray(s1.episodes)) {
+        initialEpisodes = s1.episodes.map(ep => ({
+          id: ep.id,
+          season_number: ep.season_number,
+          episode_number: ep.episode_number,
+          name: ep.name,
+          overview: ep.overview,
+          still_path: ep.still_path ? `https://image.tmdb.org/t/p/w300${ep.still_path}` : null,
+          vote_average: ep.vote_average ? Number(ep.vote_average.toFixed(1)) : 7.8,
+          runtime: ep.runtime || 45
+        }));
+      }
+    } catch(e) {}
+  }
+
+  const result = {
+    ok: true,
+    id: tmdbId || id,
+    tmdbId: tmdbId || id,
+    type: type,
+    title: title,
+    year: year || '2025',
+    rating: raw?.vote_average ? Number(raw.vote_average.toFixed(1)) : 8.0,
+    runtime: raw?.runtime || (raw?.episode_run_time ? raw.episode_run_time[0] : 120),
+    certification: { rating: cert },
+    tagline: raw?.tagline || '',
+    overview: raw?.overview || localItem?.description || '',
+    poster: raw?.poster_path ? `https://image.tmdb.org/t/p/w500${raw.poster_path}` : (localItem?.poster || null),
+    backdrop: raw?.backdrop_path ? `https://image.tmdb.org/t/p/w1280${raw.backdrop_path}` : (localItem?.backdrop || null),
+    genres: raw?.genres || (localItem?.categories || []).map((c, idx) => ({ id: idx, name: c })),
+    cast: (raw?.credits?.cast || []).slice(0, 16).map(c => ({
+      id: c.id,
+      name: c.name,
+      character: c.character,
+      profile_path: c.profile_path ? `https://image.tmdb.org/t/p/w185${c.profile_path}` : null,
+      photo: c.profile_path ? `https://image.tmdb.org/t/p/w185${c.profile_path}` : null
+    })),
+    seasons: (raw?.seasons || []).filter(s => s.season_number > 0).map(s => ({
+      season_number: s.season_number,
+      episode_count: s.episode_count || 10,
+      name: s.name || `Season ${s.season_number}`
+    })),
+    recommendations: (raw?.recommendations?.results || raw?.similar?.results || []).slice(0, 12).map(r => ({
+      tmdbId: r.id,
+      title: r.title || r.name,
+      poster: r.poster_path ? `https://image.tmdb.org/t/p/w342${r.poster_path}` : null,
+      year: String(r.release_date || r.first_air_date || '').slice(0, 4),
+      type: r.media_type || (r.title ? 'movie' : 'tv'),
+      rating: r.vote_average ? Number(r.vote_average.toFixed(1)) : 7.5
+    })),
+    initialSeason: 1,
+    initialEpisodes: initialEpisodes,
+    trailerKey: trailerKey,
+    catalog: {
+      audioLangs: audioLangs
+    },
+    downloadLinks: downloadLinks,
+    links: downloadLinks
+  };
+
+  sendJson(res, 200, result, { 'Cache-Control': 'public, max-age=3600' });
+}
+
+async function handleCatalogSeason(req, res) {
+  if (handleCors(req, res)) return;
+  const [rawPath] = (req.url || '').split('?');
+  const parts = rawPath.replace(/^\/api\/catalog\/season\/?/i, '').split('/');
+  const id = parts[0] || '';
+  const seasonNum = parseInt(parts[1] || '1', 10);
+
+  let raw = null;
+  try {
+    raw = await fetchTmdbCatalogJson(`/tv/${id}/season/${seasonNum}`);
+  } catch(e) {}
+
+  const episodes = (raw?.episodes || []).map(ep => ({
+    id: ep.id,
+    season_number: ep.season_number,
+    episode_number: ep.episode_number,
+    name: ep.name,
+    overview: ep.overview,
+    still_path: ep.still_path ? `https://image.tmdb.org/t/p/w300${ep.still_path}` : null,
+    vote_average: ep.vote_average ? Number(ep.vote_average.toFixed(1)) : 7.8,
+    runtime: ep.runtime || 45
+  }));
+
+  sendJson(res, 200, { ok: true, episodes }, { 'Cache-Control': 'public, max-age=3600' });
+}
+
+async function handleCatalogApi(req, res) {
+  if (handleCors(req, res)) return;
+  const [rawPath] = (req.url || '').split('?');
+  const cleanPath = rawPath.replace(/^\/api\/catalog\/?/i, '').toLowerCase();
+
+  if (cleanPath === '' || cleanPath === 'summary') return handleSummary(req, res);
+  if (cleanPath === 'trending') return handleCatalogTrending(req, res);
+  if (cleanPath === 'discover') return handleCatalogDiscover(req, res);
+  if (cleanPath.startsWith('title/')) return handleCatalogTitle(req, res);
+  if (cleanPath.startsWith('season/')) return handleCatalogSeason(req, res);
+  if (cleanPath === 'search') return handleSearch(req, res);
+  if (cleanPath === 'cert') return sendJson(res, 200, { ok: true, cert: 'U/A 13+' });
+
+  sendJson(res, 404, { error: 'Catalog endpoint not found', path: rawPath });
+}
+
+async function handleWatchTmdb(req, res) {
+  if (handleCors(req, res)) return;
+  const q = getQueryParams(req);
+  const [rawPath] = (req.url || '').split('?');
+  const match = rawPath.match(/^\/watch-tmdb(?:\/([^\/?#]+)|$)/i);
+  const id = (match && match[1]) || q.get('id') || '1339713';
+  const type = q.get('type') || 'movie';
+  const isTv = type === 'tv' || type === 'series';
+  const season = q.get('se') || q.get('season') || '1';
+  const episode = q.get('ep') || q.get('episode') || '1';
+
+  const s1 = isTv
+    ? `https://vidlink.pro/tv/${id}/${season}/${episode}?multiLang=true`
+    : `https://vidlink.pro/movie/${id}?multiLang=true`;
+
+  const s2 = isTv
+    ? `https://vidsrc.me/embed/tv?tmdb=${id}&season=${season}&episode=${episode}`
+    : `https://vidsrc.me/embed/movie?tmdb=${id}`;
+
+  const s3 = isTv
+    ? `https://vidsrc.cc/v2/embed/tv/${id}/${season}/${episode}`
+    : `https://vidsrc.cc/v2/embed/movie/${id}`;
+
+  const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Watch Player - Netflix4U</title>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html, body { width:100%; height:100%; overflow:hidden; background:#000000; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; color:#ffffff; }
+    #top-bar {
+      position:absolute; top:0; left:0; right:0; height:54px; z-index:100;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:0 14px; background:linear-gradient(to bottom, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 100%);
+      transition:opacity 0.25s ease;
+    }
+    #top-bar:hover { opacity:1; }
+    .back-btn {
+      display:inline-flex; align-items:center; gap:6px; background:rgba(20,20,28,0.75); backdrop-filter:blur(8px);
+      border:1px solid rgba(255,255,255,0.15); color:#fff; padding:6px 12px; border-radius:8px; font-size:13px;
+      font-weight:600; cursor:pointer; text-decoration:none; transition:background 0.15s ease;
+    }
+    .back-btn:hover { background:rgba(255,255,255,0.2); }
+    .server-tabs { display:flex; gap:8px; overflow-x:auto; }
+    .server-btn {
+      background:rgba(20,20,28,0.75); backdrop-filter:blur(8px); border:1px solid rgba(255,255,255,0.15);
+      color:rgba(255,255,255,0.8); padding:5px 12px; border-radius:8px; font-size:11px; font-weight:600;
+      cursor:pointer; transition:all 0.15s ease; white-space:nowrap;
+    }
+    .server-btn:hover { background:rgba(255,255,255,0.2); color:#fff; }
+    .server-btn.active { background:#e50914; border-color:#e50914; color:#fff; box-shadow:0 0 10px rgba(229,9,20,0.5); }
+    #player-frame { width:100%; height:100%; border:none; background:#000; }
+  </style>
+</head>
+<body>
+  <div id="top-bar">
+    <button class="back-btn" onclick="closePlayer()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 19l-7-7 7-7"/></svg>
+      <span>Back</span>
+    </button>
+    <div class="server-tabs">
+      <button class="server-btn active" onclick="switchServer('${s1}', this)">Server 1 (Multi-Audio)</button>
+      <button class="server-btn" onclick="switchServer('${s2}', this)">Server 2 (VidSrc)</button>
+      <button class="server-btn" onclick="switchServer('${s3}', this)">Server 3 (SuperStream)</button>
+    </div>
+  </div>
+  <iframe id="player-frame" src="${s1}" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+  <script>
+    function switchServer(url, btn) {
+      document.getElementById('player-frame').src = url;
+      document.querySelectorAll('.server-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+    }
+    function closePlayer() {
+      if (window.parent && window.parent !== window) {
+        window.parent.postMessage('netmirror:close-watch', '*');
+      } else if (history.length > 1) {
+        history.back();
+      } else {
+        window.location.href = '/';
+      }
+    }
+    window.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closePlayer();
+    });
+  </script>
+</body>
+</html>`;
+
+  res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+  res.end(html);
+}
+
 // 12. Master Universal Router
 async function handleUniversalApi(req, res) {
   if (handleCors(req, res)) return;
@@ -781,6 +1254,7 @@ async function handleUniversalApi(req, res) {
   const [rawPath] = (req.url || '').split('?');
   const cleanPath = rawPath.replace(/^\/api\/?/, '').toLowerCase();
 
+  if (rawPath.startsWith('/watch-tmdb')) return handleWatchTmdb(req, res);
   if (cleanPath === 'details' || cleanPath.startsWith('details/')) return handleDetails(req, res);
   if (cleanPath === 'playback' || cleanPath.startsWith('playback/')) return handlePlayback(req, res);
   if (cleanPath === 'trailer') return handleTrailer(req, res);
@@ -789,7 +1263,8 @@ async function handleUniversalApi(req, res) {
   if (cleanPath === 'cast') return handleCast(req, res);
   if (cleanPath === 'search') return handleSearch(req, res);
   if (cleanPath === 'health') return handleHealth(req, res);
-  if (cleanPath === 'summary' || cleanPath === 'catalog') return handleSummary(req, res);
+  if (cleanPath === 'summary') return handleSummary(req, res);
+  if (cleanPath === 'catalog' || cleanPath.startsWith('catalog/')) return handleCatalogApi(req, res);
   if (cleanPath === 'tmdb-lookup') return handleTmdbLookup(req, res);
   if (cleanPath === 'recommendations') return handleRecommendations(req, res);
 
@@ -802,6 +1277,7 @@ module.exports = {
   resolveTitleCast,
   handleDetails,
   handlePlayback,
+  handleWatchTmdb,
   handleTrailer,
   handlePosterResolver,
   handleTmdb,

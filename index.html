@@ -1,1193 +1,389 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <base href="/">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="description" content="Netflix4U is an independent entertainment catalog for discovering movies, series, anime, and K-dramas.">
-    <meta name="keywords" content="movies, web series, anime, k-drama, entertainment catalog, netflix4u.in">
-    <meta name="theme-color" content="#0a0d1a">
-    <meta name="color-scheme" content="dark">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Netflix4U">
-    <meta name="format-detection" content="telephone=no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0a0a0f">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="Stream and download high quality movies, web series, anime and K-dramas with multi-audio and high-speed cloud mirrors on Netflix4U.">
+  <meta name="keywords" content="Netflix4u, netmirror, stream movies online, download movies 4k, web series hindi dubbed, free streaming hd">
 
-    <!-- SEO & AEO Robots -->
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+  <!-- PWA Capabilities -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Netflix4U">
+  <meta name="format-detection" content="telephone=no">
 
-    <!-- Open Graph (AEO & Social Search) -->
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="netflix4u.in">
-    <meta property="og:locale" content="en_US">
-    <meta property="og:title" content="Netflix4U — Entertainment Catalog">
-    <meta property="og:description" content="Discover verified movies, series, anime, and K-dramas.">
-    <meta property="og:image" content="https://netflix4u.in/og-image.jpg">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:url" content="https://netflix4u.in/">
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Netflix4U">
+  <meta property="og:title" content="Netflix4U — Unlimited Movies, Series & Direct Downloads">
+  <meta property="og:description" content="Stream & download movies and shows with multi-language audio and fast cloud mirrors.">
+  <meta property="og:image" content="https://netflix4u.in/og-image.jpg">
+  <meta property="og:url" content="https://netflix4u.in/">
 
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@Netflix4UIn">
-    <meta name="twitter:title" content="Netflix4U — Entertainment Catalog">
-    <meta name="twitter:description" content="Discover verified movies, series, anime, and K-dramas.">
-    <meta name="twitter:image" content="https://netflix4u.in/og-image.jpg">
+  <!-- Favicons -->
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icons/icon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/icons/icon-16.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-180.png">
+  <link rel="manifest" href="/js/manifest.json">
 
-    <!-- Canonical -->
-    <link rel="canonical" href="https://netflix4u.in/">
+  <!-- DNS Prefetch + Preconnect -->
+  <link rel="dns-prefetch" href="https://image.tmdb.org">
+  <link rel="preconnect" href="https://image.tmdb.org" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <!-- Icons -->
-    <link rel="icon" href="/favicon.ico" sizes="any">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="manifest" href="/js/manifest.json?v=2.5">
+  <title>Netflix4U — Stream & Download Movies, Web Series & Anime</title>
 
-    <!-- Preconnect for performance -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-    <link rel="preconnect" href="https://storage.hicine.sbs" crossorigin="">
-    <link rel="preconnect" href="https://www.youtube.com" crossorigin="">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@700;800;900&display=swap" rel="stylesheet">
-    <link rel="preload" as="font" crossorigin="" href="/fonts/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2">
-    <!-- Netflix4U Exact Design System -->
-    <link rel="stylesheet" href="/css/netflix4u-exact.css?v=3.3.5">
-
-    <title>Netflix4U — Stream Movies, Series, Anime & K-Dramas</title>
-
-    <!-- ========================================== -->
-    <!-- 🤖 AEO (ANSWER ENGINE OPTIMIZATION) SCHEMAS -->
-    <!-- Targeted for ChatGPT Search, Perplexity, Gemini & Google SGE -->
-    <!-- ========================================== -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "WebSite",
-          "@id": "https://netflix4u.in/#website",
-          "url": "https://netflix4u.in/",
-          "name": "Netflix4U",
-          "description": "Independent entertainment catalog for movies, web series, anime, and K-dramas.",
-          "publisher": {
-            "@id": "https://netflix4u.in/#organization"
-          },
-          "potentialAction": {
-            "@type": "SearchAction",
-            "target": {
-              "@type": "EntryPoint",
-              "urlTemplate": "https://netflix4u.in/search?q={search_term_string}"
-            },
-            "query-input": "required name=search_term_string"
-          }
-        },
-        {
-          "@type": "Organization",
-          "@id": "https://netflix4u.in/#organization",
-          "name": "Netflix4U",
-          "url": "https://netflix4u.in/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://netflix4u.in/images/favicon.svg",
-            "width": 512,
-            "height": 512
-          }
-        },
-        {
-          "@type": "FAQPage",
-          "@id": "https://netflix4u.in/#faq",
-          "mainEntity": [
-            {
-              "@type": "Question",
-              "name": "Is Netflix4U free to use?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Yes, Netflix4U provides 100% free access to thousands of movies, TV series, anime, and Korean dramas without any mandatory subscription."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Can I download movies and web series from Netflix4U?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Yes, Netflix4U provides direct high-speed download links across multiple quality tiers including 480p, 720p, 1080p Full HD, and 4K UHD with exact file sizes."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Does Netflix4U support multiple audio languages and subtitles?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Yes, Netflix4U titles feature Multi-Audio support including Dual Audio (Hindi, English, Tamil, Telugu), original audio tracks, and multi-language subtitles customizable inside the player settings."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "What streaming servers are available on Netflix4U?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Netflix4U offers multiple fast cloud streaming servers including Fast Cloud, VidLink, and VidSrc to ensure buffer-free playback across mobile, tablet, and desktop devices."
-              }
-            }
-          ]
-        },
-        {
-          "@type": "BreadcrumbList",
-          "@id": "https://netflix4u.in/#breadcrumbs",
-          "itemListElement": [
-            {
-              "@type": "ListItem",
-              "position": 1,
-              "name": "Home",
-              "item": "https://netflix4u.in/"
-            },
-            {
-              "@type": "ListItem",
-              "position": 2,
-              "name": "Movies",
-              "item": "https://netflix4u.in/movies"
-            },
-            {
-              "@type": "ListItem",
-              "position": 3,
-              "name": "Series",
-              "item": "https://netflix4u.in/series"
-            },
-            {
-              "@type": "ListItem",
-              "position": 4,
-              "name": "Anime",
-              "item": "https://netflix4u.in/anime"
-            },
-            {
-              "@type": "ListItem",
-              "position": 5,
-              "name": "Trending",
-              "item": "https://netflix4u.in/trending"
-            }
-          ]
-        }
-      ]
+  <!-- Typography & Fonts -->
+  <style>
+    @font-face {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 400;
+      src: url(/cf-fonts/v/inter/5.2.8/latin/wght/normal.woff2);
+      unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+      font-display: swap;
     }
-    </script>
+    @font-face {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 600;
+      src: url(/cf-fonts/v/inter/5.2.8/latin/wght/normal.woff2);
+      unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 700;
+      src: url(/cf-fonts/v/inter/5.2.8/latin/wght/normal.woff2);
+      unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+      font-display: swap;
+    }
+  </style>
 
-    <!-- Runtime compatibility shim & Automatic Cache Invalidation -->
-    <script>
-      window.process = window.process || { env: { NODE_ENV: 'production' } };
-      (function() {
-        var APP_VER = '3.3.5';
-        try {
-          if (localStorage.getItem('n4u_version') !== APP_VER) {
-            localStorage.setItem('n4u_version', APP_VER);
-            if ('caches' in window) {
-              caches.keys().then(function(names) {
-                names.forEach(function(n) { caches.delete(n); });
-              });
-            }
-          }
-        } catch(e) {}
-      })();
-    </script>
-    <script src="/js/site-quality.js?v=3.3.5" defer></script>
-    <script src="/js/real-poster-resolver.js?v=3.3.5"></script>
-    <script src="/js/download-resolver.js?v=3.3.5"></script>
-    <script type="module" src="/js/index-CQL8lqua.js?v=3.3.5"></script>
-    <link rel="modulepreload" crossorigin="" href="/js/vendor-react-h5WnBHGl.js">
-    <link rel="modulepreload" crossorigin="" href="/js/vendor-framer-BGQgIPyw.js">
-    <link rel="modulepreload" crossorigin="" href="/js/vendor-ui-BbvII91P.js">
-    <link rel="stylesheet" crossorigin="" href="/css/index-usTMTSwH.css?v=3.3.5">
-  
-    <!-- Global Design System: Consistent Typographic Scale & Harmonized Button Styles -->
-    <style>
-      html {
-        overflow-x: clip !important;
-        overflow-y: auto !important;
-        scroll-behavior: smooth !important;
-        height: auto !important;
-      }
-      body {
-        max-width: 100% !important;
-        min-height: 100vh !important;
-        height: auto !important;
-        overflow-x: clip !important;
-        overflow-y: visible !important;
-        overscroll-behavior-y: auto !important;
-        touch-action: pan-y !important;
-      }
-      #root {
-        min-height: 100vh !important;
-        width: 100% !important;
-        overflow: visible !important;
-      }
+  <!-- Net27 Exact Layout & Styles -->
+  <link rel="stylesheet" href="/css/Layout.CBW6-iGy.css">
+  <link rel="stylesheet" href="/css/index.P3dZcbru.css">
+  <link rel="stylesheet" href="/css/netflix4u-net27.css">
+</head>
 
-      /* --------------------------------------------------------------------------
-         USABILITY HEURISTIC 1: CONSISTENT TYPE SCALE SYSTEM (Aim <= 10, Target 7-8)
-         Tokens:
-         1. Micro:   11px (card badges, ratings, duration, mobile bottom nav labels)
-         2. XS:      12px (subtitles, secondary tags)
-         3. SM:      14px (primary UI text, card titles, buttons, pills, search)
-         4. Base:    16px (body text, inputs, descriptions)
-         5. XL:      20px (section titles: Trending Now, New Releases)
-         6. 2XL:     24px (headings, brand logo)
-         7. Hero:    48px (hero slide title)
-         8. Display: 120px (top-10 numeral)
-         -------------------------------------------------------------------------- */
-      .text-\[9px\], .text-\[10px\], .text-\[11px\], .mobile-nav-item span:last-child {
-        font-size: 11px !important;
-      }
-      footer .text-3xl {
-        font-size: 24px !important;
-      }
-      .top-number {
-        font-size: 120px !important;
-      }
-      #hero-banner h1 {
-        font-size: clamp(24px, 4vw, 48px) !important;
-        line-height: 1.05 !important;
-      }
+<body class="min-h-dvh flex flex-col overflow-x-hidden bg-[#0a0a0f] text-white">
+  <!-- ─── Branded Honeycomb Hexagon Loader ─── -->
+  <div id="nm-loader" aria-hidden="true">
+    <div class="nm-hive" id="nm-hive"></div>
+    <div class="nm-loader-n">N</div>
+  </div>
 
-      /* --------------------------------------------------------------------------
-         USABILITY HEURISTIC 2: HARMONIZED BUTTON VARIANTS (Aim <= 5, Target 4)
-         Variants:
-         1. Primary Action (.btn-primary, #nav-sign-in, Hero Watch Now)
-         2. Secondary / Glass (.btn-secondary, Hero More Info, Watchlist)
-         3. Pill Action (.btn-pill, #nav-search-trigger, Category Filter Pills)
-         4. Circular Icon (.btn-icon, Carousel arrows, Nav icons, Close modal)
-         -------------------------------------------------------------------------- */
-      /* Variant 1: Primary Action Button */
-      .btn-primary, #nav-sign-in {
-        display: inline-flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        gap: 0.5rem !important;
-        background-color: var(--color-accent) !important;
-        color: #ffffff !important;
-        font-size: 14px !important;
-        font-weight: 600 !important;
-        border-radius: 12px !important;
-        padding: 10px 22px !important;
-        border: 1px solid transparent !important;
-        line-height: 1.25 !important;
-        cursor: pointer !important;
-        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
-      }
-      .btn-primary:hover, #nav-sign-in:hover {
-        background-color: var(--color-accent-hover) !important;
-      }
-      @media (max-width: 767px) {
-        #nav-sign-in {
-          display: none !important;
-        }
-      }
-      .btn-primary:hover, #nav-sign-in:hover {
-        transform: translateY(-1px) !important;
-      }
+  <main class="flex-1">
+    <div class="min-h-dvh bg-[#0a0a0f] text-white relative">
+      <!-- Per-Platform Ambient Glow Wash -->
+      <div id="theme-wash" class="pointer-events-none fixed inset-x-0 top-0 h-[60vh] z-0 transition-opacity duration-700" style="background: radial-gradient(ellipse at top, var(--accent, #ff6b00) 0%, transparent 65%); opacity: 0.22;"></div>
 
-      /* Variant 2: Secondary / Glass Button */
-      .btn-secondary {
-        display: inline-flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        gap: 0.5rem !important;
-        background-color: rgba(255, 255, 255, 0.1) !important;
-        color: #ffffff !important;
-        font-size: 14px !important;
-        font-weight: 600 !important;
-        border-radius: 12px !important;
-        padding: 10px 20px !important;
-        border: 1px solid rgba(255, 255, 255, 0.2) !important;
-        line-height: 1.25 !important;
-        cursor: pointer !important;
-        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
-      }
-      .btn-secondary:hover {
-        background-color: rgba(255, 255, 255, 0.2) !important;
-      }
+      <!-- Top Progress Bar -->
+      <div id="progress-bar" class="fixed top-0 left-0 h-[3px] z-[60] pointer-events-none transition-opacity duration-200" style="background: var(--accent, #ff6b00); width: 0; opacity: 0; box-shadow: 0 0 10px var(--accent, #ff6b00);"></div>
 
-      /* Variant 3: Pill Button (Search & Filter Navigation) */
-      .btn-pill, #nav-search-trigger {
-        display: inline-flex !important;
-        align-items: center !important;
-        background-color: rgba(255, 255, 255, 0.06) !important;
-        border: 1px solid rgba(255, 255, 255, 0.12) !important;
-        border-radius: 9999px !important;
-        font-size: 14px !important;
-        font-weight: 500 !important;
-        padding: 8px 18px !important;
-        color: rgba(255, 255, 255, 0.8) !important;
-        line-height: 1.25 !important;
-        cursor: pointer !important;
-        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
-      }
-      .btn-pill:hover, #nav-search-trigger:hover {
-        background-color: rgba(255, 255, 255, 0.12) !important;
-        border-color: rgba(255, 255, 255, 0.25) !important;
-        color: #ffffff !important;
-      }
+      <div class="relative z-10">
+        <!-- ─── Sticky Home Header ─── -->
+        <header id="home-header" class="fixed top-0 inset-x-0 z-40" style="padding-top: max(env(safe-area-inset-top, 0px), 8px);">
+          <div class="px-3 sm:px-6 py-2.5 flex items-center gap-3">
+            <a href="/" class="flex items-center gap-1.5 shrink-0">
+              <span class="text-xl sm:text-2xl font-black tracking-tight">
+                <span class="text-[color:var(--color-brand)]">Netflix</span>4U
+              </span>
+            </a>
 
-      /* Variant 4: Circular Icon Button */
-      .btn-icon {
-        display: inline-flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        width: 40px !important;
-        height: 40px !important;
-        border-radius: 9999px !important;
-        background-color: rgba(0, 0, 0, 0.5) !important;
-        border: 1px solid rgba(255, 255, 255, 0.2) !important;
-        color: #ffffff !important;
-        padding: 0 !important;
-        font-size: 14px !important;
-        font-weight: 400 !important;
-        cursor: pointer !important;
-        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
-      }
-      .btn-icon:hover {
-        background-color: rgba(0, 0, 0, 0.8) !important;
-        border-color: rgba(255, 255, 255, 0.4) !important;
-        transform: scale(1.08) !important;
-      }
-      /* --------------------------------------------------------------------------
-         WCAG 2.2 AA CONTRAST COMPLIANCE (Minimum 4.5:1 ratio for normal text)
-         - Elevate text-gray-500 (#6a7282, 3.9:1) to #9ca3af (7.6:1)
-         - Elevate text-gray-600 (#4a5565, 2.6:1) to #9ca3af (7.6:1)
-         - Elevate brand accent text on dark backgrounds to #ff3847 (5.5:1)
-         -------------------------------------------------------------------------- */
-      .text-gray-500 {
-        color: #9ca3af !important;
-      }
-      .text-gray-600 {
-        color: #9ca3af !important;
-      }
-      .text-gray-400 {
-        color: #cbd5e1 !important;
-      }
-      span[class*="text-[var(--color-accent)]"].text-base,
-      span[class*="text-[var(--color-accent)]"].text-sm {
-        color: #ff3847 !important;
-      }
-      header, footer, #hero-banner {
-        background-color: #060816;
-      }
-      /* WCAG 2.5.8 Target Size Minimum: Ensure tabs and dots meet 24x24px clickable bounds */
-      button[role="tab"] {
-        min-height: 24px !important;
-        min-width: 24px !important;
-        display: inline-flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        cursor: pointer !important;
-      }
-      .top-number {
-        -webkit-text-stroke: 3px rgba(255, 255, 255, 0.4) !important;
-      }
-    
-      /* Back navigation button clickability & top layering */
-      .back-btn-container, [aria-label="Go back"] {
-        z-index: 9999 !important;
-        pointer-events: auto !important;
-        cursor: pointer !important;
-      }
-      .back-btn-container {
-        position: absolute !important;
-      }
+            <!-- Centered Pill Search Bar -->
+            <div class="relative flex-1 max-w-xl mx-auto">
+              <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path>
+              </svg>
+              <input id="search-input" type="search" placeholder="Search movies, series, anime, 4K downloads…" class="w-full pl-9 pr-9 py-2 rounded-full bg-white/10 border border-white/10 placeholder:text-white/40 focus:outline-none focus:border-white/30 focus:bg-white/15 transition text-sm">
+              <button id="search-clear" type="button" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-white/40 hover:text-white text-sm w-5 h-5 rounded-full flex items-center justify-center">✕</button>
+            </div>
+          </div>
 
-      /* --------------------------------------------------------------------------
-         CROSS-DEVICE RESPONSIVE ENHANCEMENTS (Mobile, Tablet, Desktop)
-         -------------------------------------------------------------------------- */
-      /* Safe area support for notched phones & iOS Home bar */
-      .safe-area-pb {
-        padding-bottom: max(14px, env(safe-area-inset-bottom, 14px)) !important;
-      }
-      
-      /* Ensure bottom content on mobile is never obscured by fixed bottom nav */
-      @media (max-width: 1023.98px) {
-        body {
-          padding-bottom: calc(72px + env(safe-area-inset-bottom, 16px)) !important;
-        }
-      }
+          <!-- Platform Pill Switcher -->
+          <div class="px-3 sm:px-6 pb-2.5 flex gap-2 overflow-x-auto scrollbar-none">
+            <button data-platform="trending" data-color="#ff6b00" style="--pc:#ff6b00" class="platform-btn is-active shrink-0 pl-1 pr-3 py-1 rounded-full text-xs font-semibold border border-white/15 transition bg-white/15 flex items-center gap-2 whitespace-nowrap text-white">
+              <span class="w-7 h-7 rounded-full shrink-0 flex items-center justify-center bg-gradient-to-br from-amber-400 to-red-500 shadow-sm">
+                <svg viewBox="0 0 24 24" class="w-4 h-4 text-white" fill="currentColor"><path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67zM11.71 19c-1.78 0-3.22-1.4-3.22-3.14 0-1.62 1.05-2.76 2.81-3.12 1.77-.36 3.6-1.21 4.62-2.58.39 1.29.59 2.65.59 4.04 0 2.65-2.15 4.8-4.8 4.8z"></path></svg>
+              </span>
+              <span>Trending</span>
+            </button>
 
-      /* Touch target standard >= 44x44px for primary interactive elements */
-      @media (pointer: coarse) {
-        .btn-primary, .btn-secondary, .btn-pill {
-          min-height: 44px !important;
-        }
-        .btn-icon {
-          min-width: 44px !important;
-          min-height: 44px !important;
-        }
-        .mobile-nav-item {
-          min-height: 48px !important;
-        }
-      }
+            <button data-platform="LatestRelease" data-color="#22c55e" style="--pc:#22c55e" class="platform-btn shrink-0 pl-1 pr-3 py-1 rounded-full text-xs font-semibold border border-white/15 transition bg-white/5 flex items-center gap-2 whitespace-nowrap text-white/80">
+              <span class="w-7 h-7 rounded-full shrink-0 flex items-center justify-center shadow-sm" style="background: linear-gradient(135deg, #22c55e 0%, rgba(0,0,0,0.4) 100%);">
+                <svg viewBox="0 0 24 24" class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"></path><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path></svg>
+              </span>
+              <span>Latest Release</span>
+            </button>
 
-      /* Smooth touch scrolling with momentum across carousels */
-      .scrollbar-hide, [style*="scrollSnapType"], .overflow-x-auto {
-        -webkit-overflow-scrolling: touch !important;
-        scroll-behavior: smooth !important;
-      }
+            <button data-platform="Netflix" data-color="#e50914" style="--pc:#e50914" class="platform-btn shrink-0 pl-1 pr-3 py-1 rounded-full text-xs font-semibold border border-white/15 transition bg-white/5 flex items-center gap-2 whitespace-nowrap text-white/80">
+              <img src="/images/platforms/FjWTYs9RfCsT.jpg" alt="Netflix" class="w-7 h-7 rounded-full object-cover shrink-0 bg-white shadow-sm" onerror="this.src='https://image.tmdb.org/t/p/w92/FjWTYs9RfCsT.jpg'">
+              <span>Netflix</span>
+            </button>
 
-      /* Prevent image layout shifts */
-      img {
-        content-visibility: auto;
-      }
+            <button data-platform="PrimeVideo" data-color="#00a8e1" style="--pc:#00a8e1" class="platform-btn shrink-0 pl-1 pr-3 py-1 rounded-full text-xs font-semibold border border-white/15 transition bg-white/5 flex items-center gap-2 whitespace-nowrap text-white/80">
+              <img src="/images/platforms/teMwgjoxOg9u.jpg" alt="Prime Video" class="w-7 h-7 rounded-full object-cover shrink-0 bg-white shadow-sm" onerror="this.src='https://image.tmdb.org/t/p/w92/teMwgjoxOg9u.jpg'">
+              <span>Prime Video</span>
+            </button>
 
-      /* Video player responsive aspect ratio & container bounds */
-      #player iframe {
-        width: 100% !important;
-        height: 100% !important;
-        border: 0 !important;
-      }
+            <button data-platform="JioHotstar" data-color="#2b6def" style="--pc:#2b6def" class="platform-btn shrink-0 pl-1 pr-3 py-1 rounded-full text-xs font-semibold border border-white/15 transition bg-white/5 flex items-center gap-2 whitespace-nowrap text-white/80">
+              <img src="/images/platforms/JmxIsKiiiFkm.jpg" alt="JioHotstar" class="w-7 h-7 rounded-full object-cover shrink-0 bg-white shadow-sm" onerror="this.src='https://image.tmdb.org/t/p/w92/JmxIsKiiiFkm.jpg'">
+              <span>JioHotstar</span>
+            </button>
 
-      /* Clean download links card responsiveness */
-      #download-links a {
-        touch-action: manipulation !important;
-      }
+            <button data-platform="SonyLIV" data-color="#9b5de5" style="--pc:#9b5de5" class="platform-btn shrink-0 pl-1 pr-3 py-1 rounded-full text-xs font-semibold border border-white/15 transition bg-white/5 flex items-center gap-2 whitespace-nowrap text-white/80">
+              <img src="/images/platforms/IQHvNlAlUHxi.jpg" alt="SonyLIV" class="w-7 h-7 rounded-full object-cover shrink-0 bg-white shadow-sm" onerror="this.src='https://image.tmdb.org/t/p/w92/IQHvNlAlUHxi.jpg'">
+              <span>SonyLIV</span>
+            </button>
 
-      /* ==========================================================================
-         HERO SECTION - BULLETPROOF MULTI-DEVICE RESPONSIVE SYSTEM
-         Tested and verified on Mobile (<640px), Tablet (640-1024px), Desktop (>1024px)
-         ========================================================================== */
-      .hero-section-container {
-        position: relative !important;
-        width: 100% !important;
-        background-color: #141414 !important;
-        overflow: hidden !important;
-      }
+            <button data-platform="Crunchyroll" data-color="#f47521" style="--pc:#f47521" class="platform-btn shrink-0 pl-1 pr-3 py-1 rounded-full text-xs font-semibold border border-white/15 transition bg-white/5 flex items-center gap-2 whitespace-nowrap text-white/80">
+              <img src="/images/platforms/nnYmRNZy6VSX.jpg" alt="Crunchyroll" class="w-7 h-7 rounded-full object-cover shrink-0 bg-white shadow-sm" onerror="this.src='https://image.tmdb.org/t/p/w92/nnYmRNZy6VSX.jpg'">
+              <span>Crunchyroll</span>
+            </button>
 
-      /* Desktop Gradients: Rich cinematic contrast over any bright backdrop */
-      .hero-gradient-desktop {
-        position: absolute !important;
-        inset: 0 !important;
-        background: linear-gradient(to right, rgba(10,13,26,0.98) 0%, rgba(10,13,26,0.90) 35%, rgba(10,13,26,0.50) 65%, rgba(10,13,26,0.15) 100%) !important;
-        pointer-events: none !important;
-        z-index: 2 !important;
-      }
-      .hero-gradient-mobile {
-        display: none !important;
-      }
-      .hero-gradient-bottom {
-        position: absolute !important;
-        bottom: 0 !important;
-        left: 0 !important;
-        right: 0 !important;
-        height: 140px !important;
-        background: linear-gradient(to top, #141414 0%, transparent 100%) !important;
-        pointer-events: none !important;
-        z-index: 3 !important;
-      }
+            <button data-platform="Kids" data-color="#ff4fa3" style="--pc:#ff4fa3" class="platform-btn shrink-0 pl-1 pr-3 py-1 rounded-full text-xs font-semibold border border-white/15 transition bg-white/5 flex items-center gap-2 whitespace-nowrap text-white/80">
+              <span class="w-7 h-7 rounded-full shrink-0 flex items-center justify-center shadow-sm" style="background: linear-gradient(135deg, #ff4fa3 0%, rgba(0,0,0,0.4) 100%);">
+                <svg viewBox="0 0 24 24" class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" x2="9.01" y1="9" y2="9"></line><line x1="15" x2="15.01" y1="9" y2="9"></line></svg>
+              </span>
+              <span>Kids</span>
+            </button>
 
-      /* Hero Content Area: Balanced vertical spacing */
-      .hero-content-area {
-        display: flex !important;
-        flex-direction: column !important;
-        justify-content: center !important;
-        min-height: 600px !important;
-        padding-top: 5rem !important;
-        padding-bottom: 4rem !important;
-      }
+            <button data-platform="MX" data-color="#0085f6" style="--pc:#0085f6" class="platform-btn shrink-0 pl-1 pr-3 py-1 rounded-full text-xs font-semibold border border-white/15 transition bg-white/5 flex items-center gap-2 whitespace-nowrap text-white/80">
+              <img src="/images/platforms/Hoj6RBCM9kDd.jpg" alt="MX Player" class="w-7 h-7 rounded-full object-cover shrink-0 bg-white shadow-sm" onerror="this.src='https://image.tmdb.org/t/p/w92/Hoj6RBCM9kDd.jpg'">
+              <span>MX Player</span>
+            </button>
+          </div>
+        </header>
 
-      /* Hero Content Inner Layout (Desktop: Side-by-side flex row) */
-      .hero-content-inner {
-        display: flex !important;
-        flex-direction: row !important;
-        align-items: center !important;
-        justify-content: space-between !important;
-        gap: 3rem !important;
-        width: 100% !important;
-      }
+        <!-- ─── 5-Slide Hero Carousel ─── -->
+        <section id="hero" class="relative h-[64vh] sm:h-[80vh] min-h-[520px] sm:min-h-[680px] max-h-[940px] overflow-hidden" style="padding-top: calc(env(safe-area-inset-top, 0px) + 140px);"
+          data-hero='[{"tmdbId":1339713,"title":"Obsession","year":"2026","backdrop":"https://image.tmdb.org/t/p/w1280/EfqrvgJzjgKP.jpg","overview":"After breaking the mysterious \"One Wish Willow\" to win his crush&#39;s heart, a hopeless romantic finds himself getting exactly what he asked for but soon discovers that some desires come at a dark, sinister price.","rating":8.2,"type":"movie"},{"tmdbId":1007757,"title":"Swapped","year":"2026","backdrop":"https://image.tmdb.org/t/p/w1280/mO9ThpsiCxQ1.jpg","overview":"A small woodland creature and a majestic bird, two natural sworn enemies of the Valley, magically trade places and set off on an adventure of a lifetime to switch back.","rating":8.9,"type":"movie"},{"tmdbId":1311031,"title":"Demon Slayer: Kimetsu no Yaiba Infinity Castle","year":"2025","backdrop":"https://image.tmdb.org/t/p/w1280/Id0YxD2c95DP.jpg","overview":"The Demon Slayer Corps are drawn into the Infinity Castle, where Tanjiro, Nezuko, and the Hashira face terrifying Upper Rank demons in a desperate fight as the final battle begins.","rating":8.8,"type":"movie"},{"tmdbId":278,"title":"The Shawshank Redemption","year":"1994","backdrop":"https://image.tmdb.org/t/p/w1280/I0E8p9TYuAsx.jpg","overview":"Imprisoned in the 1940s for the double murder of his wife and her lover, upstanding banker Andy Dufresne begins a new life at the Shawshank prison.","rating":8.7,"type":"movie"},{"tmdbId":238,"title":"The Godfather","year":"1972","backdrop":"https://image.tmdb.org/t/p/w1280/Jic5FQ7xc8o3.jpg","overview":"Spanning the years 1945 to 1955, a chronicle of the fictional Italian-American Corleone crime family.","rating":8.7,"type":"movie"}]'>
 
-      .hero-text-col {
-        flex: 1 1 0% !important;
-        max-width: 680px !important;
-        text-align: left !important;
-        z-index: 10 !important;
-      }
+          <!-- Crossfade Backdrops -->
+          <div class="hero-bg absolute inset-0 bg-cover bg-center transition-opacity duration-[1200ms]" style="background-image: url('https://image.tmdb.org/t/p/w1280/EfqrvgJzjgKP.jpg'); opacity: 1; z-index: 10"></div>
+          <div class="hero-bg absolute inset-0 bg-cover bg-center transition-opacity duration-[1200ms]" style="background-image: url('https://image.tmdb.org/t/p/w1280/mO9ThpsiCxQ1.jpg'); opacity: 0; z-index: 9"></div>
+          <div class="hero-bg absolute inset-0 bg-cover bg-center transition-opacity duration-[1200ms]" style="background-image: url('https://image.tmdb.org/t/p/w1280/Id0YxD2c95DP.jpg'); opacity: 0; z-index: 8"></div>
+          <div class="hero-bg absolute inset-0 bg-cover bg-center transition-opacity duration-[1200ms]" style="background-image: url('https://image.tmdb.org/t/p/w1280/I0E8p9TYuAsx.jpg'); opacity: 0; z-index: 7"></div>
+          <div class="hero-bg absolute inset-0 bg-cover bg-center transition-opacity duration-[1200ms]" style="background-image: url('https://image.tmdb.org/t/p/w1280/Jic5FQ7xc8o3.jpg'); opacity: 0; z-index: 6"></div>
 
-      .hero-tag-row {
-        display: flex !important;
-        align-items: center !important;
-        justify-content: flex-start !important;
-        gap: 0.5rem !important;
-        margin-bottom: 0.75rem !important;
-      }
+          <!-- Clickable Hero Backdrop Trigger -->
+          <button id="hero-click" type="button" data-modal="title" data-tmdbid="1339713" data-type="movie" aria-label="More info for Obsession" class="absolute inset-0 z-[15] cursor-pointer bg-transparent border-0"></button>
 
-      .hero-title {
-        font-size: clamp(2rem, 3.8vw, 3.4rem) !important;
-        line-height: 1.05 !important;
-        text-shadow: 0 4px 20px rgba(0,0,0,0.95) !important;
-        margin-bottom: 0.75rem !important;
-      }
+          <!-- Gradient Masks -->
+          <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-[#0a0a0f]/40 to-transparent pointer-events-none z-20"></div>
+          <div class="absolute inset-0 bg-gradient-to-r from-[#0a0a0f] via-[#0a0a0f]/30 to-transparent pointer-events-none z-20"></div>
 
-      .hero-meta-row {
-        display: flex !important;
-        flex-wrap: wrap !important;
-        align-items: center !important;
-        justify-content: flex-start !important;
-        gap: 0.75rem !important;
-        margin-bottom: 1rem !important;
-      }
+          <!-- Hero Content -->
+          <div class="relative z-30 h-full flex items-end pb-8 sm:pb-16 pointer-events-none">
+            <div class="px-4 sm:pl-16 sm:pr-8 max-w-3xl pointer-events-auto">
+              <div class="text-[10px] sm:text-xs uppercase tracking-[0.3em] text-[color:var(--color-brand)] font-bold mb-2">
+                🔥 Trending Now
+              </div>
 
-      .hero-description {
-        display: -webkit-box !important;
-        -webkit-line-clamp: 3 !important;
-        -webkit-box-orient: vertical !important;
-        overflow: hidden !important;
-        max-width: 580px !important;
-        text-shadow: 0 2px 8px rgba(0,0,0,0.85) !important;
-        margin-bottom: 1.5rem !important;
-      }
+              <h1 id="hero-title" class="text-3xl sm:text-5xl md:text-6xl font-black mb-3 leading-[1.05] tracking-tight min-h-[2.1em] text-white" style="text-shadow: 0 2px 24px rgba(0,0,0,0.7);">
+                Obsession
+              </h1>
 
-      .hero-buttons-row {
-        display: flex !important;
-        align-items: center !important;
-        justify-content: flex-start !important;
-        gap: 0.75rem !important;
-        flex-wrap: wrap !important;
-      }
+              <div id="hero-meta" class="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs sm:text-sm text-white/85 mb-3 font-medium min-h-[1.5em]">
+                <span class="px-1.5 py-0.5 rounded bg-yellow-400/90 text-black font-bold text-[11px]">⭐ 8.2</span>
+                <span>2026</span>
+                <span>•</span>
+                <span class="uppercase tracking-wider">Movie</span>
+                <span class="px-1.5 py-0.5 rounded bg-white/15 text-[10px] tracking-wider font-bold">HD</span>
+              </div>
 
-      /* Authentic Vertical Poster Card */
-      .hero-poster-card {
-        flex-shrink: 0 !important;
-        position: relative !important;
-        display: block !important;
-        width: 260px !important;
-        aspect-ratio: 2 / 3 !important;
-        border-radius: 1.25rem !important;
-        overflow: hidden !important;
-        box-shadow: 0 25px 60px rgba(0,0,0,0.95), 0 0 25px rgba(229,9,20,0.2) !important;
-        border: 2px solid rgba(255,255,255,0.25) !important;
-        cursor: pointer !important;
-        transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.35s ease, border-color 0.35s ease !important;
-        z-index: 10 !important;
-        text-decoration: none !important;
-      }
-      .hero-poster-card:hover {
-        transform: translateY(-6px) scale(1.03) !important;
-        box-shadow: 0 30px 70px rgba(0,0,0,0.98), 0 0 35px rgba(229,9,20,0.45) !important;
-        border-color: var(--color-accent) !important;
-      }
-      .hero-poster-img {
-        width: 100% !important;
-        height: 100% !important;
-        object-fit: cover !important;
-        transition: transform 0.5s ease !important;
-      }
-      .hero-poster-card:hover .hero-poster-img {
-        transform: scale(1.06) !important;
-      }
-      .hero-poster-overlay {
-        position: absolute !important;
-        inset: 0 !important;
-        background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 50%, rgba(0,0,0,0.3) 100%) !important;
-        opacity: 0.35 !important;
-        transition: opacity 0.3s ease !important;
-      }
-      .hero-poster-card:hover .hero-poster-overlay {
-        opacity: 0.15 !important;
-      }
-      .hero-poster-play-badge {
-        position: absolute !important;
-        inset: 0 !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        opacity: 0 !important;
-        transition: opacity 0.3s ease, transform 0.3s ease !important;
-        transform: scale(0.85) !important;
-      }
-      .hero-poster-card:hover .hero-poster-play-badge {
-        opacity: 1 !important;
-        transform: scale(1) !important;
-      }
-      .hero-poster-play-circle {
-        width: 56px !important;
-        height: 56px !important;
-        border-radius: 9999px !important;
-        background-color: var(--color-accent) !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.6) !important;
-      }
-      .hero-poster-quality-badge {
-        position: absolute !important;
-        top: 10px !important;
-        right: 10px !important;
-        background: rgba(0,0,0,0.85) !important;
-        backdrop-filter: blur(8px) !important;
-        padding: 2px 8px !important;
-        border-radius: 6px !important;
-        font-size: 11px !important;
-        font-weight: 900 !important;
-        color: #ffffff !important;
-        border: 1px solid rgba(255,255,255,0.25) !important;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.5) !important;
-      }
+              <div id="hero-desc" class="text-sm sm:text-base text-white/85 max-w-2xl mb-5 line-clamp-2 sm:line-clamp-3 leading-relaxed min-h-[3em] sm:min-h-[4.5em]" style="text-shadow: 0 1px 8px rgba(0,0,0,0.6);">
+                After breaking the mysterious "One Wish Willow" to win his crush's heart, a hopeless romantic finds himself getting exactly what he asked for but soon discovers that some desires come at a dark, sinister price.
+              </div>
 
-      /* Hero Navigation Arrows */
-      .hero-nav-arrow {
-        position: absolute !important;
-        top: 50% !important;
-        transform: translateY(-50%) !important;
-        z-index: 25 !important;
-        opacity: 0.75 !important;
-      }
-      .hero-nav-arrow:hover {
-        opacity: 1 !important;
-      }
-      .hero-arrow-left {
-        left: 1.5rem !important;
-      }
-      .hero-arrow-right {
-        right: 1.5rem !important;
-      }
+              <!-- Action Buttons -->
+              <div class="flex flex-wrap gap-3">
+                <button id="hero-play" type="button" data-modal="watch" data-tmdbid="1339713" data-type="movie" data-backdrop="https://image.tmdb.org/t/p/w1280/EfqrvgJzjgKP.jpg" class="inline-flex items-center gap-2 px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg bg-white text-black font-bold hover:bg-white/90 active:scale-95 transition text-sm sm:text-base shadow-xl cursor-pointer">
+                  <svg class="w-4 h-4 sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
+                  Watch Now
+                </button>
+                <button id="hero-info" type="button" data-modal="title" data-tmdbid="1339713" data-type="movie" class="inline-flex items-center gap-2 px-5 sm:px-7 py-2.5 sm:py-3 rounded-lg bg-white/15 backdrop-blur-md text-white font-semibold hover:bg-white/25 active:scale-95 transition text-sm sm:text-base border border-white/10 cursor-pointer">
+                  <svg class="w-4 h-4 sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4M12 8h.01"></path>
+                  </svg>
+                  More Info
+                </button>
+                <button id="hero-download" type="button" data-modal="title" data-tmdbid="1339713" data-type="movie" class="inline-flex items-center gap-2 px-5 sm:px-7 py-2.5 sm:py-3 rounded-lg bg-red-600 hover:bg-red-700 active:scale-95 transition text-white font-bold text-sm sm:text-base shadow-lg cursor-pointer">
+                  <svg class="w-4 h-4 sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M12 3v12m0 0l-4-4m4 4l4-4"/><path d="M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/>
+                  </svg>
+                  Downloads
+                </button>
+              </div>
+            </div>
+          </div>
 
-      /* Carousel Dots */
-      .hero-dots-container {
-        position: absolute !important;
-        bottom: 1.5rem !important;
-        left: 50% !important;
-        transform: translateX(-50%) !important;
-        z-index: 30 !important;
-        display: flex !important;
-        align-items: center !important;
-        gap: 0.5rem !important;
-        pointer-events: auto !important;
-      }
-      .hero-dot {
-        height: 6px !important;
-        width: 8px !important;
-        border-radius: 9999px !important;
-        background-color: rgba(255,255,255,0.35) !important;
-        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
-        cursor: pointer !important;
-        border: none !important;
-        padding: 0 !important;
-      }
-      .hero-dot:hover {
-        background-color: rgba(255,255,255,0.7) !important;
-      }
-      .hero-dot-active {
-        width: 32px !important;
-        background-color: var(--color-accent) !important;
-        box-shadow: 0 0 10px rgba(229,9,20,0.6) !important;
-      }
+          <!-- Prev/Next Navigation Arrows -->
+          <button id="hero-prev" type="button" aria-label="Previous" class="hero-nav absolute left-0 sm:left-2 top-1/2 -translate-y-1/2 z-40 w-10 h-20 flex items-center justify-center text-white/50 hover:text-white pointer-events-auto active:scale-90 transition">
+            <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m15 18-6-6 6-6"/></svg>
+          </button>
+          <button id="hero-next" type="button" aria-label="Next" class="hero-nav absolute right-0 sm:right-2 top-1/2 -translate-y-1/2 z-40 w-10 h-20 flex items-center justify-center text-white/50 hover:text-white pointer-events-auto active:scale-90 transition">
+            <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
+          </button>
 
-      /* ---------------------------------------------------------
-         TABLET RESPONSIVENESS (640px to 1024px)
-         --------------------------------------------------------- */
-      @media (max-width: 1024px) and (min-width: 768px) {
-        .hero-poster-card {
-          width: 220px !important;
-        }
-        .hero-title {
-          font-size: 2.3rem !important;
-        }
-        .hero-content-area {
-          min-height: 560px !important;
-          padding-top: 5rem !important;
-          padding-bottom: 3.5rem !important;
-        }
-        .hero-arrow-left {
-          left: 0.75rem !important;
-        }
-        .hero-arrow-right {
-          right: 0.75rem !important;
-        }
-      }
+          <!-- Carousel Dots -->
+          <div id="hero-dots" class="absolute bottom-3 left-1/2 -translate-x-1/2 sm:bottom-5 flex gap-1.5 z-30"></div>
+        </section>
 
-      /* ---------------------------------------------------------
-         MOBILE RESPONSIVENESS (max-width: 767.98px)
-         Clean vertical flow: Poster on top, content below, zero overlap
-         --------------------------------------------------------- */
-      @media (max-width: 767.98px) {
-        .hero-section-container {
-          min-height: auto !important;
-        }
-        .hero-content-area {
-          min-height: auto !important;
-          padding-top: 4.8rem !important;
-          padding-bottom: 3.5rem !important;
-        }
-        .hero-gradient-desktop {
-          display: none !important;
-        }
-        .hero-gradient-mobile {
-          display: block !important;
-          position: absolute !important;
-          inset: 0 !important;
-          background: linear-gradient(to bottom, rgba(10,13,26,0.6) 0%, rgba(10,13,26,0.85) 40%, rgba(10,13,26,0.98) 75%, #0a0d1a 100%) !important;
-          pointer-events: none !important;
-          z-index: 2 !important;
-        }
-        .hero-content-inner {
-          flex-direction: column !important;
-          align-items: center !important;
-          text-align: center !important;
-          gap: 1.25rem !important;
-        }
-        /* Put the authentic poster card front and center on mobile */
-        .hero-poster-card {
-          order: 1 !important;
-          width: 170px !important;
-          max-width: 50vw !important;
-          box-shadow: 0 16px 36px rgba(0,0,0,0.92) !important;
-          border-radius: 1rem !important;
-          margin-bottom: 0.25rem !important;
-        }
-        .hero-text-col {
-          order: 2 !important;
-          max-width: 100% !important;
-          text-align: center !important;
-        }
-        .hero-tag-row {
-          justify-content: center !important;
-          margin-bottom: 0.35rem !important;
-        }
-        .hero-title {
-          font-size: 1.55rem !important;
-          line-height: 1.2 !important;
-          margin-bottom: 0.45rem !important;
-        }
-        .hero-meta-row {
-          justify-content: center !important;
-          gap: 0.4rem !important;
-          margin-bottom: 0.75rem !important;
-        }
-        .hero-genre-pill {
-          display: none !important;
-        }
-        .hero-description {
-          display: none !important; /* Keep mobile hero clean, fast, and punchy */
-        }
-        .hero-buttons-row {
-          justify-content: center !important;
-          gap: 0.6rem !important;
-          margin-top: 0.25rem !important;
-        }
-        .hero-buttons-row .btn-primary,
-        .hero-buttons-row .btn-secondary {
-          padding: 0.6rem 1.1rem !important;
-          font-size: 0.85rem !important;
-          min-height: 42px !important;
-        }
-        .hero-watchlist-text {
-          display: none !important;
-        }
-        .hero-nav-arrow {
-          display: none !important; /* Clean touch swipe on mobile */
-        }
-        .hero-dots-container {
-          bottom: 1rem !important;
-          max-width: 85vw !important;
-          overflow: hidden !important;
-          justify-content: center !important;
-          gap: 5px !important;
-        }
-        .hero-dot {
-          width: 5px !important;
-          height: 5px !important;
-        }
-        .hero-dot-active {
-          width: 16px !important;
-          height: 5px !important;
-        }
-        .hero-dots-container button:nth-child(n+7) {
-          display: none !important;
-        }
-      }
+        <!-- Compact App Download Strip -->
+        <section id="app-cta-section" class="px-3 sm:px-6 pt-3 pb-1">
+          <div class="max-w-5xl mx-auto">
+            <div class="flex items-center gap-2 sm:gap-3 sm:justify-center overflow-x-auto scrollbar-none rounded-xl border border-white/10 bg-white/[0.04] px-3 py-2">
+              <span class="shrink-0 flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-white/85 whitespace-nowrap">
+                <svg class="w-4 h-4 text-[color:var(--color-brand)]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 3v12m0 0l-4-4m4 4l4-4"></path><path d="M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"></path>
+                </svg>
+                Netflix4U Apps
+              </span>
+              <span class="hidden sm:block h-5 w-px bg-white/15 shrink-0"></span>
+              <a href="https://t.me/netflix_mirror_apk" target="_blank" rel="noopener noreferrer" class="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold text-white transition active:scale-95 border border-[#229ED9]/40 bg-[#229ED9]/15 hover:bg-[#229ED9]/25 whitespace-nowrap">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="#229ED9"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"></path></svg>
+                Telegram Channel
+              </a>
+            </div>
+          </div>
+        </section>
 
-      /* Extra small mobile (< 380px) */
-      @media (max-width: 380px) {
-        .hero-poster-card {
-          width: 145px !important;
-        }
-        .hero-title {
-          font-size: 1.35rem !important;
-        }
-      }
+        <!-- ─── Content Area: Multi-Rails Layout ─── -->
+        <main class="px-3 sm:px-6 py-5 sm:py-7 space-y-6">
+          <div id="rails-loading-bar" class="relative h-[3px] mb-4 overflow-hidden bg-white/5 rounded-full opacity-0 transition-opacity duration-200" aria-hidden="true">
+            <div class="absolute inset-y-0 left-0 w-1/3 rails-loading-bar-track"></div>
+          </div>
 
-      /* Movie card touch/mobile protection */
-      @media (hover: none), (pointer: coarse), (max-width: 1023px) {
-        .group.relative.flex-shrink-0,
-        .group.relative.flex-shrink-0:hover,
-        .group.relative.flex-shrink-0:focus,
-        .group.relative.flex-shrink-0:active {
-          transform: none !important;
-          transition: none !important;
-          z-index: 1 !important;
-        }
-        .group.relative.flex-shrink-0:active {
-          opacity: 0.85 !important;
-        }
-      }
+          <!-- Dynamic Multi-Rail Feed -->
+          <div id="rails-view" class="min-h-[60vh]"></div>
 
-      /* Strict Mobile Overflow & Zero Horizontal Scroll Guarantee */
-      html, body {
-        max-width: 100vw !important;
-        overflow-x: hidden !important;
-        overflow-x: clip !important;
-      }
-      #root {
-        max-width: 100vw !important;
-        overflow-x: hidden !important;
-        overflow-x: clip !important;
-      }
-      .safe-area-pb {
-        padding-bottom: max(0.5rem, env(safe-area-inset-bottom, 0px)) !important;
-      }
-      @media (max-width: 1023px) {
-        main {
-          padding-bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px)) !important;
-        }
-      }
-      /* Prevent horizontal scrollbar leaking on touch carousels */
-      .scrollbar-hide {
-        -ms-overflow-style: none !important;
-        scrollbar-width: none !important;
-        overflow-x: auto !important;
-        overscroll-behavior-x: contain !important;
-        -webkit-overflow-scrolling: touch !important;
-      }
-      .scrollbar-hide::-webkit-scrollbar {
-        display: none !important;
-      }
-      /* Touch-friendly buttons on mobile */
-      @media (max-width: 640px) {
-        .btn-primary, .btn-secondary {
-          min-height: 44px !important;
-          touch-action: manipulation !important;
-        }
-        .btn-icon {
-          min-width: 40px !important;
-          min-height: 40px !important;
-          touch-action: manipulation !important;
-        }
-      }
+          <!-- Search Results Grid (Hidden by default) -->
+          <div id="grid-view" class="hidden">
+            <div class="flex items-baseline justify-between mb-4 px-1">
+              <div class="flex items-center gap-3">
+                <div class="w-1.5 h-6 rounded-full" style="background: var(--accent, #ff6b00);"></div>
+                <h2 id="grid-title" class="text-xl sm:text-2xl font-bold tracking-tight text-white">Search</h2>
+              </div>
+              <div id="grid-meta" class="text-xs text-white/40 font-medium"></div>
+            </div>
+            <div id="grid-content" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4"></div>
+          </div>
 
-      /* =========================================================
-         🎬 NETFLIX EXACT — TOKEN OVERRIDE
-         ========================================================= */
-      :root {
-        --color-accent:       #E50914 !important;
-        --color-accent-hover: #f40612 !important;
-        --color-navy-950:     #141414 !important;
-        --color-navy-900:     #181818 !important;
-        --color-navy-800:     #181818 !important;
-        --color-card:         #181818 !important;
-        --color-card-hover:   #2f2f2f !important;
-        --color-bg:           #141414 !important;
-      }
-      body, html {
-        background-color: #141414 !important;
-        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
-      }
+          <!-- Search Prompt CTA -->
+          <section id="search-cta" class="mt-12 sm:mt-16 py-8 sm:py-10 px-5 sm:px-8 rounded-2xl bg-gradient-to-br from-white/5 via-white/[0.03] to-transparent border border-white/10 text-center">
+            <div class="max-w-2xl mx-auto">
+              <div class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-red-600/15 mb-4">
+                <svg class="w-7 h-7 text-red-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path>
+                </svg>
+              </div>
+              <h3 class="text-lg sm:text-2xl font-bold text-white mb-2">Can't find what you're looking for?</h3>
+              <p class="text-sm sm:text-base text-white/60 mb-5">Search any movie or show by name — instant results with direct download mirrors & multi-language streams.</p>
+              <button onclick="document.getElementById('search-input').focus(); window.scrollTo({ top: 0, behavior: 'smooth' });" type="button" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-red-600 hover:bg-red-700 text-white text-sm sm:text-base font-bold transition active:scale-95 shadow-lg shadow-red-600/20 cursor-pointer">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+                Search Full Catalog
+              </button>
+            </div>
+          </section>
 
-      /* Strict Header Logo Bounding - Desktop & Mobile */
-      #nav-logo {
-        display: flex !important;
-        align-items: center !important;
-        height: 32px !important;
-        max-width: 125px !important;
-        flex-shrink: 0 !important;
-        overflow: hidden !important;
-      }
-      #nav-logo img, header nav img {
-        width: auto !important;
-        height: 28px !important;
-        max-height: 28px !important;
-        max-width: 120px !important;
-        object-fit: contain !important;
-        display: block !important;
-      }
-      @media (max-width: 640px) {
-        #nav-logo {
-          max-width: 95px !important;
-          height: 24px !important;
-        }
-        #nav-logo img, header nav img {
-          max-width: 95px !important;
-          height: 22px !important;
-          max-height: 22px !important;
-        }
-      }
+          <!-- ─── Site Footer ─── -->
+          <footer class="pt-12 pb-8 border-t border-white/5 mt-12">
+            <div class="max-w-5xl mx-auto text-center space-y-4">
+              <div class="text-lg font-black text-white">
+                <span class="text-[color:var(--color-brand)]">Netflix</span>4U
+              </div>
+              <div class="text-xs text-white/50 flex flex-wrap justify-center gap-4 sm:gap-6 font-medium">
+                <a href="/about" class="hover:text-white transition">About Us</a>
+                <a href="/privacy" class="hover:text-white transition">Privacy Policy</a>
+                <a href="/terms" class="hover:text-white transition">Terms of Service</a>
+                <a href="/dmca" class="hover:text-white transition">DMCA Disclaimer</a>
+                <a href="/contact" class="hover:text-white transition">Contact</a>
+              </div>
+              <div class="text-xs text-white/40">
+                Netflix4U does not store media files on its servers. All streams and downloads are indexed from external verified public mirrors.
+              </div>
+              <div class="text-[11px] text-white/30">
+                © 2026 Netflix4U. All rights reserved.
+              </div>
+            </div>
+          </footer>
+        </main>
+      </div>
+    </div>
+  </main>
 
-      /* Netflix Hero Buttons */
-      .hero-buttons-row .btn-primary,
-      #hero-banner .btn-primary {
-        background-color: #ffffff !important;
-        color: #000000 !important;
-        font-weight: 700 !important;
-        border-radius: 4px !important;
-        border: none !important;
-      }
-      .hero-buttons-row .btn-primary svg,
-      #hero-banner .btn-primary svg {
-        fill: #000000 !important;
-        color: #000000 !important;
-      }
-      .hero-buttons-row .btn-primary:hover,
-      #hero-banner .btn-primary:hover {
-        background-color: rgba(255, 255, 255, 0.75) !important;
-        color: #000000 !important;
-      }
-      .hero-buttons-row .btn-secondary,
-      #hero-banner .btn-secondary {
-        background-color: rgba(109, 109, 110, 0.7) !important;
-        color: #ffffff !important;
-        font-weight: 600 !important;
-        border-radius: 4px !important;
-        border: none !important;
-        backdrop-filter: blur(8px) !important;
-      }
-      .hero-buttons-row .btn-secondary:hover,
-      #hero-banner .btn-secondary:hover {
-        background-color: rgba(109, 109, 110, 0.45) !important;
-      }
+  <!-- ─── SEARCH OVERLAY ─── -->
+  <div id="search-overlay" class="fixed inset-0 z-[55] hidden bg-black/85 backdrop-blur-md overflow-y-auto" aria-hidden="true">
+    <button id="so-close" type="button" aria-label="Close search" class="fixed top-4 right-4 z-10 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white text-xl transition cursor-pointer">✕</button>
+    <div class="mx-auto w-full max-w-3xl px-4 pt-[9vh] pb-24" style="padding-top: calc(env(safe-area-inset-top, 0px) + 9vh);">
+      <div class="flex items-center gap-3 rounded-2xl bg-[#131318] border border-red-950/60 shadow-[0_0_0_4px_rgba(229,9,20,0.15),0_10px_30px_rgba(0,0,0,0.6)] px-4 py-3">
+        <svg class="w-5 h-5 text-red-600 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+        <input id="so-input" type="search" autocomplete="off" placeholder="Search movies, series, anime, 4K downloads…" class="flex-1 min-w-0 bg-transparent text-base sm:text-xl text-white placeholder:text-white/45 focus:outline-none">
+        <button id="so-go" type="button" class="shrink-0 px-5 py-2 rounded-lg text-white font-semibold text-sm bg-red-600 hover:bg-red-700 transition active:scale-95 cursor-pointer">Search</button>
+      </div>
+      <div id="so-results" class="mt-3 space-y-1"></div>
+    </div>
+  </div>
 
-      /* Netflix Top 10 Numerals */
-      #top-10-section .top-number {
-        font-family: 'Impact', 'Arial Black', sans-serif !important;
-        font-size: 110px !important;
-        font-weight: 900 !important;
-        line-height: 0.75 !important;
-        color: #000000 !important;
-        -webkit-text-stroke: 4px #8c8c8c !important;
-        filter: drop-shadow(2px 4px 8px rgba(0,0,0,0.9)) !important;
-        text-shadow: 0 0 12px rgba(0,0,0,0.9) !important;
-      }
+  <!-- ─── TITLE MODAL ─── -->
+  <div id="title-modal" class="fixed inset-0 z-50 hidden items-start justify-center bg-black/85 backdrop-blur-sm overflow-y-auto p-0 sm:p-6" aria-hidden="true">
+    <div id="title-modal-card" class="relative w-full max-w-4xl bg-[#15151c] sm:rounded-2xl shadow-2xl overflow-hidden ring-1 ring-white/10 my-0 sm:my-8">
+      <!-- Sticky Top Bar with Back & Close -->
+      <div id="title-modal-header" class="sticky top-0 z-30 flex items-center gap-2 px-3 sm:px-4 bg-[#15151c]/95 backdrop-blur border-b border-white/10" style="padding-top: max(env(safe-area-inset-top, 0px), 8px); padding-bottom: 8px; min-height: 56px;">
+        <button id="title-modal-back" type="button" class="flex items-center gap-1.5 px-3 py-2 rounded-md text-white/95 hover:bg-white/10 active:bg-white/15 transition cursor-pointer" aria-label="Back">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path>
+          </svg>
+          <span class="text-sm font-medium">Back</span>
+        </button>
+        <div id="title-modal-header-title" class="flex-1 text-sm font-medium text-white/90 truncate px-2"></div>
+        <button id="title-modal-close" type="button" class="w-9 h-9 rounded-full hover:bg-white/10 active:bg-white/15 flex items-center justify-center text-white/90 text-lg transition cursor-pointer" aria-label="Close">✕</button>
+      </div>
 
-      footer {
-        margin-top: 2rem !important;
-      }
+      <!-- Body — Dynamically Populated -->
+      <div id="title-modal-body"></div>
+    </div>
+  </div>
 
-      /* Organized Mobile Footer */
-      @media (max-width: 767.98px) {
-        footer {
-          margin-top: 1rem !important;
-          padding-top: 1.75rem !important;
-          padding-bottom: 5.5rem !important;
-        }
-        footer > div {
-          padding: 0 1.25rem !important;
-        }
-        footer .grid {
-          display: grid !important;
-          grid-template-columns: 1fr 1fr !important;
-          gap: 1.5rem 1rem !important;
-        }
-        footer .grid > div:first-child {
-          grid-column: 1 / -1 !important;
-          padding-bottom: 0.75rem !important;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
-        }
-        footer .grid > div:nth-child(2) { grid-column: 1 !important; }
-        footer .grid > div:nth-child(3) { grid-column: 2 !important; }
-        footer .grid > div:nth-child(4) { grid-column: 1 !important; }
-        footer .grid > div:nth-child(5) { grid-column: 2 !important; }
-        footer .grid > div:first-child img {
-          height: 24px !important;
-          width: auto !important;
-        }
-        footer .grid h3 {
-          font-size: 0.75rem !important;
-          font-weight: 700 !important;
-          text-transform: uppercase !important;
-          letter-spacing: 0.06em !important;
-          color: #ffffff !important;
-          margin-bottom: 0.65rem !important;
-        }
-        footer .grid ul {
-          display: flex !important;
-          flex-direction: column !important;
-          gap: 0.4rem !important;
-        }
-        footer .grid li a {
-          font-size: 0.8rem !important;
-          color: #808080 !important;
-        }
-      }
+  <!-- ─── WATCH MODAL ─── -->
+  <div id="watch-modal" class="fixed inset-0 z-[60] hidden bg-black" aria-hidden="true">
+    <!-- Server Switcher Bar -->
+    <div id="watch-player-bar"></div>
 
-      /* ─── Card Poster Aspect Ratio & Full Height Fill ─── */
-      .aspect-\[2\/3\] {
-        aspect-ratio: 2 / 3 !important;
-        width: 100% !important;
-        display: block !important;
-        position: relative !important;
-      }
-      .aspect-\[2\/3\] > img,
-      .group.relative a img,
-      .card-poster img,
-      .hero-poster-img {
-        position: absolute !important;
-        inset: 0 !important;
-        width: 100% !important;
-        height: 100% !important;
-        object-fit: cover !important;
-        display: block !important;
-      }
-      .grid .group.relative {
-        width: 100% !important;
-      }
-      /* Detail page hero poster constraint: MUST NOT take 100% of the entire viewport! */
-      div[class*="min-h"] .aspect-\[2\/3\],
-      .hero-detail-poster {
-        width: 100% !important;
-        max-width: 240px !important;
-        height: auto !important;
-        aspect-ratio: 2 / 3 !important;
-        flex-shrink: 0 !important;
-      }
-      @media (max-width: 1024px) {
-        div[class*="min-h"] .aspect-\[2\/3\],
-        .hero-detail-poster {
-          max-width: 200px !important;
-        }
-      }
-      @media (max-width: 768px) {
-        div[class*="min-h"] .aspect-\[2\/3\],
-        .hero-detail-poster {
-          max-width: 170px !important;
-        }
-      }
-      @media (max-width: 639px) {
-        div[class*="min-h"] .aspect-\[2\/3\],
-        .hero-detail-poster {
-          max-width: 140px !important;
-        }
-      }
-      .skeleton.aspect-\[2\/3\] {
-        aspect-ratio: 2 / 3 !important;
-        width: 100% !important;
-        display: block !important;
-      }
-      /* Top 10 Today horizontal row poster card sizing */
-      #top-10-section .aspect-\[2\/3\] {
-        width: 130px !important;
-        min-width: 130px !important;
-        flex-shrink: 0 !important;
-      }
-      @media (max-width: 768px) {
-        #top-10-section .aspect-\[2\/3\] {
-          width: 110px !important;
-          min-width: 110px !important;
-        }
-      }
-      @media (max-width: 480px) {
-        #top-10-section .aspect-\[2\/3\] {
-          width: 95px !important;
-          min-width: 95px !important;
-        }
-      }
+    <button id="watch-modal-close" type="button" class="absolute z-[70] w-11 h-11 rounded-full bg-black/70 hover:bg-black/90 backdrop-blur flex items-center justify-center text-white text-xl transition cursor-pointer" style="top: 16px; right: 16px;" aria-label="Close player">✕</button>
 
-      /* ─── Footer Display Restoration ─── */
-      @media (min-width: 768px) {
-        footer .md\:grid,
-        footer div.hidden,
-        footer div[class*="md:grid"] {
-          display: grid !important;
-        }
-        footer div.md\:hidden,
-        footer div[class*="md:hidden"] {
-          display: none !important;
-        }
-      }
-      @media (max-width: 767.98px) {
-        footer .md\:grid,
-        footer div.hidden,
-        footer div[class*="md:grid"] {
-          display: none !important;
-        }
-        footer div.md\:hidden,
-        footer div[class*="md:hidden"] {
-          display: flex !important;
-        }
-      }
+    <!-- Backdrop Preview Loader -->
+    <div id="watch-modal-backdrop" class="absolute inset-0 z-[65] bg-black bg-cover bg-center pointer-events-none transition-opacity duration-500" style="opacity: 0;">
+      <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black/70"></div>
+      <div class="absolute bottom-6 right-6 flex items-center gap-2 text-white/70 text-xs font-medium">
+        <div class="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+        <span>Connecting High-Speed Stream…</span>
+      </div>
+    </div>
 
-      /* ─── Detail Page Sleek UI & Back Button ─── */
-      .back-btn-pill {
-        display: inline-flex !important;
-        align-items: center !important;
-        gap: 0.5rem !important;
-        background: rgba(15, 15, 15, 0.75) !important;
-        backdrop-filter: blur(16px) !important;
-        -webkit-backdrop-filter: blur(16px) !important;
-        color: #ffffff !important;
-        border: 1px solid rgba(255, 255, 255, 0.18) !important;
-        border-radius: 9999px !important;
-        padding: 0.45rem 1.1rem !important;
-        font-size: 0.8125rem !important;
-        font-weight: 600 !important;
-        text-decoration: none !important;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6) !important;
-        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
-        cursor: pointer !important;
-      }
-      .back-btn-pill:hover {
-        background: #E50914 !important;
-        border-color: #E50914 !important;
-        color: #ffffff !important;
-        box-shadow: 0 8px 24px rgba(229, 9, 20, 0.4) !important;
-        transform: translateX(-3px) !important;
-      }
-      div[class*="relative min-h-\[80vh\]"] {
-        min-height: 60vh !important;
-        max-height: 720px !important;
-      }
-      @media (max-width: 767.98px) {
-        div[class*="relative min-h-\[80vh\]"] {
-          min-height: auto !important;
-          max-height: none !important;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <div id="root"></div>
-    <!-- Netflix4U — Navbar Scroll & Detail Page Helpers -->
-    <script>
-      (function() {
-        function updateNav() {
-          var header = document.querySelector('header');
-          if (!header) return;
-          if (window.scrollY > 50) {
-            header.classList.add('nf-scrolled');
-          } else {
-            header.classList.remove('nf-scrolled');
-          }
-        }
-        window.addEventListener('scroll', updateNav, { passive: true });
-        window.addEventListener('DOMContentLoaded', updateNav);
-        setTimeout(updateNav, 500);
+    <iframe id="watch-modal-iframe" class="w-full h-full border-0" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen referrerpolicy="no-referrer"></iframe>
+  </div>
 
-        // Runtime Detail Page TMDB ID Cache Sync
-        var origFetch = window.fetch;
-        if (origFetch) {
-          window.fetch = function(input, init) {
-            var url = typeof input === 'string' ? input : (input && input.url ? input.url : '');
-            var pMatch = url.match(/\/data\/details\/([^/]+)\.json/i);
-            if (pMatch) {
-              var id = pMatch[1];
-              return origFetch.apply(this, arguments).then(function(res) {
-                var clone = res.clone();
-                clone.json().then(function(data) {
-                  if (data && data.tmdbId) {
-                    try {
-                      sessionStorage.setItem('fw_tmdb_' + id, JSON.stringify({ tmdb: String(data.tmdbId), imdb: data.imdbId || '' }));
-                    } catch(e) {}
-                  }
-                }).catch(function() {});
-                return res;
-              });
-            }
-            return origFetch.apply(this, arguments);
-          };
-        }
-      })();
-    </script>
-  </body>
+  <!-- ─── TRAILER MODAL ─── -->
+  <div id="trailer-modal" class="fixed inset-0 z-[55] hidden items-center justify-center bg-black/95 p-4">
+    <button id="trailer-modal-close" type="button" class="absolute z-10 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white text-xl cursor-pointer" style="top: 24px; right: 24px;">✕</button>
+    <div class="w-full max-w-5xl aspect-video">
+      <iframe id="trailer-modal-iframe" class="w-full h-full rounded-lg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <!-- Client Application Scripts -->
+  <script src="/js/download-resolver.js"></script>
+  <script src="/js/net27-modal.js"></script>
+  <script src="/js/net27-core.js"></script>
+</body>
 </html>

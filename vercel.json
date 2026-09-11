@@ -1,6 +1,8 @@
 {
   "version": 2,
   "rewrites": [
+    { "source": "/api/catalog/:match*", "destination": "/api/catalog.js" },
+    { "source": "/watch-tmdb/:match*", "destination": "/api/playback.js" },
     { "source": "/api/details/:id", "destination": "/api/details?id=:id" },
     { "source": "/api/playback/:id", "destination": "/api/playback?id=:id" },
     { "source": "/api/cron/sync", "destination": "/api/cron/sync" },

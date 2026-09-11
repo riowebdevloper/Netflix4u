@@ -5,7 +5,7 @@ const path = require('path');
 const { getPlaybackSources } = require('./services/playbackService');
 const { resolveContentId } = require('./services/canonicalResolver');
 const { isPublicRecord, publicOnly } = require('./services/contentValidationService');
-const { handleDetails, handlePlayback, handleSearch } = require('./services/apiCore');
+const { handleDetails, handlePlayback, handleSearch, handleUniversalApi } = require('./services/apiCore');
 
 const PORT = process.env.PORT || 4173;
 const ROOT = path.resolve(__dirname);
@@ -766,6 +766,11 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
+  // 4a-2b. Catalog Engine & Watch TMDB
+  if (reqPath.startsWith('/api/catalog/') || reqPath.startsWith('/watch-tmdb')) {
+    return handleUniversalApi(req, res);
+  }
+
   // 4a-3. API: Summary / Catalog Endpoint (/api/summary or /api/catalog)
   if (reqPath === '/api/summary' || reqPath === '/api/catalog') {
     const catalog = getCatalogSummary();
@@ -1286,7 +1291,7 @@ const server = http.createServer(async (req, res) => {
   }
 
   // 9b. CSS / Fonts / Images subdirectory serving
-  const ALLOWED_SUBDIRS = ['css', 'fonts', 'images', 'public'];
+  const ALLOWED_SUBDIRS = ['css', 'fonts', 'images', 'public', 'icons', 'cf-fonts', '_astro', 'js'];
   const reqSegments = reqPath.replace(/^\//, '').split('/');
   if (reqSegments.length >= 2 && ALLOWED_SUBDIRS.includes(reqSegments[0])) {
     const subFilePath = path.join(ROOT, ...reqSegments);
