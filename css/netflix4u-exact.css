@@ -587,3 +587,34 @@ section [class*="overflow-x-auto"] { padding-left: 4% !important; padding-right:
   }
 }
 
+/* ─── 14. CARD POSTERS & ASPECT-RATIO GUARDS ────────────────────────────────── */
+.aspect-\[2\/3\] {
+  aspect-ratio: 2 / 3 !important;
+  width: 100% !important;
+  display: block !important;
+  position: relative !important;
+}
+
+.aspect-\[2\/3\] > img,
+.group.relative a img,
+.card-poster img,
+.hero-poster-img {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
+}
+
+.grid .group.relative {
+  width: 100% !important;
+}
+
+/* Skeleton poster 2:3 ratio support */
+.skeleton.aspect-\[2\/3\] {
+  aspect-ratio: 2 / 3 !important;
+  width: 100% !important;
+  display: block !important;
+}
+
