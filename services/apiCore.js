@@ -1026,11 +1026,12 @@ async function handleCatalogTitle(req, res) {
   const endpoint = type === 'tv' ? `/tv/${tmdbId}` : `/movie/${tmdbId}`;
   let raw = null;
   try {
-    raw = await fetchTmdbCatalogJson(`${endpoint}?append_to_response=credits,videos,release_dates,content_ratings,recommendations,similar`);
+    raw = await fetchTmdbCatalogJson(`${endpoint}?append_to_response=credits,videos,release_dates,content_ratings,recommendations,similar,external_ids`);
   } catch(e) {}
 
   const title = raw?.title || raw?.name || localItem?.title || 'Unknown Title';
   const year = String(raw?.release_date || raw?.first_air_date || localItem?.year || '').slice(0, 4);
+  const resolvedImdbId = raw?.imdb_id || raw?.external_ids?.imdb_id || localItem?.imdbId || null;
 
   // Authenticate and fetch direct download links
   let downloadLinks = [];
@@ -1042,9 +1043,8 @@ async function handleCatalogTitle(req, res) {
   } catch(e) {}
 
   if (!downloadLinks.length) {
-    const imdbId = raw?.imdb_id || raw?.external_ids?.imdb_id || localItem?.imdbId;
     const slug = localItem?.slug;
-    const matched = findMatchingCatalogLinks(title, year, imdbId, slug);
+    const matched = findMatchingCatalogLinks(title, year, resolvedImdbId, slug);
     if (matched && matched.length > 0) {
       downloadLinks = normalizeRawLinks(matched, title);
     }
@@ -1108,6 +1108,7 @@ async function handleCatalogTitle(req, res) {
     ok: true,
     id: tmdbId || id,
     tmdbId: tmdbId || id,
+    imdbId: resolvedImdbId,
     type: type,
     title: title,
     year: year || '2025',

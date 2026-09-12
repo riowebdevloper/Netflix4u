@@ -59,18 +59,102 @@ function getDetailsMap() {
   return detailsMapCache;
 }
 
+let detailsDirIndex = null;
+const detailFileCache = new Map();
+
+function normalizeRawLinks(links, title) {
+  if (!Array.isArray(links)) return [];
+  return links.map(l => {
+    if (!l) return null;
+    let url = typeof l === 'string' ? l : (l.url || '');
+    if (!url) return null;
+
+    const rawQual = String(l.quality || 'HD').toUpperCase();
+    const isCloud = Boolean(l.isCloud || url.includes('vcloud') || url.includes('workers.dev') || url.includes('hicine'));
+    const source = l.source || (url.includes('nexdrive') ? 'dotmobiz' : (isCloud ? 'hicine' : 'dotmobiz'));
+    const size = l.size || (rawQual.includes('4K') || rawQual.includes('2160') ? '4.8 GB' : rawQual.includes('1080') ? '2.4 GB' : rawQual.includes('720') ? '1.1 GB' : '550 MB');
+    const label = l.label || `${title || 'Stream'} [${rawQual}]`;
+
+    return {
+      url,
+      quality: rawQual,
+      size,
+      label,
+      source,
+      isCloud
+    };
+  }).filter(Boolean);
+}
+
+function extractLinksFromDetail(detail, title) {
+  if (!detail) return [];
+  if (Array.isArray(detail.links) && detail.links.length > 0) {
+    return normalizeRawLinks(detail.links, title || detail.title);
+  }
+  if (Array.isArray(detail.downloadOptions) && detail.downloadOptions.length > 0) {
+    const converted = detail.downloadOptions.map(opt => ({
+      url: opt.url,
+      quality: opt.quality || 'HD',
+      size: opt.size || '',
+      label: opt.label || `Download [${opt.quality || 'HD'}]`,
+      source: opt.url && opt.url.includes('nexdrive') ? 'dotmobiz' : 'cloud',
+      isCloud: Boolean(opt.url && (opt.url.includes('workers.dev') || opt.url.includes('vcloud')))
+    }));
+    return normalizeRawLinks(converted, title || detail.title);
+  }
+  return [];
+}
+
+function loadDetailFileByFilename(filename, title) {
+  if (!filename) return null;
+  const name = String(filename).trim();
+  const candidate = name.endsWith('.json') ? name : `${name}.json`;
+  if (detailFileCache.has(candidate)) {
+    return detailFileCache.get(candidate);
+  }
+  const fullPath = path.join(DETAILS_DIR, candidate);
+  if (fs.existsSync(fullPath)) {
+    try {
+      const data = JSON.parse(fs.readFileSync(fullPath, 'utf8'));
+      const links = extractLinksFromDetail(data, title);
+      detailFileCache.set(candidate, links);
+      return links;
+    } catch(e) {}
+  }
+  return null;
+}
+
 function findMatchingCatalogLinks(title, year, imdbId, slug) {
   const dMap = getDetailsMap();
+
   // 1. Check by authentic IMDb ID
   if (imdbId && typeof imdbId === 'string' && imdbId.startsWith('tt')) {
     const entry = dMap.get(imdbId);
-    if (entry && Array.isArray(entry.links) && entry.links.length > 0) return entry.links;
+    if (entry) {
+      const links = extractLinksFromDetail(entry, title);
+      if (links.length > 0) return links;
+    }
+    const fByImdb = loadDetailFileByFilename(imdbId, title);
+    if (fByImdb && fByImdb.length > 0) return fByImdb;
   }
-  // 2. Check by slug
+
+  // 2. Check by slug or ID
   if (slug) {
     const entry = dMap.get(slug);
-    if (entry && Array.isArray(entry.links) && entry.links.length > 0) return entry.links;
+    if (entry) {
+      const links = extractLinksFromDetail(entry, title);
+      if (links.length > 0) return links;
+    }
+    const fBySlug = loadDetailFileByFilename(slug, title);
+    if (fBySlug && fBySlug.length > 0) return fBySlug;
+
+    const slugIdMatch = slug.match(/^(\d+)/);
+    if (slugIdMatch) {
+      const fById = loadDetailFileByFilename(slugIdMatch[1], title);
+      if (fById && fById.length > 0) return fById;
+    }
   }
+
   // 3. Check by normalized alphanumeric title
   const clean = String(title || '').toLowerCase().replace(/[^a-z0-9]/g, '');
   const primaryTitle = String(title || '').split(/[:\-–—]/)[0].trim().toLowerCase().replace(/[^a-z0-9]/g, '');
@@ -84,21 +168,33 @@ function findMatchingCatalogLinks(title, year, imdbId, slug) {
     if (c.length >= 3) {
       if (year) {
         const entryYear = dMap.get(c + year);
-        if (entryYear && Array.isArray(entryYear.links) && entryYear.links.length > 0) return entryYear.links;
+        if (entryYear) {
+          const links = extractLinksFromDetail(entryYear, title);
+          if (links.length > 0) return links;
+        }
+        const fByYear = loadDetailFileByFilename(c + year, title);
+        if (fByYear && fByYear.length > 0) return fByYear;
       }
+
       const entry = dMap.get(c);
-      if (entry && Array.isArray(entry.links) && entry.links.length > 0) return entry.links;
+      if (entry) {
+        const links = extractLinksFromDetail(entry, title);
+        if (links.length > 0) return links;
+      }
+
+      const fByClean = loadDetailFileByFilename(c, title);
+      if (fByClean && fByClean.length > 0) return fByClean;
 
       // Fuzzy prefix/containment match for popular series/movies
       for (const [key, val] of dMap.entries()) {
-        if (val && Array.isArray(val.links) && val.links.length > 0 && typeof key === 'string') {
-          if (key.length >= 4 && (c.startsWith(key) || key.startsWith(c))) {
-            return val.links;
-          }
+        if (val && typeof key === 'string' && key.length >= 4 && (c.startsWith(key) || key.startsWith(c))) {
+          const links = extractLinksFromDetail(val, title);
+          if (links.length > 0) return links;
         }
       }
     }
   }
+
   return [];
 }
 
@@ -171,24 +267,6 @@ function buildCatalogIndex() {
     } catch (e) {
       console.error('Error indexing dotmobiz_complete_catalog.json:', e.message);
     }
-  }
-
-  // 3. Index slug files in data/details that start with a record ID (e.g., 96465-mirzapur...)
-  if (fs.existsSync(DETAILS_DIR)) {
-    try {
-      const files = fs.readdirSync(DETAILS_DIR);
-      for (const f of files) {
-        const m = f.match(/^(\d{3,7})(?:-|\.json$)/);
-        if (m && m[1]) {
-          const num = m[1];
-          const baseName = f.replace(/\.json$/, '');
-          const canonicalId = `dotmobiz-${num}`;
-          const entry = { detailFilename: baseName, record_id: num, id: canonicalId, canonicalId };
-          if (!catalogIndex.has(num)) catalogIndex.set(num, entry);
-          if (!catalogIndex.has(canonicalId)) catalogIndex.set(canonicalId, entry);
-        }
-      }
-    } catch(e) {}
   }
 
   return catalogIndex;

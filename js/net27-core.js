@@ -82,6 +82,40 @@
     }
   }
 
+  // ─── SWR Cache Layer (sessionStorage) ───
+  var CACHE_PREFIX = 'n4u_cache_rail_v4_';
+  var CACHE_TTL_MS = 15 * 60 * 1000; // 15 mins fresh
+  var STALE_TTL_MS = 24 * 60 * 60 * 1000; // 24 hours usable stale
+
+  function getCachedRail(key) {
+    try {
+      var raw = sessionStorage.getItem(CACHE_PREFIX + key);
+      if (!raw) return null;
+      var parsed = JSON.parse(raw);
+      var age = Date.now() - parsed.timestamp;
+      if (age > STALE_TTL_MS) {
+        sessionStorage.removeItem(CACHE_PREFIX + key);
+        return null;
+      }
+      return {
+        items: parsed.items,
+        isFresh: age < CACHE_TTL_MS
+      };
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function setCachedRail(key, items) {
+    try {
+      if (!items || !items.length) return;
+      sessionStorage.setItem(CACHE_PREFIX + key, JSON.stringify({
+        timestamp: Date.now(),
+        items: items
+      }));
+    } catch (e) {}
+  }
+
   // ─── Honeycomb Loader ───
   function initHoneycombLoader() {
     var hive = document.getElementById('nm-hive');
@@ -158,6 +192,73 @@
     heroSection.addEventListener('mouseleave', function() {
       startHeroTimer();
     });
+
+    // Dynamic Hero Carousel Sync with Live Trending Feed
+    syncHeroWithTrending();
+  }
+
+  async function syncHeroWithTrending() {
+    try {
+      var items = null;
+      var cached = getCachedRail('trending-day');
+      if (cached && cached.items && cached.items.length) {
+        items = cached.items;
+      } else {
+        var res = await fetch('/api/catalog/trending?window=day');
+        if (res && res.ok) {
+          var data = await res.json();
+          items = data && data.items;
+          if (items && items.length) {
+            setCachedRail('trending-day', items);
+          }
+        }
+      }
+
+      if (!items || !items.length) return;
+
+      var valid = items.filter(function(it) {
+        return it && it.tmdbId && it.title && (it.backdrop || it.poster);
+      }).slice(0, 5);
+
+      if (valid.length < 3) return;
+
+      heroItems = valid.map(function(it) {
+        var bdrop = it.backdrop || it.poster;
+        if (bdrop && !bdrop.startsWith('http') && !bdrop.startsWith('data:')) {
+          bdrop = 'https://wsrv.nl/?url=image.tmdb.org/t/p/w1280/' + bdrop.replace(/^\//, '');
+        }
+        return {
+          tmdbId: it.tmdbId,
+          title: it.title,
+          year: it.year || '2026',
+          backdrop: bdrop,
+          overview: it.overview || '',
+          rating: it.rating ? Number(it.rating) : 8.2,
+          type: it.type === 'tv' || it.type === 'series' ? 'tv' : 'movie'
+        };
+      });
+
+      // Update background layers seamlessly
+      var existingBgs = heroSection.querySelectorAll('.hero-bg');
+      existingBgs.forEach(function(el) { el.remove(); });
+
+      var clickTrigger = heroSection.querySelector('#hero-click');
+      heroItems.forEach(function(item, i) {
+        var bg = document.createElement('div');
+        bg.className = 'hero-bg absolute inset-0 bg-cover bg-center transition-opacity duration-[1200ms]';
+        bg.style.backgroundImage = 'url("' + item.backdrop + '")';
+        bg.style.opacity = (i === currentHeroIdx) ? '1' : '0';
+        bg.style.zIndex = String(10 - i);
+        if (clickTrigger) {
+          heroSection.insertBefore(bg, clickTrigger);
+        } else {
+          heroSection.prepend(bg);
+        }
+      });
+
+      renderHeroDots();
+      showHeroSlide(currentHeroIdx % heroItems.length);
+    } catch(e) {}
   }
 
   function startHeroTimer() {
@@ -347,13 +448,120 @@
     }
   }
 
+  // ─── IntersectionObserver for Lazy Rail Loading ───
+  var railObserver = null;
+  if (typeof window !== 'undefined' && 'IntersectionObserver' in window) {
+    railObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          var target = entry.target;
+          railObserver.unobserve(target);
+          if (typeof target._loadRail === 'function') {
+            target._loadRail();
+            delete target._loadRail;
+          }
+        }
+      });
+    }, { rootMargin: '350px 0px' });
+  }
+
+  async function populateRailContent(cfg, railSection, items) {
+    var contentDiv = railSection.querySelector('[data-rail-content]');
+    if (!contentDiv) return;
+    if (!items || !items.length) {
+      railSection.style.display = 'none';
+      return;
+    }
+
+    var maxItems = cfg.ranked ? 10 : 20;
+    var widthClass = cfg.ranked ? 'w-40 sm:w-48' : 'w-[150px] sm:w-[200px]';
+
+    contentDiv.innerHTML = items.slice(0, maxItems).map(function(item, idx) {
+      return '<div class="shrink-0 ' + widthClass + '">' +
+        renderCard(item, cfg.ranked ? { rank: idx + 1 } : {}) +
+      '</div>';
+    }).join('');
+
+    initRailScrollButtons(railSection);
+  }
+
+  async function fetchRailItems(cfg) {
+    try {
+      var res = await apiFetch(cfg.url);
+      var data = await res.json();
+      var items = (data && data.items) || [];
+      var valid = items.filter(function(it) { return it && (it.poster || it.title); });
+      if (valid.length) {
+        setCachedRail(cfg.key, valid);
+        return valid;
+      }
+    } catch(e) {}
+
+    // Fallback feed
+    try {
+      var fbFeed = cfg.ranked ? '/data/trending.json' : '/data/home_feed.json';
+      var fbRes = await fetch(fbFeed);
+      var fbData = await fbRes.json();
+      var fbRaw = Array.isArray(fbData) ? fbData : (fbData.items || fbData.results || []);
+      var fbValid = fbRaw.map(function(it) {
+        return {
+          tmdbId: it.tmdbId || it.id,
+          title: it.title,
+          year: it.year,
+          poster: it.poster,
+          backdrop: it.backdrop,
+          rating: it.rating || 8.0,
+          type: it.type === 'series' ? 'tv' : 'movie'
+        };
+      }).filter(function(it) { return it && (it.poster || it.title); });
+      if (fbValid.length) {
+        setCachedRail(cfg.key, fbValid);
+        return fbValid;
+      }
+    } catch(e) {}
+
+    return [];
+  }
+
   async function loadPlatformRails(platform) {
     currentPlatform = platform;
     var configs = getRailConfigs(platform);
     if (!railsView) return;
 
-    // Render skeleton rails first
+    // Disconnect previous observer targets
+    if (railObserver) {
+      railsView.querySelectorAll('[data-rail-key]').forEach(function(el) {
+        railObserver.unobserve(el);
+      });
+    }
+
+    // Fast SWR Check: Pre-read cached rails for instant rendering (<50ms)
+    var cachedDataMap = {};
+    configs.forEach(function(cfg) {
+      var cached = getCachedRail(cfg.key);
+      if (cached && cached.items && cached.items.length) {
+        cachedDataMap[cfg.key] = cached;
+      }
+    });
+
+    // Render rails: if cached, cards show instantly; otherwise, skeleton shimmer
     railsView.innerHTML = configs.map(function(cfg) {
+      var cached = cachedDataMap[cfg.key];
+      var innerHtml = '';
+      if (cached && cached.items && cached.items.length) {
+        var maxItems = cfg.ranked ? 10 : 20;
+        var widthClass = cfg.ranked ? 'w-40 sm:w-48' : 'w-[150px] sm:w-[200px]';
+        innerHtml = cached.items.slice(0, maxItems).map(function(item, idx) {
+          return '<div class="shrink-0 ' + widthClass + '">' +
+            renderCard(item, cfg.ranked ? { rank: idx + 1 } : {}) +
+          '</div>';
+        }).join('');
+      } else {
+        innerHtml = Array.from({ length: 7 }).map(function() {
+          return '<div class="shrink-0 ' + (cfg.ranked ? 'w-40 sm:w-48' : 'w-[150px] sm:w-[200px]') + '"><div class="aspect-[2/3] rounded-lg shimmer"></div></div>';
+        }).join('');
+      }
+
       return '<section data-rail-key="' + cfg.key + '" class="mb-6">' +
         '<div class="flex items-center gap-3 mb-3 px-1">' +
           '<div class="w-1.5 h-5 rounded-full" style="background: var(--accent, #ff6b00);"></div>' +
@@ -365,9 +573,7 @@
             '<span class="rail-arrow-btn"><svg viewBox="0 0 24 24" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m15 18-6-6 6-6"/></svg></span>' +
           '</button>' +
           '<div class="flex gap-3 sm:gap-4 overflow-x-auto scrollbar-none rail-scroll" data-rail-content>' +
-            Array.from({ length: 7 }).map(function() {
-              return '<div class="shrink-0 ' + (cfg.ranked ? 'w-40 sm:w-48' : 'w-[150px] sm:w-[200px]') + '"><div class="aspect-[2/3] rounded-lg shimmer"></div></div>';
-            }).join('') +
+            innerHtml +
           '</div>' +
           '<button type="button" data-rail-next aria-label="Scroll right" class="rail-arrow rail-arrow-right rail-arrow-hidden">' +
             '<span class="rail-arrow-btn"><svg viewBox="0 0 24 24" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg></span>' +
@@ -376,88 +582,34 @@
       '</section>';
     }).join('');
 
-    // Fetch and populate each rail
-    configs.forEach(async function(cfg) {
-      try {
-        var res = await apiFetch(cfg.url);
-        var data = await res.json();
-        var items = (data && data.items) || [];
-        var validItems = items.filter(function(it) { return it && (it.poster || it.title); });
+    // Wire up scroll buttons and handle background revalidation / lazy loading
+    configs.forEach(function(cfg, idx) {
+      var railSection = railsView.querySelector('[data-rail-key="' + cfg.key + '"]');
+      if (!railSection) return;
 
-        var railSection = railsView.querySelector('[data-rail-key="' + cfg.key + '"]');
-        if (!railSection) return;
-
-        var contentDiv = railSection.querySelector('[data-rail-content]');
-        if (!contentDiv) return;
-
-        if (!validItems.length) {
-          var fbFeed = cfg.ranked ? '/data/trending.json' : '/data/home_feed.json';
-          try {
-            var fbRes = await fetch(fbFeed);
-            var fbData = await fbRes.json();
-            var fbRaw = Array.isArray(fbData) ? fbData : (fbData.items || fbData.results || []);
-            validItems = fbRaw.map(function(it) {
-              return {
-                tmdbId: it.tmdbId || it.id,
-                title: it.title,
-                year: it.year,
-                poster: it.poster,
-                backdrop: it.backdrop,
-                rating: it.rating || 8.0,
-                type: it.type === 'series' ? 'tv' : 'movie'
-              };
-            }).filter(function(it) { return it && (it.poster || it.title); });
-          } catch(e) {}
-        }
-
-        if (!validItems.length) {
-          railSection.style.display = 'none';
-          return;
-        }
-
-        var maxItems = cfg.ranked ? 10 : 20;
-        var widthClass = cfg.ranked ? 'w-40 sm:w-48' : 'w-[150px] sm:w-[200px]';
-
-        contentDiv.innerHTML = validItems.slice(0, maxItems).map(function(item, idx) {
-          return '<div class="shrink-0 ' + widthClass + '">' +
-            renderCard(item, cfg.ranked ? { rank: idx + 1 } : {}) +
-          '</div>';
-        }).join('');
-
+      var cached = cachedDataMap[cfg.key];
+      if (cached) {
         initRailScrollButtons(railSection);
-      } catch(err) {
-        var sec = railsView.querySelector('[data-rail-key="' + cfg.key + '"]');
-        if (!sec) return;
-        try {
-          var fbRes = await fetch(cfg.ranked ? '/data/trending.json' : '/data/home_feed.json');
-          var fbData = await fbRes.json();
-          var fbRaw = Array.isArray(fbData) ? fbData : (fbData.items || fbData.results || []);
-          var fbItems = fbRaw.map(function(it) {
-            return {
-              tmdbId: it.tmdbId || it.id,
-              title: it.title,
-              year: it.year,
-              poster: it.poster,
-              backdrop: it.backdrop,
-              rating: it.rating || 8.0,
-              type: it.type === 'series' ? 'tv' : 'movie'
-            };
-          }).filter(function(it) { return it && (it.poster || it.title); });
+        if (cached.isFresh) {
+          return; // Instant fresh cache hit - no network request needed
+        }
+      }
 
-          var cd = sec.querySelector('[data-rail-content]');
-          if (cd && fbItems.length) {
-            var mi = cfg.ranked ? 10 : 20;
-            var wc = cfg.ranked ? 'w-40 sm:w-48' : 'w-[150px] sm:w-[200px]';
-            cd.innerHTML = fbItems.slice(0, mi).map(function(item, idx) {
-              return '<div class="shrink-0 ' + wc + '">' +
-                renderCard(item, cfg.ranked ? { rank: idx + 1 } : {}) +
-              '</div>';
-            }).join('');
-            initRailScrollButtons(sec);
-            return;
-          }
-        } catch(e) {}
-        sec.style.display = 'none';
+      var doLoad = async function() {
+        var items = await fetchRailItems(cfg);
+        if (items.length) {
+          populateRailContent(cfg, railSection, items);
+        } else if (!cached) {
+          railSection.style.display = 'none';
+        }
+      };
+
+      // Priority rails (first 2) load immediately; lower rails lazy load on scroll
+      if (idx < 2 || !railObserver) {
+        doLoad();
+      } else {
+        railSection._loadRail = doLoad;
+        railObserver.observe(railSection);
       }
     });
   }
@@ -465,8 +617,14 @@
   function renderCard(item, options) {
     options = options || {};
     var title = item.title || 'Untitled';
-    var posterUrl = (item.poster && !item.poster.includes('placehold.co')) ? item.poster : getPosterFallback(title);
-    var isTv = item.type === 'tv';
+    var posterUrl = item.poster;
+    if (posterUrl && !posterUrl.startsWith('http') && !posterUrl.startsWith('data:')) {
+      posterUrl = 'https://wsrv.nl/?url=image.tmdb.org/t/p/w500/' + posterUrl.replace(/^\//, '');
+    }
+    if (!posterUrl || posterUrl.includes('placehold.co')) {
+      posterUrl = getPosterFallback(title);
+    }
+    var isTv = item.type === 'tv' || item.type === 'series';
     var matchScore = item.rating ? Math.round(item.rating * 10) + '% match' : '96% match';
 
     var ratingBadge = item.rating
@@ -480,10 +638,10 @@
     var hoverOverlay =
       '<div class="nm-hover absolute inset-x-0 bottom-0 px-2 pt-10 pb-2 bg-gradient-to-t from-black via-black/85 to-transparent opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200 pointer-events-none">' +
         '<div class="flex items-center gap-1.5 mb-1.5">' +
-          '<button type="button" aria-label="Play" data-modal="watch" data-tmdbid="' + item.tmdbId + '" data-type="' + (item.type || 'movie') + '" class="w-7 h-7 rounded-full bg-white flex items-center justify-center pointer-events-auto hover:scale-105 active:scale-95 transition shadow-lg cursor-pointer">' +
+          '<button type="button" aria-label="Play" data-modal="watch" data-tmdbid="' + item.tmdbId + '" data-type="' + (isTv ? 'tv' : 'movie') + '" data-title="' + escapeHtml(title) + '" data-year="' + (item.year || '') + '" data-backdrop="' + (item.backdrop || '') + '" class="w-7 h-7 rounded-full bg-white flex items-center justify-center pointer-events-auto hover:scale-105 active:scale-95 transition shadow-lg cursor-pointer">' +
             '<svg class="w-3.5 h-3.5 ml-0.5 text-black" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>' +
           '</button>' +
-          '<button type="button" aria-label="More Info" data-modal="title" data-tmdbid="' + item.tmdbId + '" data-type="' + (item.type || 'movie') + '" class="w-7 h-7 rounded-full bg-white/20 backdrop-blur flex items-center justify-center pointer-events-auto hover:bg-white/30 transition border border-white/20 cursor-pointer">' +
+          '<button type="button" aria-label="More Info" data-modal="title" data-tmdbid="' + item.tmdbId + '" data-type="' + (isTv ? 'tv' : 'movie') + '" data-title="' + escapeHtml(title) + '" class="w-7 h-7 rounded-full bg-white/20 backdrop-blur flex items-center justify-center pointer-events-auto hover:bg-white/30 transition border border-white/20 cursor-pointer">' +
             '<svg class="w-3.5 h-3.5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>' +
           '</button>' +
         '</div>' +
@@ -494,7 +652,7 @@
       '</div>';
 
     if (options.rank) {
-      return '<a href="#" data-modal="title" data-tmdbid="' + item.tmdbId + '" data-type="' + (item.type || 'movie') + '" class="nm-card card group block">' +
+      return '<a href="#" data-modal="title" data-tmdbid="' + item.tmdbId + '" data-type="' + (isTv ? 'tv' : 'movie') + '" class="nm-card card group block">' +
         '<div class="flex items-stretch gap-1">' +
           '<div class="rank-num shrink-0 self-end leading-none">' + options.rank + '</div>' +
           '<div class="nm-card-inner flex-1 relative aspect-[2/3] rounded-md overflow-hidden bg-white/5 ring-1 ring-white/10 group-hover:ring-2 group-hover:ring-red-600 transition">' +
@@ -505,7 +663,7 @@
       '</a>';
     }
 
-    return '<a href="#" data-modal="title" data-tmdbid="' + item.tmdbId + '" data-type="' + (item.type || 'movie') + '" class="nm-card card group block">' +
+    return '<a href="#" data-modal="title" data-tmdbid="' + item.tmdbId + '" data-type="' + (isTv ? 'tv' : 'movie') + '" class="nm-card card group block">' +
       '<div class="nm-card-inner relative aspect-[2/3] rounded-lg overflow-hidden bg-white/5 ring-1 ring-white/10 group-hover:ring-2 group-hover:ring-red-600 transition">' +
         '<img src="' + posterUrl + '" loading="lazy" decoding="async" alt="' + escapeHtml(title) + '" class="w-full h-full object-cover" onerror="this.onerror=null;this.src=window.__getPosterSvg(this.alt);" />' +
         ratingBadge + typeBadge + hoverOverlay +
@@ -723,7 +881,18 @@
       }, 400);
     }
 
-    // 2. Hash Watch link (e.g. #w=1339713-movie-1-1)
+    // 2. Policy / Legal Modal Pages (/about, /privacy, /terms, /dmca, /contact)
+    var policyMatch = path.match(/^\/(about|privacy|terms|dmca|contact)(?:\.html)?$/i);
+    if (policyMatch) {
+      var tabKey = policyMatch[1].toLowerCase();
+      setTimeout(function() {
+        if (window.Netflix4uModal && window.Netflix4uModal.openPolicy) {
+          window.Netflix4uModal.openPolicy(tabKey);
+        }
+      }, 300);
+    }
+
+    // 3. Hash Watch link (e.g. #w=1339713-movie-1-1)
     var hash = window.location.hash;
     var hashMatch = hash.match(/^#w=([^-]+)-(movie|tv)(?:-(\d+)(?:-(\d+))?)?$/i);
     if (hashMatch) {

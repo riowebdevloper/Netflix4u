@@ -302,11 +302,11 @@
                 <span class="text-[color:var(--color-brand)]">Netflix</span>4U
               </div>
               <div class="text-xs text-white/50 flex flex-wrap justify-center gap-4 sm:gap-6 font-medium">
-                <a href="/about" class="hover:text-white transition">About Us</a>
-                <a href="/privacy" class="hover:text-white transition">Privacy Policy</a>
-                <a href="/terms" class="hover:text-white transition">Terms of Service</a>
-                <a href="/dmca" class="hover:text-white transition">DMCA Disclaimer</a>
-                <a href="/contact" class="hover:text-white transition">Contact</a>
+                <a href="/about" data-policy-link="about" class="hover:text-white transition cursor-pointer">About Us</a>
+                <a href="/privacy" data-policy-link="privacy" class="hover:text-white transition cursor-pointer">Privacy Policy</a>
+                <a href="/terms" data-policy-link="terms" class="hover:text-white transition cursor-pointer">Terms of Service</a>
+                <a href="/dmca" data-policy-link="dmca" class="hover:text-white transition cursor-pointer">DMCA Disclaimer</a>
+                <a href="/contact" data-policy-link="contact" class="hover:text-white transition cursor-pointer">Contact</a>
               </div>
               <div class="text-xs text-white/40">
                 Netflix4U does not store media files on its servers. All streams and downloads are indexed from external verified public mirrors.
@@ -354,12 +354,58 @@
     </div>
   </div>
 
-  <!-- ─── WATCH MODAL ─── -->
-  <div id="watch-modal" class="fixed inset-0 z-[60] hidden bg-black" aria-hidden="true">
-    <!-- Server Switcher Bar -->
-    <div id="watch-player-bar"></div>
+  <!-- ─── WATCH MODAL (Net27 Streaming Player UI) ─── -->
+  <div id="watch-modal" class="fixed inset-0 z-[60] hidden bg-black flex flex-col" aria-hidden="true">
+    <!-- Net27 Floating Glass Top Header -->
+    <header id="watch-top-bar" class="absolute top-0 inset-x-0 z-[75] flex items-center justify-between px-3 sm:px-6 py-2.5 bg-gradient-to-b from-black/90 via-black/60 to-transparent transition-all duration-300 pointer-events-auto">
+      <!-- Left: Back Button + Title Meta -->
+      <div class="flex items-center gap-2 sm:gap-3 min-w-0 pr-2">
+        <button id="watch-back-btn" type="button" aria-label="Back to details" class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 active:scale-95 text-white flex items-center justify-center transition cursor-pointer shrink-0">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+        <div id="watch-title-meta" class="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm font-semibold text-white/90 truncate">
+          <span id="watch-meta-title" class="truncate">Netflix4U</span>
+          <span class="text-white/40">|</span>
+          <span id="watch-meta-year" class="text-white/70 shrink-0">2026</span>
+          <span class="text-white/40">•</span>
+          <span id="watch-meta-type" class="uppercase text-[10px] tracking-wider px-1.5 py-0.5 rounded bg-white/15 shrink-0">Movie</span>
+        </div>
+      </div>
 
-    <button id="watch-modal-close" type="button" class="absolute z-[70] w-11 h-11 rounded-full bg-black/70 hover:bg-black/90 backdrop-blur flex items-center justify-center text-white text-xl transition cursor-pointer" style="top: 16px; right: 16px;" aria-label="Close player">✕</button>
+      <!-- Right: Live Reload + Server Dropdown + Close -->
+      <div class="flex items-center gap-1.5 sm:gap-3 shrink-0">
+        <!-- Live Reload Button -->
+        <button id="watch-reload-btn" type="button" aria-label="Reload stream" title="Reload Stream" class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 active:scale-90 text-white flex items-center justify-center transition cursor-pointer">
+          <svg id="watch-reload-icon" class="w-4 h-4 transition-transform duration-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67" />
+          </svg>
+        </button>
+
+        <!-- Server Switcher Dropdown Toggle -->
+        <div class="relative" id="watch-server-dropdown-wrap">
+          <button id="watch-server-toggle" type="button" aria-expanded="false" class="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1.5 rounded-full bg-black/75 border border-white/20 hover:border-white/40 backdrop-blur-md text-xs sm:text-sm font-semibold text-white transition cursor-pointer shadow-lg">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span id="watch-current-server-label" class="truncate max-w-[110px] sm:max-w-[170px]">Server 1</span>
+            <svg id="watch-server-arrow" class="w-3.5 h-3.5 text-white/60 shrink-0 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/>
+            </svg>
+          </button>
+
+          <!-- Dropdown Menu -->
+          <div id="watch-server-menu" class="hidden absolute right-0 mt-2 w-64 sm:w-72 rounded-xl bg-[#14141c]/95 border border-white/15 backdrop-blur-xl shadow-2xl p-1.5 z-[80] space-y-1">
+            <!-- Dynamically populated servers with active state and multi-audio tags -->
+          </div>
+        </div>
+
+        <!-- Close Player Button -->
+        <button id="watch-modal-close" type="button" aria-label="Close player" class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 active:scale-95 text-white flex items-center justify-center text-lg transition cursor-pointer">✕</button>
+      </div>
+    </header>
+
+    <!-- Legacy Server Tab Bar Container (for backward compatibility) -->
+    <div id="watch-player-bar" class="hidden"></div>
 
     <!-- Backdrop Preview Loader -->
     <div id="watch-modal-backdrop" class="absolute inset-0 z-[65] bg-black bg-cover bg-center pointer-events-none transition-opacity duration-500" style="opacity: 0;">
@@ -370,7 +416,7 @@
       </div>
     </div>
 
-    <iframe id="watch-modal-iframe" class="w-full h-full border-0" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen referrerpolicy="no-referrer"></iframe>
+    <iframe id="watch-modal-iframe" class="w-full h-full flex-1 border-0 pt-0" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen referrerpolicy="no-referrer"></iframe>
   </div>
 
   <!-- ─── TRAILER MODAL ─── -->
@@ -378,6 +424,28 @@
     <button id="trailer-modal-close" type="button" class="absolute z-10 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white text-xl cursor-pointer" style="top: 24px; right: 24px;">✕</button>
     <div class="w-full max-w-5xl aspect-video">
       <iframe id="trailer-modal-iframe" class="w-full h-full rounded-lg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <!-- ─── POLICY / LEGAL / CONTACT MODAL ─── -->
+  <div id="policy-modal" class="fixed inset-0 z-[60] hidden items-center justify-center bg-black/85 backdrop-blur-md p-3 sm:p-6" aria-hidden="true">
+    <div class="relative w-full max-w-2xl bg-[#15151c] rounded-2xl border border-white/10 shadow-2xl flex flex-col max-h-[88vh] overflow-hidden">
+      <!-- Modal Header with Tab Navigation -->
+      <div class="flex items-center justify-between px-4 sm:px-6 py-4 border-b border-white/10 bg-[#15151c]">
+        <div class="flex items-center gap-1.5 sm:gap-2 overflow-x-auto scrollbar-none" id="policy-tabs">
+          <button type="button" data-policy-tab="about" class="policy-tab is-active">About Us</button>
+          <button type="button" data-policy-tab="privacy" class="policy-tab">Privacy</button>
+          <button type="button" data-policy-tab="terms" class="policy-tab">Terms</button>
+          <button type="button" data-policy-tab="dmca" class="policy-tab">DMCA</button>
+          <button type="button" data-policy-tab="contact" class="policy-tab">Contact</button>
+        </div>
+        <button id="policy-modal-close" type="button" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center text-base transition cursor-pointer shrink-0 ml-2" aria-label="Close">✕</button>
+      </div>
+
+      <!-- Modal Content Body (Scrollable) -->
+      <div id="policy-modal-body" class="p-5 sm:p-7 overflow-y-auto text-sm text-white/80 leading-relaxed space-y-4">
+        <!-- Content will be rendered dynamically -->
+      </div>
     </div>
   </div>
 

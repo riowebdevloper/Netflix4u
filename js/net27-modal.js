@@ -16,12 +16,84 @@
   var watchModalClose = document.getElementById('watch-modal-close');
   var watchPlayerBar = document.getElementById('watch-player-bar');
 
+  // Net27 Floating Player Header Elements
+  var watchTopBar = document.getElementById('watch-top-bar');
+  var watchBackBtn = document.getElementById('watch-back-btn');
+  var watchReloadBtn = document.getElementById('watch-reload-btn');
+  var watchReloadIcon = document.getElementById('watch-reload-icon');
+  var watchServerToggle = document.getElementById('watch-server-toggle');
+  var watchServerMenu = document.getElementById('watch-server-menu');
+  var watchCurrentServerLabel = document.getElementById('watch-current-server-label');
+  var watchServerArrow = document.getElementById('watch-server-arrow');
+  var watchMetaTitle = document.getElementById('watch-meta-title');
+  var watchMetaYear = document.getElementById('watch-meta-year');
+  var watchMetaType = document.getElementById('watch-meta-type');
+
+  var policyModal = document.getElementById('policy-modal');
+  var policyModalBody = document.getElementById('policy-modal-body');
+  var policyModalClose = document.getElementById('policy-modal-close');
+  var policyTabs = document.getElementById('policy-tabs');
+
   var trailerModal = document.getElementById('trailer-modal');
   var trailerModalIframe = document.getElementById('trailer-modal-iframe');
   var trailerModalClose = document.getElementById('trailer-modal-close');
 
   var historyStack = [];
   var activeWatchServers = {};
+  var currentWatchServer = 's1';
+  var activeWatchParams = null;
+
+  // Resilient Cloud Download Handlers
+  if (!window.getFastCloudDownloadHref) {
+    window.getFastCloudDownloadHref = function(rawUrl) {
+      if (!rawUrl) return '#';
+      if (rawUrl.indexOf('workers.dev') !== -1 || rawUrl.indexOf('vcloud') !== -1) {
+        var clean = rawUrl;
+        var m = clean.match(/[?&]vcloud=([^&#]+)/);
+        if (m) clean = decodeURIComponent(m[1]);
+        return 'https://wild-sun-9376.oriue.workers.dev/?vcloud=' + encodeURIComponent(clean);
+      }
+      return rawUrl;
+    };
+  }
+
+  if (!window.handleFastCloudDownload) {
+    window.handleFastCloudDownload = async function(event, rawUrl, buttonEl) {
+      if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+      var targetEl = buttonEl || (event && (event.currentTarget || (event.target && event.target.closest('a'))));
+      var originalHtml = '';
+      if (targetEl) {
+        originalHtml = targetEl.innerHTML;
+        targetEl.style.pointerEvents = 'none';
+        targetEl.innerHTML = '<span style="display:inline-flex;align-items:center;gap:6px;"><svg style="animation:spinOnce 1s linear infinite;width:14px;height:14px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10" stroke-opacity="0.25"></circle><path d="M12 2a10 10 0 0 1 10 10" stroke-linecap="round"></path></svg>Connecting Stream...</span>';
+      }
+      var restore = function() {
+        if (targetEl && originalHtml) {
+          setTimeout(function() {
+            targetEl.innerHTML = originalHtml;
+            targetEl.style.pointerEvents = 'auto';
+          }, 2200);
+        }
+      };
+
+      var clean = rawUrl || '';
+      var m = clean.match(/[?&]vcloud=([^&#]+)/);
+      if (m) clean = decodeURIComponent(m[1]);
+
+      if (clean.indexOf('workers.dev') === -1 && clean.indexOf('vcloud') === -1 && (clean.indexOf('http://') === 0 || clean.indexOf('https://') === 0)) {
+        window.open(clean, '_blank', 'noopener,noreferrer');
+        restore();
+        return;
+      }
+
+      var workerUrl = 'https://wild-sun-9376.oriue.workers.dev/?vcloud=' + encodeURIComponent(clean);
+      window.open(workerUrl, '_blank', 'noopener,noreferrer');
+      restore();
+    };
+  }
 
   function escapeHtml(str) {
     if (!str) return '';
@@ -37,7 +109,8 @@
   function unlockBodyScroll() {
     if (titleModal && titleModal.classList.contains('hidden') &&
         watchModal && watchModal.classList.contains('hidden') &&
-        trailerModal && trailerModal.classList.contains('hidden')) {
+        trailerModal && trailerModal.classList.contains('hidden') &&
+        (!policyModal || policyModal.classList.contains('hidden'))) {
       document.body.style.overflow = '';
     }
   }
@@ -217,7 +290,7 @@
       '<div class="p-4 sm:p-6 space-y-6">' +
         '<!-- Action Buttons -->' +
         '<div class="flex flex-wrap items-center gap-3">' +
-          '<button type="button" data-modal="watch" data-tmdbid="' + tmdbId + '" data-type="' + type + '" data-backdrop="' + (data.backdrop || '') + '"' + (isTv ? ' data-se="' + (data.initialSeason || 1) + '" data-ep="1"' : '') + ' class="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg bg-white text-black font-bold hover:bg-white/90 active:scale-95 transition text-sm shadow-xl cursor-pointer">' +
+          '<button type="button" data-modal="watch" data-tmdbid="' + tmdbId + '" data-type="' + type + '" data-title="' + escapeHtml(data.title) + '" data-year="' + (data.year || '') + '" data-imdbid="' + (data.imdbId || '') + '" data-backdrop="' + (data.backdrop || '') + '"' + (isTv ? ' data-se="' + (data.initialSeason || 1) + '" data-ep="1"' : '') + ' class="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg bg-white text-black font-bold hover:bg-white/90 active:scale-95 transition text-sm shadow-xl cursor-pointer">' +
             '<svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>' +
             (isTv ? 'Play S' + (data.initialSeason || 1) + ' E1' : 'Watch Now') +
           '</button>' +
@@ -313,7 +386,7 @@
           var sRes = await fetch('/api/catalog/season/' + tmdbId + '/' + selectedSeason);
           var sData = await sRes.json();
           if (sData.ok && sData.episodes && sData.episodes.length) {
-            episodeListContainer.innerHTML = renderEpisodeList(sData.episodes, tmdbId, selectedSeason, data.backdrop, downloadLinks);
+            episodeListContainer.innerHTML = renderEpisodeList(sData.episodes, tmdbId, selectedSeason, data.backdrop, downloadLinks, data.title, data.year, data.imdbId);
           } else {
             episodeListContainer.innerHTML = '<div class="text-white/40 text-sm p-6 text-center">No episodes found for this season.</div>';
           }
@@ -324,15 +397,31 @@
     }
   }
 
+  // Delegated Download Click Listener on Title Modal Body (100% Quote-Safe)
+  if (titleModalBody) {
+    titleModalBody.addEventListener('click', function(e) {
+      var dlBtn = e.target.closest('[data-fast-download]');
+      if (dlBtn) {
+        e.preventDefault();
+        var rawUrl = decodeURIComponent(dlBtn.dataset.fastDownload);
+        if (window.handleFastCloudDownload) {
+          window.handleFastCloudDownload(e, rawUrl, dlBtn);
+        } else {
+          window.open(dlBtn.href, '_blank', 'noopener,noreferrer');
+        }
+      }
+    });
+  }
+
   function renderDownloadMirrors(links, title) {
     if (!links || !links.length) {
       return '<div class="p-5 rounded-xl bg-white/[0.03] border border-white/10 text-center space-y-2">' +
         '<div class="text-sm text-white/80 font-medium">Direct download mirrors being updated for this title.</div>' +
-        '<div class="text-xs text-white/40">You can stream this movie instantly using the "Watch Now" button above.</div>' +
+        '<div class="text-xs text-white/40">You can stream this title instantly using the "Watch Now" button above.</div>' +
       '</div>';
     }
 
-    return links.map(function(link, index) {
+    return links.map(function(link) {
       var rawQual = String(link.quality || 'HD').toUpperCase();
       var qualBadgeClass = 'dl-quality-1080p';
       if (rawQual.includes('4K') || rawQual.includes('2160')) qualBadgeClass = 'dl-quality-4k';
@@ -341,13 +430,14 @@
 
       var sizeText = link.size || (rawQual.includes('4K') ? '4.8 GB' : rawQual.includes('1080') ? '2.4 GB' : rawQual.includes('720') ? '1.1 GB' : '550 MB');
       var audioText = link.audio || 'Hindi + English [Multi-Audio]';
-      var cleanUrl = (window.getFastCloudDownloadHref && window.getFastCloudDownloadHref(link.url)) || link.url;
+      var rawUrl = link.url || '#';
+      var cleanUrl = (window.getFastCloudDownloadHref && window.getFastCloudDownloadHref(rawUrl)) || rawUrl;
 
       return '<div class="dl-card">' +
         '<div class="flex items-center gap-3 min-w-0">' +
           '<span class="dl-quality-badge ' + qualBadgeClass + '">' + escapeHtml(rawQual) + '</span>' +
           '<div class="min-w-0">' +
-            '<div class="text-xs sm:text-sm font-bold text-white/90 truncate">' + escapeHtml(link.title || title) + '</div>' +
+            '<div class="text-xs sm:text-sm font-bold text-white/90 truncate">' + escapeHtml(link.label || link.title || title) + '</div>' +
             '<div class="flex items-center gap-2 text-[11px] text-white/50 mt-0.5">' +
               '<span class="font-semibold text-white/70">' + escapeHtml(sizeText) + '</span>' +
               '<span>•</span>' +
@@ -356,7 +446,7 @@
           '</div>' +
         '</div>' +
         '<div class="shrink-0">' +
-          '<a href="' + cleanUrl + '" onclick="window.handleFastCloudDownload(event, \'' + (link.url || cleanUrl) + '\')" class="dl-btn dl-cloud-btn">' +
+          '<a href="' + cleanUrl + '" data-fast-download="' + encodeURIComponent(rawUrl) + '" class="dl-btn dl-cloud-btn cursor-pointer">' +
             '<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 3v12m0 0l-4-4m4 4l4-4"/><path d="M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>' +
             '<span>Fast Download</span>' +
           '</a>' +
@@ -365,7 +455,7 @@
     }).join('');
   }
 
-  function renderEpisodeList(episodes, tmdbId, seasonNum, fallbackBackdrop, downloadLinks) {
+  function renderEpisodeList(episodes, tmdbId, seasonNum, fallbackBackdrop, downloadLinks, parentTitle, parentYear, parentImdbId) {
     if (!episodes || !episodes.length) {
       return '<div class="text-white/40 text-sm p-4 text-center">No episodes available.</div>';
     }
@@ -376,6 +466,7 @@
       var epTitle = ep.name || ('Episode ' + epNum);
       var duration = ep.runtime ? ep.runtime + 'm' : '45m';
       var overview = ep.overview ? ep.overview.slice(0, 140) + '...' : 'Play episode ' + epNum + ' of Season ' + seasonNum + '.';
+      var fullTitle = (parentTitle ? (parentTitle + ' - ') : '') + epTitle;
 
       return '<div class="flex flex-col sm:flex-row items-start sm:items-center gap-3 p-3 rounded-xl bg-white/[0.03] border border-white/5 hover:bg-white/[0.06] transition group">' +
         '<div class="flex items-center gap-3 w-full sm:w-auto">' +
@@ -383,7 +474,7 @@
           '<div class="relative w-28 sm:w-36 aspect-video rounded-lg overflow-hidden bg-white/5 shrink-0">' +
             (still ? '<img src="' + still + '" alt="' + escapeHtml(epTitle) + '" class="w-full h-full object-cover" loading="lazy" />' : '') +
             '<div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">' +
-              '<button type="button" data-modal="watch" data-tmdbid="' + tmdbId + '" data-type="tv" data-se="' + seasonNum + '" data-ep="' + epNum + '" class="w-8 h-8 rounded-full bg-white text-black flex items-center justify-center shadow-lg transform active:scale-95">' +
+              '<button type="button" data-modal="watch" data-tmdbid="' + tmdbId + '" data-type="tv" data-se="' + seasonNum + '" data-ep="' + epNum + '" data-title="' + escapeHtml(fullTitle) + '" data-year="' + (parentYear || '') + '" data-imdbid="' + (parentImdbId || '') + '" class="w-8 h-8 rounded-full bg-white text-black flex items-center justify-center shadow-lg transform active:scale-95 cursor-pointer">' +
                 '<svg class="w-4 h-4 ml-0.5" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>' +
               '</button>' +
             '</div>' +
@@ -401,7 +492,7 @@
           '<p class="text-xs text-white/60 line-clamp-2 leading-relaxed">' + escapeHtml(overview) + '</p>' +
         '</div>' +
         '<div class="flex items-center gap-2 self-end sm:self-center shrink-0">' +
-          '<button type="button" data-modal="watch" data-tmdbid="' + tmdbId + '" data-type="tv" data-se="' + seasonNum + '" data-ep="' + epNum + '" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white font-semibold text-xs flex items-center gap-1.5 transition cursor-pointer">' +
+          '<button type="button" data-modal="watch" data-tmdbid="' + tmdbId + '" data-type="tv" data-se="' + seasonNum + '" data-ep="' + epNum + '" data-title="' + escapeHtml(fullTitle) + '" data-year="' + (parentYear || '') + '" data-imdbid="' + (parentImdbId || '') + '" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white font-semibold text-xs flex items-center gap-1.5 transition cursor-pointer">' +
             '<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>' +
             '<span>Play</span>' +
           '</button>' +
@@ -435,60 +526,87 @@
     openTitleModal(prev.tmdbId, prev.type);
   }
 
-  // ─── WATCH MODAL ───
-  function openWatchModal(tmdbId, type, season, episode, backdrop) {
+  // ─── WATCH MODAL (Net27 Streaming Player UI) ───
+  var SERVERS_CONFIG = [
+    { id: 's1', name: 'Server 1 (Net27 Multi)', tag: 'Multi', tagClass: 'tag-multi', desc: 'Net27 Peachify Multi-Audio (Wolf, Spider, Multi)' },
+    { id: 's2', name: 'Server 2 (VidLink Multi)', tag: 'Hindi/Dual', tagClass: 'tag-multi', desc: 'VidLink Pro Multi-Audio Track Selector' },
+    { id: 's3', name: 'Server 3 (AllMovieLand)', tag: 'High-Speed', tagClass: 'tag-fast', desc: 'AllMovieLand Indian & Global Fast Player' },
+    { id: 's4', name: 'Server 4 (2Embed Global)', tag: 'CDN', tagClass: 'tag-global', desc: '2Embed Global High-Speed Mirror' },
+    { id: 's5', name: 'Server 5 (VidSrc PM)', tag: 'Fast Mirror', tagClass: 'tag-fast', desc: 'VidSrc PM High Uptime Mirror' },
+    { id: 's6', name: 'Server 6 (AutoEmbed)', tag: 'Backup', tagClass: 'tag-fast', desc: 'AutoEmbed Reliable CDN Backup' }
+  ];
+
+  function openWatchModal(tmdbId, type, season, episode, backdrop, title, year, imdbId) {
     if (window.__closeSearchOverlay) window.__closeSearchOverlay();
     if (!watchModal || !watchModalIframe) return;
 
     type = type || 'movie';
-    season = season || 1;
-    episode = episode || 1;
+    season = Number(season) || 1;
+    episode = Number(episode) || 1;
     var isTv = type === 'tv';
 
-    // Sanitize TMDB ID to prevent non-numeric prefixes
+    // Sanitize TMDB ID
     if (typeof tmdbId === 'string') {
       tmdbId = tmdbId.replace(/^(?:dotmobiz|tmdb(?:-movie|-series|-tv)?)-/, '');
     }
 
+    activeWatchParams = { tmdbId: tmdbId, type: type, season: season, episode: episode, backdrop: backdrop, title: title, year: year, imdbId: imdbId };
+
+    // Update Top Floating Header Metadata
+    if (watchMetaTitle) watchMetaTitle.textContent = title || 'Netflix4U';
+    if (watchMetaYear) watchMetaYear.textContent = year || '2026';
+    if (watchMetaType) {
+      watchMetaType.textContent = isTv ? ('S' + season + ' E' + episode) : 'Movie';
+    }
+
+    // Build Server URLs
+    var allMovieLandUrl = '';
+    if (imdbId && typeof imdbId === 'string' && imdbId.startsWith('tt')) {
+      allMovieLandUrl = isTv
+        ? 'https://slast430did.com/play/' + encodeURIComponent(imdbId) + '?s=' + season + '&e=' + episode
+        : 'https://slast430did.com/play/' + encodeURIComponent(imdbId);
+    } else {
+      allMovieLandUrl = isTv
+        ? 'https://slast430did.com/play/' + encodeURIComponent(tmdbId) + '?s=' + season + '&e=' + episode
+        : 'https://slast430did.com/play/' + encodeURIComponent(tmdbId);
+      // Fetch IMDb ID asynchronously if not available at boot
+      fetch('/api/catalog/title/' + encodeURIComponent(type) + '/' + encodeURIComponent(tmdbId))
+        .then(function(res) { return res.json(); })
+        .then(function(data) {
+          if (data && data.imdbId) {
+            activeWatchParams.imdbId = data.imdbId;
+            activeWatchServers.s3 = isTv
+              ? 'https://slast430did.com/play/' + encodeURIComponent(data.imdbId) + '?s=' + season + '&e=' + episode
+              : 'https://slast430did.com/play/' + encodeURIComponent(data.imdbId);
+            if (currentWatchServer === 's3' && watchModalIframe) {
+              watchModalIframe.src = activeWatchServers.s3;
+            }
+          }
+        }).catch(function() {});
+    }
+
     activeWatchServers = {
       s1: isTv
-        ? 'https://vidlink.pro/tv/' + tmdbId + '/' + season + '/' + episode + '?multiLang=true'
-        : 'https://vidlink.pro/movie/' + tmdbId + '?multiLang=true',
-      s2: isTv
         ? 'https://peachify.top/embed/tv/' + tmdbId + '/' + season + '/' + episode
         : 'https://peachify.top/embed/movie/' + tmdbId,
-      s3: isTv
+      s2: isTv
+        ? 'https://vidlink.pro/tv/' + tmdbId + '/' + season + '/' + episode + '?multiLang=true'
+        : 'https://vidlink.pro/movie/' + tmdbId + '?multiLang=true',
+      s3: allMovieLandUrl,
+      s4: isTv
         ? 'https://www.2embed.cc/embedtv/' + tmdbId + '&s=' + season + '&e=' + episode
         : 'https://www.2embed.cc/embed/' + tmdbId,
-      s4: isTv
+      s5: isTv
         ? 'https://vidsrc.pm/embed/tv/' + tmdbId + '/' + season + '/' + episode
         : 'https://vidsrc.pm/embed/movie/' + tmdbId,
-      s5: isTv
+      s6: isTv
         ? 'https://autoembed.co/tv/tmdb/' + tmdbId + '/' + season + '/' + episode
         : 'https://autoembed.co/movie/tmdb/' + tmdbId
     };
 
-    // Render Server Switcher in Watch Modal Header
-    if (watchPlayerBar) {
-      watchPlayerBar.innerHTML =
-        '<button type="button" class="server-tab-btn is-active" data-server="s1">🟢 Server 1 (VidLink Multi-Audio)</button>' +
-        '<button type="button" class="server-tab-btn" data-server="s2">🔵 Server 2 (Net27 Fast)</button>' +
-        '<button type="button" class="server-tab-btn" data-server="s3">🟣 Server 3 (2Embed Global)</button>' +
-        '<button type="button" class="server-tab-btn" data-server="s4">🟠 Server 4 (VidSrc PM)</button>' +
-        '<button type="button" class="server-tab-btn" data-server="s5">🟡 Server 5 (AutoEmbed)</button>';
-
-      watchPlayerBar.querySelectorAll('.server-tab-btn').forEach(function(btn) {
-        btn.addEventListener('click', function() {
-          watchPlayerBar.querySelectorAll('.server-tab-btn').forEach(function(b) { b.classList.remove('is-active'); });
-          btn.classList.add('is-active');
-          var sKey = btn.dataset.server;
-          if (activeWatchServers[sKey]) {
-            showWatchBackdrop(backdrop);
-            watchModalIframe.src = activeWatchServers[sKey];
-          }
-        });
-      });
-    }
+    currentWatchServer = 's1';
+    renderWatchServerMenu();
+    updateActiveServerUi('s1');
 
     showWatchBackdrop(backdrop);
     watchModalIframe.src = activeWatchServers.s1;
@@ -500,8 +618,91 @@
     if (season) hash += '-' + season;
     if (episode) hash += '-' + episode;
     if (location.hash !== hash) {
-      history.pushState({ watch: { tmdbId: tmdbId, type: type, se: season, ep: episode } }, '', hash);
+      history.pushState({ watch: { tmdbId: tmdbId, type: type, se: season, ep: episode, title: title, year: year, imdbId: imdbId } }, '', hash);
     }
+  }
+
+  function renderWatchServerMenu() {
+    if (!watchServerMenu) return;
+    watchServerMenu.innerHTML = SERVERS_CONFIG.map(function(s) {
+      var isSelected = s.id === currentWatchServer;
+      return '<button type="button" data-switch-server="' + s.id + '" class="watch-server-item' + (isSelected ? ' is-selected' : '') + '">' +
+        '<div class="flex items-center gap-2 min-w-0">' +
+          '<span class="w-2 h-2 rounded-full bg-emerald-400 shrink-0 ' + (isSelected ? 'animate-pulse' : 'opacity-70') + '"></span>' +
+          '<span class="truncate">' + escapeHtml(s.name) + '</span>' +
+        '</div>' +
+        '<span class="watch-server-tag ' + s.tagClass + ' shrink-0 ml-2">' + escapeHtml(s.tag) + '</span>' +
+      '</button>';
+    }).join('');
+
+    watchServerMenu.querySelectorAll('[data-switch-server]').forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var sId = btn.dataset.switchServer;
+        switchWatchServer(sId);
+        closeServerMenu();
+      });
+    });
+  }
+
+  function updateActiveServerUi(serverId) {
+    currentWatchServer = serverId;
+    var cfg = SERVERS_CONFIG.find(function(s) { return s.id === serverId; }) || SERVERS_CONFIG[0];
+    if (watchCurrentServerLabel) {
+      watchCurrentServerLabel.textContent = cfg.name;
+    }
+    if (watchServerMenu) {
+      watchServerMenu.querySelectorAll('[data-switch-server]').forEach(function(btn) {
+        btn.classList.toggle('is-selected', btn.dataset.switchServer === serverId);
+      });
+    }
+  }
+
+  function switchWatchServer(serverId) {
+    if (!activeWatchServers[serverId]) return;
+    updateActiveServerUi(serverId);
+    if (activeWatchParams && activeWatchParams.backdrop) {
+      showWatchBackdrop(activeWatchParams.backdrop);
+    }
+    watchModalIframe.src = activeWatchServers[serverId];
+  }
+
+  function toggleServerMenu() {
+    if (!watchServerMenu) return;
+    var isOpen = !watchServerMenu.classList.contains('hidden');
+    if (isOpen) {
+      closeServerMenu();
+    } else {
+      openServerMenu();
+    }
+  }
+
+  function openServerMenu() {
+    if (!watchServerMenu) return;
+    watchServerMenu.classList.remove('hidden');
+    if (watchServerToggle) watchServerToggle.setAttribute('aria-expanded', 'true');
+    if (watchServerArrow) watchServerArrow.style.transform = 'rotate(180deg)';
+  }
+
+  function closeServerMenu() {
+    if (!watchServerMenu) return;
+    watchServerMenu.classList.add('hidden');
+    if (watchServerToggle) watchServerToggle.setAttribute('aria-expanded', 'false');
+    if (watchServerArrow) watchServerArrow.style.transform = 'rotate(0deg)';
+  }
+
+  function reloadWatchStream() {
+    if (!watchModalIframe || !activeWatchServers[currentWatchServer]) return;
+    if (watchReloadIcon) {
+      watchReloadIcon.classList.remove('spin-anim');
+      void watchReloadIcon.offsetWidth; // force reflow
+      watchReloadIcon.classList.add('spin-anim');
+    }
+    if (activeWatchParams && activeWatchParams.backdrop) {
+      showWatchBackdrop(activeWatchParams.backdrop);
+    }
+    var cur = activeWatchServers[currentWatchServer];
+    watchModalIframe.src = cur;
   }
 
   function showWatchBackdrop(backdropUrl) {
@@ -528,6 +729,7 @@
     watchModalIframe.src = 'about:blank';
     watchModal.classList.add('hidden');
     watchModal.setAttribute('aria-hidden', 'true');
+    closeServerMenu();
     hideWatchBackdrop();
     unlockBodyScroll();
     if (location.hash && location.hash.startsWith('#w=')) {
@@ -535,6 +737,110 @@
         history.replaceState(null, '', location.pathname + location.search);
       } catch(e) {}
     }
+  }
+
+  // ─── POLICY / FOOTER MODAL CONTROLLER ───
+  var POLICY_DOCS = {
+    about: {
+      title: 'About Netflix4U',
+      content: '<div class="space-y-3">' +
+        '<p class="text-base font-semibold text-white">Welcome to Netflix4U — Ultra-Fast Streaming & Direct Cloud Downloads.</p>' +
+        '<p>Netflix4U is an entertainment discovery portal built for movie buffs, web series enthusiasts, and anime lovers. We aggregate verified, publicly accessible streaming and download mirrors into a seamless experience with zero mandatory signups or subscriptions.</p>' +
+        '<div class="p-4 rounded-xl bg-white/[0.04] border border-white/10 space-y-2">' +
+          '<div class="text-white font-bold flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-red-500"></span>Our Key Pillars</div>' +
+          '<p class="text-xs text-white/70">• <strong>Multi-Server High Speed</strong>: 6 dedicated streaming servers including Net27 Peachify, VidLink Multi-Audio, and AllMovieLand.<br>' +
+          '• <strong>Direct Fast Downloads</strong>: Zero-waiting cloud worker mirrors for 4K, 1080p, and 720p files.<br>' +
+          '• <strong>Privacy First</strong>: No registration, no tracking, and 100% client-side privacy.</p>' +
+        '</div>' +
+        '<p class="text-xs text-white/50">Version 2.4 (Net27 Edition) • Updated Daily</p>' +
+      '</div>'
+    },
+    privacy: {
+      title: 'Privacy Policy',
+      content: '<div class="space-y-3">' +
+        '<p class="font-semibold text-white">Your Privacy is Sacred to Us.</p>' +
+        '<p>At Netflix4U, we strongly believe in digital autonomy and minimal data retention:</p>' +
+        '<ul class="list-disc pl-5 space-y-1.5 text-white/75 text-xs sm:text-sm">' +
+          '<li><strong>No Account Required:</strong> You never need to submit your email, phone number, or personal details to stream or download.</li>' +
+          '<li><strong>Zero Behavioral Tracking:</strong> We do not deploy third-party advertising trackers or fingerprinting cookies.</li>' +
+          '<li><strong>Ephemeral Client Sessions:</strong> Watchlist and platform preferences are stored exclusively in your local browser session storage.</li>' +
+        '</ul>' +
+        '<p class="text-xs text-white/50">For queries regarding our privacy protocol, contact privacy@netflix4u.in.</p>' +
+      '</div>'
+    },
+    terms: {
+      title: 'Terms of Service',
+      content: '<div class="space-y-3">' +
+        '<p class="font-semibold text-white">Terms of Use & Fair Access</p>' +
+        '<p>By visiting or utilizing Netflix4U, you acknowledge and agree to the following conditions:</p>' +
+        '<ul class="list-disc pl-5 space-y-1.5 text-white/75 text-xs sm:text-sm">' +
+          '<li>Netflix4U operates as an indexer pointing to media streams and verified cloud worker mirrors hosted elsewhere on the internet.</li>' +
+          '<li>All media files belong to their respective copyright holders. Netflix4U does not broadcast or store content on its own servers.</li>' +
+          '<li>Usage of automated bots, denial-of-service scrapers, or excessive bulk download harvesting is strictly disallowed.</li>' +
+        '</ul>' +
+      '</div>'
+    },
+    dmca: {
+      title: 'DMCA Disclaimer & Copyright Compliance',
+      content: '<div class="space-y-3">' +
+        '<div class="p-4 rounded-xl bg-red-950/30 border border-red-800/40 space-y-2">' +
+          '<div class="text-red-400 font-bold flex items-center gap-2"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L1 21h22L12 2zm0 3.5l8.5 14.5H3.5L12 5.5zM11 10v4h2v-4h-2zm0 6v2h2v-2h-2z"/></svg>Digital Millennium Copyright Act Notice</div>' +
+          '<p class="text-xs text-white/80">Netflix4U strictly respects copyright laws. We do not host, broadcast, archive, or upload media files to our web hosting servers. All content is indexed automatically from public third-party sources.</p>' +
+        '</div>' +
+        '<p class="text-xs sm:text-sm text-white/75">If your copyrighted work has been indexed and you wish to submit a removal request, please email our designated agent at <span class="text-red-400 font-semibold">dmca@netflix4u.in</span> or reach out via our Telegram channel. Provide the specific URL and proof of ownership. Verified notices will be addressed within 24–48 hours.</p>' +
+      '</div>'
+    },
+    contact: {
+      title: 'Contact & Community Support',
+      content: '<div class="space-y-4">' +
+        '<p class="font-semibold text-white">We Value Your Feedback</p>' +
+        '<p class="text-xs sm:text-sm text-white/75">Connect with the Netflix4U team for media requests, bug reports, or partnership inquiries:</p>' +
+        '<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">' +
+          '<a href="https://t.me/netflix_mirror_apk" target="_blank" rel="noopener noreferrer" class="p-3.5 rounded-xl bg-[#229ED9]/15 border border-[#229ED9]/30 hover:bg-[#229ED9]/25 transition flex items-center gap-3 group">' +
+            '<div class="w-9 h-9 rounded-full bg-[#229ED9] text-white flex items-center justify-center shrink-0 shadow-lg group-hover:scale-105 transition"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg></div>' +
+            '<div><div class="text-sm font-bold text-white">Telegram Channel</div><div class="text-xs text-white/50">Live updates & requests</div></div>' +
+          '</a>' +
+          '<div class="p-3.5 rounded-xl bg-white/[0.04] border border-white/10 flex items-center gap-3">' +
+            '<div class="w-9 h-9 rounded-full bg-red-600 text-white flex items-center justify-center shrink-0 shadow-lg"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></div>' +
+            '<div><div class="text-sm font-bold text-white">Email Support</div><div class="text-xs text-white/50">support@netflix4u.in</div></div>' +
+          '</div>' +
+        '</div>' +
+      '</div>'
+    }
+  };
+
+  function openPolicyModal(tabKey) {
+    if (window.__closeSearchOverlay) window.__closeSearchOverlay();
+    if (!policyModal || !policyModalBody) return;
+
+    tabKey = tabKey || 'about';
+    switchPolicyTab(tabKey);
+
+    policyModal.classList.remove('hidden');
+    policyModal.classList.add('flex');
+    policyModal.setAttribute('aria-hidden', 'false');
+    lockBodyScroll();
+  }
+
+  function switchPolicyTab(tabKey) {
+    if (!policyModalBody) return;
+    var doc = POLICY_DOCS[tabKey] || POLICY_DOCS.about;
+    policyModalBody.innerHTML = '<h3 class="text-xl font-bold text-white mb-2">' + escapeHtml(doc.title) + '</h3>' + doc.content;
+
+    if (policyTabs) {
+      policyTabs.querySelectorAll('[data-policy-tab]').forEach(function(btn) {
+        var isThis = btn.dataset.policyTab === tabKey;
+        btn.classList.toggle('is-active', isThis);
+      });
+    }
+  }
+
+  function closePolicyModal() {
+    if (!policyModal) return;
+    policyModal.classList.add('hidden');
+    policyModal.classList.remove('flex');
+    policyModal.setAttribute('aria-hidden', 'true');
+    unlockBodyScroll();
   }
 
   // ─── TRAILER MODAL ───
@@ -557,31 +863,77 @@
   // ─── EVENT DELEGATION ───
   document.addEventListener('click', function(e) {
     var modalTrigger = e.target.closest('[data-modal]');
-    if (!modalTrigger) return;
-    var modalType = modalTrigger.dataset.modal;
+    if (modalTrigger) {
+      var modalType = modalTrigger.dataset.modal;
+      if (modalType === 'title') {
+        var tmdbId = modalTrigger.dataset.tmdbid;
+        var type = modalTrigger.dataset.type || 'movie';
+        if (!tmdbId) return;
+        e.preventDefault();
+        openTitleModal(tmdbId, type);
+      } else if (modalType === 'watch') {
+        var tmdbId = modalTrigger.dataset.tmdbid;
+        var type = modalTrigger.dataset.type || 'movie';
+        var se = modalTrigger.dataset.se || 1;
+        var ep = modalTrigger.dataset.ep || 1;
+        var backdrop = modalTrigger.dataset.backdrop || '';
+        var title = modalTrigger.dataset.title || '';
+        var year = modalTrigger.dataset.year || '';
+        var imdbId = modalTrigger.dataset.imdbid || '';
+        if (!tmdbId) return;
+        e.preventDefault();
+        openWatchModal(tmdbId, type, se, ep, backdrop, title, year, imdbId);
+      } else if (modalType === 'trailer') {
+        var yt = modalTrigger.dataset.yt;
+        if (!yt) return;
+        e.preventDefault();
+        openTrailerModal(yt);
+      }
+      return;
+    }
 
-    if (modalType === 'title') {
-      var tmdbId = modalTrigger.dataset.tmdbid;
-      var type = modalTrigger.dataset.type || 'movie';
-      if (!tmdbId) return;
+    var policyLink = e.target.closest('[data-policy-link]');
+    if (policyLink) {
       e.preventDefault();
-      openTitleModal(tmdbId, type);
-    } else if (modalType === 'watch') {
-      var tmdbId = modalTrigger.dataset.tmdbid;
-      var type = modalTrigger.dataset.type || 'movie';
-      var se = modalTrigger.dataset.se || 1;
-      var ep = modalTrigger.dataset.ep || 1;
-      var backdrop = modalTrigger.dataset.backdrop || '';
-      if (!tmdbId) return;
-      e.preventDefault();
-      openWatchModal(tmdbId, type, se, ep, backdrop);
-    } else if (modalType === 'trailer') {
-      var yt = modalTrigger.dataset.yt;
-      if (!yt) return;
-      e.preventDefault();
-      openTrailerModal(yt);
+      var tab = policyLink.dataset.policyLink;
+      openPolicyModal(tab);
+      return;
     }
   });
+
+  // Net27 Player Header Listeners
+  if (watchBackBtn) watchBackBtn.addEventListener('click', closeWatchModal);
+  if (watchReloadBtn) watchReloadBtn.addEventListener('click', reloadWatchStream);
+  if (watchServerToggle) {
+    watchServerToggle.addEventListener('click', function(e) {
+      e.stopPropagation();
+      toggleServerMenu();
+    });
+  }
+
+  // Close server menu on outside click
+  document.addEventListener('click', function(e) {
+    if (watchServerMenu && !watchServerMenu.classList.contains('hidden')) {
+      if (!e.target.closest('#watch-server-dropdown-wrap')) {
+        closeServerMenu();
+      }
+    }
+  });
+
+  // Policy Modal Listeners
+  if (policyTabs) {
+    policyTabs.querySelectorAll('[data-policy-tab]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        switchPolicyTab(btn.dataset.policyTab);
+      });
+    });
+  }
+  if (policyModalClose) policyModalClose.addEventListener('click', closePolicyModal);
+  if (policyModal) {
+    policyModal.addEventListener('click', function(e) {
+      if (e.target === policyModal) closePolicyModal();
+    });
+  }
 
   if (titleModalBack) titleModalBack.addEventListener('click', goBackTitleModal);
   if (titleModalClose) titleModalClose.addEventListener('click', closeTitleModal);
@@ -607,6 +959,7 @@
 
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
+      if (policyModal && !policyModal.classList.contains('hidden')) { closePolicyModal(); return; }
       if (trailerModal && !trailerModal.classList.contains('hidden')) { closeTrailerModal(); return; }
       if (watchModal && !watchModal.classList.contains('hidden')) { closeWatchModal(); return; }
       if (titleModal && !titleModal.classList.contains('hidden')) { closeTitleModal(); return; }
@@ -626,6 +979,8 @@
     openWatch: openWatchModal,
     closeWatch: closeWatchModal,
     openTrailer: openTrailerModal,
-    closeTrailer: closeTrailerModal
+    closeTrailer: closeTrailerModal,
+    openPolicy: openPolicyModal,
+    closePolicy: closePolicyModal
   };
 })();

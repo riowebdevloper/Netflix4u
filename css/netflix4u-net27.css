@@ -361,3 +361,89 @@ body {
   }
 }
 
+/* ─── Net27 Watch Player Top Bar & Server Dropdown ─── */
+#watch-top-bar {
+  background: linear-gradient(180deg, rgba(10, 10, 15, 0.95) 0%, rgba(10, 10, 15, 0.75) 70%, transparent 100%);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.watch-server-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-align: left;
+}
+.watch-server-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+.watch-server-item.is-selected {
+  background: rgba(229, 9, 20, 0.25);
+  color: #ffffff;
+  border-color: rgba(229, 9, 20, 0.5);
+}
+
+.watch-server-tag {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.tag-multi {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: #ffffff;
+}
+.tag-fast {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  color: #ffffff;
+}
+.tag-global {
+  background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+  color: #ffffff;
+}
+
+@keyframes spinOnce {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.spin-anim {
+  animation: spinOnce 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ─── Policy Modal Styles ─── */
+.policy-tab {
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.6);
+  background: transparent;
+  border: 1px solid transparent;
+  transition: all 0.15s ease;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.policy-tab:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.06);
+}
+.policy-tab.is-active {
+  color: #ffffff;
+  background: rgba(229, 9, 20, 0.2);
+  border-color: rgba(229, 9, 20, 0.5);
+}
+
+
