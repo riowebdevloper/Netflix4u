@@ -1,0 +1,14 @@
+# Vercel Deployment Ignore
+# Exclude 30,176 individual JSON detail files to comply with Vercel's 10,000-file limit.
+# Canonical details & fast lookup are provided via data/details_map.json
+data/details/
+
+# Temporary & build artifacts
+temp_cpanel_stage/
+scratch/
+audit_artifacts/
+*.zip
+*.tar.gz
+*.tgz
+*.rar
+screenshot*.png
