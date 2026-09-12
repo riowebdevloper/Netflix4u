@@ -590,5 +590,183 @@ body {
   align-items: center;
 }
 
+/* ─── Dedicated Isolated Ad Containers (Non-Intrusive & CLS Protected) ─── */
+.nm-ad-container {
+  width: 100%;
+  box-sizing: border-box;
+  margin: 1.25rem 0;
+  text-align: center;
+  position: relative;
+  clear: both;
+}
+
+.nm-ad-label {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.35);
+  margin-bottom: 5px;
+  user-select: none;
+}
+
+.nm-ad-slot {
+  position: relative;
+  margin: 0 auto;
+  overflow: hidden;
+  box-sizing: border-box;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.02);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  contain: content;
+  max-width: 100%;
+  transition: border-color 0.2s ease;
+}
+
+.nm-ad-slot:hover {
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+.nm-ad-slot iframe {
+  max-width: 100% !important;
+  border: none !important;
+  margin: 0 auto !important;
+  display: block !important;
+}
+
+/* Standard Ad Slot Sizes */
+.nm-ad-leaderboard {
+  max-width: 728px;
+  min-height: 90px;
+}
+
+.nm-ad-billboard {
+  max-width: 970px;
+  min-height: 90px;
+}
+
+.nm-ad-modal {
+  max-width: 100%;
+  min-height: 75px;
+  border-radius: 12px;
+  margin: 1rem 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(20,20,28,0.6) 100%);
+}
+
+.nm-ad-card {
+  height: 100%;
+  min-height: 260px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* Elegant Default Placeholder before custom third-party tags are served */
+.nm-ad-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  height: 100%;
+  padding: 12px 18px;
+  box-sizing: border-box;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 11px;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.nm-ad-placeholder:hover {
+  background: rgba(255, 255, 255, 0.04);
+  color: #ffffff;
+}
+
+.nm-ad-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: rgba(229, 9, 20, 0.15);
+  border: 1px solid rgba(229, 9, 20, 0.35);
+  color: #ff4d4d;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+/* ─── Non-Intrusive Bottom Sticky Ad Bar with Dismiss ─── */
+#nm-sticky-ad-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 45;
+  background: rgba(12, 12, 18, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 6px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.6);
+}
+
+#nm-sticky-ad-bar.nm-sticky-hidden {
+  transform: translateY(110%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+#nm-sticky-ad-close {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  z-index: 2;
+}
+
+#nm-sticky-ad-close:hover {
+  background: rgba(229, 9, 20, 0.8);
+  border-color: transparent;
+}
+
+@media (max-width: 768px) {
+  .nm-ad-leaderboard, .nm-ad-billboard {
+    min-height: 60px;
+    max-width: 100%;
+  }
+  .nm-ad-placeholder {
+    font-size: 10px;
+    padding: 8px 12px;
+    gap: 8px;
+  }
+  #nm-sticky-ad-bar {
+    padding: 4px 8px;
+  }
+}
+
+
 
 

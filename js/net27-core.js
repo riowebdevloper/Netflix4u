@@ -606,21 +606,34 @@
     });
 
     // Render rails: if cached, cards show instantly; otherwise, skeleton shimmer
-    railsView.innerHTML = configs.map(function(cfg) {
+    railsView.innerHTML = configs.map(function(cfg, idx) {
       var cached = cachedDataMap[cfg.key];
       var innerHtml = '';
       if (cached && cached.items && cached.items.length) {
         var maxItems = cfg.ranked ? 10 : 20;
         var widthClass = cfg.ranked ? 'w-40 sm:w-48' : 'w-[150px] sm:w-[200px]';
-        innerHtml = cached.items.slice(0, maxItems).map(function(item, idx) {
+        innerHtml = cached.items.slice(0, maxItems).map(function(item, i) {
           return '<div class="shrink-0 ' + widthClass + '">' +
-            renderCard(item, cfg.ranked ? { rank: idx + 1 } : {}) +
+            renderCard(item, cfg.ranked ? { rank: i + 1 } : {}) +
           '</div>';
         }).join('');
       } else {
         innerHtml = Array.from({ length: 7 }).map(function() {
           return '<div class="shrink-0 ' + (cfg.ranked ? 'w-40 sm:w-48' : 'w-[150px] sm:w-[200px]') + '"><div class="aspect-[2/3] rounded-lg shimmer"></div></div>';
         }).join('');
+      }
+
+      var adMarkup = '';
+      if (idx === 1) {
+        adMarkup = '<div class="nm-ad-container max-w-5xl mx-auto my-6" data-ad-container="ad-slot-rail-mid-1">' +
+          '<div class="nm-ad-label">Sponsored</div>' +
+          '<div id="ad-slot-rail-mid-1" class="nm-ad-slot nm-ad-leaderboard"></div>' +
+        '</div>';
+      } else if (idx === 4) {
+        adMarkup = '<div class="nm-ad-container max-w-5xl mx-auto my-6" data-ad-container="ad-slot-rail-mid-2">' +
+          '<div class="nm-ad-label">Sponsored</div>' +
+          '<div id="ad-slot-rail-mid-2" class="nm-ad-slot nm-ad-leaderboard"></div>' +
+        '</div>';
       }
 
       return '<section data-rail-key="' + cfg.key + '" class="mb-6">' +
@@ -640,8 +653,12 @@
             '<span class="rail-arrow-btn"><svg viewBox="0 0 24 24" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg></span>' +
           '</button>' +
         '</div>' +
-      '</section>';
+      '</section>' + adMarkup;
     }).join('');
+
+    if (window.Netflix4uAds) {
+      window.Netflix4uAds.renderAll(railsView);
+    }
 
     // Wire up scroll buttons and handle background revalidation / lazy loading
     configs.forEach(function(cfg, idx) {
@@ -925,9 +942,19 @@
       }
 
       if (gridMeta) gridMeta.textContent = items.length + ' results found';
-      gridContent.innerHTML = items.map(function(it) {
-        return renderCard(it);
+      var cardsHtml = items.map(function(it, idx) {
+        var card = renderCard(it);
+        if (idx === 2 && items.length >= 4) {
+          card += '<div class="nm-ad-container !m-0" data-ad-container="ad-slot-search-card">' +
+            '<div id="ad-slot-search-card" class="nm-ad-slot nm-ad-card"></div>' +
+          '</div>';
+        }
+        return card;
       }).join('');
+      gridContent.innerHTML = cardsHtml;
+      if (window.Netflix4uAds) {
+        window.Netflix4uAds.renderAll(gridContent);
+      }
     } catch(err) {
       gridContent.innerHTML = '<div class="col-span-full text-red-400 text-center py-16">Search failed.</div>';
     }
@@ -1022,6 +1049,7 @@
     initSearch();
     loadPlatformRails('trending');
     handleInitialRoutes();
+    if (window.Netflix4uAds) window.Netflix4uAds.renderAll();
   }
 
   if (document.readyState === 'loading') {

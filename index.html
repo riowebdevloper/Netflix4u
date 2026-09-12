@@ -352,6 +352,14 @@
           </div>
         </section>
 
+        <!-- Dedicated Top Ad Section (Non-Intrusive Leaderboard) -->
+        <section class="px-3 sm:px-6 pt-2 pb-0 max-w-5xl mx-auto">
+          <div class="nm-ad-container" data-ad-container="ad-slot-home-top">
+            <div class="nm-ad-label">Sponsored</div>
+            <div id="ad-slot-home-top" class="nm-ad-slot nm-ad-leaderboard"></div>
+          </div>
+        </section>
+
         <!-- ─── Content Area: Multi-Rails Layout ─── -->
         <main class="px-3 sm:px-6 py-5 sm:py-7 space-y-6">
           <div id="rails-loading-bar" class="relative h-[3px] mb-4 overflow-hidden bg-white/5 rounded-full opacity-0 transition-opacity duration-200" aria-hidden="true">
@@ -372,6 +380,12 @@
             </div>
             <div id="grid-content" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4"></div>
           </div>
+
+          <!-- Dedicated Bottom Ad Section (Non-Intrusive Billboard) -->
+          <section class="nm-ad-container max-w-5xl mx-auto my-6" data-ad-container="ad-slot-home-bottom">
+            <div class="nm-ad-label">Sponsored</div>
+            <div id="ad-slot-home-bottom" class="nm-ad-slot nm-ad-billboard"></div>
+          </section>
 
           <!-- Search Prompt CTA -->
           <section id="search-cta" class="mt-12 sm:mt-16 py-8 sm:py-10 px-5 sm:px-8 rounded-2xl bg-gradient-to-br from-white/5 via-white/[0.03] to-transparent border border-white/10 text-center">
@@ -544,7 +558,16 @@
     </div>
   </div>
 
+  <!-- ─── DISMISSIBLE STICKY BOTTOM AD BAR (Non-Intrusive) ─── -->
+  <aside id="nm-sticky-ad-bar" role="complementary" aria-label="Sponsored Partner Banner">
+    <button id="nm-sticky-ad-close" type="button" aria-label="Dismiss banner" title="Close Advertisement">✕</button>
+    <div class="nm-ad-container !my-0 !p-0 max-w-4xl" data-ad-container="ad-slot-sticky-bottom">
+      <div id="ad-slot-sticky-bottom" class="nm-ad-slot nm-ad-leaderboard !min-h-[50px] !border-0 !bg-transparent"></div>
+    </div>
+  </aside>
+
   <!-- Client Application Scripts -->
+  <script src="/js/ads-manager.js"></script>
   <script src="/js/download-resolver.js"></script>
   <script src="/js/net27-modal.js"></script>
   <script src="/js/net27-core.js"></script>

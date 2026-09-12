@@ -357,16 +357,35 @@
           '</div>' +
         '</div>' +
 
+        '<!-- In-Modal Dedicated Ad Section 1: Modal Top Sponsor -->' +
+        '<div class="nm-ad-container !my-3" data-ad-container="ad-slot-modal-top">' +
+          '<div class="nm-ad-label">Sponsored</div>' +
+          '<div id="ad-slot-modal-top" class="nm-ad-slot nm-ad-modal"></div>' +
+        '</div>' +
+
         '<!-- Audio Languages Bar -->' +
-        '<div class="pt-2">' +
+        '<div class="pt-1">' +
           '<div class="text-[11px] uppercase tracking-wider font-bold text-white/40 mb-2">Available Audio Tracks</div>' +
           '<div class="nm-audio-bar flex gap-6 overflow-x-auto scrollbar-none">' +
             audioTabs +
           '</div>' +
         '</div>' +
 
+        '<!-- In-Modal Dedicated Ad Section 2: Pre-Dotmovies Sponsor -->' +
+        '<div class="nm-ad-container !my-3" data-ad-container="ad-slot-modal-dotmovies">' +
+          '<div class="nm-ad-label">Sponsored Downloads</div>' +
+          '<div id="ad-slot-modal-dotmovies" class="nm-ad-slot nm-ad-modal"></div>' +
+        '</div>' +
+
         '<!-- SEPARATE DOWNLOAD SECTIONS -->' +
         dotmoviesSectionHtml +
+
+        '<!-- In-Modal Dedicated Ad Section 3: Cloud Mirror Sponsor -->' +
+        '<div class="nm-ad-container !my-3" data-ad-container="ad-slot-modal-cloud">' +
+          '<div class="nm-ad-label">Sponsored Server</div>' +
+          '<div id="ad-slot-modal-cloud" class="nm-ad-slot nm-ad-modal"></div>' +
+        '</div>' +
+
         cloudSectionHtml +
 
         episodesSectionHtml +
@@ -379,8 +398,19 @@
           '<div class="flex gap-4 overflow-x-auto scrollbar-none pb-2">' + castAvatars + '</div>' +
         '</section>' : '') +
 
+        '<!-- In-Modal Dedicated Ad Section 4: Modal Bottom Recommendations Sponsor -->' +
+        '<div class="nm-ad-container !my-4" data-ad-container="ad-slot-modal-bottom">' +
+          '<div class="nm-ad-label">Recommended Partner</div>' +
+          '<div id="ad-slot-modal-bottom" class="nm-ad-slot nm-ad-modal"></div>' +
+        '</div>' +
+
         recommendationsHtml +
       '</div>';
+
+    // Render ad slots inside modal body
+    if (window.Netflix4uAds) {
+      window.Netflix4uAds.renderAll(titleModalBody);
+    }
 
     // Hook events inside modal body
     titleModal.scrollTop = 0;
