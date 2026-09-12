@@ -62,7 +62,7 @@ function getDetailsMap() {
 let detailsDirIndex = null;
 const detailFileCache = new Map();
 
-function normalizeRawLinks(links, title) {
+function normalizeDetailLinks(links, title) {
   if (!Array.isArray(links)) return [];
   return links.map(l => {
     if (!l) return null;
@@ -89,7 +89,7 @@ function normalizeRawLinks(links, title) {
 function extractLinksFromDetail(detail, title) {
   if (!detail) return [];
   if (Array.isArray(detail.links) && detail.links.length > 0) {
-    return normalizeRawLinks(detail.links, title || detail.title);
+    return normalizeDetailLinks(detail.links, title || detail.title);
   }
   if (Array.isArray(detail.downloadOptions) && detail.downloadOptions.length > 0) {
     const converted = detail.downloadOptions.map(opt => ({
@@ -100,7 +100,7 @@ function extractLinksFromDetail(detail, title) {
       source: opt.url && opt.url.includes('nexdrive') ? 'dotmobiz' : 'cloud',
       isCloud: Boolean(opt.url && (opt.url.includes('workers.dev') || opt.url.includes('vcloud')))
     }));
-    return normalizeRawLinks(converted, title || detail.title);
+    return normalizeDetailLinks(converted, title || detail.title);
   }
   return [];
 }
