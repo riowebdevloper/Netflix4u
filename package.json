@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "dev": "node dev-server.js",
-    "build": "node -e \"console.log('Build verified: static assets and server ready')\"",
+    "build": "node scripts/sync_public.js",
     "test": "node scripts/verify_release_gate.js",
     "audit": "node scripts/comprehensive_qa_runner.js",
     "verify": "node scripts/verify_all_requirements.js"

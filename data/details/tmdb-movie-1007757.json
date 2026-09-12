@@ -1,0 +1,172 @@
+{
+  "id": "tmdb-movie-1007757",
+  "canonicalId": "tmdb-movie-1007757",
+  "externalProvider": "tmdb",
+  "externalId": "1007757",
+  "tmdbId": "1007757",
+  "imdbId": "tt29552248",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "Swapped",
+  "canonicalTitle": "Swapped",
+  "originalTitle": "Swapped",
+  "overview": "A small woodland creature and a majestic bird, two natural sworn enemies of the Valley, magically trade places and set off on an adventure of a lifetime to switch back. Their journey soon uncovers a greater threat—one that could endanger not only their species, but the entire valley they call home.",
+  "description": "A small woodland creature and a majestic bird, two natural sworn enemies of the Valley, magically trade places and set off on an adventure of a lifetime to switch back. Their journey soon uncovers a greater threat—one that could endanger not only their species, but the entire valley they call home.",
+  "shortDescription": "A small woodland creature and a majestic bird, two natural sworn enemies of the Valley, magically trade places and set o",
+  "year": 2026,
+  "rating": 8.9,
+  "votes": "2.2K",
+  "quality": "FHD",
+  "duration": "1h 42m",
+  "genres": [
+    "Adventure",
+    "Animation",
+    "Family",
+    "Fantasy"
+  ],
+  "categories": [
+    "Adventure",
+    "Animation",
+    "Family",
+    "Fantasy"
+  ],
+  "language": "English",
+  "country": "US",
+  "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FtHhxWxge06goXU6ZQH1hj7vK8Hd.jpg&output=webp",
+  "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FzMwhWailP1WY7sb6AoE6b8ugoy.jpg&output=webp",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/glgmAwRDP8s?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/glgmAwRDP8s?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "135651",
+      "name": "Michael B. Jordan",
+      "character": "Ollie (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/sMBpav8cK7t7Nk0yf4tuNOqNUyW.jpg"
+    },
+    {
+      "id": "36594",
+      "name": "Juno Temple",
+      "character": "Ivy (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/vwCjlWQLQWbmcUT2Lwn9G0O8r2.jpg"
+    },
+    {
+      "id": "56903",
+      "name": "Tracy Morgan",
+      "character": "Boogle / Firewolf (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/ec0OJVbs6NZKMbS1yiCAJKjeoJf.jpg"
+    },
+    {
+      "id": "5726",
+      "name": "Cedric the Entertainer",
+      "character": "Caloo (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/s6UrY5uofyxXsU5PydWBoLFReK0.jpg"
+    },
+    {
+      "id": "95517",
+      "name": "Justina Machado",
+      "character": "Calli (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/j5FaJXoyhMHlqv1l6TBdt1CH1oO.jpg"
+    },
+    {
+      "id": "41565",
+      "name": "Nate Torrence",
+      "character": "Lodd (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/yT9o149xPygdY0NsF9sNgiQwuru.jpg"
+    },
+    {
+      "id": "4663666",
+      "name": "Camden Brooks",
+      "character": "Young Ollie (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/ge9FgIjRERhyylebW2Np9YwkqqR.jpg"
+    },
+    {
+      "id": "1934645",
+      "name": "Táta Vega",
+      "character": "Grandma / Mrs. Dung Beetle (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/9SdaK2vly0Gx5yvI5rrTszh31vt.jpg"
+    },
+    {
+      "id": "3411764",
+      "name": "Ambika Mod",
+      "character": "Violet (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/jN9HhFYPNMYIupFt6GzGnHAW88c.jpg"
+    },
+    {
+      "id": "1627501",
+      "name": "Lolly Adefope",
+      "character": "Lily (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/qPS57Mw1vjydSSfSYoMw8u81waI.jpg"
+    },
+    {
+      "id": "7907",
+      "name": "John Ratzenberger",
+      "character": "Elder Javan (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/oRtDEOuIO1yDhTz5dORBdxXuLMO.jpg"
+    },
+    {
+      "id": "116315",
+      "name": "Kari Wahlgren",
+      "character": "Female Pookoo / Nurse Javan (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/kc0BOnSdzCfq8w9qoNVEm5K12x1.jpg"
+    },
+    {
+      "id": "60279",
+      "name": "Fred Tatasciore",
+      "character": "Elder Javan 2 / Rock Bear (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/xodxYKRC9mdvgquTdqpmYldliJ3.jpg"
+    },
+    {
+      "id": "6181145",
+      "name": "Zemo Tatasciore",
+      "character": "Wolf Pup (voice)",
+      "photo": null
+    },
+    {
+      "id": "571220",
+      "name": "David Lodge",
+      "character": "Wolf Father (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/1SVIavAalm6lwKjuHQoMggHH180.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 1,
+  "status": "PUBLISHED",
+  "links": [
+    {
+      "url": "https://crimson-sea-a1e5.hekoy.workers.dev/?vcloud=empty",
+      "quality": "480p",
+      "size": "450MB",
+      "label": "Swapped (2026) {Hindi-English} 480p WEB-DL x264 [450MB]",
+      "isCloud": true,
+      "canonicalId": "tmdb-movie-1007757",
+      "source": "Fast Cloud",
+      "season": null,
+      "episode": null,
+      "isPack": false
+    },
+    {
+      "url": "https://crimson-sea-a1e5.hekoy.workers.dev/?vcloud=empty",
+      "quality": "720p",
+      "size": "1GB",
+      "label": "Swapped (2026) {Hindi-English} 720p WEB-DL x264 [1GB]",
+      "isCloud": true,
+      "canonicalId": "tmdb-movie-1007757",
+      "source": "Fast Cloud",
+      "season": null,
+      "episode": null,
+      "isPack": false
+    },
+    {
+      "url": "https://crimson-sea-a1e5.hekoy.workers.dev/?vcloud=empty",
+      "quality": "1080p",
+      "size": "2.6GB",
+      "label": "Swapped (2026) {Hindi-English} 1080p WEB-DL x264 [2.6GB]",
+      "isCloud": true,
+      "canonicalId": "tmdb-movie-1007757",
+      "source": "Fast Cloud",
+      "season": null,
+      "episode": null,
+      "isPack": false
+    }
+  ]
+}

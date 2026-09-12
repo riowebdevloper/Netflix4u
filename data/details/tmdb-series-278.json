@@ -1,0 +1,53 @@
+{
+  "id": "tmdb-series-278",
+  "canonicalId": "tmdb-series-278",
+  "externalProvider": "tmdb",
+  "externalId": "278",
+  "tmdbId": "278",
+  "imdbId": "tt0154053",
+  "type": "series",
+  "contentType": "series",
+  "title": "Nightline",
+  "canonicalTitle": "Nightline",
+  "originalTitle": "Nightline",
+  "overview": "Nightline, or ABC News Nightline, is a late-night news program that is broadcast by ABC in the United States, and has a franchised formula to other networks and stations elsewhere in the world. Created by Roone Arledge, the program featured Ted Koppel as its main anchor from March 1980 until his retirement from the program in November 2005. Nightline airs weeknights at 12:37 a.m. Eastern Time, after Jimmy Kimmel Live!. It previously ran for 31 minutes, but in 2011, the program was reduced to 25 minutes. When the program moved to 12:37 a.m. ET, the program was expanded to 30 minutes.\n\nIn 2002, Nightline was ranked 23rd on TV Guide's 50 Greatest TV Shows of All Time.",
+  "description": "Nightline, or ABC News Nightline, is a late-night news program that is broadcast by ABC in the United States, and has a franchised formula to other networks and stations elsewhere in the world. Created by Roone Arledge, the program featured Ted Koppel as its main anchor from March 1980 until his retirement from the program in November 2005. Nightline airs weeknights at 12:37 a.m. Eastern Time, after Jimmy Kimmel Live!. It previously ran for 31 minutes, but in 2011, the program was reduced to 25 minutes. When the program moved to 12:37 a.m. ET, the program was expanded to 30 minutes.\n\nIn 2002, Nightline was ranked 23rd on TV Guide's 50 Greatest TV Shows of All Time.",
+  "shortDescription": "Nightline, or ABC News Nightline, is a late-night news program that is broadcast by ABC in the United States, and has a ",
+  "year": 1980,
+  "rating": 5.6,
+  "votes": "0.0K",
+  "quality": "FHD",
+  "duration": "31m/ep",
+  "genres": [
+    "News",
+    "Documentary"
+  ],
+  "categories": [
+    "News",
+    "Documentary"
+  ],
+  "language": "English",
+  "country": "US",
+  "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FptNeYSOIDgD9Gac5g1qZ8KDabFw.jpg&output=webp",
+  "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FA1Iu28JvGBkPNrPFp8zM8OU2Xp2.jpg&output=webp",
+  "trailerUrl": null,
+  "trailer": null,
+  "cast": [
+    {
+      "id": "1642047",
+      "name": "Byron Pitts",
+      "character": "Self - Anchor",
+      "photo": null
+    },
+    {
+      "id": "941791",
+      "name": "JuJu Chang",
+      "character": "Self - Anchor",
+      "photo": "https://image.tmdb.org/t/p/w185/wOJx6Bh6KV65NeoWXPIPY8uEoV4.jpg"
+    }
+  ],
+  "seasons": 9,
+  "episodes": 116,
+  "status": "PUBLISHED",
+  "links": []
+}

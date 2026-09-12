@@ -1,0 +1,133 @@
+{
+  "id": "tmdb-series-66732",
+  "canonicalId": "tmdb-series-66732",
+  "externalProvider": "tmdb",
+  "externalId": "66732",
+  "tmdbId": "66732",
+  "imdbId": "tt4574334",
+  "type": "series",
+  "contentType": "series",
+  "title": "Stranger Things",
+  "canonicalTitle": "Stranger Things",
+  "originalTitle": "Stranger Things",
+  "overview": "When a young boy vanishes, a small town uncovers a mystery involving secret experiments, terrifying supernatural forces, and one strange little girl.",
+  "description": "When a young boy vanishes, a small town uncovers a mystery involving secret experiments, terrifying supernatural forces, and one strange little girl.",
+  "shortDescription": "When a young boy vanishes, a small town uncovers a mystery involving secret experiments, terrifying supernatural forces,",
+  "year": 2016,
+  "rating": 8.6,
+  "votes": "21.8K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Action & Adventure",
+    "Mystery",
+    "Sci-Fi & Fantasy"
+  ],
+  "categories": [
+    "Action & Adventure",
+    "Mystery",
+    "Sci-Fi & Fantasy"
+  ],
+  "language": "English",
+  "country": "US",
+  "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FuOOtwVbSr4QDjAGIifLDwpb2Pdl.jpg&output=webp",
+  "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F56v2KjBlU4XaOv9rVYEQypROD7P.jpg&output=webp",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/b9EkMc79ZSU?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/b9EkMc79ZSU?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "1920",
+      "name": "Winona Ryder",
+      "character": "Joyce Byers",
+      "photo": "https://image.tmdb.org/t/p/w185/8RVrlgtua8b53wmK7oZAAkm0N5O.jpg"
+    },
+    {
+      "id": "35029",
+      "name": "David Harbour",
+      "character": "Jim Hopper",
+      "photo": "https://image.tmdb.org/t/p/w185/qMFtMWlYVtFVyBoBhX5IoA5sN5a.jpg"
+    },
+    {
+      "id": "1356210",
+      "name": "Millie Bobby Brown",
+      "character": "Eleven / Jane Hopper",
+      "photo": "https://image.tmdb.org/t/p/w185/kHO7hdNEVuTnQ0OjjrxP1RcAa0e.jpg"
+    },
+    {
+      "id": "1442069",
+      "name": "Finn Wolfhard",
+      "character": "Mike Wheeler",
+      "photo": "https://image.tmdb.org/t/p/w185/vgjd34eWfVL6GsLHwiwcAsjWLmo.jpg"
+    },
+    {
+      "id": "1653291",
+      "name": "Gaten Matarazzo",
+      "character": "Dustin Henderson",
+      "photo": "https://image.tmdb.org/t/p/w185/alVT7oDp8N5G9WLIApI9jqeuqHq.jpg"
+    },
+    {
+      "id": "1474123",
+      "name": "Caleb McLaughlin",
+      "character": "Lucas Sinclair",
+      "photo": "https://image.tmdb.org/t/p/w185/4jVS3EziBn7bf97ErxkW7jsdiLM.jpg"
+    },
+    {
+      "id": "1393177",
+      "name": "Noah Schnapp",
+      "character": "Will Byers",
+      "photo": "https://image.tmdb.org/t/p/w185/f8Gk3MUuz3xDNtcaErYB2RLgyPO.jpg"
+    },
+    {
+      "id": "1590797",
+      "name": "Sadie Sink",
+      "character": "Max Mayfield",
+      "photo": "https://image.tmdb.org/t/p/w185/92FddzBfK50XOUbtwjqHPraoGHy.jpg"
+    },
+    {
+      "id": "1039011",
+      "name": "Natalia Dyer",
+      "character": "Nancy Wheeler",
+      "photo": "https://image.tmdb.org/t/p/w185/cQaa3XEiUTgJxp85VeFYFyblJIH.jpg"
+    },
+    {
+      "id": "1448222",
+      "name": "Charlie Heaton",
+      "character": "Jonathan Byers",
+      "photo": "https://image.tmdb.org/t/p/w185/8Se6WZuvRmoB990bT29OPgVAyBo.jpg"
+    },
+    {
+      "id": "1467219",
+      "name": "Joe Keery",
+      "character": "Steve Harrington",
+      "photo": "https://image.tmdb.org/t/p/w185/ayIAVLMfZGEGIFwAo3pPnY7p59.jpg"
+    },
+    {
+      "id": "1903874",
+      "name": "Maya Hawke",
+      "character": "Robin Buckley",
+      "photo": "https://image.tmdb.org/t/p/w185/7oihORN6wlSC9qKULcpVq7Kqv1l.jpg"
+    },
+    {
+      "id": "224197",
+      "name": "Brett Gelman",
+      "character": "Murray",
+      "photo": "https://image.tmdb.org/t/p/w185/ub2IuMWFNQGYghHTPq0lpmn2Ue0.jpg"
+    },
+    {
+      "id": "2029806",
+      "name": "Priah Ferguson",
+      "character": "Erica Sinclair",
+      "photo": "https://image.tmdb.org/t/p/w185/pfUmb66qGNvBTTdX69SAGUhxj41.jpg"
+    },
+    {
+      "id": "20047",
+      "name": "Cara Buono",
+      "character": "Karen Wheeler",
+      "photo": "https://image.tmdb.org/t/p/w185/QQv5pitEXvrGR4sgECvNDLwhTG.jpg"
+    }
+  ],
+  "seasons": 5,
+  "episodes": 42,
+  "status": "PUBLISHED",
+  "links": []
+}

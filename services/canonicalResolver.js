@@ -73,19 +73,28 @@ function findMatchingCatalogLinks(title, year, imdbId, slug) {
   }
   // 3. Check by normalized alphanumeric title
   const clean = String(title || '').toLowerCase().replace(/[^a-z0-9]/g, '');
-  if (clean.length >= 3) {
-    if (year) {
-      const entryYear = dMap.get(clean + year);
-      if (entryYear && Array.isArray(entryYear.links) && entryYear.links.length > 0) return entryYear.links;
-    }
-    const entry = dMap.get(clean);
-    if (entry && Array.isArray(entry.links) && entry.links.length > 0) return entry.links;
+  const primaryTitle = String(title || '').split(/[:\-–—]/)[0].trim().toLowerCase().replace(/[^a-z0-9]/g, '');
 
-    // Fuzzy prefix/containment match for popular series/movies
-    for (const [key, val] of dMap.entries()) {
-      if (val && Array.isArray(val.links) && val.links.length > 0 && typeof key === 'string') {
-        if (key.length >= 6 && (clean.startsWith(key) || key.startsWith(clean))) {
-          return val.links;
+  const candidates = [clean];
+  if (primaryTitle && primaryTitle !== clean && primaryTitle.length >= 3) {
+    candidates.push(primaryTitle);
+  }
+
+  for (const c of candidates) {
+    if (c.length >= 3) {
+      if (year) {
+        const entryYear = dMap.get(c + year);
+        if (entryYear && Array.isArray(entryYear.links) && entryYear.links.length > 0) return entryYear.links;
+      }
+      const entry = dMap.get(c);
+      if (entry && Array.isArray(entry.links) && entry.links.length > 0) return entry.links;
+
+      // Fuzzy prefix/containment match for popular series/movies
+      for (const [key, val] of dMap.entries()) {
+        if (val && Array.isArray(val.links) && val.links.length > 0 && typeof key === 'string') {
+          if (key.length >= 4 && (c.startsWith(key) || key.startsWith(c))) {
+            return val.links;
+          }
         }
       }
     }
@@ -169,7 +178,7 @@ function buildCatalogIndex() {
     try {
       const files = fs.readdirSync(DETAILS_DIR);
       for (const f of files) {
-        const m = f.match(/^(\d{3,7})-/);
+        const m = f.match(/^(\d{3,7})(?:-|\.json$)/);
         if (m && m[1]) {
           const num = m[1];
           const baseName = f.replace(/\.json$/, '');

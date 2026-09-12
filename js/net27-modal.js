@@ -44,6 +44,7 @@
 
   // ─── TITLE MODAL ───
   function openTitleModal(tmdbId, type, pushHistory) {
+    if (window.__closeSearchOverlay) window.__closeSearchOverlay();
     if (pushHistory !== false) {
       historyStack.push({ tmdbId: tmdbId, type: type });
     }
@@ -436,6 +437,7 @@
 
   // ─── WATCH MODAL ───
   function openWatchModal(tmdbId, type, season, episode, backdrop) {
+    if (window.__closeSearchOverlay) window.__closeSearchOverlay();
     if (!watchModal || !watchModalIframe) return;
 
     type = type || 'movie';
@@ -443,28 +445,37 @@
     episode = episode || 1;
     var isTv = type === 'tv';
 
+    // Sanitize TMDB ID to prevent non-numeric prefixes
+    if (typeof tmdbId === 'string') {
+      tmdbId = tmdbId.replace(/^(?:dotmobiz|tmdb(?:-movie|-series|-tv)?)-/, '');
+    }
+
     activeWatchServers = {
       s1: isTv
-        ? 'https://peachify.top/embed/tv/' + tmdbId + '/' + season + '/' + episode
-        : 'https://peachify.top/embed/movie/' + tmdbId,
-      s2: isTv
         ? 'https://vidlink.pro/tv/' + tmdbId + '/' + season + '/' + episode + '?multiLang=true'
         : 'https://vidlink.pro/movie/' + tmdbId + '?multiLang=true',
+      s2: isTv
+        ? 'https://peachify.top/embed/tv/' + tmdbId + '/' + season + '/' + episode
+        : 'https://peachify.top/embed/movie/' + tmdbId,
       s3: isTv
-        ? 'https://vidsrc.me/embed/tv?tmdb=' + tmdbId + '&season=' + season + '&episode=' + episode
-        : 'https://vidsrc.me/embed/movie?tmdb=' + tmdbId,
+        ? 'https://www.2embed.cc/embedtv/' + tmdbId + '&s=' + season + '&e=' + episode
+        : 'https://www.2embed.cc/embed/' + tmdbId,
       s4: isTv
-        ? 'https://vidsrc.cc/v2/embed/tv/' + tmdbId + '/' + season + '/' + episode
-        : 'https://vidsrc.cc/v2/embed/movie/' + tmdbId
+        ? 'https://vidsrc.pm/embed/tv/' + tmdbId + '/' + season + '/' + episode
+        : 'https://vidsrc.pm/embed/movie/' + tmdbId,
+      s5: isTv
+        ? 'https://autoembed.co/tv/tmdb/' + tmdbId + '/' + season + '/' + episode
+        : 'https://autoembed.co/movie/tmdb/' + tmdbId
     };
 
     // Render Server Switcher in Watch Modal Header
     if (watchPlayerBar) {
       watchPlayerBar.innerHTML =
-        '<button type="button" class="server-tab-btn is-active" data-server="s1">🟢 Server 1 (Net27 Peachify)</button>' +
-        '<button type="button" class="server-tab-btn" data-server="s2">🔵 Server 2 (VidLink Multi-Audio)</button>' +
-        '<button type="button" class="server-tab-btn" data-server="s3">🟣 Server 3 (VidSrc Global)</button>' +
-        '<button type="button" class="server-tab-btn" data-server="s4">🟠 Server 4 (SuperStream)</button>';
+        '<button type="button" class="server-tab-btn is-active" data-server="s1">🟢 Server 1 (VidLink Multi-Audio)</button>' +
+        '<button type="button" class="server-tab-btn" data-server="s2">🔵 Server 2 (Net27 Fast)</button>' +
+        '<button type="button" class="server-tab-btn" data-server="s3">🟣 Server 3 (2Embed Global)</button>' +
+        '<button type="button" class="server-tab-btn" data-server="s4">🟠 Server 4 (VidSrc PM)</button>' +
+        '<button type="button" class="server-tab-btn" data-server="s5">🟡 Server 5 (AutoEmbed)</button>';
 
       watchPlayerBar.querySelectorAll('.server-tab-btn').forEach(function(btn) {
         btn.addEventListener('click', function() {

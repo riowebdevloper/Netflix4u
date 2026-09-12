@@ -258,7 +258,7 @@ async function resolveTitleCast(title, tmdbId, year, type = 'movie', imdbId = ''
               id: String(c.id),
               name: c.name || 'Actor',
               character: c.character || '',
-              photo: c.profile_path ? `https://image.tmdb.org/t/p/w185${c.profile_path}` : null
+              photo: c.profile_path ? `https://wsrv.nl/?url=image.tmdb.org/t/p/w185${c.profile_path}` : null
             }));
             castCache.set(cacheKey, cast);
             return resolve(cast);
@@ -566,8 +566,8 @@ async function handlePosterResolver(req, res) {
     });
     if (findData) {
       const item = (findData.movie_results && findData.movie_results[0]) || (findData.tv_results && findData.tv_results[0]);
-        const pUrl = item.poster_path ? `https://image.tmdb.org/t/p/w500${item.poster_path}` : null;
-        const bUrl = item.backdrop_path ? `https://image.tmdb.org/t/p/original${item.backdrop_path}` : null;
+        const pUrl = item.poster_path ? `https://wsrv.nl/?url=image.tmdb.org/t/p/w500${item.poster_path}` : null;
+        const bUrl = item.backdrop_path ? `https://wsrv.nl/?url=image.tmdb.org/t/p/original${item.backdrop_path}` : null;
         return sendJson(res, 200, {
           success: true,
           poster: pUrl ? `https://wsrv.nl/?url=${encodeURIComponent(pUrl)}&output=webp` : null,
@@ -775,54 +775,99 @@ async function handleSearch(req, res) {
     return sendJson(res, 200, { success: true, results: [], items: [] });
   }
 
-  const catalog = getCatalogSummary();
   const results = [];
-  const queryLower = query.toLowerCase();
+  const seenTmdbIds = new Set();
+  const seenTitles = new Set();
 
-  for (const item of catalog) {
-    const matchTitle = item.title && item.title.toLowerCase().includes(queryLower);
-    const matchRaw = item.rawTitle && item.rawTitle.toLowerCase().includes(queryLower);
-    const matchSlug = item.slug && item.slug.toLowerCase().includes(queryLower);
-    const matchCat = item.categories && item.categories.some(c => c.toLowerCase().includes(queryLower));
-
-    if (matchTitle || matchRaw || matchSlug || matchCat) {
-      const canonicalId = normalizeCanonicalId(item);
-      const contentType = item.type || 'movie';
-      results.push({
-        ...item,
-        id: canonicalId,
-        canonicalId,
-        tmdbId: item.tmdbId || canonicalId,
-        type: contentType,
-        contentType,
-        url: `/${contentType}/${canonicalId}`
-      });
-      if (results.length >= 10) break;
-    }
-  }
-
-  // Also query TMDB multi search so user can search any title across 500k+ global titles
+  // 1. Primary Source: TMDB Multi Search (Authentic titles, HD posters, verified tmdbIds)
   try {
     const tmdbData = await fetchTmdbCatalogJson(`/search/multi?query=${encodeURIComponent(query)}&include_adult=false&region=IN`);
     if (tmdbData && Array.isArray(tmdbData.results)) {
       for (const t of tmdbData.results) {
         if (t.media_type === 'person') continue;
         if (!t.poster_path && !t.backdrop_path) continue;
-        const exists = results.some(r => r.tmdbId == t.id || (r.title && (r.title.toLowerCase() === (t.title || t.name || '').toLowerCase())));
-        if (!exists) {
-          results.push({
-            id: String(t.id),
-            tmdbId: t.id,
-            title: t.title || t.name,
-            type: t.media_type === 'tv' ? 'tv' : 'movie',
-            poster: t.poster_path ? `https://image.tmdb.org/t/p/w342${t.poster_path}` : null,
-            backdrop: t.backdrop_path ? `https://image.tmdb.org/t/p/w780${t.backdrop_path}` : null,
-            year: String(t.release_date || t.first_air_date || '').slice(0, 4),
-            rating: t.vote_average ? Number(t.vote_average.toFixed(1)) : 7.5,
-            overview: t.overview || ''
-          });
+        if (!t.id) continue;
+
+        const tmdbId = Number(t.id);
+        const title = t.title || t.name || '';
+        const year = String(t.release_date || t.first_air_date || '').slice(0, 4);
+        const mediaType = t.media_type === 'tv' ? 'tv' : 'movie';
+
+        seenTmdbIds.add(tmdbId);
+        seenTitles.add(title.toLowerCase());
+
+        // Check for direct download links in local catalog
+        const matchedLinks = findMatchingCatalogLinks(title, year);
+        const downloadLinks = (matchedLinks && matchedLinks.length > 0)
+          ? normalizeRawLinks(matchedLinks, title)
+          : [];
+
+        results.push({
+          id: String(tmdbId),
+          tmdbId: tmdbId,
+          title: title,
+          type: mediaType,
+          contentType: mediaType,
+          poster: t.poster_path ? `https://wsrv.nl/?url=image.tmdb.org/t/p/w500${t.poster_path}` : null,
+          backdrop: t.backdrop_path ? `https://wsrv.nl/?url=image.tmdb.org/t/p/w1280${t.backdrop_path}` : null,
+          year: year,
+          rating: t.vote_average ? Number(t.vote_average.toFixed(1)) : 7.8,
+          overview: t.overview || '',
+          url: `/${mediaType}/${tmdbId}`,
+          hasDownloads: downloadLinks.length > 0,
+          downloadLinks: downloadLinks
+        });
+
+        if (results.length >= 25) break;
+      }
+    }
+  } catch(e) {}
+
+  // 2. Secondary Source: Local Catalog for regional/exclusive titles
+  try {
+    const catalog = getCatalogSummary();
+    const queryLower = query.toLowerCase();
+
+    for (const item of catalog) {
+      if (results.length >= 35) break;
+      const matchTitle = item.title && item.title.toLowerCase().includes(queryLower);
+      const matchRaw = item.rawTitle && item.rawTitle.toLowerCase().includes(queryLower);
+      const matchSlug = item.slug && item.slug.toLowerCase().includes(queryLower);
+
+      if (matchTitle || matchRaw || matchSlug) {
+        const itemTitle = item.title || item.rawTitle || '';
+        if (seenTitles.has(itemTitle.toLowerCase())) continue;
+
+        let verifiedTmdbId = item.tmdbId ? Number(item.tmdbId) : null;
+        if (!verifiedTmdbId || isNaN(verifiedTmdbId)) {
+          verifiedTmdbId = await resolveTmdbId(itemTitle, item.year, item.type || 'movie', item.imdbId);
         }
-        if (results.length >= 30) break;
+
+        if (verifiedTmdbId && seenTmdbIds.has(verifiedTmdbId)) continue;
+        if (verifiedTmdbId) seenTmdbIds.add(verifiedTmdbId);
+        seenTitles.add(itemTitle.toLowerCase());
+
+        const canonicalId = normalizeCanonicalId(item);
+        const contentType = item.type || 'movie';
+        const rawLinks = item.links || item.download_links || [];
+        const downloadLinks = normalizeRawLinks(rawLinks, itemTitle);
+
+        results.push({
+          id: verifiedTmdbId ? String(verifiedTmdbId) : canonicalId,
+          canonicalId,
+          tmdbId: verifiedTmdbId, // Strictly verified TMDB ID (never dotmobiz-XXX or internal row number!)
+          title: itemTitle,
+          type: contentType,
+          contentType,
+          poster: item.poster && !item.poster.includes('placehold.co') ? item.poster : (verifiedTmdbId ? `https://wsrv.nl/?url=image.tmdb.org/t/p/w500/${item.poster_path || ''}` : null),
+          backdrop: item.backdrop && !item.backdrop.includes('placehold.co') ? item.backdrop : null,
+          year: String(item.year || ''),
+          rating: typeof item.rating === 'number' ? item.rating : 7.8,
+          overview: item.description || '',
+          url: `/${contentType}/${verifiedTmdbId || canonicalId}`,
+          hasDownloads: downloadLinks.length > 0,
+          downloadLinks: downloadLinks
+        });
       }
     }
   } catch(e) {}
@@ -852,8 +897,8 @@ async function handleCatalogTrending(req, res) {
       tmdbId: r.id,
       title: r.title || r.name,
       year: String(r.release_date || r.first_air_date || '').slice(0, 4),
-      poster: r.poster_path ? `https://image.tmdb.org/t/p/w500${r.poster_path}` : null,
-      backdrop: r.backdrop_path ? `https://image.tmdb.org/t/p/w1280${r.backdrop_path}` : null,
+      poster: r.poster_path ? `https://wsrv.nl/?url=image.tmdb.org/t/p/w500${r.poster_path}` : null,
+      backdrop: r.backdrop_path ? `https://wsrv.nl/?url=image.tmdb.org/t/p/w1280${r.backdrop_path}` : null,
       rating: r.vote_average ? Number(r.vote_average.toFixed(1)) : 8.0,
       type: r.media_type === 'tv' ? 'tv' : 'movie',
       overview: r.overview || ''
@@ -929,8 +974,8 @@ async function handleCatalogDiscover(req, res) {
       tmdbId: r.id,
       title: r.title || r.name,
       year: String(r.release_date || r.first_air_date || '').slice(0, 4),
-      poster: r.poster_path ? `https://image.tmdb.org/t/p/w500${r.poster_path}` : null,
-      backdrop: r.backdrop_path ? `https://image.tmdb.org/t/p/w1280${r.backdrop_path}` : null,
+      poster: r.poster_path ? `https://wsrv.nl/?url=image.tmdb.org/t/p/w500${r.poster_path}` : null,
+      backdrop: r.backdrop_path ? `https://wsrv.nl/?url=image.tmdb.org/t/p/w1280${r.backdrop_path}` : null,
       rating: r.vote_average ? Number(r.vote_average.toFixed(1)) : 8.0,
       type: mediaType,
       overview: r.overview || ''
@@ -991,14 +1036,22 @@ async function handleCatalogTitle(req, res) {
   let downloadLinks = [];
   try {
     const canonical = await resolveContentId(id);
-    if (canonical && isPublicRecord(canonical)) {
-      const enriched = enrichItemMetadataAndLinks(canonical);
-      downloadLinks = enriched.links || [];
+    if (canonical && Array.isArray(canonical.links) && canonical.links.length > 0) {
+      downloadLinks = normalizeRawLinks(canonical.links, title);
     }
   } catch(e) {}
 
-  if (!downloadLinks.length && localItem) {
-    downloadLinks = normalizeRawLinks(localItem.links || localItem.download_links || [], title);
+  if (!downloadLinks.length) {
+    const imdbId = raw?.imdb_id || raw?.external_ids?.imdb_id || localItem?.imdbId;
+    const slug = localItem?.slug;
+    const matched = findMatchingCatalogLinks(title, year, imdbId, slug);
+    if (matched && matched.length > 0) {
+      downloadLinks = normalizeRawLinks(matched, title);
+    }
+  }
+
+  if (!downloadLinks.length && localItem && (localItem.links || localItem.download_links)) {
+    downloadLinks = normalizeRawLinks(localItem.links || localItem.download_links, title);
   }
 
   // Initial episodes for TV
@@ -1013,7 +1066,7 @@ async function handleCatalogTitle(req, res) {
           episode_number: ep.episode_number,
           name: ep.name,
           overview: ep.overview,
-          still_path: ep.still_path ? `https://image.tmdb.org/t/p/w300${ep.still_path}` : null,
+          still_path: ep.still_path ? `https://wsrv.nl/?url=image.tmdb.org/t/p/w300${ep.still_path}` : null,
           vote_average: ep.vote_average ? Number(ep.vote_average.toFixed(1)) : 7.8,
           runtime: ep.runtime || 45
         }));
@@ -1063,15 +1116,15 @@ async function handleCatalogTitle(req, res) {
     certification: { rating: cert },
     tagline: raw?.tagline || '',
     overview: raw?.overview || localItem?.description || '',
-    poster: raw?.poster_path ? `https://image.tmdb.org/t/p/w500${raw.poster_path}` : (localItem?.poster || null),
-    backdrop: raw?.backdrop_path ? `https://image.tmdb.org/t/p/w1280${raw.backdrop_path}` : (localItem?.backdrop || null),
+    poster: raw?.poster_path ? `https://wsrv.nl/?url=image.tmdb.org/t/p/w500${raw.poster_path}` : (localItem?.poster || null),
+    backdrop: raw?.backdrop_path ? `https://wsrv.nl/?url=image.tmdb.org/t/p/w1280${raw.backdrop_path}` : (localItem?.backdrop || null),
     genres: raw?.genres || (localItem?.categories || []).map((c, idx) => ({ id: idx, name: c })),
     cast: (raw?.credits?.cast || []).slice(0, 16).map(c => ({
       id: c.id,
       name: c.name,
       character: c.character,
-      profile_path: c.profile_path ? `https://image.tmdb.org/t/p/w185${c.profile_path}` : null,
-      photo: c.profile_path ? `https://image.tmdb.org/t/p/w185${c.profile_path}` : null
+      profile_path: c.profile_path ? `https://wsrv.nl/?url=image.tmdb.org/t/p/w185${c.profile_path}` : null,
+      photo: c.profile_path ? `https://wsrv.nl/?url=image.tmdb.org/t/p/w185${c.profile_path}` : null
     })),
     seasons: (raw?.seasons || []).filter(s => s.season_number > 0).map(s => ({
       season_number: s.season_number,
@@ -1081,7 +1134,7 @@ async function handleCatalogTitle(req, res) {
     recommendations: (raw?.recommendations?.results || raw?.similar?.results || []).slice(0, 12).map(r => ({
       tmdbId: r.id,
       title: r.title || r.name,
-      poster: r.poster_path ? `https://image.tmdb.org/t/p/w342${r.poster_path}` : null,
+      poster: r.poster_path ? `https://wsrv.nl/?url=image.tmdb.org/t/p/w342${r.poster_path}` : null,
       year: String(r.release_date || r.first_air_date || '').slice(0, 4),
       type: r.media_type || (r.title ? 'movie' : 'tv'),
       rating: r.vote_average ? Number(r.vote_average.toFixed(1)) : 7.5
@@ -1123,7 +1176,7 @@ async function handleCatalogSeason(req, res) {
     episode_number: ep.episode_number,
     name: ep.name,
     overview: ep.overview,
-    still_path: ep.still_path ? `https://image.tmdb.org/t/p/w300${ep.still_path}` : null,
+    still_path: ep.still_path ? `https://wsrv.nl/?url=image.tmdb.org/t/p/w300${ep.still_path}` : null,
     vote_average: ep.vote_average ? Number(ep.vote_average.toFixed(1)) : 7.8,
     runtime: ep.runtime || 45
   }));
@@ -1224,25 +1277,30 @@ async function handleWatchTmdb(req, res) {
   const season = q.get('se') || q.get('season') || '1';
   const episode = q.get('ep') || q.get('episode') || '1';
 
-  // Server 1: Net27 Authentic Embed (Peachify)
+  // Server 1: VidLink Multi-Audio (Hindi + English + Multilingual)
   const s1 = isTv
-    ? `https://peachify.top/embed/tv/${id}/${season}/${episode}`
-    : `https://peachify.top/embed/movie/${id}`;
-
-  // Server 2: VidLink Multi-Audio (Hindi + English + Multilingual)
-  const s2 = isTv
     ? `https://vidlink.pro/tv/${id}/${season}/${episode}?multiLang=true`
     : `https://vidlink.pro/movie/${id}?multiLang=true`;
 
-  // Server 3: VidSrc Global
-  const s3 = isTv
-    ? `https://vidsrc.me/embed/tv?tmdb=${id}&season=${season}&episode=${episode}`
-    : `https://vidsrc.me/embed/movie?tmdb=${id}`;
+  // Server 2: Net27 Authentic Embed (Peachify)
+  const s2 = isTv
+    ? `https://peachify.top/embed/tv/${id}/${season}/${episode}`
+    : `https://peachify.top/embed/movie/${id}`;
 
-  // Server 4: SuperStream
+  // Server 3: 2Embed Global
+  const s3 = isTv
+    ? `https://www.2embed.cc/embedtv/${id}&s=${season}&e=${episode}`
+    : `https://www.2embed.cc/embed/${id}`;
+
+  // Server 4: VidSrc PM
   const s4 = isTv
-    ? `https://vidsrc.cc/v2/embed/tv/${id}/${season}/${episode}`
-    : `https://vidsrc.cc/v2/embed/movie/${id}`;
+    ? `https://vidsrc.pm/embed/tv/${id}/${season}/${episode}`
+    : `https://vidsrc.pm/embed/movie/${id}`;
+
+  // Server 5: AutoEmbed
+  const s5 = isTv
+    ? `https://autoembed.co/tv/tmdb/${id}/${season}/${episode}`
+    : `https://autoembed.co/movie/tmdb/${id}`;
 
   const html = `<!DOCTYPE html>
 <html lang="en">
@@ -1284,10 +1342,11 @@ async function handleWatchTmdb(req, res) {
       <span>Back</span>
     </button>
     <div class="server-tabs">
-      <button class="server-btn active" onclick="switchServer('${s1}', this)">🟢 Server 1 (Net27 Peachify)</button>
-      <button class="server-btn" onclick="switchServer('${s2}', this)">🔵 Server 2 (VidLink Multi-Audio)</button>
-      <button class="server-btn" onclick="switchServer('${s3}', this)">🟣 Server 3 (VidSrc)</button>
-      <button class="server-btn" onclick="switchServer('${s4}', this)">🟠 Server 4 (SuperStream)</button>
+      <button class="server-btn active" onclick="switchServer('${s1}', this)">🟢 Server 1 (VidLink Multi-Audio)</button>
+      <button class="server-btn" onclick="switchServer('${s2}', this)">🔵 Server 2 (Net27 Fast)</button>
+      <button class="server-btn" onclick="switchServer('${s3}', this)">🟣 Server 3 (2Embed Global)</button>
+      <button class="server-btn" onclick="switchServer('${s4}', this)">🟠 Server 4 (VidSrc PM)</button>
+      <button class="server-btn" onclick="switchServer('${s5}', this)">🟡 Server 5 (AutoEmbed)</button>
     </div>
   </div>
   <iframe id="player-frame" src="${s1}" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
@@ -1359,6 +1418,11 @@ module.exports = {
   handleSummary,
   handleTmdbLookup,
   handleRecommendations,
+  handleCatalogApi,
+  handleCatalogTitle,
+  handleCatalogDiscover,
+  handleCatalogTrending,
+  handleCatalogSeason,
   handleUniversalApi,
   invalidateCatalogCache,
   getQueryParams,

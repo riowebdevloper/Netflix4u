@@ -1,0 +1,47 @@
+{
+  "id": "tmdb-series-299534",
+  "canonicalId": "tmdb-series-299534",
+  "externalProvider": "tmdb",
+  "externalId": "299534",
+  "tmdbId": "299534",
+  "imdbId": "",
+  "type": "series",
+  "contentType": "series",
+  "title": "電脳少女は仮想世界に沈みゆく モーションコミック版",
+  "canonicalTitle": "電脳少女は仮想世界に沈みゆく モーションコミック版",
+  "originalTitle": "電脳少女は仮想世界に沈みゆく モーションコミック版",
+  "overview": "",
+  "description": "",
+  "shortDescription": "",
+  "year": 2024,
+  "rating": 8,
+  "votes": "1.2K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [],
+  "categories": [],
+  "language": "English",
+  "country": "JP",
+  "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2F6ERZCoxEnp7LHnfLvDCoyqascRK.jpg&output=webp",
+  "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2Frh12IvVH30ohFOWaXuheJS4FyTC.jpg&output=webp",
+  "trailerUrl": null,
+  "trailer": null,
+  "cast": [
+    {
+      "id": "6432845",
+      "name": "緒 むすび",
+      "character": "フェロウ (voice)",
+      "photo": null
+    },
+    {
+      "id": "6432844",
+      "name": "餅梨あむ",
+      "character": "Azalea (voice)",
+      "photo": null
+    }
+  ],
+  "seasons": 1,
+  "episodes": 1,
+  "status": "PUBLISHED",
+  "links": []
+}

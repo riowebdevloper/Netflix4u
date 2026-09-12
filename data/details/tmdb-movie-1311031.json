@@ -1,0 +1,170 @@
+{
+  "id": "tmdb-movie-1311031",
+  "canonicalId": "tmdb-movie-1311031",
+  "externalProvider": "tmdb",
+  "externalId": "1311031",
+  "tmdbId": "1311031",
+  "imdbId": "tt32820897",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "Demon Slayer: Kimetsu no Yaiba Infinity Castle",
+  "canonicalTitle": "Demon Slayer: Kimetsu no Yaiba Infinity Castle",
+  "originalTitle": "劇場版「鬼滅の刃」無限城編 第一章 猗窩座再来",
+  "overview": "The Demon Slayer Corps are drawn into the Infinity Castle, where Tanjiro, Nezuko, and the Hashira face terrifying Upper Rank demons in a desperate fight as the final battle against Muzan Kibutsuji begins.",
+  "description": "The Demon Slayer Corps are drawn into the Infinity Castle, where Tanjiro, Nezuko, and the Hashira face terrifying Upper Rank demons in a desperate fight as the final battle against Muzan Kibutsuji begins.",
+  "shortDescription": "The Demon Slayer Corps are drawn into the Infinity Castle, where Tanjiro, Nezuko, and the Hashira face terrifying Upper ",
+  "year": 2025,
+  "rating": 8.8,
+  "votes": "2.1K",
+  "quality": "FHD",
+  "duration": "2h 36m",
+  "genres": [
+    "Animation",
+    "Action",
+    "Fantasy"
+  ],
+  "categories": [
+    "Animation",
+    "Action",
+    "Fantasy"
+  ],
+  "language": "Japanese",
+  "country": "JP",
+  "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FfWVSwgjpT2D78VUh6X8UBd2rorW.jpg&output=webp",
+  "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F1RgPyOhN4DRs225BGTlHJqCudII.jpg&output=webp",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/EpAlHmuA2YM?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/EpAlHmuA2YM?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "1256603",
+      "name": "Natsuki Hanae",
+      "character": "Tanjiro Kamado (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/alTb0DlcPIbcwM08WSmxFai58sd.jpg"
+    },
+    {
+      "id": "9705",
+      "name": "Takahiro Sakurai",
+      "character": "Giyu Tomioka (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/8s8owcKmpRAuhzEGjSdRpztthUg.jpg"
+    },
+    {
+      "id": "81244",
+      "name": "Akira Ishida",
+      "character": "Akaza (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/jnW2Gn2NlR2uwOCeyOuzypnTmkH.jpg"
+    },
+    {
+      "id": "119145",
+      "name": "Hiro Shimono",
+      "character": "Zenitsu Agatsuma (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/yrSDcgFefHtWkFmLnTrcw2t0MV.jpg"
+    },
+    {
+      "id": "1253008",
+      "name": "Yoshimasa Hosoya",
+      "character": "Kaigaku (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/lUR5oN1LrqGgp25IOcI1qOH1Ud5.jpg"
+    },
+    {
+      "id": "221773",
+      "name": "Saori Hayami",
+      "character": "Shinobu Kocho (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/gLv9lO7dlUbIsmyJUvgegqAAXki.jpg"
+    },
+    {
+      "id": "93803",
+      "name": "Mamoru Miyano",
+      "character": "Doma (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/nuok8ueG7k9hPZ09Tpr8e7Qn0ah.jpg"
+    },
+    {
+      "id": "1452028",
+      "name": "Reina Ueda",
+      "character": "Kanao Tsuyuri (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/2WV61uVU7y6XGYqNHLMpP0sApdu.jpg"
+    },
+    {
+      "id": "1221114",
+      "name": "Yuichi Nakamura",
+      "character": "Keizo (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/wb8behVKjBHX9XXrEydvNINCYwH.jpg"
+    },
+    {
+      "id": "1691384",
+      "name": "Lynn",
+      "character": "Koyuki (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/eJ2NqgzpnzNbT6Nt9EpDfzqNeZM.jpg"
+    },
+    {
+      "id": "90571",
+      "name": "Toshihiko Seki",
+      "character": "Muzan Kibutsuji (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/7jUPvx4hxWZWZJgyiCwd8KxWuvI.jpg"
+    },
+    {
+      "id": "144655",
+      "name": "Tomokazu Sugita",
+      "character": "Gyomei Himejima (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/cv5zuPZySNsHXu24pjKLYCRzJ2J.jpg"
+    },
+    {
+      "id": "1324472",
+      "name": "Kengo Kawanishi",
+      "character": "Muichiro Tokito (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/s0CxrO6LixJBgqiHEUjKelAh8ei.jpg"
+    },
+    {
+      "id": "119143",
+      "name": "Kana Hanazawa",
+      "character": "Mitsuri Kanroji (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/9UTBlNRopSOKyoWnCm74tyHOfR1.jpg"
+    },
+    {
+      "id": "9726",
+      "name": "Kenichi Suzumura",
+      "character": "Obanai Iguro (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/vFqjmIjxfgBkh3ZmUin7QETV0sy.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 1,
+  "status": "PUBLISHED",
+  "links": [
+    {
+      "url": "https://crimson-sea-a1e5.hekoy.workers.dev/?vcloud=https://vcloud.fit/dbqba_xdi3aqyx7",
+      "quality": "480p",
+      "size": "650MB",
+      "label": "Demon Slayer: Kimetsu No Yaiba Infinity Castle (2025) {Hindi-English-Japanese} 480p WEB-DL x264 [650MB]",
+      "isCloud": true,
+      "canonicalId": "tmdb-movie-1311031",
+      "source": "Fast Cloud",
+      "season": null,
+      "episode": null,
+      "isPack": false
+    },
+    {
+      "url": "https://crimson-sea-a1e5.hekoy.workers.dev/?vcloud=https://vcloud.fit/jcdcqf6g26c5jf6",
+      "quality": "720p",
+      "size": "1.4GB",
+      "label": "Demon Slayer: Kimetsu No Yaiba Infinity Castle (2025) {Hindi-English-Japanese} 720p WEB-DL x264 [1.4GB]",
+      "isCloud": true,
+      "canonicalId": "tmdb-movie-1311031",
+      "source": "Fast Cloud",
+      "season": null,
+      "episode": null,
+      "isPack": false
+    },
+    {
+      "url": "https://crimson-sea-a1e5.hekoy.workers.dev/?vcloud=https://vcloud.fit/gffqf-gmmq2sgns",
+      "quality": "1080p",
+      "size": "3.2GB",
+      "label": "Demon Slayer: Kimetsu No Yaiba Infinity Castle (2025) {Hindi-English-Japanese} 1080p WEB-DL x264 [3.2GB]",
+      "isCloud": true,
+      "canonicalId": "tmdb-movie-1311031",
+      "source": "Fast Cloud",
+      "season": null,
+      "episode": null,
+      "isPack": false
+    }
+  ]
+}

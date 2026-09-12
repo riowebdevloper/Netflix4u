@@ -1,0 +1,276 @@
+{
+  "id": "tmdb-movie-1339713",
+  "canonicalId": "tmdb-movie-1339713",
+  "externalProvider": "tmdb",
+  "externalId": "1339713",
+  "tmdbId": "1339713",
+  "imdbId": "tt37287335",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "Obsession",
+  "canonicalTitle": "Obsession",
+  "originalTitle": "Obsession",
+  "overview": "After breaking the mysterious \"One Wish Willow\" to win his crush's heart, a hopeless romantic finds himself getting exactly what he asked for but soon discovers that some desires come at a dark, sinister price.",
+  "description": "After breaking the mysterious \"One Wish Willow\" to win his crush's heart, a hopeless romantic finds himself getting exactly what he asked for but soon discovers that some desires come at a dark, sinister price.",
+  "shortDescription": "After breaking the mysterious \"One Wish Willow\" to win his crush's heart, a hopeless romantic finds himself getting exac",
+  "year": 2026,
+  "rating": 8.2,
+  "votes": "5.4K",
+  "quality": "FHD",
+  "duration": "1h 49m",
+  "genres": [
+    "Horror",
+    "Thriller"
+  ],
+  "categories": [
+    "Horror",
+    "Thriller"
+  ],
+  "language": "English",
+  "country": "US",
+  "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FbRwnj8WEKBCvmfeUNOukJPwB43K.jpg&output=webp",
+  "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FrZfmzpixLKLR3Hg2u0WgC7XLFl8.jpg&output=webp",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/gMC8kkwbIQQ?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/gMC8kkwbIQQ?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "1561370",
+      "name": "Michael Johnston",
+      "character": "Bear",
+      "photo": "https://image.tmdb.org/t/p/w185/fbpcCkBzu43kMdlXxEAMuLhseL8.jpg"
+    },
+    {
+      "id": "2638587",
+      "name": "Inde Navarrette",
+      "character": "Nikki",
+      "photo": "https://image.tmdb.org/t/p/w185/qlNBUGON8FebgzcqVhhRSVFYSa5.jpg"
+    },
+    {
+      "id": "2823609",
+      "name": "Cooper Tomlinson",
+      "character": "Ian",
+      "photo": "https://image.tmdb.org/t/p/w185/vBMQbYT1DyWPCUp11dIiqZR9zhd.jpg"
+    },
+    {
+      "id": "1519711",
+      "name": "Megan Lawless",
+      "character": "Sarah",
+      "photo": "https://image.tmdb.org/t/p/w185/6qW63YEgB1qro01sM7T2HvhtFkh.jpg"
+    },
+    {
+      "id": "28637",
+      "name": "Andy Richter",
+      "character": "Carter",
+      "photo": "https://image.tmdb.org/t/p/w185/5Qr7N6TzC8cI0ULxDm6EC5GpZ4C.jpg"
+    },
+    {
+      "id": "3095494",
+      "name": "Haley Fitzgerald",
+      "character": "Viola",
+      "photo": "https://image.tmdb.org/t/p/w185/xbKqZ5Epz0IaSCPLXDnByDACw2X.jpg"
+    },
+    {
+      "id": "1352948",
+      "name": "Darin Toonder",
+      "character": "Harry",
+      "photo": "https://image.tmdb.org/t/p/w185/bD7Y9T7Y6XwDXjGJ8Suabyt1ZGo.jpg"
+    },
+    {
+      "id": "4030428",
+      "name": "Anthony Pavone",
+      "character": "Reggie",
+      "photo": "https://image.tmdb.org/t/p/w185/hxiqY9gHgwXGYnXSD11Wacm5Nmi.jpg"
+    },
+    {
+      "id": "3592074",
+      "name": "Justice",
+      "character": "Joe",
+      "photo": "https://image.tmdb.org/t/p/w185/YFxKf2HHJvyavQf54NO5wXFOJX.jpg"
+    },
+    {
+      "id": "5618033",
+      "name": "Anthony Casabianca",
+      "character": "Chris",
+      "photo": "https://image.tmdb.org/t/p/w185/xNJUKqKQhMeyZ74erQvETr3AqV0.jpg"
+    },
+    {
+      "id": "5423994",
+      "name": "Chloe Breen",
+      "character": "Ruthie",
+      "photo": "https://image.tmdb.org/t/p/w185/oKBTQeGcQBM5aHNHwAqVWPjDVfz.jpg"
+    },
+    {
+      "id": "3729434",
+      "name": "Malcolm Kelner",
+      "character": "Bartender",
+      "photo": "https://image.tmdb.org/t/p/w185/xlojlX1dlu1OY0Vf2owDWv5PV3l.jpg"
+    },
+    {
+      "id": "6242973",
+      "name": "Charles Santa Cruz",
+      "character": "Background",
+      "photo": null
+    },
+    {
+      "id": "6242975",
+      "name": "Alex Maystrik",
+      "character": "Background",
+      "photo": null
+    },
+    {
+      "id": "6242979",
+      "name": "Mariana Silva",
+      "character": "Background",
+      "photo": null
+    }
+  ],
+  "seasons": 1,
+  "episodes": 1,
+  "status": "PUBLISHED",
+  "links": [
+    {
+      "url": "https://crimson-sea-a1e5.hekoy.workers.dev/?vcloud=https://vcloud.fit/0hnnys1eo-uxn-j",
+      "quality": "480p",
+      "size": "400MB",
+      "label": "Obsession (2026) {Hindi-English} 480p WEB-DL x264 [400MB]",
+      "isCloud": true,
+      "canonicalId": "tmdb-movie-1339713",
+      "source": "Fast Cloud",
+      "season": null,
+      "episode": null,
+      "isPack": false
+    },
+    {
+      "url": "https://crimson-sea-a1e5.hekoy.workers.dev/?vcloud=https://vcloud.fit/u1d1xjh21sqgyve",
+      "quality": "720p",
+      "size": "615MB",
+      "label": "Obsession (2026) {Hindi-English} 720p 10Bit AMZN WEB-DL x265 [615MB]",
+      "isCloud": true,
+      "canonicalId": "tmdb-movie-1339713",
+      "source": "Fast Cloud",
+      "season": null,
+      "episode": null,
+      "isPack": false
+    },
+    {
+      "url": "https://crimson-sea-a1e5.hekoy.workers.dev/?vcloud=https://vcloud.fit/dr-rah-zi1m4c24",
+      "quality": "720p",
+      "size": "925MB",
+      "label": "Obsession (2026) {Hindi-English} 720p AMZN WEB-DL x264 [925MB]",
+      "isCloud": true,
+      "canonicalId": "tmdb-movie-1339713",
+      "source": "Fast Cloud",
+      "season": null,
+      "episode": null,
+      "isPack": false
+    },
+    {
+      "url": "https://crimson-sea-a1e5.hekoy.workers.dev/?vcloud=https://vcloud.fit/kzzkvvikquk5kg3",
+      "quality": "1080p",
+      "size": "2.2GB",
+      "label": "Obsession (2026) {Hindi-English} 1080p 10Bit AMZN WEB-DL x265 [2.2GB]",
+      "isCloud": true,
+      "canonicalId": "tmdb-movie-1339713",
+      "source": "Fast Cloud",
+      "season": null,
+      "episode": null,
+      "isPack": false
+    },
+    {
+      "url": "https://crimson-sea-a1e5.hekoy.workers.dev/?vcloud=https://vcloud.fit/26n46o2yl-2xhql",
+      "quality": "1080p",
+      "size": "2.9GB",
+      "label": "Obsession (2026) {Hindi-English} 1080p DD5.1-AMZN WEB-DL x264 [2.9GB]",
+      "isCloud": true,
+      "canonicalId": "tmdb-movie-1339713",
+      "source": "Fast Cloud",
+      "season": null,
+      "episode": null,
+      "isPack": false
+    },
+    {
+      "url": "https://crimson-sea-a1e5.hekoy.workers.dev/?vcloud=https://vcloud.fit/ybpmhloo9lpqcqc",
+      "quality": "2160p / 4K",
+      "size": "4.9GB",
+      "label": "Obsession (2026) [ AMZN Hindi DDP5.1 + English DDPA5.1 ] 1080p 1080p 10bit DS4K HEVC x265 [4.9GB]",
+      "isCloud": true,
+      "canonicalId": "tmdb-movie-1339713",
+      "source": "Fast Cloud",
+      "season": 4,
+      "episode": null,
+      "isPack": false
+    },
+    {
+      "url": "https://crimson-sea-a1e5.hekoy.workers.dev/?vcloud=https://vcloud.fit/5pv5vtoyp1r-_1p",
+      "quality": "1080p",
+      "size": "7.1GB",
+      "label": "Obsession (2026) {Hindi-English} 1080p DDP5.1-AMZN WEB-DL Atmos H.264 [7.1GB]",
+      "isCloud": true,
+      "canonicalId": "tmdb-movie-1339713",
+      "source": "Fast Cloud",
+      "season": null,
+      "episode": null,
+      "isPack": false
+    },
+    {
+      "url": "https://crimson-sea-a1e5.hekoy.workers.dev/?vcloud=https://vcloud.fit/_qb1nbqn0qnwknx",
+      "quality": "2160p / 4K",
+      "size": "5.9GB",
+      "label": "Obsession (2026) [Hindi AMZN DDP 5.1 + English DDP Atmos 5.1] 2160p 10Bit HDR DV x265 [5.9GB]",
+      "isCloud": true,
+      "canonicalId": "tmdb-movie-1339713",
+      "source": "Fast Cloud",
+      "season": 5,
+      "episode": null,
+      "isPack": false
+    },
+    {
+      "url": "https://crimson-sea-a1e5.hekoy.workers.dev/?vcloud=https://vcloud.fit/cjmcjflkik4b84k",
+      "quality": "2160p / 4K",
+      "size": "20GB",
+      "label": "Obsession (2026) [ AMZN Hindi DDP5.1 + English DDPA5.1 ] 2160p 4K SDR AMZN MA WEB-DL [20GB]",
+      "isCloud": true,
+      "canonicalId": "tmdb-movie-1339713",
+      "source": "Fast Cloud",
+      "season": null,
+      "episode": null,
+      "isPack": false
+    },
+    {
+      "url": "https://crimson-sea-a1e5.hekoy.workers.dev/?vcloud=https://vcloud.fit/uuk3ykkeun3ys31",
+      "quality": "480p",
+      "size": "400MB",
+      "label": "Obsession (2026) {English with Subtitles} 480p [400MB]",
+      "isCloud": true,
+      "canonicalId": "tmdb-movie-1339713",
+      "source": "Fast Cloud",
+      "season": null,
+      "episode": null,
+      "isPack": false
+    },
+    {
+      "url": "https://crimson-sea-a1e5.hekoy.workers.dev/?vcloud=https://vcloud.fit/lgykidkdlld3ylk",
+      "quality": "720p",
+      "size": "1GB",
+      "label": "Obsession (2026) {English with Subtitles} 720p [1GB]",
+      "isCloud": true,
+      "canonicalId": "tmdb-movie-1339713",
+      "source": "Fast Cloud",
+      "season": null,
+      "episode": null,
+      "isPack": false
+    },
+    {
+      "url": "https://crimson-sea-a1e5.hekoy.workers.dev/?vcloud=https://vcloud.fit/dadjic8_k6cccic",
+      "quality": "1080p",
+      "size": "2.2GB",
+      "label": "Obsession (2026) {English with Subtitles} 1080p [2.2GB]",
+      "isCloud": true,
+      "canonicalId": "tmdb-movie-1339713",
+      "source": "Fast Cloud",
+      "season": null,
+      "episode": null,
+      "isPack": false
+    }
+  ]
+}

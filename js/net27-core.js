@@ -5,7 +5,12 @@
 (function() {
   'use strict';
 
-  var NO_POSTER_SVG = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 300'><rect fill='%23181824' width='200' height='300'/><text x='100' y='150' text-anchor='middle' fill='%23666' font-family='sans-serif' font-size='14'>No Poster</text></svg>";
+  function getPosterFallback(title) {
+    var t = escapeHtml((title || 'Netflix4U').slice(0, 22));
+    return "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 450'><defs><linearGradient id='g' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%231a1028'/><stop offset='50%' stop-color='%2310111d'/><stop offset='100%' stop-color='%230a0a10'/></linearGradient></defs><rect width='300' height='450' fill='url(%23g)'/><circle cx='150' cy='180' r='42' fill='%23e50914' opacity='0.16'/><polygon points='142,165 168,180 142,195' fill='%23e50914'/><text x='150' y='260' font-family='sans-serif' font-size='15' font-weight='bold' fill='%23ffffff' text-anchor='middle' opacity='0.9'>" + encodeURIComponent(t) + "</text><text x='150' y='285' font-family='sans-serif' font-size='11' font-weight='700' fill='%23e50914' text-anchor='middle' letter-spacing='2'>NETFLIX4U</text></svg>";
+  }
+  window.__getPosterSvg = getPosterFallback;
+  var NO_POSTER_SVG = getPosterFallback('Netflix4U');
 
   var progressBar = document.getElementById('progress-bar');
   var railsView = document.getElementById('rails-view');
@@ -288,12 +293,12 @@
   // ─── Multi-Rail Engine ───
   var GENRES = { Action: 28, Adventure: 12, Comedy: 35, Crime: 80, Drama: 18, Family: 10751, Fantasy: 14, Horror: 27, Mystery: 9648, Romance: 10749, 'Sci-Fi': 878, Thriller: 53, Animation: 16 };
   var PLATFORM_LOGOS = {
-    Netflix: 'https://image.tmdb.org/t/p/w92/FjWTYs9RfCsT.jpg',
-    PrimeVideo: 'https://image.tmdb.org/t/p/w92/teMwgjoxOg9u.jpg',
-    JioHotstar: 'https://image.tmdb.org/t/p/w92/JmxIsKiiiFkm.jpg',
-    SonyLIV: 'https://image.tmdb.org/t/p/w92/IQHvNlAlUHxi.jpg',
-    Crunchyroll: 'https://image.tmdb.org/t/p/w92/nnYmRNZy6VSX.jpg',
-    MX: 'https://image.tmdb.org/t/p/w92/Hoj6RBCM9kDd.jpg'
+    Netflix: '/images/platforms/FjWTYs9RfCsT.jpg',
+    PrimeVideo: '/images/platforms/teMwgjoxOg9u.jpg',
+    JioHotstar: '/images/platforms/JmxIsKiiiFkm.jpg',
+    SonyLIV: '/images/platforms/IQHvNlAlUHxi.jpg',
+    Crunchyroll: '/images/platforms/nnYmRNZy6VSX.jpg',
+    MX: '/images/platforms/Hoj6RBCM9kDd.jpg'
   };
 
   function getRailConfigs(platform) {
@@ -459,8 +464,8 @@
 
   function renderCard(item, options) {
     options = options || {};
-    var posterUrl = item.poster || NO_POSTER_SVG;
     var title = item.title || 'Untitled';
+    var posterUrl = (item.poster && !item.poster.includes('placehold.co')) ? item.poster : getPosterFallback(title);
     var isTv = item.type === 'tv';
     var matchScore = item.rating ? Math.round(item.rating * 10) + '% match' : '96% match';
 
@@ -493,7 +498,7 @@
         '<div class="flex items-stretch gap-1">' +
           '<div class="rank-num shrink-0 self-end leading-none">' + options.rank + '</div>' +
           '<div class="nm-card-inner flex-1 relative aspect-[2/3] rounded-md overflow-hidden bg-white/5 ring-1 ring-white/10 group-hover:ring-2 group-hover:ring-red-600 transition">' +
-            '<img src="' + posterUrl + '" loading="lazy" decoding="async" alt="' + escapeHtml(title) + '" class="w-full h-full object-cover" onerror="this.src=\'' + NO_POSTER_SVG + '\'" />' +
+            '<img src="' + posterUrl + '" loading="lazy" decoding="async" alt="' + escapeHtml(title) + '" class="w-full h-full object-cover" onerror="this.onerror=null;this.src=window.__getPosterSvg(this.alt);" />' +
             ratingBadge + typeBadge + hoverOverlay +
           '</div>' +
         '</div>' +
@@ -502,7 +507,7 @@
 
     return '<a href="#" data-modal="title" data-tmdbid="' + item.tmdbId + '" data-type="' + (item.type || 'movie') + '" class="nm-card card group block">' +
       '<div class="nm-card-inner relative aspect-[2/3] rounded-lg overflow-hidden bg-white/5 ring-1 ring-white/10 group-hover:ring-2 group-hover:ring-red-600 transition">' +
-        '<img src="' + posterUrl + '" loading="lazy" decoding="async" alt="' + escapeHtml(title) + '" class="w-full h-full object-cover" onerror="this.src=\'' + NO_POSTER_SVG + '\'" />' +
+        '<img src="' + posterUrl + '" loading="lazy" decoding="async" alt="' + escapeHtml(title) + '" class="w-full h-full object-cover" onerror="this.onerror=null;this.src=window.__getPosterSvg(this.alt);" />' +
         ratingBadge + typeBadge + hoverOverlay +
       '</div>' +
       '<div class="mt-1.5 px-0.5 text-[12px] sm:text-[13px] text-white/85 font-medium truncate">' + escapeHtml(title) + '</div>' +
@@ -626,6 +631,7 @@
     searchOverlay.setAttribute('aria-hidden', 'true');
     if (soResults) soResults.innerHTML = '';
   }
+  window.__closeSearchOverlay = closeSearchOverlay;
 
   async function executeOverlaySearch(query) {
     if (!soResults) return;
@@ -645,11 +651,11 @@
       }
 
       soResults.innerHTML = items.slice(0, 10).map(function(item) {
-        var poster = item.poster || item.backdrop || NO_POSTER_SVG;
+        var poster = (item.poster && !item.poster.includes('placehold.co')) ? item.poster : (item.backdrop || getPosterFallback(item.title));
         var isTv = item.type === 'tv';
         return '<a href="#" data-modal="title" data-tmdbid="' + item.tmdbId + '" data-type="' + (item.type || 'movie') + '" class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-white/[0.08] transition group block">' +
           '<div class="relative w-16 sm:w-20 aspect-video rounded-md overflow-hidden bg-white/5 shrink-0">' +
-            '<img src="' + poster + '" alt="' + escapeHtml(item.title) + '" referrerpolicy="no-referrer" class="w-full h-full object-cover" loading="lazy" onerror="this.onerror=null;this.src=\'' + NO_POSTER_SVG + '\';" />' +
+            '<img src="' + poster + '" alt="' + escapeHtml(item.title) + '" referrerpolicy="no-referrer" class="w-full h-full object-cover" loading="lazy" onerror="this.onerror=null;this.src=window.__getPosterSvg(this.alt);" />' +
           '</div>' +
           '<div class="flex-1 min-w-0">' +
             '<div class="text-sm font-bold text-white group-hover:text-red-500 transition truncate">' + escapeHtml(item.title) + '</div>' +

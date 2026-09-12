@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 450" width="300" height="450">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0d18"/>
+      <stop offset="50%" stop-color="#121729"/>
+      <stop offset="100%" stop-color="#080a12"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="45%" r="40%">
+      <stop offset="0%" stop-color="#e50914" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#e50914" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff3344"/>
+      <stop offset="100%" stop-color="#e50914"/>
+    </linearGradient>
+  </defs>
+  <rect width="300" height="450" fill="url(#bgGrad)"/>
+  <rect x="0.5" y="0.5" width="299" height="449" fill="none" stroke="#252d47" stroke-width="1" rx="8"/>
+  <circle cx="150" cy="190" r="80" fill="url(#glow)"/>
+  <g transform="translate(118, 155)">
+    <rect x="0" y="14" width="64" height="48" rx="8" fill="#182038" stroke="#313d66" stroke-width="2"/>
+    <path d="M0 14 L64 14 L56 0 L8 0 Z" fill="#202946" stroke="#313d66" stroke-width="2"/>
+    <path d="M14 0 L22 14 M30 0 L38 14 M46 0 L54 14" stroke="#e50914" stroke-width="2.5" stroke-linecap="round"/>
+    <polygon points="26,27 26,49 44,38" fill="url(#accentGrad)"/>
+  </g>
+  <text x="150" y="255" text-anchor="middle" fill="#ffffff" font-size="16" font-family="'Plus Jakarta Sans',Inter,system-ui,sans-serif" font-weight="800" letter-spacing="0.5">FLIX<tspan fill="#e50914">WORLD</tspan></text>
+  <text x="150" y="278" text-anchor="middle" fill="#717d9e" font-size="11" font-family="Inter,system-ui,sans-serif" font-weight="500" letter-spacing="1">PREVIEW UNAVAILABLE</text>
+  <rect x="110" y="300" width="80" height="2" rx="1" fill="#e50914" opacity="0.4"/>
+</svg>
