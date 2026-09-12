@@ -1,10 +1,5 @@
 {
   "version": 2,
-  "functions": {
-    "api/**/*.js": {
-      "excludeFiles": "data/details/**"
-    }
-  },
   "rewrites": [
     { "source": "/api/embed-tmdb/:match*", "destination": "/api/embed-tmdb?id=:match*" },
     { "source": "/api/embed-tmdb", "destination": "/api/embed-tmdb" },
@@ -49,7 +44,7 @@
         { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
         { "key": "X-XSS-Protection", "value": "1; mode=block" },
         { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "Content-Security-Policy", "value": "default-src 'self' 'unsafe-inline' 'unsafe-eval' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' https: data: blob:; connect-src 'self' https:; frame-src 'self' https://peachify.top https://*.peachify.top https://vidlink.pro https://*.vidlink.pro https://slast430did.com https://*.slast430did.com https://allmovieland.link https://*.allmovieland.link https://www.2embed.cc https://*.2embed.cc https://vidsrc.pm https://*.vidsrc.pm https://autoembed.co https://*.autoembed.co https://vidsrc.me https://*.vidsrc.me https://vidsrc.cc https://*.vidsrc.cc https://vidsrc.xyz https://*.vidsrc.xyz https://www.youtube.com https://*.youtube.com https://www.youtube-nocookie.com https://*.workers.dev; media-src 'self' blob: https:;" }
+        { "key": "Content-Security-Policy", "value": "default-src 'self' 'unsafe-inline' 'unsafe-eval' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' https: data: blob:; connect-src 'self' https:; frame-src 'self' https://peachify.top https://*.peachify.top https://www.youtube.com https://*.youtube.com https://vidlink.pro https://*.vidlink.pro https://www.2embed.cc https://*.2embed.cc https://vidsrc.pm https://*.vidsrc.pm https://autoembed.co https://*.autoembed.co https://vidsrc.me https://*.vidsrc.me https://vidsrc.cc https://*.vidsrc.cc https://vidsrc.xyz https://*.vidsrc.xyz https://*.workers.dev; media-src 'self' blob: https:;" }
       ]
     },
     {
