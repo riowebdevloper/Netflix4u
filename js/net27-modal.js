@@ -102,6 +102,26 @@
     });
   }
 
+  function unwrapImageUrl(url) {
+    if (!url || typeof url !== 'string') return '';
+    var u = url.trim();
+    if (u.indexOf('wsrv.nl/?url=') !== -1) {
+      var m = u.match(/[?&]url=([^&#]+)/);
+      if (m) {
+        try {
+          u = decodeURIComponent(m[1]);
+          if (u.indexOf('wsrv.nl/?url=') !== -1) {
+            return unwrapImageUrl(u);
+          }
+        } catch (e) {}
+      }
+    }
+    if (u.indexOf('//') === 0) u = 'https:' + u;
+    if (u.indexOf('/uploads/') === 0) u = 'https://dotmobiz.com' + u;
+    if (u.indexOf('image.tmdb.org/') === 0) u = 'https://' + u;
+    return u;
+  }
+
   function lockBodyScroll() {
     document.body.style.overflow = 'hidden';
   }
@@ -169,6 +189,9 @@
     }
 
     var isTv = data.type === 'tv' || type === 'tv';
+    var backdropUrl = unwrapImageUrl(data.backdrop || '');
+    var posterUrl = unwrapImageUrl(data.poster || '');
+
     var runtime = data.runtime ? Math.floor(data.runtime / 60) + 'h ' + (data.runtime % 60) + 'm' : '';
     var ratingBadge = (data.rating && data.rating > 0)
       ? '<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-yellow-400/90 text-black font-bold text-[11px]"><svg class="w-3 h-3" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>' + data.rating.toFixed(1) + '</span>'
@@ -179,13 +202,14 @@
     var castList = (data.cast || []).slice(0, 4).map(function(c) { return escapeHtml(c.name); }).join(', ') + ((data.cast || []).length > 4 ? ', more' : '');
     var genresList = (data.genres || []).map(function(g) { return escapeHtml(g.name); }).join(', ');
 
-    // Cast circular avatars
+    // Cast circular avatars with error recovery
     var castAvatars = (data.cast || []).slice(0, 12).map(function(c) {
+      var photoUrl = unwrapImageUrl(c.photo || c.profile_path || '');
       return '<div class="shrink-0 w-20 sm:w-24 text-center">' +
         '<div class="aspect-square rounded-full overflow-hidden bg-white/5 mb-1.5 ring-1 ring-white/10 mx-auto">' +
-          (c.photo
-            ? '<img src="' + c.photo + '" alt="' + escapeHtml(c.name) + '" class="w-full h-full object-cover" loading="lazy" decoding="async" />'
-            : '<div class="w-full h-full flex items-center justify-center text-white/30 text-lg font-bold">' + escapeHtml(c.name.slice(0, 1)) + '</div>') +
+          (photoUrl
+            ? '<img src="' + photoUrl + '" alt="' + escapeHtml(c.name) + '" class="w-full h-full object-cover" loading="lazy" decoding="async" onerror="this.onerror=null;this.parentElement.innerHTML=\'<div class=\\\'w-full h-full flex items-center justify-center text-white/40 text-sm font-bold bg-white/10\\\'>' + escapeHtml((c.name || 'C').slice(0, 1)) + '</div>\';" />'
+            : '<div class="w-full h-full flex items-center justify-center text-white/30 text-lg font-bold">' + escapeHtml((c.name || 'C').slice(0, 1)) + '</div>') +
         '</div>' +
         '<div class="text-[11px] font-semibold text-white/90 truncate">' + escapeHtml(c.name) + '</div>' +
         '<div class="text-[10px] text-white/50 truncate">' + escapeHtml(c.character || '') + '</div>' +
@@ -201,9 +225,23 @@
       return '<button type="button" class="nm-lang-tab shrink-0' + (idx === 0 ? ' nm-lang-active' : '') + '">' + escapeHtml(lang) + '</button>';
     }).join('');
 
-    // Download links
+    // Download links partition: Dotmovies Direct Downloads vs Fast Cloud CDN
     var downloadLinks = data.downloadLinks || data.links || [];
-    var downloadMirrorsHtml = renderDownloadMirrors(downloadLinks, data.title, isTv);
+
+    var dotmoviesLinks = downloadLinks.filter(function(l) {
+      if (!l || !l.url) return false;
+      var u = String(l.url || '').toLowerCase();
+      var s = String(l.source || '').toLowerCase();
+      return Boolean(l.isDotmovies || s === 'dotmovies' || s === 'dotmobiz' || u.includes('nexdrive') || u.includes('dotmobiz'));
+    });
+
+    var cloudLinks = downloadLinks.filter(function(l) {
+      if (!l || !l.url) return false;
+      return !dotmoviesLinks.includes(l);
+    });
+
+    var dotmoviesSectionHtml = renderDotmoviesSection(dotmoviesLinks, data.title, isTv, data.slug, data.canonicalId);
+    var cloudSectionHtml = renderCloudSection(cloudLinks, data.title, isTv);
 
     // Episodes for TV Series
     var episodesSectionHtml = '';
@@ -215,7 +253,7 @@
           escapeHtml(s.name || ('Season ' + s.season_number)) + ' · ' + (s.episode_count || 10) + ' ep</option>';
       }).join('');
 
-      var initialEpisodesHtml = renderEpisodeList(data.initialEpisodes || [], tmdbId, currentSeason, data.backdrop, downloadLinks);
+      var initialEpisodesHtml = renderEpisodeList(data.initialEpisodes || [], tmdbId, currentSeason, backdropUrl, downloadLinks);
 
       episodesSectionHtml =
         '<section class="mt-8 pt-4 border-t border-white/10">' +
@@ -250,9 +288,10 @@
           '</div>' +
           '<div class="flex gap-3 overflow-x-auto scrollbar-none pb-2">' +
             data.recommendations.map(function(rec) {
+              var recPoster = unwrapImageUrl(rec.poster || '');
               return '<a href="#" data-modal="title" data-tmdbid="' + rec.tmdbId + '" data-type="' + (rec.type || 'movie') + '" class="shrink-0 w-28 sm:w-32 group block">' +
                 '<div class="aspect-[2/3] rounded-lg overflow-hidden bg-white/5 ring-1 ring-white/10 group-hover:ring-2 group-hover:ring-red-600 transition">' +
-                  (rec.poster ? '<img src="' + rec.poster + '" alt="' + escapeHtml(rec.title) + '" class="w-full h-full object-cover" loading="lazy" />' : '') +
+                  (recPoster ? '<img src="' + recPoster + '" alt="' + escapeHtml(rec.title) + '" class="w-full h-full object-cover" loading="lazy" onerror="if(window.__healPoster){window.__healPoster(this);}else{this.onerror=null;this.src=window.__getPosterSvg(this.alt);}" />' : '') +
                 '</div>' +
                 '<div class="mt-1.5 text-xs font-semibold text-white/90 truncate">' + escapeHtml(rec.title) + '</div>' +
                 '<div class="text-[10px] text-white/50">' + escapeHtml(rec.year || '') + '</div>' +
@@ -266,13 +305,13 @@
     titleModalBody.innerHTML =
       '<!-- Hero Backdrop -->' +
       '<div class="relative">' +
-        '<div class="aspect-video sm:aspect-[21/9] overflow-hidden bg-zinc-950">' +
-          (data.backdrop ? '<img src="' + data.backdrop + '" alt="" class="w-full h-full object-cover" referrerpolicy="no-referrer" />' : '') +
+        '<div class="aspect-video sm:aspect-[21/9] overflow-hidden bg-zinc-950 relative">' +
+          (backdropUrl ? '<img src="' + backdropUrl + '" alt="" class="w-full h-full object-cover" referrerpolicy="no-referrer" onerror="this.onerror=null;if(\'' + posterUrl + '\'){this.src=\'' + posterUrl + '\';}else{this.style.display=\'none\';}" />' : (posterUrl ? '<img src="' + posterUrl + '" alt="" class="w-full h-full object-cover blur-sm opacity-50" />' : '')) +
           '<div class="absolute inset-0 bg-gradient-to-t from-[#15151c] via-[#15151c]/40 to-transparent"></div>' +
         '</div>' +
         '<div class="absolute inset-x-0 bottom-0 p-4 sm:p-6">' +
           '<div class="flex flex-col sm:flex-row gap-4 items-end">' +
-            (data.poster ? '<img src="' + data.poster + '" alt="' + escapeHtml(data.title) + '" referrerpolicy="no-referrer" class="hidden sm:block w-28 lg:w-32 aspect-[2/3] object-cover rounded-lg shadow-2xl ring-1 ring-white/10 shrink-0" />' : '') +
+            (posterUrl ? '<img src="' + posterUrl + '" alt="' + escapeHtml(data.title) + '" referrerpolicy="no-referrer" class="hidden sm:block w-28 lg:w-32 aspect-[2/3] object-cover rounded-lg shadow-2xl ring-1 ring-white/10 shrink-0" onerror="if(window.__healPoster){window.__healPoster(this);}else{this.onerror=null;this.src=window.__getPosterSvg(this.alt);}" />' : '') +
             '<div class="flex-1 min-w-0">' +
               '<h2 class="text-2xl sm:text-3xl md:text-4xl font-black leading-tight mb-2 tracking-tight text-white" style="text-shadow: 0 2px 16px rgba(0,0,0,0.8);">' + escapeHtml(data.title) + '</h2>' +
               (data.tagline ? '<p class="text-xs sm:text-sm text-white/70 italic mb-2 line-clamp-1">' + escapeHtml(data.tagline) + '</p>' : '') +
@@ -326,22 +365,9 @@
           '</div>' +
         '</div>' +
 
-        '<!-- DIRECT DOWNLOAD MIRRORS SECTION -->' +
-        '<section id="download-mirrors-section" class="dl-section">' +
-          '<div class="flex items-center justify-between mb-4">' +
-            '<div class="flex items-center gap-2.5">' +
-              '<div class="w-1.5 h-5 rounded-full bg-red-600"></div>' +
-              '<h3 class="text-lg sm:text-xl font-bold tracking-tight text-white">Direct Download Mirrors</h3>' +
-            '</div>' +
-            '<span class="text-xs text-green-400 font-semibold flex items-center gap-1">' +
-              '<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>' +
-              'High-Speed CDN Active' +
-            '</span>' +
-          '</div>' +
-          '<div id="modal-download-links" class="space-y-2.5">' +
-            downloadMirrorsHtml +
-          '</div>' +
-        '</section>' +
+        '<!-- SEPARATE DOWNLOAD SECTIONS -->' +
+        dotmoviesSectionHtml +
+        cloudSectionHtml +
 
         episodesSectionHtml +
 
@@ -361,7 +387,7 @@
     var scrollBtn = document.getElementById('scroll-to-downloads-btn');
     if (scrollBtn) {
       scrollBtn.addEventListener('click', function() {
-        var dlSection = document.getElementById('download-mirrors-section');
+        var dlSection = document.getElementById('dotmovies-download-section') || document.getElementById('download-mirrors-section');
         if (dlSection) dlSection.scrollIntoView({ behavior: 'smooth' });
       });
     }
@@ -546,13 +572,177 @@
     }).join('');
   }
 
+  function renderCloudSection(links, title, isTv) {
+    return '<section id="download-mirrors-section" class="dl-section">' +
+      '<div class="flex items-center justify-between mb-3.5">' +
+        '<div class="flex items-center gap-2.5">' +
+          '<div class="w-1.5 h-5 rounded-full bg-red-600"></div>' +
+          '<h3 class="text-lg sm:text-xl font-bold tracking-tight text-white">Fast Cloud CDN Mirrors</h3>' +
+        '</div>' +
+        '<span class="text-xs text-green-400 font-semibold flex items-center gap-1">' +
+          '<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>' +
+          'High-Speed CDN Active' +
+        '</span>' +
+      '</div>' +
+      '<div id="modal-download-links" class="space-y-2.5">' +
+        renderDownloadMirrors(links, title, isTv) +
+      '</div>' +
+    '</section>';
+  }
+
+  function renderDotmoviesSection(links, title, isTv, slug, canonicalId) {
+    var cleanTitle = (title || 'Movie').replace(/\(\d{4}\)/g, '').trim();
+    var dotmoviesSearchUrl = 'https://dotmobiz.com/?s=' + encodeURIComponent(cleanTitle);
+
+    var headerHtml =
+      '<div class="flex items-center justify-between mb-3.5">' +
+        '<div class="flex items-center gap-2.5">' +
+          '<span class="px-2.5 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/40 text-[10px] font-black tracking-wider uppercase">DOTMOVIES</span>' +
+          '<h3 class="text-lg sm:text-xl font-bold tracking-tight text-white flex items-center gap-2">' +
+            'Dotmovies Direct Downloads' +
+          '</h3>' +
+        '</div>' +
+        '<span class="text-xs text-amber-400 font-semibold flex items-center gap-1">' +
+          '<svg class="w-3.5 h-3.5 text-amber-400" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>' +
+          'Original NexDrive High-Speed' +
+        '</span>' +
+      '</div>';
+
+    if (!links || !links.length) {
+      return '<section id="dotmovies-download-section" class="dl-section dl-dotmovies-section mb-6">' +
+        headerHtml +
+        '<div class="p-4 rounded-xl bg-amber-500/[0.04] border border-amber-500/20 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">' +
+          '<div class="space-y-0.5">' +
+            '<div class="text-sm font-semibold text-white/90">Dotmovies Releases & Multi-Audio Rips</div>' +
+            '<div class="text-xs text-white/50">Access original Hindi & Multi-Audio releases directly on Dotmovies.</div>' +
+          '</div>' +
+          '<a href="' + dotmoviesSearchUrl + '" target="_blank" rel="noopener noreferrer" class="dl-btn dl-dotmovies-btn shrink-0 cursor-pointer">' +
+            '<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path></svg>' +
+            '<span>Search on Dotmovies</span>' +
+          '</a>' +
+        '</div>' +
+      '</section>';
+    }
+
+    var hasSeriesStructure = isTv || links.some(function(l) { return l.season || l.episode; });
+    var linksContent = '';
+
+    if (hasSeriesStructure) {
+      var seasonMap = {};
+      links.forEach(function(l) {
+        var sNum = Number(l.season) || 1;
+        var eNum = Number(l.episode) || 1;
+        if (!seasonMap[sNum]) seasonMap[sNum] = {};
+        if (!seasonMap[sNum][eNum]) seasonMap[sNum][eNum] = [];
+        seasonMap[sNum][eNum].push(l);
+      });
+
+      var seasons = Object.keys(seasonMap).map(Number).sort(function(a, b) { return a - b; });
+      if (!seasons.length) seasons = [1];
+
+      linksContent = '<div class="dl-accordion">' +
+        seasons.map(function(sNum, sIdx) {
+          var epMap = seasonMap[sNum] || {};
+          var epNums = Object.keys(epMap).map(Number).sort(function(a, b) { return a - b; });
+          var isOpen = sIdx === 0 ? ' is-open' : '';
+
+          var epRowsHtml = epNums.map(function(eNum) {
+            var epLinks = epMap[eNum] || [];
+            var epQualityPills = epLinks.map(function(link) {
+              var q = String(link.quality || 'HD').toUpperCase();
+              var rawUrl = link.url || '#';
+              return '<a href="' + rawUrl + '" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 rounded bg-amber-500/20 hover:bg-amber-500 hover:text-black active:scale-95 text-amber-300 font-bold text-xs flex items-center gap-1 transition cursor-pointer border border-amber-500/30">' +
+                '<svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 3v12m0 0l-4-4m4 4l4-4"/><path d="M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>' +
+                '<span>' + escapeHtml(q) + '</span>' +
+                (link.size ? '<span class="text-white/60 text-[10px]">(' + escapeHtml(link.size) + ')</span>' : '') +
+              '</a>';
+            }).join('');
+
+            return '<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 p-2.5 rounded-lg bg-amber-500/[0.03] border border-amber-500/10 hover:bg-amber-500/[0.06] transition">' +
+              '<div class="flex items-center gap-2">' +
+                '<span class="w-6 text-center text-xs font-bold text-amber-400">E' + eNum + '</span>' +
+                '<span class="text-xs font-semibold text-white/90">Episode ' + eNum + '</span>' +
+              '</div>' +
+              '<div class="flex flex-wrap items-center gap-1.5">' +
+                epQualityPills +
+              '</div>' +
+            '</div>';
+          }).join('');
+
+          return '<div class="dl-accordion-item' + isOpen + '" data-accordion-item>' +
+            '<button type="button" class="dl-accordion-header" data-accordion-toggle>' +
+              '<span class="flex items-center gap-2">' +
+                '<svg class="w-4 h-4 text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg>' +
+                'Season ' + sNum + ' <span class="text-white/40 text-xs font-normal">(' + epNums.length + ' episodes on Dotmovies)</span>' +
+              '</span>' +
+              '<svg class="dl-accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>' +
+            '</button>' +
+            '<div class="dl-accordion-body space-y-2">' +
+              epRowsHtml +
+            '</div>' +
+          '</div>';
+        }).join('') +
+      '</div>';
+    } else {
+      var qualWeight = function(q) {
+        q = String(q || '').toUpperCase();
+        if (q.includes('4K') || q.includes('2160')) return 4;
+        if (q.includes('1440')) return 3;
+        if (q.includes('1080')) return 2;
+        if (q.includes('720')) return 1;
+        return 0;
+      };
+
+      var sortedLinks = links.slice().sort(function(a, b) {
+        return qualWeight(b.quality) - qualWeight(a.quality);
+      });
+
+      linksContent = sortedLinks.map(function(link) {
+        var rawQual = String(link.quality || 'HD').toUpperCase();
+        var sizeText = link.size || (rawQual.includes('4K') ? '4.8 GB' : rawQual.includes('1080') ? '2.4 GB' : rawQual.includes('720') ? '1.1 GB' : '550 MB');
+        var audioText = link.audio || 'Hindi Multi-Audio [Dotmovies NexDrive]';
+        var rawUrl = link.url || '#';
+
+        return '<div class="dl-card dl-dotmovies-card">' +
+          '<div class="flex items-center gap-3 min-w-0">' +
+            '<span class="dl-quality-badge dl-dotmovies-badge">' + escapeHtml(rawQual) + '</span>' +
+            '<div class="min-w-0">' +
+              '<div class="text-xs sm:text-sm font-bold text-white/95 truncate">' + escapeHtml(link.label || link.title || title) + '</div>' +
+              '<div class="flex items-center gap-2 text-[11px] text-white/50 mt-0.5">' +
+                '<span class="font-bold text-amber-400">' + escapeHtml(sizeText) + '</span>' +
+                '<span>•</span>' +
+                '<span class="truncate text-white/70">' + escapeHtml(audioText) + '</span>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="shrink-0">' +
+            '<a href="' + rawUrl + '" target="_blank" rel="noopener noreferrer" class="dl-btn dl-dotmovies-btn cursor-pointer">' +
+              '<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 3v12m0 0l-4-4m4 4l4-4"/><path d="M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>' +
+              '<span>Download (' + escapeHtml(rawQual) + ')</span>' +
+            '</a>' +
+          '</div>' +
+        '</div>';
+      }).join('');
+    }
+
+    return '<section id="dotmovies-download-section" class="dl-section dl-dotmovies-section mb-6">' +
+      headerHtml +
+      '<div id="modal-dotmovies-links" class="space-y-2.5">' +
+        linksContent +
+      '</div>' +
+    '</section>';
+  }
+
   function renderEpisodeList(episodes, tmdbId, seasonNum, fallbackBackdrop, downloadLinks, parentTitle, parentYear, parentImdbId) {
     if (!episodes || !episodes.length) {
       return '<div class="text-white/40 text-sm p-4 text-center">No episodes available.</div>';
     }
 
+    var safeFallback = unwrapImageUrl(fallbackBackdrop || '');
+
     return episodes.map(function(ep) {
-      var still = ep.still_path || fallbackBackdrop || '';
+      var rawStill = ep.still_path || fallbackBackdrop || '';
+      var still = unwrapImageUrl(rawStill);
       var epNum = ep.episode_number || 1;
       var epTitle = ep.name || ('Episode ' + epNum);
       var duration = ep.runtime ? ep.runtime + 'm' : '45m';
@@ -563,7 +753,7 @@
         '<div class="flex items-center gap-3 w-full sm:w-auto">' +
           '<span class="text-sm font-bold text-white/40 w-6 text-center">' + epNum + '</span>' +
           '<div class="relative w-28 sm:w-36 aspect-video rounded-lg overflow-hidden bg-white/5 shrink-0">' +
-            (still ? '<img src="' + still + '" alt="' + escapeHtml(epTitle) + '" class="w-full h-full object-cover" loading="lazy" />' : '') +
+            (still ? '<img src="' + still + '" alt="' + escapeHtml(epTitle) + '" class="w-full h-full object-cover" loading="lazy" onerror="this.onerror=null;if(\'' + escapeHtml(safeFallback) + '\'){this.src=\'' + escapeHtml(safeFallback) + '\';}else{this.style.display=\'none\';}" />' : '') +
             '<div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">' +
               '<button type="button" data-modal="watch" data-tmdbid="' + tmdbId + '" data-type="tv" data-se="' + seasonNum + '" data-ep="' + epNum + '" data-title="' + escapeHtml(fullTitle) + '" data-year="' + (parentYear || '') + '" data-imdbid="' + (parentImdbId || '') + '" class="w-8 h-8 rounded-full bg-white text-black flex items-center justify-center shadow-lg transform active:scale-95 cursor-pointer">' +
                 '<svg class="w-4 h-4 ml-0.5" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>' +

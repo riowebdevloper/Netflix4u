@@ -10,6 +10,27 @@
     return "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 450'><defs><linearGradient id='g' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%231a1028'/><stop offset='50%' stop-color='%2310111d'/><stop offset='100%' stop-color='%230a0a10'/></linearGradient></defs><rect width='300' height='450' fill='url(%23g)'/><circle cx='150' cy='180' r='42' fill='%23e50914' opacity='0.16'/><polygon points='142,165 168,180 142,195' fill='%23e50914'/><text x='150' y='260' font-family='sans-serif' font-size='15' font-weight='bold' fill='%23ffffff' text-anchor='middle' opacity='0.9'>" + encodeURIComponent(t) + "</text><text x='150' y='285' font-family='sans-serif' font-size='11' font-weight='700' fill='%23e50914' text-anchor='middle' letter-spacing='2'>NETFLIX4U</text></svg>";
   }
   window.__getPosterSvg = getPosterFallback;
+
+  function unwrapImageUrl(url) {
+    if (!url || typeof url !== 'string') return '';
+    var u = url.trim();
+    if (u.indexOf('wsrv.nl/?url=') !== -1) {
+      var m = u.match(/[?&]url=([^&#]+)/);
+      if (m) {
+        try {
+          u = decodeURIComponent(m[1]);
+          if (u.indexOf('wsrv.nl/?url=') !== -1) {
+            return unwrapImageUrl(u);
+          }
+        } catch (e) {}
+      }
+    }
+    if (u.indexOf('//') === 0) u = 'https:' + u;
+    if (u.indexOf('/uploads/') === 0) u = 'https://dotmobiz.com' + u;
+    if (u.indexOf('image.tmdb.org/') === 0) u = 'https://' + u;
+    return u;
+  }
+  window.__unwrapImageUrl = unwrapImageUrl;
   var NO_POSTER_SVG = getPosterFallback('Netflix4U');
 
   var progressBar = document.getElementById('progress-bar');
@@ -661,8 +682,8 @@
     var tmdbId = item.tmdbId || item.id || '';
     var imdbId = item.imdbId || '';
     var posterUrl = item.poster;
-    if (posterUrl && !posterUrl.startsWith('http') && !posterUrl.startsWith('data:')) {
-      posterUrl = 'https://wsrv.nl/?url=image.tmdb.org/t/p/w500/' + posterUrl.replace(/^\//, '');
+    if (posterUrl) {
+      posterUrl = unwrapImageUrl(posterUrl);
     }
     if (!posterUrl || posterUrl.includes('placehold.co')) {
       posterUrl = getPosterFallback(title);
@@ -699,7 +720,7 @@
         '<div class="flex items-stretch gap-1">' +
           '<div class="rank-num shrink-0 self-end leading-none">' + options.rank + '</div>' +
           '<div class="nm-card-inner flex-1 relative aspect-[2/3] rounded-md overflow-hidden bg-white/5 ring-1 ring-white/10 group-hover:ring-2 group-hover:ring-red-600 transition">' +
-            '<img src="' + posterUrl + '" loading="lazy" decoding="async" alt="' + escapeHtml(title) + '" class="w-full h-full object-cover" onerror="this.onerror=null;this.src=window.__getPosterSvg(this.alt);" />' +
+            '<img src="' + posterUrl + '" loading="lazy" decoding="async" alt="' + escapeHtml(title) + '" class="w-full h-full object-cover" onerror="window.__healPoster(this);" />' +
             ratingBadge + typeBadge + hoverOverlay +
           '</div>' +
         '</div>' +
@@ -708,7 +729,7 @@
 
     return '<a href="#" data-modal="title" data-tmdbid="' + tmdbId + '" data-canonical-id="' + escapeHtml(canonicalId) + '" data-imdbid="' + escapeHtml(imdbId) + '" data-type="' + (isTv ? 'tv' : 'movie') + '" class="nm-card card group block">' +
       '<div class="nm-card-inner relative aspect-[2/3] rounded-lg overflow-hidden bg-white/5 ring-1 ring-white/10 group-hover:ring-2 group-hover:ring-red-600 transition">' +
-        '<img src="' + posterUrl + '" loading="lazy" decoding="async" alt="' + escapeHtml(title) + '" class="w-full h-full object-cover" onerror="this.onerror=null;this.src=window.__getPosterSvg(this.alt);" />' +
+        '<img src="' + posterUrl + '" loading="lazy" decoding="async" alt="' + escapeHtml(title) + '" class="w-full h-full object-cover" onerror="window.__healPoster(this);" />' +
         ratingBadge + typeBadge + hoverOverlay +
       '</div>' +
       '<div class="mt-1.5 px-0.5 text-[12px] sm:text-[13px] text-white/85 font-medium truncate">' + escapeHtml(title) + '</div>' +
@@ -852,14 +873,14 @@
       }
 
       soResults.innerHTML = items.slice(0, 10).map(function(item) {
-        var poster = (item.poster && !item.poster.includes('placehold.co')) ? item.poster : (item.backdrop || getPosterFallback(item.title));
+        var poster = unwrapImageUrl(item.poster || item.backdrop) || getPosterFallback(item.title);
         var isTv = item.type === 'tv';
         var canonicalId = item.canonicalId || item.id || item.tmdbId || '';
         var imdbId = item.imdbId || '';
         var tmdbId = item.tmdbId || item.id || '';
         return '<a href="#" data-modal="title" data-tmdbid="' + tmdbId + '" data-canonical-id="' + escapeHtml(canonicalId) + '" data-imdbid="' + escapeHtml(imdbId) + '" data-type="' + (item.type || 'movie') + '" class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-white/[0.08] transition group block">' +
           '<div class="relative w-16 sm:w-20 aspect-video rounded-md overflow-hidden bg-white/5 shrink-0">' +
-            '<img src="' + poster + '" alt="' + escapeHtml(item.title) + '" referrerpolicy="no-referrer" class="w-full h-full object-cover" loading="lazy" onerror="this.onerror=null;this.src=window.__getPosterSvg(this.alt);" />' +
+            '<img src="' + poster + '" alt="' + escapeHtml(item.title) + '" referrerpolicy="no-referrer" class="w-full h-full object-cover" loading="lazy" onerror="window.__healPoster(this);" />' +
           '</div>' +
           '<div class="flex-1 min-w-0">' +
             '<div class="text-sm font-bold text-white group-hover:text-red-500 transition truncate">' + escapeHtml(item.title) + '</div>' +
@@ -956,10 +977,39 @@
 
   // ─── Broken Poster Self-Healing ───
   function healPoster(imgEl) {
-    if (!imgEl) return;
-    imgEl.onerror = null;
-    var title = imgEl.alt || 'Netflix4U';
-    imgEl.src = getPosterFallback(title);
+    if (!imgEl || imgEl.dataset.healed) return;
+    imgEl.dataset.healed = '1';
+    var title = imgEl.alt || '';
+
+    imgEl.onerror = function() {
+      imgEl.onerror = null;
+      imgEl.src = getPosterFallback(title);
+    };
+
+    var card = imgEl.closest('[data-modal="title"]') || imgEl.closest('[data-modal="watch"]') || imgEl.closest('.card') || imgEl.closest('.nm-card');
+    var tmdbId = card ? (card.dataset.tmdbid || '') : '';
+    var imdbId = card ? (card.dataset.imdbid || '') : '';
+    var canonicalId = card ? (card.dataset.canonicalId || '') : '';
+    var type = card ? (card.dataset.type || 'movie') : 'movie';
+
+    var apiUrl = '/api/poster-resolver?title=' + encodeURIComponent(title) +
+      (tmdbId ? '&id=' + encodeURIComponent(tmdbId) : '') +
+      (imdbId ? '&imdbId=' + encodeURIComponent(imdbId) : '') +
+      (canonicalId ? '&canonicalId=' + encodeURIComponent(canonicalId) : '') +
+      '&type=' + encodeURIComponent(type);
+
+    fetch(apiUrl)
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (data && data.success && data.poster) {
+          imgEl.src = data.poster;
+        } else {
+          imgEl.src = getPosterFallback(title);
+        }
+      })
+      .catch(function() {
+        imgEl.src = getPosterFallback(title);
+      });
   }
   window.__healPoster = healPoster;
 

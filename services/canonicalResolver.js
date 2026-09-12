@@ -19,12 +19,77 @@ const DETAILS_DIR = path.join(DATA_DIR, 'details');
 const CATALOG_SUMMARY_PATH = path.join(DATA_DIR, 'catalog_summary.json');
 const COMPLETE_CATALOG_PATH = path.join(DATA_DIR, 'dotmobiz_complete_catalog.json');
 const DETAILS_MAP_PATH = path.join(DATA_DIR, 'details_map.json');
+const HARVESTED_PATH = path.join(DATA_DIR, 'dotmobiz_harvested.json');
 const TMDB_API_KEY = process.env.TMDB_API_KEY || '445f2b5a8941c1d4bd5a869761a916e3';
 
 // In-Memory Fast Lookup Index
 let catalogIndex = null;
 let detailsMapCache = null;
+let harvestedIndexCache = null;
 const tmdbMemoryCache = new Map();
+
+/**
+ * Cleanly unwrap proxy URLs and convert relative /uploads/ paths to dotmobiz.com
+ */
+function unwrapImageUrl(url) {
+  if (!url || typeof url !== 'string') return '';
+  let u = url.trim();
+  if (u.includes('wsrv.nl/?url=')) {
+    const m = u.match(/[?&]url=([^&#]+)/);
+    if (m) {
+      try {
+        u = decodeURIComponent(m[1]);
+        if (u.includes('wsrv.nl/?url=')) {
+          return unwrapImageUrl(u);
+        }
+      } catch (e) { }
+    }
+  }
+  if (u.startsWith('//')) u = 'https:' + u;
+  if (u.startsWith('/uploads/')) u = 'https://dotmobiz.com' + u;
+  if (u.startsWith('image.tmdb.org/')) u = 'https://' + u;
+  return u;
+}
+
+function getHarvestedIndex() {
+  if (harvestedIndexCache) return harvestedIndexCache;
+  harvestedIndexCache = new Map();
+  if (fs.existsSync(HARVESTED_PATH)) {
+    try {
+      const list = JSON.parse(fs.readFileSync(HARVESTED_PATH, 'utf8'));
+      for (const item of list) {
+        if (!item) continue;
+        if (item.postId) {
+          harvestedIndexCache.set(String(item.postId), item);
+          harvestedIndexCache.set(`dotmobiz-${item.postId}`, item);
+        }
+        if (item.imdbId && typeof item.imdbId === 'string' && item.imdbId.startsWith('tt')) {
+          harvestedIndexCache.set(item.imdbId, item);
+        }
+        if (item.title) {
+          const clean = item.title.toLowerCase().replace(/[^a-z0-9]/g, '');
+          if (clean.length >= 3) {
+            harvestedIndexCache.set(clean, item);
+          }
+          const noYear = item.title.replace(/\b(19\d{2}|20\d{2})\b.*$/i, '').toLowerCase().replace(/[^a-z0-9]/g, '');
+          if (noYear.length >= 3 && !harvestedIndexCache.has(noYear)) {
+            harvestedIndexCache.set(noYear, item);
+          }
+        }
+        if (item.url) {
+          const slugMatch = item.url.match(/dotmobiz\.com\/(?:[a-z0-9_-]+\/)?([0-9a-z-]+)(?:\.html)?/i);
+          if (slugMatch) {
+            harvestedIndexCache.set(slugMatch[1], item);
+          }
+        }
+      }
+    } catch(e) {
+      console.error('Failed to index dotmobiz_harvested.json:', e.message);
+    }
+  }
+  return harvestedIndexCache;
+}
+
 
 function getDetailsMap() {
   if (detailsMapCache) return detailsMapCache;
@@ -70,8 +135,10 @@ function normalizeDetailLinks(links, title) {
     if (!url) return null;
 
     const rawQual = String(l.quality || 'HD').toUpperCase();
+    const isNexdrive = url.includes('nexdrive') || url.includes('dotmobiz');
     const isCloud = Boolean(l.isCloud || url.includes('vcloud') || url.includes('workers.dev') || url.includes('hicine'));
-    const source = l.source || (url.includes('nexdrive') ? 'dotmobiz' : (isCloud ? 'hicine' : 'dotmobiz'));
+    const isDotmovies = Boolean(l.isDotmovies || isNexdrive || l.source === 'dotmobiz' || l.source === 'Dotmovies');
+    const source = isDotmovies ? 'Dotmovies' : (isCloud ? 'Fast Cloud' : (l.source || 'Direct Mirror'));
     const size = l.size || (rawQual.includes('4K') || rawQual.includes('2160') ? '4.8 GB' : rawQual.includes('1080') ? '2.4 GB' : rawQual.includes('720') ? '1.1 GB' : '550 MB');
     const label = l.label || `${title || 'Stream'} [${rawQual}]`;
 
@@ -81,13 +148,26 @@ function normalizeDetailLinks(links, title) {
       size,
       label,
       source,
-      isCloud
+      isCloud,
+      isDotmovies
     };
   }).filter(Boolean);
 }
 
 function extractLinksFromDetail(detail, title) {
   if (!detail) return [];
+  if (Array.isArray(detail.downloads) && detail.downloads.length > 0) {
+    const converted = detail.downloads.map(opt => ({
+      url: opt.url,
+      quality: opt.quality || 'HD',
+      size: opt.size || '',
+      label: opt.label || `Download [${opt.quality || 'HD'}]`,
+      source: 'Dotmovies',
+      isDotmovies: true,
+      isCloud: false
+    }));
+    return normalizeDetailLinks(converted, title || detail.title);
+  }
   if (Array.isArray(detail.links) && detail.links.length > 0) {
     return normalizeDetailLinks(detail.links, title || detail.title);
   }
@@ -97,7 +177,8 @@ function extractLinksFromDetail(detail, title) {
       quality: opt.quality || 'HD',
       size: opt.size || '',
       label: opt.label || `Download [${opt.quality || 'HD'}]`,
-      source: opt.url && opt.url.includes('nexdrive') ? 'dotmobiz' : 'cloud',
+      source: opt.url && (opt.url.includes('nexdrive') || opt.url.includes('dotmobiz')) ? 'Dotmovies' : 'Fast Cloud',
+      isDotmovies: Boolean(opt.url && (opt.url.includes('nexdrive') || opt.url.includes('dotmobiz'))),
       isCloud: Boolean(opt.url && (opt.url.includes('workers.dev') || opt.url.includes('vcloud')))
     }));
     return normalizeDetailLinks(converted, title || detail.title);
@@ -126,9 +207,15 @@ function loadDetailFileByFilename(filename, title) {
 
 function findMatchingCatalogLinks(title, year, imdbId, slug) {
   const dMap = getDetailsMap();
+  const hIndex = getHarvestedIndex();
 
-  // 1. Check by authentic IMDb ID
+  // 1. Check harvested Dotmovies records by authentic IMDb ID
   if (imdbId && typeof imdbId === 'string' && imdbId.startsWith('tt')) {
+    const hEntry = hIndex.get(imdbId);
+    if (hEntry) {
+      const hLinks = extractLinksFromDetail(hEntry, title);
+      if (hLinks.length > 0) return hLinks;
+    }
     const entry = dMap.get(imdbId);
     if (entry) {
       const links = extractLinksFromDetail(entry, title);
@@ -140,6 +227,11 @@ function findMatchingCatalogLinks(title, year, imdbId, slug) {
 
   // 2. Check by slug or ID
   if (slug) {
+    const hBySlug = hIndex.get(slug);
+    if (hBySlug) {
+      const hLinks = extractLinksFromDetail(hBySlug, title);
+      if (hLinks.length > 0) return hLinks;
+    }
     const entry = dMap.get(slug);
     if (entry) {
       const links = extractLinksFromDetail(entry, title);
@@ -166,6 +258,13 @@ function findMatchingCatalogLinks(title, year, imdbId, slug) {
 
   for (const c of candidates) {
     if (c.length >= 3) {
+      // Check harvested Dotmovies index first
+      const hByClean = hIndex.get(c);
+      if (hByClean) {
+        const hLinks = extractLinksFromDetail(hByClean, title);
+        if (hLinks.length > 0) return hLinks;
+      }
+
       if (year) {
         const entryYear = dMap.get(c + year);
         if (entryYear) {
@@ -184,6 +283,14 @@ function findMatchingCatalogLinks(title, year, imdbId, slug) {
 
       const fByClean = loadDetailFileByFilename(c, title);
       if (fByClean && fByClean.length > 0) return fByClean;
+
+      // Fuzzy prefix/containment match for harvested Dotmovies releases
+      for (const [hKey, hVal] of hIndex.entries()) {
+        if (hVal && typeof hKey === 'string' && hKey.length >= 4 && (c.startsWith(hKey) || hKey.startsWith(c))) {
+          const hLinks = extractLinksFromDetail(hVal, title);
+          if (hLinks.length > 0) return hLinks;
+        }
+      }
 
       // Fuzzy prefix/containment match for popular series/movies
       for (const [key, val] of dMap.entries()) {
@@ -363,8 +470,8 @@ function fetchTmdbRecord(mediaType, tmdbId) {
               categories: (raw.genres && Array.isArray(raw.genres)) ? raw.genres.map(g => g.name) : ['Entertainment'],
               language: raw.spoken_languages?.[0]?.english_name || 'English',
               country: raw.origin_country?.[0] || 'Global',
-              poster: raw.poster_path ? (`https://wsrv.nl/?url=${encodeURIComponent('https://image.tmdb.org/t/p/w500' + raw.poster_path)}&output=webp`) : null,
-              backdrop: raw.backdrop_path ? (`https://wsrv.nl/?url=${encodeURIComponent('https://image.tmdb.org/t/p/original' + raw.backdrop_path)}&output=webp`) : (raw.poster_path ? (`https://wsrv.nl/?url=${encodeURIComponent('https://image.tmdb.org/t/p/original' + raw.poster_path)}&output=webp`) : null),
+              poster: raw.poster_path ? `https://image.tmdb.org/t/p/w500${raw.poster_path}` : null,
+              backdrop: raw.backdrop_path ? `https://image.tmdb.org/t/p/original${raw.backdrop_path}` : (raw.poster_path ? `https://image.tmdb.org/t/p/original${raw.poster_path}` : null),
               trailerUrl,
               trailer: trailerUrl,
               cast,
@@ -406,7 +513,8 @@ function normalizeRawLinks(links, canonicalId, isSeries = false) {
     else if (/480|SD/i.test(q) || /480|SD/i.test(l.label || '')) q = '480p';
 
     const isCloud = Boolean(l.isCloud || (l.url && (l.url.includes('vcloud') || l.url.includes('workers.dev'))));
-    const source = isCloud ? 'Fast Cloud' : (l.url && l.url.includes('nexdrive') ? 'AllMovieLand' : (l.source || 'Direct Mirror'));
+    const isDotmovies = Boolean(l.isDotmovies || (l.url && (l.url.includes('nexdrive') || l.url.includes('dotmobiz'))) || l.source === 'dotmobiz' || l.source === 'Dotmovies');
+    const source = isDotmovies ? 'Dotmovies' : (isCloud ? 'Fast Cloud' : (l.source || 'Direct Mirror'));
 
     let season = l.season !== undefined ? l.season : null;
     let episode = l.episode !== undefined ? l.episode : null;
@@ -430,6 +538,7 @@ function normalizeRawLinks(links, canonicalId, isSeries = false) {
       quality: q,
       source,
       isCloud,
+      isDotmovies,
       season,
       episode,
       isPack
@@ -483,6 +592,8 @@ function standardizeLocalRecord(item, rawId) {
     releaseYear: item.year || parseInt((rawTitle.match(/\b(19\d{2}|20\d{2})\b/) || [0, 2026])[1], 10),
     year: item.year || parseInt((rawTitle.match(/\b(19\d{2}|20\d{2})\b/) || [0, 2026])[1], 10),
     slug: item.slug || `${canonicalId}-${title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`,
+    poster: item.poster ? unwrapImageUrl(item.poster) : null,
+    backdrop: item.backdrop ? unwrapImageUrl(item.backdrop) : (item.poster ? unwrapImageUrl(item.poster) : null),
     status: item.status || 'PUBLISHED',
     links: normalizedLinks
   };
@@ -578,5 +689,7 @@ module.exports = {
   fetchTmdbRecord,
   standardizeLocalRecord,
   findMatchingCatalogLinks,
-  normalizeRawLinks
+  normalizeRawLinks,
+  unwrapImageUrl,
+  getHarvestedIndex
 };

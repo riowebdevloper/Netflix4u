@@ -8,7 +8,7 @@ const https = require('https');
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
-const { resolveContentId, fetchTmdbRecord, findMatchingCatalogLinks, normalizeRawLinks } = require('./canonicalResolver');
+const { resolveContentId, fetchTmdbRecord, findMatchingCatalogLinks, normalizeRawLinks, unwrapImageUrl } = require('./canonicalResolver');
 
 // 🔐 Secure TMDB API Key (Environment variable or fallback)
 const TMDB_API_KEY = process.env.TMDB_API_KEY || '445f2b5a8941c1d4bd5a869761a916e3';
@@ -581,14 +581,16 @@ async function handlePosterResolver(req, res) {
     });
     if (findData) {
       const item = (findData.movie_results && findData.movie_results[0]) || (findData.tv_results && findData.tv_results[0]);
-      const pUrl = item.poster_path ? `https://wsrv.nl/?url=image.tmdb.org/t/p/w500${item.poster_path}` : null;
-      const bUrl = item.backdrop_path ? `https://wsrv.nl/?url=image.tmdb.org/t/p/original${item.backdrop_path}` : null;
-      return sendJson(res, 200, {
-        success: true,
-        poster: pUrl ? `https://wsrv.nl/?url=${encodeURIComponent(pUrl)}&output=webp` : null,
-        backdrop: bUrl ? `https://wsrv.nl/?url=${encodeURIComponent(bUrl)}&output=webp` : null,
-        tmdbId: item.id
-      }, { 'Cache-Control': 'public, max-age=86400' });
+      if (item) {
+        const pUrl = item.poster_path ? `https://image.tmdb.org/t/p/w500${item.poster_path}` : null;
+        const bUrl = item.backdrop_path ? `https://image.tmdb.org/t/p/original${item.backdrop_path}` : (pUrl || null);
+        return sendJson(res, 200, {
+          success: true,
+          poster: pUrl,
+          backdrop: bUrl,
+          tmdbId: item.id
+        }, { 'Cache-Control': 'public, max-age=86400' });
+      }
     }
   }
 
@@ -600,10 +602,45 @@ async function handlePosterResolver(req, res) {
     if (localItem && localItem.poster && !localItem.poster.includes('no-poster') && !localItem.poster.includes('placehold')) {
       return sendJson(res, 200, {
         success: true,
-        poster: localItem.poster,
-        backdrop: localItem.backdrop || localItem.poster,
+        poster: unwrapImageUrl(localItem.poster),
+        backdrop: unwrapImageUrl(localItem.backdrop || localItem.poster),
         canonicalId: localItem.canonicalId
       }, { 'Cache-Control': 'public, max-age=86400' });
+    }
+  }
+
+  // Tier 3: Search TMDB by cleaned title to guarantee a real poster
+  if (title) {
+    const cleanSearch = title.replace(/\(\d{4}\)/g, '')
+      .replace(/\[[^\]]*\]|\([^\)]*\)|\{[^\}]*\}/g, '')
+      .replace(/^(NetFlix|Prime|Disney\+|Hotstar|SonyLIV|ZEE5|JioCinema)\s+/i, '')
+      .replace(/\b(?:Season\s*\d+|S\d{1,2}|Ep(?:isode)?\s*\d+|All\s*Episodes?|Complete\s*Season).*$/i, '')
+      .replace(/\b(19\d{2}|20\d{2})\b.*$/i, '')
+      .replace(/\b(?:Hindi|English|Tamil|Telugu|Malayalam|Kannada|Korean|Japanese|Dual|Audio|Dubbed|Web|FHD|HD|4K|HQ).*$/i, '')
+      .trim();
+
+    if (cleanSearch.length >= 2) {
+      try {
+        const searchUrl = `https://api.tmdb.org/3/search/multi?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(cleanSearch)}`;
+        const searchData = await new Promise(resolve => {
+          https.get(searchUrl, { headers: { 'User-Agent': 'Mozilla/5.0', 'Accept': 'application/json' }, timeout: 4000 }, r => {
+            let d = ''; r.on('data', c => d += c); r.on('end', () => { try { resolve(JSON.parse(d)); } catch (e) { resolve(null); } });
+          }).on('error', () => resolve(null));
+        });
+        if (searchData && Array.isArray(searchData.results) && searchData.results.length > 0) {
+          const item = searchData.results.find(x => (x.media_type === 'movie' || x.media_type === 'tv') && x.poster_path) || searchData.results[0];
+          if (item && item.poster_path) {
+            const pUrl = `https://image.tmdb.org/t/p/w500${item.poster_path}`;
+            const bUrl = item.backdrop_path ? `https://image.tmdb.org/t/p/original${item.backdrop_path}` : pUrl;
+            return sendJson(res, 200, {
+              success: true,
+              poster: pUrl,
+              backdrop: bUrl,
+              tmdbId: item.id
+            }, { 'Cache-Control': 'public, max-age=86400' });
+          }
+        }
+      } catch (e) { }
     }
   }
 
@@ -830,8 +867,8 @@ async function handleSearch(req, res) {
           title: title,
           type: mediaType,
           contentType: mediaType,
-          poster: t.poster_path ? `https://wsrv.nl/?url=image.tmdb.org/t/p/w500${t.poster_path}` : null,
-          backdrop: t.backdrop_path ? `https://wsrv.nl/?url=image.tmdb.org/t/p/w1280${t.backdrop_path}` : null,
+          poster: t.poster_path ? `https://image.tmdb.org/t/p/w500${t.poster_path}` : null,
+          backdrop: t.backdrop_path ? `https://image.tmdb.org/t/p/original${t.backdrop_path}` : null,
           year: year,
           rating: t.vote_average ? Number(t.vote_average.toFixed(1)) : 7.8,
           overview: t.overview || '',
@@ -882,8 +919,8 @@ async function handleSearch(req, res) {
           title: itemTitle,
           type: contentType,
           contentType,
-          poster: item.poster && !item.poster.includes('placehold.co') ? item.poster : (verifiedTmdbId ? `https://wsrv.nl/?url=image.tmdb.org/t/p/w500/${item.poster_path || ''}` : null),
-          backdrop: item.backdrop && !item.backdrop.includes('placehold.co') ? item.backdrop : null,
+          poster: item.poster && !item.poster.includes('placehold.co') ? unwrapImageUrl(item.poster) : (verifiedTmdbId ? `https://image.tmdb.org/t/p/w500/${item.poster_path || ''}` : null),
+          backdrop: item.backdrop && !item.backdrop.includes('placehold.co') ? unwrapImageUrl(item.backdrop) : null,
           year: String(item.year || ''),
           rating: typeof item.rating === 'number' ? item.rating : 7.8,
           overview: item.description || '',
@@ -941,8 +978,8 @@ async function handleCatalogTrending(req, res) {
       tmdbId: r.id,
       title: r.title || r.name,
       year: String(r.release_date || r.first_air_date || '').slice(0, 4),
-      poster: r.poster_path ? `https://wsrv.nl/?url=image.tmdb.org/t/p/w500${r.poster_path}` : null,
-      backdrop: r.backdrop_path ? `https://wsrv.nl/?url=image.tmdb.org/t/p/w1280${r.backdrop_path}` : null,
+      poster: r.poster_path ? `https://image.tmdb.org/t/p/w500${r.poster_path}` : null,
+      backdrop: r.backdrop_path ? `https://image.tmdb.org/t/p/original${r.backdrop_path}` : null,
       rating: r.vote_average ? Number(r.vote_average.toFixed(1)) : 8.0,
       type: r.media_type === 'tv' ? 'tv' : 'movie',
       overview: r.overview || ''
@@ -1018,8 +1055,8 @@ async function handleCatalogDiscover(req, res) {
       tmdbId: r.id,
       title: r.title || r.name,
       year: String(r.release_date || r.first_air_date || '').slice(0, 4),
-      poster: r.poster_path ? `https://wsrv.nl/?url=image.tmdb.org/t/p/w500${r.poster_path}` : null,
-      backdrop: r.backdrop_path ? `https://wsrv.nl/?url=image.tmdb.org/t/p/w1280${r.backdrop_path}` : null,
+      poster: r.poster_path ? `https://image.tmdb.org/t/p/w500${r.poster_path}` : null,
+      backdrop: r.backdrop_path ? `https://image.tmdb.org/t/p/original${r.backdrop_path}` : null,
       rating: r.vote_average ? Number(r.vote_average.toFixed(1)) : 8.0,
       type: mediaType,
       overview: r.overview || ''
@@ -1162,15 +1199,15 @@ async function handleCatalogTitle(req, res) {
     certification: { rating: cert },
     tagline: raw?.tagline || '',
     overview: raw?.overview || localItem?.description || '',
-    poster: raw?.poster_path ? `https://wsrv.nl/?url=image.tmdb.org/t/p/w500${raw.poster_path}` : (localItem?.poster || null),
-    backdrop: raw?.backdrop_path ? `https://wsrv.nl/?url=image.tmdb.org/t/p/w1280${raw.backdrop_path}` : (localItem?.backdrop || null),
+    poster: raw?.poster_path ? `https://image.tmdb.org/t/p/w500${raw.poster_path}` : (unwrapImageUrl(localItem?.poster) || null),
+    backdrop: raw?.backdrop_path ? `https://image.tmdb.org/t/p/original${raw.backdrop_path}` : (unwrapImageUrl(localItem?.backdrop) || (localItem?.poster ? unwrapImageUrl(localItem.poster) : null)),
     genres: raw?.genres || (localItem?.categories || []).map((c, idx) => ({ id: idx, name: c })),
     cast: (raw?.credits?.cast || []).slice(0, 16).map(c => ({
       id: c.id,
       name: c.name,
       character: c.character,
-      profile_path: c.profile_path ? `https://wsrv.nl/?url=image.tmdb.org/t/p/w185${c.profile_path}` : null,
-      photo: c.profile_path ? `https://wsrv.nl/?url=image.tmdb.org/t/p/w185${c.profile_path}` : null
+      profile_path: c.profile_path ? `https://image.tmdb.org/t/p/w185${c.profile_path}` : null,
+      photo: c.profile_path ? `https://image.tmdb.org/t/p/w185${c.profile_path}` : null
     })),
     seasons: (raw?.seasons || []).filter(s => s.season_number > 0).map(s => ({
       season_number: s.season_number,
@@ -1180,7 +1217,7 @@ async function handleCatalogTitle(req, res) {
     recommendations: (raw?.recommendations?.results || raw?.similar?.results || []).slice(0, 12).map(r => ({
       tmdbId: r.id,
       title: r.title || r.name,
-      poster: r.poster_path ? `https://wsrv.nl/?url=image.tmdb.org/t/p/w342${r.poster_path}` : null,
+      poster: r.poster_path ? `https://image.tmdb.org/t/p/w342${r.poster_path}` : null,
       year: String(r.release_date || r.first_air_date || '').slice(0, 4),
       type: r.media_type || (r.title ? 'movie' : 'tv'),
       rating: r.vote_average ? Number(r.vote_average.toFixed(1)) : 7.5
@@ -1222,7 +1259,7 @@ async function handleCatalogSeason(req, res) {
     episode_number: ep.episode_number,
     name: ep.name,
     overview: ep.overview,
-    still_path: ep.still_path ? `https://wsrv.nl/?url=image.tmdb.org/t/p/w300${ep.still_path}` : null,
+    still_path: ep.still_path ? `https://image.tmdb.org/t/p/w300${ep.still_path}` : null,
     vote_average: ep.vote_average ? Number(ep.vote_average.toFixed(1)) : 7.8,
     runtime: ep.runtime || 45
   }));
@@ -1275,8 +1312,8 @@ function handleCategoryFeed(req, res, rawCat) {
           imdbId: it.imdbId || null,
           title: it.title,
           year: String(it.year || ''),
-          poster: it.poster,
-          backdrop: it.backdrop,
+          poster: unwrapImageUrl(it.poster),
+          backdrop: unwrapImageUrl(it.backdrop || it.poster),
           rating: typeof it.rating === 'number' ? it.rating : 8.0,
           type: it.type === 'series' ? 'tv' : 'movie',
           overview: it.description || it.overview || ''
@@ -1308,8 +1345,8 @@ function handleCategoryFeed(req, res, rawCat) {
     imdbId: it.imdbId || null,
     title: it.title,
     year: String(it.year || ''),
-    poster: it.poster,
-    backdrop: it.backdrop,
+    poster: unwrapImageUrl(it.poster),
+    backdrop: unwrapImageUrl(it.backdrop || it.poster),
     rating: typeof it.rating === 'number' ? it.rating : 8.0,
     type: it.type === 'series' ? 'tv' : 'movie',
     overview: it.description || ''
