@@ -226,6 +226,8 @@
   }
 
   async function syncHeroWithTrending() {
+    // Preserve exact net27.cc featured hero titles if already present in data-hero
+    if (heroItems && heroItems.length >= 5) return;
     try {
       var items = null;
       var cached = getCachedRail('trending-day');
@@ -435,17 +437,18 @@
     if (platform === 'trending') {
       return [
         { key: 'trending-day', title: 'Top 10 Today', url: '/api/catalog/trending?window=day', ranked: true },
-        { key: 'new-releases', title: 'Latest Releases', url: '/api/catalog/discover?type=movie&sort=release&year_from=2025&year_to=2026' + reg },
-        { key: 'movies', title: 'Popular Movies', url: '/api/category/movies' },
-        { key: 'series', title: 'Popular Series', url: '/api/category/series' },
+        { key: 'new-releases', title: 'New Releases', url: '/api/catalog/discover?type=movie&sort=release&year_from=2025&year_to=2026' + reg },
+        { key: 'netflix-popular', title: 'Popular on Netflix', url: '/api/catalog/discover?platform=Netflix&type=movie' + reg, logo: PLATFORM_LOGOS.Netflix },
+        { key: 'prime-popular', title: 'Popular on Prime Video', url: '/api/catalog/discover?platform=PrimeVideo&type=movie' + reg, logo: PLATFORM_LOGOS.PrimeVideo },
+        { key: 'kdrama', title: 'Korean Dramas', url: '/api/catalog/discover?platform=Netflix&type=tv' + reg },
+        { key: 'anime', title: 'Anime Series', url: '/api/catalog/discover?platform=Crunchyroll&type=tv' + reg, logo: PLATFORM_LOGOS.Crunchyroll },
+        { key: 'action', title: 'Action Blockbusters', url: '/api/catalog/discover?type=movie&genre=' + GENRES.Action + reg },
+        { key: 'comedy', title: 'Comedies', url: '/api/catalog/discover?type=movie&genre=' + GENRES.Comedy + reg },
+        { key: 'top-rated', title: 'Critically Acclaimed', url: '/api/catalog/discover?type=movie&sort=rating' + reg },
         { key: 'bollywood', title: 'Bollywood Blockbusters', url: '/api/category/bollywood' },
         { key: 'hollywood', title: 'Hollywood Hits', url: '/api/category/hollywood' },
         { key: 'south-indian', title: 'South Indian Cinema', url: '/api/category/south-indian' },
-        { key: 'hindi-dubbed', title: 'Hindi Dubbed Movies', url: '/api/category/hindi-dubbed' },
-        { key: 'kdrama', title: 'Korean Dramas', url: '/api/category/kdrama' },
-        { key: 'anime', title: 'Anime Collection', url: '/api/category/anime', logo: PLATFORM_LOGOS.Crunchyroll },
-        { key: 'recently-added', title: 'Recently Added', url: '/api/catalog/discover?sort=release' + reg },
-        { key: 'top-rated', title: 'Recommended & Top Rated', url: '/api/catalog/discover?type=movie&sort=rating' + reg }
+        { key: 'hindi-dubbed', title: 'Hindi Dubbed Movies', url: '/api/category/hindi-dubbed' }
       ];
     } else if (platform === 'LatestRelease') {
       return [
@@ -951,42 +954,6 @@
     }
   }
 
-  // ─── Mobile Menu Drawer ───
-  function initMobileMenu() {
-    var menuBtn = document.getElementById('mobile-menu-btn');
-    var menuDrawer = document.getElementById('mobile-menu-drawer');
-    var menuClose = document.getElementById('mobile-menu-close');
-
-    if (!menuBtn || !menuDrawer) return;
-
-    var openMenu = function() {
-      menuDrawer.classList.remove('hidden');
-      requestAnimationFrame(function() {
-        menuDrawer.classList.add('is-open');
-      });
-      document.body.style.overflow = 'hidden';
-    };
-
-    var closeMenu = function() {
-      menuDrawer.classList.remove('is-open');
-      setTimeout(function() {
-        menuDrawer.classList.add('hidden');
-        document.body.style.overflow = '';
-      }, 250);
-    };
-
-    menuBtn.addEventListener('click', openMenu);
-    if (menuClose) menuClose.addEventListener('click', closeMenu);
-
-    menuDrawer.addEventListener('click', function(e) {
-      if (e.target === menuDrawer) closeMenu();
-    });
-
-    menuDrawer.querySelectorAll('a').forEach(function(a) {
-      a.addEventListener('click', closeMenu);
-    });
-  }
-
   // ─── Broken Poster Self-Healing ───
   function healPoster(imgEl) {
     if (!imgEl) return;
@@ -1003,7 +970,6 @@
     initHeroCarousel();
     initPlatformSwitcher();
     initSearch();
-    initMobileMenu();
     loadPlatformRails('trending');
     handleInitialRoutes();
   }

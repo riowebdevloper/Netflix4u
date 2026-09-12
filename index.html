@@ -180,7 +180,10 @@
             <a href="/" class="flex items-center gap-1.5 shrink-0">
               <span class="text-xl sm:text-2xl font-black tracking-tight">
                 <span class="text-[color:var(--color-brand)]">Netflix</span>4U
-                      <!-- Centered Pill Search Bar -->
+              </span>
+            </a>
+
+            <!-- Centered Pill Search Bar -->
             <div class="relative flex-1 max-w-xl mx-auto">
               <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path>
@@ -188,13 +191,6 @@
               <input id="search-input" type="search" placeholder="Search movies, series, anime, 4K downloads…" class="w-full pl-9 pr-9 py-2 rounded-full bg-white/10 border border-white/10 placeholder:text-white/40 focus:outline-none focus:border-white/30 focus:bg-white/15 transition text-sm">
               <button id="search-clear" type="button" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-white/40 hover:text-white text-sm w-5 h-5 rounded-full flex items-center justify-center">✕</button>
             </div>
-
-            <!-- Mobile Hamburger Toggle -->
-            <button id="mobile-menu-btn" type="button" aria-label="Open navigation menu" class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 active:scale-95 flex items-center justify-center text-white shrink-0 cursor-pointer transition sm:hidden">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            </button>
           </div>
 
           <!-- Platform Pill Switcher -->
@@ -252,69 +248,22 @@
           </div>
         </header>
 
-        <!-- ─── Mobile Navigation Drawer ─── -->
-        <div id="mobile-menu-drawer" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-md transition-opacity duration-300" aria-hidden="true">
-          <div class="fixed top-0 right-0 bottom-0 w-[280px] max-w-[85vw] bg-[#121218] border-l border-white/10 shadow-2xl flex flex-col p-5 overflow-y-auto">
-            <div class="flex items-center justify-between pb-4 border-b border-white/10">
-              <div class="text-lg font-black tracking-tight"><span class="text-[color:var(--color-brand)]">Netflix</span>4U</div>
-              <button id="mobile-menu-close" type="button" aria-label="Close menu" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition cursor-pointer">✕</button>
-            </div>
-            <nav class="py-4 space-y-1">
-              <div class="text-[11px] uppercase tracking-wider font-bold text-white/40 px-3 py-1">Browse</div>
-              <a href="/" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-white hover:bg-white/10 transition">
-                <svg class="w-4 h-4 text-red-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-                Home
-              </a>
-              <a href="/movies" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-white/85 hover:bg-white/10 transition">
-                <svg class="w-4 h-4 text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect><line x1="7" y1="2" x2="7" y2="22"></line><line x1="17" y1="2" x2="17" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="2" y1="7" x2="7" y2="7"></line><line x1="2" y1="17" x2="7" y2="17"></line><line x1="17" y1="17" x2="22" y2="17"></line><line x1="17" y1="7" x2="22" y2="7"></line></svg>
-                Movies
-              </a>
-              <a href="/series" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-white/85 hover:bg-white/10 transition">
-                <svg class="w-4 h-4 text-purple-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg>
-                Web Series
-              </a>
-              <a href="/anime" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-white/85 hover:bg-white/10 transition">
-                <svg class="w-4 h-4 text-orange-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                Anime
-              </a>
-              <a href="/kdrama" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-white/85 hover:bg-white/10 transition">
-                <svg class="w-4 h-4 text-pink-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-                K-Drama
-              </a>
-              <a href="/trending" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold text-white/85 hover:bg-white/10 transition">
-                <svg class="w-4 h-4 text-amber-400" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67z"></path></svg>
-                Trending
-              </a>
-            </nav>
-            <div class="mt-auto pt-4 border-t border-white/10 space-y-3">
-              <a href="https://t.me/netflix_mirror_apk" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg bg-[#229ED9]/20 hover:bg-[#229ED9]/30 text-white font-semibold text-xs border border-[#229ED9]/30 transition">
-                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="#229ED9"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
-                Telegram Channel
-              </a>
-              <div class="flex flex-wrap gap-x-3 gap-y-1.5 text-[11px] text-white/45 pt-1">
-                <a href="/about" data-policy-link="about" class="hover:text-white">About Us</a>
-                <a href="/dmca" data-policy-link="dmca" class="hover:text-white">DMCA</a>
-                <a href="/privacy" data-policy-link="privacy" class="hover:text-white">Privacy</a>
-                <a href="/terms" data-policy-link="terms" class="hover:text-white">Terms</a>
-                <a href="/contact" data-policy-link="contact" class="hover:text-white">Contact</a>
-              </div>
-            </div>
-          </div>
-        </div>
 
-        <!-- ─── 5-Slide Hero Carousel ─── -->
+
+        <!-- ─── 6-Slide Hero Carousel (net27.cc Exact Sync) ─── -->
         <section id="hero" class="relative hero-container h-[64vh] sm:h-[80vh] min-h-[460px] sm:min-h-[680px] max-h-[940px] overflow-hidden" style="padding-top: calc(env(safe-area-inset-top, 0px) + 95px);"
-          data-hero='[{"tmdbId":1339713,"title":"Obsession","year":"2026","backdrop":"https://wsrv.nl/?url=image.tmdb.org/t/p/w1280/rZfmzpixLKLR3Hg2u0WgC7XLFl8.jpg","overview":"After breaking the mysterious \"One Wish Willow\" to win his crush&#39;s heart, a hopeless romantic finds himself getting exactly what he asked for but soon discovers that some desires come at a dark, sinister price.","rating":8.2,"type":"movie"},{"tmdbId":1007757,"title":"Swapped","year":"2026","backdrop":"https://wsrv.nl/?url=image.tmdb.org/t/p/w1280/zMwhWailP1WY7sb6AoE6b8ugoy.jpg","overview":"A small woodland creature and a majestic bird, two natural sworn enemies of the Valley, magically trade places and set off on an adventure of a lifetime to switch back.","rating":8.9,"type":"movie"},{"tmdbId":1311031,"title":"Demon Slayer: Kimetsu no Yaiba Infinity Castle","year":"2025","backdrop":"https://wsrv.nl/?url=image.tmdb.org/t/p/w1280/1RgPyOhN4DRs225BGTlHJqCudII.jpg","overview":"The Demon Slayer Corps are drawn into the Infinity Castle, where Tanjiro, Nezuko, and the Hashira face terrifying Upper Rank demons in a desperate fight as the final battle begins.","rating":8.8,"type":"movie"},{"tmdbId":278,"title":"The Shawshank Redemption","year":"1994","backdrop":"https://wsrv.nl/?url=image.tmdb.org/t/p/w1280/pNjh59JSxChQktamG3LMp9ZoQzp.jpg","overview":"Imprisoned in the 1940s for the double murder of his wife and her lover, upstanding banker Andy Dufresne begins a new life at the Shawshank prison.","rating":8.7,"type":"movie"},{"tmdbId":238,"title":"The Godfather","year":"1972","backdrop":"https://wsrv.nl/?url=image.tmdb.org/t/p/w1280/tSPT36ZKlP2WVHJLM4cQPLSzv3b.jpg","overview":"Spanning the years 1945 to 1955, a chronicle of the fictional Italian-American Corleone crime family.","rating":8.7,"type":"movie"}]'>
+          data-hero='[{"tmdbId":1408162,"title":"Vishwanath & Sons","year":"2026","backdrop":"https://image.tmdb.org/t/p/original/1qPphJz0o0ILae6rIgDK9xoAAvH.jpg","overview":"Sanjay Vishwanath is an acclaimed professional handgunner in his 40s with a major stake in fame and wealth. When he comes across a woman named Maddy in her 20s, their dynamic poses many issues that they must come to terms with.","rating":7.3,"type":"movie"},{"tmdbId":84105,"title":"Mirzapur","year":"2018","backdrop":"https://image.tmdb.org/t/p/original/3dV7pWAdwIPKR2lMIACMfObXdgK.jpg","overview":"The iron-fisted Akhandanand Tripathi is a millionaire carpet exporter and the mafia don of Mirzapur. His son, Munna, is an unworthy, power-hungry heir who will stop at nothing to inherit his father&#39;s legacy. An incident at a wedding procession forces him to cross paths with Ramakant Pandit, an upstanding lawyer, and his sons, Guddu and Bablu.","rating":8.0,"type":"tv"},{"tmdbId":108978,"title":"Reacher","year":"2022","backdrop":"https://image.tmdb.org/t/p/original/pF0qkRsrHkdYadPWY9AMeFZfcwk.jpg","overview":"Jack Reacher, a veteran military police investigator, has just recently entered civilian life. Reacher is a drifter, carrying no phone and the barest of essentials as he travels the country and explores the nation he once served.","rating":8.1,"type":"tv"},{"tmdbId":1378537,"title":"Mirzapur: The Movie","year":"2026","backdrop":"https://image.tmdb.org/t/p/original/nTkQBI8ldvPByIkxsemGxtKlr8E.jpg","overview":"The battle for Mirzapur’s throne intensifies as old enemies resurface and a new threat emerges in the form of Babban Babua, a ruthless businessman from Jaisalmer with ambitions of his own. As the Tripathis face enemies from both the past and present, loyalties are tested while Guddu and Bablu Pandit fight to defend their hard-won supremacy.","rating":8.1,"type":"movie"},{"tmdbId":5920,"title":"The Mentalist","year":"2008","backdrop":"https://image.tmdb.org/t/p/original/rJFqKcmMSttdNP58l0dVzY2NcTA.jpg","overview":"Patrick Jane, a former celebrity psychic medium, uses his razor sharp skills of observation and expertise at \"reading\" people to solve serious crimes with the California Bureau of Investigation.","rating":8.4,"type":"tv"},{"tmdbId":1709391,"title":"Hanuman Ansh","year":"2025","backdrop":"https://image.tmdb.org/t/p/original/tKYOK8iMxkhJhug3LJ2yvC5QY8M.jpg","overview":"A grieving boy seeks God to meet his departed mother, and in finding the divine, learns to serve humanity with miracles of love, food and silent blessings, becoming Hanuman Ansh, Neem Karoli Baba.","rating":8.6,"type":"movie"}]'>
 
           <!-- Crossfade Backdrops -->
-          <div class="hero-bg absolute inset-0 bg-cover bg-center transition-opacity duration-[1200ms]" style="background-image: url('https://wsrv.nl/?url=image.tmdb.org/t/p/w1280/rZfmzpixLKLR3Hg2u0WgC7XLFl8.jpg'); opacity: 1; z-index: 10"></div>
-          <div class="hero-bg absolute inset-0 bg-cover bg-center transition-opacity duration-[1200ms]" style="background-image: url('https://wsrv.nl/?url=image.tmdb.org/t/p/w1280/zMwhWailP1WY7sb6AoE6b8ugoy.jpg'); opacity: 0; z-index: 9"></div>
-          <div class="hero-bg absolute inset-0 bg-cover bg-center transition-opacity duration-[1200ms]" style="background-image: url('https://wsrv.nl/?url=image.tmdb.org/t/p/w1280/1RgPyOhN4DRs225BGTlHJqCudII.jpg'); opacity: 0; z-index: 8"></div>
-          <div class="hero-bg absolute inset-0 bg-cover bg-center transition-opacity duration-[1200ms]" style="background-image: url('https://wsrv.nl/?url=image.tmdb.org/t/p/w1280/pNjh59JSxChQktamG3LMp9ZoQzp.jpg'); opacity: 0; z-index: 7"></div>
-          <div class="hero-bg absolute inset-0 bg-cover bg-center transition-opacity duration-[1200ms]" style="background-image: url('https://wsrv.nl/?url=image.tmdb.org/t/p/w1280/tSPT36ZKlP2WVHJLM4cQPLSzv3b.jpg'); opacity: 0; z-index: 6"></div>
+          <div class="hero-bg absolute inset-0 bg-cover bg-center transition-opacity duration-[1200ms]" style="background-image: url('https://image.tmdb.org/t/p/original/1qPphJz0o0ILae6rIgDK9xoAAvH.jpg'); opacity: 1; z-index: 10" data-hero-idx="0"></div>
+          <div class="hero-bg absolute inset-0 bg-cover bg-center transition-opacity duration-[1200ms]" style="background-image: url('https://image.tmdb.org/t/p/original/3dV7pWAdwIPKR2lMIACMfObXdgK.jpg'); opacity: 0; z-index: 9" data-hero-idx="1"></div>
+          <div class="hero-bg absolute inset-0 bg-cover bg-center transition-opacity duration-[1200ms]" style="background-image: url('https://image.tmdb.org/t/p/original/pF0qkRsrHkdYadPWY9AMeFZfcwk.jpg'); opacity: 0; z-index: 8" data-hero-idx="2"></div>
+          <div class="hero-bg absolute inset-0 bg-cover bg-center transition-opacity duration-[1200ms]" style="background-image: url('https://image.tmdb.org/t/p/original/nTkQBI8ldvPByIkxsemGxtKlr8E.jpg'); opacity: 0; z-index: 7" data-hero-idx="3"></div>
+          <div class="hero-bg absolute inset-0 bg-cover bg-center transition-opacity duration-[1200ms]" style="background-image: url('https://image.tmdb.org/t/p/original/rJFqKcmMSttdNP58l0dVzY2NcTA.jpg'); opacity: 0; z-index: 6" data-hero-idx="4"></div>
+          <div class="hero-bg absolute inset-0 bg-cover bg-center transition-opacity duration-[1200ms]" style="background-image: url('https://image.tmdb.org/t/p/original/tKYOK8iMxkhJhug3LJ2yvC5QY8M.jpg'); opacity: 0; z-index: 5" data-hero-idx="5"></div>
 
           <!-- Clickable Hero Backdrop Trigger -->
-          <button id="hero-click" type="button" data-modal="title" data-tmdbid="1339713" data-type="movie" aria-label="More info for Obsession" class="absolute inset-0 z-[15] cursor-pointer bg-transparent border-0"></button>
+          <button id="hero-click" type="button" data-modal="title" data-tmdbid="1408162" data-type="movie" aria-label="More info for Vishwanath &amp; Sons" class="absolute inset-0 z-[15] cursor-pointer bg-transparent border-0"></button>
 
           <!-- Gradient Masks -->
           <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-[#0a0a0f]/40 to-transparent pointer-events-none z-20"></div>
@@ -328,11 +277,11 @@
               </div>
 
               <h1 id="hero-title" class="text-2xl sm:text-5xl md:text-6xl font-black mb-2 sm:mb-3 leading-[1.08] tracking-tight text-white line-clamp-2" style="text-shadow: 0 2px 24px rgba(0,0,0,0.7);">
-                Obsession
+                Vishwanath &amp; Sons
               </h1>
 
               <div id="hero-meta" class="flex flex-wrap items-center gap-x-2.5 sm:gap-x-3 gap-y-1 text-xs sm:text-sm text-white/85 mb-2 sm:mb-3 font-medium">
-                <span class="px-1.5 py-0.5 rounded bg-yellow-400/90 text-black font-bold text-[10px] sm:text-[11px]">⭐ 8.2</span>
+                <span class="px-1.5 py-0.5 rounded bg-yellow-400/90 text-black font-bold text-[10px] sm:text-[11px]">⭐ 7.3</span>
                 <span>2026</span>
                 <span>•</span>
                 <span class="uppercase tracking-wider">Movie</span>
@@ -340,22 +289,22 @@
               </div>
 
               <div id="hero-desc" class="text-xs sm:text-base text-white/85 max-w-2xl mb-4 sm:mb-5 line-clamp-2 sm:line-clamp-3 leading-relaxed" style="text-shadow: 0 1px 8px rgba(0,0,0,0.6);">
-                After breaking the mysterious "One Wish Willow" to win his crush's heart, a hopeless romantic finds himself getting exactly what he asked for but soon discovers that some desires come at a dark, sinister price.
+                Sanjay Vishwanath is an acclaimed professional handgunner in his 40s with a major stake in fame and wealth. When he comes across a woman named Maddy in her 20s, their dynamic poses many issues that they must come to terms with.
               </div>
 
               <!-- Action Buttons -->
               <div class="flex flex-wrap items-center gap-2 sm:gap-3">
-                <button id="hero-play" type="button" data-modal="watch" data-tmdbid="1339713" data-type="movie" data-backdrop="https://wsrv.nl/?url=image.tmdb.org/t/p/w1280/EfqrvgJzjgKP.jpg" class="inline-flex items-center gap-1.5 sm:gap-2 px-4 sm:px-8 py-2 sm:py-3 rounded-lg bg-white text-black font-bold hover:bg-white/90 active:scale-95 transition text-xs sm:text-base shadow-xl cursor-pointer">
+                <button id="hero-play" type="button" data-modal="watch" data-tmdbid="1408162" data-type="movie" data-backdrop="https://image.tmdb.org/t/p/original/1qPphJz0o0ILae6rIgDK9xoAAvH.jpg" class="inline-flex items-center gap-1.5 sm:gap-2 px-4 sm:px-8 py-2 sm:py-3 rounded-lg bg-white text-black font-bold hover:bg-white/90 active:scale-95 transition text-xs sm:text-base shadow-xl cursor-pointer">
                   <svg class="w-3.5 h-3.5 sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
                   Watch Now
                 </button>
-                <button id="hero-info" type="button" data-modal="title" data-tmdbid="1339713" data-type="movie" class="inline-flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-7 py-2 sm:py-3 rounded-lg bg-white/15 backdrop-blur-md text-white font-semibold hover:bg-white/25 active:scale-95 transition text-xs sm:text-base border border-white/10 cursor-pointer">
+                <button id="hero-info" type="button" data-modal="title" data-tmdbid="1408162" data-type="movie" class="inline-flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-7 py-2 sm:py-3 rounded-lg bg-white/15 backdrop-blur-md text-white font-semibold hover:bg-white/25 active:scale-95 transition text-xs sm:text-base border border-white/10 cursor-pointer">
                   <svg class="w-3.5 h-3.5 sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4M12 8h.01"></path>
                   </svg>
                   More Info
                 </button>
-                <button id="hero-download" type="button" data-modal="title" data-tmdbid="1339713" data-type="movie" class="inline-flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-7 py-2 sm:py-3 rounded-lg bg-red-600 hover:bg-red-700 active:scale-95 transition text-white font-bold text-xs sm:text-base shadow-lg cursor-pointer">
+                <button id="hero-download" type="button" data-modal="title" data-tmdbid="1408162" data-type="movie" class="inline-flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-7 py-2 sm:py-3 rounded-lg bg-red-600 hover:bg-red-700 active:scale-95 transition text-white font-bold text-xs sm:text-base shadow-lg cursor-pointer">
                   <svg class="w-3.5 h-3.5 sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                     <path d="M12 3v12m0 0l-4-4m4 4l4-4"/><path d="M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/>
                   </svg>
@@ -374,7 +323,14 @@
           </button>
 
           <!-- Carousel Dots -->
-          <div id="hero-dots" class="absolute bottom-3 left-1/2 -translate-x-1/2 sm:bottom-5 flex gap-1.5 z-30"></div>
+          <div id="hero-dots" class="absolute bottom-3 left-1/2 -translate-x-1/2 sm:bottom-5 flex gap-1.5 z-30">
+            <button data-hero-dot="0" aria-label="Show featured 1" class="hero-dot w-5 h-2 rounded-full bg-white transition cursor-pointer"></button>
+            <button data-hero-dot="1" aria-label="Show featured 2" class="hero-dot w-2 h-2 rounded-full bg-white/30 hover:bg-white/60 transition cursor-pointer"></button>
+            <button data-hero-dot="2" aria-label="Show featured 3" class="hero-dot w-2 h-2 rounded-full bg-white/30 hover:bg-white/60 transition cursor-pointer"></button>
+            <button data-hero-dot="3" aria-label="Show featured 4" class="hero-dot w-2 h-2 rounded-full bg-white/30 hover:bg-white/60 transition cursor-pointer"></button>
+            <button data-hero-dot="4" aria-label="Show featured 5" class="hero-dot w-2 h-2 rounded-full bg-white/30 hover:bg-white/60 transition cursor-pointer"></button>
+            <button data-hero-dot="5" aria-label="Show featured 6" class="hero-dot w-2 h-2 rounded-full bg-white/30 hover:bg-white/60 transition cursor-pointer"></button>
+          </div>
         </section>
 
         <!-- Compact App Download Strip -->
@@ -434,68 +390,26 @@
             </div>
           </section>
 
-          <!-- ─── Site Footer (Section 35: Left Browse, Right Discover + Info) ─── -->
-          <footer class="pt-10 pb-8 border-t border-white/10 mt-12 bg-black/40">
-            <div class="max-w-6xl mx-auto px-4 sm:px-6">
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 pb-8 border-b border-white/10">
-                <!-- LEFT: Browse -->
-                <div>
-                  <div class="flex items-center gap-2 mb-3">
-                    <div class="w-1.5 h-4 rounded-full bg-red-600"></div>
-                    <h4 class="text-sm font-bold uppercase tracking-wider text-white">Browse</h4>
-                  </div>
-                  <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs text-white/60 font-medium">
-                    <a href="/" class="hover:text-white transition">Home</a>
-                    <a href="/movies" class="hover:text-white transition">Movies</a>
-                    <a href="/series" class="hover:text-white transition">Web Series</a>
-                    <a href="/trending" class="hover:text-white transition">Trending</a>
-                    <a href="/anime" class="hover:text-white transition">Anime</a>
-                    <a href="/kdrama" class="hover:text-white transition">K-Drama</a>
-                  </div>
-                </div>
-
-                <!-- RIGHT: Discover + Info directly beneath Discover -->
-                <div class="space-y-6">
-                  <!-- Discover -->
-                  <div>
-                    <div class="flex items-center gap-2 mb-3">
-                      <div class="w-1.5 h-4 rounded-full bg-amber-500"></div>
-                      <h4 class="text-sm font-bold uppercase tracking-wider text-white">Discover</h4>
-                    </div>
-                    <div class="grid grid-cols-2 gap-2 text-xs text-white/60 font-medium">
-                      <a href="/bollywood" class="hover:text-white transition">Bollywood</a>
-                      <a href="/hollywood" class="hover:text-white transition">Hollywood</a>
-                      <a href="/south-indian" class="hover:text-white transition">South Indian</a>
-                      <a href="/hindi-dubbed" class="hover:text-white transition">Hindi Dubbed</a>
-                    </div>
-                  </div>
-
-                  <!-- Info (Directly beneath Discover) -->
-                  <div>
-                    <div class="flex items-center gap-2 mb-3">
-                      <div class="w-1.5 h-4 rounded-full bg-blue-500"></div>
-                      <h4 class="text-sm font-bold uppercase tracking-wider text-white">Info & Support</h4>
-                    </div>
-                    <div class="grid grid-cols-2 gap-2 text-xs text-white/60 font-medium">
-                      <a href="/about" data-policy-link="about" class="hover:text-white transition cursor-pointer">About Us</a>
-                      <a href="/dmca" data-policy-link="dmca" class="hover:text-white transition cursor-pointer">DMCA Disclaimer</a>
-                      <a href="/privacy" data-policy-link="privacy" class="hover:text-white transition cursor-pointer">Privacy Policy</a>
-                      <a href="/terms" data-policy-link="terms" class="hover:text-white transition cursor-pointer">Terms of Service</a>
-                      <a href="/contact" data-policy-link="contact" class="hover:text-white transition cursor-pointer">Contact Us</a>
-                      <a href="https://t.me/netflix_mirror_apk" target="_blank" rel="noopener noreferrer" class="hover:text-[#229ED9] text-[#229ED9] font-semibold transition">Telegram Channel</a>
-                    </div>
-                  </div>
-                </div>
+          <!-- ─── Site Footer ─── -->
+          <footer class="pt-12 pb-8 border-t border-white/5 mt-12">
+            <div class="max-w-5xl mx-auto text-center space-y-4">
+              <div class="text-lg font-black text-white">
+                <span class="text-[color:var(--color-brand)]">Netflix</span>4U
               </div>
-
-              <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/40">
-                <div class="flex items-center gap-2">
-                  <span class="text-base font-black text-white tracking-tight"><span class="text-red-600">Netflix</span>4U</span>
-                  <span>• © 2026 Netflix4U. All rights reserved.</span>
-                </div>
-                <div class="text-[11px] text-center sm:text-right max-w-lg">
-                  Netflix4U does not store media files on its servers. All streams and downloads are indexed from external verified public mirrors.
-                </div>
+              <div class="text-xs text-white/50 flex flex-wrap justify-center gap-4 sm:gap-6 font-medium">
+                <a href="/about" data-policy-link="about" class="hover:text-white transition cursor-pointer">About Us</a>
+                <a href="/privacy" data-policy-link="privacy" class="hover:text-white transition cursor-pointer">Privacy Policy</a>
+                <a href="/terms" data-policy-link="terms" class="hover:text-white transition cursor-pointer">Terms of Service</a>
+                <a href="/dmca" data-policy-link="dmca" class="hover:text-white transition cursor-pointer">DMCA Disclaimer</a>
+                <a href="/contact" data-policy-link="contact" class="hover:text-white transition cursor-pointer">Contact</a>
+              </div>
+              <div class="text-xs text-white/40">
+                Netflix4U does not store media files on its servers. All streams and downloads are indexed from external verified public mirrors.
+              </div>
+              <div class="text-[11px] text-white/30">
+                © 2026 Netflix4U. All rights reserved.
+              </div>
+            </div>
           </footer>
         </main>
       </div>
