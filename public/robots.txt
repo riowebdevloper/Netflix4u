@@ -1,0 +1,35 @@
+# Netflix4U Robots.txt
+# Optimized for Google, Bing, Perplexity, GPTBot, ClaudeBot, and AI Search Engines
+
+User-agent: *
+Allow: /
+Disallow: /data/details_map.json
+Disallow: /data/movies.json
+Disallow: /data/series.json
+Disallow: /api/admin
+Disallow: /private/
+
+# AI Search & Answer Engine Crawlers (Full Allowed)
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+# Sitemap Location
+Sitemap: https://netflix4u.in/sitemap.xml

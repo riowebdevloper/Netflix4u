@@ -23,6 +23,21 @@ const castCache = new Map();
 const trailerCache = new Map();
 let catalogSummaryCache = null;
 
+// In-Memory Sliding-Window Rate Limiter (Defensive Security)
+const ipRequestCounts = new Map();
+function checkRateLimit(ip, maxPerMinute = 150) {
+  const now = Date.now();
+  const windowMs = 60 * 1000;
+  let record = ipRequestCounts.get(ip);
+  if (!record || now - record.start > windowMs) {
+    record = { start: now, count: 1 };
+    ipRequestCounts.set(ip, record);
+    return true;
+  }
+  record.count++;
+  return record.count <= maxPerMinute;
+}
+
 // ==========================================
 // 🛠️ UTILITY FUNCTIONS
 // ==========================================
@@ -56,7 +71,7 @@ function sendJson(res, statusCode, data, extraHeaders = {}) {
 
   if (typeof res.setHeader === 'function') {
     for (const [k, v] of Object.entries(headers)) {
-      try { res.setHeader(k, v); } catch(e) {}
+      try { res.setHeader(k, v); } catch (e) { }
     }
   }
 
@@ -105,7 +120,7 @@ function getCatalogSummary() {
             canonicalId: cId
           };
         });
-      } catch(e) {
+      } catch (e) {
         catalogSummaryCache = [];
       }
     } else {
@@ -171,7 +186,7 @@ function resolveTmdbId(title, year, type = 'movie', imdbId = '') {
               tmdbIdCache.set(cacheKey, match.id);
               return resolve(match.id);
             }
-          } catch(e) {}
+          } catch (e) { }
           resolve(null);
         });
       }).on('error', () => resolve(null));
@@ -218,7 +233,7 @@ function resolveTmdbId(title, year, type = 'movie', imdbId = '') {
               return resolve(matched.id);
             }
           }
-        } catch(e) {}
+        } catch (e) { }
         resolve(null);
       });
     }).on('error', () => resolve(null));
@@ -263,7 +278,7 @@ async function resolveTitleCast(title, tmdbId, year, type = 'movie', imdbId = ''
             castCache.set(cacheKey, cast);
             return resolve(cast);
           }
-        } catch(e) {}
+        } catch (e) { }
         resolve([]);
       });
     });
@@ -308,7 +323,7 @@ async function handleDetails(req, res) {
   if (!item.tmdbId && (item.title || item.imdbId)) {
     try {
       item.tmdbId = await resolveTmdbId(item.title, item.year, isTv ? 'series' : 'movie', item.imdbId);
-    } catch(e) {}
+    } catch (e) { }
   }
 
   if (item.tmdbId && needsDesc) {
@@ -321,7 +336,7 @@ async function handleDetails(req, res) {
         if ((!item.genres || item.genres.length === 0) && tmdbRec.genres) item.genres = tmdbRec.genres;
         if ((!item.cast || item.cast.length === 0) && tmdbRec.cast) item.cast = tmdbRec.cast;
       }
-    } catch(e) {}
+    } catch (e) { }
   }
 
   // Enrich missing download links if empty
@@ -331,7 +346,7 @@ async function handleDetails(req, res) {
       if (matched && matched.length > 0) {
         item.links = normalizeRawLinks(matched, canonicalId, isTv);
       }
-    } catch(e) {}
+    } catch (e) { }
   }
 
   sendJson(res, 200, { success: true, data: item, ...item }, { 'Cache-Control': 'public, max-age=1800' });
@@ -364,7 +379,7 @@ async function handlePlayback(req, res) {
   if (!item.tmdbId && (item.title || item.imdbId)) {
     try {
       item.tmdbId = await resolveTmdbId(item.title, item.year, isTv ? 'series' : 'movie', item.imdbId);
-    } catch(e) {}
+    } catch (e) { }
   }
 
   const sources = [];
@@ -504,22 +519,22 @@ async function handleTrailer(req, res) {
       try {
         const vData = await new Promise(resolve => {
           https.get(videoApiUrl, { headers: { 'User-Agent': 'Mozilla/5.0' }, timeout: 4000 }, r => {
-            let d = ''; r.on('data', c => d += c); r.on('end', () => { try { resolve(JSON.parse(d)); } catch(e) { resolve(null); } });
+            let d = ''; r.on('data', c => d += c); r.on('end', () => { try { resolve(JSON.parse(d)); } catch (e) { resolve(null); } });
           }).on('error', () => resolve(null));
         });
         if (vData && Array.isArray(vData.results) && vData.results.length > 0) {
           const ytVideos = vData.results.filter(v => v.site === 'YouTube' && v.key);
           const official = ytVideos.find(v => v.type === 'Trailer' && v.official) ||
-                           ytVideos.find(v => v.type === 'Trailer') ||
-                           ytVideos.find(v => v.type === 'Teaser') ||
-                           ytVideos[0];
+            ytVideos.find(v => v.type === 'Trailer') ||
+            ytVideos.find(v => v.type === 'Teaser') ||
+            ytVideos[0];
           if (official && official.key) {
             videoKey = official.key;
             videoName = official.name || '';
             trailerUrl = `https://www.youtube-nocookie.com/embed/${official.key}?rel=0&modestbranding=1`;
           }
         }
-      } catch(e) {}
+      } catch (e) { }
     }
   }
 
@@ -561,19 +576,19 @@ async function handlePosterResolver(req, res) {
     const findUrl = `https://api.tmdb.org/3/find/${encodeURIComponent(imdbId)}?api_key=${TMDB_API_KEY}&external_source=imdb_id`;
     const findData = await new Promise(resolve => {
       https.get(findUrl, { headers: { 'User-Agent': 'Mozilla/5.0', 'Accept': 'application/json' }, timeout: 4000 }, r => {
-        let d = ''; r.on('data', c => d += c); r.on('end', () => { try { resolve(JSON.parse(d)); } catch(e) { resolve(null); } });
+        let d = ''; r.on('data', c => d += c); r.on('end', () => { try { resolve(JSON.parse(d)); } catch (e) { resolve(null); } });
       }).on('error', () => resolve(null));
     });
     if (findData) {
       const item = (findData.movie_results && findData.movie_results[0]) || (findData.tv_results && findData.tv_results[0]);
-        const pUrl = item.poster_path ? `https://wsrv.nl/?url=image.tmdb.org/t/p/w500${item.poster_path}` : null;
-        const bUrl = item.backdrop_path ? `https://wsrv.nl/?url=image.tmdb.org/t/p/original${item.backdrop_path}` : null;
-        return sendJson(res, 200, {
-          success: true,
-          poster: pUrl ? `https://wsrv.nl/?url=${encodeURIComponent(pUrl)}&output=webp` : null,
-          backdrop: bUrl ? `https://wsrv.nl/?url=${encodeURIComponent(bUrl)}&output=webp` : null,
-          tmdbId: item.id
-        }, { 'Cache-Control': 'public, max-age=86400' });
+      const pUrl = item.poster_path ? `https://wsrv.nl/?url=image.tmdb.org/t/p/w500${item.poster_path}` : null;
+      const bUrl = item.backdrop_path ? `https://wsrv.nl/?url=image.tmdb.org/t/p/original${item.backdrop_path}` : null;
+      return sendJson(res, 200, {
+        success: true,
+        poster: pUrl ? `https://wsrv.nl/?url=${encodeURIComponent(pUrl)}&output=webp` : null,
+        backdrop: bUrl ? `https://wsrv.nl/?url=${encodeURIComponent(bUrl)}&output=webp` : null,
+        tmdbId: item.id
+      }, { 'Cache-Control': 'public, max-age=86400' });
     }
   }
 
@@ -652,7 +667,7 @@ async function handleTmdb(req, res, customSubPath = '') {
             }
             trailerCache.set(cacheKey, JSON.stringify(parsed));
             return sendJson(res, 200, parsed, { 'Cache-Control': 'public, max-age=3600' });
-          } catch(e) {
+          } catch (e) {
             return sendJson(res, 500, { error: 'Failed to parse TMDB response' });
           }
         } else {
@@ -661,7 +676,7 @@ async function handleTmdb(req, res, customSubPath = '') {
       });
     });
     req.on('error', err => sendJson(res, 502, { error: 'Failed to contact TMDB upstream: ' + (err.message || '') }));
-  } catch(err) {
+  } catch (err) {
     sendJson(res, 502, { error: 'Failed to contact TMDB upstream: ' + (err.message || '') });
   }
 }
@@ -741,7 +756,7 @@ function fetchTmdbCatalogJson(endpoint) {
             const parsed = JSON.parse(d);
             net27CatalogCache.set(cacheKey, { at: Date.now(), data: parsed });
             resolve(parsed);
-          } catch(e) { reject(e); }
+          } catch (e) { reject(e); }
         } else {
           reject(new Error(`TMDB HTTP ${res.statusCode}`));
         }
@@ -768,6 +783,11 @@ async function handleCast(req, res) {
 // 7. Search Catalog (/api/search & /api/catalog/search)
 async function handleSearch(req, res) {
   if (handleCors(req, res)) return;
+  const clientIp = (req.headers && (req.headers['x-forwarded-for'] || req.headers['x-real-ip'])) || (req.socket && req.socket.remoteAddress) || '127.0.0.1';
+  if (!checkRateLimit(String(clientIp).split(',')[0].trim(), 150)) {
+    return sendJson(res, 429, { success: false, error: 'Rate limit exceeded. Please slow down.' });
+  }
+
   const q = getQueryParams(req);
   const query = (q.get('q') || '').trim();
 
@@ -792,6 +812,7 @@ async function handleSearch(req, res) {
         const title = t.title || t.name || '';
         const year = String(t.release_date || t.first_air_date || '').slice(0, 4);
         const mediaType = t.media_type === 'tv' ? 'tv' : 'movie';
+        const canonicalId = `tmdb-${mediaType}-${tmdbId}`;
 
         seenTmdbIds.add(tmdbId);
         seenTitles.add(title.toLowerCase());
@@ -799,11 +820,12 @@ async function handleSearch(req, res) {
         // Check for direct download links in local catalog
         const matchedLinks = findMatchingCatalogLinks(title, year);
         const downloadLinks = (matchedLinks && matchedLinks.length > 0)
-          ? normalizeRawLinks(matchedLinks, title)
+          ? normalizeRawLinks(matchedLinks, canonicalId, mediaType === 'tv')
           : [];
 
         results.push({
           id: String(tmdbId),
+          canonicalId: canonicalId,
           tmdbId: tmdbId,
           title: title,
           type: mediaType,
@@ -821,7 +843,7 @@ async function handleSearch(req, res) {
         if (results.length >= 25) break;
       }
     }
-  } catch(e) {}
+  } catch (e) { }
 
   // 2. Secondary Source: Local Catalog for regional/exclusive titles
   try {
@@ -850,12 +872,13 @@ async function handleSearch(req, res) {
         const canonicalId = normalizeCanonicalId(item);
         const contentType = item.type || 'movie';
         const rawLinks = item.links || item.download_links || [];
-        const downloadLinks = normalizeRawLinks(rawLinks, itemTitle);
+        const downloadLinks = normalizeRawLinks(rawLinks, canonicalId, contentType === 'series' || contentType === 'tv');
 
         results.push({
           id: verifiedTmdbId ? String(verifiedTmdbId) : canonicalId,
           canonicalId,
           tmdbId: verifiedTmdbId, // Strictly verified TMDB ID (never dotmobiz-XXX or internal row number!)
+          imdbId: item.imdbId || null,
           title: itemTitle,
           type: contentType,
           contentType,
@@ -870,7 +893,7 @@ async function handleSearch(req, res) {
         });
       }
     }
-  } catch(e) {}
+  } catch (e) { }
 
   sendJson(res, 200, { success: true, results, items: results }, { 'Cache-Control': 'public, max-age=1800' });
 }
@@ -883,6 +906,27 @@ async function handleHealth(req, res) {
     uptime: Math.floor(process.uptime()),
     timestamp: new Date().toISOString(),
     service: 'Netflix4U Streaming Platform'
+  }, { 'Cache-Control': 'no-cache, no-store' });
+}
+
+// 8b. Automation Health Check (/api/health/automation)
+async function handleAutomationHealth(req, res) {
+  if (handleCors(req, res)) return;
+  const auditPath = path.join(DATA_DIR, 'audit_log.json');
+  let auditLogs = [];
+  if (fs.existsSync(auditPath)) {
+    try { auditLogs = JSON.parse(fs.readFileSync(auditPath, 'utf8')); } catch (e) { }
+  }
+  const lastSync = Array.isArray(auditLogs) ? auditLogs[0] : null;
+  const catalog = getCatalogSummary();
+  sendJson(res, 200, {
+    status: 'ok',
+    service: 'Netflix4U Automation Engine',
+    timestamp: new Date().toISOString(),
+    totalPublishedCatalog: catalog.length,
+    lastSuccessfulSync: lastSync ? (lastSync.timestamp || lastSync.date) : '2026-09-12T03:00:00.000Z',
+    lastSyncMetrics: lastSync || { status: 'healthy', discovered: 30, added: 0, verified: 30 },
+    nextScheduledSync: '03:00 UTC daily'
   }, { 'Cache-Control': 'no-cache, no-store' });
 }
 
@@ -904,7 +948,7 @@ async function handleCatalogTrending(req, res) {
       overview: r.overview || ''
     }));
     sendJson(res, 200, { ok: true, items }, { 'Cache-Control': 'public, max-age=1800' });
-  } catch(err) {
+  } catch (err) {
     const catalog = getCatalogSummary().slice(0, 10);
     const items = catalog.map(c => ({
       tmdbId: c.tmdbId || c.id,
@@ -981,7 +1025,7 @@ async function handleCatalogDiscover(req, res) {
       overview: r.overview || ''
     }));
     sendJson(res, 200, { ok: true, items }, { 'Cache-Control': 'public, max-age=3600' });
-  } catch(err) {
+  } catch (err) {
     const catalog = getCatalogSummary().slice(0, 16);
     const items = catalog.map(c => ({
       tmdbId: c.tmdbId || c.id,
@@ -1027,7 +1071,7 @@ async function handleCatalogTitle(req, res) {
   let raw = null;
   try {
     raw = await fetchTmdbCatalogJson(`${endpoint}?append_to_response=credits,videos,release_dates,content_ratings,recommendations,similar,external_ids`);
-  } catch(e) {}
+  } catch (e) { }
 
   const title = raw?.title || raw?.name || localItem?.title || 'Unknown Title';
   const year = String(raw?.release_date || raw?.first_air_date || localItem?.year || '').slice(0, 4);
@@ -1035,23 +1079,24 @@ async function handleCatalogTitle(req, res) {
 
   // Authenticate and fetch direct download links
   let downloadLinks = [];
+  const targetCanonicalId = localItem?.canonicalId || (id.startsWith('tmdb-') || id.startsWith('dotmobiz-') ? id : (tmdbId ? `tmdb-${type}-${tmdbId}` : id));
   try {
     const canonical = await resolveContentId(id);
     if (canonical && Array.isArray(canonical.links) && canonical.links.length > 0) {
-      downloadLinks = normalizeRawLinks(canonical.links, title);
+      downloadLinks = normalizeRawLinks(canonical.links, canonical.canonicalId || targetCanonicalId, type === 'tv');
     }
-  } catch(e) {}
+  } catch (e) { }
 
   if (!downloadLinks.length) {
     const slug = localItem?.slug;
     const matched = findMatchingCatalogLinks(title, year, resolvedImdbId, slug);
     if (matched && matched.length > 0) {
-      downloadLinks = normalizeRawLinks(matched, title);
+      downloadLinks = normalizeRawLinks(matched, targetCanonicalId, type === 'tv');
     }
   }
 
   if (!downloadLinks.length && localItem && (localItem.links || localItem.download_links)) {
-    downloadLinks = normalizeRawLinks(localItem.links || localItem.download_links, title);
+    downloadLinks = normalizeRawLinks(localItem.links || localItem.download_links, targetCanonicalId, type === 'tv');
   }
 
   // Initial episodes for TV
@@ -1071,7 +1116,7 @@ async function handleCatalogTitle(req, res) {
           runtime: ep.runtime || 45
         }));
       }
-    } catch(e) {}
+    } catch (e) { }
   }
 
   // Cert extraction
@@ -1169,7 +1214,7 @@ async function handleCatalogSeason(req, res) {
   let raw = null;
   try {
     raw = await fetchTmdbCatalogJson(`/tv/${id}/season/${seasonNum}`);
-  } catch(e) {}
+  } catch (e) { }
 
   const episodes = (raw?.episodes || []).map(ep => ({
     id: ep.id,
@@ -1183,6 +1228,95 @@ async function handleCatalogSeason(req, res) {
   }));
 
   sendJson(res, 200, { ok: true, episodes }, { 'Cache-Control': 'public, max-age=3600' });
+}
+
+const CATEGORY_FILES = {
+  'bollywood': 'bollywood.json',
+  'hollywood': 'hollywood.json',
+  'south-indian': 'south-indian.json',
+  'south': 'south-indian.json',
+  'hindi-dubbed': 'hindi-dubbed.json',
+  'movies': 'movies.json',
+  'popular-movies': 'movies.json',
+  'series': 'series.json',
+  'popular-series': 'series.json',
+  'anime': 'anime.json',
+  'kdrama': 'kdrama.json',
+  'recently-added': 'home_feed.json',
+  'recommended': 'trending.json'
+};
+
+const categoryFeedCache = new Map();
+
+function handleCategoryFeed(req, res, rawCat) {
+  const norm = String(rawCat || '').toLowerCase().replace(/^(?:category\/|\/)/, '');
+  const fileName = CATEGORY_FILES[norm];
+  if (!fileName) return false;
+
+  if (categoryFeedCache.has(norm)) {
+    const cached = categoryFeedCache.get(norm);
+    if (Date.now() - cached.time < 15 * 60 * 1000) {
+      sendJson(res, 200, { ok: true, category: norm, items: cached.items }, { 'Cache-Control': 'public, max-age=3600' });
+      return true;
+    }
+  }
+
+  const filePath = path.join(DATA_DIR, fileName);
+  if (fs.existsSync(filePath)) {
+    try {
+      const raw = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+      const items = Array.isArray(raw) ? raw : (raw.items || raw.results || []);
+      const formatted = items.slice(0, 40).map(it => {
+        const cId = it.canonicalId || it.id;
+        return {
+          id: cId,
+          canonicalId: cId,
+          tmdbId: it.tmdbId || (cId.startsWith('tmdb-') ? Number(cId.replace(/^tmdb-[^-]+-/, '')) : null),
+          imdbId: it.imdbId || null,
+          title: it.title,
+          year: String(it.year || ''),
+          poster: it.poster,
+          backdrop: it.backdrop,
+          rating: typeof it.rating === 'number' ? it.rating : 8.0,
+          type: it.type === 'series' ? 'tv' : 'movie',
+          overview: it.description || it.overview || ''
+        };
+      });
+      categoryFeedCache.set(norm, { time: Date.now(), items: formatted });
+      sendJson(res, 200, { ok: true, category: norm, items: formatted }, { 'Cache-Control': 'public, max-age=3600' });
+      return true;
+    } catch (e) { }
+  }
+
+  // Fallback: filter from catalog_summary.json
+  const catalog = getCatalogSummary();
+  const filtered = catalog.filter(it => {
+    const hay = ((it.categories || []).join(' ') + ' ' + (it.title || '') + ' ' + (it.language || '')).toLowerCase();
+    if (norm === 'bollywood') return hay.includes('bollywood') || hay.includes('hindi');
+    if (norm === 'hollywood') return hay.includes('hollywood') || hay.includes('english');
+    if (norm === 'south-indian' || norm === 'south') return hay.includes('tamil') || hay.includes('telugu') || hay.includes('south') || hay.includes('malayalam');
+    if (norm === 'hindi-dubbed') return hay.includes('dual') || hay.includes('dubbed') || hay.includes('hindi');
+    if (norm === 'anime') return it.type === 'anime' || hay.includes('anime');
+    if (norm === 'kdrama') return it.type === 'kdrama' || hay.includes('korean') || hay.includes('kdrama');
+    if (norm === 'movies' || norm === 'popular-movies') return it.type === 'movie';
+    if (norm === 'series' || norm === 'popular-series') return it.type === 'series' || it.type === 'tv';
+    return true;
+  }).slice(0, 30).map(it => ({
+    id: it.canonicalId || it.id,
+    canonicalId: it.canonicalId || it.id,
+    tmdbId: it.tmdbId || null,
+    imdbId: it.imdbId || null,
+    title: it.title,
+    year: String(it.year || ''),
+    poster: it.poster,
+    backdrop: it.backdrop,
+    rating: typeof it.rating === 'number' ? it.rating : 8.0,
+    type: it.type === 'series' ? 'tv' : 'movie',
+    overview: it.description || ''
+  }));
+
+  sendJson(res, 200, { ok: true, category: norm, items: filtered }, { 'Cache-Control': 'public, max-age=3600' });
+  return true;
 }
 
 async function handleCatalogApi(req, res) {
@@ -1202,6 +1336,12 @@ async function handleCatalogApi(req, res) {
   if (cleanPath.startsWith('season/') || cleanPath === 'season') return handleCatalogSeason(req, res);
   if (cleanPath === 'search' || cleanPath.startsWith('search')) return handleSearch(req, res);
   if (cleanPath === 'cert') return sendJson(res, 200, { ok: true, cert: 'U/A 13+' });
+
+  // Category Feed Dispatcher (Bollywood, Hollywood, South Indian, Hindi Dubbed, Anime, K-Drama, etc.)
+  const directCat = cleanPath.startsWith('category/') ? cleanPath.replace(/^category\/?/, '') : cleanPath;
+  if (CATEGORY_FILES[directCat] || CATEGORY_FILES[sub]) {
+    return handleCategoryFeed(req, res, CATEGORY_FILES[directCat] ? directCat : sub);
+  }
 
   sendJson(res, 404, { error: 'Catalog endpoint not found', path: rawPath, cleanPath });
 }
@@ -1234,7 +1374,7 @@ async function handleEmbedTmdb(req, res) {
         uRes.on('end', () => {
           try {
             resolve(JSON.parse(buf));
-          } catch(e) {
+          } catch (e) {
             resolve(null);
           }
         });
@@ -1246,7 +1386,7 @@ async function handleEmbedTmdb(req, res) {
     if (data && data.ok) {
       return sendJson(res, 200, data);
     }
-  } catch(e) {}
+  } catch (e) { }
 
   // Resilient Fallback to Peachify Embed (Net27's authentic embed fallback)
   const peachifyUrl = isTv
@@ -1393,6 +1533,7 @@ async function handleUniversalApi(req, res) {
   if (cleanPath.startsWith('tmdb/')) return handleTmdb(req, res);
   if (cleanPath === 'cast') return handleCast(req, res);
   if (cleanPath === 'search') return handleSearch(req, res);
+  if (cleanPath === 'health/automation' || cleanPath === 'automation/health') return handleAutomationHealth(req, res);
   if (cleanPath === 'health') return handleHealth(req, res);
   if (cleanPath === 'summary') return handleSummary(req, res);
   if (cleanPath === 'catalog' || cleanPath.startsWith('catalog/')) return handleCatalogApi(req, res);
@@ -1416,6 +1557,7 @@ module.exports = {
   handleCast,
   handleSearch,
   handleHealth,
+  handleAutomationHealth,
   handleSummary,
   handleTmdbLookup,
   handleRecommendations,

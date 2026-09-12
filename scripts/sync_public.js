@@ -32,4 +32,25 @@ console.log('Synchronizing static assets to public/...');
 copyDirRecursive(path.join(ROOT, 'images'), path.join(PUBLIC_DIR, 'images'));
 copyDirRecursive(path.join(ROOT, 'cf-fonts'), path.join(PUBLIC_DIR, 'cf-fonts'));
 copyDirRecursive(path.join(ROOT, 'icons'), path.join(PUBLIC_DIR, 'icons'));
-console.log('Static assets successfully synchronized to public/.');
+
+const rootFilesToSync = [
+  'favicon.ico',
+  'favicon.svg',
+  'favicon-16x16.png',
+  'favicon-32x32.png',
+  'apple-touch-icon.png',
+  'android-chrome-192x192.png',
+  'android-chrome-512x512.png',
+  'robots.txt',
+  'sitemap.xml'
+];
+
+for (const f of rootFilesToSync) {
+  const src = path.join(ROOT, f);
+  const dest = path.join(PUBLIC_DIR, f);
+  if (fs.existsSync(src)) {
+    fs.copyFileSync(src, dest);
+  }
+}
+
+console.log('Static assets and SEO metadata files successfully synchronized to public/.');

@@ -116,10 +116,11 @@
   }
 
   // ─── TITLE MODAL ───
-  function openTitleModal(tmdbId, type, pushHistory) {
+  function openTitleModal(tmdbId, type, pushHistory, canonicalId, imdbId) {
     if (window.__closeSearchOverlay) window.__closeSearchOverlay();
+    var lookupId = canonicalId || tmdbId;
     if (pushHistory !== false) {
-      historyStack.push({ tmdbId: tmdbId, type: type });
+      historyStack.push({ tmdbId: tmdbId, type: type, canonicalId: canonicalId, imdbId: imdbId });
     }
 
     if (!titleModal) return;
@@ -141,21 +142,23 @@
       '</div>';
     titleModal.scrollTop = 0;
 
-    fetchTitleDetails(tmdbId, type);
+    fetchTitleDetails(lookupId, type, canonicalId, imdbId);
   }
 
-  async function fetchTitleDetails(tmdbId, type) {
+  async function fetchTitleDetails(lookupId, type, canonicalId, imdbId) {
     try {
-      var res = await fetch('/api/catalog/title/' + encodeURIComponent(type) + '/' + encodeURIComponent(tmdbId));
+      var res = await fetch('/api/catalog/title/' + encodeURIComponent(type) + '/' + encodeURIComponent(lookupId));
       if (!res.ok) throw new Error('HTTP ' + res.status);
       var data = await res.json();
-      renderTitleModal(data, tmdbId, type);
+      data.canonicalId = data.canonicalId || canonicalId || lookupId;
+      if (imdbId && !data.imdbId) data.imdbId = imdbId;
+      renderTitleModal(data, lookupId, type);
     } catch (err) {
       titleModalBody.innerHTML =
         '<div class="p-12 text-center text-white/60 space-y-3">' +
           '<div class="text-xl font-bold text-red-400">Failed to load title information</div>' +
           '<div class="text-sm">' + escapeHtml(err.message) + '</div>' +
-          '<button onclick="window.Netflix4uModal.openTitle(' + tmdbId + ', \'' + type + '\')" class="px-5 py-2 rounded-md bg-white/10 hover:bg-white/20 text-white font-semibold text-xs mt-3 transition">Try Again</button>' +
+          '<button onclick="window.Netflix4uModal.openTitle(\'' + lookupId + '\', \'' + type + '\')" class="px-5 py-2 rounded-md bg-white/10 hover:bg-white/20 text-white font-semibold text-xs mt-3 transition">Try Again</button>' +
         '</div>';
     }
   }
@@ -200,7 +203,7 @@
 
     // Download links
     var downloadLinks = data.downloadLinks || data.links || [];
-    var downloadMirrorsHtml = renderDownloadMirrors(downloadLinks, data.title);
+    var downloadMirrorsHtml = renderDownloadMirrors(downloadLinks, data.title, isTv);
 
     // Episodes for TV Series
     var episodesSectionHtml = '';
@@ -290,7 +293,7 @@
       '<div class="p-4 sm:p-6 space-y-6">' +
         '<!-- Action Buttons -->' +
         '<div class="flex flex-wrap items-center gap-3">' +
-          '<button type="button" data-modal="watch" data-tmdbid="' + tmdbId + '" data-type="' + type + '" data-title="' + escapeHtml(data.title) + '" data-year="' + (data.year || '') + '" data-imdbid="' + (data.imdbId || '') + '" data-backdrop="' + (data.backdrop || '') + '"' + (isTv ? ' data-se="' + (data.initialSeason || 1) + '" data-ep="1"' : '') + ' class="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg bg-white text-black font-bold hover:bg-white/90 active:scale-95 transition text-sm shadow-xl cursor-pointer">' +
+          '<button type="button" data-modal="watch" data-tmdbid="' + (data.tmdbId || tmdbId) + '" data-canonical-id="' + escapeHtml(data.canonicalId || tmdbId) + '" data-type="' + type + '" data-title="' + escapeHtml(data.title) + '" data-year="' + (data.year || '') + '" data-imdbid="' + (data.imdbId || '') + '" data-backdrop="' + (data.backdrop || '') + '"' + (isTv ? ' data-se="' + (data.initialSeason || 1) + '" data-ep="1"' : '') + ' class="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg bg-white text-black font-bold hover:bg-white/90 active:scale-95 transition text-sm shadow-xl cursor-pointer">' +
             '<svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>' +
             (isTv ? 'Play S' + (data.initialSeason || 1) + ' E1' : 'Watch Now') +
           '</button>' +
@@ -400,6 +403,17 @@
   // Delegated Download Click Listener on Title Modal Body (100% Quote-Safe)
   if (titleModalBody) {
     titleModalBody.addEventListener('click', function(e) {
+      // Accordion Toggle for Series Seasons
+      var accBtn = e.target.closest('[data-accordion-toggle]');
+      if (accBtn) {
+        e.preventDefault();
+        var item = accBtn.closest('[data-accordion-item]');
+        if (item) {
+          item.classList.toggle('is-open');
+        }
+        return;
+      }
+
       var dlBtn = e.target.closest('[data-fast-download]');
       if (dlBtn) {
         e.preventDefault();
@@ -413,7 +427,7 @@
     });
   }
 
-  function renderDownloadMirrors(links, title) {
+  function renderDownloadMirrors(links, title, isTv) {
     if (!links || !links.length) {
       return '<div class="p-5 rounded-xl bg-white/[0.03] border border-white/10 text-center space-y-2">' +
         '<div class="text-sm text-white/80 font-medium">Direct download mirrors being updated for this title.</div>' +
@@ -421,10 +435,87 @@
       '</div>';
     }
 
-    return links.map(function(link) {
+    var hasSeriesStructure = isTv || links.some(function(l) { return l.season || l.episode; });
+
+    if (hasSeriesStructure) {
+      // Group series links by season -> episode
+      var seasonMap = {};
+      links.forEach(function(l) {
+        var sNum = Number(l.season) || 1;
+        var eNum = Number(l.episode) || 1;
+        if (!seasonMap[sNum]) seasonMap[sNum] = {};
+        if (!seasonMap[sNum][eNum]) seasonMap[sNum][eNum] = [];
+        seasonMap[sNum][eNum].push(l);
+      });
+
+      var seasons = Object.keys(seasonMap).map(Number).sort(function(a, b) { return a - b; });
+      if (!seasons.length) seasons = [1];
+
+      return '<div class="dl-accordion">' +
+        seasons.map(function(sNum, sIdx) {
+          var epMap = seasonMap[sNum] || {};
+          var epNums = Object.keys(epMap).map(Number).sort(function(a, b) { return a - b; });
+          var isOpen = sIdx === 0 ? ' is-open' : '';
+
+          var epRowsHtml = epNums.map(function(eNum) {
+            var epLinks = epMap[eNum] || [];
+            var epQualityPills = epLinks.map(function(link) {
+              var q = String(link.quality || 'HD').toUpperCase();
+              var rawUrl = link.url || '#';
+              var cleanUrl = (window.getFastCloudDownloadHref && window.getFastCloudDownloadHref(rawUrl)) || rawUrl;
+              return '<a href="' + cleanUrl + '" data-fast-download="' + encodeURIComponent(rawUrl) + '" class="px-2.5 py-1 rounded bg-white/10 hover:bg-red-600 active:scale-95 text-white font-bold text-xs flex items-center gap-1 transition cursor-pointer border border-white/10">' +
+                '<svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 3v12m0 0l-4-4m4 4l4-4"/><path d="M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>' +
+                '<span>' + escapeHtml(q) + '</span>' +
+                (link.size ? '<span class="text-white/50 text-[10px]">(' + escapeHtml(link.size) + ')</span>' : '') +
+              '</a>';
+            }).join('');
+
+            return '<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 p-2.5 rounded-lg bg-white/[0.03] border border-white/5 hover:bg-white/[0.05] transition">' +
+              '<div class="flex items-center gap-2">' +
+                '<span class="w-6 text-center text-xs font-bold text-white/50">E' + eNum + '</span>' +
+                '<span class="text-xs font-semibold text-white/90">Episode ' + eNum + '</span>' +
+              '</div>' +
+              '<div class="flex flex-wrap items-center gap-1.5">' +
+                epQualityPills +
+              '</div>' +
+            '</div>';
+          }).join('');
+
+          return '<div class="dl-accordion-item' + isOpen + '" data-accordion-item>' +
+            '<button type="button" class="dl-accordion-header" data-accordion-toggle>' +
+              '<span class="flex items-center gap-2">' +
+                '<svg class="w-4 h-4 text-red-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg>' +
+                'Season ' + sNum + ' <span class="text-white/40 text-xs font-normal">(' + epNums.length + ' episodes available)</span>' +
+              '</span>' +
+              '<svg class="dl-accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>' +
+            '</button>' +
+            '<div class="dl-accordion-body space-y-2">' +
+              epRowsHtml +
+            '</div>' +
+          '</div>';
+        }).join('') +
+      '</div>';
+    }
+
+    // Movies: Sorted from highest quality (4K) down to 480p
+    var qualWeight = function(q) {
+      q = String(q || '').toUpperCase();
+      if (q.includes('4K') || q.includes('2160')) return 4;
+      if (q.includes('1440')) return 3;
+      if (q.includes('1080')) return 2;
+      if (q.includes('720')) return 1;
+      return 0;
+    };
+
+    var sortedLinks = links.slice().sort(function(a, b) {
+      return qualWeight(b.quality) - qualWeight(a.quality);
+    });
+
+    return sortedLinks.map(function(link) {
       var rawQual = String(link.quality || 'HD').toUpperCase();
       var qualBadgeClass = 'dl-quality-1080p';
       if (rawQual.includes('4K') || rawQual.includes('2160')) qualBadgeClass = 'dl-quality-4k';
+      else if (rawQual.includes('1440')) qualBadgeClass = 'dl-quality-1080p';
       else if (rawQual.includes('720')) qualBadgeClass = 'dl-quality-720p';
       else if (rawQual.includes('480')) qualBadgeClass = 'dl-quality-480p';
 
@@ -536,21 +627,51 @@
     { id: 's6', name: 'Server 6 (AutoEmbed)', tag: 'Backup', tagClass: 'tag-fast', desc: 'AutoEmbed Reliable CDN Backup' }
   ];
 
-  function openWatchModal(tmdbId, type, season, episode, backdrop, title, year, imdbId) {
+  function openWatchModal(tmdbId, type, season, episode, backdrop, title, year, imdbId, canonicalId) {
     if (window.__closeSearchOverlay) window.__closeSearchOverlay();
     if (!watchModal || !watchModalIframe) return;
 
     type = type || 'movie';
     season = Number(season) || 1;
     episode = Number(episode) || 1;
-    var isTv = type === 'tv';
+    var isTv = type === 'tv' || type === 'series';
 
-    // Sanitize TMDB ID
-    if (typeof tmdbId === 'string') {
-      tmdbId = tmdbId.replace(/^(?:dotmobiz|tmdb(?:-movie|-series|-tv)?)-/, '');
+    // Verify Streaming Identity
+    var cleanTmdbId = String(tmdbId || '').replace(/^(?:dotmobiz|tmdb(?:-movie|-series|-tv)?)-/, '');
+    var hasValidStreamSource = false;
+    if (/^\d{1,9}$/.test(cleanTmdbId) && Number(cleanTmdbId) > 0) {
+      hasValidStreamSource = true;
+      tmdbId = cleanTmdbId;
+    } else if (imdbId && typeof imdbId === 'string' && imdbId.startsWith('tt')) {
+      hasValidStreamSource = true;
     }
 
-    activeWatchParams = { tmdbId: tmdbId, type: type, season: season, episode: episode, backdrop: backdrop, title: title, year: year, imdbId: imdbId };
+    if (!hasValidStreamSource) {
+      watchModalIframe.src = 'about:blank';
+      watchModal.classList.remove('hidden');
+      watchModal.setAttribute('aria-hidden', 'false');
+      lockBodyScroll();
+      if (watchMetaTitle) watchMetaTitle.textContent = title || 'Netflix4U';
+      var fallbackBanner = document.getElementById('watch-unavailable-banner');
+      if (!fallbackBanner) {
+        fallbackBanner = document.createElement('div');
+        fallbackBanner.id = 'watch-unavailable-banner';
+        fallbackBanner.className = 'absolute inset-0 z-[70] bg-[#0a0a0f] flex flex-col items-center justify-center p-6 text-center space-y-4';
+        watchModal.appendChild(fallbackBanner);
+      }
+      fallbackBanner.style.display = 'flex';
+      fallbackBanner.innerHTML =
+        '<div class="w-16 h-16 rounded-full bg-red-600/20 text-red-500 flex items-center justify-center mb-2"><svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>' +
+        '<h3 class="text-xl font-bold text-white">Streaming source unavailable for this title.</h3>' +
+        '<p class="text-sm text-white/60 max-w-md">Our streaming CDN is searching for verified playback mirrors for "' + escapeHtml(title) + '". You can download this title directly from the title details page.</p>' +
+        '<button onclick="window.Netflix4uModal.closeWatch();" class="px-6 py-2.5 rounded-lg bg-red-600 hover:bg-red-700 text-white font-semibold text-sm transition cursor-pointer">Back to Details</button>';
+      return;
+    }
+
+    var bannerEl = document.getElementById('watch-unavailable-banner');
+    if (bannerEl) bannerEl.style.display = 'none';
+
+    activeWatchParams = { tmdbId: tmdbId, type: type, season: season, episode: episode, backdrop: backdrop, title: title, year: year, imdbId: imdbId, canonicalId: canonicalId };
 
     // Update Top Floating Header Metadata
     if (watchMetaTitle) watchMetaTitle.textContent = title || 'Netflix4U';
@@ -729,6 +850,8 @@
     watchModalIframe.src = 'about:blank';
     watchModal.classList.add('hidden');
     watchModal.setAttribute('aria-hidden', 'true');
+    var bannerEl = document.getElementById('watch-unavailable-banner');
+    if (bannerEl) bannerEl.style.display = 'none';
     closeServerMenu();
     hideWatchBackdrop();
     unlockBodyScroll();
@@ -867,12 +990,15 @@
       var modalType = modalTrigger.dataset.modal;
       if (modalType === 'title') {
         var tmdbId = modalTrigger.dataset.tmdbid;
+        var canonicalId = modalTrigger.dataset.canonicalId;
+        var imdbId = modalTrigger.dataset.imdbid;
         var type = modalTrigger.dataset.type || 'movie';
-        if (!tmdbId) return;
+        if (!tmdbId && !canonicalId) return;
         e.preventDefault();
-        openTitleModal(tmdbId, type);
+        openTitleModal(tmdbId, type, true, canonicalId, imdbId);
       } else if (modalType === 'watch') {
         var tmdbId = modalTrigger.dataset.tmdbid;
+        var canonicalId = modalTrigger.dataset.canonicalId;
         var type = modalTrigger.dataset.type || 'movie';
         var se = modalTrigger.dataset.se || 1;
         var ep = modalTrigger.dataset.ep || 1;
@@ -880,9 +1006,9 @@
         var title = modalTrigger.dataset.title || '';
         var year = modalTrigger.dataset.year || '';
         var imdbId = modalTrigger.dataset.imdbid || '';
-        if (!tmdbId) return;
+        if (!tmdbId && !canonicalId) return;
         e.preventDefault();
-        openWatchModal(tmdbId, type, se, ep, backdrop, title, year, imdbId);
+        openWatchModal(tmdbId, type, se, ep, backdrop, title, year, imdbId, canonicalId);
       } else if (modalType === 'trailer') {
         var yt = modalTrigger.dataset.yt;
         if (!yt) return;

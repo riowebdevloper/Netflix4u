@@ -446,4 +446,124 @@ body {
   border-color: rgba(229, 9, 20, 0.5);
 }
 
+/* ─── Mobile Hero Responsiveness (320px - 768px) ─── */
+@media (max-width: 640px) {
+  .hero-container {
+    height: 70vh !important;
+    min-height: 450px !important;
+    max-height: 580px !important;
+    padding-top: calc(env(safe-area-inset-top, 0px) + 92px) !important;
+    box-sizing: border-box;
+  }
+  .hero-container #hero-title {
+    font-size: clamp(1.4rem, 6vw, 2.2rem) !important;
+    line-height: 1.12 !important;
+    min-height: unset !important;
+    margin-bottom: 6px !important;
+  }
+  .hero-container #hero-desc {
+    font-size: 12px !important;
+    line-height: 1.4 !important;
+    min-height: unset !important;
+    margin-bottom: 12px !important;
+    -webkit-line-clamp: 2 !important;
+    display: -webkit-box !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+  }
+  .hero-container #hero-meta {
+    gap: 6px !important;
+    margin-bottom: 8px !important;
+  }
+  .hero-nav {
+    display: none !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .hero-container {
+    min-height: 420px !important;
+  }
+  .hero-container #hero-title {
+    font-size: 1.3rem !important;
+  }
+  .hero-container button {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+    font-size: 11px !important;
+  }
+}
+
+/* ─── Mobile Menu Drawer ─── */
+#mobile-menu-drawer.is-open {
+  display: block !important;
+}
+#mobile-menu-drawer > div {
+  transform: translateX(100%);
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+#mobile-menu-drawer.is-open > div {
+  transform: translateX(0);
+}
+
+/* ─── Download Accordion Structure (Movies & Series) ─── */
+.dl-accordion {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.02);
+}
+.dl-accordion-item {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.dl-accordion-item:last-child {
+  border-bottom: none;
+}
+.dl-accordion-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.03);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  text-align: left;
+}
+.dl-accordion-header:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+.dl-accordion-chevron {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.2s ease;
+  color: rgba(255, 255, 255, 0.5);
+  flex-shrink: 0;
+}
+.dl-accordion-item.is-open .dl-accordion-chevron {
+  transform: rotate(180deg);
+  color: #ffffff;
+}
+.dl-accordion-body {
+  display: none;
+  padding: 10px 14px;
+  background: rgba(0, 0, 0, 0.2);
+}
+.dl-accordion-item.is-open .dl-accordion-body {
+  display: block;
+}
+
+/* Download Quality Grid within Accordion */
+.dl-quality-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+
 
