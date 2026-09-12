@@ -1,0 +1,53 @@
+name: Daily Content Ingestion & Catalog Sync
+
+on:
+  schedule:
+    # Runs everyday at 00:00 UTC (5:30 AM IST) automatically
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+    # Allows manual one-click trigger from GitHub Actions tab anytime!
+    inputs:
+      max_discovery:
+        description: 'Maximum new candidates to discover from TMDB'
+        required: false
+        default: '30'
+
+jobs:
+  sync-catalog:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Run Automated Content Ingestion Pipeline
+        env:
+          TMDB_API_KEY: ${{ secrets.TMDB_API_KEY || '445f2b5a8941c1d4bd5a869761a916e3' }}
+        run: |
+          MAX_DISC="${{ github.event.inputs.max_discovery || '30' }}"
+          echo "Starting catalog synchronization with maxDiscovery=${MAX_DISC}..."
+          node scripts/cron_sync.js --max=${MAX_DISC}
+
+      - name: Check for Catalog Updates & Auto-Commit
+        run: |
+          git config --global user.name "Netflix4U Automation Bot"
+          git config --global user.email "bot@netflix4u.in"
+          
+          # Check if any data files or sitemap were updated
+          if [[ -n $(git status --porcelain data/ sitemap.xml) ]]; then
+            echo "New catalog content detected. Committing and pushing updates..."
+            git add data/ sitemap.xml
+            git commit -m "chore(auto): daily catalog ingestion & sync [skip ci]"
+            git push origin main
+          else
+            echo "Catalog is already up to date. No new changes to commit."
+          fi
