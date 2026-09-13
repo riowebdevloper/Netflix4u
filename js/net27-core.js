@@ -627,12 +627,26 @@
       if (idx === 1) {
         adMarkup = '<div class="nm-ad-container max-w-5xl mx-auto my-6" data-ad-container="ad-slot-rail-mid-1">' +
           '<div class="nm-ad-label">Sponsored</div>' +
-          '<div id="ad-slot-rail-mid-1" class="nm-ad-slot nm-ad-leaderboard"></div>' +
+          '<div id="ad-slot-rail-mid-1" class="nm-ad-slot nm-ad-leaderboard">' +
+            '<a href="https://t.me/netflix_mirror_apk" target="_blank" rel="noopener noreferrer" class="nm-ad-placeholder">' +
+              '<span class="nm-ad-badge"><svg class="w-3 h-3" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L1 21h22L12 2zm0 3.8L20.2 19H3.8L12 5.8z"/></svg>Trending Shows</span>' +
+              '<span class="truncate font-semibold text-white/90">Daily Hindi Dubbed &amp; Multi-Audio Web Series</span>' +
+              '<span class="hidden sm:inline text-white/50 text-[11px] truncate">• Ultra HD 4K Cloud Streaming</span>' +
+              '<span class="shrink-0 px-2.5 py-1 rounded bg-white/10 hover:bg-white/20 text-white font-bold text-[10px] transition">Explore</span>' +
+            '</a>' +
+          '</div>' +
         '</div>';
       } else if (idx === 4) {
         adMarkup = '<div class="nm-ad-container max-w-5xl mx-auto my-6" data-ad-container="ad-slot-rail-mid-2">' +
           '<div class="nm-ad-label">Sponsored</div>' +
-          '<div id="ad-slot-rail-mid-2" class="nm-ad-slot nm-ad-leaderboard"></div>' +
+          '<div id="ad-slot-rail-mid-2" class="nm-ad-slot nm-ad-leaderboard">' +
+            '<a href="https://t.me/netflix_mirror_apk" target="_blank" rel="noopener noreferrer" class="nm-ad-placeholder">' +
+              '<span class="nm-ad-badge"><svg class="w-3 h-3" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L1 21h22L12 2zm0 3.8L20.2 19H3.8L12 5.8z"/></svg>Fast CDN</span>' +
+              '<span class="truncate font-semibold text-white/90">Direct High-Speed Cloud Downloads &amp; APKs</span>' +
+              '<span class="hidden sm:inline text-white/50 text-[11px] truncate">• Join 45K+ Streamers</span>' +
+              '<span class="shrink-0 px-2.5 py-1 rounded bg-white/10 hover:bg-white/20 text-white font-bold text-[10px] transition">Join</span>' +
+            '</a>' +
+          '</div>' +
         '</div>';
       }
 

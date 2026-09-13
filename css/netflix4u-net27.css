@@ -631,6 +631,12 @@ body {
   border-color: rgba(255, 255, 255, 0.14);
 }
 
+/* Auto-collapse if slot is completely empty */
+.nm-ad-slot:empty,
+.nm-ad-container:has(.nm-ad-slot:empty) {
+  display: none !important;
+}
+
 .nm-ad-slot iframe {
   max-width: 100% !important;
   border: none !important;
