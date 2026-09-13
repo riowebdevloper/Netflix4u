@@ -9,15 +9,18 @@ try {
 } catch (e) {}
 
 // PWA Shell & Offline Support
-var CACHE_NAME = 'n4u-pwa-v1';
+var CACHE_NAME = 'n4u-pwa-v2';
 var STATIC_ASSETS = [
   '/',
   '/index.html',
   '/css/netflix4u-net27.css',
+  '/css/Layout.CBW6-iGy.css',
+  '/css/index.P3dZcbru.css',
   '/js/net27-core.js',
   '/js/net27-modal.js',
-  '/js/manifest.json',
+  '/manifest.json',
   '/favicon.ico',
+  '/favicon.svg',
   '/android-chrome-192x192.png',
   '/android-chrome-512x512.png'
 ];
@@ -26,7 +29,13 @@ self.addEventListener('install', function(event) {
   self.skipWaiting();
   event.waitUntil(
     caches.open(CACHE_NAME).then(function(cache) {
-      return cache.addAll(STATIC_ASSETS).catch(function() {});
+      return Promise.all(
+        STATIC_ASSETS.map(function(url) {
+          return cache.add(url).catch(function(err) {
+            console.warn('[SW] Caching failed for asset:', url, err);
+          });
+        })
+      );
     })
   );
 });
@@ -52,10 +61,30 @@ self.addEventListener('fetch', function(event) {
 
   event.respondWith(
     caches.match(event.request).then(function(cached) {
-      return cached || fetch(event.request);
+      if (cached) {
+        // Revalidate in background for local static assets
+        fetch(event.request).then(function(networkResponse) {
+          if (networkResponse && networkResponse.status === 200 && networkResponse.type === 'basic') {
+            caches.open(CACHE_NAME).then(function(cache) {
+              cache.put(event.request, networkResponse);
+            });
+          }
+        }).catch(function() {});
+        return cached;
+      }
+      return fetch(event.request).then(function(response) {
+        if (!response || response.status !== 200 || response.type !== 'basic') {
+          return response;
+        }
+        var toCache = response.clone();
+        caches.open(CACHE_NAME).then(function(cache) {
+          cache.put(event.request, toCache);
+        });
+        return response;
+      });
     }).catch(function() {
       if (event.request.mode === 'navigate') {
-        return caches.match('/index.html');
+        return caches.match('/index.html') || caches.match('/');
       }
     })
   );

@@ -93,10 +93,10 @@
   window.__showToast = showToast;
 
   // ─── My List (Watchlist) Storage Engine ───
-  var MY_LIST_KEY = 'n4u_my_list_v1';
+  var MY_LIST_KEY = 'n4u_my_list';
   function getMyList() {
     try {
-      var raw = localStorage.getItem(MY_LIST_KEY);
+      var raw = localStorage.getItem(MY_LIST_KEY) || localStorage.getItem('n4u_my_list_v1');
       return raw ? JSON.parse(raw) : [];
     } catch(e) {
       return [];
@@ -139,6 +139,7 @@
     }
     try {
       localStorage.setItem(MY_LIST_KEY, JSON.stringify(list));
+      localStorage.setItem('n4u_my_list_v1', JSON.stringify(list));
     } catch(e) {}
     window.dispatchEvent(new CustomEvent('mylist-changed', { detail: { id: id, added: added } }));
     return added;
@@ -147,11 +148,27 @@
   window.__isBookmarked = isBookmarked;
   window.__toggleMyList = toggleMyList;
 
+  // Reactive My List synchronization across open views and card badges
+  window.addEventListener('mylist-changed', function(e) {
+    if (!e || !e.detail) return;
+    var changedId = String(e.detail.id);
+    var isAdded = Boolean(e.detail.added);
+    document.querySelectorAll('[data-card-bookmark="' + changedId + '"]').forEach(function(btn) {
+      btn.classList.toggle('is-bookmarked', isAdded);
+      btn.title = isAdded ? 'In My List' : 'Add to My List';
+      var svg = btn.querySelector('svg');
+      if (svg) svg.setAttribute('fill', isAdded ? 'currentColor' : 'none');
+    });
+    if (currentPlatform === 'mylist') {
+      loadPlatformRails('mylist');
+    }
+  });
+
   // ─── Continue Watching Engine (Local Playback Resume) ───
-  var CONTINUE_KEY = 'n4u_continue_watching_v1';
+  var CONTINUE_KEY = 'n4u_continue_watching';
   function getContinueWatching() {
     try {
-      var raw = localStorage.getItem(CONTINUE_KEY);
+      var raw = localStorage.getItem(CONTINUE_KEY) || localStorage.getItem('n4u_continue_watching_v1');
       return raw ? JSON.parse(raw) : [];
     } catch(e) {
       return [];
@@ -180,6 +197,7 @@
     if (list.length > 15) list = list.slice(0, 15);
     try {
       localStorage.setItem(CONTINUE_KEY, JSON.stringify(list));
+      localStorage.setItem('n4u_continue_watching_v1', JSON.stringify(list));
     } catch(e) {}
     if (currentPlatform === 'trending') {
       renderContinueWatchingRail();
@@ -191,6 +209,7 @@
     });
     try {
       localStorage.setItem(CONTINUE_KEY, JSON.stringify(list));
+      localStorage.setItem('n4u_continue_watching_v1', JSON.stringify(list));
     } catch(e) {}
     renderContinueWatchingRail();
     showToast('Removed from Continue Watching');
@@ -914,8 +933,8 @@
       '</div>';
 
     if (options.rank) {
-      return '<a href="#" data-modal="title" data-tmdbid="' + tmdbId + '" data-canonical-id="' + escapeHtml(canonicalId) + '" data-imdbid="' + escapeHtml(imdbId) + '" data-type="' + (isTv ? 'tv' : 'movie') + '" class="nm-card card group block">' +
-        '<div class="flex items-stretch gap-1">' +
+      return '<a href="#" data-modal="title" data-tmdbid="' + tmdbId + '" data-canonical-id="' + escapeHtml(canonicalId) + '" data-imdbid="' + escapeHtml(imdbId) + '" data-type="' + (isTv ? 'tv' : 'movie') + '" class="nm-card card group block nm-card-ranked">' +
+        '<div class="flex items-end relative overflow-visible">' +
           '<div class="rank-num shrink-0 self-end leading-none">' + options.rank + '</div>' +
           '<div class="nm-card-inner flex-1 relative aspect-[2/3] rounded-md overflow-hidden bg-white/5 ring-1 ring-white/10 group-hover:ring-2 group-hover:ring-red-600 transition">' +
             '<img src="' + posterUrl + '" loading="lazy" decoding="async" alt="' + escapeHtml(title) + '" class="w-full h-full object-cover" onerror="window.__healPoster(this);" />' +
@@ -1181,6 +1200,29 @@
         }
       }, 400);
     }
+
+    // 4. Query Params Deep Linking (e.g. ?id=1408162&type=movie or ?watch=1408162)
+    try {
+      var sp = new URLSearchParams(window.location.search);
+      var qId = sp.get('id') || sp.get('tmdbId');
+      var qWatch = sp.get('watch') || sp.get('w');
+      var qType = sp.get('type') || 'movie';
+      var qSe = sp.get('se') || sp.get('s') || 1;
+      var qEp = sp.get('ep') || sp.get('e') || 1;
+      if (qWatch) {
+        setTimeout(function() {
+          if (window.Netflix4uModal && window.Netflix4uModal.openWatch) {
+            window.Netflix4uModal.openWatch(qWatch, qType, qSe, qEp, '');
+          }
+        }, 400);
+      } else if (qId) {
+        setTimeout(function() {
+          if (window.Netflix4uModal && window.Netflix4uModal.openTitle) {
+            window.Netflix4uModal.openTitle(qId, qType, false);
+          }
+        }, 400);
+      }
+    } catch(e) {}
   }
 
   // ─── Broken Poster Self-Healing ───
@@ -1429,29 +1471,48 @@
 
   // ─── PWA beforeinstallprompt Handler ───
   var deferredPrompt = null;
+  function showPwaInstallButtons() {
+    var pwaBtn = document.getElementById('pwa-install-btn');
+    if (pwaBtn) pwaBtn.classList.remove('hidden');
+    var ctaBtn = document.getElementById('cta-install-btn');
+    if (ctaBtn) ctaBtn.classList.remove('hidden');
+  }
+
+  function hidePwaInstallButtons() {
+    var pwaBtn = document.getElementById('pwa-install-btn');
+    if (pwaBtn) pwaBtn.classList.add('hidden');
+    var ctaBtn = document.getElementById('cta-install-btn');
+    if (ctaBtn) ctaBtn.classList.add('hidden');
+  }
+
+  function triggerPwaInstall() {
+    if (!deferredPrompt) {
+      showToast('App is ready to install via your browser menu (Add to Home Screen)', '📱');
+      return;
+    }
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(function(res) {
+      if (res && res.outcome === 'accepted') {
+        showToast('Netflix4U App installed successfully!', '🎉');
+      }
+      deferredPrompt = null;
+      hidePwaInstallButtons();
+    }).catch(function() {});
+  }
+
   window.addEventListener('beforeinstallprompt', function(e) {
     e.preventDefault();
     deferredPrompt = e;
-    var pwaBtn = document.getElementById('pwa-install-btn');
-    if (pwaBtn) pwaBtn.classList.remove('hidden');
+    showPwaInstallButtons();
   });
 
   var installBtn = document.getElementById('pwa-install-btn');
   if (installBtn) {
-    installBtn.addEventListener('click', function() {
-      if (!deferredPrompt) {
-        showToast('App is ready to install via browser menu (Add to Home Screen)', '📱');
-        return;
-      }
-      deferredPrompt.prompt();
-      deferredPrompt.userChoice.then(function(res) {
-        if (res && res.outcome === 'accepted') {
-          showToast('Netflix4U App installed successfully!', '🎉');
-        }
-        deferredPrompt = null;
-        installBtn.classList.add('hidden');
-      });
-    });
+    installBtn.addEventListener('click', triggerPwaInstall);
+  }
+  var ctaInstallBtn = document.getElementById('cta-install-btn');
+  if (ctaInstallBtn) {
+    ctaInstallBtn.addEventListener('click', triggerPwaInstall);
   }
 
   // ─── App Initialization ───

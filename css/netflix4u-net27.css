@@ -85,27 +85,39 @@ body {
   color: #ffffff !important;
 }
 
-/* Rank number in Top 10 Today (Netflix-Style 3D Overlay) */
+/* Rank number in Top 10 Today (Authentic Netflix-Style 3D Overlay) */
 .rank-num {
-  font-size: clamp(5.5rem, 9vw, 8.5rem);
+  font-family: 'Impact', 'Bebas Neue', 'Arial Black', sans-serif;
+  font-size: clamp(6.2rem, 10vw, 9rem);
   font-weight: 900;
-  font-style: italic;
-  letter-spacing: -8px;
+  line-height: 0.8;
+  letter-spacing: -6px;
   color: #0b0c10;
-  -webkit-text-stroke: 3px rgba(255, 255, 255, 0.45);
-  text-stroke: 3px rgba(255, 255, 255, 0.45);
-  text-shadow: 0 4px 18px rgba(0, 0, 0, 0.9);
+  -webkit-text-fill-color: #0c0d14;
+  -webkit-text-stroke: 4px rgba(255, 255, 255, 0.7);
+  text-stroke: 4px rgba(255, 255, 255, 0.7);
+  text-shadow: 2px 2px 0 #000, 4px 4px 0 #000, 0 8px 24px rgba(0, 0, 0, 0.9);
   user-select: none;
-  line-height: 0.82;
-  transform: translateX(10px);
-  z-index: 1;
+  z-index: 2;
+  margin-right: -1.2rem;
+  transform: translateY(4px);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-block;
+  pointer-events: none;
+  shrink: 0;
+}
+@media (min-width: 640px) {
+  .rank-num {
+    margin-right: -1.8rem;
+    -webkit-text-stroke: 5px rgba(255, 255, 255, 0.8);
+    letter-spacing: -8px;
+  }
 }
 .nm-card:hover .rank-num {
   -webkit-text-stroke-color: #e50914;
-  color: #151520;
-  transform: translateX(3px) scale(1.05);
-  text-shadow: 0 0 24px rgba(229, 9, 20, 0.6);
+  -webkit-text-fill-color: #180a0a;
+  transform: translateY(4px) scale(1.06);
+  text-shadow: 2px 2px 0 #000, 4px 4px 0 #000, 0 0 28px rgba(229, 9, 20, 0.7);
 }
 
 /* Rail arrows */
@@ -869,6 +881,16 @@ body {
   box-shadow: 0 0 10px rgba(229, 9, 20, 0.5);
 }
 
+@keyframes bookmarkPop {
+  0% { transform: scale(0.7); }
+  50% { transform: scale(1.35); }
+  100% { transform: scale(1); }
+}
+.nm-card-bookmark.is-bookmarked svg,
+.nm-btn-bookmark.is-active svg {
+  animation: bookmarkPop 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
 .nm-btn-bookmark {
   display: inline-flex;
   align-items: center;
@@ -953,6 +975,20 @@ body {
 .btn-stream-copy:hover {
   background: rgba(255, 255, 255, 0.22);
   color: #ffffff;
+}
+
+/* ─── Direct External Player Strip (under downloads / title modal) ─── */
+.nm-ext-stream-strip {
+  margin-top: 1rem;
+  padding: 0.85rem 1rem;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(255, 140, 0, 0.08), rgba(0, 133, 246, 0.08));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
 }
 
 /* ─── Toast Notifications ─── */

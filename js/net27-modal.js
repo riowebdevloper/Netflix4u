@@ -346,7 +346,7 @@
       '<div class="p-4 sm:p-6 space-y-6">' +
         '<!-- Action Buttons -->' +
         '<div class="flex flex-wrap items-center gap-2.5 sm:gap-3">' +
-          '<button type="button" data-modal="watch" data-tmdbid="' + (data.tmdbId || tmdbId) + '" data-canonical-id="' + escapeHtml(data.canonicalId || tmdbId) + '" data-type="' + type + '" data-title="' + escapeHtml(data.title) + '" data-year="' + (data.year || '') + '" data-imdbid="' + (data.imdbId || '') + '" data-backdrop="' + (data.backdrop || '') + '"' + (isTv ? ' data-se="' + (data.initialSeason || 1) + '" data-ep="1"' : '') + ' class="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg bg-white text-black font-bold hover:bg-white/90 active:scale-95 transition text-sm shadow-xl cursor-pointer">' +
+          '<button type="button" data-modal="watch" data-tmdbid="' + (data.tmdbId || tmdbId) + '" data-canonical-id="' + escapeHtml(data.canonicalId || tmdbId) + '" data-type="' + type + '" data-title="' + escapeHtml(data.title) + '" data-year="' + (data.year || '') + '" data-imdbid="' + (data.imdbId || '') + '" data-backdrop="' + (data.backdrop || '') + '" data-poster="' + (data.poster || '') + '"' + (isTv ? ' data-se="' + (data.initialSeason || 1) + '" data-ep="1"' : '') + ' class="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg bg-white text-black font-bold hover:bg-white/90 active:scale-95 transition text-sm shadow-xl cursor-pointer">' +
             '<svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>' +
             (isTv ? 'Play S' + (data.initialSeason || 1) + ' E1' : 'Watch Now') +
           '</button>' +
@@ -403,6 +403,33 @@
         '</div>' +
 
         cloudSectionHtml +
+
+        '<!-- Direct External Player Strip -->' +
+        '<div class="nm-ext-stream-strip">' +
+          '<div class="flex items-center gap-2">' +
+            '<span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>' +
+            '<div>' +
+              '<div class="text-xs sm:text-sm font-bold text-white flex items-center gap-1.5">' +
+                'Stream in External App (Zero Buffering)' +
+              '</div>' +
+              '<div class="text-[11px] text-white/50">Direct hardware-accelerated playback with multi-audio & subtitles</div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="flex items-center gap-2 flex-wrap">' +
+            '<button type="button" class="btn-vlc" data-ext-stream-vlc="' + encodeURIComponent(isTv ? 'https://peachify.top/embed/tv/' + (data.tmdbId || tmdbId) + '/' + (data.initialSeason || 1) + '/1' : 'https://peachify.top/embed/movie/' + (data.tmdbId || tmdbId)) + '" title="Open in VLC Media Player">' +
+              '<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L1 21h22L12 2zm0 3.8L20.2 19H3.8L12 5.8z"/></svg>' +
+              '<span>Open in VLC</span>' +
+            '</button>' +
+            '<button type="button" class="btn-mx" data-ext-stream-mx="' + encodeURIComponent(isTv ? 'https://peachify.top/embed/tv/' + (data.tmdbId || tmdbId) + '/' + (data.initialSeason || 1) + '/1' : 'https://peachify.top/embed/movie/' + (data.tmdbId || tmdbId)) + '" title="Open in MX Player">' +
+              '<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>' +
+              '<span>Open in MX Player</span>' +
+            '</button>' +
+            '<button type="button" class="btn-stream-copy" data-ext-stream-copy="' + encodeURIComponent(isTv ? 'https://peachify.top/embed/tv/' + (data.tmdbId || tmdbId) + '/' + (data.initialSeason || 1) + '/1' : 'https://peachify.top/embed/movie/' + (data.tmdbId || tmdbId)) + '" title="Copy Stream URL">' +
+              '<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>' +
+              '<span>Copy Stream Link</span>' +
+            '</button>' +
+          '</div>' +
+        '</div>' +
 
         episodesSectionHtml +
 
@@ -901,7 +928,7 @@
     { id: 's6', name: 'Server 6 (AutoEmbed)', tag: 'Backup', tagClass: 'tag-fast', desc: 'AutoEmbed Reliable CDN Backup' }
   ];
 
-  function openWatchModal(tmdbId, type, season, episode, backdrop, title, year, imdbId, canonicalId) {
+  function openWatchModal(tmdbId, type, season, episode, backdrop, title, year, imdbId, canonicalId, poster) {
     if (window.__closeSearchOverlay) window.__closeSearchOverlay();
     if (!watchModal || !watchModalIframe) return;
 
@@ -1016,7 +1043,7 @@
         canonicalId: (params && params.canonicalId) || tmdbId,
         title: title || 'Title',
         backdrop: backdrop,
-        poster: backdrop,
+        poster: poster || backdrop,
         type: type,
         year: year,
         se: season,
@@ -1364,17 +1391,57 @@
         var se = modalTrigger.dataset.se || 1;
         var ep = modalTrigger.dataset.ep || 1;
         var backdrop = modalTrigger.dataset.backdrop || '';
+        var poster = modalTrigger.dataset.poster || '';
         var title = modalTrigger.dataset.title || '';
         var year = modalTrigger.dataset.year || '';
         var imdbId = modalTrigger.dataset.imdbid || '';
         if (!tmdbId && !canonicalId) return;
         e.preventDefault();
-        openWatchModal(tmdbId, type, se, ep, backdrop, title, year, imdbId, canonicalId);
+        openWatchModal(tmdbId, type, se, ep, backdrop, title, year, imdbId, canonicalId, poster);
       } else if (modalType === 'trailer') {
         var yt = modalTrigger.dataset.yt;
         if (!yt) return;
         e.preventDefault();
         openTrailerModal(yt);
+      }
+      return;
+    }
+
+    // Direct External Stream Buttons (VLC, MX Player, Copy Link)
+    var vlcBtn = e.target.closest('[data-ext-stream-vlc]');
+    if (vlcBtn) {
+      e.preventDefault();
+      e.stopPropagation();
+      var rawVlc = decodeURIComponent(vlcBtn.dataset.extStreamVlc || '');
+      if (!rawVlc) return;
+      var cleanVlc = rawVlc.replace(/^https?:\/\//, '');
+      window.location.href = 'vlc://' + cleanVlc;
+      if (window.__showToast) window.__showToast('Launching stream in VLC Player…', '🎬');
+      return;
+    }
+
+    var mxBtn = e.target.closest('[data-ext-stream-mx]');
+    if (mxBtn) {
+      e.preventDefault();
+      e.stopPropagation();
+      var rawMx = decodeURIComponent(mxBtn.dataset.extStreamMx || '');
+      if (!rawMx) return;
+      var intentMx = 'intent:' + rawMx + '#Intent;package=com.mxtech.videoplayer.ad;type=video/*;end';
+      window.location.href = intentMx;
+      if (window.__showToast) window.__showToast('Launching stream in MX Player…', '🎬');
+      return;
+    }
+
+    var copyStreamBtn = e.target.closest('[data-ext-stream-copy]');
+    if (copyStreamBtn) {
+      e.preventDefault();
+      e.stopPropagation();
+      var rawCopy = decodeURIComponent(copyStreamBtn.dataset.extStreamCopy || '');
+      if (!rawCopy) return;
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(rawCopy).then(function() {
+          if (window.__showToast) window.__showToast('Stream link copied to clipboard!', '📋');
+        });
       }
       return;
     }

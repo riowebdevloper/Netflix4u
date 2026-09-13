@@ -8,6 +8,9 @@
   <meta name="description" content="Stream and download high quality movies, web series, anime and K-dramas with multi-audio and high-speed cloud mirrors on Netflix4U.">
   <meta name="keywords" content="Netflix4u, netmirror, stream movies online, download movies 4k, web series hindi dubbed, free streaming hd">
 
+  <!-- HilltopAds Verification -->
+  <meta name="676d243f6147231bddf2863dfb1033ddbbd89377" content="676d243f6147231bddf2863dfb1033ddbbd89377">
+
   <!-- PWA Capabilities -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
@@ -40,7 +43,7 @@
   <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
   <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="manifest" href="/js/manifest.json">
+  <link rel="manifest" href="/manifest.json">
 
   <!-- DNS Prefetch + Preconnect -->
   <link rel="dns-prefetch" href="https://image.tmdb.org">
@@ -194,13 +197,14 @@
 
             <!-- Header Quick Actions: Request & Install PWA -->
             <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
-              <button id="header-request-btn" type="button" aria-label="Request a Movie or Series" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold border border-white/15 bg-white/10 hover:bg-white/20 text-white transition active:scale-95 cursor-pointer">
+              <button id="header-request-btn" type="button" aria-label="Request a Movie or Series" class="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-full text-xs font-semibold border border-white/15 bg-white/10 hover:bg-white/20 text-white transition active:scale-95 cursor-pointer">
                 <svg class="w-3.5 h-3.5 text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-                Request
+                <span class="hidden sm:inline">Request</span>
+                <span class="sm:hidden text-[11px]">Req</span>
               </button>
-              <button id="pwa-install-btn" type="button" aria-label="Install Netflix4U App" class="hidden inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold border border-green-500/40 bg-green-500/15 hover:bg-green-500/25 text-white transition active:scale-95 cursor-pointer">
+              <button id="pwa-install-btn" type="button" aria-label="Install Netflix4U App" class="hidden inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-full text-xs font-semibold border border-green-500/40 bg-green-500/15 hover:bg-green-500/25 text-white transition active:scale-95 cursor-pointer">
                 <span class="pwa-pulse-dot"></span>
-                Install App
+                <span>Install App</span>
               </button>
             </div>
           </div>
@@ -368,6 +372,10 @@
                 <svg class="w-4 h-4" viewBox="0 0 24 24" fill="#229ED9"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
                 Telegram Channel
               </a>
+              <button id="cta-install-btn" type="button" class="hidden shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold text-white transition active:scale-95 border border-green-500/40 bg-green-500/15 hover:bg-green-500/25 whitespace-nowrap cursor-pointer">
+                <span class="pwa-pulse-dot"></span>
+                Install Web App
+              </button>
             </div>
           </div>
         </section>
@@ -439,10 +447,16 @@
               </div>
               <h3 class="text-lg sm:text-2xl font-bold text-white mb-2">Can't find what you're looking for?</h3>
               <p class="text-sm sm:text-base text-white/60 mb-5">Search any movie or show by name — instant results with direct download mirrors & multi-language streams.</p>
-              <button onclick="document.getElementById('search-input').focus(); window.scrollTo({ top: 0, behavior: 'smooth' });" type="button" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-red-600 hover:bg-red-700 text-white text-sm sm:text-base font-bold transition active:scale-95 shadow-lg shadow-red-600/20 cursor-pointer">
-                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
-                Search Full Catalog
-              </button>
+              <div class="flex flex-wrap items-center justify-center gap-3">
+                <button onclick="document.getElementById('search-input').focus(); window.scrollTo({ top: 0, behavior: 'smooth' });" type="button" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-red-600 hover:bg-red-700 text-white text-sm sm:text-base font-bold transition active:scale-95 shadow-lg shadow-red-600/20 cursor-pointer">
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+                  Search Full Catalog
+                </button>
+                <button id="search-cta-request" onclick="document.getElementById('header-request-btn').click();" type="button" class="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-white/10 hover:bg-white/20 text-white text-sm sm:text-base font-semibold border border-white/15 transition active:scale-95 cursor-pointer">
+                  <svg class="w-4 h-4 text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                  Request a Title
+                </button>
+              </div>
             </div>
           </section>
 

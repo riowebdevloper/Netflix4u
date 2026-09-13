@@ -1,8 +1,9 @@
 {
+  "id": "/?source=pwa",
   "name": "Netflix4U — Unlimited Movies & Series",
   "short_name": "Netflix4U",
   "description": "Stream & download high-speed movies, web series, anime and K-dramas with multi-audio on Netflix4U.",
-  "start_url": "/",
+  "start_url": "/?source=pwa",
   "scope": "/",
   "display": "standalone",
   "background_color": "#0a0a0f",
@@ -13,13 +14,25 @@
       "src": "/android-chrome-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
     },
     {
       "src": "/android-chrome-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ],
   "categories": ["entertainment", "video", "movies"],
@@ -29,7 +42,8 @@
       "src": "/og-image.jpg",
       "sizes": "1200x630",
       "type": "image/jpeg",
-      "label": "Netflix4U Streaming Hub"
+      "label": "Netflix4U Streaming Hub",
+      "form_factor": "wide"
     }
   ]
 }

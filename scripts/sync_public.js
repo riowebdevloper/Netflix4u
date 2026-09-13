@@ -42,7 +42,15 @@ const rootFilesToSync = [
   'android-chrome-192x192.png',
   'android-chrome-512x512.png',
   'robots.txt',
-  'sitemap.xml'
+  'sitemap.xml',
+  'manifest.json',
+  'sw.js',
+  '676d243f6147231bddf2863dfb1033ddbbd89377.html',
+  '676d243f6147231bddf2863dfb1033ddbbd89377.txt',
+  '863dfb1033ddbbd89377.html',
+  '863dfb1033ddbbd89377.txt',
+  '676d243f6147231bddf2.txt',
+  '676d243f6147231bddf2.html'
 ];
 
 for (const f of rootFilesToSync) {
