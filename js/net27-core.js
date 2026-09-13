@@ -1471,43 +1471,146 @@
     });
   }
 
-  // ─── PWA beforeinstallprompt Handler ───
-  var deferredPrompt = null;
-  function showPwaInstallButtons() {
-    var pwaBtn = document.getElementById('pwa-install-btn');
-    if (pwaBtn) pwaBtn.classList.remove('hidden');
-    var ctaBtn = document.getElementById('cta-install-btn');
-    if (ctaBtn) ctaBtn.classList.remove('hidden');
+  // ─── PWA & Native App Installation Controller ───
+  var deferredPrompt = window.pwaDeferredPrompt || null;
+
+  function isStandaloneApp() {
+    return window.matchMedia('(display-mode: standalone)').matches ||
+           window.navigator.standalone === true ||
+           (document.referrer && document.referrer.includes('android-app://'));
   }
 
-  function hidePwaInstallButtons() {
-    var pwaBtn = document.getElementById('pwa-install-btn');
-    if (pwaBtn) pwaBtn.classList.add('hidden');
-    var ctaBtn = document.getElementById('cta-install-btn');
-    if (ctaBtn) ctaBtn.classList.add('hidden');
+  function detectUserPlatform() {
+    var ua = navigator.userAgent || navigator.vendor || window.opera || '';
+    if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) return 'ios';
+    if (/android/i.test(ua)) return 'android';
+    if (/windows|macintosh|linux/i.test(ua)) return 'desktop';
+    return 'other';
+  }
+
+  function renderPwaInstructions() {
+    var titleEl = document.getElementById('pwa-guide-title');
+    var stepsEl = document.getElementById('pwa-guide-steps');
+    if (!titleEl || !stepsEl) return;
+
+    var platform = detectUserPlatform();
+    if (platform === 'ios') {
+      titleEl.innerHTML = '<span>🍎</span> Safari / iPhone Instructions:';
+      stepsEl.innerHTML = 
+        '<li>Tap the <strong>Share</strong> button ( <svg class="inline w-3.5 h-3.5 text-blue-400 align-text-bottom" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg> ) at the bottom of Safari.</li>' +
+        '<li>Scroll down the share sheet and tap <strong>"Add to Home Screen"</strong> ( <span class="text-white font-bold">+</span> ).</li>' +
+        '<li>Tap <strong>"Add"</strong> in the top right to install Netflix4U!</li>';
+    } else if (platform === 'android') {
+      titleEl.innerHTML = '<span>🤖</span> Android / Chrome Instructions:';
+      stepsEl.innerHTML = 
+        '<li>Tap the <strong>Three Dots (⋮)</strong> menu icon at the top right of Chrome.</li>' +
+        '<li>Tap <strong>"Install app"</strong> or <strong>"Add to Home screen"</strong>.</li>' +
+        '<li>Tap <strong>"Install"</strong> to add Netflix4U to your home screen with zero-buffer streaming!</li>';
+    } else {
+      titleEl.innerHTML = '<span>💻</span> Desktop / PC Instructions:';
+      stepsEl.innerHTML = 
+        '<li>Click the <strong>Install icon (⊕)</strong> on the right side of your browser address bar.</li>' +
+        '<li>Or click the <strong>Three Dots (⋮)</strong> menu → <strong>"Save and share"</strong> → <strong>"Install Netflix4U"</strong>.</li>' +
+        '<li>Launch anytime directly from your desktop or taskbar in standalone window!</li>';
+    }
+  }
+
+  function openPwaInstallModal() {
+    renderPwaInstructions();
+    var modal = document.getElementById('pwa-install-modal');
+    if (modal) {
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('modal-open');
+    }
+  }
+
+  function closePwaInstallModal() {
+    var modal = document.getElementById('pwa-install-modal');
+    if (modal) {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('modal-open');
+    }
+  }
+
+  function updateInstalledButtons() {
+    if (isStandaloneApp()) {
+      var pwaBtn = document.getElementById('pwa-install-btn');
+      if (pwaBtn) {
+        pwaBtn.innerHTML = '<span class="text-green-400 font-bold">✓</span><span>App Installed</span>';
+        pwaBtn.classList.remove('border-green-500/40', 'bg-green-500/15', 'hover:bg-green-500/25');
+        pwaBtn.classList.add('border-white/20', 'bg-white/10', 'text-white/80');
+      }
+      var ctaBtn = document.getElementById('cta-install-btn');
+      if (ctaBtn) {
+        ctaBtn.innerHTML = '<span class="text-green-400 font-bold">✓</span> App Installed';
+        ctaBtn.classList.remove('border-green-500/40', 'bg-green-500/15', 'hover:bg-green-500/25');
+        ctaBtn.classList.add('border-white/20', 'bg-white/10', 'text-white/80');
+      }
+      var directBtn = document.getElementById('pwa-direct-install-btn');
+      if (directBtn) {
+        directBtn.innerHTML = '<span>✓ App Installed (Running in App Mode)</span>';
+        directBtn.disabled = true;
+        directBtn.classList.remove('from-red-600', 'to-red-700', 'hover:from-red-500', 'hover:to-red-600');
+        directBtn.classList.add('bg-zinc-800', 'text-white/60', 'cursor-default');
+      }
+    }
   }
 
   function triggerPwaInstall() {
-    if (!deferredPrompt) {
-      showToast('App is ready to install via your browser menu (Add to Home Screen)', '📱');
+    if (isStandaloneApp()) {
+      showToast('Netflix4U is already running in App mode! Enjoy movies & series.', '🎬');
       return;
     }
-    deferredPrompt.prompt();
-    deferredPrompt.userChoice.then(function(res) {
-      if (res && res.outcome === 'accepted') {
-        showToast('Netflix4U App installed successfully!', '🎉');
+
+    var promptEvent = window.pwaDeferredPrompt || deferredPrompt;
+    if (promptEvent && typeof promptEvent.prompt === 'function') {
+      try {
+        promptEvent.prompt();
+        promptEvent.userChoice.then(function(choiceResult) {
+          if (choiceResult && choiceResult.outcome === 'accepted') {
+            showToast('Netflix4U App installed successfully! Enjoy high-speed streaming!', '🎉');
+            window.pwaDeferredPrompt = null;
+            deferredPrompt = null;
+            updateInstalledButtons();
+            closePwaInstallModal();
+          } else {
+            showToast('Install cancelled. You can install anytime from the menu!', 'ℹ️');
+          }
+        }).catch(function() {
+          openPwaInstallModal();
+        });
+      } catch (err) {
+        openPwaInstallModal();
       }
-      deferredPrompt = null;
-      hidePwaInstallButtons();
-    }).catch(function() {});
+    } else {
+      // If browser beforeinstallprompt hasn't fired or on iOS/Firefox, show the guided install modal
+      openPwaInstallModal();
+    }
   }
 
   window.addEventListener('beforeinstallprompt', function(e) {
     e.preventDefault();
     deferredPrompt = e;
-    showPwaInstallButtons();
+    window.pwaDeferredPrompt = e;
   });
 
+  window.addEventListener('pwa-prompt-ready', function() {
+    deferredPrompt = window.pwaDeferredPrompt;
+  });
+
+  window.addEventListener('appinstalled', function() {
+    showToast('Netflix4U App installed successfully!', '🎉');
+    window.pwaDeferredPrompt = null;
+    deferredPrompt = null;
+    updateInstalledButtons();
+    closePwaInstallModal();
+  });
+
+  // Attach button triggers
   var installBtn = document.getElementById('pwa-install-btn');
   if (installBtn) {
     installBtn.addEventListener('click', triggerPwaInstall);
@@ -1516,6 +1619,40 @@
   if (ctaInstallBtn) {
     ctaInstallBtn.addEventListener('click', triggerPwaInstall);
   }
+  var directInstallBtn = document.getElementById('pwa-direct-install-btn');
+  if (directInstallBtn) {
+    directInstallBtn.addEventListener('click', triggerPwaInstall);
+  }
+  var pwaCloseBtn = document.getElementById('pwa-modal-close');
+  if (pwaCloseBtn) {
+    pwaCloseBtn.addEventListener('click', closePwaInstallModal);
+  }
+  var pwaModal = document.getElementById('pwa-install-modal');
+  if (pwaModal) {
+    pwaModal.addEventListener('click', function(e) {
+      if (e.target === pwaModal) closePwaInstallModal();
+    });
+  }
+  var pwaCopyBtn = document.getElementById('pwa-copy-link-btn');
+  if (pwaCopyBtn) {
+    pwaCopyBtn.addEventListener('click', function() {
+      var installUrl = 'https://netflix4u.in/?source=pwa';
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(installUrl).then(function() {
+          showToast('App link copied! Open in Chrome or Safari to install.', '📋');
+        }).catch(function() {
+          showToast(installUrl, '🔗');
+        });
+      } else {
+        showToast(installUrl, '🔗');
+      }
+    });
+  }
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      closePwaInstallModal();
+    }
+  });
 
   // ─── App Initialization ───
   function init() {
@@ -1526,6 +1663,7 @@
     initSearch();
     loadPlatformRails('trending');
     handleInitialRoutes();
+    updateInstalledButtons();
     if (window.Netflix4uAds) window.Netflix4uAds.renderAll();
   }
 

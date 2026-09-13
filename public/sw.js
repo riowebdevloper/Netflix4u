@@ -9,10 +9,11 @@ try {
 } catch (e) {}
 
 // PWA Shell & Offline Support (Network-First for HTML to guarantee fresh updates)
-var CACHE_NAME = 'n4u-pwa-v5';
+var CACHE_NAME = 'n4u-pwa-v6';
 var STATIC_ASSETS = [
   '/',
   '/index.html',
+  '/?source=pwa',
   '/css/netflix4u-net27.css',
   '/css/Layout.CBW6-iGy.css',
   '/css/index.P3dZcbru.css',
@@ -79,7 +80,7 @@ self.addEventListener('fetch', function(event) {
         }
         return networkResponse;
       }).catch(function() {
-        return caches.match(event.request).then(function(cached) {
+        return caches.match(event.request, { ignoreSearch: true }).then(function(cached) {
           return cached || caches.match('/index.html') || caches.match('/');
         });
       })
@@ -99,7 +100,7 @@ self.addEventListener('fetch', function(event) {
         }
         return networkResponse;
       }).catch(function() {
-        return caches.match(event.request);
+        return caches.match(event.request, { ignoreSearch: true });
       })
     );
     return;
@@ -107,7 +108,7 @@ self.addEventListener('fetch', function(event) {
 
   // Stale-While-Revalidate for other static assets (images, icons, fonts)
   event.respondWith(
-    caches.match(event.request).then(function(cached) {
+    caches.match(event.request, { ignoreSearch: true }).then(function(cached) {
       if (cached) {
         fetch(event.request).then(function(networkResponse) {
           if (networkResponse && networkResponse.status === 200 && networkResponse.type === 'basic') {
