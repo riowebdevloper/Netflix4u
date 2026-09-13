@@ -9,43 +9,7 @@
   var slotConfigs = {};
   var STICKY_DISMISSED_KEY = 'nm_sticky_ad_dismissed';
 
-  var ADSTERRA_NATIVE_SRC = 'https://pl31315274.profitableratecpmnetwork.com/bb6db87840ef2c647140600c50c30ab2/invoke.js';
   var ADSTERRA_CONTAINER_ID = 'container-bb6db87840ef2c647140600c50c30ab2';
-
-  /**
-   * Generates an isolated sandboxed iframe document containing the Adsterra Native Banner.
-   * This allows multiple slots to run native banners without ID collision.
-   */
-  function createAdsterraNativeIframe(slotEl) {
-    if (!slotEl) return;
-    // If slot already has the container element directly in DOM, let root invoke.js populate it
-    if (slotEl.querySelector('#' + ADSTERRA_CONTAINER_ID)) {
-      return;
-    }
-
-    var iframe = document.createElement('iframe');
-    iframe.style.width = '100%';
-    iframe.style.minHeight = '90px';
-    iframe.style.border = 'none';
-    iframe.style.overflow = 'hidden';
-    iframe.scrolling = 'no';
-    iframe.setAttribute('title', 'Advertisement');
-    iframe.setAttribute('loading', 'lazy');
-
-    var html = '<!DOCTYPE html><html><head><meta charset="utf-8">' +
-      '<style>' +
-        'body { margin: 0; padding: 4px; background: transparent; display: flex; align-items: center; justify-content: center; font-family: system-ui, -apple-system, sans-serif; overflow: hidden; }' +
-        '#' + ADSTERRA_CONTAINER_ID + ' { width: 100%; display: flex; justify-content: center; }' +
-      '</style>' +
-      '</head><body>' +
-      '<script async="async" data-cfasync="false" src="' + ADSTERRA_NATIVE_SRC + '"><\/script>' +
-      '<div id="' + ADSTERRA_CONTAINER_ID + '"></div>' +
-      '</body></html>';
-
-    iframe.srcdoc = html;
-    slotEl.innerHTML = '';
-    slotEl.appendChild(iframe);
-  }
 
   var DEFAULT_SPONSOR_HTML = function(title, subtitle, cta) {
     return '<a href="https://t.me/netflix_mirror_apk" target="_blank" rel="noopener noreferrer" class="nm-ad-placeholder">' +
@@ -59,10 +23,37 @@
     '</a>';
   };
 
+  /**
+   * Monitor Adsterra native container in #ad-slot-home-top.
+   * If AdBlock blocks it or no ad is filled after timeout, show fallback so slot is NEVER blank.
+   */
+  function setupAdsterraFallbackMonitor() {
+    var container = document.getElementById(ADSTERRA_CONTAINER_ID);
+    var parentSlot = document.getElementById('ad-slot-home-top');
+    if (!container || !parentSlot) return;
+
+    var filled = false;
+    var observer = new MutationObserver(function(mutations) {
+      if (container.children.length > 0) {
+        filled = true;
+        observer.disconnect();
+      }
+    });
+    observer.observe(container, { childList: true, subtree: true });
+
+    setTimeout(function() {
+      if (!filled && container.children.length === 0) {
+        // If Adsterra script hasn't populated container (e.g. adblocker active), render fallback
+        container.innerHTML = DEFAULT_SPONSOR_HTML('Featured Streaming Sponsor', 'Direct 4K Mirrors & Fast Downloads', 'Join');
+      }
+      observer.disconnect();
+    }, 2800);
+  }
+
   var AdsManager = {
     /**
      * Configure a custom ad snippet or provider tag for any slot ID
-     * @param {string} slotId e.g. 'ad-slot-home-top'
+     * @param {string} slotId e.g. 'ad-slot-home-bottom'
      * @param {string|Function} adContent HTML snippet or generator function
      */
     registerSlot: function(slotId, adContent) {
@@ -121,18 +112,12 @@
           } catch(e) {}
         }
       } else {
-        // If element is the primary home-top slot and already has container, leave it
+        // If element is the primary home-top slot with active Adsterra container, leave it to invoke.js
         if (el.id === 'ad-slot-home-top' && el.querySelector('#' + ADSTERRA_CONTAINER_ID)) {
           return;
         }
 
-        // Active Adsterra Native Banner Rendering
-        if (el.classList.contains('nm-ad-leaderboard') || el.classList.contains('nm-ad-billboard') || el.classList.contains('nm-ad-modal')) {
-          createAdsterraNativeIframe(el);
-          return;
-        }
-
-        // Render card or fallback placeholder
+        // Native card in search results
         if (el.classList.contains('nm-ad-card')) {
           el.innerHTML = '<a href="https://t.me/netflix_mirror_apk" target="_blank" rel="noopener noreferrer" class="h-full w-full flex flex-col items-center justify-center p-4 text-center group block">' +
             '<div class="w-12 h-12 rounded-full bg-red-600/20 text-red-500 flex items-center justify-center mb-3 group-hover:scale-110 transition">' +
@@ -142,6 +127,20 @@
             '<div class="text-[11px] text-white/50 mb-3">Instant 4K Cloud Streaming & APK Downloads</div>' +
             '<span class="px-3 py-1 rounded-md bg-white/10 group-hover:bg-white/20 text-white text-[10px] font-bold transition">Visit Channel</span>' +
           '</a>';
+          return;
+        }
+
+        // For modal slots or billboard slots awaiting separate zone codes, render sleek partner banner
+        if (slotId === 'ad-slot-modal-top') {
+          el.innerHTML = DEFAULT_SPONSOR_HTML('High-Speed Cloud Stream', 'Ultra-fast CDN playback with multi-audio support', 'Watch');
+        } else if (slotId === 'ad-slot-modal-dotmovies') {
+          el.innerHTML = DEFAULT_SPONSOR_HTML('Verified Direct Download Mirror', 'Original untouched prints & Dual Audio rips', 'Get Link');
+        } else if (slotId === 'ad-slot-modal-cloud') {
+          el.innerHTML = DEFAULT_SPONSOR_HTML('Lightning Cloud CDN Server', 'Zero-buffer direct video stream & instant access', 'Connect');
+        } else if (slotId === 'ad-slot-modal-bottom') {
+          el.innerHTML = DEFAULT_SPONSOR_HTML('Join Official Telegram Channel', 'Get daily movie releases & direct APK updates', 'Join 45K+');
+        } else if (slotId === 'ad-slot-home-bottom') {
+          el.innerHTML = DEFAULT_SPONSOR_HTML('Stream in 4K UHD & Dolby 5.1', 'No subscription required • Daily updated catalog', 'Explore');
         } else {
           el.innerHTML = DEFAULT_SPONSOR_HTML();
         }
@@ -193,6 +192,7 @@
     init: function() {
       AdsManager.renderAll();
       AdsManager.initStickyBanner();
+      setupAdsterraFallbackMonitor();
     }
   };
 

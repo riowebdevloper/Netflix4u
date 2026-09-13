@@ -638,6 +638,14 @@ body {
   display: block !important;
 }
 
+#container-bb6db87840ef2c647140600c50c30ab2 {
+  width: 100%;
+  min-height: 90px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 /* Standard Ad Slot Sizes */
 .nm-ad-leaderboard {
   max-width: 728px;
