@@ -1,0 +1,78 @@
+{
+  "id": "tmdb-series-30984",
+  "canonicalId": "tmdb-series-30984",
+  "externalProvider": "tmdb",
+  "externalId": "30984",
+  "tmdbId": "30984",
+  "imdbId": "tt0434665",
+  "type": "series",
+  "contentType": "series",
+  "title": "Bleach",
+  "canonicalTitle": "Bleach",
+  "originalTitle": "BLEACH",
+  "overview": "For as long as he can remember, Ichigo Kurosaki has been able to see ghosts. But when he meets Rukia, a Soul Reaper who battles evil spirits known as Hollows, he finds his life is changed forever. Now, with a newfound wealth of spiritual energy, Ichigo discovers his true calling: to protect the living and the dead from evil.",
+  "description": "For as long as he can remember, Ichigo Kurosaki has been able to see ghosts. But when he meets Rukia, a Soul Reaper who battles evil spirits known as Hollows, he finds his life is changed forever. Now, with a newfound wealth of spiritual energy, Ichigo discovers his true calling: to protect the living and the dead from evil.",
+  "shortDescription": "For as long as he can remember, Ichigo Kurosaki has been able to see ghosts. But when he meets Rukia, a Soul Reaper who ",
+  "year": 2004,
+  "releaseDate": "2004-10-05",
+  "rating": 8.3,
+  "votes": "2.3K",
+  "quality": "FHD",
+  "duration": "24m/ep",
+  "genres": [
+    "Action & Adventure",
+    "Animation",
+    "Sci-Fi & Fantasy"
+  ],
+  "categories": [
+    "Action & Adventure",
+    "Animation",
+    "Sci-Fi & Fantasy"
+  ],
+  "language": "Japanese",
+  "country": "JP",
+  "director": "Director",
+  "poster": "https://image.tmdb.org/t/p/w500/2EewmxXe72ogD0EaWM8gqa0ccIw.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/o0NsbcIvsllg6CJX0FBFY8wWbsn.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/0c4IoCA5fY0?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/0c4IoCA5fY0?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "78402",
+      "name": "Masakazu Morita",
+      "character": "Ichigo Kurosaki (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/2INsHYbx9gEhhzXPHdqBDdvHjFt.jpg"
+    },
+    {
+      "id": "23988",
+      "name": "Fumiko Orikasa",
+      "character": "Rukia Kuchiki (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/f5d1J13fksa1hK8u7AS95aO8b9.jpg"
+    },
+    {
+      "id": "216448",
+      "name": "Hiroki Yasumoto",
+      "character": "Yasutora Sado (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/vNIGLl0wFmdhdnulMssQ1qyNeBs.jpg"
+    },
+    {
+      "id": "70099",
+      "name": "Yuki Matsuoka",
+      "character": "Orihime Inoue (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/e8rNkMM9O7ULA1RJtLbvkN9789v.jpg"
+    },
+    {
+      "id": "82056",
+      "name": "Noriaki Sugiyama",
+      "character": "Uryu Ishida (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/szqqQ8T0gzuSxjU2rnWcthsaSJT.jpg"
+    }
+  ],
+  "seasons": 2,
+  "episodes": 416,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-13T03:09:52.658Z",
+  "createdAt": "2026-09-13T03:09:52.658Z",
+  "updatedAt": "2026-09-13T03:09:52.658Z",
+  "links": []
+}

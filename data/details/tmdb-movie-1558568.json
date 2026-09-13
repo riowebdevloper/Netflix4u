@@ -1,0 +1,98 @@
+{
+  "id": "tmdb-movie-1558568",
+  "canonicalId": "tmdb-movie-1558568",
+  "externalProvider": "tmdb",
+  "externalId": "1558568",
+  "tmdbId": "1558568",
+  "imdbId": "tt38616652",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "Go Team!",
+  "canonicalTitle": "Go Team!",
+  "originalTitle": "Gracias, equipo",
+  "overview": "When their team-building event gets downgraded to a tiny village, a cheese company's staff think it can't get worse — then they learn about the layoffs.",
+  "description": "When their team-building event gets downgraded to a tiny village, a cheese company's staff think it can't get worse — then they learn about the layoffs.",
+  "shortDescription": "When their team-building event gets downgraded to a tiny village, a cheese company's staff think it can't get worse — th",
+  "year": 2026,
+  "releaseDate": "2026-09-11",
+  "rating": 6.3,
+  "votes": "0.0K",
+  "quality": "FHD",
+  "duration": "1h 33m",
+  "genres": [
+    "Comedy"
+  ],
+  "categories": [
+    "Comedy"
+  ],
+  "language": "Spanish",
+  "country": "ES",
+  "director": "Diego Núñez Irigoyen",
+  "poster": "https://image.tmdb.org/t/p/w500/jM8LRvzYIqZqw6Si5xNECiHFDgM.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/24JmHBUaZVmZRoEMjzejLL3sJc5.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/VSN8YM6urHo?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/VSN8YM6urHo?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "114460",
+      "name": "Alexandra Jiménez",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/2dRN4aqsNgO9Um2f3FUWSx5WMcx.jpg"
+    },
+    {
+      "id": "16971",
+      "name": "Maribel Verdú",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/7hxTsW5CKi2lkz5yGMWShki7DOo.jpg"
+    },
+    {
+      "id": "227071",
+      "name": "Pedro Casablanc",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/7oXGl8Nr2w7SaES4tbzjw4RYtF0.jpg"
+    },
+    {
+      "id": "25220",
+      "name": "Pepe Viyuela",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/aDDn9kF809MMCIXGQ7Cl0crW7Zj.jpg"
+    },
+    {
+      "id": "984654",
+      "name": "Raúl Tejón",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/cKc2AQ8t7bn2XXceg7vYP3XlJIe.jpg"
+    },
+    {
+      "id": "1465849",
+      "name": "Ismael Fritschi",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/8fRvH1drA5VUD1nodNdcTrf9mQ0.jpg"
+    },
+    {
+      "id": "2168107",
+      "name": "Victor Rebull",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/locdIJLnX1elVJr3ufV4sprk6Yh.jpg"
+    },
+    {
+      "id": "1390564",
+      "name": "Blanca Martínez",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/wIQhqLe9cvIkWL7V2oBMAeuxqk1.jpg"
+    },
+    {
+      "id": "93831",
+      "name": "Saturnino García",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/yubpcNgsdb5rKZPhKmiNRJfA0qX.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 1,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-13T03:09:52.701Z",
+  "createdAt": "2026-09-13T03:09:52.701Z",
+  "updatedAt": "2026-09-13T03:09:52.701Z",
+  "links": []
+}

@@ -1,0 +1,78 @@
+{
+  "id": "tmdb-movie-1423191",
+  "canonicalId": "tmdb-movie-1423191",
+  "externalProvider": "tmdb",
+  "externalId": "1423191",
+  "tmdbId": "1423191",
+  "imdbId": "tt35538033",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "Resident Evil",
+  "canonicalTitle": "Resident Evil",
+  "originalTitle": "Resident Evil",
+  "overview": "Medical courier Bryan unwittingly finds himself fighting for survival as one fateful, horrifying night collapses around him in chaos.",
+  "description": "Medical courier Bryan unwittingly finds himself fighting for survival as one fateful, horrifying night collapses around him in chaos.",
+  "shortDescription": "Medical courier Bryan unwittingly finds himself fighting for survival as one fateful, horrifying night collapses around ",
+  "year": 2026,
+  "releaseDate": "2026-09-16",
+  "rating": 8,
+  "votes": "1.2K",
+  "quality": "FHD",
+  "duration": "1h 31m",
+  "genres": [
+    "Horror",
+    "Thriller",
+    "Adventure"
+  ],
+  "categories": [
+    "Horror",
+    "Thriller",
+    "Adventure"
+  ],
+  "language": "English",
+  "country": "US",
+  "director": "Zach Cregger",
+  "poster": "https://image.tmdb.org/t/p/w500/qku2uWSoJ9amQV5MWo1Eek29iji.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/3icyRAqgakNcQn6aDVz9libFmBA.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/mNd1gb19A-c?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/mNd1gb19A-c?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "148992",
+      "name": "Austin Abrams",
+      "character": "Bryan",
+      "photo": "https://image.tmdb.org/t/p/w185/gG4KsGZDw3tO2R66cn9VdOo8uSu.jpg"
+    },
+    {
+      "id": "1838225",
+      "name": "Zach Cherry",
+      "character": "Dave",
+      "photo": "https://image.tmdb.org/t/p/w185/fT3Wv8ef0Vn0daHWAObCp2Bd4Y.jpg"
+    },
+    {
+      "id": "3119545",
+      "name": "Kali Reis",
+      "character": "Pauline",
+      "photo": "https://image.tmdb.org/t/p/w185/ruLDXHnKA4aHEQCcFGDAJ7bLTdt.jpg"
+    },
+    {
+      "id": "1294982",
+      "name": "Paul Walter Hauser",
+      "character": "Carl",
+      "photo": "https://image.tmdb.org/t/p/w185/hXjjbYg1Ah8mFf5ZcaakyXzDKMx.jpg"
+    },
+    {
+      "id": "1169291",
+      "name": "Johnno Wilson",
+      "character": "Max",
+      "photo": "https://image.tmdb.org/t/p/w185/eZtBoBE0F7Qb9ZyNpacMOQtmWnM.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 1,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-13T03:09:52.859Z",
+  "createdAt": "2026-09-13T03:09:52.859Z",
+  "updatedAt": "2026-09-13T03:09:52.859Z",
+  "links": []
+}

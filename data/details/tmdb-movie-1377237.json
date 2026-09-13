@@ -1,0 +1,114 @@
+{
+  "id": "tmdb-movie-1377237",
+  "canonicalId": "tmdb-movie-1377237",
+  "externalProvider": "tmdb",
+  "externalId": "1377237",
+  "tmdbId": "1377237",
+  "imdbId": "tt31349844",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "Runner",
+  "canonicalTitle": "Runner",
+  "originalTitle": "Runner",
+  "overview": "A former soldier and his unlikely partner become the targets of a ruthless cartel while racing to complete a critical medical delivery and save the life of a little girl.",
+  "description": "A former soldier and his unlikely partner become the targets of a ruthless cartel while racing to complete a critical medical delivery and save the life of a little girl.",
+  "shortDescription": "A former soldier and his unlikely partner become the targets of a ruthless cartel while racing to complete a critical me",
+  "year": 2026,
+  "releaseDate": "2026-09-07",
+  "rating": 7.8,
+  "votes": "0.0K",
+  "quality": "FHD",
+  "duration": "1h 37m",
+  "genres": [
+    "Action",
+    "Comedy",
+    "Thriller"
+  ],
+  "categories": [
+    "Action",
+    "Comedy",
+    "Thriller"
+  ],
+  "language": "English",
+  "country": "US",
+  "director": "Scott Waugh",
+  "poster": "https://image.tmdb.org/t/p/w500/yBKMAIj7clP42UkFejhGDBBoTpb.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/iXR79oKsLHwLno9jdzxxeFP21sy.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/B6Z9MM1LhEA?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/B6Z9MM1LhEA?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "64295",
+      "name": "Alan Ritchson",
+      "character": "Hank Malone",
+      "photo": "https://image.tmdb.org/t/p/w185/92YNEEpCyugkTzPprJwZpvVtvuK.jpg"
+    },
+    {
+      "id": "887",
+      "name": "Owen Wilson",
+      "character": "Ben",
+      "photo": "https://image.tmdb.org/t/p/w185/5A46lNOwmpX77jAdhyKxU7e2Hub.jpg"
+    },
+    {
+      "id": "17289",
+      "name": "Rodrigo Santoro",
+      "character": "Damian",
+      "photo": "https://image.tmdb.org/t/p/w185/d3MaF9SPHDn2PMYHuqdnO0Csik6.jpg"
+    },
+    {
+      "id": "1681867",
+      "name": "Leila George",
+      "character": "Kate",
+      "photo": "https://image.tmdb.org/t/p/w185/s46DMiPDGSMq6qad5TL8mG5qfdy.jpg"
+    },
+    {
+      "id": "270",
+      "name": "Adriana Barraza",
+      "character": "Donna",
+      "photo": "https://image.tmdb.org/t/p/w185/kfww4YbO9J2HpCldEqyyhQugwy5.jpg"
+    },
+    {
+      "id": "220914",
+      "name": "Peta Sergeant",
+      "character": "Julie",
+      "photo": "https://image.tmdb.org/t/p/w185/owkSN29t7P6hpazZKsUMt7FybrP.jpg"
+    },
+    {
+      "id": "4900411",
+      "name": "Scarlett Crabtree",
+      "character": "Ellie Baker",
+      "photo": "https://image.tmdb.org/t/p/w185/3377x3ADVhE5kuPV7JpCByqvF5r.jpg"
+    },
+    {
+      "id": "131928",
+      "name": "Geraldine Hakewill",
+      "character": "Monica",
+      "photo": "https://image.tmdb.org/t/p/w185/cMzkT78ZH4qluKg2VumKkF3eTia.jpg"
+    },
+    {
+      "id": "61784",
+      "name": "Goran D. Kleut",
+      "character": "Luke",
+      "photo": "https://image.tmdb.org/t/p/w185/vsN8BI3t4c8JHLoLznCZxO9gZ6r.jpg"
+    },
+    {
+      "id": "5837275",
+      "name": "Adam Fraser",
+      "character": "Passerby / Runner",
+      "photo": null
+    },
+    {
+      "id": "5837297",
+      "name": "Sabelle Morrow-Woods",
+      "character": "Passerby",
+      "photo": "https://image.tmdb.org/t/p/w185/1y5jkcSgZUicMI22Y3DxYaWcjfT.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 1,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-13T03:09:52.904Z",
+  "createdAt": "2026-09-13T03:09:52.904Z",
+  "updatedAt": "2026-09-13T03:09:52.904Z",
+  "links": []
+}

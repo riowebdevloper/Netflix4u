@@ -1,0 +1,76 @@
+{
+  "id": "tmdb-series-16322",
+  "canonicalId": "tmdb-series-16322",
+  "externalProvider": "tmdb",
+  "externalId": "16322",
+  "tmdbId": "16322",
+  "imdbId": "tt1194223",
+  "type": "series",
+  "contentType": "series",
+  "title": "X Factor",
+  "canonicalTitle": "X Factor",
+  "originalTitle": "X Factor",
+  "overview": "X Factor is the Italian version of the British musical talent show The X Factor. The first four seasons aired on Rai 2, but since 2011 it has been broadcast on Sky Uno, with reruns on TV8, after Rai dropped the show due to high costs. Sky Italia acquired the format, extending its broadcast until 2024. Starting from the eleventh season, RTL 102.5 became the official radio station, replacing Radio Deejay and Radio 105. The show was hosted by Francesco Facchinetti (2008-2010), Alessandro Cattelan (2011-2020), Ludovico Tersigni (2021), and Francesca Michielin (2022-2023). From 2024 onwards, Giorgia will take over as host. Since the seventh season, the show has been produced by Fremantle Italia without the collaboration of Magnolia, which had produced the selection episodes in the early seasons.",
+  "description": "X Factor is the Italian version of the British musical talent show The X Factor. The first four seasons aired on Rai 2, but since 2011 it has been broadcast on Sky Uno, with reruns on TV8, after Rai dropped the show due to high costs. Sky Italia acquired the format, extending its broadcast until 2024. Starting from the eleventh season, RTL 102.5 became the official radio station, replacing Radio Deejay and Radio 105. The show was hosted by Francesco Facchinetti (2008-2010), Alessandro Cattelan (2011-2020), Ludovico Tersigni (2021), and Francesca Michielin (2022-2023). From 2024 onwards, Giorgia will take over as host. Since the seventh season, the show has been produced by Fremantle Italia without the collaboration of Magnolia, which had produced the selection episodes in the early seasons.",
+  "shortDescription": "X Factor is the Italian version of the British musical talent show The X Factor. The first four seasons aired on Rai 2, ",
+  "year": 2008,
+  "releaseDate": "2008-03-10",
+  "rating": 7.5,
+  "votes": "0.0K",
+  "quality": "FHD",
+  "duration": "180m/ep",
+  "genres": [
+    "Reality",
+    "Family"
+  ],
+  "categories": [
+    "Reality",
+    "Family"
+  ],
+  "language": "Italian",
+  "country": "IT",
+  "director": "Director",
+  "poster": "https://image.tmdb.org/t/p/w500/tGIDuv3ySOGk8agG34fKMZI7BTB.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/pwP9zHx1L6FTxDtekx8VZJ9OZdK.jpg",
+  "trailerUrl": null,
+  "trailer": null,
+  "cast": [
+    {
+      "id": "1098421",
+      "name": "Giorgia",
+      "character": "Self - Presenter",
+      "photo": "https://image.tmdb.org/t/p/w185/pUq7YUjben9eYs2v2TyyVAZWNfj.jpg"
+    },
+    {
+      "id": "1171682",
+      "name": "Jake La Furia",
+      "character": "Self - Judge",
+      "photo": "https://image.tmdb.org/t/p/w185/vWRqzHbsTsi3q0kvipXTGUYh1Xv.jpg"
+    },
+    {
+      "id": "2988082",
+      "name": "Paola Iezzi",
+      "character": "Self - Judge",
+      "photo": "https://image.tmdb.org/t/p/w185/kcBTGqi3WQIaBQIbNrgLvqKKSaT.jpg"
+    },
+    {
+      "id": "1819574",
+      "name": "Francesco Gabbani",
+      "character": "Self - Judge",
+      "photo": "https://image.tmdb.org/t/p/w185/33HCc0AlmP8KS7x4U2cgF82HMTw.jpg"
+    },
+    {
+      "id": "3348827",
+      "name": "Irama",
+      "character": "Self - Judge",
+      "photo": "https://image.tmdb.org/t/p/w185/rQpk7IJFgfblzZE757oSshjkUtP.jpg"
+    }
+  ],
+  "seasons": 20,
+  "episodes": 264,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-13T03:09:53.003Z",
+  "createdAt": "2026-09-13T03:09:53.003Z",
+  "updatedAt": "2026-09-13T03:09:53.003Z",
+  "links": []
+}

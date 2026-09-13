@@ -1,0 +1,78 @@
+{
+  "id": "tmdb-series-94664",
+  "canonicalId": "tmdb-series-94664",
+  "externalProvider": "tmdb",
+  "externalId": "94664",
+  "tmdbId": "94664",
+  "imdbId": "tt13293588",
+  "type": "series",
+  "contentType": "series",
+  "title": "Mushoku Tensei: Jobless Reincarnation",
+  "canonicalTitle": "Mushoku Tensei: Jobless Reincarnation",
+  "originalTitle": "無職転生 ～異世界行ったら本気だす～",
+  "overview": "When a 34-year-old underachiever gets run over by a truck, his story doesn't end there. Reincarnated in a new world as an infant, Rudy will seize every opportunity to live the life he's always wanted. Armed with new friends, some freshly acquired magical abilities, and the courage to do the things he's always dreamed of, he's embarking on an epic adventure—with all of his past experience intact!",
+  "description": "When a 34-year-old underachiever gets run over by a truck, his story doesn't end there. Reincarnated in a new world as an infant, Rudy will seize every opportunity to live the life he's always wanted. Armed with new friends, some freshly acquired magical abilities, and the courage to do the things he's always dreamed of, he's embarking on an epic adventure—with all of his past experience intact!",
+  "shortDescription": "When a 34-year-old underachiever gets run over by a truck, his story doesn't end there. Reincarnated in a new world as a",
+  "year": 2021,
+  "releaseDate": "2021-01-11",
+  "rating": 8.4,
+  "votes": "1.7K",
+  "quality": "FHD",
+  "duration": "24m/ep",
+  "genres": [
+    "Action & Adventure",
+    "Animation",
+    "Sci-Fi & Fantasy"
+  ],
+  "categories": [
+    "Action & Adventure",
+    "Animation",
+    "Sci-Fi & Fantasy"
+  ],
+  "language": "Japanese",
+  "country": "JP",
+  "director": "Director",
+  "poster": "https://image.tmdb.org/t/p/w500/gLKOYIMyKlUHW0SVdskhgf9C0yy.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/j9fRIimor0AMFJR9kjZubXcABzZ.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/k5VxfJpzy1Q?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/k5VxfJpzy1Q?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "1321070",
+      "name": "Yumi Uchiyama",
+      "character": "Rudeus Greyrat (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/JvavoF3YOLCf4LHfl4XvYobANE.jpg"
+    },
+    {
+      "id": "144655",
+      "name": "Tomokazu Sugita",
+      "character": "Rudeus Greyrat's Former Self (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/cv5zuPZySNsHXu24pjKLYCRzJ2J.jpg"
+    },
+    {
+      "id": "1324646",
+      "name": "Ai Kakuma",
+      "character": "Eris Boreas Greyrat (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/o3tQSeeJAeafJNvQs2IKvpKY7av.jpg"
+    },
+    {
+      "id": "1254671",
+      "name": "Ai Kayano",
+      "character": "Sylphiette (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/l8ywp387rfdAS7mOExe3cEZnsk0.jpg"
+    },
+    {
+      "id": "1820616",
+      "name": "Konomi Kohara",
+      "character": "Roxy Migurdia (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/3wjTzpJpBiTkLexdMmo9a3wfgRT.jpg"
+    }
+  ],
+  "seasons": 3,
+  "episodes": 61,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-13T03:09:53.116Z",
+  "createdAt": "2026-09-13T03:09:53.116Z",
+  "updatedAt": "2026-09-13T03:09:53.116Z",
+  "links": []
+}

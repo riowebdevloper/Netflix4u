@@ -1,0 +1,58 @@
+{
+  "id": "tmdb-series-59941",
+  "canonicalId": "tmdb-series-59941",
+  "externalProvider": "tmdb",
+  "externalId": "59941",
+  "tmdbId": "59941",
+  "imdbId": "tt3444938",
+  "type": "series",
+  "contentType": "series",
+  "title": "The Tonight Show Starring Jimmy Fallon",
+  "canonicalTitle": "The Tonight Show Starring Jimmy Fallon",
+  "originalTitle": "The Tonight Show Starring Jimmy Fallon",
+  "overview": "After Jay Leno's second retirement from the program, Jimmy Fallon stepped in as his permanent replacement. After 42 years in Los Angeles the program was brought back to New York.",
+  "description": "After Jay Leno's second retirement from the program, Jimmy Fallon stepped in as his permanent replacement. After 42 years in Los Angeles the program was brought back to New York.",
+  "shortDescription": "After Jay Leno's second retirement from the program, Jimmy Fallon stepped in as his permanent replacement. After 42 year",
+  "year": 2014,
+  "releaseDate": "2014-02-17",
+  "rating": 5.8,
+  "votes": "0.4K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Comedy",
+    "Talk"
+  ],
+  "categories": [
+    "Comedy",
+    "Talk"
+  ],
+  "language": "English",
+  "country": "US",
+  "director": "Dave Diomedi",
+  "poster": "https://image.tmdb.org/t/p/w500/1N4o5PmmqhlVDrcdJ2RlCFWbLGX.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/7VO04TtL1jIT6XOPs9u4jdB8KaB.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/q-0YafsWK_M?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/q-0YafsWK_M?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "11669",
+      "name": "Jimmy Fallon",
+      "character": "Self - Host",
+      "photo": "https://image.tmdb.org/t/p/w185/h9kYouEP6VrM8GkS2jl7jMDKbwu.jpg"
+    },
+    {
+      "id": "1215931",
+      "name": "Steve Higgins",
+      "character": "Self - Announcer",
+      "photo": "https://image.tmdb.org/t/p/w185/yia3GOqqCVfiNISWFjcqih88f1j.jpg"
+    }
+  ],
+  "seasons": 13,
+  "episodes": 2406,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-13T03:09:53.066Z",
+  "createdAt": "2026-09-13T03:09:53.066Z",
+  "updatedAt": "2026-09-13T03:09:53.066Z",
+  "links": []
+}

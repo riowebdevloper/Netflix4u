@@ -1,0 +1,118 @@
+{
+  "id": "tmdb-movie-1365884",
+  "canonicalId": "tmdb-movie-1365884",
+  "externalProvider": "tmdb",
+  "externalId": "1365884",
+  "tmdbId": "1365884",
+  "imdbId": "tt38267923",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "Call My Agent! The Movie",
+  "canonicalTitle": "Call My Agent! The Movie",
+  "originalTitle": "Dix Pour Cent ! Le Film",
+  "overview": "Five years after ASK Agency closed, debut director Andréa loses her lead actor just days before filming and reunited with her old team — for better or worse.",
+  "description": "Five years after ASK Agency closed, debut director Andréa loses her lead actor just days before filming and reunited with her old team — for better or worse.",
+  "shortDescription": "Five years after ASK Agency closed, debut director Andréa loses her lead actor just days before filming and reunited wit",
+  "year": 2026,
+  "releaseDate": "2026-08-29",
+  "rating": 6,
+  "votes": "0.0K",
+  "quality": "FHD",
+  "duration": "1h 57m",
+  "genres": [
+    "Comedy",
+    "Drama"
+  ],
+  "categories": [
+    "Comedy",
+    "Drama"
+  ],
+  "language": "French",
+  "country": "FR",
+  "director": "Émilie Noblet",
+  "poster": "https://image.tmdb.org/t/p/w500/p4SvSFIkjCs4y0C7yAcYP9XNmP2.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/4v8XgcmtUFVXUzGb7noltdjg2Ou.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/01PX2jZNW5A?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/01PX2jZNW5A?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "1348474",
+      "name": "Camille Cottin",
+      "character": "Andréa Martel",
+      "photo": "https://image.tmdb.org/t/p/w185/ArBIA46esEk1qMlSwoVPR1SxPvc.jpg"
+    },
+    {
+      "id": "19361",
+      "name": "Thibault de Montalembert",
+      "character": "Mathias Barneville",
+      "photo": "https://image.tmdb.org/t/p/w185/wfPsfqRmuxXlVmZUTfsOXf9nwGA.jpg"
+    },
+    {
+      "id": "1423713",
+      "name": "Grégory Montel",
+      "character": "Gabriel Sarda",
+      "photo": "https://image.tmdb.org/t/p/w185/nImuHSjUgi8v8CaYp5UAZTHbY0j.jpg"
+    },
+    {
+      "id": "36513",
+      "name": "Liliane Rovère",
+      "character": "Arlette Azémar",
+      "photo": "https://image.tmdb.org/t/p/w185/mo7NTceScg2S8YByd9Nc5jCsdfm.jpg"
+    },
+    {
+      "id": "1010001",
+      "name": "Fanny Sidney",
+      "character": "Camille Valentini",
+      "photo": "https://image.tmdb.org/t/p/w185/vZslkUvialyIejC4CoDnY6WvT4Q.jpg"
+    },
+    {
+      "id": "983929",
+      "name": "Laure Calamy",
+      "character": "Noémie Leclerc",
+      "photo": "https://image.tmdb.org/t/p/w185/ov3BaihlXFRTzKTc7Hs5KWskEi4.jpg"
+    },
+    {
+      "id": "1104307",
+      "name": "Nicolas Maury",
+      "character": "Hervé André-Jezak",
+      "photo": "https://image.tmdb.org/t/p/w185/31wQP13EufTzCtldFBU2ckmLsve.jpg"
+    },
+    {
+      "id": "971262",
+      "name": "Ophélia Kolb",
+      "character": "Collette Brancillon",
+      "photo": "https://image.tmdb.org/t/p/w185/90jLuYsywTxMGiRvrAmQ2aJgcHJ.jpg"
+    },
+    {
+      "id": "54168",
+      "name": "Anne Marivin",
+      "character": "Élise Formain",
+      "photo": "https://image.tmdb.org/t/p/w185/m0CnA4iVKCQcnEVBVqRewSwlTLM.jpg"
+    },
+    {
+      "id": "119499",
+      "name": "Laetitia Casta",
+      "character": "Laetitia Casta",
+      "photo": "https://image.tmdb.org/t/p/w185/6hakGGXWNWJ5VxMd2u8ExVwjRrj.jpg"
+    },
+    {
+      "id": "992623",
+      "name": "Vincent Macaigne",
+      "character": "Vincent Macaigne",
+      "photo": "https://image.tmdb.org/t/p/w185/6Z4JmAauiallW2lXTOuSAiHdHGf.jpg"
+    },
+    {
+      "id": "1461",
+      "name": "George Clooney",
+      "character": "George Clooney",
+      "photo": "https://image.tmdb.org/t/p/w185/dt0a7DT0SQeHb7NpURD6ifyEzsN.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 1,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-13T03:09:52.809Z",
+  "createdAt": "2026-09-13T03:09:52.809Z",
+  "updatedAt": "2026-09-13T03:09:52.809Z",
+  "links": []
+}

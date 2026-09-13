@@ -1,0 +1,118 @@
+{
+  "id": "tmdb-series-314939",
+  "canonicalId": "tmdb-series-314939",
+  "externalProvider": "tmdb",
+  "externalId": "314939",
+  "tmdbId": "314939",
+  "imdbId": "tt43736405",
+  "type": "series",
+  "contentType": "series",
+  "title": "A Love Other Than Yours",
+  "canonicalTitle": "A Love Other Than Yours",
+  "originalTitle": "너 말고 다른 연애",
+  "overview": "A realistic, emotionally resonant romance about a couple in their tenth year together whose comfortable relationship is tested by unexpected feelings.",
+  "description": "A realistic, emotionally resonant romance about a couple in their tenth year together whose comfortable relationship is tested by unexpected feelings.",
+  "shortDescription": "A realistic, emotionally resonant romance about a couple in their tenth year together whose comfortable relationship is ",
+  "year": 2026,
+  "releaseDate": "2026-09-12",
+  "rating": 8,
+  "votes": "1.2K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Drama",
+    "Comedy"
+  ],
+  "categories": [
+    "Drama",
+    "Comedy"
+  ],
+  "language": "Korean",
+  "country": "KR",
+  "director": "Hwang Seung-ki",
+  "poster": "https://image.tmdb.org/t/p/w500/iKgdhgBPi1cCRRqsUgaxUDRuFP6.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/moUjiEzpJVNZc7hyNRBbLPt0CPX.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/zp62ID0bbQM?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/zp62ID0bbQM?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "1350000",
+      "name": "Seo Kang-joon",
+      "character": "Namgung Ho",
+      "photo": "https://image.tmdb.org/t/p/w185/a73St97D7GmJteo3s3rNKxQWk7a.jpg"
+    },
+    {
+      "id": "1875711",
+      "name": "Ahn Eun-jin",
+      "character": "Lee Mi-do",
+      "photo": "https://image.tmdb.org/t/p/w185/cZDp8Qim5tmUN9gQxPkBOE5MS8w.jpg"
+    },
+    {
+      "id": "4057433",
+      "name": "Lee Joo-ahn",
+      "character": "Han Tae-seung",
+      "photo": "https://image.tmdb.org/t/p/w185/bTRF3R85bd2u68W4VInNtXz2Avw.jpg"
+    },
+    {
+      "id": "2838969",
+      "name": "Jo A-ram",
+      "character": "Park Soo-ah",
+      "photo": "https://image.tmdb.org/t/p/w185/vcJF048TtTA7uiOGKkzTLp3MdeB.jpg"
+    },
+    {
+      "id": "3675304",
+      "name": "Lee Min-jae",
+      "character": "Lee Wan-do",
+      "photo": "https://image.tmdb.org/t/p/w185/o1mZIKQuXIj8nGUWxUp4c2z7VoG.jpg"
+    },
+    {
+      "id": "1747532",
+      "name": "Kim Nam-hee",
+      "character": "Lee Young-do",
+      "photo": "https://image.tmdb.org/t/p/w185/isgY8huXgnoW7AD97vKYlhJwAyI.jpg"
+    },
+    {
+      "id": "587632",
+      "name": "Kim Mi-kyeong",
+      "character": "Ma Suk-hee",
+      "photo": "https://image.tmdb.org/t/p/w185/bJLkarteB2O0duu5ABvM5QFRuax.jpg"
+    },
+    {
+      "id": "1547209",
+      "name": "Kwak Si-yang",
+      "character": "Seo Joo-hyuk",
+      "photo": "https://image.tmdb.org/t/p/w185/8fHGivHyjPxWjLFNlFratxey0To.jpg"
+    },
+    {
+      "id": "2242937",
+      "name": "Heo Ji-na",
+      "character": "Ko Moon-young",
+      "photo": "https://image.tmdb.org/t/p/w185/qAlevBKYdXjwiijFdhm0gduguaC.jpg"
+    },
+    {
+      "id": "566372",
+      "name": "Lee Jun-hyeok",
+      "character": "Eom Ho-sik",
+      "photo": "https://image.tmdb.org/t/p/w185/bgZrYipsty7yTMHEy4cmVmfWJzQ.jpg"
+    },
+    {
+      "id": "2400913",
+      "name": "Cheon Yi-seul",
+      "character": "Oh Yeon-ju",
+      "photo": "https://image.tmdb.org/t/p/w185/gaYMpVnVaAc86z8uNw0wvTAVYix.jpg"
+    },
+    {
+      "id": "2982887",
+      "name": "Song Ji-woo",
+      "character": "Song Hae-na",
+      "photo": "https://image.tmdb.org/t/p/w185/oZ5mIHFptomfG7HiG1IUM2Yepo3.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 14,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-13T03:09:52.752Z",
+  "createdAt": "2026-09-13T03:09:52.752Z",
+  "updatedAt": "2026-09-13T03:09:52.752Z",
+  "links": []
+}
