@@ -124,6 +124,9 @@
 
   function lockBodyScroll() {
     document.body.style.overflow = 'hidden';
+    document.body.classList.add('modal-open');
+    var stickyAd = document.getElementById('aads-sticky-wrap');
+    if (stickyAd) stickyAd.style.display = 'none';
   }
 
   function unlockBodyScroll() {
@@ -132,6 +135,13 @@
         trailerModal && trailerModal.classList.contains('hidden') &&
         (!policyModal || policyModal.classList.contains('hidden'))) {
       document.body.style.overflow = '';
+      document.body.classList.remove('modal-open');
+      document.body.classList.remove('watch-active');
+      var stickyAd = document.getElementById('aads-sticky-wrap');
+      var aadsCheck = document.getElementById('aadsstickymtz6up6x');
+      if (stickyAd && (!aadsCheck || !aadsCheck.checked)) {
+        stickyAd.style.display = '';
+      }
     }
   }
 
@@ -396,7 +406,7 @@
         '<!-- SEPARATE DOWNLOAD SECTIONS -->' +
         dotmoviesSectionHtml +
 
-        '<!-- In-Modal Dedicated Ad Section 3: Cloud Mirror Sponsor -->' +
+        '<!-- In-Modal Dedicated Ad Section 3: Cloud Server Sponsor -->' +
         '<div class="nm-ad-container !my-3" data-ad-container="ad-slot-modal-cloud">' +
           '<div class="nm-ad-label">Sponsored Server</div>' +
           '<div id="ad-slot-modal-cloud" class="nm-ad-slot nm-ad-modal"></div>' +
@@ -567,7 +577,7 @@
   function renderDownloadMirrors(links, title, isTv) {
     if (!links || !links.length) {
       return '<div class="p-5 rounded-xl bg-white/[0.03] border border-white/10 text-center space-y-2">' +
-        '<div class="text-sm text-white/80 font-medium">Direct download mirrors being updated for this title.</div>' +
+        '<div class="text-sm text-white/80 font-medium">Direct download links being updated for this title.</div>' +
         '<div class="text-xs text-white/40">You can stream this title instantly using the "Watch Now" button above.</div>' +
       '</div>';
     }
@@ -688,7 +698,7 @@
       '<div class="flex items-center justify-between mb-3.5">' +
         '<div class="flex items-center gap-2.5">' +
           '<div class="w-1.5 h-5 rounded-full bg-red-600"></div>' +
-          '<h3 class="text-lg sm:text-xl font-bold tracking-tight text-white">Fast Cloud CDN Mirrors</h3>' +
+          '<h3 class="text-lg sm:text-xl font-bold tracking-tight text-white">Fast Cloud CDN Downloads</h3>' +
         '</div>' +
         '<span class="text-xs text-green-400 font-semibold flex items-center gap-1">' +
           '<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>' +
@@ -923,8 +933,8 @@
     { id: 's1', name: 'Server 1 (Net27 Multi)', tag: 'Multi', tagClass: 'tag-multi', desc: 'Net27 Peachify Multi-Audio (Wolf, Spider, Multi)' },
     { id: 's2', name: 'Server 2 (VidLink Multi)', tag: 'Hindi/Dual', tagClass: 'tag-multi', desc: 'VidLink Pro Multi-Audio Track Selector' },
     { id: 's3', name: 'Server 3 (AllMovieLand)', tag: 'High-Speed', tagClass: 'tag-fast', desc: 'AllMovieLand Indian & Global Fast Player' },
-    { id: 's4', name: 'Server 4 (2Embed Global)', tag: 'CDN', tagClass: 'tag-global', desc: '2Embed Global High-Speed Mirror' },
-    { id: 's5', name: 'Server 5 (VidSrc PM)', tag: 'Fast Mirror', tagClass: 'tag-fast', desc: 'VidSrc PM High Uptime Mirror' },
+    { id: 's4', name: 'Server 4 (2Embed Global)', tag: 'CDN', tagClass: 'tag-global', desc: '2Embed Global High-Speed Server' },
+    { id: 's5', name: 'Server 5 (VidSrc PM)', tag: 'Fast Server', tagClass: 'tag-fast', desc: 'VidSrc PM High Uptime Server' },
     { id: 's6', name: 'Server 6 (AutoEmbed)', tag: 'Backup', tagClass: 'tag-fast', desc: 'AutoEmbed Reliable CDN Backup' }
   ];
 
@@ -952,6 +962,7 @@
       watchModal.classList.remove('hidden');
       watchModal.setAttribute('aria-hidden', 'false');
       lockBodyScroll();
+      document.body.classList.add('watch-active');
       if (watchMetaTitle) watchMetaTitle.textContent = title || 'Netflix4U';
       var fallbackBanner = document.getElementById('watch-unavailable-banner');
       if (!fallbackBanner) {
@@ -964,7 +975,7 @@
       fallbackBanner.innerHTML =
         '<div class="w-16 h-16 rounded-full bg-red-600/20 text-red-500 flex items-center justify-center mb-2"><svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>' +
         '<h3 class="text-xl font-bold text-white">Streaming source unavailable for this title.</h3>' +
-        '<p class="text-sm text-white/60 max-w-md">Our streaming CDN is searching for verified playback mirrors for "' + escapeHtml(title) + '". You can download this title directly from the title details page.</p>' +
+        '<p class="text-sm text-white/60 max-w-md">Our streaming CDN is searching for verified playback sources for "' + escapeHtml(title) + '". You can download this title directly from the title details page.</p>' +
         '<button onclick="window.Netflix4uModal.closeWatch();" class="px-6 py-2.5 rounded-lg bg-red-600 hover:bg-red-700 text-white font-semibold text-sm transition cursor-pointer">Back to Details</button>';
       return;
     }
@@ -1256,11 +1267,11 @@
       title: 'About Netflix4U',
       content: '<div class="space-y-3">' +
         '<p class="text-base font-semibold text-white">Welcome to Netflix4U — Ultra-Fast Streaming & Direct Cloud Downloads.</p>' +
-        '<p>Netflix4U is an entertainment discovery portal built for movie buffs, web series enthusiasts, and anime lovers. We aggregate verified, publicly accessible streaming and download mirrors into a seamless experience with zero mandatory signups or subscriptions.</p>' +
+        '<p>Netflix4U is an entertainment discovery portal built for movie buffs, web series enthusiasts, and anime lovers. We aggregate verified, publicly accessible streaming and download sources into a seamless experience with zero mandatory signups or subscriptions.</p>' +
         '<div class="p-4 rounded-xl bg-white/[0.04] border border-white/10 space-y-2">' +
           '<div class="text-white font-bold flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-red-500"></span>Our Key Pillars</div>' +
           '<p class="text-xs text-white/70">• <strong>Multi-Server High Speed</strong>: 6 dedicated streaming servers including Net27 Peachify, VidLink Multi-Audio, and AllMovieLand.<br>' +
-          '• <strong>Direct Fast Downloads</strong>: Zero-waiting cloud worker mirrors for 4K, 1080p, and 720p files.<br>' +
+          '• <strong>Direct Fast Downloads</strong>: Zero-waiting cloud worker servers for 4K, 1080p, and 720p files.<br>' +
           '• <strong>Privacy First</strong>: No registration, no tracking, and 100% client-side privacy.</p>' +
         '</div>' +
         '<p class="text-xs text-white/50">Version 2.4 (Net27 Edition) • Updated Daily</p>' +
@@ -1285,7 +1296,7 @@
         '<p class="font-semibold text-white">Terms of Use & Fair Access</p>' +
         '<p>By visiting or utilizing Netflix4U, you acknowledge and agree to the following conditions:</p>' +
         '<ul class="list-disc pl-5 space-y-1.5 text-white/75 text-xs sm:text-sm">' +
-          '<li>Netflix4U operates as an indexer pointing to media streams and verified cloud worker mirrors hosted elsewhere on the internet.</li>' +
+          '<li>Netflix4U operates as an indexer pointing to media streams and verified cloud worker sources hosted elsewhere on the internet.</li>' +
           '<li>All media files belong to their respective copyright holders. Netflix4U does not broadcast or store content on its own servers.</li>' +
           '<li>Usage of automated bots, denial-of-service scrapers, or excessive bulk download harvesting is strictly disallowed.</li>' +
         '</ul>' +
@@ -1307,7 +1318,7 @@
         '<p class="font-semibold text-white">We Value Your Feedback</p>' +
         '<p class="text-xs sm:text-sm text-white/75">Connect with the Netflix4U team for media requests, bug reports, or partnership inquiries:</p>' +
         '<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">' +
-          '<a href="https://t.me/netflix_mirror_apk" target="_blank" rel="noopener noreferrer" class="p-3.5 rounded-xl bg-[#229ED9]/15 border border-[#229ED9]/30 hover:bg-[#229ED9]/25 transition flex items-center gap-3 group">' +
+          '<a href="https://t.me/netflix4u" target="_blank" rel="noopener noreferrer" class="p-3.5 rounded-xl bg-[#229ED9]/15 border border-[#229ED9]/30 hover:bg-[#229ED9]/25 transition flex items-center gap-3 group">' +
             '<div class="w-9 h-9 rounded-full bg-[#229ED9] text-white flex items-center justify-center shrink-0 shadow-lg group-hover:scale-105 transition"><svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg></div>' +
             '<div><div class="text-sm font-bold text-white">Telegram Channel</div><div class="text-xs text-white/50">Live updates & requests</div></div>' +
           '</a>' +
@@ -1513,6 +1524,20 @@
 
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
+      var reqM = document.getElementById('request-modal');
+      if (reqM && !reqM.classList.contains('hidden')) {
+        reqM.classList.add('hidden');
+        reqM.classList.remove('flex');
+        document.body.classList.remove('modal-open');
+        return;
+      }
+      var shareM = document.getElementById('share-modal');
+      if (shareM && !shareM.classList.contains('hidden')) {
+        shareM.classList.add('hidden');
+        shareM.classList.remove('flex');
+        document.body.classList.remove('modal-open');
+        return;
+      }
       if (policyModal && !policyModal.classList.contains('hidden')) { closePolicyModal(); return; }
       if (trailerModal && !trailerModal.classList.contains('hidden')) { closeTrailerModal(); return; }
       if (watchModal && !watchModal.classList.contains('hidden')) { closeWatchModal(); return; }
@@ -1521,7 +1546,7 @@
   });
 
   window.addEventListener('message', function(e) {
-    if (e.data === 'netmirror:close-watch') {
+    if (e.data === 'netmirror:close-watch' || e.data === 'netflix4u:close-watch') {
       closeWatchModal();
     }
   });

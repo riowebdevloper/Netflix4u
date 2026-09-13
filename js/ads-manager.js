@@ -12,13 +12,13 @@
   var ADSTERRA_CONTAINER_ID = 'container-bb6db87840ef2c647140600c50c30ab2';
 
   var DEFAULT_SPONSOR_HTML = function(title, subtitle, cta) {
-    return '<a href="https://t.me/netflix_mirror_apk" target="_blank" rel="noopener noreferrer" class="nm-ad-placeholder">' +
+    return '<a href="https://t.me/netflix4u" target="_blank" rel="noopener noreferrer" class="nm-ad-placeholder">' +
       '<span class="nm-ad-badge">' +
         '<svg class="w-3 h-3" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L1 21h22L12 2zm0 3.8L20.2 19H3.8L12 5.8z"/></svg>' +
         'Verified Partner' +
       '</span>' +
       '<span class="truncate font-semibold text-white/90">' + (title || 'Stream Fast, Ad-Free & 4K') + '</span>' +
-      '<span class="hidden sm:inline text-white/50 text-[11px] truncate">• ' + (subtitle || 'Official Telegram Channel & Fast CDN Mirrors') + '</span>' +
+      '<span class="hidden sm:inline text-white/50 text-[11px] truncate">• ' + (subtitle || 'Official Telegram Channel & Fast Cloud CDN') + '</span>' +
       '<span class="shrink-0 px-2.5 py-1 rounded bg-white/10 hover:bg-white/20 text-white font-bold text-[10px] transition">' + (cta || 'Explore') + '</span>' +
     '</a>';
   };
@@ -44,7 +44,7 @@
     setTimeout(function() {
       if (!filled && container.children.length === 0) {
         // If Adsterra script hasn't populated container (e.g. adblocker active), render fallback
-        container.innerHTML = DEFAULT_SPONSOR_HTML('Featured Streaming Sponsor', 'Direct 4K Mirrors & Fast Downloads', 'Join');
+        container.innerHTML = DEFAULT_SPONSOR_HTML('Featured Streaming Sponsor', 'Direct 4K Servers & Fast Downloads', 'Join');
       }
       observer.disconnect();
     }, 2800);
@@ -124,7 +124,7 @@
 
         // Native card in search results
         if (el.classList.contains('nm-ad-card')) {
-          el.innerHTML = '<a href="https://t.me/netflix_mirror_apk" target="_blank" rel="noopener noreferrer" class="h-full w-full flex flex-col items-center justify-center p-4 text-center group block">' +
+          el.innerHTML = '<a href="https://t.me/netflix4u" target="_blank" rel="noopener noreferrer" class="h-full w-full flex flex-col items-center justify-center p-4 text-center group block">' +
             '<div class="w-12 h-12 rounded-full bg-red-600/20 text-red-500 flex items-center justify-center mb-3 group-hover:scale-110 transition">' +
               '<svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>' +
             '</div>' +
@@ -139,7 +139,7 @@
         if (slotId === 'ad-slot-modal-top') {
           el.innerHTML = DEFAULT_SPONSOR_HTML('High-Speed Cloud Stream', 'Ultra-fast CDN playback with multi-audio support', 'Watch');
         } else if (slotId === 'ad-slot-modal-dotmovies') {
-          el.innerHTML = DEFAULT_SPONSOR_HTML('Verified Direct Download Mirror', 'Original untouched prints & Dual Audio rips', 'Get Link');
+          el.innerHTML = DEFAULT_SPONSOR_HTML('Verified Direct Download Server', 'Original untouched prints & Dual Audio rips', 'Get Link');
         } else if (slotId === 'ad-slot-modal-cloud') {
           el.innerHTML = DEFAULT_SPONSOR_HTML('Lightning Cloud CDN Server', 'Zero-buffer direct video stream & instant access', 'Connect');
         } else if (slotId === 'ad-slot-modal-bottom') {

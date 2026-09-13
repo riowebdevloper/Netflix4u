@@ -188,7 +188,7 @@ body {
   border-bottom-color: var(--color-brand, #e50914);
 }
 
-/* ─── DIRECT DOWNLOAD MIRRORS STYLES ─── */
+/* ─── DIRECT DOWNLOAD SERVERS STYLES ─── */
 .dl-section {
   margin-top: 24px;
   padding-top: 20px;
@@ -734,6 +734,23 @@ body {
 }
 
 /* ─── Non-Intrusive Bottom Sticky Ad Bar with Dismiss ─── */
+body.modal-open #aads-sticky-wrap,
+body.watch-active #aads-sticky-wrap,
+body.modal-open [class*="push"],
+body.watch-active [class*="push"],
+#watch-modal:not(.hidden) ~ #aads-sticky-wrap,
+#watch-modal:not(.hidden) ~ * [class*="push"] {
+  display: none !important;
+}
+
+body {
+  padding-bottom: 75px;
+}
+body.watch-active,
+body.modal-open {
+  padding-bottom: 0 !important;
+}
+
 #nm-sticky-ad-bar {
   position: fixed;
   bottom: 0;

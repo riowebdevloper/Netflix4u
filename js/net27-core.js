@@ -806,7 +806,7 @@
         adMarkup = '<div class="nm-ad-container max-w-5xl mx-auto my-6" data-ad-container="ad-slot-rail-mid-1">' +
           '<div class="nm-ad-label">Sponsored</div>' +
           '<div id="ad-slot-rail-mid-1" class="nm-ad-slot nm-ad-leaderboard">' +
-            '<a href="https://t.me/netflix_mirror_apk" target="_blank" rel="noopener noreferrer" class="nm-ad-placeholder">' +
+            '<a href="https://t.me/netflix4u" target="_blank" rel="noopener noreferrer" class="nm-ad-placeholder">' +
               '<span class="nm-ad-badge"><svg class="w-3 h-3" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L1 21h22L12 2zm0 3.8L20.2 19H3.8L12 5.8z"/></svg>Trending Shows</span>' +
               '<span class="truncate font-semibold text-white/90">Daily Hindi Dubbed &amp; Multi-Audio Web Series</span>' +
               '<span class="hidden sm:inline text-white/50 text-[11px] truncate">• Ultra HD 4K Cloud Streaming</span>' +
@@ -818,7 +818,7 @@
         adMarkup = '<div class="nm-ad-container max-w-5xl mx-auto my-6" data-ad-container="ad-slot-rail-mid-2">' +
           '<div class="nm-ad-label">Sponsored</div>' +
           '<div id="ad-slot-rail-mid-2" class="nm-ad-slot nm-ad-leaderboard">' +
-            '<a href="https://t.me/netflix_mirror_apk" target="_blank" rel="noopener noreferrer" class="nm-ad-placeholder">' +
+            '<a href="https://t.me/netflix4u" target="_blank" rel="noopener noreferrer" class="nm-ad-placeholder">' +
               '<span class="nm-ad-badge"><svg class="w-3 h-3" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L1 21h22L12 2zm0 3.8L20.2 19H3.8L12 5.8z"/></svg>Fast CDN</span>' +
               '<span class="truncate font-semibold text-white/90">Direct High-Speed Cloud Downloads &amp; APKs</span>' +
               '<span class="hidden sm:inline text-white/50 text-[11px] truncate">• Join 45K+ Streamers</span>' +
@@ -1371,24 +1371,28 @@
   var reqClose = document.getElementById('request-modal-close');
   var reqForm = document.getElementById('request-form');
 
-  if (reqBtn && reqModal) {
-    reqBtn.addEventListener('click', function() {
-      reqModal.classList.remove('hidden');
-      reqModal.classList.add('flex');
-    });
+  function openReqModal() {
+    if (!reqModal) return;
+    reqModal.classList.remove('hidden');
+    reqModal.classList.add('flex');
+    document.body.classList.add('modal-open');
   }
-  if (reqClose && reqModal) {
-    reqClose.addEventListener('click', function() {
-      reqModal.classList.add('hidden');
-      reqModal.classList.remove('flex');
-    });
+
+  function closeReqModal() {
+    if (!reqModal) return;
+    reqModal.classList.add('hidden');
+    reqModal.classList.remove('flex');
+    document.body.classList.remove('modal-open');
+  }
+
+  if (reqBtn) reqBtn.addEventListener('click', openReqModal);
+  if (reqClose) reqClose.addEventListener('click', closeReqModal);
+  if (reqModal) {
     reqModal.addEventListener('click', function(e) {
-      if (e.target === reqModal) {
-        reqModal.classList.add('hidden');
-        reqModal.classList.remove('flex');
-      }
+      if (e.target === reqModal) closeReqModal();
     });
   }
+
   if (reqForm) {
     reqForm.addEventListener('submit', function(e) {
       e.preventDefault();
@@ -1398,14 +1402,11 @@
       var audio = (document.getElementById('req-audio') || {}).value || '';
 
       var msg = 'Request for Netflix4U: ' + title + (year ? ' (' + year + ')' : '') + ' [' + type + ']' + (audio ? ' - ' + audio : '');
-      var tgUrl = 'https://t.me/netflix_mirror_apk?text=' + encodeURIComponent(msg);
+      var tgUrl = 'https://t.me/netflix4u?text=' + encodeURIComponent(msg);
       window.open(tgUrl, '_blank', 'noopener,noreferrer');
       showToast('Request submitted! Our team will add it within 24h.', '🎉');
       reqForm.reset();
-      if (reqModal) {
-        reqModal.classList.add('hidden');
-        reqModal.classList.remove('flex');
-      }
+      closeReqModal();
     });
   }
 
@@ -1439,19 +1440,21 @@
     if (shareTgBtn) shareTgBtn.href = 'https://t.me/share/url?url=' + encodeURIComponent(url) + '&text=' + encodeURIComponent('Watch ' + title + ' on Netflix4U');
     shareModal.classList.remove('hidden');
     shareModal.classList.add('flex');
+    document.body.classList.add('modal-open');
   }
   window.__openShareDialog = openShareDialog;
 
-  if (shareClose && shareModal) {
-    shareClose.addEventListener('click', function() {
-      shareModal.classList.add('hidden');
-      shareModal.classList.remove('flex');
-    });
+  function closeShareModal() {
+    if (!shareModal) return;
+    shareModal.classList.add('hidden');
+    shareModal.classList.remove('flex');
+    document.body.classList.remove('modal-open');
+  }
+
+  if (shareClose) shareClose.addEventListener('click', closeShareModal);
+  if (shareModal) {
     shareModal.addEventListener('click', function(e) {
-      if (e.target === shareModal) {
-        shareModal.classList.add('hidden');
-        shareModal.classList.remove('flex');
-      }
+      if (e.target === shareModal) closeShareModal();
     });
   }
   if (shareCopyBtn) {
@@ -1460,11 +1463,10 @@
       if (navigator.clipboard) {
         navigator.clipboard.writeText(url).then(function() {
           showToast('Link copied to clipboard!', '📋');
-          if (shareModal) {
-            shareModal.classList.add('hidden');
-            shareModal.classList.remove('flex');
-          }
+          closeShareModal();
         });
+      } else {
+        closeShareModal();
       }
     });
   }
