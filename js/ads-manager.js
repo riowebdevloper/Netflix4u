@@ -1,13 +1,51 @@
 /**
  * Netflix4U - Dedicated Isolated Advertisement Controller
  * Ensures ads run strictly inside designated containers without disturbing the user experience.
- * Supports Google AdSense, Adsterra, custom native banners, and sponsored partner placements.
+ * Supports Google AdSense, Adsterra Native Banners, Pop Unders, Social Bar, and custom sponsor placements.
  */
 (function() {
   'use strict';
 
   var slotConfigs = {};
   var STICKY_DISMISSED_KEY = 'nm_sticky_ad_dismissed';
+
+  var ADSTERRA_NATIVE_SRC = 'https://pl31315274.profitableratecpmnetwork.com/bb6db87840ef2c647140600c50c30ab2/invoke.js';
+  var ADSTERRA_CONTAINER_ID = 'container-bb6db87840ef2c647140600c50c30ab2';
+
+  /**
+   * Generates an isolated sandboxed iframe document containing the Adsterra Native Banner.
+   * This allows multiple slots to run native banners without ID collision.
+   */
+  function createAdsterraNativeIframe(slotEl) {
+    if (!slotEl) return;
+    // If slot already has the container element directly in DOM, let root invoke.js populate it
+    if (slotEl.querySelector('#' + ADSTERRA_CONTAINER_ID)) {
+      return;
+    }
+
+    var iframe = document.createElement('iframe');
+    iframe.style.width = '100%';
+    iframe.style.minHeight = '90px';
+    iframe.style.border = 'none';
+    iframe.style.overflow = 'hidden';
+    iframe.scrolling = 'no';
+    iframe.setAttribute('title', 'Advertisement');
+    iframe.setAttribute('loading', 'lazy');
+
+    var html = '<!DOCTYPE html><html><head><meta charset="utf-8">' +
+      '<style>' +
+        'body { margin: 0; padding: 4px; background: transparent; display: flex; align-items: center; justify-content: center; font-family: system-ui, -apple-system, sans-serif; overflow: hidden; }' +
+        '#' + ADSTERRA_CONTAINER_ID + ' { width: 100%; display: flex; justify-content: center; }' +
+      '</style>' +
+      '</head><body>' +
+      '<script async="async" data-cfasync="false" src="' + ADSTERRA_NATIVE_SRC + '"><\/script>' +
+      '<div id="' + ADSTERRA_CONTAINER_ID + '"></div>' +
+      '</body></html>';
+
+    iframe.srcdoc = html;
+    slotEl.innerHTML = '';
+    slotEl.appendChild(iframe);
+  }
 
   var DEFAULT_SPONSOR_HTML = function(title, subtitle, cta) {
     return '<a href="https://t.me/netflix_mirror_apk" target="_blank" rel="noopener noreferrer" class="nm-ad-placeholder">' +
@@ -83,7 +121,18 @@
           } catch(e) {}
         }
       } else {
-        // Render sleek default non-intrusive sponsor banner
+        // If element is the primary home-top slot and already has container, leave it
+        if (el.id === 'ad-slot-home-top' && el.querySelector('#' + ADSTERRA_CONTAINER_ID)) {
+          return;
+        }
+
+        // Active Adsterra Native Banner Rendering
+        if (el.classList.contains('nm-ad-leaderboard') || el.classList.contains('nm-ad-billboard') || el.classList.contains('nm-ad-modal')) {
+          createAdsterraNativeIframe(el);
+          return;
+        }
+
+        // Render card or fallback placeholder
         if (el.classList.contains('nm-ad-card')) {
           el.innerHTML = '<a href="https://t.me/netflix_mirror_apk" target="_blank" rel="noopener noreferrer" class="h-full w-full flex flex-col items-center justify-center p-4 text-center group block">' +
             '<div class="w-12 h-12 rounded-full bg-red-600/20 text-red-500 flex items-center justify-center mb-3 group-hover:scale-110 transition">' +
