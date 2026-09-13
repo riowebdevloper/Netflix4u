@@ -12,7 +12,7 @@
   var ADSTERRA_CONTAINER_ID = 'container-bb6db87840ef2c647140600c50c30ab2';
 
   var DEFAULT_SPONSOR_HTML = function(title, subtitle, cta) {
-    return '<a href="https://t.me/netflix4u" target="_blank" rel="noopener noreferrer" class="nm-ad-placeholder">' +
+    return '<a href="https://t.me/netflix4u_website" target="_blank" rel="noopener noreferrer" class="nm-ad-placeholder">' +
       '<span class="nm-ad-badge">' +
         '<svg class="w-3 h-3" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L1 21h22L12 2zm0 3.8L20.2 19H3.8L12 5.8z"/></svg>' +
         'Verified Partner' +
@@ -124,7 +124,7 @@
 
         // Native card in search results
         if (el.classList.contains('nm-ad-card')) {
-          el.innerHTML = '<a href="https://t.me/netflix4u" target="_blank" rel="noopener noreferrer" class="h-full w-full flex flex-col items-center justify-center p-4 text-center group block">' +
+          el.innerHTML = '<a href="https://t.me/netflix4u_website" target="_blank" rel="noopener noreferrer" class="h-full w-full flex flex-col items-center justify-center p-4 text-center group block">' +
             '<div class="w-12 h-12 rounded-full bg-red-600/20 text-red-500 flex items-center justify-center mb-3 group-hover:scale-110 transition">' +
               '<svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>' +
             '</div>' +

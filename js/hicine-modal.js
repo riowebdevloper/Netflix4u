@@ -540,7 +540,7 @@
             <span class="hicine-quality-pill" style="border-color: #06b6d4; color: #67e8f9;">Telegram</span>
             <span class="hicine-dl-size-label">Direct Fast Download File (No Ads)</span>
           </div>
-          <a href="https://t.me/" target="_blank" rel="noopener noreferrer" class="hicine-dl-btn" style="background: #0284c7;">Join &amp; Download</a>
+          <a href="https://t.me/netflix4u_website" target="_blank" rel="noopener noreferrer" class="hicine-dl-btn" style="background: #0284c7;">Join &amp; Download</a>
         </div>
       </div>
     `;
