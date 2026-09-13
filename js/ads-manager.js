@@ -1,7 +1,7 @@
 /**
  * Netflix4U - Dedicated Isolated Advertisement Controller
  * Ensures ads run strictly inside designated containers without disturbing the user experience.
- * Supports Google AdSense, Adsterra Native Banners, Pop Unders, Social Bar, and custom sponsor placements.
+ * Supports Google AdSense, Adsterra Native Banners, and custom sponsor placements (Zero Popunders).
  */
 (function() {
   'use strict';
