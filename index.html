@@ -577,5 +577,14 @@
   <script src="/js/download-resolver.js"></script>
   <script src="/js/net27-modal.js"></script>
   <script src="/js/net27-core.js"></script>
+
+  <!-- Service Worker Registration (Push Notifications / Monetag) -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/sw.js').catch(function() {});
+      });
+    }
+  </script>
 </body>
 </html>
