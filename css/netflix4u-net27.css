@@ -85,21 +85,27 @@ body {
   color: #ffffff !important;
 }
 
-/* Rank number in Top 10 Today */
+/* Rank number in Top 10 Today (Netflix-Style 3D Overlay) */
 .rank-num {
-  font-size: clamp(5rem, 8vw, 7.5rem);
+  font-size: clamp(5.5rem, 9vw, 8.5rem);
   font-weight: 900;
   font-style: italic;
-  letter-spacing: -6px;
-  color: #111116;
-  -webkit-text-stroke: 2px #444450;
-  text-stroke: 2px #444450;
+  letter-spacing: -8px;
+  color: #0b0c10;
+  -webkit-text-stroke: 3px rgba(255, 255, 255, 0.45);
+  text-stroke: 3px rgba(255, 255, 255, 0.45);
+  text-shadow: 0 4px 18px rgba(0, 0, 0, 0.9);
   user-select: none;
-  line-height: 0.85;
-  transition: -webkit-text-stroke-color 0.25s ease;
+  line-height: 0.82;
+  transform: translateX(10px);
+  z-index: 1;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .nm-card:hover .rank-num {
-  -webkit-text-stroke-color: #ffffff;
+  -webkit-text-stroke-color: #e50914;
+  color: #151520;
+  transform: translateX(3px) scale(1.05);
+  text-shadow: 0 0 24px rgba(229, 9, 20, 0.6);
 }
 
 /* Rail arrows */
@@ -779,6 +785,224 @@ body {
   #nm-sticky-ad-bar {
     padding: 4px 8px;
   }
+}
+
+/* ─── Continue Watching Rail Styles ─── */
+.nm-continue-card {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.04);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s;
+}
+.nm-continue-card:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.8), 0 0 16px rgba(229, 9, 20, 0.3);
+}
+.nm-continue-progress-wrap {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.25);
+  z-index: 10;
+}
+.nm-continue-progress-bar {
+  height: 100%;
+  background: #e50914;
+  box-shadow: 0 0 8px #e50914;
+}
+.nm-continue-remove {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  z-index: 15;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.15s, background 0.15s;
+  cursor: pointer;
+}
+.nm-continue-card:hover .nm-continue-remove {
+  opacity: 1;
+}
+.nm-continue-remove:hover {
+  background: #e50914;
+  color: #ffffff;
+  border-color: transparent;
+}
+
+/* ─── My List (Watchlist) Buttons & Indicators ─── */
+.nm-card-bookmark {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  pointer-events: auto;
+  transition: all 0.2s;
+}
+.nm-card-bookmark:hover {
+  background: rgba(255, 255, 255, 0.35);
+  transform: scale(1.08);
+}
+.nm-card-bookmark.is-bookmarked {
+  background: #e50914 !important;
+  border-color: transparent !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 10px rgba(229, 9, 20, 0.5);
+}
+
+.nm-btn-bookmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.nm-btn-bookmark:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+.nm-btn-bookmark.is-active {
+  background: #e50914;
+  border-color: #e50914;
+  box-shadow: 0 0 14px rgba(229, 9, 20, 0.5);
+}
+
+/* ─── External Player Buttons (VLC, MX Player) ─── */
+.btn-vlc {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #ff8c00, #ff5500);
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 2px 10px rgba(255, 85, 0, 0.3);
+}
+.btn-vlc:hover {
+  background: linear-gradient(135deg, #ffa020, #ff6600);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(255, 85, 0, 0.5);
+}
+
+.btn-mx {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #0085f6, #0050d0);
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 2px 10px rgba(0, 133, 246, 0.3);
+}
+.btn-mx:hover {
+  background: linear-gradient(135deg, #2099ff, #0060e0);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(0, 133, 246, 0.5);
+}
+
+.btn-stream-copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-stream-copy:hover {
+  background: rgba(255, 255, 255, 0.22);
+  color: #ffffff;
+}
+
+/* ─── Toast Notifications ─── */
+#toast-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 999999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none;
+}
+.nm-toast {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 18px;
+  background: rgba(18, 18, 26, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(229, 9, 20, 0.2);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  transform: translateY(20px);
+  opacity: 0;
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.nm-toast.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* ─── PWA Install Banner & Pulse ─── */
+.pwa-pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 8px #22c55e;
+  animation: pwaPulse 2s infinite;
+}
+@keyframes pwaPulse {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.3); opacity: 1; box-shadow: 0 0 12px #22c55e; }
+  100% { transform: scale(0.95); opacity: 0.8; }
 }
 
 

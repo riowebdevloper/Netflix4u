@@ -301,6 +301,20 @@
         '</section>';
     }
 
+    // Action buttons for modal
+    var inList = window.__isBookmarked && window.__isBookmarked(tmdbId);
+    var myListBtnHtml =
+      '<button type="button" id="modal-mylist-btn" class="nm-btn-bookmark ' + (inList ? 'is-active' : '') + '">' +
+        '<svg class="w-4 h-4" viewBox="0 0 24 24" fill="' + (inList ? 'currentColor' : 'none') + '" stroke="currentColor" stroke-width="2.5"><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z"/></svg>' +
+        '<span>' + (inList ? 'In My List' : 'My List') + '</span>' +
+      '</button>';
+
+    var shareBtnHtml =
+      '<button type="button" id="modal-share-btn" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-white/15 backdrop-blur text-white font-semibold hover:bg-white/25 active:scale-95 transition text-sm border border-white/10 cursor-pointer" title="Share with Friends">' +
+        '<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>' +
+        '<span>Share</span>' +
+      '</button>';
+
     // Assemble Full Modal Body
     titleModalBody.innerHTML =
       '<!-- Hero Backdrop -->' +
@@ -331,7 +345,7 @@
       '<!-- Content Body -->' +
       '<div class="p-4 sm:p-6 space-y-6">' +
         '<!-- Action Buttons -->' +
-        '<div class="flex flex-wrap items-center gap-3">' +
+        '<div class="flex flex-wrap items-center gap-2.5 sm:gap-3">' +
           '<button type="button" data-modal="watch" data-tmdbid="' + (data.tmdbId || tmdbId) + '" data-canonical-id="' + escapeHtml(data.canonicalId || tmdbId) + '" data-type="' + type + '" data-title="' + escapeHtml(data.title) + '" data-year="' + (data.year || '') + '" data-imdbid="' + (data.imdbId || '') + '" data-backdrop="' + (data.backdrop || '') + '"' + (isTv ? ' data-se="' + (data.initialSeason || 1) + '" data-ep="1"' : '') + ' class="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg bg-white text-black font-bold hover:bg-white/90 active:scale-95 transition text-sm shadow-xl cursor-pointer">' +
             '<svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>' +
             (isTv ? 'Play S' + (data.initialSeason || 1) + ' E1' : 'Watch Now') +
@@ -344,6 +358,8 @@
             '<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>' +
             'Trailer' +
           '</button>' : '') +
+          myListBtnHtml +
+          shareBtnHtml +
         '</div>' +
 
         '<!-- Two Column Synopsis & Cast/Genres -->' +
@@ -419,6 +435,44 @@
       scrollBtn.addEventListener('click', function() {
         var dlSection = document.getElementById('dotmovies-download-section') || document.getElementById('download-mirrors-section');
         if (dlSection) dlSection.scrollIntoView({ behavior: 'smooth' });
+      });
+    }
+
+    // My List button click in modal
+    var modalMylistBtn = document.getElementById('modal-mylist-btn');
+    if (modalMylistBtn) {
+      modalMylistBtn.addEventListener('click', function() {
+        if (window.__toggleMyList) {
+          var added = window.__toggleMyList({
+            tmdbId: data.tmdbId || tmdbId,
+            canonicalId: data.canonicalId || tmdbId,
+            imdbId: data.imdbId || '',
+            title: data.title,
+            poster: posterUrl,
+            backdrop: backdropUrl,
+            year: data.year,
+            type: type,
+            rating: data.rating
+          });
+          modalMylistBtn.classList.toggle('is-active', added);
+          modalMylistBtn.querySelector('span').textContent = added ? 'In My List' : 'My List';
+          var svg = modalMylistBtn.querySelector('svg');
+          if (svg) svg.setAttribute('fill', added ? 'currentColor' : 'none');
+        }
+      });
+    }
+
+    // Share button click in modal
+    var modalShareBtn = document.getElementById('modal-share-btn');
+    if (modalShareBtn) {
+      modalShareBtn.addEventListener('click', function() {
+        if (window.__openShareDialog) {
+          var shareUrl = window.location.origin + '/?title=' + encodeURIComponent(data.title) + '&id=' + (data.tmdbId || tmdbId);
+          window.__openShareDialog({
+            title: data.title,
+            url: shareUrl
+          });
+        }
       });
     }
 
@@ -955,6 +1009,22 @@
     watchModal.setAttribute('aria-hidden', 'false');
     lockBodyScroll();
 
+    // Auto save to Continue Watching
+    if (window.__saveContinueWatching) {
+      window.__saveContinueWatching({
+        tmdbId: tmdbId,
+        canonicalId: (params && params.canonicalId) || tmdbId,
+        title: title || 'Title',
+        backdrop: backdrop,
+        poster: backdrop,
+        type: type,
+        year: year,
+        se: season,
+        ep: episode,
+        progress: Math.floor(Math.random() * 30) + 40
+      });
+    }
+
     var hash = '#w=' + tmdbId + '-' + type;
     if (season) hash += '-' + season;
     if (episode) hash += '-' + episode;
@@ -1031,6 +1101,77 @@
     if (watchServerToggle) watchServerToggle.setAttribute('aria-expanded', 'false');
     if (watchServerArrow) watchServerArrow.style.transform = 'rotate(0deg)';
   }
+
+  // ─── External Player (VLC & MX Player) Controller ───
+  var watchExtToggle = document.getElementById('watch-ext-toggle');
+  var watchExtMenu = document.getElementById('watch-ext-menu');
+  var watchBtnVlc = document.getElementById('watch-btn-vlc');
+  var watchBtnMx = document.getElementById('watch-btn-mx');
+  var watchBtnCopy = document.getElementById('watch-btn-copy-link');
+
+  function toggleExtMenu() {
+    if (!watchExtMenu) return;
+    var isOpen = !watchExtMenu.classList.contains('hidden');
+    if (isOpen) {
+      watchExtMenu.classList.add('hidden');
+    } else {
+      closeServerMenu();
+      watchExtMenu.classList.remove('hidden');
+    }
+  }
+
+  function getActiveStreamUrl() {
+    return (activeWatchServers && activeWatchServers[currentWatchServer]) || '';
+  }
+
+  if (watchExtToggle) {
+    watchExtToggle.addEventListener('click', function(e) {
+      e.stopPropagation();
+      toggleExtMenu();
+    });
+  }
+
+  if (watchBtnVlc) {
+    watchBtnVlc.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var url = getActiveStreamUrl();
+      if (!url) return;
+      var clean = url.replace(/^https?:\/\//, '');
+      window.location.href = 'vlc://' + clean;
+      if (watchExtMenu) watchExtMenu.classList.add('hidden');
+      if (window.__showToast) window.__showToast('Launching in VLC Player…', '🎬');
+    });
+  }
+
+  if (watchBtnMx) {
+    watchBtnMx.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var url = getActiveStreamUrl();
+      if (!url) return;
+      var intentUrl = 'intent:' + url + '#Intent;package=com.mxtech.videoplayer.ad;type=video/*;end';
+      window.location.href = intentUrl;
+      if (watchExtMenu) watchExtMenu.classList.add('hidden');
+      if (window.__showToast) window.__showToast('Launching in MX Player…', '🎬');
+    });
+  }
+
+  if (watchBtnCopy) {
+    watchBtnCopy.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var url = getActiveStreamUrl();
+      if (!url) return;
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(url).then(function() {
+          if (window.__showToast) window.__showToast('Stream link copied to clipboard!', '📋');
+          if (watchExtMenu) watchExtMenu.classList.add('hidden');
+        });
+      }
+    });
+  }
+
+  document.addEventListener('click', function() {
+    if (watchExtMenu) watchExtMenu.classList.add('hidden');
+  });
 
   function reloadWatchStream() {
     if (!watchModalIframe || !activeWatchServers[currentWatchServer]) return;

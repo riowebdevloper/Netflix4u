@@ -73,6 +73,131 @@
     });
   }
 
+  // ─── Toast Notification System ───
+  function showToast(message, icon) {
+    var container = document.getElementById('toast-container');
+    if (!container) return;
+    var toast = document.createElement('div');
+    toast.className = 'nm-toast';
+    var ic = icon || '<svg class="w-4 h-4 text-emerald-400" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>';
+    toast.innerHTML = ic + '<span>' + escapeHtml(message) + '</span>';
+    container.appendChild(toast);
+    requestAnimationFrame(function() {
+      toast.classList.add('show');
+    });
+    setTimeout(function() {
+      toast.classList.remove('show');
+      setTimeout(function() { toast.remove(); }, 300);
+    }, 2800);
+  }
+  window.__showToast = showToast;
+
+  // ─── My List (Watchlist) Storage Engine ───
+  var MY_LIST_KEY = 'n4u_my_list_v1';
+  function getMyList() {
+    try {
+      var raw = localStorage.getItem(MY_LIST_KEY);
+      return raw ? JSON.parse(raw) : [];
+    } catch(e) {
+      return [];
+    }
+  }
+  function isBookmarked(id) {
+    if (!id) return false;
+    var list = getMyList();
+    return list.some(function(item) {
+      return String(item.tmdbId || item.id) === String(id) || String(item.canonicalId) === String(id);
+    });
+  }
+  function toggleMyList(item) {
+    if (!item) return false;
+    var id = String(item.tmdbId || item.id || item.canonicalId);
+    var list = getMyList();
+    var idx = list.findIndex(function(x) {
+      return String(x.tmdbId || x.id || x.canonicalId) === id;
+    });
+    var added = false;
+    if (idx >= 0) {
+      list.splice(idx, 1);
+      added = false;
+      showToast('Removed from My List', '<svg class="w-4 h-4 text-red-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>');
+    } else {
+      list.unshift({
+        tmdbId: item.tmdbId || item.id,
+        canonicalId: item.canonicalId || item.id || item.tmdbId,
+        imdbId: item.imdbId || '',
+        title: item.title,
+        poster: item.poster,
+        backdrop: item.backdrop,
+        year: item.year,
+        type: item.type || 'movie',
+        rating: item.rating || 8.0,
+        addedAt: Date.now()
+      });
+      added = true;
+      showToast('Added to My List', '<svg class="w-4 h-4 text-emerald-400" viewBox="0 0 24 24" fill="currentColor"><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z"/></svg>');
+    }
+    try {
+      localStorage.setItem(MY_LIST_KEY, JSON.stringify(list));
+    } catch(e) {}
+    window.dispatchEvent(new CustomEvent('mylist-changed', { detail: { id: id, added: added } }));
+    return added;
+  }
+  window.__getMyList = getMyList;
+  window.__isBookmarked = isBookmarked;
+  window.__toggleMyList = toggleMyList;
+
+  // ─── Continue Watching Engine (Local Playback Resume) ───
+  var CONTINUE_KEY = 'n4u_continue_watching_v1';
+  function getContinueWatching() {
+    try {
+      var raw = localStorage.getItem(CONTINUE_KEY);
+      return raw ? JSON.parse(raw) : [];
+    } catch(e) {
+      return [];
+    }
+  }
+  function saveContinueWatching(item) {
+    if (!item || (!item.tmdbId && !item.canonicalId)) return;
+    var id = String(item.tmdbId || item.canonicalId);
+    var list = getContinueWatching();
+    list = list.filter(function(x) {
+      return String(x.tmdbId || x.canonicalId) !== id;
+    });
+    list.unshift({
+      tmdbId: item.tmdbId,
+      canonicalId: item.canonicalId || item.tmdbId,
+      title: item.title || 'Movie',
+      poster: item.poster || '',
+      backdrop: item.backdrop || '',
+      type: item.type || 'movie',
+      year: item.year || '',
+      se: item.se || 1,
+      ep: item.ep || 1,
+      progress: item.progress || 52,
+      lastWatched: Date.now()
+    });
+    if (list.length > 15) list = list.slice(0, 15);
+    try {
+      localStorage.setItem(CONTINUE_KEY, JSON.stringify(list));
+    } catch(e) {}
+    if (currentPlatform === 'trending') {
+      renderContinueWatchingRail();
+    }
+  }
+  function removeContinueWatching(id) {
+    var list = getContinueWatching().filter(function(x) {
+      return String(x.tmdbId || x.canonicalId) !== String(id);
+    });
+    try {
+      localStorage.setItem(CONTINUE_KEY, JSON.stringify(list));
+    } catch(e) {}
+    renderContinueWatchingRail();
+    showToast('Removed from Continue Watching');
+  }
+  window.__saveContinueWatching = saveContinueWatching;
+  window.__removeContinueWatching = removeContinueWatching;
+
   // ─── Network Progress Bar ───
   function startProgress() {
     activeReqCount++;
@@ -586,6 +711,40 @@
 
   async function loadPlatformRails(platform) {
     currentPlatform = platform;
+
+    // Handle "My List" Tab
+    if (platform === 'mylist') {
+      var myList = getMyList();
+      if (!railsView) return;
+      if (!myList.length) {
+        railsView.innerHTML =
+          '<section class="py-16 text-center max-w-md mx-auto px-4">' +
+            '<div class="w-16 h-16 rounded-full bg-white/10 text-white/40 flex items-center justify-center mx-auto mb-4">' +
+              '<svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z"/></svg>' +
+            '</div>' +
+            '<h3 class="text-xl font-bold text-white mb-2">Your List is Empty</h3>' +
+            '<p class="text-sm text-white/60 mb-6 leading-relaxed">Click the bookmark icon on any movie or series to save it here for quick access anytime.</p>' +
+            '<button type="button" onclick="document.querySelector(\'[data-platform=trending]\').click()" class="px-6 py-2.5 rounded-full bg-red-600 hover:bg-red-700 text-white font-bold text-sm transition shadow-lg cursor-pointer">Explore Trending Titles</button>' +
+          '</section>';
+        return;
+      }
+      railsView.innerHTML =
+        '<section class="mb-8">' +
+          '<div class="flex items-center justify-between mb-4 px-1">' +
+            '<div class="flex items-center gap-3">' +
+              '<div class="w-1.5 h-5 rounded-full bg-red-600"></div>' +
+              '<h2 class="text-lg sm:text-xl font-bold tracking-tight text-white">My List (' + myList.length + ')</h2>' +
+            '</div>' +
+          '</div>' +
+          '<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">' +
+            myList.map(function(item) {
+              return renderCard(item);
+            }).join('') +
+          '</div>' +
+        '</section>';
+      return;
+    }
+
     var configs = getRailConfigs(platform);
     if (!railsView) return;
 
@@ -674,6 +833,11 @@
       window.Netflix4uAds.renderAll(railsView);
     }
 
+    // Render Continue Watching Rail if on trending platform
+    if (platform === 'trending') {
+      renderContinueWatchingRail();
+    }
+
     // Wire up scroll buttons and handle background revalidation / lazy loading
     configs.forEach(function(cfg, idx) {
       var railSection = railsView.querySelector('[data-rail-key="' + cfg.key + '"]');
@@ -738,6 +902,9 @@
           '</button>' +
           '<button type="button" aria-label="More Info" data-modal="title" data-tmdbid="' + tmdbId + '" data-canonical-id="' + escapeHtml(canonicalId) + '" data-imdbid="' + escapeHtml(imdbId) + '" data-type="' + (isTv ? 'tv' : 'movie') + '" data-title="' + escapeHtml(title) + '" class="w-7 h-7 rounded-full bg-white/20 backdrop-blur flex items-center justify-center pointer-events-auto hover:bg-white/30 transition border border-white/20 cursor-pointer">' +
             '<svg class="w-3.5 h-3.5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>' +
+          '</button>' +
+          '<button type="button" aria-label="Add to My List" data-card-bookmark="' + tmdbId + '" class="nm-card-bookmark ' + (isBookmarked(tmdbId) ? 'is-bookmarked' : '') + ' w-7 h-7 rounded-full bg-white/20 backdrop-blur flex items-center justify-center pointer-events-auto hover:bg-white/30 transition border border-white/20 cursor-pointer" title="' + (isBookmarked(tmdbId) ? 'In My List' : 'Add to My List') + '">' +
+            '<svg class="w-3.5 h-3.5 ' + (isBookmarked(tmdbId) ? 'text-white' : 'text-white/90') + '" viewBox="0 0 24 24" fill="' + (isBookmarked(tmdbId) ? 'currentColor' : 'none') + '" stroke="currentColor" stroke-width="2.5"><path d="M17 3H7c-1.1 0-1.99.9-1.99 2L5 21l7-3 7 3V5c0-1.1-.9-2-2-2z"/></svg>' +
           '</button>' +
         '</div>' +
         '<div class="flex items-center gap-1.5 text-[10px] font-medium leading-tight">' +
@@ -1054,6 +1221,239 @@
   }
   window.__healPoster = healPoster;
 
+  function renderContinueWatchingRail() {
+    if (currentPlatform !== 'trending' || !railsView) return;
+    var existing = document.getElementById('continue-watching-rail');
+    var items = getContinueWatching();
+    if (!items.length) {
+      if (existing) existing.remove();
+      return;
+    }
+
+    var railHtml =
+      '<section id="continue-watching-rail" class="mb-8">' +
+        '<div class="flex items-center justify-between gap-3 mb-3 px-1">' +
+          '<div class="flex items-center gap-2.5">' +
+            '<div class="w-1.5 h-5 rounded-full bg-red-600 animate-pulse"></div>' +
+            '<h2 class="text-base sm:text-lg font-bold tracking-tight text-white flex items-center gap-2">' +
+              'Continue Watching' +
+              '<span class="text-[11px] font-normal text-white/50">(' + items.length + ')</span>' +
+            '</h2>' +
+          '</div>' +
+        '</div>' +
+        '<div class="relative rail-wrap">' +
+          '<button type="button" data-rail-prev aria-label="Scroll left" class="rail-arrow rail-arrow-left rail-arrow-hidden">' +
+            '<span class="rail-arrow-btn"><svg viewBox="0 0 24 24" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m15 18-6-6 6-6"/></svg></span>' +
+          '</button>' +
+          '<div class="flex gap-3 sm:gap-4 overflow-x-auto scrollbar-none rail-scroll" data-rail-content>' +
+            items.map(function(item) {
+              var poster = item.poster ? unwrapImageUrl(item.poster) : getPosterFallback(item.title);
+              var isTv = item.type === 'tv' || item.type === 'series';
+              var epLabel = isTv ? 'S' + (item.se || 1) + ':E' + (item.ep || 1) : '';
+              return '<div class="shrink-0 w-[160px] sm:w-[210px]">' +
+                '<div class="nm-continue-card group cursor-pointer" data-modal="watch" data-tmdbid="' + item.tmdbId + '" data-canonical-id="' + escapeHtml(item.canonicalId || item.tmdbId) + '" data-type="' + (isTv ? 'tv' : 'movie') + '" data-title="' + escapeHtml(item.title) + '" data-year="' + (item.year || '') + '"' + (isTv ? ' data-se="' + (item.se || 1) + '" data-ep="' + (item.ep || 1) + '"' : '') + '>' +
+                  '<button type="button" aria-label="Remove from Continue Watching" data-remove-cw="' + item.tmdbId + '" class="nm-continue-remove" title="Remove">✕</button>' +
+                  '<div class="relative aspect-[16/9] sm:aspect-[2/3] overflow-hidden bg-white/5 rounded-t-lg">' +
+                    '<img src="' + poster + '" alt="' + escapeHtml(item.title) + '" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="window.__healPoster(this);" />' +
+                    '<div class="absolute inset-0 bg-black/30 group-hover:bg-black/10 flex items-center justify-center transition">' +
+                      '<div class="w-10 h-10 rounded-full bg-white/90 group-hover:bg-white text-black flex items-center justify-center shadow-2xl group-hover:scale-110 transition">' +
+                        '<svg class="w-5 h-5 ml-0.5" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>' +
+                      '</div>' +
+                    '</div>' +
+                    '<div class="nm-continue-progress-wrap">' +
+                      '<div class="nm-continue-progress-bar" style="width: ' + (item.progress || 50) + '%;"></div>' +
+                    '</div>' +
+                  '</div>' +
+                  '<div class="p-2 bg-[#121218] rounded-b-lg flex items-center justify-between gap-1.5">' +
+                    '<div class="truncate text-xs font-semibold text-white/90">' + escapeHtml(item.title) + '</div>' +
+                    (epLabel ? '<span class="shrink-0 px-1.5 py-0.5 rounded bg-white/15 text-[10px] font-bold text-white/80">' + epLabel + '</span>' : '') +
+                  '</div>' +
+                '</div>' +
+              '</div>';
+            }).join('') +
+          '</div>' +
+          '<button type="button" data-rail-next aria-label="Scroll right" class="rail-arrow rail-arrow-right rail-arrow-hidden">' +
+            '<span class="rail-arrow-btn"><svg viewBox="0 0 24 24" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg></span>' +
+          '</button>' +
+        '</div>' +
+      '</section>';
+
+    if (existing) {
+      existing.outerHTML = railHtml;
+    } else {
+      railsView.insertAdjacentHTML('afterbegin', railHtml);
+    }
+    var newSec = document.getElementById('continue-watching-rail');
+    if (newSec) initRailScrollButtons(newSec);
+  }
+  window.__renderContinueWatchingRail = renderContinueWatchingRail;
+
+  // ─── Global Event Delegation for Bookmarks & Continue Watching ───
+  document.addEventListener('click', function(e) {
+    var bmBtn = e.target.closest('[data-card-bookmark]');
+    if (bmBtn) {
+      e.preventDefault();
+      e.stopPropagation();
+      var id = bmBtn.dataset.cardBookmark;
+      var card = bmBtn.closest('.nm-card');
+      var title = card ? (card.querySelector('img') ? card.querySelector('img').alt : '') : '';
+      var img = card ? card.querySelector('img') : null;
+      var poster = img ? img.src : '';
+      var isTv = card && card.dataset.type === 'tv';
+      var added = toggleMyList({
+        tmdbId: id,
+        title: title || 'Title',
+        poster: poster,
+        type: isTv ? 'tv' : 'movie'
+      });
+      bmBtn.classList.toggle('is-bookmarked', added);
+      bmBtn.title = added ? 'In My List' : 'Add to My List';
+      var svg = bmBtn.querySelector('svg');
+      if (svg) svg.setAttribute('fill', added ? 'currentColor' : 'none');
+      return;
+    }
+
+    var cwRemoveBtn = e.target.closest('[data-remove-cw]');
+    if (cwRemoveBtn) {
+      e.preventDefault();
+      e.stopPropagation();
+      var cwId = cwRemoveBtn.dataset.removeCw;
+      removeContinueWatching(cwId);
+      return;
+    }
+  });
+
+  // ─── Movie Request Modal Handler ───
+  var reqBtn = document.getElementById('header-request-btn');
+  var reqModal = document.getElementById('request-modal');
+  var reqClose = document.getElementById('request-modal-close');
+  var reqForm = document.getElementById('request-form');
+
+  if (reqBtn && reqModal) {
+    reqBtn.addEventListener('click', function() {
+      reqModal.classList.remove('hidden');
+      reqModal.classList.add('flex');
+    });
+  }
+  if (reqClose && reqModal) {
+    reqClose.addEventListener('click', function() {
+      reqModal.classList.add('hidden');
+      reqModal.classList.remove('flex');
+    });
+    reqModal.addEventListener('click', function(e) {
+      if (e.target === reqModal) {
+        reqModal.classList.add('hidden');
+        reqModal.classList.remove('flex');
+      }
+    });
+  }
+  if (reqForm) {
+    reqForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var title = (document.getElementById('req-title') || {}).value || '';
+      var type = (document.getElementById('req-type') || {}).value || 'Movie';
+      var year = (document.getElementById('req-year') || {}).value || '';
+      var audio = (document.getElementById('req-audio') || {}).value || '';
+
+      var msg = 'Request for Netflix4U: ' + title + (year ? ' (' + year + ')' : '') + ' [' + type + ']' + (audio ? ' - ' + audio : '');
+      var tgUrl = 'https://t.me/netflix_mirror_apk?text=' + encodeURIComponent(msg);
+      window.open(tgUrl, '_blank', 'noopener,noreferrer');
+      showToast('Request submitted! Our team will add it within 24h.', '🎉');
+      reqForm.reset();
+      if (reqModal) {
+        reqModal.classList.add('hidden');
+        reqModal.classList.remove('flex');
+      }
+    });
+  }
+
+  // ─── Viral Share Modal Handler ───
+  var shareModal = document.getElementById('share-modal');
+  var shareClose = document.getElementById('share-modal-close');
+  var sharePreviewTitle = document.getElementById('share-preview-title');
+  var shareWaBtn = document.getElementById('share-whatsapp-btn');
+  var shareTgBtn = document.getElementById('share-telegram-btn');
+  var shareCopyBtn = document.getElementById('share-copy-link-btn');
+  var currentShareData = null;
+
+  function openShareDialog(data) {
+    currentShareData = data;
+    var title = (data && data.title) || 'Movie';
+    var url = (data && data.url) || window.location.href;
+    var shareText = 'Watch ' + title + ' in 4K UHD with multi-audio on Netflix4U: ' + url;
+
+    if (navigator.share && window.matchMedia('(max-width: 768px)').matches) {
+      navigator.share({
+        title: title + ' — Netflix4U',
+        text: shareText,
+        url: url
+      }).catch(function() {});
+      return;
+    }
+
+    if (!shareModal) return;
+    if (sharePreviewTitle) sharePreviewTitle.textContent = title;
+    if (shareWaBtn) shareWaBtn.href = 'https://api.whatsapp.com/send?text=' + encodeURIComponent(shareText);
+    if (shareTgBtn) shareTgBtn.href = 'https://t.me/share/url?url=' + encodeURIComponent(url) + '&text=' + encodeURIComponent('Watch ' + title + ' on Netflix4U');
+    shareModal.classList.remove('hidden');
+    shareModal.classList.add('flex');
+  }
+  window.__openShareDialog = openShareDialog;
+
+  if (shareClose && shareModal) {
+    shareClose.addEventListener('click', function() {
+      shareModal.classList.add('hidden');
+      shareModal.classList.remove('flex');
+    });
+    shareModal.addEventListener('click', function(e) {
+      if (e.target === shareModal) {
+        shareModal.classList.add('hidden');
+        shareModal.classList.remove('flex');
+      }
+    });
+  }
+  if (shareCopyBtn) {
+    shareCopyBtn.addEventListener('click', function() {
+      var url = (currentShareData && currentShareData.url) || window.location.href;
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(url).then(function() {
+          showToast('Link copied to clipboard!', '📋');
+          if (shareModal) {
+            shareModal.classList.add('hidden');
+            shareModal.classList.remove('flex');
+          }
+        });
+      }
+    });
+  }
+
+  // ─── PWA beforeinstallprompt Handler ───
+  var deferredPrompt = null;
+  window.addEventListener('beforeinstallprompt', function(e) {
+    e.preventDefault();
+    deferredPrompt = e;
+    var pwaBtn = document.getElementById('pwa-install-btn');
+    if (pwaBtn) pwaBtn.classList.remove('hidden');
+  });
+
+  var installBtn = document.getElementById('pwa-install-btn');
+  if (installBtn) {
+    installBtn.addEventListener('click', function() {
+      if (!deferredPrompt) {
+        showToast('App is ready to install via browser menu (Add to Home Screen)', '📱');
+        return;
+      }
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then(function(res) {
+        if (res && res.outcome === 'accepted') {
+          showToast('Netflix4U App installed successfully!', '🎉');
+        }
+        deferredPrompt = null;
+        installBtn.classList.add('hidden');
+      });
+    });
+  }
+
   // ─── App Initialization ───
   function init() {
     initHoneycombLoader();
@@ -1072,3 +1472,4 @@
     init();
   }
 })();
+
