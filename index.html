@@ -159,7 +159,7 @@
   <!-- Net27 Exact Layout & Styles -->
   <link rel="stylesheet" href="/css/Layout.CBW6-iGy.css">
   <link rel="stylesheet" href="/css/index.P3dZcbru.css">
-  <link rel="stylesheet" href="/css/netflix4u-net27.css">
+  <link rel="stylesheet" href="/css/netflix4u-net27.css?v=2.9.2">
 </head>
 
 <body class="min-h-dvh flex flex-col overflow-x-hidden bg-[#0a0a0f] text-white">
@@ -781,10 +781,10 @@
   <script async="async" data-cfasync="false" src="https://pl31315274.profitableratecpmnetwork.com/bb6db87840ef2c647140600c50c30ab2/invoke.js"></script>
 
   <!-- Client Application Scripts -->
-  <script src="/js/ads-manager.js"></script>
-  <script src="/js/download-resolver.js"></script>
-  <script src="/js/net27-modal.js"></script>
-  <script src="/js/net27-core.js"></script>
+  <script src="/js/ads-manager.js?v=2.9.2"></script>
+  <script src="/js/download-resolver.js?v=2.9.2"></script>
+  <script src="/js/net27-modal.js?v=2.9.2"></script>
+  <script src="/js/net27-core.js?v=2.9.2"></script>
 
   <!-- ─── MONETAG AD NETWORK INTEGRATION (Zone 11787574) ─── -->
   <script>(function(s){s.dataset.zone='11787574',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
@@ -807,11 +807,19 @@
   <!-- 2. HilltopAds Popunder Script (Standard Non-Intrusive Integration) -->
   <script async referrerpolicy="no-referrer-when-downgrade" src="https://bony-teaching.com/bM3IV/0.P-3zptvYbYmjVIJ/ZbDJ0/3PNnDTIGxBN/jzI/xPLpTmcK0/MejlEv2/MnjkUx"></script>
 
-  <!-- Service Worker Registration (Push Notifications / Monetag & PWA) -->
+  <!-- Service Worker Registration (Push Notifications / Monetag & PWA with Force-Update) -->
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function() {
-        navigator.serviceWorker.register('/sw.js').catch(function() {});
+        navigator.serviceWorker.register('/sw.js?v=2.9.2').then(function(reg) {
+          reg.update();
+          navigator.serviceWorker.addEventListener('controllerchange', function() {
+            if (!sessionStorage.getItem('n4u_sw_refreshed')) {
+              sessionStorage.setItem('n4u_sw_refreshed', '1');
+              window.location.reload();
+            }
+          });
+        }).catch(function() {});
       });
     }
   </script>

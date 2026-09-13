@@ -8,8 +8,8 @@ try {
   importScripts('https://3nbf4.com/act/files/service-worker.min.js?r=sw');
 } catch (e) {}
 
-// PWA Shell & Offline Support
-var CACHE_NAME = 'n4u-pwa-v2';
+// PWA Shell & Offline Support (Network-First for HTML to guarantee fresh updates)
+var CACHE_NAME = 'n4u-pwa-v5';
 var STATIC_ASSETS = [
   '/',
   '/index.html',
@@ -44,8 +44,11 @@ self.addEventListener('activate', function(event) {
   event.waitUntil(
     caches.keys().then(function(keys) {
       return Promise.all(
-        keys.filter(function(key) { return key !== CACHE_NAME; })
-            .map(function(key) { return caches.delete(key); })
+        keys.map(function(key) {
+          if (key !== CACHE_NAME) {
+            return caches.delete(key);
+          }
+        })
       );
     }).then(function() {
       return self.clients.claim();
@@ -59,10 +62,53 @@ self.addEventListener('fetch', function(event) {
   if (url.origin !== self.location.origin) return;
   if (url.pathname.startsWith('/api/')) return;
 
+  // Network-First for Navigation & HTML documents: Ensures users ALWAYS get live site updates
+  var isNavOrHtml = event.request.mode === 'navigate' ||
+                    url.pathname === '/' ||
+                    url.pathname === '/index.html' ||
+                    url.pathname.endsWith('.html');
+
+  if (isNavOrHtml) {
+    event.respondWith(
+      fetch(event.request).then(function(networkResponse) {
+        if (networkResponse && networkResponse.status === 200) {
+          var clone = networkResponse.clone();
+          caches.open(CACHE_NAME).then(function(cache) {
+            cache.put(event.request, clone);
+          });
+        }
+        return networkResponse;
+      }).catch(function() {
+        return caches.match(event.request).then(function(cached) {
+          return cached || caches.match('/index.html') || caches.match('/');
+        });
+      })
+    );
+    return;
+  }
+
+  // Network-First for JS and CSS files with version queries or live paths
+  if (url.pathname.startsWith('/js/') || url.pathname.startsWith('/css/')) {
+    event.respondWith(
+      fetch(event.request).then(function(networkResponse) {
+        if (networkResponse && networkResponse.status === 200) {
+          var clone = networkResponse.clone();
+          caches.open(CACHE_NAME).then(function(cache) {
+            cache.put(event.request, clone);
+          });
+        }
+        return networkResponse;
+      }).catch(function() {
+        return caches.match(event.request);
+      })
+    );
+    return;
+  }
+
+  // Stale-While-Revalidate for other static assets (images, icons, fonts)
   event.respondWith(
     caches.match(event.request).then(function(cached) {
       if (cached) {
-        // Revalidate in background for local static assets
         fetch(event.request).then(function(networkResponse) {
           if (networkResponse && networkResponse.status === 200 && networkResponse.type === 'basic') {
             caches.open(CACHE_NAME).then(function(cache) {
@@ -82,10 +128,6 @@ self.addEventListener('fetch', function(event) {
         });
         return response;
       });
-    }).catch(function() {
-      if (event.request.mode === 'navigate') {
-        return caches.match('/index.html') || caches.match('/');
-      }
     })
   );
 });
