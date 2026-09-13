@@ -117,6 +117,11 @@
           return;
         }
 
+        // If slot already contains an active ad script (HilltopAds, Adsterra), leave it to invoke script
+        if (el.querySelector('script')) {
+          return;
+        }
+
         // Native card in search results
         if (el.classList.contains('nm-ad-card')) {
           el.innerHTML = '<a href="https://t.me/netflix_mirror_apk" target="_blank" rel="noopener noreferrer" class="h-full w-full flex flex-col items-center justify-center p-4 text-center group block">' +
