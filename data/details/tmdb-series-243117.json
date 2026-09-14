@@ -1,0 +1,118 @@
+{
+  "id": "tmdb-series-243117",
+  "canonicalId": "tmdb-series-243117",
+  "externalProvider": "tmdb",
+  "externalId": "243117",
+  "tmdbId": "243117",
+  "imdbId": "tt29694831",
+  "type": "series",
+  "contentType": "series",
+  "title": "Plus belle la vie, encore plus belle",
+  "canonicalTitle": "Plus belle la vie, encore plus belle",
+  "originalTitle": "Plus belle la vie, encore plus belle",
+  "overview": "",
+  "description": "",
+  "shortDescription": "",
+  "year": 2024,
+  "releaseDate": "2024-01-08",
+  "rating": 5.7,
+  "votes": "0.0K",
+  "quality": "FHD",
+  "duration": "20m/ep",
+  "genres": [
+    "Soap",
+    "Drama"
+  ],
+  "categories": [
+    "Soap",
+    "Drama"
+  ],
+  "language": "French",
+  "country": "FR",
+  "director": "Director",
+  "poster": "https://image.tmdb.org/t/p/w500/ps0WuyL384MahVCxysxOfF1fhgq.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/3Jolb6Ky31IhEwyS8QhRykKo79J.jpg",
+  "trailerUrl": null,
+  "trailer": null,
+  "cast": [
+    {
+      "id": "2540637",
+      "name": "Laurent Kerusoré",
+      "character": "Thomas Marci",
+      "photo": "https://image.tmdb.org/t/p/w185/j5TrKscirrGlDCgKfCVvUi7GhFH.jpg"
+    },
+    {
+      "id": "1389470",
+      "name": "Sylvie Flepp",
+      "character": "Mirta Torres",
+      "photo": "https://image.tmdb.org/t/p/w185/umrpSZv7Kblg7bvQ6t91Gvn1jHS.jpg"
+    },
+    {
+      "id": "1720648",
+      "name": "Cécilia Hornus",
+      "character": "Blanche Marci",
+      "photo": "https://image.tmdb.org/t/p/w185/bbaFaqPoywxRGmypJJEFliLx7QB.jpg"
+    },
+    {
+      "id": "2198192",
+      "name": "Anne Décis",
+      "character": "Luna Torres",
+      "photo": "https://image.tmdb.org/t/p/w185/eMjwJnXLwOzP3gFEySdoeCwwalu.jpg"
+    },
+    {
+      "id": "1903950",
+      "name": "Stéphane Henon",
+      "character": "Jean-Paul Boher",
+      "photo": "https://image.tmdb.org/t/p/w185/o3Jv6AjbVbizwY9ABIvLSiAB4s8.jpg"
+    },
+    {
+      "id": "1331519",
+      "name": "Léa François",
+      "character": "Barbara Évenot",
+      "photo": "https://image.tmdb.org/t/p/w185/s2ZT6RtP5A6Or8TFoN6uG0BMDog.jpg"
+    },
+    {
+      "id": "1048753",
+      "name": "Joakim Latzko",
+      "character": "Gabriel Riva",
+      "photo": "https://image.tmdb.org/t/p/w185/rdShlcMx8ru25XhyzCgEi09Zasf.jpg"
+    },
+    {
+      "id": "2050932",
+      "name": "Marie Hennerez",
+      "character": "Léa Nebout",
+      "photo": "https://image.tmdb.org/t/p/w185/J6To6uSuEGKjHRZhUaKbQ7hQYt.jpg"
+    },
+    {
+      "id": "2846675",
+      "name": "Marie Réache",
+      "character": "Babeth Nebout",
+      "photo": "https://image.tmdb.org/t/p/w185/51tzdYjZsQaf3wuIIZk9q439Di1.jpg"
+    },
+    {
+      "id": "72339",
+      "name": "Jérôme Bertin",
+      "character": "Patrick Nebout",
+      "photo": "https://image.tmdb.org/t/p/w185/b0AB81YlzSs5nnmbUKDP2mGYbYH.jpg"
+    },
+    {
+      "id": "5318",
+      "name": "Élisabeth Commelin",
+      "character": "Yolande Sandré",
+      "photo": "https://image.tmdb.org/t/p/w185/bDnIJ1c0WUPdXKNecIQmMoeNa3u.jpg"
+    },
+    {
+      "id": "1745553",
+      "name": "Lola Marois-Bigard",
+      "character": "Ariane Hersant",
+      "photo": "https://image.tmdb.org/t/p/w185/fbLiu6JqTTVkckf40gSiFw4C0jg.jpg"
+    }
+  ],
+  "seasons": 3,
+  "episodes": 704,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-14T03:23:17.405Z",
+  "createdAt": "2026-09-14T03:23:17.405Z",
+  "updatedAt": "2026-09-14T03:23:17.405Z",
+  "links": []
+}

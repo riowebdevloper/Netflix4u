@@ -1,0 +1,120 @@
+{
+  "id": "tmdb-movie-1408162",
+  "canonicalId": "tmdb-movie-1408162",
+  "externalProvider": "tmdb",
+  "externalId": "1408162",
+  "tmdbId": "1408162",
+  "imdbId": "tt35836025",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "Vishwanath & Sons",
+  "canonicalTitle": "Vishwanath & Sons",
+  "originalTitle": "விஸ்வநாத் & சன்ஸ்",
+  "overview": "A celebrated Olympian shooter travels to America looking for a donor to help his sick child — but unexpected romance complicates his search.",
+  "description": "A celebrated Olympian shooter travels to America looking for a donor to help his sick child — but unexpected romance complicates his search.",
+  "shortDescription": "A celebrated Olympian shooter travels to America looking for a donor to help his sick child — but unexpected romance com",
+  "year": 2026,
+  "releaseDate": "2026-08-14",
+  "rating": 7.4,
+  "votes": "0.0K",
+  "quality": "FHD",
+  "duration": "2h 41m",
+  "genres": [
+    "Drama",
+    "Romance",
+    "Comedy"
+  ],
+  "categories": [
+    "Drama",
+    "Romance",
+    "Comedy"
+  ],
+  "language": "Tamil",
+  "country": "IN",
+  "director": "Venky Atluri",
+  "poster": "https://image.tmdb.org/t/p/w500/adDZVEQZnMJ380zPOmVj6vBWHgk.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/nfNaAiiILjYRc2CKkId1ZfPTtlh.jpg",
+  "trailerUrl": null,
+  "trailer": null,
+  "cast": [
+    {
+      "id": "85720",
+      "name": "Suriya",
+      "character": "Sanjay 'Sanju' Vishwanath",
+      "photo": "https://image.tmdb.org/t/p/w185/hIFXv3gIjlNS78gJmaguEOxvfPH.jpg"
+    },
+    {
+      "id": "2191938",
+      "name": "Mamitha Baiju",
+      "character": "Madanakameshwari 'Maddy Jay' Jothilingam",
+      "photo": "https://image.tmdb.org/t/p/w185/9ySiE3j7ep16fhKi3u5iq5rbOk6.jpg"
+    },
+    {
+      "id": "562177",
+      "name": "Radhika Sarathkumar",
+      "character": "Nirmala Devi",
+      "photo": "https://image.tmdb.org/t/p/w185/kEKzT8HAJw8lfFUtWWd0SoQ9kC9.jpg"
+    },
+    {
+      "id": "123180",
+      "name": "Raveena Tandon",
+      "character": "Anjali Devi",
+      "photo": "https://image.tmdb.org/t/p/w185/4z0X9ZMgyNZRHfJG4G2Z10rhLpu.jpg"
+    },
+    {
+      "id": "2261843",
+      "name": "Sunil",
+      "character": "Ramu",
+      "photo": "https://image.tmdb.org/t/p/w185/w92Vawfw4DcLYSLtUeFTm46KNIe.jpg"
+    },
+    {
+      "id": "6423626",
+      "name": "Harika",
+      "character": "Sireesha Ramalingam",
+      "photo": "https://image.tmdb.org/t/p/w185/y7ujuzC4nXWrYcUnHNVDtwOG2JQ.jpg"
+    },
+    {
+      "id": "130111",
+      "name": "Nassar",
+      "character": "Ramanadhan",
+      "photo": "https://image.tmdb.org/t/p/w185/p3I0tSQY3C5qZW3NzFfbpjKPNL6.jpg"
+    },
+    {
+      "id": "1638514",
+      "name": "Harsha Chemudu",
+      "character": "Kishore",
+      "photo": "https://image.tmdb.org/t/p/w185/be0atwoQTudy7WaVCNwWbQuxjvG.jpg"
+    },
+    {
+      "id": "2036697",
+      "name": "Bhavani Sre",
+      "character": "Meghana",
+      "photo": "https://image.tmdb.org/t/p/w185/jpSwJEKKmCoaQZOOG6ofppNHdGQ.jpg"
+    },
+    {
+      "id": "4189538",
+      "name": "V.J. Pappu",
+      "character": "Prakash",
+      "photo": "https://image.tmdb.org/t/p/w185/sH9wQiBcFCh3wgw97RuyscEYSzP.jpg"
+    },
+    {
+      "id": "139896",
+      "name": "Rajiv Menon",
+      "character": "Vijay Vishwanath",
+      "photo": "https://image.tmdb.org/t/p/w185/gMOTcaKxG7wnzRlx77Nwuw5QUMI.jpg"
+    },
+    {
+      "id": "1511161",
+      "name": "Mime Gopi",
+      "character": "Politician Thangavelu",
+      "photo": "https://image.tmdb.org/t/p/w185/gglNAjJMlCb0p7ig3OVpgsXMkMD.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 1,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-14T03:23:17.308Z",
+  "createdAt": "2026-09-14T03:23:17.308Z",
+  "updatedAt": "2026-09-14T03:23:17.308Z",
+  "links": []
+}

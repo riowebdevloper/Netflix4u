@@ -1,0 +1,52 @@
+{
+  "id": "tmdb-series-7967",
+  "canonicalId": "tmdb-series-7967",
+  "externalProvider": "tmdb",
+  "externalId": "7967",
+  "tmdbId": "7967",
+  "imdbId": "tt1280627",
+  "type": "series",
+  "contentType": "series",
+  "title": "The Rachel Maddow Show",
+  "canonicalTitle": "The Rachel Maddow Show",
+  "originalTitle": "The Rachel Maddow Show",
+  "overview": "The Rachel Maddow Show is a daily news and opinion television program that airs on MSNBC, running in the 9:00 pm ET timeslot. It is hosted by Rachel Maddow, who gained popularity with her frequent appearances as a liberal pundit on various MSNBC programs. It is based on her former radio show of the same name. The show debuted on September 8, 2008.",
+  "description": "The Rachel Maddow Show is a daily news and opinion television program that airs on MSNBC, running in the 9:00 pm ET timeslot. It is hosted by Rachel Maddow, who gained popularity with her frequent appearances as a liberal pundit on various MSNBC programs. It is based on her former radio show of the same name. The show debuted on September 8, 2008.",
+  "shortDescription": "The Rachel Maddow Show is a daily news and opinion television program that airs on MSNBC, running in the 9:00 pm ET time",
+  "year": 2008,
+  "releaseDate": "2008-09-08",
+  "rating": 5.9,
+  "votes": "0.0K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "News",
+    "Talk"
+  ],
+  "categories": [
+    "News",
+    "Talk"
+  ],
+  "language": "English",
+  "country": "US",
+  "director": "Director",
+  "poster": "https://image.tmdb.org/t/p/w500/nm4ubPrrnksdaD9EAvqzClfGlFo.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/lrKyCG1DSJHvpJsw7YozU3e4ydV.jpg",
+  "trailerUrl": null,
+  "trailer": null,
+  "cast": [
+    {
+      "id": "451844",
+      "name": "Rachel Maddow",
+      "character": "Self - Hostess",
+      "photo": "https://image.tmdb.org/t/p/w185/j7RIkIOSRCPBEIwqkWKJ9ehuqJ8.jpg"
+    }
+  ],
+  "seasons": 19,
+  "episodes": 3750,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-14T03:23:17.496Z",
+  "createdAt": "2026-09-14T03:23:17.496Z",
+  "updatedAt": "2026-09-14T03:23:17.496Z",
+  "links": []
+}

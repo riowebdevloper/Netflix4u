@@ -1,0 +1,84 @@
+{
+  "id": "tmdb-series-194583",
+  "canonicalId": "tmdb-series-194583",
+  "externalProvider": "tmdb",
+  "externalId": "194583",
+  "tmdbId": "194583",
+  "imdbId": "tt18546730",
+  "type": "series",
+  "contentType": "series",
+  "title": "The Walking Dead: Dead City",
+  "canonicalTitle": "The Walking Dead: Dead City",
+  "originalTitle": "The Walking Dead: Dead City",
+  "overview": "Maggie and Negan travel to post-apocalyptic Manhattan - long ago cut off from the mainland. The crumbling city is filled with the dead and denizens who have made it a world full of anarchy, danger, beauty, and terror.",
+  "description": "Maggie and Negan travel to post-apocalyptic Manhattan - long ago cut off from the mainland. The crumbling city is filled with the dead and denizens who have made it a world full of anarchy, danger, beauty, and terror.",
+  "shortDescription": "Maggie and Negan travel to post-apocalyptic Manhattan - long ago cut off from the mainland. The crumbling city is filled",
+  "year": 2023,
+  "releaseDate": "2023-06-18",
+  "rating": 7.9,
+  "votes": "0.8K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Action & Adventure",
+    "Drama",
+    "Sci-Fi & Fantasy"
+  ],
+  "categories": [
+    "Action & Adventure",
+    "Drama",
+    "Sci-Fi & Fantasy"
+  ],
+  "language": "English",
+  "country": "US",
+  "director": "Director",
+  "poster": "https://image.tmdb.org/t/p/w500/wq3vuQzQgbS83zX3malAFWMsSwX.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/vV5LKWmuysEe5wsuZJGbdiL5XJ2.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/Zu2z-SY3hCk?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/Zu2z-SY3hCk?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "62220",
+      "name": "Lauren Cohan",
+      "character": "Maggie Rhee",
+      "photo": "https://image.tmdb.org/t/p/w185/8WPbj506873QzrKwUFbjjniLuvD.jpg"
+    },
+    {
+      "id": "47296",
+      "name": "Jeffrey Dean Morgan",
+      "character": "Negan",
+      "photo": "https://image.tmdb.org/t/p/w185/m8bdrmh6ExDCGQ64E83mHg002YV.jpg"
+    },
+    {
+      "id": "557579",
+      "name": "Raúl Castillo",
+      "character": "Luis",
+      "photo": "https://image.tmdb.org/t/p/w185/wyxl5HtyjeJRXkE89LtsItQhPHN.jpg"
+    },
+    {
+      "id": "2357412",
+      "name": "Logan Kim",
+      "character": "Hershel Rhee",
+      "photo": "https://image.tmdb.org/t/p/w185/enI1CJeXSKOSTvC4mp945xxGU9X.jpg"
+    },
+    {
+      "id": "56457",
+      "name": "Aimee Garcia",
+      "character": "Renata",
+      "photo": "https://image.tmdb.org/t/p/w185/4z3mkoa8jHpqjzfbhzYMeKe2Mf7.jpg"
+    },
+    {
+      "id": "22125",
+      "name": "Jimmi Simpson",
+      "character": "Dillard",
+      "photo": "https://image.tmdb.org/t/p/w185/gerE8VqXfFyAs3QhbUlwEuZllKq.jpg"
+    }
+  ],
+  "seasons": 3,
+  "episodes": 22,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-14T03:23:17.221Z",
+  "createdAt": "2026-09-14T03:23:17.221Z",
+  "updatedAt": "2026-09-14T03:23:17.221Z",
+  "links": []
+}

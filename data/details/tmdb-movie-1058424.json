@@ -1,0 +1,120 @@
+{
+  "id": "tmdb-movie-1058424",
+  "canonicalId": "tmdb-movie-1058424",
+  "externalProvider": "tmdb",
+  "externalId": "1058424",
+  "tmdbId": "1058424",
+  "imdbId": "tt27369017",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "Hope",
+  "canonicalTitle": "Hope",
+  "originalTitle": "호프",
+  "overview": "In the remote South Korean village of Hope Harbor, police chief Bum-seok and officer Sung-ae are called to investigate a mysterious creature wreaking havoc on the community. But all is not as it seems, and perceptions can be misleading. What begins as ignorance plants the seed of disaster, escalating through human conflict into a tragedy of cosmic proportions.",
+  "description": "In the remote South Korean village of Hope Harbor, police chief Bum-seok and officer Sung-ae are called to investigate a mysterious creature wreaking havoc on the community. But all is not as it seems, and perceptions can be misleading. What begins as ignorance plants the seed of disaster, escalating through human conflict into a tragedy of cosmic proportions.",
+  "shortDescription": "In the remote South Korean village of Hope Harbor, police chief Bum-seok and officer Sung-ae are called to investigate a",
+  "year": 2026,
+  "releaseDate": "2026-07-15",
+  "rating": 7.8,
+  "votes": "0.1K",
+  "quality": "FHD",
+  "duration": "2h 37m",
+  "genres": [
+    "Science Fiction",
+    "Mystery",
+    "Action"
+  ],
+  "categories": [
+    "Science Fiction",
+    "Mystery",
+    "Action"
+  ],
+  "language": "Korean",
+  "country": "KR",
+  "director": "Na Hong-jin",
+  "poster": "https://image.tmdb.org/t/p/w500/h39KOfADZB5I7JzNh9ih9GbZdoK.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/o1UvmHqE2fh0Z62wls5bdrNtBN2.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/OFaJzL83y0Q?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/OFaJzL83y0Q?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "68903",
+      "name": "Hwang Jung-min",
+      "character": "Go Bum-seok",
+      "photo": "https://image.tmdb.org/t/p/w185/hKF1uh0iEfuZlBE79CXPw415qyn.jpg"
+    },
+    {
+      "id": "127564",
+      "name": "Zo In-sung",
+      "character": "Go Sung-ki",
+      "photo": "https://image.tmdb.org/t/p/w185/9TS1cSfetbwsa5T59n5cxn7egKc.jpg"
+    },
+    {
+      "id": "3194501",
+      "name": "Hoyeon",
+      "character": "Lim Sung-ae",
+      "photo": "https://image.tmdb.org/t/p/w185/AfQFFyGeG9xOQnEJb1Ash1RomkP.jpg"
+    },
+    {
+      "id": "227454",
+      "name": "Alicia Vikander",
+      "character": "J'aur",
+      "photo": "https://image.tmdb.org/t/p/w185/lZu8qiTwiQIN96cuptgqMCCaUtg.jpg"
+    },
+    {
+      "id": "17288",
+      "name": "Michael Fassbender",
+      "character": "Ma'veyyo",
+      "photo": "https://image.tmdb.org/t/p/w185/xvbnUiB2ZBR3QIt595OzNy657Vw.jpg"
+    },
+    {
+      "id": "1353827",
+      "name": "Taylor Russell",
+      "character": "Ai'dovor",
+      "photo": "https://image.tmdb.org/t/p/w185/3kW1SvpzyOPPZHxbz7cgR7ilmtQ.jpg"
+    },
+    {
+      "id": "1286537",
+      "name": "Cameron Britton",
+      "character": "Va'migere",
+      "photo": "https://image.tmdb.org/t/p/w185/9HFxi8ZnBiby3AQ7tBOPDxXFkCT.jpg"
+    },
+    {
+      "id": "564847",
+      "name": "Lee Sang-hee",
+      "character": "Nak-yeon",
+      "photo": "https://image.tmdb.org/t/p/w185/wOYFSg20yGe48VFALqGAlrLjFHV.jpg"
+    },
+    {
+      "id": "2370779",
+      "name": "Um Mun-suk",
+      "character": "Yang-bae",
+      "photo": "https://image.tmdb.org/t/p/w185/niV5OXu1cgKnlIU1Iamp1BVeCdT.jpg"
+    },
+    {
+      "id": "1305674",
+      "name": "Im Hyun-sik",
+      "character": "Hae-sul",
+      "photo": "https://image.tmdb.org/t/p/w185/syQMfT7qchOwKDMXc3vQB57v1ZL.jpg"
+    },
+    {
+      "id": "1731537",
+      "name": "Hwang Seok-jeong",
+      "character": "Head of Health Center",
+      "photo": "https://image.tmdb.org/t/p/w185/MEhgvZBDS890lfCSeUwHxWL3Xh.jpg"
+    },
+    {
+      "id": "3214227",
+      "name": "Han Woo-yeol",
+      "character": "Wan-seob",
+      "photo": "https://image.tmdb.org/t/p/w185/xFZ7vSyvxcHDSuhg6G0MXpNsjcT.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 1,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-14T03:23:17.043Z",
+  "createdAt": "2026-09-14T03:23:17.043Z",
+  "updatedAt": "2026-09-14T03:23:17.043Z",
+  "links": []
+}
