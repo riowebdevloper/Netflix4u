@@ -77,13 +77,13 @@
                 <div class="hicine-downloads-container" id="hicine-cloud-downloads-list"></div>
               </div>
 
-              <!-- DOTMOVIES EXCLUSIVE DOWNLOADS SECTION -->
+              <!-- DIRECT ULTRA HD DOWNLOADS SECTION -->
               <div>
                 <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
                   <span style="font-size: 0.8rem; font-weight: 800; color: #10b981; text-transform: uppercase; letter-spacing: 0.05em; display: inline-flex; align-items: center; gap: 6px;">
-                    📥 DotMovies Direct Links (NexDrive / Multi-Audio)
+                    📥 Direct Ultra HD Links (High-Speed Multi-Audio)
                   </span>
-                  <span style="font-size: 0.75rem; background: rgba(16,185,129,0.15); color: #34d399; border: 1px solid rgba(16,185,129,0.3); padding: 2px 8px; border-radius: 6px; font-weight: 700;">DotMovies</span>
+                  <span style="font-size: 0.75rem; background: rgba(16,185,129,0.15); color: #34d399; border: 1px solid rgba(16,185,129,0.3); padding: 2px 8px; border-radius: 6px; font-weight: 700;">Direct Fast</span>
                 </div>
                 <div class="hicine-downloads-container" id="hicine-dotmovies-downloads-list"></div>
               </div>
@@ -501,7 +501,7 @@
       dotCard.style.borderColor = 'rgba(16, 185, 129, 0.18)';
       dotCard.innerHTML = `
         <div class="hicine-dl-file-info">
-          <strong style="color: #34d399;">DotMovies Dual Audio Release:</strong>
+          <strong style="color: #34d399;">Direct Ultra HD Release:</strong>
           ${cleanName} (${year}) Hindi Dual Audio [${q}] ${sz}
         </div>
         <div class="hicine-dl-row">
@@ -515,7 +515,7 @@
               <polyline points="7 10 12 15 17 10"></polyline>
               <line x1="12" y1="15" x2="12" y2="3"></line>
             </svg>
-            Download (NexDrive)
+            Download (${q})
           </a>
         </div>
       `;

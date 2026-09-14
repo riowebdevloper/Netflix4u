@@ -137,8 +137,8 @@ function normalizeDetailLinks(links, title) {
     const rawQual = String(l.quality || 'HD').toUpperCase();
     const isNexdrive = url.includes('nexdrive') || url.includes('dotmobiz');
     const isCloud = Boolean(l.isCloud || url.includes('vcloud') || url.includes('workers.dev') || url.includes('hicine'));
-    const isDotmovies = Boolean(l.isDotmovies || isNexdrive || l.source === 'dotmobiz' || l.source === 'Dotmovies');
-    const source = isDotmovies ? 'Dotmovies' : (isCloud ? 'Fast Cloud' : (l.source || 'Direct Mirror'));
+    const isDotmovies = Boolean(l.isDotmovies || isNexdrive || l.source === 'dotmobiz' || l.source === 'Dotmovies' || l.source === 'Direct Ultra HD');
+    const source = isDotmovies ? 'Direct Ultra HD' : (isCloud ? 'Fast Cloud' : (l.source || 'Direct Mirror'));
     const size = l.size || (rawQual.includes('4K') || rawQual.includes('2160') ? '4.8 GB' : rawQual.includes('1080') ? '2.4 GB' : rawQual.includes('720') ? '1.1 GB' : '550 MB');
     const label = l.label || `${title || 'Stream'} [${rawQual}]`;
 
@@ -162,7 +162,7 @@ function extractLinksFromDetail(detail, title) {
       quality: opt.quality || 'HD',
       size: opt.size || '',
       label: opt.label || `Download [${opt.quality || 'HD'}]`,
-      source: 'Dotmovies',
+      source: 'Direct Ultra HD',
       isDotmovies: true,
       isCloud: false
     }));
@@ -177,7 +177,7 @@ function extractLinksFromDetail(detail, title) {
       quality: opt.quality || 'HD',
       size: opt.size || '',
       label: opt.label || `Download [${opt.quality || 'HD'}]`,
-      source: opt.url && (opt.url.includes('nexdrive') || opt.url.includes('dotmobiz')) ? 'Dotmovies' : 'Fast Cloud',
+      source: opt.url && (opt.url.includes('nexdrive') || opt.url.includes('dotmobiz')) ? 'Direct Ultra HD' : 'Fast Cloud',
       isDotmovies: Boolean(opt.url && (opt.url.includes('nexdrive') || opt.url.includes('dotmobiz'))),
       isCloud: Boolean(opt.url && (opt.url.includes('workers.dev') || opt.url.includes('vcloud')))
     }));
@@ -513,8 +513,8 @@ function normalizeRawLinks(links, canonicalId, isSeries = false) {
     else if (/480|SD/i.test(q) || /480|SD/i.test(l.label || '')) q = '480p';
 
     const isCloud = Boolean(l.isCloud || (l.url && (l.url.includes('vcloud') || l.url.includes('workers.dev'))));
-    const isDotmovies = Boolean(l.isDotmovies || (l.url && (l.url.includes('nexdrive') || l.url.includes('dotmobiz'))) || l.source === 'dotmobiz' || l.source === 'Dotmovies');
-    const source = isDotmovies ? 'Dotmovies' : (isCloud ? 'Fast Cloud' : (l.source || 'Direct Mirror'));
+    const isDotmovies = Boolean(l.isDotmovies || (l.url && (l.url.includes('nexdrive') || l.url.includes('dotmobiz'))) || l.source === 'dotmobiz' || l.source === 'Dotmovies' || l.source === 'Direct Ultra HD');
+    const source = isDotmovies ? 'Direct Ultra HD' : (isCloud ? 'Fast Cloud' : (l.source || 'Direct Mirror'));
 
     let season = l.season !== undefined ? l.season : null;
     let episode = l.episode !== undefined ? l.episode : null;
@@ -561,7 +561,9 @@ function standardizeLocalRecord(item, rawId) {
   // Retrieve raw links
   let links = Array.isArray(item.links) && item.links.length > 0
     ? item.links
-    : (Array.isArray(item.downloadOptions) && item.downloadOptions.length > 0 ? item.downloadOptions : []);
+    : (Array.isArray(item.downloads) && item.downloads.length > 0
+        ? item.downloads.map(d => ({ ...d, source: 'Direct Ultra HD', isDotmovies: true }))
+        : (Array.isArray(item.downloadOptions) && item.downloadOptions.length > 0 ? item.downloadOptions : []));
 
   // If links are empty, query details_map.json fallback
   if (links.length === 0) {
@@ -668,6 +670,13 @@ async function resolveContentId(rawId) {
   const mapEntry = dMap.get(rawNum) || dMap.get(id) || (catalogEntry?.slug ? dMap.get(catalogEntry.slug) : null);
   if (mapEntry) {
     return standardizeLocalRecord(mapEntry, id);
+  }
+
+  // 5c. Check dotmobiz_harvested.json directly
+  const hIndex = getHarvestedIndex();
+  const hEntry = hIndex.get(id) || hIndex.get(rawNum);
+  if (hEntry) {
+    return standardizeLocalRecord(hEntry, id);
   }
 
   // 6. Fallback for TMDB numeric IDs only if NOT in local catalog (e.g., 90545 for Sandman)

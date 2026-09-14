@@ -242,7 +242,7 @@
       if (!l || !l.url) return false;
       var u = String(l.url || '').toLowerCase();
       var s = String(l.source || '').toLowerCase();
-      return Boolean(l.isDotmovies || s === 'dotmovies' || s === 'dotmobiz' || u.includes('nexdrive') || u.includes('dotmobiz'));
+      return Boolean(l.isDotmovies || s === 'dotmovies' || s === 'dotmobiz' || s.includes('direct ultra hd') || u.includes('nexdrive') || u.includes('dotmobiz'));
     });
 
     var cloudLinks = downloadLinks.filter(function(l) {
@@ -413,33 +413,35 @@
         '</div>' +
 
         cloudSectionHtml +
-
-        '<!-- Direct External Player Strip -->' +
-        '<div class="nm-ext-stream-strip">' +
-          '<div class="flex items-center gap-2">' +
-            '<span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>' +
-            '<div>' +
-              '<div class="text-xs sm:text-sm font-bold text-white flex items-center gap-1.5">' +
-                'Stream in External App (Zero Buffering)' +
+        (function() {
+          var streamableUrl = resolveStreamableVideoUrl(data, isTv, data.initialSeason || 1, 1);
+          return '<!-- Direct External Player Strip -->' +
+          '<div class="nm-ext-stream-strip">' +
+            '<div class="flex items-center gap-2">' +
+              '<span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>' +
+              '<div>' +
+                '<div class="text-xs sm:text-sm font-bold text-white flex items-center gap-1.5">' +
+                  'Stream in External App (Zero Buffering)' +
+                '</div>' +
+                '<div class="text-[11px] text-white/50">Direct hardware-accelerated playback with multi-audio & subtitles</div>' +
               '</div>' +
-              '<div class="text-[11px] text-white/50">Direct hardware-accelerated playback with multi-audio & subtitles</div>' +
             '</div>' +
-          '</div>' +
-          '<div class="flex items-center gap-2 flex-wrap">' +
-            '<button type="button" class="btn-vlc" data-ext-stream-vlc="' + encodeURIComponent(isTv ? 'https://peachify.top/embed/tv/' + (data.tmdbId || tmdbId) + '/' + (data.initialSeason || 1) + '/1' : 'https://peachify.top/embed/movie/' + (data.tmdbId || tmdbId)) + '" title="Open in VLC Media Player">' +
-              '<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L1 21h22L12 2zm0 3.8L20.2 19H3.8L12 5.8z"/></svg>' +
-              '<span>Open in VLC</span>' +
-            '</button>' +
-            '<button type="button" class="btn-mx" data-ext-stream-mx="' + encodeURIComponent(isTv ? 'https://peachify.top/embed/tv/' + (data.tmdbId || tmdbId) + '/' + (data.initialSeason || 1) + '/1' : 'https://peachify.top/embed/movie/' + (data.tmdbId || tmdbId)) + '" title="Open in MX Player">' +
-              '<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>' +
-              '<span>Open in MX Player</span>' +
-            '</button>' +
-            '<button type="button" class="btn-stream-copy" data-ext-stream-copy="' + encodeURIComponent(isTv ? 'https://peachify.top/embed/tv/' + (data.tmdbId || tmdbId) + '/' + (data.initialSeason || 1) + '/1' : 'https://peachify.top/embed/movie/' + (data.tmdbId || tmdbId)) + '" title="Copy Stream URL">' +
-              '<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>' +
-              '<span>Copy Stream Link</span>' +
-            '</button>' +
-          '</div>' +
-        '</div>' +
+            '<div class="flex items-center gap-2 flex-wrap">' +
+              '<button type="button" class="btn-vlc" data-ext-stream-vlc="' + encodeURIComponent(streamableUrl) + '" title="Open in VLC Media Player">' +
+                '<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L1 21h22L12 2zm0 3.8L20.2 19H3.8L12 5.8z"/></svg>' +
+                '<span>Open in VLC</span>' +
+              '</button>' +
+              '<button type="button" class="btn-mx" data-ext-stream-mx="' + encodeURIComponent(streamableUrl) + '" title="Open in MX Player">' +
+                '<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>' +
+                '<span>Open in MX Player</span>' +
+              '</button>' +
+              '<button type="button" class="btn-stream-copy" data-ext-stream-copy="' + encodeURIComponent(streamableUrl) + '" title="Copy Stream URL">' +
+                '<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>' +
+                '<span>Copy Stream Link</span>' +
+              '</button>' +
+            '</div>' +
+          '</div>';
+        })() +
 
         episodesSectionHtml +
 
@@ -711,38 +713,102 @@
     '</section>';
   }
 
-  function renderDotmoviesSection(links, title, isTv, slug, canonicalId) {
-    var cleanTitle = (title || 'Movie').replace(/\(\d{4}\)/g, '').trim();
-    var dotmoviesSearchUrl = 'https://dotmobiz.com/?s=' + encodeURIComponent(cleanTitle);
+  function resolveStreamableVideoUrl(data, isTv, season, episode) {
+    if (!data) return '';
+    var s = Number(season) || 1;
+    var ep = Number(episode) || 1;
 
+    // 1. Check if data.links has direct cloud/stream/video URLs
+    var links = data.links || data.downloadLinks || [];
+    if (links && Array.isArray(links) && links.length > 0) {
+      // Find matching season & episode for series
+      var match = null;
+      if (isTv) {
+        match = links.find(function(l) {
+          return l && l.url && Number(l.season) === s && Number(l.episode) === ep && (l.isCloud || l.url.includes('workers.dev') || l.url.includes('vcloud') || l.url.includes('hicine'));
+        });
+        if (!match) {
+          match = links.find(function(l) {
+            return l && l.url && Number(l.season) === s && Number(l.episode) === ep;
+          });
+        }
+      }
+      // If not TV or no episode-specific match found, look for best cloud stream
+      if (!match) {
+        match = links.find(function(l) {
+          return l && l.url && (l.isCloud || l.url.includes('workers.dev') || l.url.includes('vcloud') || l.url.includes('hicine') || /\.(mp4|mkv|m3u8)($|\?)/i.test(l.url));
+        });
+      }
+      // Or any direct link
+      if (!match) {
+        match = links.find(function(l) { return l && l.url && !l.url.startsWith('#'); });
+      }
+      if (match && match.url) {
+        return match.url;
+      }
+    }
+
+    // 2. Fallback: if TMDB ID is present, construct fallback stream URL
+    var tmdbId = data.tmdbId || data.id;
+    if (tmdbId) {
+      var cleanId = String(tmdbId).replace(/^tmdb-(?:movie|series)-/, '');
+      if (isTv) {
+        return 'https://autoembed.co/tv/tmdb/' + cleanId + '/' + s + '/' + ep;
+      }
+      return 'https://autoembed.co/movie/tmdb/' + cleanId;
+    }
+    return '';
+  }
+
+  function launchInVlc(rawUrl) {
+    if (!rawUrl) {
+      if (window.__showToast) window.__showToast('No stream URL available to launch VLC', '⚠️');
+      return;
+    }
+    var isAndroid = /Android/i.test(navigator.userAgent);
+    if (isAndroid) {
+      var vlcIntent = 'intent:' + rawUrl + '#Intent;action=android.intent.action.VIEW;type=video/*;package=org.videolan.vlc;end';
+      window.location.href = vlcIntent;
+    } else {
+      var clean = rawUrl.replace(/^https?:\/\//i, '');
+      window.location.href = 'vlc://' + clean;
+    }
+    if (window.__showToast) window.__showToast('Opening stream in VLC Player…', '🎬');
+  }
+
+  function launchInMxPlayer(rawUrl) {
+    if (!rawUrl) {
+      if (window.__showToast) window.__showToast('No stream URL available to launch MX Player', '⚠️');
+      return;
+    }
+    var isAndroid = /Android/i.test(navigator.userAgent);
+    if (isAndroid) {
+      var mxIntent = 'intent:' + rawUrl + '#Intent;action=android.intent.action.VIEW;type=video/*;package=com.mxtech.videoplayer.ad;end';
+      window.location.href = mxIntent;
+    } else {
+      var clean = rawUrl.replace(/^https?:\/\//i, '');
+      window.location.href = 'vlc://' + clean;
+    }
+    if (window.__showToast) window.__showToast('Opening stream in MX Player…', '🎬');
+  }
+
+  function renderDotmoviesSection(links, title, isTv, slug, canonicalId) {
     var headerHtml =
       '<div class="flex items-center justify-between mb-3.5">' +
         '<div class="flex items-center gap-2.5">' +
-          '<span class="px-2.5 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/40 text-[10px] font-black tracking-wider uppercase">DOTMOVIES</span>' +
+          '<span class="px-2.5 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/40 text-[10px] font-black tracking-wider uppercase">DIRECT ULTRA HD</span>' +
           '<h3 class="text-lg sm:text-xl font-bold tracking-tight text-white flex items-center gap-2">' +
-            'Dotmovies Direct Downloads' +
+            'Direct Ultra HD Downloads' +
           '</h3>' +
         '</div>' +
         '<span class="text-xs text-amber-400 font-semibold flex items-center gap-1">' +
           '<svg class="w-3.5 h-3.5 text-amber-400" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>' +
-          'Original NexDrive High-Speed' +
+          'High-Speed Direct Mirrors' +
         '</span>' +
       '</div>';
 
     if (!links || !links.length) {
-      return '<section id="dotmovies-download-section" class="dl-section dl-dotmovies-section mb-6">' +
-        headerHtml +
-        '<div class="p-4 rounded-xl bg-amber-500/[0.04] border border-amber-500/20 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">' +
-          '<div class="space-y-0.5">' +
-            '<div class="text-sm font-semibold text-white/90">Dotmovies Releases & Multi-Audio Rips</div>' +
-            '<div class="text-xs text-white/50">Access original Hindi & Multi-Audio releases directly on Dotmovies.</div>' +
-          '</div>' +
-          '<a href="' + dotmoviesSearchUrl + '" target="_blank" rel="noopener noreferrer" class="dl-btn dl-dotmovies-btn shrink-0 cursor-pointer">' +
-            '<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path></svg>' +
-            '<span>Search on Dotmovies</span>' +
-          '</a>' +
-        '</div>' +
-      '</section>';
+      return '';
     }
 
     var hasSeriesStructure = isTv || links.some(function(l) { return l.season || l.episode; });
@@ -794,7 +860,7 @@
             '<button type="button" class="dl-accordion-header" data-accordion-toggle>' +
               '<span class="flex items-center gap-2">' +
                 '<svg class="w-4 h-4 text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg>' +
-                'Season ' + sNum + ' <span class="text-white/40 text-xs font-normal">(' + epNums.length + ' episodes on Dotmovies)</span>' +
+                'Season ' + sNum + ' <span class="text-white/40 text-xs font-normal">(' + epNums.length + ' Direct Ultra HD episodes)</span>' +
               '</span>' +
               '<svg class="dl-accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>' +
             '</button>' +
@@ -821,14 +887,15 @@
       linksContent = sortedLinks.map(function(link) {
         var rawQual = String(link.quality || 'HD').toUpperCase();
         var sizeText = link.size || (rawQual.includes('4K') ? '4.8 GB' : rawQual.includes('1080') ? '2.4 GB' : rawQual.includes('720') ? '1.1 GB' : '550 MB');
-        var audioText = link.audio || 'Hindi Multi-Audio [Dotmovies NexDrive]';
+        var audioText = (link.audio || 'Hindi Multi-Audio [Direct Fast Cloud]').replace(/dotmovies/gi, 'Direct').replace(/nexdrive/gi, 'Ultra HD');
         var rawUrl = link.url || '#';
+        var rawLabel = (link.label || link.title || title).replace(/dotmovies/gi, 'Netflix4U').replace(/dotmobiz/gi, 'Direct').replace(/nexdrive/gi, 'Ultra HD');
 
         return '<div class="dl-card dl-dotmovies-card">' +
           '<div class="flex items-center gap-3 min-w-0">' +
             '<span class="dl-quality-badge dl-dotmovies-badge">' + escapeHtml(rawQual) + '</span>' +
             '<div class="min-w-0">' +
-              '<div class="text-xs sm:text-sm font-bold text-white/95 truncate">' + escapeHtml(link.label || link.title || title) + '</div>' +
+              '<div class="text-xs sm:text-sm font-bold text-white/95 truncate">' + escapeHtml(rawLabel) + '</div>' +
               '<div class="flex items-center gap-2 text-[11px] text-white/50 mt-0.5">' +
                 '<span class="font-bold text-amber-400">' + escapeHtml(sizeText) + '</span>' +
                 '<span>•</span>' +
@@ -983,7 +1050,22 @@
     var bannerEl = document.getElementById('watch-unavailable-banner');
     if (bannerEl) bannerEl.style.display = 'none';
 
-    activeWatchParams = { tmdbId: tmdbId, type: type, season: season, episode: episode, backdrop: backdrop, title: title, year: year, imdbId: imdbId, canonicalId: canonicalId };
+    activeWatchParams = { tmdbId: tmdbId, type: type, season: season, episode: episode, backdrop: backdrop, title: title, year: year, imdbId: imdbId, canonicalId: canonicalId, directStreamUrl: '' };
+
+    // Asynchronously resolve direct stream URL for VLC & MX Player
+    var targetPlayId = canonicalId || tmdbId;
+    if (targetPlayId) {
+      fetch('/api/playback/' + encodeURIComponent(targetPlayId) + '?season=' + encodeURIComponent(season || 1) + '&episode=' + encodeURIComponent(episode || 1))
+        .then(function(res) { return res.json(); })
+        .then(function(pbData) {
+          if (pbData && pbData.sources && Array.isArray(pbData.sources)) {
+            var direct = pbData.sources.find(function(s) { return s.isDirect && s.url; });
+            if (direct && direct.url) {
+              activeWatchParams.directStreamUrl = direct.url;
+            }
+          }
+        }).catch(function() {});
+    }
 
     // Update Top Floating Header Metadata
     if (watchMetaTitle) watchMetaTitle.textContent = title || 'Netflix4U';
@@ -1159,6 +1241,13 @@
   }
 
   function getActiveStreamUrl() {
+    if (activeWatchParams && activeWatchParams.directStreamUrl) {
+      return activeWatchParams.directStreamUrl;
+    }
+    if (activeWatchParams) {
+      var resolved = resolveStreamableVideoUrl(activeWatchParams, activeWatchParams.type === 'tv' || activeWatchParams.type === 'series', activeWatchParams.season, activeWatchParams.episode);
+      if (resolved) return resolved;
+    }
     return (activeWatchServers && activeWatchServers[currentWatchServer]) || '';
   }
 
@@ -1174,10 +1263,8 @@
       e.stopPropagation();
       var url = getActiveStreamUrl();
       if (!url) return;
-      var clean = url.replace(/^https?:\/\//, '');
-      window.location.href = 'vlc://' + clean;
+      launchInVlc(url);
       if (watchExtMenu) watchExtMenu.classList.add('hidden');
-      if (window.__showToast) window.__showToast('Launching in VLC Player…', '🎬');
     });
   }
 
@@ -1186,10 +1273,8 @@
       e.stopPropagation();
       var url = getActiveStreamUrl();
       if (!url) return;
-      var intentUrl = 'intent:' + url + '#Intent;package=com.mxtech.videoplayer.ad;type=video/*;end';
-      window.location.href = intentUrl;
+      launchInMxPlayer(url);
       if (watchExtMenu) watchExtMenu.classList.add('hidden');
-      if (window.__showToast) window.__showToast('Launching in MX Player…', '🎬');
     });
   }
 
@@ -1424,10 +1509,7 @@
       e.preventDefault();
       e.stopPropagation();
       var rawVlc = decodeURIComponent(vlcBtn.dataset.extStreamVlc || '');
-      if (!rawVlc) return;
-      var cleanVlc = rawVlc.replace(/^https?:\/\//, '');
-      window.location.href = 'vlc://' + cleanVlc;
-      if (window.__showToast) window.__showToast('Launching stream in VLC Player…', '🎬');
+      launchInVlc(rawVlc);
       return;
     }
 
@@ -1436,10 +1518,7 @@
       e.preventDefault();
       e.stopPropagation();
       var rawMx = decodeURIComponent(mxBtn.dataset.extStreamMx || '');
-      if (!rawMx) return;
-      var intentMx = 'intent:' + rawMx + '#Intent;package=com.mxtech.videoplayer.ad;type=video/*;end';
-      window.location.href = intentMx;
-      if (window.__showToast) window.__showToast('Launching stream in MX Player…', '🎬');
+      launchInMxPlayer(rawMx);
       return;
     }
 

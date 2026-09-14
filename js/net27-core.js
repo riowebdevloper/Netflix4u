@@ -1577,6 +1577,7 @@
   }
 
   function closePwaInstallModal() {
+    sessionStorage.setItem('n4u_pwa_dismissed', '1');
     var modal = document.getElementById('pwa-install-modal');
     if (modal) {
       modal.classList.add('hidden');
@@ -1584,6 +1585,17 @@
       modal.setAttribute('aria-hidden', 'true');
       document.body.classList.remove('modal-open');
     }
+  }
+
+  function initAutoPwaPrompt() {
+    if (isStandaloneApp()) return;
+    if (sessionStorage.getItem('n4u_pwa_dismissed') === '1') return;
+
+    setTimeout(function() {
+      if (!isStandaloneApp() && !document.body.classList.contains('watch-active')) {
+        openPwaInstallModal();
+      }
+    }, 800);
   }
 
   function updateInstalledButtons() {
@@ -1637,8 +1649,14 @@
         openPwaInstallModal();
       }
     } else {
-      // If browser beforeinstallprompt hasn't fired or on iOS/Firefox, show the guided install modal
+      // If browser beforeinstallprompt hasn't fired or on iOS/Safari, show the guided install modal
       openPwaInstallModal();
+      var platform = detectUserPlatform();
+      if (platform === 'ios') {
+        showToast('Tap Share (⎋) then "Add to Home Screen" to install!', '📱');
+      } else {
+        showToast('Tap the browser menu (⋮) → "Install app" to install!', '📲');
+      }
     }
   }
 
@@ -1671,7 +1689,16 @@
   }
   var directInstallBtn = document.getElementById('pwa-direct-install-btn');
   if (directInstallBtn) {
-    directInstallBtn.addEventListener('click', triggerPwaInstall);
+    directInstallBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      triggerPwaInstall();
+    });
+    directInstallBtn.addEventListener('touchstart', function() {
+      directInstallBtn.style.transform = 'scale(0.96)';
+    }, { passive: true });
+    directInstallBtn.addEventListener('touchend', function() {
+      directInstallBtn.style.transform = '';
+    }, { passive: true });
   }
   var pwaCloseBtn = document.getElementById('pwa-modal-close');
   if (pwaCloseBtn) {
@@ -1714,6 +1741,7 @@
     loadPlatformRails('trending');
     handleInitialRoutes();
     updateInstalledButtons();
+    initAutoPwaPrompt();
     if (window.Netflix4uAds) window.Netflix4uAds.renderAll();
   }
 
