@@ -56,11 +56,12 @@
     });
   </script>
 
-  <!-- DNS Prefetch + Preconnect -->
+  <!-- DNS Prefetch + Preconnect (Critical Origins Only) -->
   <link rel="dns-prefetch" href="https://image.tmdb.org">
   <link rel="preconnect" href="https://image.tmdb.org" crossorigin>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- LCP Hero Image Preload (Immediate Discovery & Early Fetch) -->
+  <link rel="preload" as="image" href="https://image.tmdb.org/t/p/w1280/1qPphJz0o0ILae6rIgDK9xoAAvH.jpg" imagesrcset="https://image.tmdb.org/t/p/w780/1qPphJz0o0ILae6rIgDK9xoAAvH.jpg 780w, https://image.tmdb.org/t/p/w1280/1qPphJz0o0ILae6rIgDK9xoAAvH.jpg 1280w" imagesizes="100vw" fetchpriority="high">
 
   <!-- JSON-LD Structured Data (Google Branded Search & AEO Optimization) -->
   <script type="application/ld+json">
@@ -245,27 +246,27 @@
             </button>
 
             <button data-platform="Netflix" data-color="#e50914" style="--pc:#e50914" class="platform-btn shrink-0 pl-1 pr-3 py-1 rounded-full text-xs font-semibold border border-white/15 transition bg-white/5 flex items-center gap-2 whitespace-nowrap text-white/80">
-              <img src="/images/platforms/FjWTYs9RfCsT.jpg" alt="Netflix" class="w-7 h-7 rounded-full object-cover shrink-0 bg-white shadow-sm">
+              <img src="/images/platforms/FjWTYs9RfCsT.jpg" alt="" width="28" height="28" loading="lazy" decoding="async" class="w-7 h-7 rounded-full object-cover shrink-0 bg-white shadow-sm">
               <span>Netflix</span>
             </button>
 
             <button data-platform="PrimeVideo" data-color="#00a8e1" style="--pc:#00a8e1" class="platform-btn shrink-0 pl-1 pr-3 py-1 rounded-full text-xs font-semibold border border-white/15 transition bg-white/5 flex items-center gap-2 whitespace-nowrap text-white/80">
-              <img src="/images/platforms/teMwgjoxOg9u.jpg" alt="Prime Video" class="w-7 h-7 rounded-full object-cover shrink-0 bg-white shadow-sm">
+              <img src="/images/platforms/teMwgjoxOg9u.jpg" alt="" width="28" height="28" loading="lazy" decoding="async" class="w-7 h-7 rounded-full object-cover shrink-0 bg-white shadow-sm">
               <span>Prime Video</span>
             </button>
 
             <button data-platform="JioHotstar" data-color="#2b6def" style="--pc:#2b6def" class="platform-btn shrink-0 pl-1 pr-3 py-1 rounded-full text-xs font-semibold border border-white/15 transition bg-white/5 flex items-center gap-2 whitespace-nowrap text-white/80">
-              <img src="/images/platforms/JmxIsKiiiFkm.jpg" alt="JioHotstar" class="w-7 h-7 rounded-full object-cover shrink-0 bg-white shadow-sm">
+              <img src="/images/platforms/JmxIsKiiiFkm.jpg" alt="" width="28" height="28" loading="lazy" decoding="async" class="w-7 h-7 rounded-full object-cover shrink-0 bg-white shadow-sm">
               <span>JioHotstar</span>
             </button>
 
             <button data-platform="SonyLIV" data-color="#9b5de5" style="--pc:#9b5de5" class="platform-btn shrink-0 pl-1 pr-3 py-1 rounded-full text-xs font-semibold border border-white/15 transition bg-white/5 flex items-center gap-2 whitespace-nowrap text-white/80">
-              <img src="/images/platforms/IQHvNlAlUHxi.jpg" alt="SonyLIV" class="w-7 h-7 rounded-full object-cover shrink-0 bg-white shadow-sm">
+              <img src="/images/platforms/IQHvNlAlUHxi.jpg" alt="" width="28" height="28" loading="lazy" decoding="async" class="w-7 h-7 rounded-full object-cover shrink-0 bg-white shadow-sm">
               <span>SonyLIV</span>
             </button>
 
             <button data-platform="Crunchyroll" data-color="#f47521" style="--pc:#f47521" class="platform-btn shrink-0 pl-1 pr-3 py-1 rounded-full text-xs font-semibold border border-white/15 transition bg-white/5 flex items-center gap-2 whitespace-nowrap text-white/80">
-              <img src="/images/platforms/nnYmRNZy6VSX.jpg" alt="Crunchyroll" class="w-7 h-7 rounded-full object-cover shrink-0 bg-white shadow-sm">
+              <img src="/images/platforms/nnYmRNZy6VSX.jpg" alt="" width="28" height="28" loading="lazy" decoding="async" class="w-7 h-7 rounded-full object-cover shrink-0 bg-white shadow-sm">
               <span>Crunchyroll</span>
             </button>
 
@@ -277,7 +278,7 @@
             </button>
 
             <button data-platform="MX" data-color="#0085f6" style="--pc:#0085f6" class="platform-btn shrink-0 pl-1 pr-3 py-1 rounded-full text-xs font-semibold border border-white/15 transition bg-white/5 flex items-center gap-2 whitespace-nowrap text-white/80">
-              <img src="/images/platforms/Hoj6RBCM9kDd.jpg" alt="MX Player" class="w-7 h-7 rounded-full object-cover shrink-0 bg-white shadow-sm">
+              <img src="/images/platforms/Hoj6RBCM9kDd.jpg" alt="" width="28" height="28" loading="lazy" decoding="async" class="w-7 h-7 rounded-full object-cover shrink-0 bg-white shadow-sm">
               <span>MX Player</span>
             </button>
           </div>
@@ -287,25 +288,35 @@
 
         <!-- ─── 6-Slide Hero Carousel (net27.cc Exact Sync) ─── -->
         <section id="hero" class="relative hero-container h-[64vh] sm:h-[80vh] min-h-[460px] sm:min-h-[680px] max-h-[940px] overflow-hidden" style="padding-top: calc(env(safe-area-inset-top, 0px) + 95px);"
-          data-hero='[{"tmdbId":1408162,"title":"Vishwanath & Sons","year":"2026","backdrop":"https://image.tmdb.org/t/p/original/1qPphJz0o0ILae6rIgDK9xoAAvH.jpg","overview":"Sanjay Vishwanath is an acclaimed professional handgunner in his 40s with a major stake in fame and wealth. When he comes across a woman named Maddy in her 20s, their dynamic poses many issues that they must come to terms with.","rating":7.3,"type":"movie"},{"tmdbId":84105,"title":"Mirzapur","year":"2018","backdrop":"https://image.tmdb.org/t/p/original/3dV7pWAdwIPKR2lMIACMfObXdgK.jpg","overview":"The iron-fisted Akhandanand Tripathi is a millionaire carpet exporter and the mafia don of Mirzapur. His son, Munna, is an unworthy, power-hungry heir who will stop at nothing to inherit his father&#39;s legacy. An incident at a wedding procession forces him to cross paths with Ramakant Pandit, an upstanding lawyer, and his sons, Guddu and Bablu.","rating":8.0,"type":"tv"},{"tmdbId":108978,"title":"Reacher","year":"2022","backdrop":"https://image.tmdb.org/t/p/original/pF0qkRsrHkdYadPWY9AMeFZfcwk.jpg","overview":"Jack Reacher, a veteran military police investigator, has just recently entered civilian life. Reacher is a drifter, carrying no phone and the barest of essentials as he travels the country and explores the nation he once served.","rating":8.1,"type":"tv"},{"tmdbId":1378537,"title":"Mirzapur: The Movie","year":"2026","backdrop":"https://image.tmdb.org/t/p/original/nTkQBI8ldvPByIkxsemGxtKlr8E.jpg","overview":"The battle for Mirzapur’s throne intensifies as old enemies resurface and a new threat emerges in the form of Babban Babua, a ruthless businessman from Jaisalmer with ambitions of his own. As the Tripathis face enemies from both the past and present, loyalties are tested while Guddu and Bablu Pandit fight to defend their hard-won supremacy.","rating":8.1,"type":"movie"},{"tmdbId":5920,"title":"The Mentalist","year":"2008","backdrop":"https://image.tmdb.org/t/p/original/rJFqKcmMSttdNP58l0dVzY2NcTA.jpg","overview":"Patrick Jane, a former celebrity psychic medium, uses his razor sharp skills of observation and expertise at \"reading\" people to solve serious crimes with the California Bureau of Investigation.","rating":8.4,"type":"tv"},{"tmdbId":1709391,"title":"Hanuman Ansh","year":"2025","backdrop":"https://image.tmdb.org/t/p/original/tKYOK8iMxkhJhug3LJ2yvC5QY8M.jpg","overview":"A grieving boy seeks God to meet his departed mother, and in finding the divine, learns to serve humanity with miracles of love, food and silent blessings, becoming Hanuman Ansh, Neem Karoli Baba.","rating":8.6,"type":"movie"}]'>
+          data-hero='[{"tmdbId":1408162,"title":"Vishwanath & Sons","year":"2026","backdrop":"https://image.tmdb.org/t/p/w1280/1qPphJz0o0ILae6rIgDK9xoAAvH.jpg","overview":"Sanjay Vishwanath is an acclaimed professional handgunner in his 40s with a major stake in fame and wealth. When he comes across a woman named Maddy in her 20s, their dynamic poses many issues that they must come to terms with.","rating":7.3,"type":"movie"},{"tmdbId":84105,"title":"Mirzapur","year":"2018","backdrop":"https://image.tmdb.org/t/p/w1280/3dV7pWAdwIPKR2lMIACMfObXdgK.jpg","overview":"The iron-fisted Akhandanand Tripathi is a millionaire carpet exporter and the mafia don of Mirzapur. His son, Munna, is an unworthy, power-hungry heir who will stop at nothing to inherit his father&#39;s legacy. An incident at a wedding procession forces him to cross paths with Ramakant Pandit, an upstanding lawyer, and his sons, Guddu and Bablu.","rating":8.0,"type":"tv"},{"tmdbId":108978,"title":"Reacher","year":"2022","backdrop":"https://image.tmdb.org/t/p/w1280/pF0qkRsrHkdYadPWY9AMeFZfcwk.jpg","overview":"Jack Reacher, a veteran military police investigator, has just recently entered civilian life. Reacher is a drifter, carrying no phone and the barest of essentials as he travels the country and explores the nation he once served.","rating":8.1,"type":"tv"},{"tmdbId":1378537,"title":"Mirzapur: The Movie","year":"2026","backdrop":"https://image.tmdb.org/t/p/w1280/nTkQBI8ldvPByIkxsemGxtKlr8E.jpg","overview":"The battle for Mirzapur’s throne intensifies as old enemies resurface and a new threat emerges in the form of Babban Babua, a ruthless businessman from Jaisalmer with ambitions of his own. As the Tripathis face enemies from both the past and present, loyalties are tested while Guddu and Bablu Pandit fight to defend their hard-won supremacy.","rating":8.1,"type":"movie"},{"tmdbId":5920,"title":"The Mentalist","year":"2008","backdrop":"https://image.tmdb.org/t/p/w1280/rJFqKcmMSttdNP58l0dVzY2NcTA.jpg","overview":"Patrick Jane, a former celebrity psychic medium, uses his razor sharp skills of observation and expertise at \"reading\" people to solve serious crimes with the California Bureau of Investigation.","rating":8.4,"type":"tv"},{"tmdbId":1709391,"title":"Hanuman Ansh","year":"2025","backdrop":"https://image.tmdb.org/t/p/w1280/tKYOK8iMxkhJhug3LJ2yvC5QY8M.jpg","overview":"A grieving boy seeks God to meet his departed mother, and in finding the divine, learns to serve humanity with miracles of love, food and silent blessings, becoming Hanuman Ansh, Neem Karoli Baba.","rating":8.6,"type":"movie"}]'>
 
-          <!-- Crossfade Backdrops -->
-          <div class="hero-bg absolute inset-0 bg-cover bg-center transition-opacity duration-[1200ms]" style="background-image: url('https://image.tmdb.org/t/p/original/1qPphJz0o0ILae6rIgDK9xoAAvH.jpg'); opacity: 1; z-index: 10" data-hero-idx="0"></div>
-          <div class="hero-bg absolute inset-0 bg-cover bg-center transition-opacity duration-[1200ms]" style="background-image: url('https://image.tmdb.org/t/p/original/3dV7pWAdwIPKR2lMIACMfObXdgK.jpg'); opacity: 0; z-index: 9" data-hero-idx="1"></div>
-          <div class="hero-bg absolute inset-0 bg-cover bg-center transition-opacity duration-[1200ms]" style="background-image: url('https://image.tmdb.org/t/p/original/pF0qkRsrHkdYadPWY9AMeFZfcwk.jpg'); opacity: 0; z-index: 8" data-hero-idx="2"></div>
-          <div class="hero-bg absolute inset-0 bg-cover bg-center transition-opacity duration-[1200ms]" style="background-image: url('https://image.tmdb.org/t/p/original/nTkQBI8ldvPByIkxsemGxtKlr8E.jpg'); opacity: 0; z-index: 7" data-hero-idx="3"></div>
-          <div class="hero-bg absolute inset-0 bg-cover bg-center transition-opacity duration-[1200ms]" style="background-image: url('https://image.tmdb.org/t/p/original/rJFqKcmMSttdNP58l0dVzY2NcTA.jpg'); opacity: 0; z-index: 6" data-hero-idx="4"></div>
-          <div class="hero-bg absolute inset-0 bg-cover bg-center transition-opacity duration-[1200ms]" style="background-image: url('https://image.tmdb.org/t/p/original/tKYOK8iMxkhJhug3LJ2yvC5QY8M.jpg'); opacity: 0; z-index: 5" data-hero-idx="5"></div>
+          <!-- Crossfade Backdrops: True LCP Priority Image on Slide 0, Lazy Adjacent on 1-5 -->
+          <div class="hero-bg absolute inset-0 transition-opacity duration-[1200ms] overflow-hidden" style="opacity: 1; z-index: 10" data-hero-idx="0">
+            <img src="https://image.tmdb.org/t/p/w1280/1qPphJz0o0ILae6rIgDK9xoAAvH.jpg"
+                 srcset="https://image.tmdb.org/t/p/w780/1qPphJz0o0ILae6rIgDK9xoAAvH.jpg 780w, https://image.tmdb.org/t/p/w1280/1qPphJz0o0ILae6rIgDK9xoAAvH.jpg 1280w"
+                 sizes="100vw"
+                 alt="Vishwanath &amp; Sons Featured Backdrop"
+                 width="1280" height="720"
+                 fetchpriority="high"
+                 loading="eager"
+                 decoding="sync"
+                 class="w-full h-full object-cover object-center pointer-events-none" />
+          </div>
+          <div class="hero-bg absolute inset-0 bg-cover bg-center transition-opacity duration-[1200ms]" style="opacity: 0; z-index: 9" data-hero-idx="1" data-bg="https://image.tmdb.org/t/p/w1280/3dV7pWAdwIPKR2lMIACMfObXdgK.jpg"></div>
+          <div class="hero-bg absolute inset-0 bg-cover bg-center transition-opacity duration-[1200ms]" style="opacity: 0; z-index: 8" data-hero-idx="2" data-bg="https://image.tmdb.org/t/p/w1280/pF0qkRsrHkdYadPWY9AMeFZfcwk.jpg"></div>
+          <div class="hero-bg absolute inset-0 bg-cover bg-center transition-opacity duration-[1200ms]" style="opacity: 0; z-index: 7" data-hero-idx="3" data-bg="https://image.tmdb.org/t/p/w1280/nTkQBI8ldvPByIkxsemGxtKlr8E.jpg"></div>
+          <div class="hero-bg absolute inset-0 bg-cover bg-center transition-opacity duration-[1200ms]" style="opacity: 0; z-index: 6" data-hero-idx="4" data-bg="https://image.tmdb.org/t/p/w1280/rJFqKcmMSttdNP58l0dVzY2NcTA.jpg"></div>
+          <div class="hero-bg absolute inset-0 bg-cover bg-center transition-opacity duration-[1200ms]" style="opacity: 0; z-index: 5" data-hero-idx="5" data-bg="https://image.tmdb.org/t/p/w1280/tKYOK8iMxkhJhug3LJ2yvC5QY8M.jpg"></div>
 
-          <!-- Clickable Hero Backdrop Trigger -->
-          <button id="hero-click" type="button" data-modal="title" data-tmdbid="1408162" data-type="movie" aria-label="More info for Vishwanath &amp; Sons" class="absolute inset-0 z-[15] cursor-pointer bg-transparent border-0"></button>
+          <!-- Clickable Hero Backdrop Trigger (Confined to upper backdrop to avoid control overlap) -->
+          <button id="hero-click" type="button" data-modal="title" data-tmdbid="1408162" data-type="movie" aria-label="More info for Vishwanath &amp; Sons" class="absolute inset-x-0 top-0 h-[65%] z-[15] cursor-pointer bg-transparent border-0"></button>
 
           <!-- Gradient Masks -->
           <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-[#0a0a0f]/40 to-transparent pointer-events-none z-20"></div>
           <div class="absolute inset-0 bg-gradient-to-r from-[#0a0a0f] via-[#0a0a0f]/30 to-transparent pointer-events-none z-20"></div>
 
           <!-- Hero Content -->
-          <div class="relative z-30 h-full flex items-end pb-8 sm:pb-16 pointer-events-none">
+          <div class="relative z-30 h-full flex items-end pb-16 sm:pb-16 pointer-events-none">
             <div class="px-3 sm:pl-16 sm:pr-8 max-w-3xl pointer-events-auto">
               <div class="text-[10px] sm:text-xs uppercase tracking-[0.3em] text-[color:var(--color-brand)] font-bold mb-1 sm:mb-2">
                 🔥 Trending Now
@@ -315,7 +326,7 @@
                 Vishwanath &amp; Sons
               </h1>
 
-              <div id="hero-meta" class="flex flex-wrap items-center gap-x-2.5 sm:gap-x-3 gap-y-1 text-xs sm:text-sm text-white/85 mb-2 sm:mb-3 font-medium">
+              <div id="hero-meta" class="flex flex-wrap items-center gap-x-2.5 sm:gap-x-3 gap-y-1 text-xs sm:text-sm text-white/90 mb-2 sm:mb-3 font-medium">
                 <span class="px-1.5 py-0.5 rounded bg-yellow-400/90 text-black font-bold text-[10px] sm:text-[11px]">⭐ 7.3</span>
                 <span>2026</span>
                 <span>•</span>
@@ -323,23 +334,23 @@
                 <span class="px-1.5 py-0.5 rounded bg-white/15 text-[9px] sm:text-[10px] tracking-wider font-bold">HD</span>
               </div>
 
-              <div id="hero-desc" class="text-xs sm:text-base text-white/85 max-w-2xl mb-4 sm:mb-5 line-clamp-2 sm:line-clamp-3 leading-relaxed" style="text-shadow: 0 1px 8px rgba(0,0,0,0.6);">
+              <div id="hero-desc" class="text-xs sm:text-base text-white/90 max-w-2xl mb-4 sm:mb-5 line-clamp-2 sm:line-clamp-3 leading-relaxed" style="text-shadow: 0 1px 8px rgba(0,0,0,0.6);">
                 Sanjay Vishwanath is an acclaimed professional handgunner in his 40s with a major stake in fame and wealth. When he comes across a woman named Maddy in her 20s, their dynamic poses many issues that they must come to terms with.
               </div>
 
               <!-- Action Buttons -->
-              <div class="flex flex-wrap items-center gap-2 sm:gap-3">
-                <button id="hero-play" type="button" data-modal="watch" data-tmdbid="1408162" data-type="movie" data-backdrop="https://image.tmdb.org/t/p/original/1qPphJz0o0ILae6rIgDK9xoAAvH.jpg" class="inline-flex items-center gap-1.5 sm:gap-2 px-4 sm:px-8 py-2 sm:py-3 rounded-lg bg-white text-black font-bold hover:bg-white/90 active:scale-95 transition text-xs sm:text-base shadow-xl cursor-pointer">
+              <div class="flex flex-wrap items-center gap-2 sm:gap-3 mb-8 sm:mb-0">
+                <button id="hero-play" type="button" data-modal="watch" data-tmdbid="1408162" data-type="movie" data-backdrop="https://image.tmdb.org/t/p/w1280/1qPphJz0o0ILae6rIgDK9xoAAvH.jpg" class="inline-flex items-center gap-1.5 sm:gap-2 px-4 sm:px-8 min-h-[44px] py-2.5 sm:py-3 rounded-lg bg-white text-black font-bold hover:bg-white/90 active:scale-95 transition text-xs sm:text-base shadow-xl cursor-pointer">
                   <svg class="w-3.5 h-3.5 sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
                   Watch Now
                 </button>
-                <button id="hero-info" type="button" data-modal="title" data-tmdbid="1408162" data-type="movie" class="inline-flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-7 py-2 sm:py-3 rounded-lg bg-white/15 backdrop-blur-md text-white font-semibold hover:bg-white/25 active:scale-95 transition text-xs sm:text-base border border-white/10 cursor-pointer">
+                <button id="hero-info" type="button" data-modal="title" data-tmdbid="1408162" data-type="movie" class="inline-flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-7 min-h-[44px] py-2.5 sm:py-3 rounded-lg bg-white/15 backdrop-blur-md text-white font-semibold hover:bg-white/25 active:scale-95 transition text-xs sm:text-base border border-white/10 cursor-pointer">
                   <svg class="w-3.5 h-3.5 sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4M12 8h.01"></path>
                   </svg>
                   More Info
                 </button>
-                <button id="hero-download" type="button" data-modal="title" data-tmdbid="1408162" data-type="movie" class="inline-flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-7 py-2 sm:py-3 rounded-lg bg-red-600 hover:bg-red-700 active:scale-95 transition text-white font-bold text-xs sm:text-base shadow-lg cursor-pointer">
+                <button id="hero-download" type="button" data-modal="title" data-tmdbid="1408162" data-type="movie" class="inline-flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-7 min-h-[44px] py-2.5 sm:py-3 rounded-lg bg-red-600 hover:bg-red-700 active:scale-95 transition text-white font-bold text-xs sm:text-base shadow-lg cursor-pointer">
                   <svg class="w-3.5 h-3.5 sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                     <path d="M12 3v12m0 0l-4-4m4 4l4-4"/><path d="M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/>
                   </svg>
@@ -350,21 +361,21 @@
           </div>
 
           <!-- Prev/Next Navigation Arrows -->
-          <button id="hero-prev" type="button" aria-label="Previous" class="hero-nav absolute left-0 sm:left-2 top-1/2 -translate-y-1/2 z-40 w-10 h-20 flex items-center justify-center text-white/50 hover:text-white pointer-events-auto active:scale-90 transition">
+          <button id="hero-prev" type="button" aria-label="Previous featured title" class="hero-nav absolute left-0 sm:left-2 top-1/2 -translate-y-1/2 z-40 w-11 h-20 flex items-center justify-center text-white/60 hover:text-white pointer-events-auto active:scale-90 transition">
             <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m15 18-6-6 6-6"/></svg>
           </button>
-          <button id="hero-next" type="button" aria-label="Next" class="hero-nav absolute right-0 sm:right-2 top-1/2 -translate-y-1/2 z-40 w-10 h-20 flex items-center justify-center text-white/50 hover:text-white pointer-events-auto active:scale-90 transition">
+          <button id="hero-next" type="button" aria-label="Next featured title" class="hero-nav absolute right-0 sm:right-2 top-1/2 -translate-y-1/2 z-40 w-11 h-20 flex items-center justify-center text-white/60 hover:text-white pointer-events-auto active:scale-90 transition">
             <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m9 18 6-6-6-6"/></svg>
           </button>
 
-          <!-- Carousel Dots -->
-          <div id="hero-dots" class="absolute bottom-3 left-1/2 -translate-x-1/2 sm:bottom-5 flex gap-1.5 z-30">
-            <button data-hero-dot="0" aria-label="Show featured 1" class="hero-dot w-5 h-2 rounded-full bg-white transition cursor-pointer"></button>
-            <button data-hero-dot="1" aria-label="Show featured 2" class="hero-dot w-2 h-2 rounded-full bg-white/30 hover:bg-white/60 transition cursor-pointer"></button>
-            <button data-hero-dot="2" aria-label="Show featured 3" class="hero-dot w-2 h-2 rounded-full bg-white/30 hover:bg-white/60 transition cursor-pointer"></button>
-            <button data-hero-dot="3" aria-label="Show featured 4" class="hero-dot w-2 h-2 rounded-full bg-white/30 hover:bg-white/60 transition cursor-pointer"></button>
-            <button data-hero-dot="4" aria-label="Show featured 5" class="hero-dot w-2 h-2 rounded-full bg-white/30 hover:bg-white/60 transition cursor-pointer"></button>
-            <button data-hero-dot="5" aria-label="Show featured 6" class="hero-dot w-2 h-2 rounded-full bg-white/30 hover:bg-white/60 transition cursor-pointer"></button>
+          <!-- Carousel Dots with Accessible 48px Touch Target Hitboxes -->
+          <div id="hero-dots" class="absolute bottom-1 sm:bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-0.5 z-30">
+            <button type="button" data-hero-dot="0" aria-label="Show featured 1" class="hero-dot-hitbox"><span class="hero-dot w-5 h-2 rounded-full bg-white transition-all block"></span></button>
+            <button type="button" data-hero-dot="1" aria-label="Show featured 2" class="hero-dot-hitbox"><span class="hero-dot w-2 h-2 rounded-full bg-white/40 hover:bg-white/70 transition-all block"></span></button>
+            <button type="button" data-hero-dot="2" aria-label="Show featured 3" class="hero-dot-hitbox"><span class="hero-dot w-2 h-2 rounded-full bg-white/40 hover:bg-white/70 transition-all block"></span></button>
+            <button type="button" data-hero-dot="3" aria-label="Show featured 4" class="hero-dot-hitbox"><span class="hero-dot w-2 h-2 rounded-full bg-white/40 hover:bg-white/70 transition-all block"></span></button>
+            <button type="button" data-hero-dot="4" aria-label="Show featured 5" class="hero-dot-hitbox"><span class="hero-dot w-2 h-2 rounded-full bg-white/40 hover:bg-white/70 transition-all block"></span></button>
+            <button type="button" data-hero-dot="5" aria-label="Show featured 6" class="hero-dot-hitbox"><span class="hero-dot w-2 h-2 rounded-full bg-white/40 hover:bg-white/70 transition-all block"></span></button>
           </div>
         </section>
 
@@ -436,26 +447,13 @@
           <section class="nm-ad-container max-w-5xl mx-auto my-6" data-ad-container="ad-slot-home-bottom">
             <div class="nm-ad-label">Sponsored</div>
             <div id="ad-slot-home-bottom" class="nm-ad-slot nm-ad-billboard">
-              <!-- HilltopAds Banner 300x250 Integration -->
-              <script>
-              (function(bgiec){
-              var d = document,
-                  s = d.createElement('script'),
-                  l = d.currentScript || d.scripts[d.scripts.length - 1];
-              s.settings = bgiec || {};
-              s.src = "\/\/untimely-hello.com\/b-X.VMsrdsGml\/0CYPWfcM\/JeVm\/9euyZRUqlKkuPVToc\/0AMFj\/E_2-N\/D\/UftxNqzTQ\/yYMST\/YK0POXQY";
-              s.async = true;
-              s.referrerPolicy = 'no-referrer-when-downgrade';
-              l.parentNode.insertBefore(s, l);
-              })({})
-              </script>
               <a href="https://t.me/netflix4u_website" target="_blank" rel="noopener noreferrer" class="nm-ad-placeholder">
                 <span class="nm-ad-badge">
                   <svg class="w-3 h-3" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L1 21h22L12 2zm0 3.8L20.2 19H3.8L12 5.8z"/></svg>
                   Verified Partner
                 </span>
                 <span class="truncate font-semibold text-white/90">Stream in 4K UHD &amp; Dolby 5.1</span>
-                <span class="hidden sm:inline text-white/50 text-[11px] truncate">• No subscription required • Daily updated catalog</span>
+                <span class="hidden sm:inline text-white/75 text-[11px] truncate">• No subscription required • Daily updated catalog</span>
                 <span class="shrink-0 px-2.5 py-1 rounded bg-white/10 hover:bg-white/20 text-white font-bold text-[10px] transition">Explore</span>
               </a>
             </div>
@@ -490,17 +488,17 @@
               <div class="text-lg font-black text-white">
                 <span class="text-[color:var(--color-brand)]">Netflix</span>4U
               </div>
-              <div class="text-xs text-white/50 flex flex-wrap justify-center gap-4 sm:gap-6 font-medium">
+              <div class="text-xs text-white/80 flex flex-wrap justify-center gap-4 sm:gap-6 font-medium">
                 <a href="/about" data-policy-link="about" class="hover:text-white transition cursor-pointer">About Us</a>
                 <a href="/privacy" data-policy-link="privacy" class="hover:text-white transition cursor-pointer">Privacy Policy</a>
                 <a href="/terms" data-policy-link="terms" class="hover:text-white transition cursor-pointer">Terms of Service</a>
                 <a href="/dmca" data-policy-link="dmca" class="hover:text-white transition cursor-pointer">DMCA Disclaimer</a>
                 <a href="/contact" data-policy-link="contact" class="hover:text-white transition cursor-pointer">Contact</a>
               </div>
-              <div class="text-xs text-white/40">
+              <div class="text-xs text-white/75">
                 Netflix4U does not store media files on its servers. All streams and downloads are indexed from external verified public cloud sources.
               </div>
-              <div class="text-[11px] text-white/30">
+              <div class="text-[11px] text-white/70">
                 © 2026 Netflix4U. All rights reserved.
               </div>
             </div>
@@ -636,14 +634,14 @@
       </div>
     </div>
 
-    <iframe id="watch-modal-iframe" class="w-full h-full flex-1 border-0 pt-0" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen referrerpolicy="no-referrer"></iframe>
+    <iframe id="watch-modal-iframe" title="High-Speed Video Player" class="w-full h-full flex-1 border-0 pt-0" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen referrerpolicy="no-referrer"></iframe>
   </div>
 
   <!-- ─── TRAILER MODAL ─── -->
   <div id="trailer-modal" class="fixed inset-0 z-[55] hidden items-center justify-center bg-black/95 p-4">
     <button id="trailer-modal-close" type="button" class="absolute z-10 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white text-xl cursor-pointer" style="top: 24px; right: 24px;">✕</button>
     <div class="w-full max-w-5xl aspect-video">
-      <iframe id="trailer-modal-iframe" class="w-full h-full rounded-lg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      <iframe id="trailer-modal-iframe" title="Movie Trailer Preview" class="w-full h-full rounded-lg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
     </div>
   </div>
 
@@ -821,7 +819,7 @@
           </svg>
         </label>
         <div id="frame" style="width: 100%;max-width:728px;margin: auto;position: relative; z-index: 99998;">
-          <iframe data-aa="2455136" src="//acceptable.a-ads.com/2455136/?size=Adaptive" style="border:0; padding:0; width:100%; min-height:50px; max-height:80px; overflow:hidden; margin: auto; display:block;"></iframe>
+          <iframe data-aa="2455136" title="Sponsored Advertisement" src="https://acceptable.a-ads.com/2455136/?size=Adaptive" style="border:0; padding:0; width:100%; min-height:50px; max-height:80px; overflow:hidden; margin: auto; display:block;"></iframe>
         </div>
       </div>
       <style>
@@ -848,50 +846,41 @@
   </div>
   <!-- ─── END AADS AD UNIT 2455136 ─── -->
 
-  <!-- ─── ADSTERRA AD NETWORK INTEGRATION ─── -->
-  <!-- Native Banner 1 Invocation Script (Runs only within dedicated sections) -->
-  <script async="async" data-cfasync="false" src="https://pl31315274.profitableratecpmnetwork.com/bb6db87840ef2c647140600c50c30ab2/invoke.js"></script>
+  <!-- Client Application Scripts (Deferred for Zero Render-Blocking) -->
+  <script defer src="/js/ads-manager.js?v=3.0.0"></script>
+  <script defer src="/js/net27-core.js?v=3.0.0"></script>
+  <script defer src="/js/download-resolver.js?v=3.0.0"></script>
+  <script defer src="/js/net27-modal.js?v=3.0.0"></script>
 
-  <!-- Client Application Scripts -->
-  <script src="/js/ads-manager.js?v=2.9.3"></script>
-  <script src="/js/download-resolver.js?v=2.9.3"></script>
-  <script src="/js/net27-modal.js?v=2.9.3"></script>
-  <script src="/js/net27-core.js?v=2.9.3"></script>
-
-  <!-- ─── MONETAG AD NETWORK INTEGRATION (Zone 11787574) ─── -->
-  <script>(function(s){s.dataset.zone='11787574',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
-
-  <!-- ─── HILLTOPADS AD NETWORK INTEGRATION ─── -->
-  <!-- 1. HilltopAds In-Page Push -->
+  <!-- ─── DEFERRED THIRD-PARTY INTEGRATIONS (Engagement-Gated & Error-Shielded) ─── -->
   <script>
-  (function(bgiec){
-  var d = document,
-      s = d.createElement('script'),
-      l = d.currentScript || d.scripts[d.scripts.length - 1];
-  s.settings = bgiec || {};
-  s.src = "\/\/untimely-hello.com\/bwXHV.sedkGUlG0RY_WScx\/BeOmF9Vu\/ZXUclgkqPKT\/cK0bMnj\/E\/2\/MDjUkntVNnz\/QfymMNTjYDzbM\/wv";
-  s.async = true;
-  s.referrerPolicy = 'no-referrer-when-downgrade';
-  l.parentNode.insertBefore(s, l);
-  })({})
+    (function() {
+      var adsLoaded = false;
+      function triggerEngagementAds() {
+        if (adsLoaded) return;
+        adsLoaded = true;
+        var events = ['scroll', 'touchstart', 'mousemove', 'keydown', 'click'];
+        events.forEach(function(e) { window.removeEventListener(e, triggerEngagementAds); });
+        // Monetag Tag (Engagement Deferred)
+        try {
+          var mTag = document.createElement('script');
+          mTag.dataset.zone = '11787574';
+          mTag.src = 'https://nap5k.com/tag.min.js';
+          mTag.async = true;
+          mTag.onerror = function() {};
+          document.body.appendChild(mTag);
+        } catch(e) {}
+      }
+      var events = ['scroll', 'touchstart', 'mousemove', 'keydown', 'click'];
+      events.forEach(function(e) { window.addEventListener(e, triggerEngagementAds, { passive: true, once: true }); });
+    })();
   </script>
 
-  <!-- 2. HilltopAds Popunder Script (Standard Non-Intrusive Integration) -->
-  <script async referrerpolicy="no-referrer-when-downgrade" src="https://bony-teaching.com/bM3IV/0.P-3zptvYbYmjVIJ/ZbDJ0/3PNnDTIGxBN/jzI/xPLpTmcK0/MejlEv2/MnjkUx"></script>
-
-  <!-- Service Worker Registration (Push Notifications / Monetag & PWA with Force-Update) -->
+  <!-- Service Worker Registration (Clean PWA Caching without Reload Interruptions) -->
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function() {
-        navigator.serviceWorker.register('/sw.js?v=2.9.3').then(function(reg) {
-          reg.update();
-          navigator.serviceWorker.addEventListener('controllerchange', function() {
-            if (!sessionStorage.getItem('n4u_sw_refreshed_v6')) {
-              sessionStorage.setItem('n4u_sw_refreshed_v6', '1');
-              window.location.reload();
-            }
-          });
-        }).catch(function() {});
+        navigator.serviceWorker.register('/sw.js').catch(function() {});
       });
     }
   </script>

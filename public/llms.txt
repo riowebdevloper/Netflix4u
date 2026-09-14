@@ -1,0 +1,38 @@
+# Netflix4U
+
+> Netflix4U is a high-speed entertainment discovery and streaming web application delivering verified catalog information for global movies, web series, anime, K-dramas, Bollywood, Hollywood, South Indian cinema, and Hindi-dubbed releases.
+
+## Overview
+Netflix4U provides clean, crawlable catalog listings, verified TMDB and IMDb metadata, multi-language audio availability details, high-definition trailer previews, and direct playback links.
+
+## Canonical Platform Information
+- **Website**: https://netflix4u.in/
+- **Brand**: Netflix4U
+- **Primary Content Categories**:
+  - Movies: Global feature films across all release years and genres.
+  - Web Series: Multi-season episodic television and streaming series.
+  - Anime: Japanese animation with original and multi-audio dubbed tracks.
+  - K-Drama: Korean television dramas with subtitle and dubbing options.
+  - Bollywood: Hindi cinema, musical blockbusters, and indie features.
+  - Hollywood: International box-office titles and franchises.
+  - South Indian: Tamil, Telugu, Malayalam, and Kannada cinema.
+  - Hindi Dubbed: Dual-audio and regional dubbed releases.
+  - Trending: Real-time popular entertainment based on viewer activity.
+
+## Key Public Routes
+- Homepage: https://netflix4u.in/
+- Movies: https://netflix4u.in/movies
+- Web Series: https://netflix4u.in/series
+- Anime: https://netflix4u.in/anime
+- K-Drama: https://netflix4u.in/kdrama
+- Bollywood: https://netflix4u.in/bollywood
+- Hollywood: https://netflix4u.in/hollywood
+- South Indian: https://netflix4u.in/south-indian
+- Hindi Dubbed: https://netflix4u.in/hindi-dubbed
+- Trending: https://netflix4u.in/trending
+
+## Technical Architecture & Compliance
+- **Rendering**: Static progressive web application (PWA) with fast client hydration and service worker caching.
+- **Metadata**: Verified against TMDB and IMDb canonical records.
+- **Accessibility**: Full WCAG 2.1 AA compliant navigation, high contrast UI, and assistive technology support.
+- **Machine Discovery**: Clean semantic HTML, Schema.org JSON-LD structured data (WebSite, Organization, Movie, TVSeries), and XML sitemaps.

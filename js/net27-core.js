@@ -281,47 +281,60 @@
     } catch (e) {}
   }
 
-  // ─── Honeycomb Loader ───
+  // ─── Honeycomb Loader (Fast Dismissal & DOM Clean-Up) ───
   function initHoneycombLoader() {
+    var loader = document.getElementById('nm-loader');
+    if (!loader) return;
     var hive = document.getElementById('nm-hive');
-    if (!hive) return;
-    var S = 16, cx = 105, cy = 105, R = 2;
-    for (var q = -R; q <= R; q++) {
-      for (var r = Math.max(-R, -q - R); r <= Math.min(R, -q + R); r++) {
-        var x = cx + S * Math.sqrt(3) * (q + r / 2);
-        var y = cy + S * 1.5 * r;
-        var ring = (Math.abs(q) + Math.abs(r) + Math.abs(q + r)) / 2;
-        var hex = document.createElement('div');
-        hex.className = 'nm-hex';
-        hex.style.left = x + 'px';
-        hex.style.top = y + 'px';
-        hex.style.animationDelay = (ring * 0.16) + 's';
-        hive.appendChild(hex);
+    if (hive && hive.children.length === 0) {
+      var S = 16, cx = 105, cy = 105, R = 2;
+      for (var q = -R; q <= R; q++) {
+        for (var r = Math.max(-R, -q - R); r <= Math.min(R, -q + R); r++) {
+          var x = cx + S * Math.sqrt(3) * (q + r / 2);
+          var y = cy + S * 1.5 * r;
+          var ring = (Math.abs(q) + Math.abs(r) + Math.abs(q + r)) / 2;
+          var hex = document.createElement('div');
+          hex.className = 'nm-hex';
+          hex.style.left = x + 'px';
+          hex.style.top = y + 'px';
+          hex.style.animationDelay = (ring * 0.16) + 's';
+          hive.appendChild(hex);
+        }
       }
     }
-    var loader = document.getElementById('nm-loader');
     function hideLoader() {
-      if (!loader) return;
+      if (!loader || loader._hidden) return;
+      loader._hidden = true;
       loader.classList.add('nm-hide');
-      setTimeout(function() { loader.style.display = 'none'; }, 450);
+      setTimeout(function() {
+        loader.style.display = 'none';
+        try { loader.remove(); } catch(e) {}
+      }, 180);
     }
     window.__nmHideLoader = hideLoader;
-    setTimeout(hideLoader, 600); // Safety fallback: guarantee loader never gets stuck
+    setTimeout(hideLoader, 280);
     if (document.readyState === 'complete' || document.readyState === 'interactive') {
-      setTimeout(hideLoader, 200);
+      setTimeout(hideLoader, 50);
     } else {
-      document.addEventListener('DOMContentLoaded', function() { setTimeout(hideLoader, 200); });
-      window.addEventListener('load', function() { setTimeout(hideLoader, 200); });
+      document.addEventListener('DOMContentLoaded', function() { setTimeout(hideLoader, 50); });
+      window.addEventListener('load', function() { setTimeout(hideLoader, 50); });
     }
   }
 
-  // ─── Header Scroll ───
+  // ─── Header Scroll (rAF Debounced to Prevent Forced Reflow) ───
   function initHeaderScroll() {
     var header = document.getElementById('home-header');
     if (!header) return;
+    var ticking = false;
     var check = function() {
-      if (window.scrollY > 40) header.classList.add('scrolled');
-      else header.classList.remove('scrolled');
+      if (!ticking) {
+        window.requestAnimationFrame(function() {
+          if (window.scrollY > 40) header.classList.add('scrolled');
+          else header.classList.remove('scrolled');
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
     check();
     window.addEventListener('scroll', check, { passive: true });
@@ -476,10 +489,19 @@
     currentHeroIdx = idx;
     var item = heroItems[idx];
 
-    // Toggle backdrop opacity
+    // Toggle backdrop opacity and lazy-load image if needed
     var bgLayers = heroSection.querySelectorAll('.hero-bg');
     bgLayers.forEach(function(bg, i) {
-      bg.style.opacity = (i === idx) ? '1' : '0';
+      if (i === idx) {
+        if (bg.dataset.bg && !bg.style.backgroundImage) {
+          bg.style.backgroundImage = 'url("' + bg.dataset.bg + '")';
+        }
+        bg.style.opacity = '1';
+        bg.style.zIndex = '10';
+      } else {
+        bg.style.opacity = '0';
+        bg.style.zIndex = String(9 - i);
+      }
     });
 
     // Update Text & Badges
@@ -525,11 +547,11 @@
     if (heroDots) {
       heroDots.querySelectorAll('.hero-dot').forEach(function(dot, i) {
         if (i === idx) {
-          dot.classList.remove('bg-white/30');
+          dot.classList.remove('bg-white/40', 'w-2');
           dot.classList.add('bg-white', 'w-5');
         } else {
           dot.classList.remove('bg-white', 'w-5');
-          dot.classList.add('bg-white/30');
+          dot.classList.add('bg-white/40', 'w-2');
         }
       });
     }
@@ -538,12 +560,13 @@
   function renderHeroDots() {
     if (!heroDots) return;
     heroDots.innerHTML = heroItems.map(function(_, idx) {
-      return '<button type="button" data-hero-dot="' + idx + '" aria-label="Show featured ' + (idx + 1) + '" class="hero-dot w-2 h-2 rounded-full bg-white/30 hover:bg-white/60 transition cursor-pointer"></button>';
+      var isFirst = idx === 0;
+      return '<button type="button" data-hero-dot="' + idx + '" aria-label="Show featured ' + (idx + 1) + '" class="hero-dot-hitbox"><span class="hero-dot ' + (isFirst ? 'w-5 bg-white' : 'w-2 bg-white/40 hover:bg-white/70') + ' h-2 rounded-full transition-all block"></span></button>';
     }).join('');
 
-    heroDots.querySelectorAll('.hero-dot').forEach(function(dot) {
-      dot.addEventListener('click', function() {
-        var idx = Number(dot.dataset.heroDot);
+    heroDots.querySelectorAll('[data-hero-dot]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var idx = Number(btn.dataset.heroDot);
         showHeroSlide(idx);
         startHeroTimer();
       });
@@ -889,6 +912,26 @@
     });
   }
 
+  function buildPosterImg(url, title, extraClass) {
+    extraClass = extraClass || 'w-full h-full object-cover';
+    var safeTitle = escapeHtml(title || 'Netflix4U');
+    if (!url || url.indexOf('data:image') === 0) {
+      return '<img src="' + (url || NO_POSTER_SVG) + '" width="200" height="300" loading="lazy" decoding="async" alt="' + safeTitle + '" class="' + extraClass + '" onerror="window.__healPoster(this);" />';
+    }
+    if (url.indexOf('image.tmdb.org') !== -1) {
+      var tmdbMatch = url.match(/image\.tmdb\.org\/t\/p\/([^/]+)\/(.+)$/);
+      if (tmdbMatch) {
+        var posterPath = tmdbMatch[2];
+        var base = 'https://image.tmdb.org/t/p/';
+        var src185 = base + 'w185/' + posterPath;
+        var src342 = base + 'w342/' + posterPath;
+        var src500 = base + 'w500/' + posterPath;
+        return '<img src="' + src342 + '" srcset="' + src185 + ' 185w, ' + src342 + ' 342w, ' + src500 + ' 500w" sizes="(max-width: 640px) 150px, 200px" width="200" height="300" loading="lazy" decoding="async" alt="' + safeTitle + '" class="' + extraClass + '" onerror="window.__healPoster(this);" />';
+      }
+    }
+    return '<img src="' + url + '" width="200" height="300" loading="lazy" decoding="async" alt="' + safeTitle + '" class="' + extraClass + '" onerror="window.__healPoster(this);" />';
+  }
+
   function renderCard(item, options) {
     options = options || {};
     var title = item.title || 'Untitled';
@@ -937,7 +980,7 @@
         '<div class="flex items-end relative overflow-visible">' +
           '<div class="rank-num shrink-0 self-end leading-none">' + options.rank + '</div>' +
           '<div class="nm-card-inner flex-1 relative aspect-[2/3] rounded-md overflow-hidden bg-white/5 ring-1 ring-white/10 group-hover:ring-2 group-hover:ring-red-600 transition">' +
-            '<img src="' + posterUrl + '" loading="lazy" decoding="async" alt="' + escapeHtml(title) + '" class="w-full h-full object-cover" onerror="window.__healPoster(this);" />' +
+            buildPosterImg(posterUrl, title, 'w-full h-full object-cover') +
             ratingBadge + typeBadge + hoverOverlay +
           '</div>' +
         '</div>' +
@@ -946,7 +989,7 @@
 
     return '<a href="#" data-modal="title" data-tmdbid="' + tmdbId + '" data-canonical-id="' + escapeHtml(canonicalId) + '" data-imdbid="' + escapeHtml(imdbId) + '" data-type="' + (isTv ? 'tv' : 'movie') + '" class="nm-card card group block">' +
       '<div class="nm-card-inner relative aspect-[2/3] rounded-lg overflow-hidden bg-white/5 ring-1 ring-white/10 group-hover:ring-2 group-hover:ring-red-600 transition">' +
-        '<img src="' + posterUrl + '" loading="lazy" decoding="async" alt="' + escapeHtml(title) + '" class="w-full h-full object-cover" onerror="window.__healPoster(this);" />' +
+        buildPosterImg(posterUrl, title, 'w-full h-full object-cover') +
         ratingBadge + typeBadge + hoverOverlay +
       '</div>' +
       '<div class="mt-1.5 px-0.5 text-[12px] sm:text-[13px] text-white/85 font-medium truncate">' + escapeHtml(title) + '</div>' +
@@ -959,6 +1002,7 @@
     var nextBtn = section.querySelector('[data-rail-next]');
     if (!content) return;
 
+    var ticking = false;
     var updateArrows = function() {
       if (!prevBtn || !nextBtn) return;
       var sl = content.scrollLeft;
@@ -967,10 +1011,16 @@
       else prevBtn.classList.remove('rail-arrow-hidden');
       if (sl >= max) nextBtn.classList.add('rail-arrow-hidden');
       else nextBtn.classList.remove('rail-arrow-hidden');
+      ticking = false;
     };
 
-    updateArrows();
-    content.addEventListener('scroll', updateArrows, { passive: true });
+    requestAnimationFrame(updateArrows);
+    content.addEventListener('scroll', function() {
+      if (!ticking) {
+        requestAnimationFrame(updateArrows);
+        ticking = true;
+      }
+    }, { passive: true });
 
     if (prevBtn) {
       prevBtn.addEventListener('click', function() {

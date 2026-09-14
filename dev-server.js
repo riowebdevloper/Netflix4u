@@ -577,7 +577,7 @@ const server = http.createServer(async (req, res) => {
   res.setHeader('X-XSS-Protection', '1; mode=block');
   res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
   res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
-  res.setHeader('Content-Security-Policy', "default-src 'self' 'unsafe-inline' 'unsafe-eval' https:; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; form-action 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' https://image.tmdb.org https://m.media-amazon.com https://storage.hicine.sbs https://*.hicine.sbs https://wsrv.nl https://*.wsrv.nl https://images.weserv.nl https://*.workers.dev data: blob:; connect-src 'self' https://api.tmdb.org https://storage.hicine.sbs https://wsrv.nl https://*.wsrv.nl https://*.workers.dev https:; frame-src 'self' https://peachify.top https://*.peachify.top https://vidlink.pro https://*.vidlink.pro https://slast430did.com https://*.slast430did.com https://allmovieland.link https://*.allmovieland.link https://www.2embed.cc https://*.2embed.cc https://vidsrc.pm https://*.vidsrc.pm https://autoembed.co https://*.autoembed.co https://vidsrc.me https://*.vidsrc.me https://vidsrc.cc https://*.vidsrc.cc https://vidsrc.xyz https://*.vidsrc.xyz https://www.youtube-nocookie.com https://www.youtube.com https://youtube.com https://*.youtube.com https://*.workers.dev https://*.vcloud.fit https://storage.hicine.sbs https://*.storage.hicine.sbs; media-src 'self' blob: https:;");
+  res.setHeader('Content-Security-Policy', "default-src 'self' 'unsafe-inline' 'unsafe-eval' https:; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; form-action 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' https://image.tmdb.org https://m.media-amazon.com https://storage.hicine.sbs https://*.hicine.sbs https://wsrv.nl https://*.wsrv.nl https://images.weserv.nl https://*.workers.dev data: blob:; connect-src 'self' https://api.tmdb.org https://storage.hicine.sbs https://wsrv.nl https://*.wsrv.nl https://*.workers.dev https:; frame-src 'self' https://acceptable.a-ads.com https://*.a-ads.com http://acceptable.a-ads.com http://*.a-ads.com https://peachify.top https://*.peachify.top https://vidlink.pro https://*.vidlink.pro https://slast430did.com https://*.slast430did.com https://allmovieland.link https://*.allmovieland.link https://www.2embed.cc https://*.2embed.cc https://vidsrc.pm https://*.vidsrc.pm https://autoembed.co https://*.autoembed.co https://vidsrc.me https://*.vidsrc.me https://vidsrc.cc https://*.vidsrc.cc https://vidsrc.xyz https://*.vidsrc.xyz https://www.youtube-nocookie.com https://www.youtube.com https://youtube.com https://*.youtube.com https://*.workers.dev https://*.vcloud.fit https://storage.hicine.sbs https://*.storage.hicine.sbs; media-src 'self' blob: https:;");
 
   const reqOrigin = req.headers['origin'];
   if (reqOrigin && (/^https:\/\/netflix4u\.in$/i.test(reqOrigin) || /^https:\/\/netflix4u\.fun$/i.test(reqOrigin) || /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/i.test(reqOrigin))) {
@@ -1314,14 +1314,20 @@ const server = http.createServer(async (req, res) => {
 
   if (fs.existsSync(inJs) && fs.statSync(inJs).isFile()) {
     const ext = path.extname(inJs).toLowerCase();
-    res.writeHead(200, { 'Content-Type': MIME_TYPES[ext] || 'application/octet-stream' });
+    res.writeHead(200, {
+      'Content-Type': MIME_TYPES[ext] || 'application/octet-stream',
+      'Cache-Control': 'public, max-age=31536000, immutable'
+    });
     fs.createReadStream(inJs).pipe(res);
     return;
   }
 
   if (fs.existsSync(inAssets) && fs.statSync(inAssets).isFile()) {
     const ext = path.extname(inAssets).toLowerCase();
-    res.writeHead(200, { 'Content-Type': MIME_TYPES[ext] || 'application/octet-stream' });
+    res.writeHead(200, {
+      'Content-Type': MIME_TYPES[ext] || 'application/octet-stream',
+      'Cache-Control': 'public, max-age=31536000, immutable'
+    });
     fs.createReadStream(inAssets).pipe(res);
     return;
   }

@@ -28,12 +28,13 @@ async function runPerformanceQA() {
     '/',
     '/api/health',
     '/api/summary',
-    '/api/title?id=dotmobiz-96465',
-    '/api/playback?id=dotmobiz-96465',
+    '/api/title?id=23933',
+    '/api/playback?id=23933',
     '/data/home_feed.json',
     '/images/favicon.svg',
     '/robots.txt',
-    '/sitemap.xml'
+    '/sitemap.xml',
+    '/llms.txt'
   ];
 
   let passed = 0;

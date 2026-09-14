@@ -50,7 +50,8 @@ const rootFilesToSync = [
   '863dfb1033ddbbd89377.html',
   '863dfb1033ddbbd89377.txt',
   '676d243f6147231bddf2.txt',
-  '676d243f6147231bddf2.html'
+  '676d243f6147231bddf2.html',
+  'llms.txt'
 ];
 
 for (const f of rootFilesToSync) {
