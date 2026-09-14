@@ -9,7 +9,8 @@
     "build": "node scripts/sync_public.js",
     "test": "node scripts/verify_release_gate.js",
     "audit": "node scripts/comprehensive_qa_runner.js",
-    "verify": "node scripts/verify_all_requirements.js"
+    "verify": "node scripts/verify_all_requirements.js",
+    "cron:sync": "node scripts/cron_sync.js"
   },
   "keywords": [
     "streaming",
