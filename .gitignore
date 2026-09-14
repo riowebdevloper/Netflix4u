@@ -25,6 +25,10 @@ audit_artifacts/
 
 # Screenshots & debugging assets
 screenshot*.png
+Screenshot*
+*.report.html
+*.report.json
+*.pdf
 favicon
 
 # OS & Editor generated files
