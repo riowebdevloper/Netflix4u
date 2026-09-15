@@ -1,0 +1,133 @@
+{
+  "id": "tmdb-movie-90918",
+  "canonicalId": "tmdb-movie-90918",
+  "externalProvider": "tmdb",
+  "externalId": "90918",
+  "tmdbId": "90918",
+  "imdbId": "tt0028444",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "Sharad of Atlantis",
+  "canonicalTitle": "Sharad of Atlantis",
+  "originalTitle": "Undersea Kingdom",
+  "overview": "Crash Corrigan, a recent graduate of Annapolis, and Diana, a go-getting reporter, join Professor Norton for a search for the source of a string of earthquakes, Atlantis. They ride Prof. Norton's rocket submarine searching the sea and little Billy Norton, the professor's son stows away, of course. When they find Atlantis they are caught in a war between peaceful Atlanteans, note their white capes, and war-monging Atlanteans, note their black capes. After many harrowing moments for Crash, Diana, Prof. Norton and Billy, they barely get away with their lives when they escape a tower of Atlantis raised to the surface for the sole purpose of dominating or destroying the Earth (Which one depends on the compliance of the upper world dwellers.)",
+  "description": "Crash Corrigan, a recent graduate of Annapolis, and Diana, a go-getting reporter, join Professor Norton for a search for the source of a string of earthquakes, Atlantis. They ride Prof. Norton's rocket submarine searching the sea and little Billy Norton, the professor's son stows away, of course. When they find Atlantis they are caught in a war between peaceful Atlanteans, note their white capes, and war-monging Atlanteans, note their black capes. After many harrowing moments for Crash, Diana, Prof. Norton and Billy, they barely get away with their lives when they escape a tower of Atlantis raised to the surface for the sole purpose of dominating or destroying the Earth (Which one depends on the compliance of the upper world dwellers.)",
+  "shortDescription": "Crash Corrigan, a recent graduate of Annapolis, and Diana, a go-getting reporter, join Professor Norton for a search for",
+  "year": 1936,
+  "rating": 4.4,
+  "votes": "0.0K",
+  "quality": "FHD",
+  "duration": "3h 46m",
+  "genres": [
+    "Action",
+    "Fantasy",
+    "Science Fiction"
+  ],
+  "categories": [
+    "Action",
+    "Fantasy",
+    "Science Fiction"
+  ],
+  "language": "English",
+  "country": "US",
+  "poster": "https://image.tmdb.org/t/p/w500/v24hM8WeAlT4uoZHPWu94DbMHz4.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/vLtq76eogPnLUCQ13tsjHu5FFJ1.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/V6SD2gVh5_4?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/V6SD2gVh5_4?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "52178",
+      "name": "Ray Corrigan",
+      "character": "Ray 'Crash' Corrigan",
+      "photo": "https://image.tmdb.org/t/p/w185/iH9FM9CYHYcHWLuME0w4eKQgLFr.jpg"
+    },
+    {
+      "id": "938885",
+      "name": "Lois Wilde",
+      "character": "Diana Compton",
+      "photo": "https://image.tmdb.org/t/p/w185/htBX4JzoJbiOIuJSqSzkoA10XGw.jpg"
+    },
+    {
+      "id": "90074",
+      "name": "Monte Blue",
+      "character": "Unga Khan",
+      "photo": "https://image.tmdb.org/t/p/w185/f9VVvlkPviIaHfcW8fog8JwYUvP.jpg"
+    },
+    {
+      "id": "78193",
+      "name": "William Farnum",
+      "character": "Sharad",
+      "photo": "https://image.tmdb.org/t/p/w185/a2N7jJoXYLHaUFBDMGMuIgqja60.jpg"
+    },
+    {
+      "id": "120817",
+      "name": "Boothe Howard",
+      "character": "Ditmar",
+      "photo": null
+    },
+    {
+      "id": "90333",
+      "name": "Raymond Hatton",
+      "character": "Gasspon",
+      "photo": "https://image.tmdb.org/t/p/w185/eTiQiDcMhwD3DCE6yINa7RKd5NJ.jpg"
+    },
+    {
+      "id": "33698",
+      "name": "C. Montague Shaw",
+      "character": "Professor Norton",
+      "photo": "https://image.tmdb.org/t/p/w185/7u7wp5oqxUzaA8DnqJBB9lBG1Ww.jpg"
+    },
+    {
+      "id": "1048129",
+      "name": "Lee Van Atta",
+      "character": "Billy Norton",
+      "photo": null
+    },
+    {
+      "id": "90072",
+      "name": "Smiley Burnette",
+      "character": "Briny Deep",
+      "photo": "https://image.tmdb.org/t/p/w185/hfwpyujboZDjvsEqOEBxT5vJ9U5.jpg"
+    },
+    {
+      "id": "952908",
+      "name": "Frankie Marvin",
+      "character": "Salty",
+      "photo": null
+    },
+    {
+      "id": "4072",
+      "name": "Lon Chaney Jr.",
+      "character": "Capt. Hakur",
+      "photo": "https://image.tmdb.org/t/p/w185/4DHZ2jXQFbTuslsaOmrmrJ9HMMd.jpg"
+    },
+    {
+      "id": "90369",
+      "name": "Lane Chandler",
+      "character": "Darius",
+      "photo": "https://image.tmdb.org/t/p/w185/zwUk9TYX6u2Y7jr6VDEW1NW7Flr.jpg"
+    },
+    {
+      "id": "33776",
+      "name": "Jack Mulhall",
+      "character": "Andrews",
+      "photo": "https://image.tmdb.org/t/p/w185/4r33PICmACJZ2Bjum0v1EkvOxbx.jpg"
+    },
+    {
+      "id": "165008",
+      "name": "John Bradford",
+      "character": "Joe",
+      "photo": null
+    },
+    {
+      "id": "1181154",
+      "name": "Malcolm McGregor",
+      "character": "Zogg",
+      "photo": "https://image.tmdb.org/t/p/w185/dwZptn0TCRGtGdKS039f5opo91b.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 1,
+  "status": "PUBLISHED",
+  "links": []
+}

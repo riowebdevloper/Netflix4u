@@ -1,0 +1,133 @@
+{
+  "id": "tmdb-movie-1241634",
+  "canonicalId": "tmdb-movie-1241634",
+  "externalProvider": "tmdb",
+  "externalId": "1241634",
+  "tmdbId": "1241634",
+  "imdbId": "tt28037987",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "Saiyaara",
+  "canonicalTitle": "Saiyaara",
+  "originalTitle": "सैयारा",
+  "overview": "Two artistic souls find harmony through music despite their contrasting worlds. As feelings deepen, age and circumstances challenge their undeniable bond.",
+  "description": "Two artistic souls find harmony through music despite their contrasting worlds. As feelings deepen, age and circumstances challenge their undeniable bond.",
+  "shortDescription": "Two artistic souls find harmony through music despite their contrasting worlds. As feelings deepen, age and circumstance",
+  "year": 2025,
+  "rating": 6.4,
+  "votes": "0.1K",
+  "quality": "FHD",
+  "duration": "2h 30m",
+  "genres": [
+    "Romance",
+    "Drama",
+    "Music"
+  ],
+  "categories": [
+    "Romance",
+    "Drama",
+    "Music"
+  ],
+  "language": "Hindi",
+  "country": "IN",
+  "poster": "https://image.tmdb.org/t/p/w500/hQBIsi3ZfBYEayMc3GhcEmJVkss.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/mguy0nefEUY7NKruffpLO3Stj3d.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/nF31d_f4n_A?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/nF31d_f4n_A?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "2486707",
+      "name": "Ahaan Panday",
+      "character": "Krish Kapoor",
+      "photo": "https://image.tmdb.org/t/p/w185/52awRTNKMuB3oH93j8LZVoQILJ1.jpg"
+    },
+    {
+      "id": "4571587",
+      "name": "Aneet Padda",
+      "character": "Vaani Batra",
+      "photo": "https://image.tmdb.org/t/p/w185/9YP19WwvZ6DkFwbCyfydUbh7TSt.jpg"
+    },
+    {
+      "id": "2306058",
+      "name": "Alam Khan",
+      "character": "KV",
+      "photo": "https://image.tmdb.org/t/p/w185/qI9VLzGq4DDCjTdBLQI2bBM9la3.jpg"
+    },
+    {
+      "id": "1336965",
+      "name": "Rajesh Kumar",
+      "character": "Rajesh Batra",
+      "photo": "https://image.tmdb.org/t/p/w185/vat8qbqIeumutuToGX0VrtA06M6.jpg"
+    },
+    {
+      "id": "1197127",
+      "name": "Geeta Agrawal Sharma",
+      "character": "Geeta Batra",
+      "photo": "https://image.tmdb.org/t/p/w185/5Jrwb9zWG2Hjmf8PQLuDmCKnMHG.jpg"
+    },
+    {
+      "id": "4306162",
+      "name": "Anngad Raaj",
+      "character": "Rudransh Batra",
+      "photo": "https://image.tmdb.org/t/p/w185/vxDu6v0eHSTTc1kHLGLzqtkP61Z.jpg"
+    },
+    {
+      "id": "122498",
+      "name": "Varun Badola",
+      "character": "Ashok Kapoor",
+      "photo": "https://image.tmdb.org/t/p/w185/dzSBwofeP4dh3bP8TG6VxkHSjLy.jpg"
+    },
+    {
+      "id": "229276",
+      "name": "Shaad Randhawa",
+      "character": "Prince",
+      "photo": "https://image.tmdb.org/t/p/w185/eFUtx2lbDmu6RUaezRsub9O7yGv.jpg"
+    },
+    {
+      "id": "2504720",
+      "name": "Sid Makkar",
+      "character": "Vinit Rawal",
+      "photo": "https://image.tmdb.org/t/p/w185/b9E8NeQ2CgDEAMTnHuutLlpmfBY.jpg"
+    },
+    {
+      "id": "2416809",
+      "name": "Shaan Groverr",
+      "character": "Mahesh Iyer",
+      "photo": null
+    },
+    {
+      "id": "5574277",
+      "name": "Neil Dutta",
+      "character": "Cleo Matthews",
+      "photo": null
+    },
+    {
+      "id": "5574280",
+      "name": "Ritika Murthy",
+      "character": "Neha",
+      "photo": null
+    },
+    {
+      "id": "5574281",
+      "name": "Mohit Wadhwa",
+      "character": "Rick",
+      "photo": null
+    },
+    {
+      "id": "5574282",
+      "name": "Meher Acharya Dar",
+      "character": "Dr. Khyati",
+      "photo": null
+    },
+    {
+      "id": "5578929",
+      "name": "Ishitaa Thakur",
+      "character": "Singer in Himachal",
+      "photo": null
+    }
+  ],
+  "seasons": 1,
+  "episodes": 1,
+  "status": "PUBLISHED",
+  "links": []
+}

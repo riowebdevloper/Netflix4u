@@ -1,0 +1,167 @@
+{
+  "id": "tmdb-series-1399",
+  "canonicalId": "tmdb-series-1399",
+  "externalProvider": "tmdb",
+  "externalId": "1399",
+  "tmdbId": "1399",
+  "imdbId": "tt0944947",
+  "type": "series",
+  "contentType": "series",
+  "title": "Game of Thrones",
+  "canonicalTitle": "Game of Thrones",
+  "originalTitle": "Game of Thrones",
+  "overview": "Seven noble families fight for control of the mythical land of Westeros. Friction between the houses leads to full-scale war. All while a very ancient evil awakens in the farthest north. Amidst the war, a neglected military order of misfits, the Night's Watch, is all that stands between the realms of men and icy horrors beyond.",
+  "description": "Seven noble families fight for control of the mythical land of Westeros. Friction between the houses leads to full-scale war. All while a very ancient evil awakens in the farthest north. Amidst the war, a neglected military order of misfits, the Night's Watch, is all that stands between the realms of men and icy horrors beyond.",
+  "shortDescription": "Seven noble families fight for control of the mythical land of Westeros. Friction between the houses leads to full-scale",
+  "year": 2011,
+  "rating": 8.5,
+  "votes": "27.7K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Sci-Fi & Fantasy",
+    "Drama",
+    "Action & Adventure"
+  ],
+  "categories": [
+    "Sci-Fi & Fantasy",
+    "Drama",
+    "Action & Adventure"
+  ],
+  "language": "English",
+  "country": "US",
+  "poster": "https://image.tmdb.org/t/p/w500/1XS1oqL89opfnbLl8WnZY1O1uJx.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/zZqpAXxVSBtxV9qPBcscfXBcL2w.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/KPLWWIOCOOQ?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/KPLWWIOCOOQ?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "22970",
+      "name": "Peter Dinklage",
+      "character": "Tyrion 'The Halfman' Lannister",
+      "photo": "https://image.tmdb.org/t/p/w185/9CAd7wr8QZyIN0E7nm8v1B6WkGn.jpg"
+    },
+    {
+      "id": "239019",
+      "name": "Kit Harington",
+      "character": "Jon Snow",
+      "photo": "https://image.tmdb.org/t/p/w185/iGXlJbExWwZmo9sUDsYuzf4Sv4y.jpg"
+    },
+    {
+      "id": "12795",
+      "name": "Nikolaj Coster-Waldau",
+      "character": "Sir Jaime 'Kingslayer' Lannister",
+      "photo": "https://image.tmdb.org/t/p/w185/rpFOERbHkj7GWxkinUNiQ76sSGk.jpg"
+    },
+    {
+      "id": "17286",
+      "name": "Lena Headey",
+      "character": "Cersei Lannister",
+      "photo": "https://image.tmdb.org/t/p/w185/cDyZLf8ddz0EgoUjpv4jjzy7qxA.jpg"
+    },
+    {
+      "id": "1223786",
+      "name": "Emilia Clarke",
+      "character": "Daenerys Targaryen",
+      "photo": "https://image.tmdb.org/t/p/w185/iFY6t7Ux9r70WB7Sp0TTVz6eGtm.jpg"
+    },
+    {
+      "id": "15498",
+      "name": "Liam Cunningham",
+      "character": "Davos Seaworth",
+      "photo": "https://image.tmdb.org/t/p/w185/y27shwpEYGq4vhdEajcmqucuq9x.jpg"
+    },
+    {
+      "id": "1181313",
+      "name": "Maisie Williams",
+      "character": "Arya Stark",
+      "photo": "https://image.tmdb.org/t/p/w185/zk1rlBVci2fmnFhMezaPpa4kwZF.jpg"
+    },
+    {
+      "id": "239020",
+      "name": "Isaac Hempstead Wright",
+      "character": "Brandon 'Bran' Stark",
+      "photo": "https://image.tmdb.org/t/p/w185/g6ZreLmGrrOzaUCGVFRNPAWfcso.jpg"
+    },
+    {
+      "id": "1001657",
+      "name": "Sophie Turner",
+      "character": "Sansa Stark",
+      "photo": "https://image.tmdb.org/t/p/w185/8ur4aHFakVCinWk0cvrGO8qAUhv.jpg"
+    },
+    {
+      "id": "1010135",
+      "name": "John Bradley",
+      "character": "Samwell 'Sam' Tarly",
+      "photo": "https://image.tmdb.org/t/p/w185/lQuxVtH8GkSLSZQhpmSdIi88DSF.jpg"
+    },
+    {
+      "id": "3075",
+      "name": "Rory McCann",
+      "character": "Sandor 'The Hound' Clegane",
+      "photo": "https://image.tmdb.org/t/p/w185/meEHyiCRXTTCiYQMzP4VEdvEuD0.jpg"
+    },
+    {
+      "id": "570296",
+      "name": "Joe Dempsie",
+      "character": "Gendry",
+      "photo": "https://image.tmdb.org/t/p/w185/47XNLVxbLsEBFgGYgbHAIYE5ja9.jpg"
+    },
+    {
+      "id": "1011904",
+      "name": "Gwendoline Christie",
+      "character": "Brienne of Tarth",
+      "photo": "https://image.tmdb.org/t/p/w185/kmlv5i02n3zKryBr2W3kSeWVKTD.jpg"
+    },
+    {
+      "id": "964792",
+      "name": "Jacob Anderson",
+      "character": "Grey Worm",
+      "photo": "https://image.tmdb.org/t/p/w185/cWO1DdhFXWs5r8baNOPaVaJ56x6.jpg"
+    }
+  ],
+  "seasons": 8,
+  "episodes": 73,
+  "status": "PUBLISHED",
+  "links": [
+    {
+      "url": "https://crimson-sea-a1e5.hekoy.workers.dev/?vcloud=https://vcloud.fit/pel7-j41jg_kjk7",
+      "quality": "480p",
+      "size": "400MB",
+      "label": "Server Stream (480p)",
+      "source": "Fast Cloud",
+      "isCloud": true,
+      "isDotmovies": false,
+      "canonicalId": "tmdb-series-1399",
+      "season": 1,
+      "episode": null,
+      "isPack": false
+    },
+    {
+      "url": "https://crimson-sea-a1e5.hekoy.workers.dev/?vcloud=https://vcloud.fit/gx8ghhhggxehgne",
+      "quality": "720p",
+      "size": "1GB",
+      "label": "Server Stream (720p)",
+      "source": "Fast Cloud",
+      "isCloud": true,
+      "isDotmovies": false,
+      "canonicalId": "tmdb-series-1399",
+      "season": 1,
+      "episode": null,
+      "isPack": false
+    },
+    {
+      "url": "https://crimson-sea-a1e5.hekoy.workers.dev/?vcloud=https://vcloud.fit/rasgvtts_euaosa",
+      "quality": "1080p",
+      "size": "2GB",
+      "label": "Server Stream (1080p)",
+      "source": "Fast Cloud",
+      "isCloud": true,
+      "isDotmovies": false,
+      "canonicalId": "tmdb-series-1399",
+      "season": 1,
+      "episode": null,
+      "isPack": false
+    }
+  ]
+}

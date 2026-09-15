@@ -586,8 +586,8 @@ async function handlePosterResolver(req, res) {
         const bUrl = item.backdrop_path ? `https://image.tmdb.org/t/p/original${item.backdrop_path}` : (pUrl || null);
         return sendJson(res, 200, {
           success: true,
-          poster: pUrl,
-          backdrop: bUrl,
+          poster: pUrl ? unwrapImageUrl(pUrl, 400) : null,
+          backdrop: bUrl ? unwrapImageUrl(bUrl, 1280) : null,
           tmdbId: item.id
         }, { 'Cache-Control': 'public, max-age=86400' });
       }
@@ -634,8 +634,8 @@ async function handlePosterResolver(req, res) {
             const bUrl = item.backdrop_path ? `https://image.tmdb.org/t/p/original${item.backdrop_path}` : pUrl;
             return sendJson(res, 200, {
               success: true,
-              poster: pUrl,
-              backdrop: bUrl,
+              poster: unwrapImageUrl(pUrl, 400),
+              backdrop: unwrapImageUrl(bUrl, 1280),
               tmdbId: item.id
             }, { 'Cache-Control': 'public, max-age=86400' });
           }
@@ -1091,7 +1091,15 @@ async function handleCatalogTitle(req, res) {
   const type = parts[0] === 'tv' || parts[0] === 'series' ? 'tv' : (q.get('type') || 'movie');
   let id = parts[1] || q.get('id') || (parts[0] !== 'movie' && parts[0] !== 'tv' ? parts[0] : '');
 
-  let tmdbId = Number(id);
+  // Handle tmdb-movie-12345 / tmdb-series-12345 / nm-12345 / dotmobiz-12345 prefixes
+  let tmdbId = null;
+  const tmdbPrefixMatch = String(id).match(/^tmdb[-:](?:movie|series|tv)[-:]([0-9]+)$/i);
+  if (tmdbPrefixMatch) {
+    tmdbId = Number(tmdbPrefixMatch[1]);
+  } else if (/^\d+$/.test(id) && !String(id).startsWith('nm-')) {
+    tmdbId = Number(id);
+  }
+
   let localItem = null;
   const catalog = getCatalogSummary();
 
@@ -1100,8 +1108,14 @@ async function handleCatalogTitle(req, res) {
 
   if (localItem && localItem.tmdbId) {
     tmdbId = localItem.tmdbId;
-  } else if (isNaN(tmdbId) || tmdbId <= 0 || (tmdbId < 100000 && localItem)) {
-    tmdbId = await resolveTmdbId(localItem?.title || id, localItem?.year, type, localItem?.imdbId);
+  } else if (!tmdbId || isNaN(tmdbId) || tmdbId <= 0 || (tmdbId < 100000 && localItem)) {
+    const queryTitle = q.get('title') || '';
+    const queryYear = q.get('year') || '';
+    const queryImdbId = q.get('imdbId') || '';
+    const lookupTitle = localItem?.title || queryTitle || (String(id).startsWith('nm-') ? '' : id);
+    if (lookupTitle) {
+      tmdbId = await resolveTmdbId(lookupTitle, localItem?.year || queryYear, type, localItem?.imdbId || queryImdbId);
+    }
   }
 
   const endpoint = type === 'tv' ? `/tv/${tmdbId}` : `/movie/${tmdbId}`;
@@ -1110,8 +1124,13 @@ async function handleCatalogTitle(req, res) {
     raw = await fetchTmdbCatalogJson(`${endpoint}?append_to_response=credits,videos,release_dates,content_ratings,recommendations,similar,external_ids`);
   } catch (e) { }
 
-  const title = raw?.title || raw?.name || localItem?.title || 'Unknown Title';
-  const year = String(raw?.release_date || raw?.first_air_date || localItem?.year || '').slice(0, 4);
+  const queryTitle = q.get('title') || '';
+  const queryYear = q.get('year') || '';
+  const queryPoster = q.get('poster') || '';
+  const queryBackdrop = q.get('backdrop') || '';
+
+  const title = raw?.title || raw?.name || localItem?.title || queryTitle || 'Unknown Title';
+  const year = String(raw?.release_date || raw?.first_air_date || localItem?.year || queryYear || '').slice(0, 4);
   const resolvedImdbId = raw?.imdb_id || raw?.external_ids?.imdb_id || localItem?.imdbId || null;
 
   // Authenticate and fetch direct download links
@@ -1189,6 +1208,7 @@ async function handleCatalogTitle(req, res) {
   const result = {
     ok: true,
     id: tmdbId || id,
+    canonicalId: targetCanonicalId,
     tmdbId: tmdbId || id,
     imdbId: resolvedImdbId,
     type: type,
@@ -1197,18 +1217,20 @@ async function handleCatalogTitle(req, res) {
     rating: raw?.vote_average ? Number(raw.vote_average.toFixed(1)) : 8.0,
     runtime: raw?.runtime || (raw?.episode_run_time ? raw.episode_run_time[0] : 120),
     certification: { rating: cert },
-    tagline: raw?.tagline || '',
-    overview: raw?.overview || localItem?.description || '',
-    poster: raw?.poster_path ? `https://image.tmdb.org/t/p/w500${raw.poster_path}` : (unwrapImageUrl(localItem?.poster) || null),
-    backdrop: raw?.backdrop_path ? `https://image.tmdb.org/t/p/original${raw.backdrop_path}` : (unwrapImageUrl(localItem?.backdrop) || (localItem?.poster ? unwrapImageUrl(localItem.poster) : null)),
+    overview: raw?.overview || localItem?.description || (queryTitle ? `Watch ${queryTitle} online in high definition on Netflix4U.` : ''),
+    poster: raw?.poster_path ? unwrapImageUrl(`https://image.tmdb.org/t/p/w500${raw.poster_path}`, 400) : (unwrapImageUrl(localItem?.poster) || (queryPoster ? unwrapImageUrl(queryPoster) : null)),
+    backdrop: raw?.backdrop_path ? unwrapImageUrl(`https://image.tmdb.org/t/p/original${raw.backdrop_path}`, 1280) : (unwrapImageUrl(localItem?.backdrop) || (queryBackdrop ? unwrapImageUrl(queryBackdrop) : null) || (localItem?.poster ? unwrapImageUrl(localItem.poster) : (queryPoster ? unwrapImageUrl(queryPoster) : null))),
     genres: raw?.genres || (localItem?.categories || []).map((c, idx) => ({ id: idx, name: c })),
-    cast: (raw?.credits?.cast || []).slice(0, 16).map(c => ({
-      id: c.id,
-      name: c.name,
-      character: c.character,
-      profile_path: c.profile_path ? `https://image.tmdb.org/t/p/w185${c.profile_path}` : null,
-      photo: c.profile_path ? `https://image.tmdb.org/t/p/w185${c.profile_path}` : null
-    })),
+    cast: (raw?.credits?.cast || []).slice(0, 16).map(c => {
+      const photo = c.profile_path ? unwrapImageUrl(`https://image.tmdb.org/t/p/w185${c.profile_path}`, 185) : null;
+      return {
+        id: c.id,
+        name: c.name,
+        character: c.character,
+        profile_path: photo,
+        photo: photo
+      };
+    }),
     seasons: (raw?.seasons || []).filter(s => s.season_number > 0).map(s => ({
       season_number: s.season_number,
       episode_count: s.episode_count || 10,
@@ -1217,7 +1239,7 @@ async function handleCatalogTitle(req, res) {
     recommendations: (raw?.recommendations?.results || raw?.similar?.results || []).slice(0, 12).map(r => ({
       tmdbId: r.id,
       title: r.title || r.name,
-      poster: r.poster_path ? `https://image.tmdb.org/t/p/w342${r.poster_path}` : null,
+      poster: r.poster_path ? unwrapImageUrl(`https://image.tmdb.org/t/p/w342${r.poster_path}`, 342) : null,
       year: String(r.release_date || r.first_air_date || '').slice(0, 4),
       type: r.media_type || (r.title ? 'movie' : 'tv'),
       rating: r.vote_average ? Number(r.vote_average.toFixed(1)) : 7.5

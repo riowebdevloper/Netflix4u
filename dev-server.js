@@ -5,7 +5,7 @@ const path = require('path');
 const { getPlaybackSources } = require('./services/playbackService');
 const { resolveContentId } = require('./services/canonicalResolver');
 const { isPublicRecord, publicOnly } = require('./services/contentValidationService');
-const { handleDetails, handlePlayback, handleSearch, handleUniversalApi, handleProbeStream } = require('./services/apiCore');
+const { handleDetails, handlePlayback, handleSearch, handleUniversalApi, handleProbeStream, handlePosterResolver } = require('./services/apiCore');
 
 const PORT = process.env.PORT || 4173;
 const ROOT = path.resolve(__dirname);
@@ -577,7 +577,7 @@ const server = http.createServer(async (req, res) => {
   res.setHeader('X-XSS-Protection', '1; mode=block');
   res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
   res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
-  res.setHeader('Content-Security-Policy', "default-src 'self' 'unsafe-inline' 'unsafe-eval' https:; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; form-action 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' https://image.tmdb.org https://m.media-amazon.com https://storage.hicine.sbs https://*.hicine.sbs https://wsrv.nl https://*.wsrv.nl https://images.weserv.nl https://*.workers.dev data: blob:; connect-src 'self' https://api.tmdb.org https://storage.hicine.sbs https://wsrv.nl https://*.wsrv.nl https://*.workers.dev https:; frame-src 'self' https://acceptable.a-ads.com https://*.a-ads.com http://acceptable.a-ads.com http://*.a-ads.com https://peachify.top https://*.peachify.top https://vidlink.pro https://*.vidlink.pro https://slast430did.com https://*.slast430did.com https://allmovieland.link https://*.allmovieland.link https://www.2embed.cc https://*.2embed.cc https://vidsrc.pm https://*.vidsrc.pm https://autoembed.co https://*.autoembed.co https://vidsrc.me https://*.vidsrc.me https://vidsrc.cc https://*.vidsrc.cc https://vidsrc.xyz https://*.vidsrc.xyz https://www.youtube-nocookie.com https://www.youtube.com https://youtube.com https://*.youtube.com https://*.workers.dev https://*.vcloud.fit https://storage.hicine.sbs https://*.storage.hicine.sbs; media-src 'self' blob: https:;");
+  res.setHeader('Content-Security-Policy', "default-src 'self' 'unsafe-inline' 'unsafe-eval' https:; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; form-action 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' https: http: data: blob:; connect-src 'self' https: http: data: blob:; frame-src 'self' https: http:; media-src 'self' blob: https:;");
 
   const reqOrigin = req.headers['origin'];
   if (reqOrigin && (/^https:\/\/netflix4u\.in$/i.test(reqOrigin) || /^https:\/\/netflix4u\.fun$/i.test(reqOrigin) || /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/i.test(reqOrigin))) {
@@ -628,6 +628,278 @@ const server = http.createServer(async (req, res) => {
   if (reqPath === '/api/probe-stream' || reqPath.startsWith('/api/probe-stream/')) {
     return handleProbeStream(req, res);
   }
+
+  // 2d. 🌐 NetMirror Live Catalog Proxy (/api/netmirror/:feed)
+  if (reqPath.startsWith('/api/netmirror')) {
+    const NM_BASE = 'https://api2.imdb3.shop/api';
+    const NM_SEARCH_BASE = 'https://api2.imdb4.shop/api/search2';
+    const NM_TMDB_KEY = '445f2b5a8941c1d4bd5a869761a916e3'; // same key as apiCore
+    const NM_UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36';
+
+    // ── TMDB Title Resolution Cache (survives server lifecycle) ──
+    if (!global._nmTmdbCache) global._nmTmdbCache = new Map();
+    const nmTmdbCache = global._nmTmdbCache;
+
+    // Resolve NM title+year+type → TMDB ID (uses cache to avoid hammering TMDB)
+    function nmResolveTmdb(title, year, isTv) {
+      const cacheKey = (isTv ? 'tv:' : 'mv:') + title.toLowerCase().trim() + ':' + (year || '');
+      if (nmTmdbCache.has(cacheKey)) return Promise.resolve(nmTmdbCache.get(cacheKey));
+
+      const endpoint = isTv ? 'tv' : 'movie';
+      const cleanTitle = title
+        .replace(/&amp;/g, '&').replace(/\s*\[.*?\]\s*/g, '').replace(/\s*S\d+.*$/i, '').trim();
+      const qYear = year && !isTv ? `&primary_release_year=${year}` : '';
+      const url = `https://api.tmdb.org/3/search/${endpoint}?api_key=${NM_TMDB_KEY}&query=${encodeURIComponent(cleanTitle)}${qYear}&include_adult=false`;
+
+      return new Promise(resolve => {
+        https.get(url, { headers: { 'User-Agent': 'Mozilla/5.0', 'Accept': 'application/json' }, timeout: 4000 }, res2 => {
+          let d = ''; res2.on('data', c => d += c);
+          res2.on('end', () => {
+            try {
+              const j = JSON.parse(d);
+              const results = j.results || [];
+              const match = results.find(r => {
+                const rTitle = (r.title || r.name || '').toLowerCase();
+                const qTitle = cleanTitle.toLowerCase();
+                return rTitle === qTitle || rTitle.includes(qTitle) || qTitle.includes(rTitle);
+              }) || results[0];
+              if (match && match.id) {
+                const rawPoster = match.poster_path ? ('https://image.tmdb.org/t/p/w500' + match.poster_path) : null;
+                const proxiedPoster = rawPoster ? ('https://wsrv.nl/?url=' + encodeURIComponent(rawPoster) + '&w=400&output=webp&q=85') : null;
+                const result = { tmdbId: match.id, poster: proxiedPoster };
+                nmTmdbCache.set(cacheKey, result);
+                return resolve(result);
+              }
+            } catch(e) {}
+            nmTmdbCache.set(cacheKey, null);
+            resolve(null);
+          });
+        }).on('error', () => { nmTmdbCache.set(cacheKey, null); resolve(null); });
+      });
+    }
+
+    const nmPage = queryParams.get('page') || '0';
+    const nmCount = queryParams.get('count') || '15';
+
+    // Map feed slug → NM endpoint (VERIFIED IDs from full category scan)
+    const NM_FEED_MAP = {
+      // ─── Main Homepage Feeds ───
+      'trending':           '/tranding?id=11',   // "Trending Now"
+      'top10':              '/tranding?id=11',   // "Trending Now"
+      'recently-added':     '/tranding?id=12',   // "Trending in Cinema"
+      'new-releases':       '/tranding?id=2',    // "Latest Cinema Movies"
+      'best-latest':        '/tranding?id=3',    // "Best and Latest"
+      'featured':           '/tranding?id=59',   // "Featured"
+      // ─── Indian Cinema ───
+      'bollywood':          '/tranding?id=14',   // "Bollywood" ✅
+      'south-hindi':        '/tranding?id=15',   // "South Hindi" ✅
+      'south-indian':       '/tranding?id=15',   // "South Hindi" (alias)
+      'indian-drama':       '/tranding?id=38',   // "Indian Drama" ✅
+      'indian-series':      '/tranding?id=19',   // "Trending Indian Series" ✅
+      'bollywood-classics': '/tranding?id=10',   // "Top 100 Bollywood Movies" ✅
+      'pushpa-style':       '/tranding?id=8',    // "Movies Like Pushpa 2"
+      'salman-khan':        '/tranding?id=6',    // "Salman Khan Blockbusters"
+      // ─── Hollywood & English ───
+      'hollywood':          '/tranding?id=13',   // "Hollywood" ✅
+      'hollywood-en':       '/tranding?id=26',   // "Hollywood Movie En"
+      'top-box-office':     '/tranding?id=44',   // "Top 200 All Time Box Office En"
+      // ─── Streaming Platform ───
+      'netflix-movies':     '/tranding?id=20',   // "Trending Movie On Netflix" ✅
+      'netflix-shows':      '/tranding?id=21',   // "Trending Shows On Netflix" ✅
+      'prime-movies':       '/tranding?id=22',   // "Top Movie On Prime Video" ✅
+      'prime-shows':        '/tranding?id=23',   // "Top Shows On Prime Video" ✅
+      // ─── Genre (English) ───
+      'anime':              '/tranding?id=30',   // "Anime [English Dubbed]" ✅
+      'action':             '/tranding?id=31',   // "Action Movies En" ✅
+      'horror':             '/tranding?id=32',   // "Horror Movies En" ✅
+      'romance':            '/tranding?id=33',   // "Romantic Movies En" ✅
+      'adventure':          '/tranding?id=34',   // "Adventure EN" ✅
+      'superhero':          '/tranding?id=35',   // "Superheros En" ✅
+      'marvel':             '/tranding?id=43',   // "Marvel Movies En" ✅
+      'marvel-hindi':       '/tranding?id=42',   // "Marvel Movies" (Hindi)
+      'dc-movies':          '/tranding?id=58',   // "DC Movies En"
+      'western-tv':         '/tranding?id=27',   // "Western TV En"
+      // ─── Genre (Hindi / Dubbed) ───
+      'superhero-hindi':    '/tranding?id=45',   // "Superhero Hi" ✅
+      'dc-hindi':           '/tranding?id=46',   // "DC Movie Studio Hi"
+      'adventure-hindi':    '/tranding?id=47',   // "Adventure Unfolded Hi"
+      'sci-fi':             '/tranding?id=48',   // "The Sci-Fi Spectrum Hi" ✅
+      'horror-hindi':       '/tranding?id=51',   // "Horror in Hollywood Hi"
+      'mystery':            '/tranding?id=55',   // "Mystery Unlocked Hi" ✅
+      'zombie':             '/tranding?id=56',   // "Zombie Movies Hi"
+      'disaster':           '/tranding?id=54',   // "Disaster And Rescue Hi"
+      'thriller':           '/tranding?id=55',   // "Mystery Unlocked" (closest match)
+      'sci-fi-stellar':     '/tranding?id=53',   // "Stellar Invasion Hi"
+      // ─── Asian Content ───
+      'kdrama':             '/tranding?id=18',   // "K-Drama Hindi" ✅
+      'kdrama-en':          '/tranding?id=28',   // "Trending K-Drama En"
+      'c-drama-hindi':      '/tranding?id=39',   // "C-Drama Hindi"
+      'c-drama-en':         '/tranding?id=29',   // "C-Drama En"
+      'turkish-drama':      '/tranding?id=41',   // "Turkish Drama Hindi"
+      // ─── Series & Shows ───
+      'top-series':         '/tranding?id=16',   // "Top Series This Week" ✅
+      'new-series':         '/tranding?id=19',   // "Trending Indian Series" ✅
+      'top-imdb-series':    '/tranding?id=9',    // "Top Rated IMDB Series"
+      'western-tv-hindi':   '/tranding?id=40',   // "Western TV Hindi"
+      'reality-tv':         '/tranding?id=37',   // "Reality-TV"
+      // ─── Misc ───
+      'love-movies':        '/tranding?id=7',    // "Best of Love Story Movies"
+      'action-old':         '/tranding?id=4',    // "Action movies" (older list)
+      'hindi-dubbed':       '/tranding?id=9',    // "Top Rated IMDB Series" (best for dubbed)
+      'new-movies':         '/tranding?id=2',    // "Latest Cinema Movies" ✅
+      'popular':            '/tranding?id=11',   // "Trending Now"
+      'comedy':             '/tranding?id=3',    // "Best and Latest" (no pure comedy category)
+    };
+
+
+    const nmFeedSlug = reqPath.replace(/^\/api\/netmirror\/?/, '').split('?')[0] || 'trending';
+    const nmLimit = parseInt(queryParams.get('count') || '15', 10);
+
+    // Helper to proxy request to api2.imdb3.shop
+    function nmFetch(upstreamPath, cb) {
+      const url = NM_BASE + upstreamPath + '&page=' + nmPage;
+      const nmReq = https.get(url, {
+        headers: {
+          'User-Agent': NM_UA,
+          'Accept': 'application/json',
+          'Referer': 'https://netmirror.center/',
+          'Origin': 'https://netmirror.center'
+        },
+        timeout: 7000
+      }, (upRes) => {
+        let buf = '';
+        upRes.on('data', c => buf += c);
+        upRes.on('end', () => {
+          try { cb(null, JSON.parse(buf)); } catch(e) { cb(e, null); }
+        });
+      });
+      nmReq.on('error', e => cb(e, null));
+      nmReq.on('timeout', () => { nmReq.destroy(); cb(new Error('timeout'), null); });
+    }
+
+    // Normalize a NetMirror item to Netflix4U schema
+    async function nmNormalize(raw) {
+      if (!raw) return null;
+
+      // ── Poster: raw candidates ──
+      let poster = raw.poster_path || raw.backdrop_path || '';
+      if (poster && typeof poster === 'string') {
+        poster = poster.trim();
+        if (poster.startsWith('//')) poster = 'https:' + poster;
+      }
+
+      // ── Title: strip [Hindi], [English], S1-S8 suffixes, HTML entities ──
+      let title = (raw.title || '')
+        .replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"')
+        .replace(/\s*\[.*?\]\s*/g, '')              // remove [Hindi], [English Dubbed] etc.
+        .replace(/\s*S\d+(\s*-\s*S\d+)?\s*$/i, '')  // remove trailing S1, S1-S8, S1 - S8
+        .replace(/\s+Season\s*\d+(\s*-\s*\d+)?\s*$/i, '') // remove trailing Season 1-4
+        .trim();
+      if (!title) return null;
+
+      const isTv = raw.media_type === 'tv';
+      const year = String(raw.release_date || '').split(',')[0] || '';
+
+      // ── Resolve TMDB ID & Poster: if tm_id is missing or poster is missing ──
+      let tmdbId = raw.tm_id ? Number(raw.tm_id) : null;
+      let tmdbPoster = null;
+      if (!tmdbId || !poster) {
+        try {
+          const tmdbResult = await nmResolveTmdb(title, year, isTv);
+          if (tmdbResult) {
+            if (!tmdbId) tmdbId = tmdbResult.tmdbId;
+            if (tmdbResult.poster) tmdbPoster = tmdbResult.poster;
+          }
+        } catch(e) {}
+      }
+
+      // Format clean, proxied final poster URL (avoiding bogus 404 paths)
+      const candidatePoster = tmdbPoster || poster || '';
+      let finalPoster = '';
+      if (candidatePoster) {
+        if (candidatePoster.startsWith('data:image') || candidatePoster.startsWith('blob:')) {
+          finalPoster = candidatePoster;
+        } else if (candidatePoster.includes('wsrv.nl') || candidatePoster.includes('images.weserv.nl')) {
+          finalPoster = candidatePoster;
+        } else if (/^https?:\/\//i.test(candidatePoster)) {
+          finalPoster = 'https://wsrv.nl/?url=' + encodeURIComponent(candidatePoster) + '&w=400&output=webp&q=85';
+        } else {
+          finalPoster = candidatePoster;
+        }
+      }
+
+      const canonicalId = tmdbId
+        ? ('tmdb-' + (isTv ? 'series' : 'movie') + '-' + tmdbId)
+        : ('nm-' + String(raw.id));
+
+      return {
+        canonicalId,
+        externalId: String(raw.id),
+        tmdbId: tmdbId || null,
+        contentType: isTv ? 'tv' : 'movie',
+        type: isTv ? 'tv' : 'movie',
+        title,
+        year,
+        poster: finalPoster,
+        backdrop: poster || finalPoster,
+        rating: raw.vote_average ? Number(parseFloat(raw.vote_average).toFixed(1)) : 7.5,
+        genres: raw.genre || [],
+        language: raw.cn || ''
+      };
+    }
+
+    // Handle /api/netmirror/search?q=...
+    if (nmFeedSlug === 'search') {
+      const q = queryParams.get('q') || '';
+      if (!q || q.length < 2) {
+        res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'public, max-age=60' });
+        res.end(JSON.stringify({ ok: true, feed: 'search', items: [] }));
+        return;
+      }
+      const searchUrl = NM_SEARCH_BASE + '/' + encodeURIComponent(q.replace(/\//g, '--slash--').replace(/\s+/g, '+')) + '?page=0';
+      const sReq = https.get(searchUrl, { headers: { 'User-Agent': NM_UA }, timeout: 5000 }, (sRes) => {
+        let buf = '';
+        sRes.on('data', c => buf += c);
+        sRes.on('end', async () => {
+          try {
+            const j = JSON.parse(buf);
+            const items = (await Promise.all((j.results || []).slice(0, 20).map(nmNormalize))).filter(Boolean);
+            res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'public, max-age=60' });
+            res.end(JSON.stringify({ ok: true, feed: 'search', items }));
+          } catch(e) {
+            res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+            res.end(JSON.stringify({ ok: true, feed: 'search', items: [] }));
+          }
+        });
+      });
+      sReq.on('error', () => {
+        res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+        res.end(JSON.stringify({ ok: true, feed: 'search', items: [] }));
+      });
+      return;
+    }
+
+    const nmEndpoint = NM_FEED_MAP[nmFeedSlug];
+    if (!nmEndpoint) {
+      res.writeHead(404, { 'Content-Type': 'application/json; charset=utf-8' });
+      res.end(JSON.stringify({ error: 'Unknown netmirror feed: ' + nmFeedSlug }));
+      return;
+    }
+
+    nmFetch(nmEndpoint, async (err, data) => {
+      const raw = (data && data.results ? data.results : []).slice(0, nmLimit);
+      // Resolve all items in parallel (TMDB lookups are concurrent)
+      const items = (await Promise.all(raw.map(nmNormalize))).filter(Boolean);
+
+      res.writeHead(200, {
+        'Content-Type': 'application/json; charset=utf-8',
+        'Cache-Control': 'public, max-age=900, stale-while-revalidate=3600'
+      });
+      res.end(JSON.stringify({ ok: true, feed: nmFeedSlug, items }));
+    });
+    return;
+  }
+
 
   // 3. 🚨 ANTI-DATA THEFT SHIELD: Strictly block direct raw database dumps
   if (reqPath.startsWith('/data/')) {
@@ -857,71 +1129,9 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
-  // 4b. API: Poster Resolver Proxy (Protects TMDB key from client-side exposure)
+  // 4b. API: Poster Resolver Proxy (Unified with apiCore & wsrv.nl proxy)
   if (reqPath === '/api/poster-resolver') {
-    const title = queryParams.get('title') || '';
-    const imdbId = queryParams.get('imdbId') || '';
-    const type = queryParams.get('type') || 'movie';
-    if (!title && !imdbId) {
-      res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
-      res.end(JSON.stringify({ error: 'Title or imdbId parameter required' }));
-      return;
-    }
-
-    let poster = null;
-    let backdrop = null;
-    let tmdbId = null;
-
-    // Tier 1: If authentic IMDb ID is passed (starts with tt), use TMDB /find (100% precision)
-    if (imdbId && imdbId.startsWith('tt')) {
-      const findUrl = `https://api.tmdb.org/3/find/${encodeURIComponent(imdbId)}?api_key=${SECRETS.TMDB_API_KEY}&external_source=imdb_id`;
-      const findData = await new Promise(resolve => {
-        https.get(findUrl, { headers: { 'User-Agent': 'Mozilla/5.0', 'Accept': 'application/json' }, timeout: 4000 }, r => {
-          let d = ''; r.on('data', c => d += c); r.on('end', () => { try { resolve(JSON.parse(d)); } catch(e) { resolve(null); } });
-        }).on('error', () => resolve(null));
-      });
-      if (findData) {
-        const item = (findData.movie_results && findData.movie_results[0]) || (findData.tv_results && findData.tv_results[0]);
-        if (item) {
-          tmdbId = item.id;
-          if (item.poster_path) poster = `https://image.tmdb.org/t/p/w500${item.poster_path}`;
-          if (item.backdrop_path) backdrop = `https://image.tmdb.org/t/p/original${item.backdrop_path}`;
-        }
-      }
-    }
-
-    // Tier 2: Check local authentic catalog summary
-    if (!poster && title) {
-      const clean = title.replace(/\(\d{4}\)/g, '').replace(/^(NetFlix|Prime|Disney\+|Hotstar|SonyLIV|ZEE5)\s+/i, '').trim();
-      const localItem = getCatalogSummary().find(x => x.title && x.title.toLowerCase() === clean.toLowerCase());
-      if (localItem && localItem.poster && !localItem.poster.includes('no-poster') && !localItem.poster.includes('placehold')) {
-        poster = localItem.poster;
-        backdrop = localItem.backdrop || localItem.poster;
-      }
-    }
-
-    // Tier 3: Search TMDB with verified title & year matching (never returns an unrelated movie)
-    if (!poster && title) {
-      const clean = title.replace(/\(\d{4}\)/g, '').replace(/^(NetFlix|Prime|Disney\+|Hotstar|SonyLIV|ZEE5)\s+/i, '').trim();
-      tmdbId = await resolveTmdbId(clean, '', type, imdbId);
-      if (tmdbId) {
-        const endpoint = (type === 'series' || type === 'anime' || type === 'kdrama') ? 'tv' : 'movie';
-        const url = `https://api.tmdb.org/3/${endpoint}/${tmdbId}?api_key=${SECRETS.TMDB_API_KEY}`;
-        const data = await new Promise(resolve => {
-          https.get(url, { headers: { 'User-Agent': 'Mozilla/5.0', 'Accept': 'application/json' }, timeout: 4000 }, res => {
-            let d = ''; res.on('data', c => d += c); res.on('end', () => { try { resolve(JSON.parse(d)); } catch(e) { resolve(null); } });
-          }).on('error', () => resolve(null));
-        });
-        if (data) {
-          if (data.poster_path) poster = `https://image.tmdb.org/t/p/w500${data.poster_path}`;
-          if (data.backdrop_path) backdrop = `https://image.tmdb.org/t/p/original${data.backdrop_path}`;
-        }
-      }
-    }
-
-    res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'public, max-age=86400' });
-    res.end(JSON.stringify({ success: true, poster, backdrop, tmdbId }));
-    return;
+    return handlePosterResolver(req, res);
   }
 
   // 4c. API: Secure Image Proxy (/api/image-proxy?url=...) with Strict SSRF Defense

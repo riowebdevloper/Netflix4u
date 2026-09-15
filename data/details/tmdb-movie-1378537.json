@@ -1,0 +1,201 @@
+{
+  "id": "tmdb-movie-1378537",
+  "canonicalId": "tmdb-movie-1378537",
+  "externalProvider": "tmdb",
+  "externalId": "1378537",
+  "tmdbId": "1378537",
+  "imdbId": "tt34339725",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "Mirzapur: The Movie",
+  "canonicalTitle": "Mirzapur: The Movie",
+  "originalTitle": "मिर्ज़ापुर - द मूवी",
+  "overview": "The battle for Mirzapur’s throne intensifies as old enemies resurface and a new threat emerges in the form of Babban Babua, a ruthless businessman from Jaisalmer with ambitions of his own. As the Tripathis face enemies from both the past and present, loyalties are tested while Guddu and Bablu Pandit fight to establish themselves in the power struggle for Mirzapur.",
+  "description": "The battle for Mirzapur’s throne intensifies as old enemies resurface and a new threat emerges in the form of Babban Babua, a ruthless businessman from Jaisalmer with ambitions of his own. As the Tripathis face enemies from both the past and present, loyalties are tested while Guddu and Bablu Pandit fight to establish themselves in the power struggle for Mirzapur.",
+  "shortDescription": "The battle for Mirzapur’s throne intensifies as old enemies resurface and a new threat emerges in the form of Babban Bab",
+  "year": 2026,
+  "rating": 6.9,
+  "votes": "0.0K",
+  "quality": "FHD",
+  "duration": "3h 17m",
+  "genres": [
+    "Action",
+    "Crime",
+    "Drama",
+    "Thriller"
+  ],
+  "categories": [
+    "Action",
+    "Crime",
+    "Drama",
+    "Thriller"
+  ],
+  "language": "Hindi",
+  "country": "IN",
+  "poster": "https://image.tmdb.org/t/p/w500/cdDKdCRyq6BYuNblpKUYqRPWvEg.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/nTkQBI8ldvPByIkxsemGxtKlr8E.jpg",
+  "trailerUrl": null,
+  "trailer": null,
+  "cast": [
+    {
+      "id": "1179460",
+      "name": "Pankaj Tripathi",
+      "character": "Akhandanand 'Kaleen' Tripathi",
+      "photo": "https://image.tmdb.org/t/p/w185/f3Vxz0QB7PHeyPcXrfJX14Xkxnu.jpg"
+    },
+    {
+      "id": "492791",
+      "name": "Ali Fazal",
+      "character": "Govind 'Guddu' Pandit",
+      "photo": "https://image.tmdb.org/t/p/w185/lLDmx3RDuMXObASvdFXeUh1GOgd.jpg"
+    },
+    {
+      "id": "1158934",
+      "name": "Divyendu Sharma",
+      "character": "Phoolchand 'Munna' Tripathi",
+      "photo": "https://image.tmdb.org/t/p/w185/rGlCCQtOBiNJULfB5w0FXgPPKw0.jpg"
+    },
+    {
+      "id": "1485519",
+      "name": "Jitendra Kumar",
+      "character": "Vinay 'Bablu' Pandit",
+      "photo": "https://image.tmdb.org/t/p/w185/562Mucw9YaDHUlFBqK5aot3H2lJ.jpg"
+    },
+    {
+      "id": "85882",
+      "name": "Ravi Kishan",
+      "character": "Babban Babua",
+      "photo": "https://image.tmdb.org/t/p/w185/rkUTRk0tuA98RepP9jhgcCbhHqy.jpg"
+    },
+    {
+      "id": "86243",
+      "name": "Rasika Dugal",
+      "character": "Beena Tripathi",
+      "photo": "https://image.tmdb.org/t/p/w185/hDLEHqYoIY6ZGrbmlsUJpwn9nl3.jpg"
+    },
+    {
+      "id": "3583080",
+      "name": "Mohit Malik",
+      "character": "Birju Lohar",
+      "photo": "https://image.tmdb.org/t/p/w185/kzjU6RtL3S0HtvIE0VUhvLzSZDu.jpg"
+    },
+    {
+      "id": "1246564",
+      "name": "Sheeba Chaddha",
+      "character": "Vasudha Pandit",
+      "photo": "https://image.tmdb.org/t/p/w185/yWBQeR47GmnGJn33w4c8QzakkSh.jpg"
+    },
+    {
+      "id": "1708061",
+      "name": "Abhishek Banerjee",
+      "character": "'Compounder' Subodh",
+      "photo": "https://image.tmdb.org/t/p/w185/cfyRkFBFfodBbNKbsTc8eG9YtVj.jpg"
+    },
+    {
+      "id": "2176508",
+      "name": "Shriya Pilgaonkar",
+      "character": "Swaragini 'Sweety' Gupta",
+      "photo": "https://image.tmdb.org/t/p/w185/XhfCTuNJHkH1irx1cWE1gVVrn9.jpg"
+    },
+    {
+      "id": "1469936",
+      "name": "Shweta Tripathi Sharma",
+      "character": "Gajgamini 'Golu' Gupta",
+      "photo": "https://image.tmdb.org/t/p/w185/xZ0pk5qKzfK1oB54Mmfo1lUSSEu.jpg"
+    },
+    {
+      "id": "130679",
+      "name": "Sonal Chauhan",
+      "character": "Mumtaz Bibi",
+      "photo": "https://image.tmdb.org/t/p/w185/6kZGegjH3UNDYEEKJ4OTEZcuKeA.jpg"
+    },
+    {
+      "id": "110707",
+      "name": "Sushant Singh",
+      "character": "Bhairav Singh Karnawat",
+      "photo": "https://image.tmdb.org/t/p/w185/cAXp9JphzW3E90OHhxyBB7JXyiO.jpg"
+    },
+    {
+      "id": "1197124",
+      "name": "Rajesh Tailang",
+      "character": "Adv. Ramakant Pandit",
+      "photo": "https://image.tmdb.org/t/p/w185/ou1zcrNfhXBKcpnPgtKs64SRGXm.jpg"
+    },
+    {
+      "id": "53377",
+      "name": "Kulbhushan Kharbanda",
+      "character": "Satyanand 'Bauji' Tripathi",
+      "photo": "https://image.tmdb.org/t/p/w185/iboGvJPKZ98kU8YKgomn9Jpk0XN.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 1,
+  "status": "PUBLISHED",
+  "links": [
+    {
+      "url": "https://nexdrive.love/genxfm910740903425180/",
+      "quality": "480p",
+      "size": "630MB",
+      "label": "Click Here To Download [630MB]",
+      "source": "Direct Ultra HD",
+      "isCloud": false,
+      "isDotmovies": true,
+      "canonicalId": "tmdb-movie-1378537",
+      "season": null,
+      "episode": null,
+      "isPack": false
+    },
+    {
+      "url": "https://nexdrive.love/genxfm776893648085437/",
+      "quality": "720p",
+      "size": "1.5GB",
+      "label": "Click Here To Download [1.5GB]",
+      "source": "Direct Ultra HD",
+      "isCloud": false,
+      "isDotmovies": true,
+      "canonicalId": "tmdb-movie-1378537",
+      "season": null,
+      "episode": null,
+      "isPack": false
+    },
+    {
+      "url": "https://nexdrive.love/genxfm011427785387803/",
+      "quality": "1080p",
+      "size": "3.6GB",
+      "label": "Click Here To Download [3.6GB]",
+      "source": "Direct Ultra HD",
+      "isCloud": false,
+      "isDotmovies": true,
+      "canonicalId": "tmdb-movie-1378537",
+      "season": null,
+      "episode": null,
+      "isPack": false
+    },
+    {
+      "url": "https://nexdrive.love/genxfm146623256425930/",
+      "quality": "1080p",
+      "size": "9.6GB",
+      "label": "Click Here To Download [9.6GB]",
+      "source": "Direct Ultra HD",
+      "isCloud": false,
+      "isDotmovies": true,
+      "canonicalId": "tmdb-movie-1378537",
+      "season": null,
+      "episode": null,
+      "isPack": false
+    },
+    {
+      "url": "https://nexdrive.love/genxfm424289049033224/",
+      "quality": "1080p",
+      "size": "19GB",
+      "label": "Click Here To Download [19GB]",
+      "source": "Direct Ultra HD",
+      "isCloud": false,
+      "isDotmovies": true,
+      "canonicalId": "tmdb-movie-1378537",
+      "season": null,
+      "episode": null,
+      "isPack": false
+    }
+  ]
+}

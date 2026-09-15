@@ -146,11 +146,11 @@
   }
 
   // ─── TITLE MODAL ───
-  function openTitleModal(tmdbId, type, pushHistory, canonicalId, imdbId) {
+  function openTitleModal(tmdbId, type, pushHistory, canonicalId, imdbId, titleHint, yearHint, posterHint, backdropHint) {
     if (window.__closeSearchOverlay) window.__closeSearchOverlay();
     var lookupId = canonicalId || tmdbId;
     if (pushHistory !== false) {
-      historyStack.push({ tmdbId: tmdbId, type: type, canonicalId: canonicalId, imdbId: imdbId });
+      historyStack.push({ tmdbId: tmdbId, type: type, canonicalId: canonicalId, imdbId: imdbId, title: titleHint, year: yearHint, poster: posterHint, backdrop: backdropHint });
       try {
         var titleHash = '#title=' + lookupId + '-' + type;
         if (location.hash !== titleHash && !location.hash.startsWith('#w=')) {
@@ -178,16 +178,23 @@
       '</div>';
     titleModal.scrollTop = 0;
 
-    fetchTitleDetails(lookupId, type, canonicalId, imdbId);
+    fetchTitleDetails(lookupId, type, canonicalId, imdbId, titleHint, yearHint, posterHint, backdropHint);
   }
 
-  async function fetchTitleDetails(lookupId, type, canonicalId, imdbId) {
+  async function fetchTitleDetails(lookupId, type, canonicalId, imdbId, titleHint, yearHint, posterHint, backdropHint) {
     try {
-      var res = await fetch('/api/catalog/title/' + encodeURIComponent(type) + '/' + encodeURIComponent(lookupId));
+      var query = '?title=' + encodeURIComponent(titleHint || '') +
+                  '&year=' + encodeURIComponent(yearHint || '') +
+                  '&poster=' + encodeURIComponent(posterHint || '') +
+                  '&backdrop=' + encodeURIComponent(backdropHint || '');
+      var res = await fetch('/api/catalog/title/' + encodeURIComponent(type) + '/' + encodeURIComponent(lookupId) + query);
       if (!res.ok) throw new Error('HTTP ' + res.status);
       var data = await res.json();
       data.canonicalId = data.canonicalId || canonicalId || lookupId;
       if (imdbId && !data.imdbId) data.imdbId = imdbId;
+      if ((!data.title || data.title === 'Unknown Title') && titleHint) data.title = titleHint;
+      if (!data.poster && posterHint) data.poster = posterHint;
+      if (!data.backdrop && (backdropHint || posterHint)) data.backdrop = backdropHint || posterHint;
       renderTitleModal(data, lookupId, type);
     } catch (err) {
       titleModalBody.innerHTML =
@@ -202,6 +209,22 @@
   function renderTitleModal(data, tmdbId, type) {
     if (titleModalHeaderTitle) {
       titleModalHeaderTitle.textContent = data.title || '';
+    }
+
+    // Auto save to Continue Watching upon opening details
+    if (window.__saveContinueWatching && (data.tmdbId || data.canonicalId)) {
+      window.__saveContinueWatching({
+        tmdbId: data.tmdbId,
+        canonicalId: data.canonicalId || tmdbId,
+        title: data.title || 'Netflix4U',
+        poster: data.poster || data.backdrop || '',
+        backdrop: data.backdrop || data.poster || '',
+        type: type || data.type || 'movie',
+        year: data.year || '',
+        se: data.initialSeason || 1,
+        ep: 1,
+        progress: 20
+      });
     }
 
     var isTv = data.type === 'tv' || type === 'tv';
@@ -336,12 +359,12 @@
       '<!-- Hero Backdrop -->' +
       '<div class="relative">' +
         '<div class="aspect-video sm:aspect-[21/9] overflow-hidden bg-zinc-950 relative">' +
-          (backdropUrl ? '<img src="' + backdropUrl + '" alt="" class="w-full h-full object-cover" referrerpolicy="no-referrer" onerror="this.onerror=null;if(\'' + posterUrl + '\'){this.src=\'' + posterUrl + '\';}else{this.style.display=\'none\';}" />' : (posterUrl ? '<img src="' + posterUrl + '" alt="" class="w-full h-full object-cover blur-sm opacity-50" />' : '')) +
+          (backdropUrl ? '<img src="' + backdropUrl + '" alt="" class="w-full h-full object-cover" referrerpolicy="no-referrer" onerror="this.onerror=null;' + (posterUrl ? 'this.src=\'' + posterUrl + '\';' : 'this.style.display=\'none\';') + '" />' : (posterUrl ? '<img src="' + posterUrl + '" alt="" class="w-full h-full object-cover blur-sm opacity-50" />' : '')) +
           '<div class="absolute inset-0 bg-gradient-to-t from-[#15151c] via-[#15151c]/40 to-transparent"></div>' +
         '</div>' +
         '<div class="absolute inset-x-0 bottom-0 p-4 sm:p-6">' +
           '<div class="flex flex-col sm:flex-row gap-4 items-end">' +
-            (posterUrl ? '<img src="' + posterUrl + '" alt="' + escapeHtml(data.title) + '" referrerpolicy="no-referrer" class="hidden sm:block w-28 lg:w-32 aspect-[2/3] object-cover rounded-lg shadow-2xl ring-1 ring-white/10 shrink-0" onerror="if(window.__healPoster){window.__healPoster(this);}else{this.onerror=null;this.src=window.__getPosterSvg(this.alt);}" />' : '') +
+            '<img src="' + (posterUrl || (window.__getPosterSvg ? window.__getPosterSvg(data.title) : '')) + '" alt="' + escapeHtml(data.title) + '" referrerpolicy="no-referrer" class="hidden sm:block w-28 lg:w-32 aspect-[2/3] object-cover rounded-lg shadow-2xl ring-1 ring-white/10 shrink-0" onerror="if(window.__healPoster){window.__healPoster(this);}else{this.onerror=null;this.src=window.__getPosterSvg?window.__getPosterSvg(this.alt):\'\';}" />' +
             '<div class="flex-1 min-w-0">' +
               '<h2 class="text-2xl sm:text-3xl md:text-4xl font-black leading-tight mb-2 tracking-tight text-white" style="text-shadow: 0 2px 16px rgba(0,0,0,0.8);">' + escapeHtml(data.title) + '</h2>' +
               (data.tagline ? '<p class="text-xs sm:text-sm text-white/70 italic mb-2 line-clamp-1">' + escapeHtml(data.tagline) + '</p>' : '') +
@@ -936,8 +959,10 @@
     var safeFallback = unwrapImageUrl(fallbackBackdrop || '');
 
     return episodes.map(function(ep) {
-      var rawStill = ep.still_path || fallbackBackdrop || '';
-      var still = unwrapImageUrl(rawStill);
+      var rawStill = ep.still_path
+        ? (ep.still_path.indexOf('http') === 0 ? ep.still_path : ('https://image.tmdb.org/t/p/w300' + ep.still_path))
+        : (fallbackBackdrop || '');
+      var still = unwrapImageUrl(rawStill, 300);
       var epNum = ep.episode_number || 1;
       var epTitle = ep.name || ('Episode ' + epNum);
       var duration = ep.runtime ? ep.runtime + 'm' : '45m';
@@ -948,9 +973,9 @@
         '<div class="flex items-center gap-3 w-full sm:w-auto">' +
           '<span class="text-sm font-bold text-white/40 w-6 text-center">' + epNum + '</span>' +
           '<div class="relative w-28 sm:w-36 aspect-video rounded-lg overflow-hidden bg-white/5 shrink-0">' +
-            (still ? '<img src="' + still + '" alt="' + escapeHtml(epTitle) + '" class="w-full h-full object-cover" loading="lazy" onerror="this.onerror=null;if(\'' + escapeHtml(safeFallback) + '\'){this.src=\'' + escapeHtml(safeFallback) + '\';}else{this.style.display=\'none\';}" />' : '') +
+            (still ? '<img src="' + still + '" alt="' + escapeHtml(epTitle) + '" class="w-full h-full object-cover" loading="lazy" onerror="this.onerror=null;' + (safeFallback ? 'this.src=\'' + escapeHtml(safeFallback) + '\';' : 'this.style.display=\'none\';') + '" />' : (safeFallback ? '<img src="' + safeFallback + '" alt="' + escapeHtml(epTitle) + '" class="w-full h-full object-cover" />' : '')) +
             '<div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">' +
-              '<button type="button" data-modal="watch" data-tmdbid="' + tmdbId + '" data-type="tv" data-se="' + seasonNum + '" data-ep="' + epNum + '" data-title="' + escapeHtml(fullTitle) + '" data-year="' + (parentYear || '') + '" data-imdbid="' + (parentImdbId || '') + '" class="w-8 h-8 rounded-full bg-white text-black flex items-center justify-center shadow-lg transform active:scale-95 cursor-pointer">' +
+              '<button type="button" data-modal="watch" data-tmdbid="' + tmdbId + '" data-type="tv" data-se="' + seasonNum + '" data-ep="' + epNum + '" data-title="' + escapeHtml(fullTitle) + '" data-year="' + (parentYear || '') + '" data-imdbid="' + (parentImdbId || '') + '" data-poster="' + escapeHtml(still || safeFallback || '') + '" data-backdrop="' + escapeHtml(still || safeFallback || '') + '" class="w-8 h-8 rounded-full bg-white text-black flex items-center justify-center shadow-lg transform active:scale-95 cursor-pointer">' +
                 '<svg class="w-4 h-4 ml-0.5" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>' +
               '</button>' +
             '</div>' +
@@ -968,7 +993,7 @@
           '<p class="text-xs text-white/60 line-clamp-2 leading-relaxed">' + escapeHtml(overview) + '</p>' +
         '</div>' +
         '<div class="flex items-center gap-2 self-end sm:self-center shrink-0">' +
-          '<button type="button" data-modal="watch" data-tmdbid="' + tmdbId + '" data-type="tv" data-se="' + seasonNum + '" data-ep="' + epNum + '" data-title="' + escapeHtml(fullTitle) + '" data-year="' + (parentYear || '') + '" data-imdbid="' + (parentImdbId || '') + '" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white font-semibold text-xs flex items-center gap-1.5 transition cursor-pointer">' +
+          '<button type="button" data-modal="watch" data-tmdbid="' + tmdbId + '" data-type="tv" data-se="' + seasonNum + '" data-ep="' + epNum + '" data-title="' + escapeHtml(fullTitle) + '" data-year="' + (parentYear || '') + '" data-imdbid="' + (parentImdbId || '') + '" data-poster="' + escapeHtml(still || safeFallback || '') + '" data-backdrop="' + escapeHtml(still || safeFallback || '') + '" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white font-semibold text-xs flex items-center gap-1.5 transition cursor-pointer">' +
             '<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>' +
             '<span>Play</span>' +
           '</button>' +
@@ -993,6 +1018,9 @@
       titleModalBody.innerHTML = '';
       if (titleModalHeaderTitle) titleModalHeaderTitle.textContent = '';
       unlockBodyScroll();
+      if (window.__renderContinueWatchingRail) {
+        window.__renderContinueWatchingRail();
+      }
     }, 280);
   }
 
@@ -1015,7 +1043,9 @@
     { id: 's4', name: 'Server 4 (VidSrc PM)', tag: 'Global CDN', tagClass: 'tag-global', desc: 'VidSrc PM High Uptime Global Mirror' },
     { id: 's5', name: 'Server 5 (AutoEmbed)', tag: 'Backup', tagClass: 'tag-fast', desc: 'AutoEmbed Reliable CDN Backup' },
     { id: 's6', name: 'Server 6 (2Embed Global)', tag: 'Universal', tagClass: 'tag-global', desc: '2Embed Global High-Speed Server' },
-    { id: 's7', name: 'Server 7 (VidSrc In)', tag: 'Fast Mirror', tagClass: 'tag-multi', desc: 'VidSrc In High-Performance Mirror' }
+    { id: 's7', name: 'Server 7 (VidSrc In)', tag: 'Fast Mirror', tagClass: 'tag-multi', desc: 'VidSrc In High-Performance Mirror' },
+    { id: 's8', name: 'Server 8 (SuperEmbed)', tag: 'Multi CDN', tagClass: 'tag-fast', desc: 'SuperEmbed High Uptime Multi-Stream' },
+    { id: 's9', name: 'Server 9 (RiveStream)', tag: 'Fast Stream', tagClass: 'tag-global', desc: 'RiveStream Adaptive High-Speed Stream' }
   ];
 
   // Auto-failover & orientation state
@@ -1023,7 +1053,7 @@
   var autoSwitchTimer = null;
   var autoSwitchIndex = 0;
   var isPlaybackConfirmed = false;
-  var autoSwitchOrder = ['s1', 's2', 's3', 's4', 's5', 's6', 's7'];
+  var autoSwitchOrder = ['s1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9'];
   var watchTopBarTimer = null;
   var currentAutoSwitchToken = 0;
   var activeProbeController = null;
@@ -1074,16 +1104,7 @@
   function resetWatchTopBarTimer() {
     if (!watchTopBar) return;
     watchTopBar.classList.remove('watch-bar-hidden');
-    if (watchTopBarTimer) clearTimeout(watchTopBarTimer);
-    watchTopBarTimer = setTimeout(function() {
-      if (watchModal && !watchModal.classList.contains('hidden')) {
-        var isServerOpen = watchServerMenu && !watchServerMenu.classList.contains('hidden');
-        var isExtOpen = watchExtMenu && !watchExtMenu.classList.contains('hidden');
-        if (!isServerOpen && !isExtOpen) {
-          watchTopBar.classList.add('watch-bar-hidden');
-        }
-      }
-    }, 3500);
+    // Top bar stays permanently visible so Back button and all Streaming Servers are always accessible during playback!
   }
 
   if (watchModal) {
@@ -1367,13 +1388,13 @@
       hasValidStreamSource = true;
     }
 
-    if (!hasValidStreamSource) {
+    function showUnavailableBanner(streamTitle) {
       watchModalIframe.src = 'about:blank';
       watchModal.classList.remove('hidden');
       watchModal.setAttribute('aria-hidden', 'false');
       lockBodyScroll();
       document.body.classList.add('watch-active');
-      if (watchMetaTitle) watchMetaTitle.textContent = title || 'Netflix4U';
+      if (watchMetaTitle) watchMetaTitle.textContent = streamTitle || 'Netflix4U';
       var fallbackBanner = document.getElementById('watch-unavailable-banner');
       if (!fallbackBanner) {
         fallbackBanner = document.createElement('div');
@@ -1385,8 +1406,28 @@
       fallbackBanner.innerHTML =
         '<div class="w-16 h-16 rounded-full bg-red-600/20 text-red-500 flex items-center justify-center mb-2"><svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>' +
         '<h3 class="text-xl font-bold text-white">Streaming source unavailable for this title.</h3>' +
-        '<p class="text-sm text-white/60 max-w-md">Our streaming CDN is searching for verified playback sources for "' + escapeHtml(title) + '". You can download this title directly from the title details page.</p>' +
+        '<p class="text-sm text-white/60 max-w-md">Our streaming CDN is searching for verified playback sources for "' + escapeHtml(streamTitle) + '". You can download this title directly from the title details page.</p>' +
         '<button onclick="window.Netflix4uModal.closeWatch();" class="px-6 py-2.5 rounded-lg bg-red-600 hover:bg-red-700 text-white font-semibold text-sm transition cursor-pointer">Back to Details</button>';
+    }
+
+    if (!hasValidStreamSource) {
+      if (title || canonicalId) {
+        var queryTarget = canonicalId || title;
+        fetch('/api/catalog/title/' + encodeURIComponent(type) + '/' + encodeURIComponent(queryTarget) + '?title=' + encodeURIComponent(title || ''))
+          .then(function(res) { return res.json(); })
+          .then(function(resolved) {
+            var rawT = resolved && resolved.tmdbId ? String(resolved.tmdbId).replace(/^tmdb-(?:movie|series)-/, '') : '';
+            if (/^\d{1,9}$/.test(rawT) && Number(rawT) > 0) {
+              openWatchModal(rawT, type, season, episode, backdrop || resolved.backdrop, title || resolved.title, year || resolved.year, imdbId || resolved.imdbId, canonicalId || resolved.canonicalId, poster || resolved.poster);
+            } else {
+              showUnavailableBanner(title);
+            }
+          }).catch(function() {
+            showUnavailableBanner(title);
+          });
+        return;
+      }
+      showUnavailableBanner(title);
       return;
     }
 
@@ -1462,7 +1503,13 @@
         : 'https://www.2embed.cc/embed/' + tmdbId,
       s7: isTv
         ? 'https://vidsrc.in/embed/tv/' + tmdbId + '/' + season + '/' + episode
-        : 'https://vidsrc.in/embed/movie/' + tmdbId
+        : 'https://vidsrc.in/embed/movie/' + tmdbId,
+      s8: isTv
+        ? 'https://multiembed.mov/?video_id=' + tmdbId + '&tmdb=1&s=' + season + '&e=' + episode
+        : 'https://multiembed.mov/?video_id=' + tmdbId + '&tmdb=1',
+      s9: isTv
+        ? 'https://rivestream.live/embed?type=tv&id=' + tmdbId + '&season=' + season + '&episode=' + episode
+        : 'https://rivestream.live/embed?type=movie&id=' + tmdbId
     };
 
     currentWatchServer = 's1';
@@ -2006,9 +2053,18 @@
         var canonicalId = modalTrigger.dataset.canonicalId;
         var imdbId = modalTrigger.dataset.imdbid;
         var type = modalTrigger.dataset.type || 'movie';
+        var title = modalTrigger.dataset.title || '';
+        var year = modalTrigger.dataset.year || '';
+        var poster = modalTrigger.dataset.poster || '';
+        var backdrop = modalTrigger.dataset.backdrop || '';
+        var card = modalTrigger.closest('.nm-card') || modalTrigger.closest('.card') || modalTrigger;
+        var img = card.querySelector('img');
+        if (!poster && img && img.src) poster = img.src;
+        if (!backdrop && poster) backdrop = poster;
+        if (!title && img && img.alt) title = img.alt;
         if (!tmdbId && !canonicalId) return;
         e.preventDefault();
-        openTitleModal(tmdbId, type, true, canonicalId, imdbId);
+        openTitleModal(tmdbId, type, true, canonicalId, imdbId, title, year, poster, backdrop);
       } else if (modalType === 'watch') {
         var tmdbId = modalTrigger.dataset.tmdbid;
         var canonicalId = modalTrigger.dataset.canonicalId;
@@ -2020,6 +2076,11 @@
         var title = modalTrigger.dataset.title || '';
         var year = modalTrigger.dataset.year || '';
         var imdbId = modalTrigger.dataset.imdbid || '';
+        var card = modalTrigger.closest('.nm-card') || modalTrigger.closest('.card') || modalTrigger.closest('#title-modal') || modalTrigger;
+        var img = card.querySelector('img');
+        if (!poster && img && img.src) poster = img.src;
+        if (!backdrop && poster) backdrop = poster;
+        if (!title && img && img.alt) title = img.alt;
         if (!tmdbId && !canonicalId) return;
         e.preventDefault();
         openWatchModal(tmdbId, type, se, ep, backdrop, title, year, imdbId, canonicalId, poster);

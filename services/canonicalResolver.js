@@ -29,25 +29,31 @@ let harvestedIndexCache = null;
 const tmdbMemoryCache = new Map();
 
 /**
- * Cleanly unwrap proxy URLs and convert relative /uploads/ paths to dotmobiz.com
+ * Safely normalize image URLs and route external images through wsrv.nl proxy
  */
-function unwrapImageUrl(url) {
+function unwrapImageUrl(url, width) {
   if (!url || typeof url !== 'string') return '';
   let u = url.trim();
-  if (u.includes('wsrv.nl/?url=')) {
-    const m = u.match(/[?&]url=([^&#]+)/);
-    if (m) {
-      try {
-        u = decodeURIComponent(m[1]);
-        if (u.includes('wsrv.nl/?url=')) {
-          return unwrapImageUrl(u);
-        }
-      } catch (e) { }
-    }
-  }
+  if (!u) return '';
+  if (u.startsWith('data:image') || u.startsWith('blob:')) return u;
   if (u.startsWith('//')) u = 'https:' + u;
   if (u.startsWith('/uploads/')) u = 'https://dotmobiz.com' + u;
   if (u.startsWith('image.tmdb.org/')) u = 'https://' + u;
+
+  // If already routed through wsrv.nl, ensure webp output
+  if (u.includes('wsrv.nl') || u.includes('images.weserv.nl')) {
+    if (!u.includes('output=webp')) {
+      u += (u.includes('?') ? '&' : '?') + 'output=webp';
+    }
+    return u;
+  }
+
+  // Proxy external HTTP/HTTPS images through wsrv.nl for fast caching and ISP bypass
+  if (/^https?:\/\//i.test(u)) {
+    const w = width ? `&w=${width}` : '&w=400';
+    return `https://wsrv.nl/?url=${encodeURIComponent(u)}${w}&output=webp&q=85`;
+  }
+
   return u;
 }
 

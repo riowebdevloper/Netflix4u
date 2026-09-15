@@ -29,6 +29,10 @@ Screenshot*
 *.report.html
 *.report.json
 *.pdf
+*.mp4
+*.mkv
+*.webm
+*.avi
 favicon
 
 # OS & Editor generated files

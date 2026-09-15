@@ -430,17 +430,20 @@ body {
 
 /* ─── Net27 Watch Player Top Bar & Server Dropdown ─── */
 #watch-top-bar {
-  background: linear-gradient(180deg, rgba(10, 10, 15, 0.95) 0%, rgba(10, 10, 15, 0.75) 70%, transparent 100%);
+  background: rgba(11, 11, 18, 0.98);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
+  position: relative !important;
+  z-index: 75 !important;
+  flex-shrink: 0 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  pointer-events: auto !important;
 }
 
 #watch-top-bar.watch-bar-hidden {
-  opacity: 0 !important;
-  transform: translateY(-100%) !important;
-  pointer-events: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+  pointer-events: auto !important;
 }
 
 #watch-rotate-btn:hover {

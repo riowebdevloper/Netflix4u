@@ -6,31 +6,58 @@
   'use strict';
 
   function getPosterFallback(title) {
-    var t = escapeHtml((title || 'Netflix4U').slice(0, 22));
-    return "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 450'><defs><linearGradient id='g' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%231a1028'/><stop offset='50%' stop-color='%2310111d'/><stop offset='100%' stop-color='%230a0a10'/></linearGradient></defs><rect width='300' height='450' fill='url(%23g)'/><circle cx='150' cy='180' r='42' fill='%23e50914' opacity='0.16'/><polygon points='142,165 168,180 142,195' fill='%23e50914'/><text x='150' y='260' font-family='sans-serif' font-size='15' font-weight='bold' fill='%23ffffff' text-anchor='middle' opacity='0.9'>" + encodeURIComponent(t) + "</text><text x='150' y='285' font-family='sans-serif' font-size='11' font-weight='700' fill='%23e50914' text-anchor='middle' letter-spacing='2'>NETFLIX4U</text></svg>";
+    var rawTitle = (title || 'Netflix4U').slice(0, 24);
+    var safeTitle = rawTitle.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;');
+    var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 450" width="300" height="450">' +
+      '<defs>' +
+        '<linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">' +
+          '<stop offset="0%" stop-color="#181126"/>' +
+          '<stop offset="50%" stop-color="#0e0f18"/>' +
+          '<stop offset="100%" stop-color="#07070a"/>' +
+        '</linearGradient>' +
+        '<linearGradient id="redG" x1="0%" y1="0%" x2="100%" y2="100%">' +
+          '<stop offset="0%" stop-color="#ff1e27"/>' +
+          '<stop offset="100%" stop-color="#b80007"/>' +
+        '</linearGradient>' +
+      '</defs>' +
+      '<rect width="300" height="450" fill="url(#bg)"/>' +
+      '<circle cx="150" cy="180" r="48" fill="url(#redG)" opacity="0.18"/>' +
+      '<circle cx="150" cy="180" r="32" fill="#e50914" opacity="0.25"/>' +
+      '<polygon points="144,166 164,180 144,194" fill="#ffffff"/>' +
+      '<text x="150" y="258" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="700" fill="#ffffff" text-anchor="middle" opacity="0.95">' + safeTitle + '</text>' +
+      '<rect x="95" y="280" width="110" height="22" rx="4" fill="#e50914" fill-opacity="0.15" stroke="#e50914" stroke-width="1" stroke-opacity="0.4"/>' +
+      '<text x="150" y="295" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="800" fill="#e50914" text-anchor="middle" letter-spacing="2">NETFLIX4U</text>' +
+    '</svg>';
+    return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
   }
   window.__getPosterSvg = getPosterFallback;
 
-  function unwrapImageUrl(url) {
+  function normalizeImageUrl(url, width) {
     if (!url || typeof url !== 'string') return '';
     var u = url.trim();
-    if (u.indexOf('wsrv.nl/?url=') !== -1) {
-      var m = u.match(/[?&]url=([^&#]+)/);
-      if (m) {
-        try {
-          u = decodeURIComponent(m[1]);
-          if (u.indexOf('wsrv.nl/?url=') !== -1) {
-            return unwrapImageUrl(u);
-          }
-        } catch (e) {}
-      }
-    }
+    if (!u) return '';
+    if (u.indexOf('data:image') === 0 || u.indexOf('blob:') === 0) return u;
     if (u.indexOf('//') === 0) u = 'https:' + u;
     if (u.indexOf('/uploads/') === 0) u = 'https://dotmobiz.com' + u;
     if (u.indexOf('image.tmdb.org/') === 0) u = 'https://' + u;
-    return u;
+
+    // If it is already a wsrv.nl proxy URL, ensure output=webp
+    if (u.indexOf('wsrv.nl') !== -1 || u.indexOf('images.weserv.nl') !== -1) {
+      if (u.indexOf('output=webp') === -1) {
+        u += (u.indexOf('?') === -1 ? '?' : '&') + 'output=webp';
+      }
+      return u;
+    }
+
+    // Proxy external HTTP/HTTPS images through wsrv.nl for fast caching, WebP, and ISP bypass
+    var w = width ? ('&w=' + width) : '&w=400';
+    return 'https://wsrv.nl/?url=' + encodeURIComponent(u) + w + '&output=webp&q=85';
+  }
+  function unwrapImageUrl(url) {
+    return normalizeImageUrl(url);
   }
   window.__unwrapImageUrl = unwrapImageUrl;
+  window.__normalizeImageUrl = normalizeImageUrl;
   var NO_POSTER_SVG = getPosterFallback('Netflix4U');
 
   var progressBar = document.getElementById('progress-bar');
@@ -199,9 +226,7 @@
       localStorage.setItem(CONTINUE_KEY, JSON.stringify(list));
       localStorage.setItem('n4u_continue_watching_v1', JSON.stringify(list));
     } catch(e) {}
-    if (currentPlatform === 'trending') {
-      renderContinueWatchingRail();
-    }
+    renderContinueWatchingRail();
   }
   function removeContinueWatching(id) {
     var list = getContinueWatching().filter(function(x) {
@@ -624,20 +649,45 @@
     var reg = '&region=IN';
     if (platform === 'trending') {
       return [
-        { key: 'trending-day', title: 'Top 10 Today', url: '/api/catalog/trending?window=day', ranked: true },
-        { key: 'new-releases', title: 'New Releases', url: '/api/catalog/discover?type=movie&sort=release&year_from=2025&year_to=2026' + reg },
-        { key: 'netflix-popular', title: 'Popular on Netflix', url: '/api/catalog/discover?platform=Netflix&type=movie' + reg, logo: PLATFORM_LOGOS.Netflix },
-        { key: 'prime-popular', title: 'Popular on Prime Video', url: '/api/catalog/discover?platform=PrimeVideo&type=movie' + reg, logo: PLATFORM_LOGOS.PrimeVideo },
-        { key: 'kdrama', title: 'Korean Dramas', url: '/api/catalog/discover?platform=Netflix&type=tv' + reg },
-        { key: 'anime', title: 'Anime Series', url: '/api/catalog/discover?platform=Crunchyroll&type=tv' + reg, logo: PLATFORM_LOGOS.Crunchyroll },
-        { key: 'action', title: 'Action Blockbusters', url: '/api/catalog/discover?type=movie&genre=' + GENRES.Action + reg },
-        { key: 'comedy', title: 'Comedies', url: '/api/catalog/discover?type=movie&genre=' + GENRES.Comedy + reg },
-        { key: 'top-rated', title: 'Critically Acclaimed', url: '/api/catalog/discover?type=movie&sort=rating' + reg },
-        { key: 'bollywood', title: 'Bollywood Blockbusters', url: '/api/category/bollywood' },
-        { key: 'hollywood', title: 'Hollywood Hits', url: '/api/category/hollywood' },
-        { key: 'south-indian', title: 'South Indian Cinema', url: '/api/category/south-indian' },
-        { key: 'hindi-dubbed', title: 'Hindi Dubbed Movies', url: '/api/category/hindi-dubbed' }
+        // ─── Top of Homepage ───
+        { key: 'trending-day',    title: '🔥 Top 10 Today',            url: '/api/catalog/trending?window=day', ranked: true },
+        { key: 'nm-trending',     title: '🌐 Trending Now',             url: '/api/netmirror/trending?count=15' },
+        { key: 'nm-recently',     title: '🕐 Recently Added',           url: '/api/netmirror/recently-added?count=15' },
+        { key: 'nm-new-movies',   title: '🆕 Latest Cinema Movies',     url: '/api/netmirror/new-movies?count=15' },
+        // ─── Streaming Platforms ───
+        { key: 'nm-netflix-m',    title: '▶️ Trending on Netflix',      url: '/api/netmirror/netflix-movies?count=15' },
+        { key: 'nm-netflix-s',    title: '📺 Top Shows on Netflix',     url: '/api/netmirror/netflix-shows?count=15' },
+        { key: 'nm-prime-m',      title: '🎬 Top Movies on Prime',      url: '/api/netmirror/prime-movies?count=15' },
+        { key: 'nm-prime-s',      title: '📡 Top Shows on Prime',       url: '/api/netmirror/prime-shows?count=15' },
+        // ─── Indian Cinema ───
+        { key: 'nm-bollywood',    title: '🎬 Bollywood Blockbusters',   url: '/api/netmirror/bollywood?count=15' },
+        { key: 'nm-south',        title: '🌴 South Indian (Hindi)',      url: '/api/netmirror/south-hindi?count=15' },
+        { key: 'nm-indian-series',title: '📺 Trending Indian Series',   url: '/api/netmirror/indian-series?count=15' },
+        { key: 'nm-indian-drama', title: '🎭 Indian Drama',             url: '/api/netmirror/indian-drama?count=15' },
+        { key: 'nm-top-series',   title: '🏆 Top Series This Week',     url: '/api/netmirror/top-series?count=15' },
+        { key: 'nm-bollywood-cl', title: '🎪 Top 100 Bollywood Movies', url: '/api/netmirror/bollywood-classics?count=15' },
+        // ─── Hollywood & English ───
+        { key: 'nm-hollywood',    title: '🎥 Hollywood Hits',           url: '/api/netmirror/hollywood?count=15' },
+        { key: 'nm-top-imdb',     title: '⭐ Top Rated IMDB Series',    url: '/api/netmirror/top-imdb-series?count=15' },
+        { key: 'nm-box-office',   title: '🏆 Top 200 Box Office',       url: '/api/netmirror/top-box-office?count=15' },
+        // ─── Genre ───
+        { key: 'nm-action',       title: '💥 Action Movies',            url: '/api/netmirror/action?count=15' },
+        { key: 'nm-horror',       title: '👻 Horror Movies',            url: '/api/netmirror/horror?count=15' },
+        { key: 'nm-romance',      title: '💕 Romantic Movies',          url: '/api/netmirror/romance?count=15' },
+        { key: 'nm-adventure',    title: '🗺️ Adventure',                url: '/api/netmirror/adventure?count=15' },
+        { key: 'nm-mystery',      title: '🔍 Mystery & Thriller',       url: '/api/netmirror/mystery?count=15' },
+        { key: 'nm-scifi',        title: '🚀 Sci-Fi Spectrum',          url: '/api/netmirror/sci-fi?count=15' },
+        { key: 'nm-superhero',    title: '🦸 Superhero Movies',         url: '/api/netmirror/superhero?count=15' },
+        { key: 'nm-marvel',       title: '⚡ Marvel Movies',            url: '/api/netmirror/marvel?count=15' },
+        { key: 'nm-superhero-hi', title: '🦸 Superhero (Hindi)',        url: '/api/netmirror/superhero-hindi?count=15' },
+        { key: 'nm-anime',        title: '⚡ Anime (English)',           url: '/api/netmirror/anime?count=15' },
+        // ─── Asian Content ───
+        { key: 'nm-kdrama',       title: '🇰🇷 Korean Dramas (Hindi)',   url: '/api/netmirror/kdrama?count=15' },
+        { key: 'nm-kdrama-en',    title: '🇰🇷 Korean Dramas (English)', url: '/api/netmirror/kdrama-en?count=15' },
+        { key: 'nm-turkish',      title: '🌙 Turkish Drama (Hindi)',    url: '/api/netmirror/turkish-drama?count=15' },
+        { key: 'nm-c-drama',      title: '🇨🇳 Chinese Drama (Hindi)',   url: '/api/netmirror/c-drama-hindi?count=15' },
       ];
+
     } else if (platform === 'LatestRelease') {
       return [
         { key: 'lr-trending', title: 'Trending This Week', url: '/api/catalog/trending?window=week', ranked: true },
@@ -906,21 +956,11 @@
   function buildPosterImg(url, title, extraClass) {
     extraClass = extraClass || 'w-full h-full object-cover';
     var safeTitle = escapeHtml(title || 'Netflix4U');
-    if (!url || url.indexOf('data:image') === 0) {
-      return '<img src="' + (url || NO_POSTER_SVG) + '" width="200" height="300" loading="lazy" decoding="async" alt="' + safeTitle + '" class="' + extraClass + '" onerror="window.__healPoster(this);" />';
+    var normalizedUrl = normalizeImageUrl(url);
+    if (!normalizedUrl || normalizedUrl.indexOf('data:image') === 0) {
+      return '<img src="' + (normalizedUrl || getPosterFallback(title)) + '" width="200" height="300" loading="lazy" decoding="async" alt="' + safeTitle + '" class="' + extraClass + '" onerror="window.__healPoster(this);" />';
     }
-    if (url.indexOf('image.tmdb.org') !== -1) {
-      var tmdbMatch = url.match(/image\.tmdb\.org\/t\/p\/([^/]+)\/(.+)$/);
-      if (tmdbMatch) {
-        var posterPath = tmdbMatch[2];
-        var base = 'https://image.tmdb.org/t/p/';
-        var src185 = base + 'w185/' + posterPath;
-        var src342 = base + 'w342/' + posterPath;
-        var src500 = base + 'w500/' + posterPath;
-        return '<img src="' + src342 + '" srcset="' + src185 + ' 185w, ' + src342 + ' 342w, ' + src500 + ' 500w" sizes="(max-width: 640px) 150px, 200px" width="200" height="300" loading="lazy" decoding="async" alt="' + safeTitle + '" class="' + extraClass + '" onerror="window.__healPoster(this);" />';
-      }
-    }
-    return '<img src="' + url + '" width="200" height="300" loading="lazy" decoding="async" alt="' + safeTitle + '" class="' + extraClass + '" onerror="window.__healPoster(this);" />';
+    return '<img src="' + normalizedUrl + '" width="200" height="300" loading="lazy" decoding="async" alt="' + safeTitle + '" class="' + extraClass + '" onerror="window.__healPoster(this);" />';
   }
 
   function renderCard(item, options) {
@@ -1304,7 +1344,7 @@
       .then(function(r) { return r.json(); })
       .then(function(data) {
         if (data && data.success && data.poster) {
-          imgEl.src = data.poster;
+          imgEl.src = normalizeImageUrl(data.poster);
         } else {
           imgEl.src = getPosterFallback(title);
         }
@@ -1316,7 +1356,7 @@
   window.__healPoster = healPoster;
 
   function renderContinueWatchingRail() {
-    if (currentPlatform !== 'trending' || !railsView) return;
+    if (!railsView) return;
     var existing = document.getElementById('continue-watching-rail');
     var items = getContinueWatching();
     if (!items.length) {
