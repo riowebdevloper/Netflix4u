@@ -1227,7 +1227,7 @@
       }, 300);
     }
 
-    // 3. Hash Watch link (e.g. #w=1339713-movie-1-1)
+    // 3. Hash Watch & Title links (e.g. #w=1339713-movie-1-1 or #title=1339713-movie)
     var hash = window.location.hash;
     var hashMatch = hash.match(/^#w=([^-]+)-(movie|tv)(?:-(\d+)(?:-(\d+))?)?$/i);
     if (hashMatch) {
@@ -1240,6 +1240,17 @@
           window.Netflix4uModal.openWatch(wId, wType, wSe, wEp, '');
         }
       }, 400);
+    } else {
+      var titleHashMatch = hash.match(/^#title=([^-]+)-(movie|tv)$/i);
+      if (titleHashMatch) {
+        var tId = titleHashMatch[1];
+        var tType = titleHashMatch[2];
+        setTimeout(function() {
+          if (window.Netflix4uModal && window.Netflix4uModal.openTitle) {
+            window.Netflix4uModal.openTitle(tId, tType, false);
+          }
+        }, 400);
+      }
     }
 
     // 4. Query Params Deep Linking (e.g. ?id=1408162&type=movie or ?watch=1408162)

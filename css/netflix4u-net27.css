@@ -314,41 +314,45 @@ body {
 
 /* ─── Watch Modal & Streaming Controls ─── */
 #watch-player-bar {
-  position: absolute;
-  top: 16px;
-  left: 16px;
-  right: 72px;
-  z-index: 70;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 6px;
   pointer-events: auto;
+  overflow-x: auto;
+  white-space: nowrap;
 }
 .server-tab-btn {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 6px 12px;
-  border-radius: 8px;
+  padding: 5px 11px;
+  border-radius: 9999px;
   font-size: 11px;
   font-weight: 600;
   background: rgba(20, 20, 28, 0.85);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.85);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+  user-select: none;
 }
 .server-tab-btn:hover {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.3);
   color: #ffffff;
+  transform: translateY(-1px);
+}
+.server-tab-btn:active {
+  transform: scale(0.96);
 }
 .server-tab-btn.is-active {
-  background: #e50914;
+  background: rgba(229, 9, 20, 0.85);
   color: #ffffff;
-  border-color: #e50914;
-  box-shadow: 0 0 12px rgba(229, 9, 20, 0.5);
+  border-color: #ff3b30;
+  box-shadow: 0 0 14px rgba(229, 9, 20, 0.6);
 }
 
 /* Composited Shimmer placeholder */
@@ -405,13 +409,11 @@ body {
 
 @media (max-width: 640px) {
   #watch-player-bar {
-    left: 8px;
-    right: 56px;
-    overflow-x: auto;
-    padding-bottom: 4px;
+    gap: 4px;
+    padding-bottom: 2px;
   }
   .server-tab-btn {
-    padding: 5px 9px;
+    padding: 4px 8px;
     font-size: 10px;
     white-space: nowrap;
   }
@@ -499,6 +501,11 @@ body {
 .tag-global {
   background: linear-gradient(135deg, #8b5cf6, #6d28d9);
   color: #ffffff;
+}
+.tag-peachify {
+  background: linear-gradient(135deg, #f97316, #ea580c);
+  color: #ffffff;
+  box-shadow: 0 0 8px rgba(249, 115, 22, 0.4);
 }
 
 @keyframes spinOnce {

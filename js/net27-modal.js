@@ -151,6 +151,12 @@
     var lookupId = canonicalId || tmdbId;
     if (pushHistory !== false) {
       historyStack.push({ tmdbId: tmdbId, type: type, canonicalId: canonicalId, imdbId: imdbId });
+      try {
+        var titleHash = '#title=' + lookupId + '-' + type;
+        if (location.hash !== titleHash && !location.hash.startsWith('#w=')) {
+          history.pushState({ modal: 'title', tmdbId: lookupId, type: type }, '', titleHash);
+        }
+      } catch(e) {}
     }
 
     if (!titleModal) return;
@@ -976,6 +982,11 @@
     titleModal.setAttribute('aria-hidden', 'true');
     historyStack = [];
     titleModal.classList.remove('nm-modal-in');
+    if (location.hash && (location.hash.startsWith('#title=') || location.hash.startsWith('#w='))) {
+      try {
+        history.replaceState(null, '', location.pathname + location.search);
+      } catch(e) {}
+    }
     setTimeout(function() {
       titleModal.classList.add('hidden');
       titleModal.classList.remove('flex');
@@ -998,12 +1009,13 @@
 
   // ─── WATCH MODAL (Net27 Streaming Player UI with Auto-Failover Engine) ───
   var SERVERS_CONFIG = [
-    { id: 's1', name: 'Server 1 (VidLink Pro)', tag: 'Hindi/Dual', tagClass: 'tag-multi', desc: 'VidLink Pro Multi-Audio Track Selector (Hindi & English)' },
-    { id: 's2', name: 'Server 2 (AllMovieLand)', tag: 'Indian Fast', tagClass: 'tag-fast', desc: 'AllMovieLand Indian & Global Fast Player' },
-    { id: 's3', name: 'Server 3 (VidSrc PM)', tag: 'Global CDN', tagClass: 'tag-global', desc: 'VidSrc PM High Uptime Global Mirror' },
-    { id: 's4', name: 'Server 4 (AutoEmbed)', tag: 'Backup', tagClass: 'tag-fast', desc: 'AutoEmbed Reliable CDN Backup' },
-    { id: 's5', name: 'Server 5 (2Embed Global)', tag: 'Universal', tagClass: 'tag-global', desc: '2Embed Global High-Speed Server' },
-    { id: 's6', name: 'Server 6 (VidSrc In)', tag: 'Fast Mirror', tagClass: 'tag-multi', desc: 'VidSrc In High-Performance Mirror' }
+    { id: 's1', name: 'Server 1 (Net27 Peachify)', tag: 'Peachify', tagClass: 'tag-peachify', desc: 'Net27 Authentic Peachify Fast Multi-Stream' },
+    { id: 's2', name: 'Server 2 (VidLink Pro)', tag: 'Hindi/Dual', tagClass: 'tag-multi', desc: 'VidLink Pro Multi-Audio Track Selector (Hindi & English)' },
+    { id: 's3', name: 'Server 3 (AllMovieLand)', tag: 'Indian Fast', tagClass: 'tag-fast', desc: 'AllMovieLand Indian & Global Fast Player' },
+    { id: 's4', name: 'Server 4 (VidSrc PM)', tag: 'Global CDN', tagClass: 'tag-global', desc: 'VidSrc PM High Uptime Global Mirror' },
+    { id: 's5', name: 'Server 5 (AutoEmbed)', tag: 'Backup', tagClass: 'tag-fast', desc: 'AutoEmbed Reliable CDN Backup' },
+    { id: 's6', name: 'Server 6 (2Embed Global)', tag: 'Universal', tagClass: 'tag-global', desc: '2Embed Global High-Speed Server' },
+    { id: 's7', name: 'Server 7 (VidSrc In)', tag: 'Fast Mirror', tagClass: 'tag-multi', desc: 'VidSrc In High-Performance Mirror' }
   ];
 
   // Auto-failover & orientation state
@@ -1011,7 +1023,7 @@
   var autoSwitchTimer = null;
   var autoSwitchIndex = 0;
   var isPlaybackConfirmed = false;
-  var autoSwitchOrder = ['s1', 's2', 's3', 's4', 's5', 's6'];
+  var autoSwitchOrder = ['s1', 's2', 's3', 's4', 's5', 's6', 's7'];
   var watchTopBarTimer = null;
   var currentAutoSwitchToken = 0;
   var activeProbeController = null;
@@ -1421,11 +1433,11 @@
         .then(function(data) {
           if (data && data.imdbId) {
             activeWatchParams.imdbId = data.imdbId;
-            activeWatchServers.s2 = isTv
+            activeWatchServers.s3 = isTv
               ? 'https://slast430did.com/play/' + encodeURIComponent(data.imdbId) + '?s=' + season + '&e=' + episode
               : 'https://slast430did.com/play/' + encodeURIComponent(data.imdbId);
-            if (currentWatchServer === 's2' && watchModalIframe) {
-              watchModalIframe.src = activeWatchServers.s2;
+            if (currentWatchServer === 's3' && watchModalIframe) {
+              watchModalIframe.src = activeWatchServers.s3;
             }
           }
         }).catch(function() {});
@@ -1433,40 +1445,40 @@
 
     activeWatchServers = {
       s1: isTv
+        ? 'https://peachify.top/embed/tv/' + tmdbId + '/' + season + '/' + episode
+        : 'https://peachify.top/embed/movie/' + tmdbId,
+      s2: isTv
         ? 'https://vidlink.pro/tv/' + tmdbId + '/' + season + '/' + episode + '?multiLang=true'
         : 'https://vidlink.pro/movie/' + tmdbId + '?multiLang=true',
-      s2: allMovieLandUrl,
-      s3: isTv
+      s3: allMovieLandUrl,
+      s4: isTv
         ? 'https://vidsrc.pm/embed/tv/' + tmdbId + '/' + season + '/' + episode
         : 'https://vidsrc.pm/embed/movie/' + tmdbId,
-      s4: isTv
+      s5: isTv
         ? 'https://autoembed.co/tv/tmdb/' + tmdbId + '/' + season + '/' + episode
         : 'https://autoembed.co/movie/tmdb/' + tmdbId,
-      s5: isTv
+      s6: isTv
         ? 'https://www.2embed.cc/embedtv/' + tmdbId + '&s=' + season + '&e=' + episode
         : 'https://www.2embed.cc/embed/' + tmdbId,
-      s6: isTv
+      s7: isTv
         ? 'https://vidsrc.in/embed/tv/' + tmdbId + '/' + season + '/' + episode
         : 'https://vidsrc.in/embed/movie/' + tmdbId
     };
 
     currentWatchServer = 's1';
+    isAutoSwitchEnabled = true;
     isPlaybackConfirmed = false;
+    currentAutoSwitchToken++;
     renderWatchServerMenu();
     updateActiveServerUi('s1');
-    updateAutoSwitchToggleUi(isAutoSwitchEnabled);
+    updateAutoSwitchToggleUi(true);
 
     watchModal.classList.remove('hidden');
     watchModal.setAttribute('aria-hidden', 'false');
     lockBodyScroll();
 
-    if (isAutoSwitchEnabled) {
-      startAutoSwitchSequence(0);
-    } else {
-      showWatchBackdrop(backdrop);
-      watchModalIframe.src = activeWatchServers.s1;
-      setTimeout(function() { hideWatchBackdrop(); }, 1200);
-    }
+    // Start auto switch sequence from index 0 (Peachify)
+    startAutoSwitchSequence(0);
 
     checkOrientationHint();
     resetWatchTopBarTimer();
@@ -1487,36 +1499,68 @@
       });
     }
 
-    var hash = '#w=' + tmdbId + '-' + type;
-    if (season) hash += '-' + season;
-    if (episode) hash += '-' + episode;
-    if (location.hash !== hash) {
-      history.pushState({ watch: { tmdbId: tmdbId, type: type, se: season, ep: episode, title: title, year: year, imdbId: imdbId } }, '', hash);
-    }
+    // Ensure history reflects More Info page state before Watch state so Back always returns to Details
+    var returnTargetId = canonicalId || tmdbId;
+    var titleHash = '#title=' + returnTargetId + '-' + type;
+    var watchHash = '#w=' + tmdbId + '-' + type;
+    if (season) watchHash += '-' + season;
+    if (episode) watchHash += '-' + episode;
+
+    try {
+      if (!location.hash || (!location.hash.startsWith('#title=') && !location.hash.startsWith('#w='))) {
+        history.replaceState({ modal: 'title', tmdbId: returnTargetId, type: type }, '', titleHash);
+      }
+      if (location.hash !== watchHash) {
+        history.pushState({ modal: 'watch', tmdbId: tmdbId, type: type, se: season, ep: episode, title: title, year: year, imdbId: imdbId }, '', watchHash);
+      }
+    } catch(e) {}
   }
 
   function renderWatchServerMenu() {
-    var serverListContainer = document.getElementById('watch-servers-list-container') || watchServerMenu;
-    if (!serverListContainer) return;
-    serverListContainer.innerHTML = SERVERS_CONFIG.map(function(s) {
-      var isSelected = s.id === currentWatchServer;
-      return '<button type="button" data-switch-server="' + s.id + '" class="watch-server-item' + (isSelected ? ' is-selected' : '') + '">' +
-        '<div class="flex items-center gap-2 min-w-0">' +
-          '<span class="w-2 h-2 rounded-full bg-emerald-400 shrink-0 ' + (isSelected ? 'animate-pulse' : 'opacity-70') + '"></span>' +
-          '<span class="truncate">' + escapeHtml(s.name) + '</span>' +
-        '</div>' +
-        '<span class="watch-server-tag ' + s.tagClass + ' shrink-0 ml-2">' + escapeHtml(s.tag) + '</span>' +
-      '</button>';
-    }).join('');
+    // 1. Render visible horizontal Server Pills Bar in Watch Header
+    if (watchPlayerBar) {
+      watchPlayerBar.innerHTML = SERVERS_CONFIG.map(function(s) {
+        var isSelected = s.id === currentWatchServer;
+        var shortName = s.name.replace(/^Server\s*/i, 'S');
+        return '<button type="button" data-switch-server="' + s.id + '" class="server-tab-btn' + (isSelected ? ' is-active' : '') + '" title="' + escapeHtml(s.desc) + '">' +
+          '<span class="w-2 h-2 rounded-full ' + (isSelected ? 'bg-emerald-400 animate-pulse' : 'bg-white/40') + ' shrink-0"></span>' +
+          '<span class="truncate max-w-[130px] sm:max-w-none">' + escapeHtml(shortName) + '</span>' +
+          '<span class="watch-server-tag ' + s.tagClass + ' shrink-0 ml-1">' + escapeHtml(s.tag) + '</span>' +
+        '</button>';
+      }).join('');
 
-    serverListContainer.querySelectorAll('[data-switch-server]').forEach(function(btn) {
-      btn.addEventListener('click', function(e) {
-        e.stopPropagation();
-        var sId = btn.dataset.switchServer;
-        switchWatchServer(sId, true);
-        closeServerMenu();
+      watchPlayerBar.querySelectorAll('[data-switch-server]').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          var sId = btn.dataset.switchServer;
+          switchWatchServer(sId, true);
+        });
       });
-    });
+    }
+
+    // 2. Render dropdown menu list
+    var serverListContainer = document.getElementById('watch-servers-list-container');
+    if (serverListContainer) {
+      serverListContainer.innerHTML = SERVERS_CONFIG.map(function(s) {
+        var isSelected = s.id === currentWatchServer;
+        return '<button type="button" data-switch-server="' + s.id + '" class="watch-server-item' + (isSelected ? ' is-selected' : '') + '">' +
+          '<div class="flex items-center gap-2 min-w-0">' +
+            '<span class="w-2 h-2 rounded-full bg-emerald-400 shrink-0 ' + (isSelected ? 'animate-pulse' : 'opacity-70') + '"></span>' +
+            '<span class="truncate">' + escapeHtml(s.name) + '</span>' +
+          '</div>' +
+          '<span class="watch-server-tag ' + s.tagClass + ' shrink-0 ml-2">' + escapeHtml(s.tag) + '</span>' +
+        '</button>';
+      }).join('');
+
+      serverListContainer.querySelectorAll('[data-switch-server]').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          var sId = btn.dataset.switchServer;
+          switchWatchServer(sId, true);
+          closeServerMenu();
+        });
+      });
+    }
   }
 
   function updateActiveServerUi(serverId) {
@@ -1525,7 +1569,19 @@
     if (watchCurrentServerLabel) {
       watchCurrentServerLabel.textContent = cfg.name;
     }
-    var serverListContainer = document.getElementById('watch-servers-list-container') || watchServerMenu;
+    // Update visible Server Pills Bar
+    if (watchPlayerBar) {
+      watchPlayerBar.querySelectorAll('[data-switch-server]').forEach(function(btn) {
+        var isSel = btn.dataset.switchServer === serverId;
+        btn.classList.toggle('is-active', isSel);
+        var dot = btn.querySelector('.rounded-full');
+        if (dot) {
+          dot.className = 'w-2 h-2 rounded-full shrink-0 ' + (isSel ? 'bg-emerald-400 animate-pulse' : 'bg-white/40');
+        }
+      });
+    }
+    // Update dropdown menu
+    var serverListContainer = document.getElementById('watch-servers-list-container');
     if (serverListContainer) {
       serverListContainer.querySelectorAll('[data-switch-server]').forEach(function(btn) {
         btn.classList.toggle('is-selected', btn.dataset.switchServer === serverId);
@@ -1718,8 +1774,8 @@
     }, 450);
   }
 
-  function closeWatchModal() {
-    if (!watchModal || !watchModalIframe) return;
+  function closeWatchAndReturnToDetails() {
+    if (!watchModal) return;
     if (autoSwitchTimer) {
       clearTimeout(autoSwitchTimer);
       autoSwitchTimer = null;
@@ -1728,13 +1784,83 @@
       clearTimeout(watchTopBarTimer);
       watchTopBarTimer = null;
     }
+    if (activeProbeController) {
+      try { activeProbeController.abort(); } catch(e) {}
+      activeProbeController = null;
+    }
+    currentAutoSwitchToken++;
+
     if (watchTopBar) {
       watchTopBar.classList.remove('watch-bar-hidden');
     }
     if (watchPortraitHint) {
       watchPortraitHint.classList.add('hidden');
     }
-    watchModalIframe.src = 'about:blank';
+    if (watchModalIframe) {
+      watchModalIframe.src = 'about:blank';
+    }
+    watchModal.classList.add('hidden');
+    watchModal.setAttribute('aria-hidden', 'true');
+
+    var bannerEl = document.getElementById('watch-unavailable-banner');
+    if (bannerEl) bannerEl.style.display = 'none';
+
+    closeServerMenu();
+    hideWatchBackdrop();
+
+    // Smoothly return to the More Info page (Title Modal)
+    var returnParams = activeWatchParams;
+    if (returnParams && (returnParams.tmdbId || returnParams.canonicalId)) {
+      var targetId = returnParams.canonicalId || returnParams.tmdbId;
+      var targetType = returnParams.type || 'movie';
+      var titleHash = '#title=' + targetId + '-' + targetType;
+
+      try {
+        if (location.hash !== titleHash) {
+          history.replaceState({ modal: 'title', tmdbId: targetId, type: targetType }, '', titleHash);
+        }
+      } catch(e) {}
+
+      // If titleModal is already loaded in DOM, display it
+      if (titleModal && titleModalBody && titleModalBody.children.length > 0) {
+        titleModal.classList.remove('hidden');
+        titleModal.classList.add('flex');
+        titleModal.setAttribute('aria-hidden', 'false');
+        requestAnimationFrame(function() {
+          titleModal.classList.add('nm-modal-in');
+        });
+        lockBodyScroll();
+      } else {
+        openTitleModal(returnParams.tmdbId, returnParams.type, false, returnParams.canonicalId, returnParams.imdbId);
+      }
+    } else {
+      unlockBodyScroll();
+      if (location.hash && location.hash.startsWith('#w=')) {
+        try {
+          history.replaceState(null, '', location.pathname + location.search);
+        } catch(e) {}
+      }
+    }
+  }
+
+  function closeWatchModal(shouldReturnToTitle) {
+    if (shouldReturnToTitle !== false) {
+      closeWatchAndReturnToDetails();
+      return;
+    }
+    if (!watchModal) return;
+    if (autoSwitchTimer) {
+      clearTimeout(autoSwitchTimer);
+      autoSwitchTimer = null;
+    }
+    if (watchTopBarTimer) {
+      clearTimeout(watchTopBarTimer);
+      watchTopBarTimer = null;
+    }
+    currentAutoSwitchToken++;
+    if (watchTopBar) watchTopBar.classList.remove('watch-bar-hidden');
+    if (watchPortraitHint) watchPortraitHint.classList.add('hidden');
+    if (watchModalIframe) watchModalIframe.src = 'about:blank';
     watchModal.classList.add('hidden');
     watchModal.setAttribute('aria-hidden', 'true');
     var bannerEl = document.getElementById('watch-unavailable-banner');
@@ -1948,8 +2074,8 @@
     }
   });
 
-  // Net27 Player Header Listeners
-  if (watchBackBtn) watchBackBtn.addEventListener('click', closeWatchModal);
+  // Net27 Player Header Listeners - Return to More Info Page
+  if (watchBackBtn) watchBackBtn.addEventListener('click', closeWatchAndReturnToDetails);
   if (watchReloadBtn) watchReloadBtn.addEventListener('click', reloadWatchStream);
   if (watchServerToggle) {
     watchServerToggle.addEventListener('click', function(e) {
@@ -1984,7 +2110,7 @@
 
   if (titleModalBack) titleModalBack.addEventListener('click', goBackTitleModal);
   if (titleModalClose) titleModalClose.addEventListener('click', closeTitleModal);
-  if (watchModalClose) watchModalClose.addEventListener('click', closeWatchModal);
+  if (watchModalClose) watchModalClose.addEventListener('click', closeWatchAndReturnToDetails);
   if (trailerModalClose) trailerModalClose.addEventListener('click', closeTrailerModal);
 
   if (titleModal) {
@@ -2031,14 +2157,45 @@
       }
       if (policyModal && !policyModal.classList.contains('hidden')) { closePolicyModal(); return; }
       if (trailerModal && !trailerModal.classList.contains('hidden')) { closeTrailerModal(); return; }
-      if (watchModal && !watchModal.classList.contains('hidden')) { closeWatchModal(); return; }
+      if (watchModal && !watchModal.classList.contains('hidden')) { closeWatchAndReturnToDetails(); return; }
       if (titleModal && !titleModal.classList.contains('hidden')) { closeTitleModal(); return; }
     }
   });
 
   window.addEventListener('message', function(e) {
     if (e.data === 'netmirror:close-watch' || e.data === 'netflix4u:close-watch') {
-      closeWatchModal();
+      closeWatchAndReturnToDetails();
+    }
+  });
+
+  // Seamless Browser / Hardware Back Navigation Controller
+  window.addEventListener('popstate', function(e) {
+    var isWatchOpen = watchModal && !watchModal.classList.contains('hidden');
+    var isTitleOpen = titleModal && !titleModal.classList.contains('hidden');
+    var currentHash = window.location.hash || '';
+
+    // If streaming player was active and user navigated back: return to More Info page
+    if (isWatchOpen && !currentHash.startsWith('#w=')) {
+      closeWatchAndReturnToDetails();
+      return;
+    }
+
+    // If on More Info page and user navigated back: return to Homepage
+    if (isTitleOpen && !currentHash.startsWith('#title=') && !currentHash.startsWith('#w=')) {
+      closeTitleModal();
+      return;
+    }
+
+    // Direct hash routing
+    var titleMatch = currentHash.match(/^#title=([^-]+)-(movie|tv)$/i);
+    if (titleMatch && !isTitleOpen && !isWatchOpen) {
+      openTitleModal(titleMatch[1], titleMatch[2], false);
+      return;
+    }
+
+    var watchMatch = currentHash.match(/^#w=([^-]+)-(movie|tv)(?:-(\d+)(?:-(\d+))?)?$/i);
+    if (watchMatch && !isWatchOpen) {
+      openWatchModal(watchMatch[1], watchMatch[2], watchMatch[3] || 1, watchMatch[4] || 1);
     }
   });
 
@@ -2047,7 +2204,8 @@
     openTitle: openTitleModal,
     closeTitle: closeTitleModal,
     openWatch: openWatchModal,
-    closeWatch: closeWatchModal,
+    closeWatch: closeWatchAndReturnToDetails,
+    closeWatchDirect: closeWatchModal,
     openTrailer: openTrailerModal,
     closeTrailer: closeTrailerModal,
     openPolicy: openPolicyModal,
