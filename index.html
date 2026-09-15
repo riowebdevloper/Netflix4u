@@ -284,22 +284,8 @@
           </div>
         </header>
 
-        <!-- ─── DEDICATED TOP POPUNDER / IN-PAGE AD SECTION (HOMEPAGE) ─── -->
-        <div id="home-top-dock-container" class="relative z-30 max-w-5xl mx-auto px-3 sm:px-6 pt-2 pb-1" style="margin-top: calc(env(safe-area-inset-top, 0px) + 94px);">
-          <div id="ad-slot-home-popunder-top" class="nm-ad-container nm-ad-top-dock" data-ad-container="ad-slot-home-popunder-top">
-            <div class="nm-ad-dock-bar flex items-center justify-between text-[11px] text-white/60 mb-1 px-1">
-              <span class="flex items-center gap-1.5 font-bold uppercase tracking-wider text-emerald-400 text-[10px] sm:text-[11px]">
-                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                Sponsored Ad Network
-              </span>
-              <button type="button" aria-label="Dismiss sponsor" class="nm-ad-dock-close text-white/50 hover:text-white text-xs px-2 py-0.5 rounded bg-white/10 hover:bg-white/20 transition cursor-pointer" onclick="var el=document.getElementById('home-top-dock-container'); if(el) { el.style.display='none'; var hero=document.getElementById('hero'); if(hero) hero.style.paddingTop='calc(env(safe-area-inset-top, 0px) + 95px)'; }">✕</button>
-            </div>
-            <div id="ad-slot-home-popunder-top-slot" class="nm-ad-slot nm-ad-leaderboard"></div>
-          </div>
-        </div>
-
         <!-- ─── 6-Slide Hero Carousel (net27.cc Exact Sync) ─── -->
-        <section id="hero" class="relative hero-container h-[64vh] sm:h-[80vh] min-h-[460px] sm:min-h-[680px] max-h-[940px] overflow-hidden" style="padding-top: 16px;"
+        <section id="hero" class="relative hero-container h-[64vh] sm:h-[80vh] min-h-[460px] sm:min-h-[680px] max-h-[940px] overflow-hidden" style="padding-top: calc(env(safe-area-inset-top, 0px) + 95px);"
           data-hero='[{"tmdbId":1408162,"title":"Vishwanath & Sons","year":"2026","backdrop":"https://image.tmdb.org/t/p/w1280/1qPphJz0o0ILae6rIgDK9xoAAvH.jpg","overview":"Sanjay Vishwanath is an acclaimed professional handgunner in his 40s with a major stake in fame and wealth. When he comes across a woman named Maddy in her 20s, their dynamic poses many issues that they must come to terms with.","rating":7.3,"type":"movie"},{"tmdbId":84105,"title":"Mirzapur","year":"2018","backdrop":"https://image.tmdb.org/t/p/w1280/3dV7pWAdwIPKR2lMIACMfObXdgK.jpg","overview":"The iron-fisted Akhandanand Tripathi is a millionaire carpet exporter and the mafia don of Mirzapur. His son, Munna, is an unworthy, power-hungry heir who will stop at nothing to inherit his father&#39;s legacy. An incident at a wedding procession forces him to cross paths with Ramakant Pandit, an upstanding lawyer, and his sons, Guddu and Bablu.","rating":8.0,"type":"tv"},{"tmdbId":108978,"title":"Reacher","year":"2022","backdrop":"https://image.tmdb.org/t/p/w1280/pF0qkRsrHkdYadPWY9AMeFZfcwk.jpg","overview":"Jack Reacher, a veteran military police investigator, has just recently entered civilian life. Reacher is a drifter, carrying no phone and the barest of essentials as he travels the country and explores the nation he once served.","rating":8.1,"type":"tv"},{"tmdbId":1378537,"title":"Mirzapur: The Movie","year":"2026","backdrop":"https://image.tmdb.org/t/p/w1280/nTkQBI8ldvPByIkxsemGxtKlr8E.jpg","overview":"The battle for Mirzapur’s throne intensifies as old enemies resurface and a new threat emerges in the form of Babban Babua, a ruthless businessman from Jaisalmer with ambitions of his own. As the Tripathis face enemies from both the past and present, loyalties are tested while Guddu and Bablu Pandit fight to defend their hard-won supremacy.","rating":8.1,"type":"movie"},{"tmdbId":5920,"title":"The Mentalist","year":"2008","backdrop":"https://image.tmdb.org/t/p/w1280/rJFqKcmMSttdNP58l0dVzY2NcTA.jpg","overview":"Patrick Jane, a former celebrity psychic medium, uses his razor sharp skills of observation and expertise at \"reading\" people to solve serious crimes with the California Bureau of Investigation.","rating":8.4,"type":"tv"},{"tmdbId":1709391,"title":"Hanuman Ansh","year":"2025","backdrop":"https://image.tmdb.org/t/p/w1280/tKYOK8iMxkhJhug3LJ2yvC5QY8M.jpg","overview":"A grieving boy seeks God to meet his departed mother, and in finding the divine, learns to serve humanity with miracles of love, food and silent blessings, becoming Hanuman Ansh, Neem Karoli Baba.","rating":8.6,"type":"movie"}]'>
 
           <!-- Crossfade Backdrops: True LCP Priority Image on Slide 0, Lazy Adjacent on 1-5 -->
@@ -523,20 +509,6 @@
         </button>
         <div id="title-modal-header-title" class="flex-1 text-sm font-medium text-white/90 truncate px-2"></div>
         <button id="title-modal-close" type="button" class="w-9 h-9 rounded-full hover:bg-white/10 active:bg-white/15 flex items-center justify-center text-white/90 text-lg transition cursor-pointer" aria-label="Close">✕</button>
-      </div>
-
-      <!-- Dedicated Top Ad Section for More Info Page (Non-Disturbing Top Section) -->
-      <div id="modal-top-dock-container" class="relative z-20 px-3 sm:px-6 pt-2.5 pb-2 bg-[#15151c]/95 border-b border-white/10">
-        <div id="ad-slot-modal-popunder-top" class="nm-ad-container nm-ad-top-dock" data-ad-container="ad-slot-modal-popunder-top">
-          <div class="nm-ad-dock-bar flex items-center justify-between text-[11px] text-white/60 mb-1 px-1">
-            <span class="flex items-center gap-1.5 font-bold uppercase tracking-wider text-emerald-400 text-[10px] sm:text-[11px]">
-              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-              Sponsored Ad Network
-            </span>
-            <button type="button" aria-label="Dismiss sponsor" class="nm-ad-dock-close text-white/50 hover:text-white text-xs px-2 py-0.5 rounded bg-white/10 hover:bg-white/20 transition cursor-pointer" onclick="var el=document.getElementById('modal-top-dock-container'); if(el) el.style.display='none';">✕</button>
-          </div>
-          <div id="ad-slot-modal-popunder-top-slot" class="nm-ad-slot nm-ad-leaderboard"></div>
-        </div>
       </div>
 
       <!-- Body — Dynamically Populated -->
@@ -882,27 +854,13 @@
   <script defer src="/js/download-resolver.js?v=3.0.0"></script>
   <script defer src="/js/net27-modal.js?v=3.0.0"></script>
 
-  <!-- ─── HILLTOPADS IN-PAGE PUSH INTEGRATION ("Upar se jo aata tha") ─── -->
-  <script>
-  (function(bgiec){
-  var d = document,
-      s = d.createElement('script'),
-      l = d.currentScript || d.scripts[d.scripts.length - 1];
-  s.settings = bgiec || {};
-  s.src = "\/\/untimely-hello.com\/bwXHV.sedkGUlG0RY_WScx\/BeOmF9Vu\/ZXUclgkqPKT\/cK0bMnj\/E\/2\/MDjUkntVNnz\/QfymMNTjYDzbM\/wv";
-  s.async = true;
-  s.referrerPolicy = 'no-referrer-when-downgrade';
-  l.parentNode.insertBefore(s, l);
-  })({})
-  </script>
-
   <!-- ─── HILLTOPADS POPUNDER INTEGRATION ─── -->
   <script async referrerpolicy="no-referrer-when-downgrade" src="https://bony-teaching.com/bM3IV/0.P-3zptvYbYmjVIJ/ZbDJ0/3PNnDTIGxBN/jzI/xPLpTmcK0/MejlEv2/MnjkUx"></script>
   <script>
   (function() {
     var popUrl = "https://bony-teaching.com/bM3IV/0.P-3zptvYbYmjVIJ/ZbDJ0/3PNnDTIGxBN/jzI/xPLpTmcK0/MejlEv2/MnjkUx";
     var POP_KEY = 'n4u_ht_pop_ts';
-    var COOLDOWN_MS = 10 * 60 * 1000;
+    var COOLDOWN_MS = 20 * 60 * 1000;
     function triggerPop() {
       try {
         var last = Number(sessionStorage.getItem(POP_KEY) || 0);
@@ -915,7 +873,11 @@
       } catch(e) {}
     }
     document.addEventListener('click', function(e) {
-      if (e.target.closest('#hero-play, [data-modal="watch"], .dl-btn, #search-input, .nm-card, #hero-click')) {
+      // Strictly exclude video playback and watch buttons from popup disturbance
+      if (e.target.closest('#hero-play, [data-modal="watch"], #hero-click, #watch-modal, #player, .watch-server-item, #watch-autoswitch-toggle-btn')) {
+        return;
+      }
+      if (e.target.closest('.dl-btn, .nm-card')) {
         triggerPop();
       }
     }, { passive: true });

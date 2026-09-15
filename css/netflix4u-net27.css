@@ -651,63 +651,22 @@ body {
   clear: both;
 }
 
-/* ─── Dedicated Top Popunder & In-Page Ad Dock Sections ─── */
+/* ─── Top Floating Push / Popups Ad Suppression Shield ─── */
+#home-top-dock-container,
+#modal-top-dock-container,
 .nm-ad-top-dock {
-  width: 100%;
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 8px 12px;
-  background: rgba(18, 18, 26, 0.88);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-  transition: all 0.3s ease;
+  display: none !important;
 }
 
-.nm-ad-dock-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 6px;
-}
-
-.nm-ad-dock-close {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-
-.nm-ad-top-dock .nm-ad-slot {
-  min-height: 60px;
-  max-height: 90px;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  background: rgba(0, 0, 0, 0.2);
-}
-
-/* Ensure docked push notifications are constrained and never float over navigation */
-.nm-ad-top-dock div[style*="position: fixed"],
-.nm-ad-top-dock div[style*="position:fixed"],
-.nm-ad-top-dock [style*="position: fixed"],
-.nm-ad-top-dock [style*="position:fixed"] {
-  position: static !important;
-  width: 100% !important;
-  max-width: 100% !important;
-  margin: 0 auto !important;
-  top: auto !important;
-  left: auto !important;
-  right: auto !important;
-  bottom: auto !important;
-  transform: none !important;
-  box-shadow: none !important;
-  border-radius: 8px !important;
+/* Guard against any injected third-party top overlay notifications or floating popups */
+iframe[src*="untimely"],
+iframe[src*="bony"],
+div[class*="inpage-push"],
+div[id*="inpage_push"],
+div[class*="push-notification"] {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
 }
 
 .nm-ad-label {

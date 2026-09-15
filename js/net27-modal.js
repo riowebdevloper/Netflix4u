@@ -1049,6 +1049,12 @@
       if (isAutoSwitchEnabled) {
         isPlaybackConfirmed = false;
         startAutoSwitchSequence(0);
+      } else {
+        isPlaybackConfirmed = true;
+        if (autoSwitchTimer) {
+          clearTimeout(autoSwitchTimer);
+          autoSwitchTimer = null;
+        }
       }
     });
   }
@@ -1163,6 +1169,8 @@
   function confirmPlaybackActive() {
     if (isPlaybackConfirmed) return;
     isPlaybackConfirmed = true;
+    isAutoSwitchEnabled = false;
+    updateAutoSwitchToggleUi(false);
     if (autoSwitchTimer) {
       clearTimeout(autoSwitchTimer);
       autoSwitchTimer = null;
@@ -1171,7 +1179,7 @@
     setWatchStatus('Connected to ' + cfg.name, 'Playback stream running');
     setTimeout(function() {
       hideWatchBackdrop();
-    }, 500);
+    }, 400);
     if (watchServerIndicator) {
       watchServerIndicator.className = 'w-2 h-2 rounded-full bg-emerald-400';
     }
@@ -1194,9 +1202,7 @@
       if (activeWatchServers && activeWatchServers[fallbackServer]) {
         watchModalIframe.src = activeWatchServers[fallbackServer];
       }
-      setTimeout(function() {
-        hideWatchBackdrop();
-      }, 1500);
+      confirmPlaybackActive();
       return;
     }
 
@@ -1239,17 +1245,11 @@
 
       // Load the iframe URL only when verified reachable
       watchModalIframe.src = serverUrl;
-      setWatchStatus('Connecting ' + cfg.name + '…', 'Buffering stream • Auto-switching if stuck');
+      setWatchStatus('Connected to ' + cfg.name, 'Stream verified • Playback ready');
 
-      // Auto failover timer (3.5s): if no actual media playback event confirmed, advance
-      if (autoSwitchTimer) clearTimeout(autoSwitchTimer);
-      autoSwitchTimer = setTimeout(function() {
-        if (seqToken === currentAutoSwitchToken && isAutoSwitchEnabled && !isPlaybackConfirmed) {
-          console.log('[Netflix4U AutoSwitch] Server ' + serverId + ' timeout/not playing, switching to next server...');
-          setWatchStatus(cfg.name + ' slow or unavailable, trying next…', 'Auto-switching in progress…');
-          startAutoSwitchSequence(index + 1);
-        }
-      }, 3500);
+      // Stop auto-switch immediately on the verified working player!
+      // "jis player par content chal jaye us par ruk jao. Aur uspe woh content chala do."
+      confirmPlaybackActive();
     });
   }
 
@@ -2000,8 +2000,17 @@
 
   if (watchModalIframe) {
     watchModalIframe.addEventListener('load', function() {
+      if (watchModalIframe.src && watchModalIframe.src !== 'about:blank') {
+        confirmPlaybackActive();
+      }
       setTimeout(hideWatchBackdrop, 400);
     });
+  }
+
+  if (watchModal) {
+    watchModal.addEventListener('pointerdown', function() {
+      confirmPlaybackActive();
+    }, { passive: true });
   }
 
   document.addEventListener('keydown', function(e) {
