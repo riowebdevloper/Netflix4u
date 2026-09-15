@@ -698,6 +698,28 @@
       "publishedAt": "2022-08-28T13:22:56.000Z"
     },
     {
+      "id": "tmdb-movie-1482547",
+      "canonicalId": "tmdb-movie-1482547",
+      "title": "Zip Wire",
+      "rawTitle": "Zip Wire",
+      "slug": "tmdb-movie-1482547-zip-wire",
+      "type": "movie",
+      "year": 2026,
+      "quality": "FHD",
+      "provider": "tmdb",
+      "rating": 7.9,
+      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FcO7J0XSVKPlAjUCMWC7DVBn1Py2.jpg&output=webp",
+      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FsbkkAtymJaH5UzExiK974uPzCY4.jpg&output=webp",
+      "imdbId": "tt36980377",
+      "tmdbId": "1482547",
+      "categories": [
+        "Action",
+        "Thriller"
+      ],
+      "status": "PUBLISHED",
+      "publishedAt": "2026-09-15T03:24:44.017Z"
+    },
+    {
       "id": "tmdb-movie-1408162",
       "canonicalId": "tmdb-movie-1408162",
       "title": "Vishwanath & Sons",
@@ -798,7 +820,7 @@
       "year": 2026,
       "quality": "FHD",
       "provider": "tmdb",
-      "rating": 10,
+      "rating": 9.2,
       "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2Fqku2uWSoJ9amQV5MWo1Eek29iji.jpg&output=webp",
       "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F3icyRAqgakNcQn6aDVz9libFmBA.jpg&output=webp",
       "imdbId": "tt35538033",
@@ -1044,35 +1066,6 @@
       ],
       "status": "PUBLISHED",
       "publishedAt": "2026-08-27T13:42:10.000Z"
-    },
-    {
-      "id": "12113370",
-      "canonicalId": "12113370",
-      "title": "Abovem And Below",
-      "rawTitle": "Abovem And Below (2026)",
-      "slug": "abovem-and-below-2026",
-      "type": "movie",
-      "year": 2026,
-      "quality": "FHD",
-      "provider": "dotmobiz",
-      "rating": 8,
-      "poster": "https://storage.hicine.sbs/images/k3qzAyzDxc6UGjaoEdEKqQXPMSc.webp",
-      "backdrop": "https://storage.hicine.sbs/images/k3qzAyzDxc6UGjaoEdEKqQXPMSc.webp",
-      "categories": [
-        "Hollywood",
-        "English",
-        "1080p",
-        "2026",
-        "480p",
-        "720p",
-        "Action",
-        "Crime",
-        "Horror",
-        "Thriller",
-        "WEB-DL"
-      ],
-      "status": "PUBLISHED",
-      "publishedAt": "2026-08-27T02:06:15.000Z"
     }
   ],
   "featured": [
@@ -1948,6 +1941,33 @@
       "publishedAt": "2026-07-30T02:10:03.000Z"
     },
     {
+      "id": "28192",
+      "canonicalId": "28192",
+      "title": "The Polygamist",
+      "rawTitle": "The Polygamist (2026)",
+      "slug": "the-polygamist-2026",
+      "type": "series",
+      "year": 2026,
+      "quality": "FHD",
+      "provider": "dotmobiz",
+      "rating": 8.9,
+      "poster": "https://storage.hicine.sbs/images/The-Polygamist-2026.webp",
+      "backdrop": "https://storage.hicine.sbs/images/The-Polygamist-2026.webp",
+      "categories": [
+        "Hollywood Series",
+        "Dual Audio Series",
+        "1080p",
+        "2026",
+        "480p",
+        "720p",
+        "Drama",
+        "Netflix",
+        "WEB-DL"
+      ],
+      "status": "PUBLISHED",
+      "publishedAt": "2026-06-12T15:34:20.000Z"
+    },
+    {
       "id": "28182",
       "canonicalId": "28182",
       "title": "Off Campus",
@@ -2415,33 +2435,6 @@
       ],
       "status": "PUBLISHED",
       "publishedAt": "2026-08-23T14:34:29.000Z"
-    },
-    {
-      "id": "28281",
-      "canonicalId": "28281",
-      "title": "Lucky",
-      "rawTitle": "Lucky (2026)",
-      "slug": "lucky-2026",
-      "type": "series",
-      "year": 2026,
-      "quality": "HD",
-      "provider": "dotmobiz",
-      "rating": 8,
-      "poster": "https://storage.hicine.sbs/images/Lucky-2026.webp",
-      "backdrop": "https://storage.hicine.sbs/images/Lucky-2026.webp",
-      "categories": [
-        "Hollywood Series",
-        "English",
-        "2026",
-        "720p",
-        "Apple TV+",
-        "Crime",
-        "Drama",
-        "Thriller",
-        "WEB-DL"
-      ],
-      "status": "PUBLISHED",
-      "publishedAt": "2026-08-21T11:14:32.000Z"
     }
   ],
   "anime": [
@@ -3582,29 +3575,6 @@
   ],
   "topRated": [
     {
-      "id": "tmdb-movie-1423191",
-      "canonicalId": "tmdb-movie-1423191",
-      "title": "Resident Evil",
-      "rawTitle": "Resident Evil",
-      "slug": "tmdb-movie-1423191-resident-evil",
-      "type": "movie",
-      "year": 2026,
-      "quality": "FHD",
-      "provider": "tmdb",
-      "rating": 10,
-      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2Fqku2uWSoJ9amQV5MWo1Eek29iji.jpg&output=webp",
-      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F3icyRAqgakNcQn6aDVz9libFmBA.jpg&output=webp",
-      "imdbId": "tt35538033",
-      "tmdbId": "1423191",
-      "categories": [
-        "Horror",
-        "Thriller",
-        "Adventure"
-      ],
-      "status": "PUBLISHED",
-      "publishedAt": "2026-09-13T03:09:52.859Z"
-    },
-    {
       "id": "28185",
       "canonicalId": "28185",
       "title": "Teach You a Lesson",
@@ -3632,6 +3602,29 @@
       ],
       "status": "PUBLISHED",
       "publishedAt": "2026-06-08T05:00:26.000Z"
+    },
+    {
+      "id": "tmdb-movie-1423191",
+      "canonicalId": "tmdb-movie-1423191",
+      "title": "Resident Evil",
+      "rawTitle": "Resident Evil",
+      "slug": "tmdb-movie-1423191-resident-evil",
+      "type": "movie",
+      "year": 2026,
+      "quality": "FHD",
+      "provider": "tmdb",
+      "rating": 9.2,
+      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2Fqku2uWSoJ9amQV5MWo1Eek29iji.jpg&output=webp",
+      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F3icyRAqgakNcQn6aDVz9libFmBA.jpg&output=webp",
+      "imdbId": "tt35538033",
+      "tmdbId": "1423191",
+      "categories": [
+        "Horror",
+        "Thriller",
+        "Adventure"
+      ],
+      "status": "PUBLISHED",
+      "publishedAt": "2026-09-13T03:09:52.859Z"
     },
     {
       "id": "12113226",
@@ -3748,6 +3741,33 @@
       ],
       "status": "PUBLISHED",
       "publishedAt": "2026-05-01T17:00:32.000Z"
+    },
+    {
+      "id": "28192",
+      "canonicalId": "28192",
+      "title": "The Polygamist",
+      "rawTitle": "The Polygamist (2026)",
+      "slug": "the-polygamist-2026",
+      "type": "series",
+      "year": 2026,
+      "quality": "FHD",
+      "provider": "dotmobiz",
+      "rating": 8.9,
+      "poster": "https://storage.hicine.sbs/images/The-Polygamist-2026.webp",
+      "backdrop": "https://storage.hicine.sbs/images/The-Polygamist-2026.webp",
+      "categories": [
+        "Hollywood Series",
+        "Dual Audio Series",
+        "1080p",
+        "2026",
+        "480p",
+        "720p",
+        "Drama",
+        "Netflix",
+        "WEB-DL"
+      ],
+      "status": "PUBLISHED",
+      "publishedAt": "2026-06-12T15:34:20.000Z"
     },
     {
       "id": "28182",
@@ -4114,34 +4134,6 @@
       ],
       "status": "PUBLISHED",
       "publishedAt": "2022-12-26T10:47:18.000Z"
-    },
-    {
-      "id": "12099425",
-      "canonicalId": "12099425",
-      "title": "Spirited Away",
-      "rawTitle": "Spirited Away (2001)",
-      "slug": "spirited-away-2001",
-      "type": "movie",
-      "year": 2001,
-      "quality": "FHD",
-      "provider": "dotmobiz",
-      "rating": 8.5,
-      "poster": "https://storage.hicine.sbs/images/Spirited-Away-2001.webp",
-      "backdrop": "https://storage.hicine.sbs/images/Spirited-Away-2001.webp",
-      "categories": [
-        "Hollywood",
-        "1080p",
-        "2001",
-        "480p",
-        "720p",
-        "Adventure",
-        "Animation",
-        "Comedy",
-        "Dual Audio Movies",
-        "Hindi Dubbed Movies"
-      ],
-      "status": "PUBLISHED",
-      "publishedAt": "2022-11-13T12:22:35.000Z"
     }
   ],
   "nowPlaying": [
@@ -4282,6 +4274,28 @@
       "publishedAt": "2022-08-28T13:22:56.000Z"
     },
     {
+      "id": "tmdb-movie-1482547",
+      "canonicalId": "tmdb-movie-1482547",
+      "title": "Zip Wire",
+      "rawTitle": "Zip Wire",
+      "slug": "tmdb-movie-1482547-zip-wire",
+      "type": "movie",
+      "year": 2026,
+      "quality": "FHD",
+      "provider": "tmdb",
+      "rating": 7.9,
+      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FcO7J0XSVKPlAjUCMWC7DVBn1Py2.jpg&output=webp",
+      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FsbkkAtymJaH5UzExiK974uPzCY4.jpg&output=webp",
+      "imdbId": "tt36980377",
+      "tmdbId": "1482547",
+      "categories": [
+        "Action",
+        "Thriller"
+      ],
+      "status": "PUBLISHED",
+      "publishedAt": "2026-09-15T03:24:44.017Z"
+    },
+    {
       "id": "tmdb-movie-1408162",
       "canonicalId": "tmdb-movie-1408162",
       "title": "Vishwanath & Sons",
@@ -4382,7 +4396,7 @@
       "year": 2026,
       "quality": "FHD",
       "provider": "tmdb",
-      "rating": 10,
+      "rating": 9.2,
       "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2Fqku2uWSoJ9amQV5MWo1Eek29iji.jpg&output=webp",
       "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F3icyRAqgakNcQn6aDVz9libFmBA.jpg&output=webp",
       "imdbId": "tt35538033",
@@ -4515,37 +4529,7 @@
       ],
       "status": "PUBLISHED",
       "publishedAt": "2026-09-01T11:52:55.000Z"
-    },
-    {
-      "id": "12113379",
-      "canonicalId": "12113379",
-      "title": "Mobile Suit Gundam Hathaway: The Sorcery of Nymph Circe",
-      "rawTitle": "Mobile Suit Gundam Hathaway: The Sorcery of Nymph Circe (2026)",
-      "slug": "mobile-suit-gundam-hathaway-the-sorcery-of-nymph-circe-2026",
-      "type": "movie",
-      "year": 2026,
-      "quality": "FHD",
-      "provider": "dotmobiz",
-      "rating": 8,
-      "poster": "https://storage.hicine.sbs/images/6YkVpc9Dn1L2FHNlLOybpSKeGc7.webp",
-      "backdrop": "https://storage.hicine.sbs/images/6YkVpc9Dn1L2FHNlLOybpSKeGc7.webp",
-      "categories": [
-        "Hollywood",
-        "Anime Series",
-        "1080p",
-        "2026",
-        "480p",
-        "720p",
-        "Action",
-        "Animation",
-        "Drama",
-        "Netflix",
-        "Sci-Fi",
-        "WEB-DL"
-      ],
-      "status": "PUBLISHED",
-      "publishedAt": "2026-08-31T10:24:18.000Z"
     }
   ],
-  "updatedAt": "2026-09-14T03:23:18.223Z"
+  "updatedAt": "2026-09-15T03:24:44.763Z"
 }

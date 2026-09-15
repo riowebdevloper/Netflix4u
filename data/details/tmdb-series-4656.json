@@ -1,0 +1,43 @@
+{
+  "id": "tmdb-series-4656",
+  "canonicalId": "tmdb-series-4656",
+  "externalProvider": "tmdb",
+  "externalId": "4656",
+  "tmdbId": "4656",
+  "imdbId": "tt0185103",
+  "type": "series",
+  "contentType": "series",
+  "title": "Raw",
+  "canonicalTitle": "Raw",
+  "originalTitle": "Raw",
+  "overview": "A regularly scheduled, live, year-round program featuring some of the biggest WWE Superstars.",
+  "description": "A regularly scheduled, live, year-round program featuring some of the biggest WWE Superstars.",
+  "shortDescription": "A regularly scheduled, live, year-round program featuring some of the biggest WWE Superstars.",
+  "year": 1993,
+  "releaseDate": "1993-01-11",
+  "rating": 6.8,
+  "votes": "0.4K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Reality"
+  ],
+  "categories": [
+    "Reality"
+  ],
+  "language": "English",
+  "country": "US",
+  "director": "Director",
+  "poster": "https://image.tmdb.org/t/p/w500/fstEe6RsyNyPUnMwNcL20iNl0nE.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/gjRnFAQk4EVg1P1s5512FT1Lq9c.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/FVO6mUQMon8?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/FVO6mUQMon8?rel=0&modestbranding=1",
+  "cast": [],
+  "seasons": 34,
+  "episodes": 1743,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-15T03:24:44.257Z",
+  "createdAt": "2026-09-15T03:24:44.257Z",
+  "updatedAt": "2026-09-15T03:24:44.257Z",
+  "links": []
+}

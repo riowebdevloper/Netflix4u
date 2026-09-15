@@ -1,0 +1,76 @@
+{
+  "id": "tmdb-movie-1482547",
+  "canonicalId": "tmdb-movie-1482547",
+  "externalProvider": "tmdb",
+  "externalId": "1482547",
+  "tmdbId": "1482547",
+  "imdbId": "tt36980377",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "Zip Wire",
+  "canonicalTitle": "Zip Wire",
+  "originalTitle": "Zip Wire",
+  "overview": "When her ground-breaking pharmaceutical discovery is stolen and partner murdered, researcher Amy must face her fear of heights to escape nefarious attackers, with the only path to salvation being a treacherous aerial runway. To outsmart the mysterious hostiles, she has to summon every ounce of courage to protect the world-changing scientific discovery — and herself — before it's too late.",
+  "description": "When her ground-breaking pharmaceutical discovery is stolen and partner murdered, researcher Amy must face her fear of heights to escape nefarious attackers, with the only path to salvation being a treacherous aerial runway. To outsmart the mysterious hostiles, she has to summon every ounce of courage to protect the world-changing scientific discovery — and herself — before it's too late.",
+  "shortDescription": "When her ground-breaking pharmaceutical discovery is stolen and partner murdered, researcher Amy must face her fear of h",
+  "year": 2026,
+  "releaseDate": "2026-08-31",
+  "rating": 7.9,
+  "votes": "0.0K",
+  "quality": "FHD",
+  "duration": "1h 35m",
+  "genres": [
+    "Action",
+    "Thriller"
+  ],
+  "categories": [
+    "Action",
+    "Thriller"
+  ],
+  "language": "English",
+  "country": "DK",
+  "director": "Howard J. Ford",
+  "poster": "https://image.tmdb.org/t/p/w500/cO7J0XSVKPlAjUCMWC7DVBn1Py2.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/sbkkAtymJaH5UzExiK974uPzCY4.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/M9tHmu0wNHM?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/M9tHmu0wNHM?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "57578",
+      "name": "MyAnna Buring",
+      "character": "Amy Watson",
+      "photo": "https://image.tmdb.org/t/p/w185/boC5LKewKpz8zhtUmPScHfkSAlV.jpg"
+    },
+    {
+      "id": "1190069",
+      "name": "Joseph Millson",
+      "character": "Evan",
+      "photo": "https://image.tmdb.org/t/p/w185/pd5iENRPBpybR935qv8C2TVtGNL.jpg"
+    },
+    {
+      "id": "9825",
+      "name": "Saffron Burrows",
+      "character": "Donaldson",
+      "photo": "https://image.tmdb.org/t/p/w185/2qMLZh9XWquBt7TZF9wmDiOtJdm.jpg"
+    },
+    {
+      "id": "1477555",
+      "name": "Michael Amariah",
+      "character": "Robert",
+      "photo": "https://image.tmdb.org/t/p/w185/mWsW3cdo2gFsvymHSoefrRBHGuq.jpg"
+    },
+    {
+      "id": "3471358",
+      "name": "Silvia Presente",
+      "character": "Chloe",
+      "photo": null
+    }
+  ],
+  "seasons": 1,
+  "episodes": 1,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-15T03:24:44.017Z",
+  "createdAt": "2026-09-15T03:24:44.017Z",
+  "updatedAt": "2026-09-15T03:24:44.017Z",
+  "links": []
+}

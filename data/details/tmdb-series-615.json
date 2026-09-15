@@ -1,0 +1,96 @@
+{
+  "id": "tmdb-series-615",
+  "canonicalId": "tmdb-series-615",
+  "externalProvider": "tmdb",
+  "externalId": "615",
+  "tmdbId": "615",
+  "imdbId": "tt0149460",
+  "type": "series",
+  "contentType": "series",
+  "title": "Futurama",
+  "canonicalTitle": "Futurama",
+  "originalTitle": "Futurama",
+  "overview": "The adventures of a late-20th-century New York City pizza delivery boy, Philip J. Fry, who, after being unwittingly cryogenically frozen for one thousand years, finds employment at Planet Express, an interplanetary delivery company in the retro-futuristic 31st century.",
+  "description": "The adventures of a late-20th-century New York City pizza delivery boy, Philip J. Fry, who, after being unwittingly cryogenically frozen for one thousand years, finds employment at Planet Express, an interplanetary delivery company in the retro-futuristic 31st century.",
+  "shortDescription": "The adventures of a late-20th-century New York City pizza delivery boy, Philip J. Fry, who, after being unwittingly cryo",
+  "year": 1999,
+  "releaseDate": "1999-03-28",
+  "rating": 8.4,
+  "votes": "3.9K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Animation",
+    "Comedy",
+    "Sci-Fi & Fantasy"
+  ],
+  "categories": [
+    "Animation",
+    "Comedy",
+    "Sci-Fi & Fantasy"
+  ],
+  "language": "English",
+  "country": "US",
+  "director": "Director",
+  "poster": "https://image.tmdb.org/t/p/w500/eM8bbTn8C8vUwwS6upzzm7gX31u.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/4xKG4S1IyLIglHbCYGJDsptgQNh.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/dUHzt5md1x0?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/dUHzt5md1x0?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "23679",
+      "name": "Billy West",
+      "character": "Fry / Professor Farnsworth / Zoidberg / Zapp Brannigan (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/iNQtBsgV4wr3z5CEEFhR5U4Yedk.jpg"
+    },
+    {
+      "id": "18980",
+      "name": "Katey Sagal",
+      "character": "Leela (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/jdnBWdXlQG2Q2F6v9MPJkaWQ9Vd.jpg"
+    },
+    {
+      "id": "31531",
+      "name": "John DiMaggio",
+      "character": "Bender (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/qcbQe71nSlULDsP1OxTqltEKFbl.jpg"
+    },
+    {
+      "id": "34983",
+      "name": "Tress MacNeille",
+      "character": "Mom (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/gI2LsgByvSffQY34vabVnPmrHzw.jpg"
+    },
+    {
+      "id": "34521",
+      "name": "Maurice LaMarche",
+      "character": "Morbo / Kif Kroker (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/qCiL3EYAhLcNo0rNj5pczWo9MwG.jpg"
+    },
+    {
+      "id": "15100",
+      "name": "Lauren Tom",
+      "character": "Amy Wong (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/fTKFspRRQ275AkzvtPERLZnXe0n.jpg"
+    },
+    {
+      "id": "31549",
+      "name": "Phil LaMarr",
+      "character": "Hermes Conrad (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/xP2kNlsmXtzXq0geutflO4K9mSE.jpg"
+    },
+    {
+      "id": "52794",
+      "name": "David Herman",
+      "character": "Scruffy (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/wexIWmxk2uigMRLJ1WXYHroODuU.jpg"
+    }
+  ],
+  "seasons": 11,
+  "episodes": 164,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-15T03:24:43.964Z",
+  "createdAt": "2026-09-15T03:24:43.965Z",
+  "updatedAt": "2026-09-15T03:24:43.965Z",
+  "links": []
+}
