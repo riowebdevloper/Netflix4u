@@ -462,9 +462,10 @@
         recommendationsHtml +
       '</div>';
 
-    // Render ad slots inside modal body
+    // Render ad slots inside modal body & top dock
     if (window.Netflix4uAds) {
-      window.Netflix4uAds.renderAll(titleModalBody);
+      window.Netflix4uAds.renderAll(titleModal);
+      window.Netflix4uAds.renderSlot('ad-slot-modal-popunder-top-slot');
     }
 
     // Hook events inside modal body

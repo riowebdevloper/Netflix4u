@@ -226,7 +226,13 @@
         return;
       }
 
-      // ─── HOMEPAGE AD PLACEMENTS (6 Sections) ───
+      // ─── HOMEPAGE AD PLACEMENTS ───
+
+      // 0. Dedicated Top Popunder & In-Page Ad Dock Section
+      if (slotId === 'ad-slot-home-popunder-top-slot' || slotId === 'ad-slot-home-popunder-top') {
+        renderAadsUnit(el, 60, 90);
+        return;
+      }
 
       // 1. Under Hero Carousel (#ad-slot-home-top) -> Adsterra Native Banner
       if (slotId === 'ad-slot-home-top') {
@@ -270,7 +276,13 @@
         return;
       }
 
-      // ─── MORE INFO PAGE (TITLE MODAL) AD PLACEMENTS (4 Sections) ───
+      // ─── MORE INFO PAGE (TITLE MODAL) AD PLACEMENTS ───
+
+      // 0. In-Modal Top Popunder / In-Page Ad Dock Section
+      if (slotId === 'ad-slot-modal-popunder-top-slot' || slotId === 'ad-slot-modal-popunder-top') {
+        renderAadsUnit(el, 60, 90);
+        return;
+      }
 
       // 1. In-Modal Top Sponsor (#ad-slot-modal-top) -> A-ADS Adaptive Unit
       if (slotId === 'ad-slot-modal-top') {
@@ -352,11 +364,65 @@
     },
 
     /**
+     * Monitor dynamically injected third-party push / popunder banners (e.g. HilltopAds)
+     * and dock them safely into the dedicated top ad sections so they never cover UI or disturb the user.
+     */
+    initPopunderAdDocker: function() {
+      var homeDock = document.getElementById('ad-slot-home-popunder-top-slot');
+      var modalDock = document.getElementById('ad-slot-modal-popunder-top-slot');
+      var titleModal = document.getElementById('title-modal');
+
+      var dockerObserver = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          mutation.addedNodes.forEach(function(node) {
+            if (node.nodeType === 1 && node.tagName === 'DIV') {
+              var nid = (node.id || '').toLowerCase();
+              if (nid === 'watch-modal' || nid === 'title-modal' || nid === 'home-header' || nid === 'watch-top-bar' || nid === 'theme-wash' || nid === 'progress-bar' || nid === 'trailer-modal' || nid === 'policy-modal' || nid === 'nm-loader' || nid === 'aads-sticky-wrap') {
+                return;
+              }
+
+              var styleAttr = node.getAttribute('style') || '';
+              var isFixed = styleAttr.includes('position: fixed') || styleAttr.includes('position:fixed');
+              var isTop = styleAttr.includes('top: 0') || styleAttr.includes('top:0') || styleAttr.includes('top: 5') || styleAttr.includes('top:5') || styleAttr.includes('top: 10');
+              var isPushAd = nid.includes('push') || nid.includes('banner') || (node.className && typeof node.className === 'string' && (node.className.includes('push') || node.className.includes('inpage')));
+              var hasAdFrame = Boolean(node.querySelector('iframe[src*="untimely"], iframe[src*="bony"], a[href*="untimely"], a[href*="bony"], a[href*="hilltop"]'));
+
+              if ((isFixed && isTop) || isPushAd || hasAdFrame) {
+                var isModalOpen = titleModal && !titleModal.classList.contains('hidden');
+                var targetDock = isModalOpen ? modalDock : homeDock;
+
+                if (targetDock && !targetDock.contains(node)) {
+                  node.style.position = 'static';
+                  node.style.width = '100%';
+                  node.style.maxWidth = '100%';
+                  node.style.margin = '0 auto';
+                  node.style.top = 'auto';
+                  node.style.left = 'auto';
+                  node.style.right = 'auto';
+                  node.style.bottom = 'auto';
+                  node.style.transform = 'none';
+                  node.style.boxShadow = 'none';
+                  node.style.zIndex = '1';
+
+                  targetDock.innerHTML = '';
+                  targetDock.appendChild(node);
+                }
+              }
+            }
+          });
+        });
+      });
+
+      dockerObserver.observe(document.body, { childList: true, subtree: false });
+    },
+
+    /**
      * Primary startup initialization
      */
     init: function() {
       AdsManager.renderAll();
       AdsManager.initStickyBanner();
+      AdsManager.initPopunderAdDocker();
       loadAdsterraScript();
       setupAdsterraFallbackMonitor();
     }
