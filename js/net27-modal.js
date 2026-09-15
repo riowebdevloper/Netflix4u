@@ -995,15 +995,224 @@
     openTitleModal(prev.tmdbId, prev.type);
   }
 
-  // ─── WATCH MODAL (Net27 Streaming Player UI) ───
+  // ─── WATCH MODAL (Net27 Streaming Player UI with Auto-Failover Engine) ───
   var SERVERS_CONFIG = [
-    { id: 's1', name: 'Server 1 (Net27 Multi)', tag: 'Multi', tagClass: 'tag-multi', desc: 'Net27 Peachify Multi-Audio (Wolf, Spider, Multi)' },
-    { id: 's2', name: 'Server 2 (VidLink Multi)', tag: 'Hindi/Dual', tagClass: 'tag-multi', desc: 'VidLink Pro Multi-Audio Track Selector' },
-    { id: 's3', name: 'Server 3 (AllMovieLand)', tag: 'High-Speed', tagClass: 'tag-fast', desc: 'AllMovieLand Indian & Global Fast Player' },
-    { id: 's4', name: 'Server 4 (2Embed Global)', tag: 'CDN', tagClass: 'tag-global', desc: '2Embed Global High-Speed Server' },
-    { id: 's5', name: 'Server 5 (VidSrc PM)', tag: 'Fast Server', tagClass: 'tag-fast', desc: 'VidSrc PM High Uptime Server' },
-    { id: 's6', name: 'Server 6 (AutoEmbed)', tag: 'Backup', tagClass: 'tag-fast', desc: 'AutoEmbed Reliable CDN Backup' }
+    { id: 's1', name: 'Server 1 (VidLink Pro)', tag: 'Hindi/Dual', tagClass: 'tag-multi', desc: 'VidLink Pro Multi-Audio Track Selector (Hindi & English)' },
+    { id: 's2', name: 'Server 2 (AllMovieLand)', tag: 'Indian Fast', tagClass: 'tag-fast', desc: 'AllMovieLand Indian & Global Fast Player' },
+    { id: 's3', name: 'Server 3 (VidSrc PM)', tag: 'Global CDN', tagClass: 'tag-global', desc: 'VidSrc PM High Uptime Global Mirror' },
+    { id: 's4', name: 'Server 4 (AutoEmbed)', tag: 'Backup', tagClass: 'tag-fast', desc: 'AutoEmbed Reliable CDN Backup' },
+    { id: 's5', name: 'Server 5 (2Embed Global)', tag: 'Universal', tagClass: 'tag-global', desc: '2Embed Global High-Speed Server' }
   ];
+
+  // Auto-failover & orientation state
+  var isAutoSwitchEnabled = true;
+  var autoSwitchTimer = null;
+  var autoSwitchIndex = 0;
+  var isPlaybackConfirmed = false;
+  var autoSwitchOrder = ['s1', 's2', 's3', 's4', 's5'];
+  var watchTopBarTimer = null;
+
+  var watchStreamStatusText = document.getElementById('watch-stream-status-text');
+  var watchStreamSubstatusText = document.getElementById('watch-stream-substatus-text');
+  var watchServerIndicator = document.getElementById('watch-server-indicator');
+  var watchAutoswitchToggleBtn = document.getElementById('watch-autoswitch-toggle-btn');
+  var watchRotateBtn = document.getElementById('watch-rotate-btn');
+  var watchPortraitHint = document.getElementById('watch-portrait-hint');
+  var watchPortraitHintDismiss = document.getElementById('watch-portrait-hint-dismiss');
+
+  function setWatchStatus(status, substatus) {
+    if (watchStreamStatusText && status) watchStreamStatusText.textContent = status;
+    if (watchStreamSubstatusText && substatus) watchStreamSubstatusText.textContent = substatus;
+  }
+
+  function updateAutoSwitchToggleUi(enabled) {
+    isAutoSwitchEnabled = enabled;
+    if (!watchAutoswitchToggleBtn) return;
+    if (enabled) {
+      watchAutoswitchToggleBtn.textContent = 'ENABLED';
+      watchAutoswitchToggleBtn.className = 'px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/30 transition cursor-pointer';
+    } else {
+      watchAutoswitchToggleBtn.textContent = 'MANUAL';
+      watchAutoswitchToggleBtn.className = 'px-2 py-0.5 rounded text-[10px] font-bold bg-white/10 text-white/70 border border-white/20 hover:bg-white/20 transition cursor-pointer';
+    }
+  }
+
+  if (watchAutoswitchToggleBtn) {
+    watchAutoswitchToggleBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      isAutoSwitchEnabled = !isAutoSwitchEnabled;
+      updateAutoSwitchToggleUi(isAutoSwitchEnabled);
+      if (isAutoSwitchEnabled) {
+        isPlaybackConfirmed = false;
+        startAutoSwitchSequence(0);
+      }
+    });
+  }
+
+  function resetWatchTopBarTimer() {
+    if (!watchTopBar) return;
+    watchTopBar.classList.remove('watch-bar-hidden');
+    if (watchTopBarTimer) clearTimeout(watchTopBarTimer);
+    watchTopBarTimer = setTimeout(function() {
+      if (watchModal && !watchModal.classList.contains('hidden')) {
+        var isServerOpen = watchServerMenu && !watchServerMenu.classList.contains('hidden');
+        var isExtOpen = watchExtMenu && !watchExtMenu.classList.contains('hidden');
+        if (!isServerOpen && !isExtOpen) {
+          watchTopBar.classList.add('watch-bar-hidden');
+        }
+      }
+    }, 3500);
+  }
+
+  if (watchModal) {
+    ['mousemove', 'touchstart', 'click', 'keydown'].forEach(function(evtName) {
+      watchModal.addEventListener(evtName, function() {
+        resetWatchTopBarTimer();
+      }, { passive: true });
+    });
+  }
+
+  function togglePlayerFullscreenLandscape() {
+    if (!document.fullscreenElement) {
+      var targetEl = watchModal || document.documentElement;
+      var req = targetEl.requestFullscreen || targetEl.webkitRequestFullscreen || targetEl.msRequestFullscreen;
+      if (req) {
+        req.call(targetEl).then(function() {
+          if (screen.orientation && screen.orientation.lock) {
+            screen.orientation.lock('landscape').catch(function() {});
+          }
+        }).catch(function() {});
+      }
+    } else {
+      var exit = document.exitFullscreen || document.webkitExitFullscreen || document.msExitFullscreen;
+      if (exit) {
+        exit.call(document).catch(function() {});
+      }
+    }
+    resetWatchTopBarTimer();
+  }
+
+  if (watchRotateBtn) {
+    watchRotateBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      togglePlayerFullscreenLandscape();
+    });
+  }
+
+  if (watchPortraitHintDismiss) {
+    watchPortraitHintDismiss.addEventListener('click', function(e) {
+      e.stopPropagation();
+      if (watchPortraitHint) watchPortraitHint.classList.add('hidden');
+    });
+  }
+
+  function checkOrientationHint() {
+    if (!watchPortraitHint) return;
+    var isPortrait = window.matchMedia && window.matchMedia('(max-width: 768px) and (orientation: portrait)').matches;
+    if (isPortrait && watchModal && !watchModal.classList.contains('hidden')) {
+      watchPortraitHint.classList.remove('hidden');
+      setTimeout(function() {
+        if (watchPortraitHint) watchPortraitHint.classList.add('hidden');
+      }, 6000);
+    } else {
+      watchPortraitHint.classList.add('hidden');
+    }
+  }
+
+  function confirmPlaybackActive() {
+    if (isPlaybackConfirmed) return;
+    isPlaybackConfirmed = true;
+    if (autoSwitchTimer) {
+      clearTimeout(autoSwitchTimer);
+      autoSwitchTimer = null;
+    }
+    var cfg = SERVERS_CONFIG.find(function(s) { return s.id === currentWatchServer; }) || SERVERS_CONFIG[0];
+    setWatchStatus('Connected to ' + cfg.name, 'Playback stream running');
+    setTimeout(function() {
+      hideWatchBackdrop();
+    }, 600);
+    if (watchServerIndicator) {
+      watchServerIndicator.className = 'w-2 h-2 rounded-full bg-emerald-400';
+    }
+    resetWatchTopBarTimer();
+  }
+
+  function startAutoSwitchSequence(index) {
+    if (!isAutoSwitchEnabled) return;
+    if (autoSwitchTimer) {
+      clearTimeout(autoSwitchTimer);
+      autoSwitchTimer = null;
+    }
+    
+    if (index >= autoSwitchOrder.length) {
+      setWatchStatus('Connecting best available server…', 'Manual server switching available');
+      setTimeout(function() {
+        hideWatchBackdrop();
+      }, 1500);
+      return;
+    }
+
+    autoSwitchIndex = index;
+    var serverId = autoSwitchOrder[index];
+    var cfg = SERVERS_CONFIG.find(function(s) { return s.id === serverId; }) || SERVERS_CONFIG[0];
+    
+    currentWatchServer = serverId;
+    updateActiveServerUi(serverId);
+    
+    setWatchStatus('Connecting ' + cfg.name + '…', 'Scanning for buffer-free playback • Auto-switching if busy');
+    if (activeWatchParams && activeWatchParams.backdrop) {
+      showWatchBackdrop(activeWatchParams.backdrop);
+    }
+    
+    if (activeWatchServers && activeWatchServers[serverId]) {
+      watchModalIframe.src = activeWatchServers[serverId];
+    }
+
+    // Auto failover timer (4.8s): if no playback event confirmed, auto-advance to next server
+    autoSwitchTimer = setTimeout(function() {
+      if (isAutoSwitchEnabled && !isPlaybackConfirmed) {
+        console.log('[Netflix4U AutoSwitch] Server ' + serverId + ' unresponsive/not playing, switching to next server...');
+        setWatchStatus(cfg.name + ' busy, trying next server…', 'Auto-switching in progress…');
+        startAutoSwitchSequence(index + 1);
+      }
+    }, 4800);
+  }
+
+  // Cross-origin postMessage listener for HTML5 video player events
+  window.addEventListener('message', function(event) {
+    if (!watchModal || watchModal.classList.contains('hidden')) return;
+    var data = event.data;
+    if (!data) return;
+    
+    var isPlaying = false;
+    var isError = false;
+    
+    if (typeof data === 'string') {
+      try { data = JSON.parse(data); } catch(e) {}
+    }
+    
+    if (typeof data === 'object' && data !== null) {
+      var evtStr = (data.event || data.type || data.status || data.action || '').toString().toLowerCase();
+      if (evtStr.includes('play') || evtStr.includes('timeupdate') || evtStr.includes('loaded') || evtStr.includes('ready')) {
+        isPlaying = true;
+      }
+      if (evtStr.includes('error') || evtStr.includes('not_found') || evtStr.includes('fail') || evtStr.includes('unavailable')) {
+        isError = true;
+      }
+      if (data.data && typeof data.data === 'object') {
+        var subEvt = (data.data.event || data.data.type || '').toString().toLowerCase();
+        if (subEvt.includes('play') || subEvt.includes('timeupdate')) isPlaying = true;
+        if (subEvt.includes('error') || subEvt.includes('not_found')) isError = true;
+      }
+    }
+    
+    if (isPlaying) {
+      confirmPlaybackActive();
+    } else if (isError && isAutoSwitchEnabled && !isPlaybackConfirmed) {
+      if (autoSwitchTimer) clearTimeout(autoSwitchTimer);
+      startAutoSwitchSequence(autoSwitchIndex + 1);
+    }
+  });
 
   function openWatchModal(tmdbId, type, season, episode, backdrop, title, year, imdbId, canonicalId, poster) {
     if (window.__closeSearchOverlay) window.__closeSearchOverlay();
@@ -1090,11 +1299,11 @@
         .then(function(data) {
           if (data && data.imdbId) {
             activeWatchParams.imdbId = data.imdbId;
-            activeWatchServers.s3 = isTv
+            activeWatchServers.s2 = isTv
               ? 'https://slast430did.com/play/' + encodeURIComponent(data.imdbId) + '?s=' + season + '&e=' + episode
               : 'https://slast430did.com/play/' + encodeURIComponent(data.imdbId);
-            if (currentWatchServer === 's3' && watchModalIframe) {
-              watchModalIframe.src = activeWatchServers.s3;
+            if (currentWatchServer === 's2' && watchModalIframe) {
+              watchModalIframe.src = activeWatchServers.s2;
             }
           }
         }).catch(function() {});
@@ -1102,38 +1311,46 @@
 
     activeWatchServers = {
       s1: isTv
-        ? 'https://peachify.top/embed/tv/' + tmdbId + '/' + season + '/' + episode
-        : 'https://peachify.top/embed/movie/' + tmdbId,
-      s2: isTv
         ? 'https://vidlink.pro/tv/' + tmdbId + '/' + season + '/' + episode + '?multiLang=true'
         : 'https://vidlink.pro/movie/' + tmdbId + '?multiLang=true',
-      s3: allMovieLandUrl,
-      s4: isTv
-        ? 'https://www.2embed.cc/embedtv/' + tmdbId + '&s=' + season + '&e=' + episode
-        : 'https://www.2embed.cc/embed/' + tmdbId,
-      s5: isTv
+      s2: allMovieLandUrl,
+      s3: isTv
         ? 'https://vidsrc.pm/embed/tv/' + tmdbId + '/' + season + '/' + episode
         : 'https://vidsrc.pm/embed/movie/' + tmdbId,
-      s6: isTv
+      s4: isTv
         ? 'https://autoembed.co/tv/tmdb/' + tmdbId + '/' + season + '/' + episode
-        : 'https://autoembed.co/movie/tmdb/' + tmdbId
+        : 'https://autoembed.co/movie/tmdb/' + tmdbId,
+      s5: isTv
+        ? 'https://www.2embed.cc/embedtv/' + tmdbId + '&s=' + season + '&e=' + episode
+        : 'https://www.2embed.cc/embed/' + tmdbId
     };
 
     currentWatchServer = 's1';
+    isPlaybackConfirmed = false;
     renderWatchServerMenu();
     updateActiveServerUi('s1');
+    updateAutoSwitchToggleUi(isAutoSwitchEnabled);
 
-    showWatchBackdrop(backdrop);
-    watchModalIframe.src = activeWatchServers.s1;
     watchModal.classList.remove('hidden');
     watchModal.setAttribute('aria-hidden', 'false');
     lockBodyScroll();
+
+    if (isAutoSwitchEnabled) {
+      startAutoSwitchSequence(0);
+    } else {
+      showWatchBackdrop(backdrop);
+      watchModalIframe.src = activeWatchServers.s1;
+      setTimeout(function() { hideWatchBackdrop(); }, 1200);
+    }
+
+    checkOrientationHint();
+    resetWatchTopBarTimer();
 
     // Auto save to Continue Watching
     if (window.__saveContinueWatching) {
       window.__saveContinueWatching({
         tmdbId: tmdbId,
-        canonicalId: (params && params.canonicalId) || tmdbId,
+        canonicalId: (activeWatchParams && activeWatchParams.canonicalId) || tmdbId,
         title: title || 'Title',
         backdrop: backdrop,
         poster: poster || backdrop,
@@ -1154,8 +1371,9 @@
   }
 
   function renderWatchServerMenu() {
-    if (!watchServerMenu) return;
-    watchServerMenu.innerHTML = SERVERS_CONFIG.map(function(s) {
+    var serverListContainer = document.getElementById('watch-servers-list-container') || watchServerMenu;
+    if (!serverListContainer) return;
+    serverListContainer.innerHTML = SERVERS_CONFIG.map(function(s) {
       var isSelected = s.id === currentWatchServer;
       return '<button type="button" data-switch-server="' + s.id + '" class="watch-server-item' + (isSelected ? ' is-selected' : '') + '">' +
         '<div class="flex items-center gap-2 min-w-0">' +
@@ -1166,11 +1384,11 @@
       '</button>';
     }).join('');
 
-    watchServerMenu.querySelectorAll('[data-switch-server]').forEach(function(btn) {
+    serverListContainer.querySelectorAll('[data-switch-server]').forEach(function(btn) {
       btn.addEventListener('click', function(e) {
         e.stopPropagation();
         var sId = btn.dataset.switchServer;
-        switchWatchServer(sId);
+        switchWatchServer(sId, true);
         closeServerMenu();
       });
     });
@@ -1182,20 +1400,36 @@
     if (watchCurrentServerLabel) {
       watchCurrentServerLabel.textContent = cfg.name;
     }
-    if (watchServerMenu) {
-      watchServerMenu.querySelectorAll('[data-switch-server]').forEach(function(btn) {
+    var serverListContainer = document.getElementById('watch-servers-list-container') || watchServerMenu;
+    if (serverListContainer) {
+      serverListContainer.querySelectorAll('[data-switch-server]').forEach(function(btn) {
         btn.classList.toggle('is-selected', btn.dataset.switchServer === serverId);
       });
     }
   }
 
-  function switchWatchServer(serverId) {
+  function switchWatchServer(serverId, isManual) {
     if (!activeWatchServers[serverId]) return;
+    if (isManual) {
+      isAutoSwitchEnabled = false;
+      isPlaybackConfirmed = true;
+      if (autoSwitchTimer) {
+        clearTimeout(autoSwitchTimer);
+        autoSwitchTimer = null;
+      }
+      updateAutoSwitchToggleUi(false);
+      var cfg = SERVERS_CONFIG.find(function(s) { return s.id === serverId; }) || SERVERS_CONFIG[0];
+      setWatchStatus('Manual: ' + cfg.name, 'Manual server selected');
+    }
     updateActiveServerUi(serverId);
     if (activeWatchParams && activeWatchParams.backdrop) {
       showWatchBackdrop(activeWatchParams.backdrop);
     }
     watchModalIframe.src = activeWatchServers[serverId];
+    setTimeout(function() {
+      hideWatchBackdrop();
+    }, 800);
+    resetWatchTopBarTimer();
   }
 
   function toggleServerMenu() {
@@ -1331,6 +1565,20 @@
 
   function closeWatchModal() {
     if (!watchModal || !watchModalIframe) return;
+    if (autoSwitchTimer) {
+      clearTimeout(autoSwitchTimer);
+      autoSwitchTimer = null;
+    }
+    if (watchTopBarTimer) {
+      clearTimeout(watchTopBarTimer);
+      watchTopBarTimer = null;
+    }
+    if (watchTopBar) {
+      watchTopBar.classList.remove('watch-bar-hidden');
+    }
+    if (watchPortraitHint) {
+      watchPortraitHint.classList.add('hidden');
+    }
     watchModalIframe.src = 'about:blank';
     watchModal.classList.add('hidden');
     watchModal.setAttribute('aria-hidden', 'true');

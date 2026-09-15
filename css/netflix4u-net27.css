@@ -431,6 +431,27 @@ body {
   background: linear-gradient(180deg, rgba(10, 10, 15, 0.95) 0%, rgba(10, 10, 15, 0.75) 70%, transparent 100%);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+#watch-top-bar.watch-bar-hidden {
+  opacity: 0 !important;
+  transform: translateY(-100%) !important;
+  pointer-events: none !important;
+}
+
+#watch-rotate-btn:hover {
+  background: rgba(16, 185, 129, 0.2);
+  border-color: rgba(16, 185, 129, 0.45);
+}
+
+@media (max-width: 768px) and (orientation: portrait) {
+  #watch-modal-iframe {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+  }
 }
 
 .watch-server-item {
