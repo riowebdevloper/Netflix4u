@@ -1002,7 +1002,8 @@
     { id: 's2', name: 'Server 2 (AllMovieLand)', tag: 'Indian Fast', tagClass: 'tag-fast', desc: 'AllMovieLand Indian & Global Fast Player' },
     { id: 's3', name: 'Server 3 (VidSrc PM)', tag: 'Global CDN', tagClass: 'tag-global', desc: 'VidSrc PM High Uptime Global Mirror' },
     { id: 's4', name: 'Server 4 (AutoEmbed)', tag: 'Backup', tagClass: 'tag-fast', desc: 'AutoEmbed Reliable CDN Backup' },
-    { id: 's5', name: 'Server 5 (2Embed Global)', tag: 'Universal', tagClass: 'tag-global', desc: '2Embed Global High-Speed Server' }
+    { id: 's5', name: 'Server 5 (2Embed Global)', tag: 'Universal', tagClass: 'tag-global', desc: '2Embed Global High-Speed Server' },
+    { id: 's6', name: 'Server 6 (VidSrc In)', tag: 'Fast Mirror', tagClass: 'tag-multi', desc: 'VidSrc In High-Performance Mirror' }
   ];
 
   // Auto-failover & orientation state
@@ -1010,8 +1011,10 @@
   var autoSwitchTimer = null;
   var autoSwitchIndex = 0;
   var isPlaybackConfirmed = false;
-  var autoSwitchOrder = ['s1', 's2', 's3', 's4', 's5'];
+  var autoSwitchOrder = ['s1', 's2', 's3', 's4', 's5', 's6'];
   var watchTopBarTimer = null;
+  var currentAutoSwitchToken = 0;
+  var activeProbeController = null;
 
   var watchStreamStatusText = document.getElementById('watch-stream-status-text');
   var watchStreamSubstatusText = document.getElementById('watch-stream-substatus-text');
@@ -1120,6 +1123,43 @@
     }
   }
 
+  function probeStream(url, cb) {
+    if (!url) return cb(false, 404);
+    if (activeProbeController) {
+      try { activeProbeController.abort(); } catch(e) {}
+    }
+    activeProbeController = (typeof AbortController !== 'undefined') ? new AbortController() : null;
+    var signal = activeProbeController ? activeProbeController.signal : undefined;
+    var timedOut = false;
+    var timeoutId = setTimeout(function() {
+      timedOut = true;
+      if (activeProbeController) {
+        try { activeProbeController.abort(); } catch(e) {}
+      }
+      cb(true, 200);
+    }, 2400);
+
+    fetch('/api/probe-stream?url=' + encodeURIComponent(url), { signal: signal })
+      .then(function(res) { return res.json(); })
+      .then(function(data) {
+        if (timedOut) return;
+        clearTimeout(timeoutId);
+        if (data && data.status === 404) {
+          cb(false, 404);
+        } else if (data && data.ok === false && (data.status === 403 || data.status === 500 || data.status === 502)) {
+          cb(false, data.status);
+        } else {
+          cb(true, (data && data.status) || 200);
+        }
+      })
+      .catch(function(err) {
+        if (timedOut) return;
+        clearTimeout(timeoutId);
+        if (err && err.name === 'AbortError') return;
+        cb(true, 200);
+      });
+  }
+
   function confirmPlaybackActive() {
     if (isPlaybackConfirmed) return;
     isPlaybackConfirmed = true;
@@ -1131,7 +1171,7 @@
     setWatchStatus('Connected to ' + cfg.name, 'Playback stream running');
     setTimeout(function() {
       hideWatchBackdrop();
-    }, 600);
+    }, 500);
     if (watchServerIndicator) {
       watchServerIndicator.className = 'w-2 h-2 rounded-full bg-emerald-400';
     }
@@ -1146,7 +1186,14 @@
     }
     
     if (index >= autoSwitchOrder.length) {
-      setWatchStatus('Connecting best available server…', 'Manual server switching available');
+      var fallbackServer = autoSwitchOrder[0] || 's1';
+      var fallbackCfg = SERVERS_CONFIG.find(function(s) { return s.id === fallbackServer; }) || SERVERS_CONFIG[0];
+      setWatchStatus('Connected to ' + fallbackCfg.name, 'Manual server switching available');
+      currentWatchServer = fallbackServer;
+      updateActiveServerUi(fallbackServer);
+      if (activeWatchServers && activeWatchServers[fallbackServer]) {
+        watchModalIframe.src = activeWatchServers[fallbackServer];
+      }
       setTimeout(function() {
         hideWatchBackdrop();
       }, 1500);
@@ -1160,23 +1207,50 @@
     currentWatchServer = serverId;
     updateActiveServerUi(serverId);
     
-    setWatchStatus('Connecting ' + cfg.name + '…', 'Scanning for buffer-free playback • Auto-switching if busy');
+    setWatchStatus('Connecting ' + cfg.name + '…', 'Scanning for 404 errors & verified stream');
     if (activeWatchParams && activeWatchParams.backdrop) {
       showWatchBackdrop(activeWatchParams.backdrop);
     }
     
-    if (activeWatchServers && activeWatchServers[serverId]) {
-      watchModalIframe.src = activeWatchServers[serverId];
+    var serverUrl = (activeWatchServers && activeWatchServers[serverId]) || '';
+    if (!serverUrl) {
+      startAutoSwitchSequence(index + 1);
+      return;
     }
 
-    // Auto failover timer (4.8s): if no playback event confirmed, auto-advance to next server
-    autoSwitchTimer = setTimeout(function() {
-      if (isAutoSwitchEnabled && !isPlaybackConfirmed) {
-        console.log('[Netflix4U AutoSwitch] Server ' + serverId + ' unresponsive/not playing, switching to next server...');
-        setWatchStatus(cfg.name + ' busy, trying next server…', 'Auto-switching in progress…');
-        startAutoSwitchSequence(index + 1);
+    var seqToken = ++currentAutoSwitchToken;
+
+    // Fast HTTP health probe before user ever sees an error screen
+    probeStream(serverUrl, function(isHealthy, statusCode) {
+      if (seqToken !== currentAutoSwitchToken) return;
+      if (!isAutoSwitchEnabled || isPlaybackConfirmed) return;
+
+      if (!isHealthy && statusCode === 404) {
+        console.warn('[Netflix4U AutoSwitch] Server ' + serverId + ' returned 404 (File Not Found). Switching immediately.');
+        setWatchStatus(cfg.name + ' returned 404 (File Not Found)', 'Auto-switching to next server…');
+        if (autoSwitchTimer) clearTimeout(autoSwitchTimer);
+        autoSwitchTimer = setTimeout(function() {
+          if (seqToken === currentAutoSwitchToken && isAutoSwitchEnabled && !isPlaybackConfirmed) {
+            startAutoSwitchSequence(index + 1);
+          }
+        }, 250);
+        return;
       }
-    }, 4800);
+
+      // Load the iframe URL only when verified reachable
+      watchModalIframe.src = serverUrl;
+      setWatchStatus('Connecting ' + cfg.name + '…', 'Buffering stream • Auto-switching if stuck');
+
+      // Auto failover timer (3.5s): if no actual media playback event confirmed, advance
+      if (autoSwitchTimer) clearTimeout(autoSwitchTimer);
+      autoSwitchTimer = setTimeout(function() {
+        if (seqToken === currentAutoSwitchToken && isAutoSwitchEnabled && !isPlaybackConfirmed) {
+          console.log('[Netflix4U AutoSwitch] Server ' + serverId + ' timeout/not playing, switching to next server...');
+          setWatchStatus(cfg.name + ' slow or unavailable, trying next…', 'Auto-switching in progress…');
+          startAutoSwitchSequence(index + 1);
+        }
+      }, 3500);
+    });
   }
 
   // Cross-origin postMessage listener for HTML5 video player events
@@ -1185,33 +1259,80 @@
     var data = event.data;
     if (!data) return;
     
-    var isPlaying = false;
-    var isError = false;
-    
     if (typeof data === 'string') {
       try { data = JSON.parse(data); } catch(e) {}
     }
     
-    if (typeof data === 'object' && data !== null) {
-      var evtStr = (data.event || data.type || data.status || data.action || '').toString().toLowerCase();
-      if (evtStr.includes('play') || evtStr.includes('timeupdate') || evtStr.includes('loaded') || evtStr.includes('ready')) {
+    var isPlaying = false;
+    var isError = false;
+
+    function evaluateEventString(str) {
+      if (!str || typeof str !== 'string') return;
+      var s = str.toLowerCase();
+      // Genuine playback confirmation events ONLY
+      if (
+        s === 'play' ||
+        s === 'playing' ||
+        s === 'playback_started' ||
+        s === 'playbackstarted' ||
+        s === 'mediaplay' ||
+        s === 'videoplaying' ||
+        s === 'playing_started' ||
+        s.indexOf('timeupdate') !== -1 ||
+        s.indexOf('video_playing') !== -1
+      ) {
         isPlaying = true;
       }
-      if (evtStr.includes('error') || evtStr.includes('not_found') || evtStr.includes('fail') || evtStr.includes('unavailable')) {
+      // Error and 404 / File Not Found events
+      if (
+        s.indexOf('error') !== -1 ||
+        s.indexOf('not_found') !== -1 ||
+        s.indexOf('notfound') !== -1 ||
+        s.indexOf('404') !== -1 ||
+        s.indexOf('fail') !== -1 ||
+        s.indexOf('unavailable') !== -1 ||
+        s.indexOf('empty_source') !== -1 ||
+        s.indexOf('no_source') !== -1 ||
+        s.indexOf('abort') !== -1
+      ) {
         isError = true;
-      }
-      if (data.data && typeof data.data === 'object') {
-        var subEvt = (data.data.event || data.data.type || '').toString().toLowerCase();
-        if (subEvt.includes('play') || subEvt.includes('timeupdate')) isPlaying = true;
-        if (subEvt.includes('error') || subEvt.includes('not_found')) isError = true;
       }
     }
     
-    if (isPlaying) {
-      confirmPlaybackActive();
-    } else if (isError && isAutoSwitchEnabled && !isPlaybackConfirmed) {
+    if (typeof data === 'object' && data !== null) {
+      evaluateEventString(data.event);
+      evaluateEventString(data.type);
+      evaluateEventString(data.status);
+      evaluateEventString(data.action);
+      evaluateEventString(data.msg);
+      evaluateEventString(data.message);
+      if (data.data) {
+        if (typeof data.data === 'string') evaluateEventString(data.data);
+        else if (typeof data.data === 'object') {
+          evaluateEventString(data.data.event);
+          evaluateEventString(data.data.type);
+          evaluateEventString(data.data.status);
+          evaluateEventString(data.data.msg);
+          evaluateEventString(data.data.message);
+        }
+      }
+    } else if (typeof data === 'string') {
+      evaluateEventString(data);
+    }
+    
+    if (isError && !isPlaybackConfirmed) {
+      console.warn('[Netflix4U AutoSwitch] Detected stream error/404 via message:', data);
+      var currentCfg = SERVERS_CONFIG.find(function(s) { return s.id === currentWatchServer; }) || SERVERS_CONFIG[0];
+      setWatchStatus(currentCfg.name + ' stream error (404/Not Found)', 'Auto-switching to next server…');
       if (autoSwitchTimer) clearTimeout(autoSwitchTimer);
-      startAutoSwitchSequence(autoSwitchIndex + 1);
+      autoSwitchTimer = setTimeout(function() {
+        startAutoSwitchSequence(autoSwitchIndex + 1);
+      }, 250);
+      return;
+    }
+
+    if (isPlaying && !isError) {
+      confirmPlaybackActive();
     }
   });
 
@@ -1323,7 +1444,10 @@
         : 'https://autoembed.co/movie/tmdb/' + tmdbId,
       s5: isTv
         ? 'https://www.2embed.cc/embedtv/' + tmdbId + '&s=' + season + '&e=' + episode
-        : 'https://www.2embed.cc/embed/' + tmdbId
+        : 'https://www.2embed.cc/embed/' + tmdbId,
+      s6: isTv
+        ? 'https://vidsrc.in/embed/tv/' + tmdbId + '/' + season + '/' + episode
+        : 'https://vidsrc.in/embed/movie/' + tmdbId
     };
 
     currentWatchServer = 's1';
@@ -1411,25 +1535,55 @@
 
   function switchWatchServer(serverId, isManual) {
     if (!activeWatchServers[serverId]) return;
+    var cfg = SERVERS_CONFIG.find(function(s) { return s.id === serverId; }) || SERVERS_CONFIG[0];
+
     if (isManual) {
       isAutoSwitchEnabled = false;
-      isPlaybackConfirmed = true;
+      isPlaybackConfirmed = false;
       if (autoSwitchTimer) {
         clearTimeout(autoSwitchTimer);
         autoSwitchTimer = null;
       }
       updateAutoSwitchToggleUi(false);
-      var cfg = SERVERS_CONFIG.find(function(s) { return s.id === serverId; }) || SERVERS_CONFIG[0];
-      setWatchStatus('Manual: ' + cfg.name, 'Manual server selected');
+      setWatchStatus('Connecting ' + cfg.name + '…', 'Manual server selected • Checking stream health');
     }
     updateActiveServerUi(serverId);
     if (activeWatchParams && activeWatchParams.backdrop) {
       showWatchBackdrop(activeWatchParams.backdrop);
     }
-    watchModalIframe.src = activeWatchServers[serverId];
-    setTimeout(function() {
-      hideWatchBackdrop();
-    }, 800);
+
+    var serverUrl = activeWatchServers[serverId] || '';
+    var seqToken = ++currentAutoSwitchToken;
+
+    // Fast check if selected server returns 404
+    probeStream(serverUrl, function(isHealthy, statusCode) {
+      if (seqToken !== currentAutoSwitchToken) return;
+
+      if (!isHealthy && statusCode === 404) {
+        console.warn('[Netflix4U Manual Switch] Selected server ' + serverId + ' returned 404. Auto-recovering to next server.');
+        setWatchStatus(cfg.name + ' returned 404 (File Not Found)', 'Auto-switching to backup server…');
+        if (window.__showToast) {
+          window.__showToast(cfg.name + ' returned 404 (File Not Found). Switched to backup server.', '⚠️');
+        }
+        var nextIdx = (autoSwitchOrder.indexOf(serverId) + 1) % autoSwitchOrder.length;
+        var nextServer = autoSwitchOrder[nextIdx];
+        setTimeout(function() {
+          if (seqToken === currentAutoSwitchToken) {
+            switchWatchServer(nextServer, false);
+          }
+        }, 350);
+        return;
+      }
+
+      watchModalIframe.src = serverUrl;
+      setWatchStatus('Connecting ' + cfg.name + '…', 'Stream verified • Loading playback…');
+      setTimeout(function() {
+        if (seqToken === currentAutoSwitchToken) {
+          hideWatchBackdrop();
+        }
+      }, 1200);
+    });
+
     resetWatchTopBarTimer();
   }
 

@@ -1554,6 +1554,86 @@ async function handleWatchTmdb(req, res) {
   res.end(html);
 }
 
+// 11b. Ultra-fast Streaming Server Availability Probe (/api/probe-stream?url=...)
+async function handleProbeStream(req, res) {
+  if (handleCors(req, res)) return;
+  const q = getQueryParams(req);
+  const targetUrl = q.get('url');
+
+  if (!targetUrl) {
+    return sendJson(res, 400, { ok: false, error: 'url query parameter required' });
+  }
+
+  let parsed;
+  try {
+    parsed = new URL(targetUrl);
+  } catch(e) {
+    return sendJson(res, 400, { ok: false, error: 'Invalid URL syntax' });
+  }
+
+  if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') {
+    return sendJson(res, 400, { ok: false, error: 'Only http and https protocols supported' });
+  }
+
+  const hostname = parsed.hostname.toLowerCase();
+  const isPrivate =
+    hostname === 'localhost' ||
+    hostname === '127.0.0.1' ||
+    hostname === '::1' ||
+    hostname === '169.254.169.254' ||
+    hostname.startsWith('10.') ||
+    hostname.startsWith('192.168.') ||
+    /^172\.(1[6-9]|2[0-9]|3[0-1])\./.test(hostname) ||
+    hostname.endsWith('.internal') ||
+    hostname.endsWith('.local');
+
+  if (isPrivate) {
+    return sendJson(res, 403, { ok: false, error: 'Probing private/internal addresses is forbidden' });
+  }
+
+  const client = parsed.protocol === 'https:' ? https : http;
+
+  const probe = new Promise((resolve) => {
+    const probeReq = client.request(parsed, {
+      method: 'HEAD',
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+      },
+      timeout: 2500
+    }, probeRes => {
+      let code = probeRes.statusCode || 0;
+      if (code === 405 || code === 403) {
+        // Fallback quickly to small byte GET
+        const getReq = client.request(parsed, {
+          method: 'GET',
+          headers: {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+            'Range': 'bytes=0-1024'
+          },
+          timeout: 2000
+        }, getRes => {
+          const getCode = getRes.statusCode || 0;
+          getRes.resume();
+          resolve({ ok: (getCode >= 200 && getCode < 400) || getCode === 206, status: getCode });
+        });
+        getReq.on('error', () => resolve({ ok: false, status: code }));
+        getReq.on('timeout', () => { getReq.destroy(); resolve({ ok: false, status: 504 }); });
+        getReq.end();
+        return;
+      }
+      resolve({ ok: code >= 200 && code < 400, status: code });
+    });
+
+    probeReq.on('error', err => resolve({ ok: false, status: 502, error: err.message }));
+    probeReq.on('timeout', () => { probeReq.destroy(); resolve({ ok: false, status: 504, error: 'Timed out' }); });
+    probeReq.end();
+  });
+
+  const result = await probe;
+  sendJson(res, 200, result, { 'Cache-Control': 'public, max-age=60' });
+}
+
 // 12. Master Universal Router
 async function handleUniversalApi(req, res) {
   if (handleCors(req, res)) return;
@@ -1563,6 +1643,7 @@ async function handleUniversalApi(req, res) {
 
   if (rawPath.startsWith('/watch-tmdb')) return handleWatchTmdb(req, res);
   if (cleanPath === 'embed-tmdb' || cleanPath.startsWith('embed-tmdb/')) return handleEmbedTmdb(req, res);
+  if (cleanPath === 'probe-stream' || cleanPath.startsWith('probe-stream/')) return handleProbeStream(req, res);
   if (cleanPath === 'details' || cleanPath.startsWith('details/')) return handleDetails(req, res);
   if (cleanPath === 'playback' || cleanPath.startsWith('playback/')) return handlePlayback(req, res);
   if (cleanPath === 'trailer') return handleTrailer(req, res);
@@ -1588,6 +1669,7 @@ module.exports = {
   handlePlayback,
   handleWatchTmdb,
   handleEmbedTmdb,
+  handleProbeStream,
   handleTrailer,
   handlePosterResolver,
   handleTmdb,

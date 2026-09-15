@@ -5,7 +5,7 @@ const path = require('path');
 const { getPlaybackSources } = require('./services/playbackService');
 const { resolveContentId } = require('./services/canonicalResolver');
 const { isPublicRecord, publicOnly } = require('./services/contentValidationService');
-const { handleDetails, handlePlayback, handleSearch, handleUniversalApi } = require('./services/apiCore');
+const { handleDetails, handlePlayback, handleSearch, handleUniversalApi, handleProbeStream } = require('./services/apiCore');
 
 const PORT = process.env.PORT || 4173;
 const ROOT = path.resolve(__dirname);
@@ -622,6 +622,11 @@ const server = http.createServer(async (req, res) => {
       service: 'Netflix4U Streaming Platform'
     }));
     return;
+  }
+
+  // 2c. Streaming Health Probe (/api/probe-stream?url=...)
+  if (reqPath === '/api/probe-stream' || reqPath.startsWith('/api/probe-stream/')) {
+    return handleProbeStream(req, res);
   }
 
   // 3. 🚨 ANTI-DATA THEFT SHIELD: Strictly block direct raw database dumps
