@@ -745,15 +745,10 @@ body {
   flex-shrink: 0;
 }
 
-/* ─── Non-Intrusive Bottom Sticky Ad Bar with Dismiss & Anti-Disturbance ─── */
+/* ─── Non-Intrusive Bottom Sticky Ad Bar with Dismiss ─── */
 body.modal-open #aads-sticky-wrap,
 body.watch-active #aads-sticky-wrap,
-body.modal-open [class*="push"],
-body.watch-active [class*="push"],
-body.modal-open div[style*="position: fixed"]:not(#progress-bar):not(#title-modal):not(#watch-modal):not(#trailer-modal):not(#policy-modal):not(#request-modal):not(#share-modal):not(#toast-container),
-body.watch-active div[style*="position: fixed"]:not(#progress-bar):not(#title-modal):not(#watch-modal):not(#trailer-modal):not(#policy-modal):not(#request-modal):not(#share-modal):not(#toast-container),
 #watch-modal:not(.hidden) ~ #aads-sticky-wrap,
-#watch-modal:not(.hidden) ~ * [class*="push"],
 #title-modal:not(.hidden) ~ #aads-sticky-wrap {
   display: none !important;
 }
@@ -762,11 +757,6 @@ body.watch-active div[style*="position: fixed"]:not(#progress-bar):not(#title-mo
 img:not([src]):not(.poster-img),
 img[src=""]:not(.poster-img),
 img[src="data:image/svg+xml;base64,"]:not(.poster-img) {
-  display: none !important;
-}
-
-/* Prevent unhandled fixed ad overlays from sticking to the top header */
-body > div[style*="position: fixed"]:not(#progress-bar):not(#home-header):not(#nm-loader):not(#search-overlay):not(#title-modal):not(#watch-modal):not(#trailer-modal):not(#policy-modal):not(#request-modal):not(#share-modal):not(#pwa-install-modal):not(#toast-container):not(#aads-sticky-wrap) {
   display: none !important;
 }
 

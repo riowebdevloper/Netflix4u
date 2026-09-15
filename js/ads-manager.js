@@ -246,15 +246,15 @@
         return;
       }
 
-      // 3. Between Rail 4 & Rail 5 (#ad-slot-rail-mid-2) -> HilltopAds 300x250 Banner
+      // 3. Between Rail 4 & Rail 5 (#ad-slot-rail-mid-2) -> A-ADS Adaptive Unit 2455136
       if (slotId === 'ad-slot-rail-mid-2') {
-        renderHilltopBanner(el);
+        renderAadsUnit(el, 60, 90);
         return;
       }
 
-      // 4. Between Rail 7 & Rail 8 (#ad-slot-rail-mid-3) -> Adsterra Native Unit (Sandboxed)
+      // 4. Between Rail 7 & Rail 8 (#ad-slot-rail-mid-3) -> A-ADS Adaptive Unit 2455136
       if (slotId === 'ad-slot-rail-mid-3') {
-        renderAdsterraSandboxed(el);
+        renderAadsUnit(el, 60, 90);
         return;
       }
 
@@ -278,9 +278,9 @@
         return;
       }
 
-      // 2. In-Modal Pre-Dotmovies Downloads Sponsor (#ad-slot-modal-dotmovies) -> HilltopAds Banner
+      // 2. In-Modal Pre-Dotmovies Downloads Sponsor (#ad-slot-modal-dotmovies) -> A-ADS Adaptive Unit
       if (slotId === 'ad-slot-modal-dotmovies') {
-        renderHilltopBanner(el);
+        renderAadsUnit(el, 60, 85);
         return;
       }
 
@@ -290,9 +290,9 @@
         return;
       }
 
-      // 4. In-Modal Bottom Recommendations Sponsor (#ad-slot-modal-bottom) -> Adsterra Native Banner (Sandboxed)
+      // 4. In-Modal Bottom Recommendations Sponsor (#ad-slot-modal-bottom) -> A-ADS Adaptive Unit
       if (slotId === 'ad-slot-modal-bottom') {
-        renderAdsterraSandboxed(el);
+        renderAadsUnit(el, 60, 85);
         return;
       }
 

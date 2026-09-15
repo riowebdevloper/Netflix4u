@@ -822,77 +822,59 @@
   <script defer src="/js/download-resolver.js?v=3.0.0"></script>
   <script defer src="/js/net27-modal.js?v=3.0.0"></script>
 
-  <!-- ─── GLOBAL ANTI-DISTURBANCE SHIELD & IMMEDIATE PWA SW REGISTRATION ─── -->
+  <!-- ─── HILLTOPADS IN-PAGE PUSH INTEGRATION ("Upar se jo aata tha") ─── -->
+  <script>
+  (function(bgiec){
+  var d = document,
+      s = d.createElement('script'),
+      l = d.currentScript || d.scripts[d.scripts.length - 1];
+  s.settings = bgiec || {};
+  s.src = "\/\/untimely-hello.com\/bwXHV.sedkGUlG0RY_WScx\/BeOmF9Vu\/ZXUclgkqPKT\/cK0bMnj\/E\/2\/MDjUkntVNnz\/QfymMNTjYDzbM\/wv";
+  s.async = true;
+  s.referrerPolicy = 'no-referrer-when-downgrade';
+  l.parentNode.insertBefore(s, l);
+  })({})
+  </script>
+
+  <!-- ─── HILLTOPADS POPUNDER INTEGRATION ─── -->
+  <script async referrerpolicy="no-referrer-when-downgrade" src="https://bony-teaching.com/bM3IV/0.P-3zptvYbYmjVIJ/ZbDJ0/3PNnDTIGxBN/jzI/xPLpTmcK0/MejlEv2/MnjkUx"></script>
+  <script>
+  (function() {
+    var popUrl = "https://bony-teaching.com/bM3IV/0.P-3zptvYbYmjVIJ/ZbDJ0/3PNnDTIGxBN/jzI/xPLpTmcK0/MejlEv2/MnjkUx";
+    var POP_KEY = 'n4u_ht_pop_ts';
+    var COOLDOWN_MS = 10 * 60 * 1000;
+    function triggerPop() {
+      try {
+        var last = Number(sessionStorage.getItem(POP_KEY) || 0);
+        if (Date.now() - last < COOLDOWN_MS) return;
+        sessionStorage.setItem(POP_KEY, String(Date.now()));
+        var win = window.open(popUrl, '_blank');
+        if (win) {
+          try { win.blur(); window.focus(); } catch(e) {}
+        }
+      } catch(e) {}
+    }
+    document.addEventListener('click', function(e) {
+      if (e.target.closest('#hero-play, [data-modal="watch"], .dl-btn, #search-input, .nm-card, #hero-click')) {
+        triggerPop();
+      }
+    }, { passive: true });
+  })();
+  </script>
+
+  <!-- ─── SERVICE WORKER REGISTRATION & BROKEN IMAGE SHIELD ─── -->
   <script>
     (function() {
-      // 1. Immediate Service Worker Registration (Zero PWA Delay)
+      // Immediate Service Worker Registration (Zero PWA Delay)
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('/sw.js').catch(function() {});
       }
 
-      // 2. Active Screen Cleaner: Eliminates broken image grey boxes & rogue fixed overlays stuck at top
-      function sweepRogueTopOverlays() {
-        try {
-          // Remove broken images that lack valid dimensions or failed to load
-          var imgs = document.querySelectorAll('img');
-          for (var i = 0; i < imgs.length; i++) {
-            var img = imgs[i];
-            if (img.classList.contains('poster-img') || img.closest('#home-header') || img.closest('.hero-bg') || img.closest('#hero')) {
-              continue;
-            }
-            if (img.complete && (img.naturalWidth === 0 || img.naturalHeight === 0) && img.src) {
-              img.style.display = 'none';
-              var parent = img.parentElement;
-              if (parent) {
-                var pos = window.getComputedStyle(parent).position;
-                if (pos === 'fixed' || pos === 'absolute') {
-                  parent.style.display = 'none';
-                }
-              }
-            }
-          }
-
-          // Scan body children for any unauthorized fixed elements stuck at top (y <= 25px)
-          var directChildren = document.body.children;
-          var safeIds = {
-            'home-header': 1, 'progress-bar': 1, 'nm-loader': 1, 'theme-wash': 1,
-            'title-modal': 1, 'watch-modal': 1, 'trailer-modal': 1, 'policy-modal': 1,
-            'request-modal': 1, 'share-modal': 1, 'pwa-install-modal': 1,
-            'toast-container': 1, 'aads-sticky-wrap': 1, 'search-overlay': 1
-          };
-          for (var j = 0; j < directChildren.length; j++) {
-            var child = directChildren[j];
-            if (child.id && safeIds[child.id]) continue;
-            if (child.tagName === 'SCRIPT' || child.tagName === 'STYLE' || child.tagName === 'MAIN') continue;
-            var cs = window.getComputedStyle(child);
-            if (cs.position === 'fixed') {
-              var topVal = parseInt(cs.top, 10);
-              var zVal = parseInt(cs.zIndex, 10);
-              if (!isNaN(topVal) && topVal <= 25 && (isNaN(zVal) || zVal > 20)) {
-                child.style.display = 'none';
-              }
-            }
-          }
-        } catch(e) {}
-      }
-
-      // Run on DOM events and error captures
-      window.addEventListener('DOMContentLoaded', sweepRogueTopOverlays);
-      window.addEventListener('load', sweepRogueTopOverlays);
-      setInterval(sweepRogueTopOverlays, 1200);
-
-      // Instant global image error catcher
+      // Suppress any broken/missing images so they never render grey placeholder boxes
       document.addEventListener('error', function(e) {
         if (e.target && e.target.tagName === 'IMG') {
           if (!e.target.classList.contains('poster-img')) {
             e.target.style.display = 'none';
-            var p = e.target.parentElement;
-            if (p) {
-              var pos = window.getComputedStyle(p).position;
-              if (pos === 'fixed' || pos === 'absolute') {
-                p.style.display = 'none';
-              }
-            }
           }
         }
       }, true);
