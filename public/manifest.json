@@ -25,7 +25,15 @@
   ],
   "categories": ["entertainment", "video", "movies"],
   "lang": "en",
+  "prefer_related_applications": false,
   "screenshots": [
+    {
+      "src": "/og-image.jpg",
+      "sizes": "1200x630",
+      "type": "image/jpeg",
+      "label": "Netflix4U Streaming Mobile",
+      "form_factor": "narrow"
+    },
     {
       "src": "/og-image.jpg",
       "sizes": "1200x630",

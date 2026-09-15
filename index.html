@@ -764,15 +764,8 @@
         <span>Install App Now</span>
       </button>
 
-      <!-- Dynamic Platform Instruction Guide (Auto-detected) -->
-      <div id="pwa-guide-container" class="rounded-xl bg-white/[0.03] border border-white/10 p-3.5 space-y-2 text-xs text-white/80">
-        <div class="font-semibold text-white/95 flex items-center gap-1.5" id="pwa-guide-title">
-          <span>📱</span> How to Install on your Device:
-        </div>
-        <ol id="pwa-guide-steps" class="space-y-1.5 pl-4 list-decimal text-white/70 leading-relaxed">
-          <!-- Dynamically populated based on user OS/browser -->
-        </ol>
-      </div>
+      <!-- Dynamic Platform Instruction Guide (Hidden - Direct Install Only) -->
+      <div id="pwa-guide-container" class="hidden"></div>
 
       <!-- Copy App Link Backup -->
       <button id="pwa-copy-link-btn" type="button" class="w-full py-2 px-3 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-white/70 hover:text-white text-xs flex items-center justify-center gap-1.5 transition cursor-pointer">
@@ -829,37 +822,81 @@
   <script defer src="/js/download-resolver.js?v=3.0.0"></script>
   <script defer src="/js/net27-modal.js?v=3.0.0"></script>
 
-  <!-- ─── DEFERRED THIRD-PARTY INTEGRATIONS (Engagement-Gated & Error-Shielded) ─── -->
+  <!-- ─── GLOBAL ANTI-DISTURBANCE SHIELD & IMMEDIATE PWA SW REGISTRATION ─── -->
   <script>
     (function() {
-      var adsLoaded = false;
-      function triggerEngagementAds() {
-        if (adsLoaded) return;
-        adsLoaded = true;
-        var events = ['scroll', 'touchstart', 'mousemove', 'keydown', 'click'];
-        events.forEach(function(e) { window.removeEventListener(e, triggerEngagementAds); });
-        // Monetag Tag (Engagement Deferred)
+      // 1. Immediate Service Worker Registration (Zero PWA Delay)
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js').catch(function() {});
+      }
+
+      // 2. Active Screen Cleaner: Eliminates broken image grey boxes & rogue fixed overlays stuck at top
+      function sweepRogueTopOverlays() {
         try {
-          var mTag = document.createElement('script');
-          mTag.dataset.zone = '11787574';
-          mTag.src = 'https://nap5k.com/tag.min.js';
-          mTag.async = true;
-          mTag.onerror = function() {};
-          document.body.appendChild(mTag);
+          // Remove broken images that lack valid dimensions or failed to load
+          var imgs = document.querySelectorAll('img');
+          for (var i = 0; i < imgs.length; i++) {
+            var img = imgs[i];
+            if (img.classList.contains('poster-img') || img.closest('#home-header') || img.closest('.hero-bg') || img.closest('#hero')) {
+              continue;
+            }
+            if (img.complete && (img.naturalWidth === 0 || img.naturalHeight === 0) && img.src) {
+              img.style.display = 'none';
+              var parent = img.parentElement;
+              if (parent) {
+                var pos = window.getComputedStyle(parent).position;
+                if (pos === 'fixed' || pos === 'absolute') {
+                  parent.style.display = 'none';
+                }
+              }
+            }
+          }
+
+          // Scan body children for any unauthorized fixed elements stuck at top (y <= 25px)
+          var directChildren = document.body.children;
+          var safeIds = {
+            'home-header': 1, 'progress-bar': 1, 'nm-loader': 1, 'theme-wash': 1,
+            'title-modal': 1, 'watch-modal': 1, 'trailer-modal': 1, 'policy-modal': 1,
+            'request-modal': 1, 'share-modal': 1, 'pwa-install-modal': 1,
+            'toast-container': 1, 'aads-sticky-wrap': 1, 'search-overlay': 1
+          };
+          for (var j = 0; j < directChildren.length; j++) {
+            var child = directChildren[j];
+            if (child.id && safeIds[child.id]) continue;
+            if (child.tagName === 'SCRIPT' || child.tagName === 'STYLE' || child.tagName === 'MAIN') continue;
+            var cs = window.getComputedStyle(child);
+            if (cs.position === 'fixed') {
+              var topVal = parseInt(cs.top, 10);
+              var zVal = parseInt(cs.zIndex, 10);
+              if (!isNaN(topVal) && topVal <= 25 && (isNaN(zVal) || zVal > 20)) {
+                child.style.display = 'none';
+              }
+            }
+          }
         } catch(e) {}
       }
-      var events = ['scroll', 'touchstart', 'mousemove', 'keydown', 'click'];
-      events.forEach(function(e) { window.addEventListener(e, triggerEngagementAds, { passive: true, once: true }); });
-    })();
-  </script>
 
-  <!-- Service Worker Registration (Clean PWA Caching without Reload Interruptions) -->
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function() {
-        navigator.serviceWorker.register('/sw.js').catch(function() {});
-      });
-    }
+      // Run on DOM events and error captures
+      window.addEventListener('DOMContentLoaded', sweepRogueTopOverlays);
+      window.addEventListener('load', sweepRogueTopOverlays);
+      setInterval(sweepRogueTopOverlays, 1200);
+
+      // Instant global image error catcher
+      document.addEventListener('error', function(e) {
+        if (e.target && e.target.tagName === 'IMG') {
+          if (!e.target.classList.contains('poster-img')) {
+            e.target.style.display = 'none';
+            var p = e.target.parentElement;
+            if (p) {
+              var pos = window.getComputedStyle(p).position;
+              if (pos === 'fixed' || pos === 'absolute') {
+                p.style.display = 'none';
+              }
+            }
+          }
+        }
+      }, true);
+    })();
   </script>
 </body>
 </html>

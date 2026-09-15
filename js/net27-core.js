@@ -835,6 +835,11 @@
           '<div class="nm-ad-label">Sponsored</div>' +
           '<div id="ad-slot-rail-mid-2" class="nm-ad-slot nm-ad-leaderboard"></div>' +
         '</div>';
+      } else if (idx === 7) {
+        adMarkup = '<div class="nm-ad-container max-w-5xl mx-auto my-6" data-ad-container="ad-slot-rail-mid-3">' +
+          '<div class="nm-ad-label">Sponsored</div>' +
+          '<div id="ad-slot-rail-mid-3" class="nm-ad-slot nm-ad-leaderboard"></div>' +
+        '</div>';
       }
 
       return '<section data-rail-key="' + cfg.key + '" class="mb-6">' +
@@ -1573,17 +1578,6 @@
     }
   }
 
-  function initAutoPwaPrompt() {
-    if (isStandaloneApp()) return;
-    if (sessionStorage.getItem('n4u_pwa_dismissed') === '1') return;
-
-    setTimeout(function() {
-      if (!isStandaloneApp() && !document.body.classList.contains('watch-active')) {
-        openPwaInstallModal();
-      }
-    }, 800);
-  }
-
   function updateInstalledButtons() {
     if (isStandaloneApp()) {
       var pwaBtn = document.getElementById('pwa-install-btn');
@@ -1629,19 +1623,17 @@
             showToast('Install cancelled. You can install anytime from the menu!', 'ℹ️');
           }
         }).catch(function() {
-          openPwaInstallModal();
+          showToast('Tap browser menu (⋮) → "Install app" to add to home screen!', '📲');
         });
       } catch (err) {
-        openPwaInstallModal();
+        showToast('Tap browser menu (⋮) → "Install app" to add to home screen!', '📲');
       }
     } else {
-      // If browser beforeinstallprompt hasn't fired or on iOS/Safari, show the guided install modal
-      openPwaInstallModal();
       var platform = detectUserPlatform();
       if (platform === 'ios') {
-        showToast('Tap Share (⎋) then "Add to Home Screen" to install!', '📱');
+        showToast('Tap Share (⎋) then "Add to Home Screen" to install Netflix4U!', '📱');
       } else {
-        showToast('Tap the browser menu (⋮) → "Install app" to install!', '📲');
+        showToast('Tap browser menu (⋮) → "Install app" to install instantly!', '📲');
       }
     }
   }
@@ -1727,7 +1719,6 @@
     loadPlatformRails('trending');
     handleInitialRoutes();
     updateInstalledButtons();
-    initAutoPwaPrompt();
     if (window.Netflix4uAds) window.Netflix4uAds.renderAll();
   }
 

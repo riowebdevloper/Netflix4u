@@ -9,7 +9,7 @@ try {
 } catch (e) {}
 
 // PWA Shell & Offline Support (Network-First for HTML to guarantee fresh updates)
-var CACHE_NAME = 'n4u-pwa-v6';
+var CACHE_NAME = 'n4u-pwa-v7';
 var STATIC_ASSETS = [
   '/',
   '/index.html',

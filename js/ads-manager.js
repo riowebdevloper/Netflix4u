@@ -78,20 +78,89 @@
   }
 
   /**
-   * Inject HilltopAds Banner 300x250 script into target container
+   * Render A-ADS Adaptive Unit inside a responsive, bounded container
    */
-  function loadHilltopBanner(slotEl) {
-    if (!slotEl || slotEl.dataset.htLoaded) return;
-    slotEl.dataset.htLoaded = 'true';
-    try {
-      var s = document.createElement('script');
-      s.src = HILLTOP_BANNER_SRC;
-      s.async = true;
-      s.referrerPolicy = 'no-referrer-when-downgrade';
-      s.onerror = function() {};
-      var wrap = slotEl.querySelector('#hilltop-banner-inner-mid-2') || slotEl;
-      wrap.appendChild(s);
-    } catch(e) {}
+  function renderAadsUnit(slotEl, minH, maxH) {
+    if (!slotEl) return;
+    var hMin = minH || 60;
+    var hMax = maxH || 90;
+    slotEl.innerHTML = '<div style="width:100%;max-width:728px;margin:auto;position:relative;border-radius:10px;overflow:hidden;background:rgba(255,255,255,0.02);">' +
+      '<iframe data-aa="' + AADS_UNIT_ID + '" title="Sponsored Advertisement" src="' + AADS_ADAPTIVE_URL + '" style="border:0;padding:0;width:100%;min-height:' + hMin + 'px;max-height:' + hMax + 'px;overflow:hidden;margin:auto;display:block;background:transparent;"></iframe>' +
+    '</div>';
+  }
+
+  /**
+   * Render Adsterra Native Banner inside an isolated sandboxed iframe to allow multiple placements without ID clash
+   */
+  function renderAdsterraSandboxed(slotEl) {
+    if (!slotEl) return;
+    var iframe = document.createElement('iframe');
+    iframe.style.width = '100%';
+    iframe.style.minHeight = '90px';
+    iframe.style.border = 'none';
+    iframe.style.overflow = 'hidden';
+    iframe.scrolling = 'no';
+    iframe.setAttribute('title', 'Advertisement');
+    iframe.setAttribute('loading', 'lazy');
+
+    var html = '<!DOCTYPE html><html><head><meta charset="utf-8">' +
+      '<style>' +
+        'body { margin: 0; padding: 4px; background: transparent; display: flex; align-items: center; justify-content: center; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; overflow: hidden; }' +
+        '#' + ADSTERRA_CONTAINER_ID + ' { width: 100%; display: flex; justify-content: center; }' +
+      '</style>' +
+      '</head><body>' +
+      '<script async="async" data-cfasync="false" src="' + ADSTERRA_NATIVE_SRC + '"><\/script>' +
+      '<div id="' + ADSTERRA_CONTAINER_ID + '"></div>' +
+      '</body></html>';
+
+    iframe.srcdoc = html;
+    slotEl.innerHTML = '';
+    slotEl.appendChild(iframe);
+
+    // Fallback if blocked
+    setTimeout(function() {
+      try {
+        if (!iframe.contentDocument || !iframe.contentDocument.body || iframe.contentDocument.body.children.length <= 1) {
+          slotEl.innerHTML = DEFAULT_SPONSOR_HTML('Featured Cloud Partner', 'Ultra-fast CDN playback & multi-audio support', 'Explore');
+        }
+      } catch(e) {}
+    }, 2800);
+  }
+
+  /**
+   * Render HilltopAds 300x250 Banner in an isolated sandbox with fallback
+   */
+  function renderHilltopBanner(slotEl) {
+    if (!slotEl) return;
+    var iframe = document.createElement('iframe');
+    iframe.style.width = '100%';
+    iframe.style.maxWidth = '728px';
+    iframe.style.minHeight = '90px';
+    iframe.style.border = 'none';
+    iframe.style.overflow = 'hidden';
+    iframe.scrolling = 'no';
+    iframe.setAttribute('title', 'Sponsored');
+    iframe.setAttribute('loading', 'lazy');
+
+    var html = '<!DOCTYPE html><html><head><meta charset="utf-8">' +
+      '<style>' +
+        'body { margin: 0; padding: 0; background: transparent; display: flex; align-items: center; justify-content: center; overflow: hidden; }' +
+      '</style>' +
+      '</head><body>' +
+      '<script src="' + HILLTOP_BANNER_SRC + '" async referrerpolicy="no-referrer-when-downgrade"><\/script>' +
+      '</body></html>';
+
+    iframe.srcdoc = html;
+    slotEl.innerHTML = '';
+    slotEl.appendChild(iframe);
+
+    setTimeout(function() {
+      try {
+        if (!iframe.contentDocument || !iframe.contentDocument.body || iframe.contentDocument.body.children.length <= 1) {
+          slotEl.innerHTML = DEFAULT_SPONSOR_HTML('Fast Cloud Servers', 'Direct High-Speed Cloud Downloads & APKs', 'Join');
+        }
+      } catch(e) {}
+    }, 2800);
   }
 
   var AdsManager = {
@@ -157,7 +226,9 @@
         return;
       }
 
-      // Slot 1: Under Hero Carousel (#ad-slot-home-top) -> Strictly 1 Ad: Adsterra Native Banner
+      // ─── HOMEPAGE AD PLACEMENTS (6 Sections) ───
+
+      // 1. Under Hero Carousel (#ad-slot-home-top) -> Adsterra Native Banner
       if (slotId === 'ad-slot-home-top') {
         if (!el.querySelector('#' + ADSTERRA_CONTAINER_ID)) {
           el.innerHTML = '<div id="' + ADSTERRA_CONTAINER_ID + '">' +
@@ -169,28 +240,59 @@
         return;
       }
 
-      // Slot 2: Between Rail 1 & Rail 2 (#ad-slot-rail-mid-1) -> Strictly 1 Ad: A-ADS Adaptive Unit
+      // 2. Between Rail 1 & Rail 2 (#ad-slot-rail-mid-1) -> A-ADS Adaptive Unit 2455136
       if (slotId === 'ad-slot-rail-mid-1') {
-        el.innerHTML = '<div style="width:100%;max-width:728px;margin:auto;position:relative;">' +
-          '<iframe data-aa="' + AADS_UNIT_ID + '" title="Sponsored Advertisement" src="' + AADS_ADAPTIVE_URL + '" style="border:0;padding:0;width:100%;min-height:60px;max-height:90px;overflow:hidden;margin:auto;display:block;"></iframe>' +
-        '</div>';
+        renderAadsUnit(el, 60, 90);
         return;
       }
 
-      // Slot 3: Between Rail 4 & Rail 5 (#ad-slot-rail-mid-2) -> Strictly 1 Ad: HilltopAds 300x250 Banner
+      // 3. Between Rail 4 & Rail 5 (#ad-slot-rail-mid-2) -> HilltopAds 300x250 Banner
       if (slotId === 'ad-slot-rail-mid-2') {
-        el.innerHTML = '<div id="hilltop-container-rail-mid-2" style="width:100%;max-width:728px;min-height:90px;margin:auto;display:flex;align-items:center;justify-content:center;">' +
-          '<div id="hilltop-banner-inner-mid-2" style="width:100%;text-align:center;">' +
-            DEFAULT_SPONSOR_HTML('Fast Cloud Servers', 'Direct High-Speed Cloud Downloads & APKs', 'Join') +
-          '</div>' +
-        '</div>';
-        loadHilltopBanner(el);
+        renderHilltopBanner(el);
         return;
       }
 
-      // Slot 4: Bottom Billboard before Search CTA (#ad-slot-home-bottom) -> Strictly 1 Ad: High-CTR Verified Partner Billboard
+      // 4. Between Rail 7 & Rail 8 (#ad-slot-rail-mid-3) -> Adsterra Native Unit (Sandboxed)
+      if (slotId === 'ad-slot-rail-mid-3') {
+        renderAdsterraSandboxed(el);
+        return;
+      }
+
+      // 5. Bottom Billboard before Search CTA (#ad-slot-home-bottom) -> A-ADS Adaptive Billboard Unit
       if (slotId === 'ad-slot-home-bottom') {
-        el.innerHTML = DEFAULT_SPONSOR_HTML('Stream in 4K UHD & Dolby 5.1', 'No subscription required • Daily updated catalog', 'Explore');
+        renderAadsUnit(el, 75, 100);
+        return;
+      }
+
+      // 6. Dismissible Bottom Sticky Bar (#ad-slot-sticky-bottom) -> A-ADS Adaptive Unit
+      if (slotId === 'ad-slot-sticky-bottom') {
+        renderAadsUnit(el, 50, 75);
+        return;
+      }
+
+      // ─── MORE INFO PAGE (TITLE MODAL) AD PLACEMENTS (4 Sections) ───
+
+      // 1. In-Modal Top Sponsor (#ad-slot-modal-top) -> A-ADS Adaptive Unit
+      if (slotId === 'ad-slot-modal-top') {
+        renderAadsUnit(el, 55, 75);
+        return;
+      }
+
+      // 2. In-Modal Pre-Dotmovies Downloads Sponsor (#ad-slot-modal-dotmovies) -> HilltopAds Banner
+      if (slotId === 'ad-slot-modal-dotmovies') {
+        renderHilltopBanner(el);
+        return;
+      }
+
+      // 3. In-Modal Cloud Server Sponsor (#ad-slot-modal-cloud) -> A-ADS Adaptive Unit
+      if (slotId === 'ad-slot-modal-cloud') {
+        renderAadsUnit(el, 55, 75);
+        return;
+      }
+
+      // 4. In-Modal Bottom Recommendations Sponsor (#ad-slot-modal-bottom) -> Adsterra Native Banner (Sandboxed)
+      if (slotId === 'ad-slot-modal-bottom') {
+        renderAdsterraSandboxed(el);
         return;
       }
 
@@ -207,18 +309,7 @@
         return;
       }
 
-      // Modal ad slots: Distinct single sponsor unit per modal section
-      if (slotId === 'ad-slot-modal-top') {
-        el.innerHTML = DEFAULT_SPONSOR_HTML('High-Speed Cloud Stream', 'Ultra-fast CDN playback with multi-audio support', 'Watch');
-      } else if (slotId === 'ad-slot-modal-dotmovies') {
-        el.innerHTML = DEFAULT_SPONSOR_HTML('Verified Direct Download Server', 'Original untouched prints & Dual Audio rips', 'Get Link');
-      } else if (slotId === 'ad-slot-modal-cloud') {
-        el.innerHTML = DEFAULT_SPONSOR_HTML('Lightning Cloud CDN Server', 'Zero-buffer direct video stream & instant access', 'Connect');
-      } else if (slotId === 'ad-slot-modal-bottom') {
-        el.innerHTML = DEFAULT_SPONSOR_HTML('Join Official Telegram Channel', 'Get daily movie releases & direct APK updates', 'Join 45K+');
-      } else {
-        el.innerHTML = DEFAULT_SPONSOR_HTML();
-      }
+      el.innerHTML = DEFAULT_SPONSOR_HTML();
     },
 
     /**
