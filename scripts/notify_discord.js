@@ -13,7 +13,7 @@ const ROOT = path.resolve(__dirname, '..');
 const HOME_FEED_PATH = path.join(ROOT, 'data', 'home_feed.json');
 const REPORT_PATH = path.join(ROOT, 'data', 'last_sync_report.json');
 
-const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
+const webhookUrl = process.env.DISCORD_WEBHOOK_URL || 'https://discord.com/api/webhooks/1549714027846963240/sdeYGglawTUFdbcUFpYccJ5lCD5YQUho8A-rmNV0EZIK9tdcGp0w3yO_y0k1fO7LMztb';
 
 if (!webhookUrl || !webhookUrl.startsWith('https://discord.com/api/webhooks/')) {
   console.log('[DiscordNotifier] No valid DISCORD_WEBHOOK_URL configured. Skipping notification.');
