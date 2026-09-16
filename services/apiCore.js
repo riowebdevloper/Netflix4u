@@ -1908,172 +1908,96 @@ async function handleNetmirrorPlayer(req, res) {
 
   try {
     const item = await resolveNetmirrorItem(id, title, type, lang);
-    if (!item) {
-      res.writeHead(404, { 'Content-Type': 'text/html; charset=utf-8' });
-      res.end('<!DOCTYPE html><html><body style="background:#000;color:#fff;font-family:sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;"><h3>NetMirror streaming source not found for this title.</h3></body></html>');
-      return;
-    }
-
-    const nid = item.id;
-    const ts = Math.floor(Date.now() / 1000);
-    const sig = crypto.createHmac('sha256', 'net###@@sss').update(`${nid}:${ts}`).digest('hex');
-
-    function Ee(ve) {
-      const bt = new TextEncoder().encode(ve || '');
-      return String.fromCharCode(...bt);
-    }
-    const na = encodeURIComponent(Buffer.from(Ee(item.title)).toString('base64'));
-
-    // 1. Determine if item has embed_json (individual episode links like watchdirect/watchdrivehub)
-    const hasEmbedJson = Array.isArray(item.embed_json) && item.embed_json.length > 0;
-    const embedEpisode = hasEmbedJson
-      ? (item.embed_json.find(pe => Number(pe.se) === Number(se) && Number(pe.ep) === Number(ep)) || item.embed_json[0])
-      : null;
-
-    // 2. For movies or non-episodic media, passing se=1/ep=1 causes NetMirror to return "Server Busy"
-    const isMovie = (type === 'movie') || !item.season || !Array.isArray(item.season) || item.season.length === 0;
+    let nid = item ? item.id : (id && /^\d{1,9}$/.test(String(id)) ? id : null);
+    let mediaType = (item && item.media_type) || type;
+    const isMovie = (mediaType === 'movie') || (item && (!item.season || !Array.isArray(item.season) || item.season.length === 0));
     const actualSe = isMovie ? '' : se;
     const actualEp = isMovie ? '' : ep;
 
-    // 3. Construct upstream path & query (pass exten=true so NetMirror does not sabotage with dummy http://play_url)
-    let playPath = 'watchbox.php';
-    let queryParamsStr = '';
-    if (embedEpisode && embedEpisode.url) {
-      const epName = embedEpisode.name || 'watchdirect';
-      playPath = `${epName}.php`;
-      queryParamsStr = `?url=${encodeURIComponent(embedEpisode.url)}&size=${encodeURIComponent(embedEpisode.size || '')}&se=${encodeURIComponent(embedEpisode.se || actualSe)}&ep=${encodeURIComponent(embedEpisode.ep || actualEp)}&name=${encodeURIComponent(epName)}&year=${encodeURIComponent(item.release_date || '')}&na=${na}&tm_id=${encodeURIComponent(item.tm_id || '')}&ts=${ts}&sig=${sig}&nid=${nid}&exten=true&tv=&token=`;
-    } else {
-      playPath = 'watchbox.php';
-      queryParamsStr = `?id=${item.subjectid || ''}&se=${actualSe}&ep=${actualEp}&dp=${encodeURIComponent(item.dp || '')}&na=${na}&year=${encodeURIComponent(item.release_date || '')}&tm_id=${encodeURIComponent(item.tm_id || '')}&ts=${ts}&sig=${sig}&nid=${nid}&exten=true&tv=&token=`;
+    if (!nid) {
+      // Fallback directly to VidLink Multi-Audio if no NetMirror item matched
+      const fallbackUrl = `https://vidlink.pro/${isMovie ? 'movie/' + id : 'tv/' + id + '/' + actualSe + '/' + actualEp}?multiLang=true${lang ? '&lang=' + lang : ''}`;
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'X-Frame-Options': 'ALLOWALL', 'Content-Security-Policy': 'frame-ancestors *' });
+      return res.end(`<!DOCTYPE html><html><body style="margin:0;background:#000;overflow:hidden;"><iframe src="${fallbackUrl}" style="width:100vw;height:100vh;border:none;" allowfullscreen></iframe></body></html>`);
     }
 
-    // Upstream mirror hosts to try in case of upstream rate limit or temporary busy state
-    const upstreamHosts = [
-      'play.watch21.shop',
-      'bet.watch22.shop',
-      'limit.watch22.shop',
-      'spedostream2.shop',
-      'dv.watch22.shop'
-    ];
+    const netmirrorEmbedUrl = `https://netmirror.center/${mediaType}/${nid}/?embed=1${actualSe ? '&se=' + actualSe : ''}${actualEp ? '&ep=' + actualEp : ''}`;
 
-    async function fetchFromHost(host) {
-      return new Promise((resolve) => {
-        const fullUrl = `https://${host}/play/${playPath}${queryParamsStr}`;
-        const req = https.get(fullUrl, {
-          headers: {
-            'Referer': 'https://netmirror.center/',
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36'
-          },
-          timeout: 7000
-        }, res => {
-          let html = '';
-          res.on('data', c => html += c);
-          res.on('end', () => {
-            const isBusy = html.includes('Server Busy') || html.includes('server busy') || html.includes('429 Too Many Requests');
-            resolve({ ok: res.statusCode === 200 && !isBusy, html, statusCode: res.statusCode, isBusy });
+    https.get(netmirrorEmbedUrl, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
+        'Referer': 'https://netmirror.center/',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+      },
+      timeout: 8000
+    }, nmRes => {
+      let html = '';
+      nmRes.on('data', c => html += c);
+      nmRes.on('end', () => {
+        let modified = html;
+        if (modified.includes('<head>')) {
+          modified = modified.replace('<head>', '<head><base href="https://netmirror.center/"><meta name="referrer" content="origin">');
+        } else {
+          modified = '<base href="https://netmirror.center/"><meta name="referrer" content="origin">' + modified;
+        }
+
+        const autoServer2Script = `
+        <script>
+          window.llvpnLoaded = true;
+          try {
+            var path = '/${mediaType}/${nid}/?embed=1${actualSe ? '&se=' + actualSe : ''}${actualEp ? '&ep=' + actualEp : ''}';
+            window.history.replaceState(null, '', path);
+          } catch(e) {}
+
+          window.addEventListener('DOMContentLoaded', function() {
+            window.llvpnLoaded = true;
+            var clicked = false;
+            var timer = setInterval(function() {
+              if (clicked) return;
+              var buttons = Array.from(document.querySelectorAll('button, div[role="button"], span, a, .server-btn'));
+              var s2 = buttons.find(function(b) {
+                var txt = (b.textContent || '').trim();
+                return txt === 'Server 2' || txt.includes('Server 2');
+              });
+              if (s2) {
+                clicked = true;
+                s2.click();
+                clearInterval(timer);
+              }
+            }, 250);
+            setTimeout(function() { clearInterval(timer); }, 9000);
           });
+        </script>
+        <style>
+          body, html { margin:0 !important; padding:0 !important; background:#000 !important; overflow:hidden !important; width:100vw !important; height:100vh !important; }
+          .navbar, header, footer, .recommendation-container, .related-titles { display:none !important; }
+          #idIframe, iframe { width:100% !important; height:100% !important; border:none !important; display:block !important; }
+        </style>
+        `;
+
+        if (modified.includes('</body>')) {
+          modified = modified.replace('</body>', autoServer2Script + '</body>');
+        } else {
+          modified += autoServer2Script;
+        }
+
+        res.writeHead(200, {
+          'Content-Type': 'text/html; charset=utf-8',
+          'Cache-Control': 'no-cache, no-store, must-revalidate',
+          'X-Frame-Options': 'ALLOWALL',
+          'Content-Security-Policy': 'frame-ancestors *'
         });
-        req.on('error', () => resolve({ ok: false, html: '', statusCode: 502, isBusy: false }));
-        req.on('timeout', () => { req.destroy(); resolve({ ok: false, html: '', statusCode: 504, isBusy: false }); });
+        res.end(modified);
       });
-    }
-
-    let result = null;
-    for (const host of upstreamHosts) {
-      result = await fetchFromHost(host);
-      if (result.ok) break;
-    }
-
-    const fallbackStreamUrl = `https://vidlink.pro/${isMovie ? 'movie/' + (item.tm_id || id) : 'tv/' + (item.tm_id || id) + '/' + actualSe + '/' + actualEp}?multiLang=true${lang ? '&lang=' + lang : ''}`;
-
-    if (result && result.ok && result.html) {
-      let modified = result.html;
-      if (modified.includes('<head>')) {
-        modified = modified.replace('<head>', '<head><base href="https://play.watch21.shop/play/"><meta name="referrer" content="no-referrer">');
-      } else {
-        modified = '<base href="https://play.watch21.shop/play/"><meta name="referrer" content="no-referrer">' + modified;
-      }
-
-      // Bypass NetMirror intentional sabotage where play_url returns dummy http://play_url
-      modified = modified.replace(/return\s+['"]http:\/\/play_url['"];?/g, 'return play_url;');
-      modified = modified.replace("art.notice.show = 'Please Add Extention for Fast Loading';", "");
-      modified = modified.replace("art.notice.show = 'Fast Loading.. (With Extension)';", "");
-
-      // Inject fail-safe script so if Artplayer receives 429 or Video load failed, it automatically falls over to VidLink Multi-Audio
-      const failSafeScript = `
-      <script>
-        (function() {
-          var fallbackUrl = ${JSON.stringify(fallbackStreamUrl)};
-          var switched = false;
-          function doFallback() {
-            if (switched) return;
-            switched = true;
-            console.warn('[NetMirror SafeGuard] Falling over to Multi-Audio Stream:', fallbackUrl);
-            window.location.replace(fallbackUrl);
-          }
-
-          window.addEventListener('error', function(e) {
-            if (e && (e.message || '').toLowerCase().includes('fail') || (e.target && e.target.tagName === 'VIDEO')) {
-              setTimeout(doFallback, 800);
-            }
-          }, true);
-
-          setInterval(function() {
-            var notice = document.querySelector('.art-notice, .art-error');
-            var video = document.querySelector('video');
-            if (notice && (notice.textContent.includes('failed') || notice.textContent.includes('Error'))) {
-              doFallback();
-            }
-            if (video && video.error) {
-              doFallback();
-            }
-          }, 1000);
-        })();
-      </script>
-      `;
-
-      if (modified.includes('</body>')) {
-        modified = modified.replace('</body>', failSafeScript + '</body>');
-      } else {
-        modified += failSafeScript;
-      }
-
-      res.writeHead(200, {
-        'Content-Type': 'text/html; charset=utf-8',
-        'Cache-Control': 'no-cache, no-store, must-revalidate',
-        'X-Frame-Options': 'ALLOWALL',
-        'Content-Security-Policy': 'frame-ancestors *'
-      });
-      res.end(modified);
-      return;
-    }
-
-    // If upstream hosts returned Server Busy or 429 rate limit:
-    // Instantly stream the high-speed VidLink Multi-Audio player so video starts immediately without ANY error!
-    res.writeHead(200, {
-      'Content-Type': 'text/html; charset=utf-8',
-      'Cache-Control': 'no-cache, no-store, must-revalidate',
-      'X-Frame-Options': 'ALLOWALL',
-      'Content-Security-Policy': 'frame-ancestors *'
+    }).on('error', () => {
+      const fallbackUrl = `https://vidlink.pro/${isMovie ? 'movie/' + id : 'tv/' + id + '/' + actualSe + '/' + actualEp}?multiLang=true${lang ? '&lang=' + lang : ''}`;
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'X-Frame-Options': 'ALLOWALL', 'Content-Security-Policy': 'frame-ancestors *' });
+      res.end(`<!DOCTYPE html><html><body style="margin:0;background:#000;overflow:hidden;"><iframe src="${fallbackUrl}" style="width:100vw;height:100vh;border:none;" allowfullscreen></iframe></body></html>`);
     });
-    res.end(`<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Multi-Audio Player</title>
-  <style>
-    body, html { margin:0; padding:0; width:100%; height:100%; overflow:hidden; background:#000; }
-    iframe { width:100%; height:100%; border:none; display:block; }
-  </style>
-</head>
-<body>
-  <iframe src="${fallbackStreamUrl}" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
-</body>
-</html>`);
   } catch(err) {
-    res.writeHead(500, { 'Content-Type': 'text/html; charset=utf-8' });
-    res.end(`<!DOCTYPE html><html><body style="background:#000;color:#fff;font-family:sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;"><h3>Server 2 error: ${err.message}</h3></body></html>`);
+    const fallbackUrl = `https://vidlink.pro/${type === 'tv' ? 'tv/' + id + '/' + se + '/' + ep : 'movie/' + id}?multiLang=true${lang ? '&lang=' + lang : ''}`;
+    res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'X-Frame-Options': 'ALLOWALL', 'Content-Security-Policy': 'frame-ancestors *' });
+    res.end(`<!DOCTYPE html><html><body style="margin:0;background:#000;overflow:hidden;"><iframe src="${fallbackUrl}" style="width:100vw;height:100vh;border:none;" allowfullscreen></iframe></body></html>`);
   }
 }
 

@@ -1178,13 +1178,13 @@
 
   // ─── WATCH MODAL (Net27 Streaming Player UI with Auto-Failover Engine) ───
   var SERVERS_CONFIG = [
-    { id: 's1', name: 'Server 1 (Multi-Audio HD Pro)', tag: '100% Multi-Audio', tagClass: 'tag-multi', desc: 'Verified Multi-Audio Player with Dual/Multi-Language Tracks (Hindi, English, Tamil, Telugu)' },
-    { id: 's2', name: 'Server 2 (VidSrc PM Global)', tag: 'Global CDN', tagClass: 'tag-global', desc: 'VidSrc PM High Uptime Global Streaming Mirror' },
-    { id: 's3', name: 'Server 3 (2Embed High-Speed)', tag: 'Fast Mirror', tagClass: 'tag-fast', desc: '2Embed Global High-Speed Streaming Server' },
-    { id: 's4', name: 'Server 4 (VidSrc In)', tag: 'Indian/Global', tagClass: 'tag-multi', desc: 'VidSrc In High-Performance Mirror' },
-    { id: 's5', name: 'Server 5 (SuperEmbed Multi)', tag: 'Backup', tagClass: 'tag-global', desc: 'SuperEmbed Multi CDN Backup Stream' },
-    { id: 's6', name: 'Server 6 (AutoEmbed)', tag: 'Backup CDN', tagClass: 'tag-fast', desc: 'AutoEmbed Fast Streaming Player' },
-    { id: 's7', name: 'Server 7 (NetMirror Direct)', tag: 'NetMirror', tagClass: 'tag-multi', desc: 'NetMirror Multi-Audio Stream Mirror' }
+    { id: 's1', name: 'Server 1 (NetMirror Server 2 Multi-Audio)', tag: '100% Multi-Audio', tagClass: 'tag-multi', desc: 'NetMirror Server 2 Multi-Audio Player with Dual/Multi-Language Tracks (Hindi, English, Tamil, Telugu)' },
+    { id: 's2', name: 'Server 2 (VidLink Pro Multi-Audio)', tag: 'Multi-Lang', tagClass: 'tag-multi', desc: 'VidLink Pro High-Speed Global Streaming Player' },
+    { id: 's3', name: 'Server 3 (VidSrc PM Global)', tag: 'Global CDN', tagClass: 'tag-global', desc: 'VidSrc PM High Uptime Global Streaming Mirror' },
+    { id: 's4', name: 'Server 4 (2Embed High-Speed)', tag: 'Fast Mirror', tagClass: 'tag-fast', desc: '2Embed Global High-Speed Streaming Server' },
+    { id: 's5', name: 'Server 5 (VidSrc In)', tag: 'Indian/Global', tagClass: 'tag-multi', desc: 'VidSrc In High-Performance Mirror' },
+    { id: 's6', name: 'Server 6 (SuperEmbed Multi)', tag: 'Backup', tagClass: 'tag-global', desc: 'SuperEmbed Multi CDN Backup Stream' },
+    { id: 's7', name: 'Server 7 (AutoEmbed)', tag: 'Backup CDN', tagClass: 'tag-fast', desc: 'AutoEmbed Fast Streaming Player' }
   ];
 
   var currentWatchLang = 'hi';
@@ -1682,27 +1682,27 @@
         }).catch(function() {});
     }
 
-    var s1Url = buildVidlinkMultiAudioUrl(activeWatchParams, currentWatchLang);
-    var netmirrorUrl = buildNetmirrorServerUrl(activeWatchParams, currentWatchLang);
+    var s1Url = buildNetmirrorServerUrl(activeWatchParams, currentWatchLang);
+    var s2Url = buildVidlinkMultiAudioUrl(activeWatchParams, currentWatchLang);
 
     activeWatchServers = {
       s1: s1Url,
-      s2: isTv
+      s2: s2Url,
+      s3: isTv
         ? 'https://vidsrc.pm/embed/tv/' + tmdbId + '/' + season + '/' + episode
         : 'https://vidsrc.pm/embed/movie/' + tmdbId,
-      s3: isTv
+      s4: isTv
         ? 'https://www.2embed.cc/embedtv/' + tmdbId + '&s=' + season + '&e=' + episode
         : 'https://www.2embed.cc/embed/' + tmdbId,
-      s4: isTv
+      s5: isTv
         ? 'https://vidsrc.in/embed/tv/' + tmdbId + '/' + season + '/' + episode
         : 'https://vidsrc.in/embed/movie/' + tmdbId,
-      s5: isTv
+      s6: isTv
         ? 'https://multiembed.mov/?video_id=' + tmdbId + '&tmdb=1&s=' + season + '&e=' + episode
         : 'https://multiembed.mov/?video_id=' + tmdbId + '&tmdb=1',
-      s6: isTv
+      s7: isTv
         ? 'https://autoembed.co/tv/tmdb/' + tmdbId + '/' + season + '/' + episode
-        : 'https://autoembed.co/movie/tmdb/' + tmdbId,
-      s7: netmirrorUrl
+        : 'https://autoembed.co/movie/tmdb/' + tmdbId
     };
 
     currentWatchServer = 's1';
@@ -1844,18 +1844,20 @@
     var season = activeWatchParams.season || 1;
     var episode = activeWatchParams.episode || 1;
 
-    var newS1Url = buildVidlinkMultiAudioUrl(activeWatchParams, currentWatchLang);
+    var newS1Url = buildNetmirrorServerUrl(activeWatchParams, currentWatchLang);
+    var newS2Url = buildVidlinkMultiAudioUrl(activeWatchParams, currentWatchLang);
 
     activeWatchServers.s1 = newS1Url;
+    activeWatchServers.s2 = newS2Url;
 
     // Switch to Server 1 to immediately provide user their chosen language stream
     currentWatchServer = 's1';
     updateActiveServerUi('s1');
     watchModalIframe.src = newS1Url;
 
-    setWatchStatus('Language: ' + langCfg.label + ' (Server 1)', 'Multi-Audio HD Player active');
+    setWatchStatus('Language: ' + langCfg.label + ' (Server 1)', 'NetMirror Server 2 Multi-Audio Player active');
     if (window.__showToast) {
-      window.__showToast('Switched audio to ' + langCfg.label + ' • Multi-Audio HD Player', '🎧');
+      window.__showToast('Switched audio to ' + langCfg.label + ' • NetMirror Server 2 Player', '🎧');
     }
     resetWatchTopBarTimer();
   }
