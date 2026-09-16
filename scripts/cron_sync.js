@@ -44,6 +44,25 @@ async function main() {
   console.log(`[CLI] Pipeline execution finished in ${duration}s.`);
   console.log('Summary:', JSON.stringify(summary, null, 2));
   console.log('========================================================');
+
+  // Save last sync report for notifications & audits
+  try {
+    const fs = require('fs');
+    const path = require('path');
+    const reportPath = path.join(__dirname, '..', 'data', 'last_sync_report.json');
+    fs.writeFileSync(reportPath, JSON.stringify({ ...summary, duration, timestamp: new Date().toISOString() }, null, 2), 'utf8');
+  } catch (e) {}
+
+  // Trigger Discord Webhook notification if configured
+  if (process.env.DISCORD_WEBHOOK_URL) {
+    try {
+      console.log('[CLI] Dispatching Discord notification...');
+      require('./notify_discord');
+    } catch (e) {
+      console.error('[CLI] Failed to send Discord notification:', e.message);
+    }
+  }
+
   process.exit(summary.status === 'error' ? 1 : 0);
 }
 

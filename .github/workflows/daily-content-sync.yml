@@ -32,6 +32,7 @@ jobs:
       - name: Run Automated Content Ingestion Pipeline
         env:
           TMDB_API_KEY: ${{ secrets.TMDB_API_KEY || '445f2b5a8941c1d4bd5a869761a916e3' }}
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
         run: |
           MAX_DISC="${{ github.event.inputs.max_discovery || '30' }}"
           echo "Starting catalog synchronization with maxDiscovery=${MAX_DISC}..."
