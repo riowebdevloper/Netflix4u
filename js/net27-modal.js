@@ -46,8 +46,13 @@
   // Direct High-Speed Cloud File Download Handlers
   if (!window.getFastCloudDownloadHref) {
     window.getFastCloudDownloadHref = function(rawUrl) {
-      if (!rawUrl) return '#';
-      if (rawUrl.indexOf('workers.dev') !== -1 || rawUrl.indexOf('vcloud') !== -1 || rawUrl.indexOf('r2.dev') !== -1) {
+      if (!rawUrl || typeof rawUrl !== 'string') return '#';
+      if (rawUrl.startsWith('/api/download-file')) return rawUrl;
+      // All download and CDN links route directly through the fast file download resolver
+      if (rawUrl.indexOf('workers.dev') !== -1 || rawUrl.indexOf('vcloud') !== -1 || rawUrl.indexOf('r2.dev') !== -1 || rawUrl.indexOf('nexdrive') !== -1 || rawUrl.indexOf('hubcloud') !== -1) {
+        return '/api/download-file?url=' + encodeURIComponent(rawUrl);
+      }
+      if (rawUrl.startsWith('http')) {
         return '/api/download-file?url=' + encodeURIComponent(rawUrl);
       }
       return rawUrl;
@@ -55,7 +60,7 @@
   }
 
   if (!window.handleFastCloudDownload) {
-    window.handleFastCloudDownload = async function(event, rawUrl, buttonEl) {
+    window.handleFastCloudDownload = function(event, rawUrl, buttonEl) {
       if (event) {
         event.preventDefault();
         event.stopPropagation();
@@ -65,14 +70,14 @@
       if (targetEl) {
         originalHtml = targetEl.innerHTML;
         targetEl.style.pointerEvents = 'none';
-        targetEl.innerHTML = '<span style="display:inline-flex;align-items:center;gap:6px;"><svg style="animation:spinOnce 1s linear infinite;width:14px;height:14px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10" stroke-opacity="0.25"></circle><path d="M12 2a10 10 0 0 1 10 10" stroke-linecap="round"></path></svg>Starting Download...</span>';
+        targetEl.innerHTML = '<span style="display:inline-flex;align-items:center;gap:6px;"><svg style="animation:spinOnce 1s linear infinite;width:14px;height:14px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10" stroke-opacity="0.25"></circle><path d="M12 2a10 10 0 0 1 10 10" stroke-linecap="round"></path></svg>Downloading...</span>';
       }
       var restore = function() {
         if (targetEl && originalHtml) {
           setTimeout(function() {
             targetEl.innerHTML = originalHtml;
             targetEl.style.pointerEvents = 'auto';
-          }, 3000);
+          }, 2500);
         }
       };
 
@@ -83,16 +88,20 @@
         window.__showToast('📥 High-speed direct file download starting...', '⚡');
       }
 
-      // Trigger direct native browser download without redirecting to ad/countdown pages
-      var dlLink = document.createElement('a');
-      dlLink.href = dlUrl;
-      dlLink.setAttribute('download', '');
-      dlLink.style.display = 'none';
-      document.body.appendChild(dlLink);
-      dlLink.click();
-      setTimeout(function() {
-        if (dlLink.parentNode) dlLink.parentNode.removeChild(dlLink);
-      }, 1000);
+      // Trigger native browser download directly via location assign (bypasses Chromium synthetic download blockers)
+      try {
+        window.location.assign(dlUrl);
+      } catch(e) {
+        var dlLink = document.createElement('a');
+        dlLink.href = dlUrl;
+        dlLink.setAttribute('download', '');
+        dlLink.target = '_blank';
+        document.body.appendChild(dlLink);
+        dlLink.click();
+        setTimeout(function() {
+          if (dlLink.parentNode) dlLink.parentNode.removeChild(dlLink);
+        }, 1000);
+      }
 
       restore();
     };
@@ -1182,14 +1191,15 @@
   }
 
   // ─── WATCH MODAL (Net27 Streaming Player UI with Auto-Failover Engine) ───
+  // ─── WATCH MODAL (Net27 Streaming Player UI with Auto-Failover Engine) ───
   var SERVERS_CONFIG = [
-    { id: 's1', name: 'Server 1 (Multi-Audio Error-Bypassing Engine)', tag: '100% Multi-Audio', tagClass: 'tag-multi', desc: 'Resilient Multi-Audio Streaming Engine with Dual Audio Tracks (Hindi, English, Tamil, Telugu) & Auto-Bypass Error Shield' },
-    { id: 's2', name: 'Server 2 (VidLink Pro Multi-Audio)', tag: 'Multi-Lang', tagClass: 'tag-multi', desc: 'VidLink Pro High-Speed Global Streaming Player' },
-    { id: 's3', name: 'Server 3 (VidSrc PM Global)', tag: 'Global CDN', tagClass: 'tag-global', desc: 'VidSrc PM High Uptime Global Streaming Mirror' },
-    { id: 's4', name: 'Server 4 (2Embed High-Speed)', tag: 'Fast Mirror', tagClass: 'tag-fast', desc: '2Embed Global High-Speed Streaming Server' },
-    { id: 's5', name: 'Server 5 (VidSrc In)', tag: 'Indian/Global', tagClass: 'tag-multi', desc: 'VidSrc In High-Performance Mirror' },
-    { id: 's6', name: 'Server 6 (SuperEmbed Multi)', tag: 'Backup', tagClass: 'tag-global', desc: 'SuperEmbed Multi CDN Backup Stream' },
-    { id: 's7', name: 'Server 7 (AutoEmbed)', tag: 'Backup CDN', tagClass: 'tag-fast', desc: 'AutoEmbed Fast Streaming Player' }
+    { id: 's1', name: 'Server 1 (Multi-Audio Engine)', shortName: 'Server 1 • Multi-Audio', tag: '100% Multi-Audio', tagClass: 'tag-multi', desc: 'NetMirror Server 2 Multi-Audio Engine (Hindi, English, Tamil, Telugu) with zero buffering' },
+    { id: 's2', name: 'Server 2 (AllMovieLand Player)', shortName: 'Server 2 • AllMovieLand', tag: 'AllMovieLand', tagClass: 'tag-peachify', desc: 'AllMovieLand Ultra HD High-Speed Streaming Player' },
+    { id: 's3', name: 'Server 3 (VidLink Pro Multi-Audio)', shortName: 'Server 3 • VidLink', tag: 'Multi-Lang', tagClass: 'tag-multi', desc: 'VidLink Pro High-Speed Global Streaming Player' },
+    { id: 's4', name: 'Server 4 (VidSrc PM Global)', shortName: 'Server 4 • VidSrc', tag: 'Global CDN', tagClass: 'tag-global', desc: 'VidSrc PM High Uptime Global Streaming Mirror' },
+    { id: 's5', name: 'Server 5 (2Embed High-Speed)', shortName: 'Server 5 • 2Embed', tag: 'Fast Mirror', tagClass: 'tag-fast', desc: '2Embed Global High-Speed Streaming Server' },
+    { id: 's6', name: 'Server 6 (SuperEmbed Multi)', shortName: 'Server 6 • SuperEmbed', tag: 'Backup', tagClass: 'tag-global', desc: 'SuperEmbed Multi CDN Backup Stream' },
+    { id: 's7', name: 'Server 7 (AutoEmbed)', shortName: 'Server 7 • AutoEmbed', tag: 'Backup CDN', tagClass: 'tag-fast', desc: 'AutoEmbed Fast Streaming Player' }
   ];
 
   var currentWatchLang = 'hi';
@@ -1207,17 +1217,18 @@
   var autoSwitchIndex = 0;
   var isPlaybackConfirmed = false;
   var autoSwitchOrder = ['s1', 's2', 's3', 's4', 's5', 's6', 's7'];
-  var watchTopBarTimer = null;
   var currentAutoSwitchToken = 0;
   var activeProbeController = null;
+  var watchTopBarHideTimeout = null;
 
   var watchStreamStatusText = document.getElementById('watch-stream-status-text');
   var watchStreamSubstatusText = document.getElementById('watch-stream-substatus-text');
   var watchServerIndicator = document.getElementById('watch-server-indicator');
   var watchAutoswitchToggleBtn = document.getElementById('watch-autoswitch-toggle-btn');
   var watchRotateBtn = document.getElementById('watch-rotate-btn');
-  var watchPortraitHint = document.getElementById('watch-portrait-hint');
-  var watchPortraitHintDismiss = document.getElementById('watch-portrait-hint-dismiss');
+  var watchAudioToggle = document.getElementById('watch-audio-toggle');
+  var watchAudioMenu = document.getElementById('watch-audio-menu');
+  var watchCurrentAudioLabel = document.getElementById('watch-current-audio-label');
 
   function setWatchStatus(status, substatus) {
     if (watchStreamStatusText && status) watchStreamStatusText.textContent = status;
@@ -1228,7 +1239,7 @@
     isAutoSwitchEnabled = enabled;
     if (!watchAutoswitchToggleBtn) return;
     if (enabled) {
-      watchAutoswitchToggleBtn.textContent = 'ENABLED';
+      watchAutoswitchToggleBtn.textContent = 'AUTO';
       watchAutoswitchToggleBtn.className = 'px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/30 transition cursor-pointer';
     } else {
       watchAutoswitchToggleBtn.textContent = 'MANUAL';
@@ -1257,7 +1268,122 @@
   function resetWatchTopBarTimer() {
     if (!watchTopBar) return;
     watchTopBar.classList.remove('watch-bar-hidden');
-    // Top bar stays permanently visible so Back button and all Streaming Servers are always accessible during playback!
+    clearTimeout(watchTopBarHideTimeout);
+    
+    var isServerOpen = watchServerMenu && !watchServerMenu.classList.contains('hidden');
+    var isAudioOpen = watchAudioMenu && !watchAudioMenu.classList.contains('hidden');
+    var isExtOpen = watchExtMenu && !watchExtMenu.classList.contains('hidden');
+    var isFailoverOpen = document.getElementById('watch-failover-card') && !document.getElementById('watch-failover-card').classList.contains('hidden');
+    if (isServerOpen || isAudioOpen || isExtOpen || isFailoverOpen) return;
+
+    watchTopBarHideTimeout = setTimeout(function() {
+      if (watchModal && !watchModal.classList.contains('hidden')) {
+        watchTopBar.classList.add('watch-bar-hidden');
+      }
+    }, 3000);
+  }
+
+  // In-Player Failover Card Handlers (When video file is not on server)
+  function showWatchFailoverCard(failedServerId, reason) {
+    var card = document.getElementById('watch-failover-card');
+    if (!card) return;
+    var cfg = SERVERS_CONFIG.find(function(s) { return s.id === failedServerId; }) || SERVERS_CONFIG[0];
+    var titleEl = document.getElementById('failover-card-title');
+    var descEl = document.getElementById('failover-card-desc');
+    var actionsEl = document.getElementById('failover-card-actions');
+
+    if (titleEl) titleEl.textContent = 'Stream Unavailable on ' + (cfg.shortName || cfg.name);
+    if (descEl) descEl.textContent = 'This video file was not found or failed on ' + (cfg.shortName || cfg.name) + '. Choose another working server to continue watching:';
+
+    if (actionsEl) {
+      var otherServers = SERVERS_CONFIG.filter(function(s) { return s.id !== failedServerId; });
+      actionsEl.innerHTML = otherServers.map(function(s) {
+        var isRecommended = s.id === 's1';
+        return '<button type="button" data-failover-server="' + s.id + '" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl ' + (isRecommended ? 'bg-red-600 hover:bg-red-500' : 'bg-white/10 hover:bg-white/20 border border-white/20') + ' text-white font-bold text-xs sm:text-sm transition cursor-pointer active:scale-95 shadow-lg">' +
+          '<span>Play on ' + escapeHtml(s.shortName || s.name) + '</span>' +
+          (isRecommended ? '<span class="px-1.5 py-0.5 rounded bg-white/20 text-[9px] font-black uppercase">BEST</span>' : '') +
+        '</button>';
+      }).join('');
+
+      actionsEl.querySelectorAll('[data-failover-server]').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          var targetId = btn.dataset.failoverServer;
+          card.classList.add('hidden');
+          switchWatchServer(targetId, true);
+        });
+      });
+    }
+
+    card.classList.remove('hidden');
+    resetWatchTopBarTimer();
+  }
+
+  function hideWatchFailoverCard() {
+    var card = document.getElementById('watch-failover-card');
+    if (card) card.classList.add('hidden');
+  }
+
+  // Choose Streaming Server Modal Handler
+  function openServerPickerModal(tmdbId, type, season, episode, backdrop, title, year, imdbId, canonicalId, poster) {
+    var pickerModal = document.getElementById('watch-server-picker-modal');
+    if (!pickerModal) {
+      openWatchModal(tmdbId, type, season, episode, backdrop, title, year, imdbId, canonicalId, poster, 's1');
+      return;
+    }
+
+    var pickerTitle = document.getElementById('picker-modal-title');
+    if (pickerTitle) {
+      pickerTitle.textContent = (title || 'Stream') + (type === 'tv' || type === 'series' ? ' (S' + (season || 1) + ' E' + (episode || 1) + ')' : '');
+    }
+
+    var pickerList = document.getElementById('picker-server-list');
+    if (pickerList) {
+      pickerList.innerHTML = SERVERS_CONFIG.map(function(s, idx) {
+        var isS1 = s.id === 's1';
+        var isS2 = s.id === 's2';
+        var badge = isS1 ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">RECOMMENDED</span>' :
+                    isS2 ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-orange-500/20 text-orange-400 border border-orange-500/30">ALLMOVIELAND</span>' :
+                    '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-white/10 text-white/60">' + escapeHtml(s.tag) + '</span>';
+
+        return '<button type="button" data-select-server="' + s.id + '" class="picker-server-card' + (isS1 ? ' is-active' : '') + '">' +
+          '<div class="flex items-center gap-3">' +
+            '<div class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center font-bold text-xs text-white">' + (idx + 1) + '</div>' +
+            '<div>' +
+              '<div class="text-xs sm:text-sm font-bold text-white flex items-center gap-2">' +
+                '<span>' + escapeHtml(s.name) + '</span>' +
+              '</div>' +
+              '<div class="text-[11px] text-white/50">' + escapeHtml(s.desc || '') + '</div>' +
+            '</div>' +
+          '</div>' +
+          badge +
+        '</button>';
+      }).join('');
+
+      pickerList.querySelectorAll('[data-select-server]').forEach(function(card) {
+        card.addEventListener('click', function(e) {
+          e.stopPropagation();
+          var serverId = card.dataset.selectServer;
+          pickerModal.classList.add('hidden');
+          pickerModal.setAttribute('aria-hidden', 'true');
+          openWatchModal(tmdbId, type, season, episode, backdrop, title, year, imdbId, canonicalId, poster, serverId);
+        });
+      });
+    }
+
+    pickerModal.classList.remove('hidden');
+    pickerModal.setAttribute('aria-hidden', 'false');
+  }
+
+  var pickerCloseBtn = document.getElementById('watch-server-picker-close');
+  if (pickerCloseBtn) {
+    pickerCloseBtn.addEventListener('click', function() {
+      var pickerModal = document.getElementById('watch-server-picker-modal');
+      if (pickerModal) {
+        pickerModal.classList.add('hidden');
+        pickerModal.setAttribute('aria-hidden', 'true');
+      }
+    });
   }
 
   if (watchModal) {
@@ -1572,7 +1698,7 @@
     return url;
   }
 
-  function openWatchModal(tmdbId, type, season, episode, backdrop, title, year, imdbId, canonicalId, poster) {
+  function openWatchModal(tmdbId, type, season, episode, backdrop, title, year, imdbId, canonicalId, poster, chosenServer) {
     if (window.__closeSearchOverlay) window.__closeSearchOverlay();
     if (!watchModal || !watchModalIframe) return;
 
@@ -1661,7 +1787,7 @@
       watchMetaType.textContent = isTv ? ('S' + season + ' E' + episode) : 'Movie';
     }
 
-    // Build Server URLs
+    // Build Server URLs (Server 2 is 100% AllMovieLand)
     var allMovieLandUrl = '';
     if (imdbId && typeof imdbId === 'string' && imdbId.startsWith('tt')) {
       allMovieLandUrl = isTv
@@ -1677,31 +1803,29 @@
         .then(function(data) {
           if (data && data.imdbId) {
             activeWatchParams.imdbId = data.imdbId;
-            activeWatchServers.s3 = isTv
+            activeWatchServers.s2 = isTv
               ? 'https://slast430did.com/play/' + encodeURIComponent(data.imdbId) + '?s=' + season + '&e=' + episode
               : 'https://slast430did.com/play/' + encodeURIComponent(data.imdbId);
-            if (currentWatchServer === 's3' && watchModalIframe) {
-              watchModalIframe.src = activeWatchServers.s3;
+            if (currentWatchServer === 's2' && watchModalIframe) {
+              watchModalIframe.src = activeWatchServers.s2;
             }
           }
         }).catch(function() {});
     }
 
     var s1Url = buildNetmirrorServerUrl(activeWatchParams, currentWatchLang);
-    var s2Url = buildVidlinkMultiAudioUrl(activeWatchParams, currentWatchLang);
+    var s3Url = buildVidlinkMultiAudioUrl(activeWatchParams, currentWatchLang);
 
     activeWatchServers = {
       s1: s1Url,
-      s2: s2Url,
-      s3: isTv
+      s2: allMovieLandUrl,
+      s3: s3Url,
+      s4: isTv
         ? 'https://vidsrc.pm/embed/tv/' + tmdbId + '/' + season + '/' + episode
         : 'https://vidsrc.pm/embed/movie/' + tmdbId,
-      s4: isTv
+      s5: isTv
         ? 'https://www.2embed.cc/embedtv/' + tmdbId + '&s=' + season + '&e=' + episode
         : 'https://www.2embed.cc/embed/' + tmdbId,
-      s5: isTv
-        ? 'https://vidsrc.in/embed/tv/' + tmdbId + '/' + season + '/' + episode
-        : 'https://vidsrc.in/embed/movie/' + tmdbId,
       s6: isTv
         ? 'https://multiembed.mov/?video_id=' + tmdbId + '&tmdb=1&s=' + season + '&e=' + episode
         : 'https://multiembed.mov/?video_id=' + tmdbId + '&tmdb=1',
@@ -1710,23 +1834,30 @@
         : 'https://autoembed.co/movie/tmdb/' + tmdbId
     };
 
-    currentWatchServer = 's1';
-    isAutoSwitchEnabled = true;
+    var startingServer = chosenServer || 's1';
+    currentWatchServer = startingServer;
+    isAutoSwitchEnabled = !chosenServer;
     isPlaybackConfirmed = false;
     currentAutoSwitchToken++;
     renderWatchServerMenu();
-    renderWatchAudioLangBar();
-    updateActiveServerUi('s1');
-    updateAutoSwitchToggleUi(true);
+    renderWatchAudioDropdown();
+    updateActiveServerUi(startingServer);
+    updateAutoSwitchToggleUi(isAutoSwitchEnabled);
 
     watchModal.classList.remove('hidden');
     watchModal.setAttribute('aria-hidden', 'false');
     lockBodyScroll();
 
-    // Start auto switch sequence from index 0 (Peachify)
-    startAutoSwitchSequence(0);
+    if (chosenServer && activeWatchServers[chosenServer]) {
+      watchModalIframe.src = activeWatchServers[chosenServer];
+      var chosenCfg = SERVERS_CONFIG.find(function(s) { return s.id === chosenServer; }) || SERVERS_CONFIG[0];
+      setWatchStatus('Connected to ' + (chosenCfg.shortName || chosenCfg.name), 'Stream verified • Playback ready');
+      confirmPlaybackActive();
+    } else {
+      // Start auto switch sequence from index 0
+      startAutoSwitchSequence(0);
+    }
 
-    checkOrientationHint();
     resetWatchTopBarTimer();
 
     // Auto save to Continue Watching
@@ -1830,39 +1961,59 @@
     });
   }
 
+  function renderWatchAudioDropdown() {
+    var list = document.getElementById('watch-audio-list-container');
+    if (!list) return;
+
+    list.innerHTML = AUDIO_LANGS_CONFIG.map(function(lang) {
+      var isSelected = lang.id === currentWatchLang || lang.code === currentWatchLang;
+      return '<button type="button" data-switch-lang="' + lang.id + '" class="watch-server-item' + (isSelected ? ' is-selected' : '') + '">' +
+        '<div class="flex items-center gap-2">' +
+          '<span class="w-2 h-2 rounded-full ' + (isSelected ? 'bg-amber-400 animate-pulse' : 'bg-white/40') + '"></span>' +
+          '<span>' + escapeHtml(lang.label) + '</span>' +
+        '</div>' +
+        '<span class="watch-server-tag ' + (isSelected ? 'tag-multi' : 'tag-fast') + '">' + escapeHtml(lang.tag) + '</span>' +
+      '</button>';
+    }).join('');
+
+    list.querySelectorAll('[data-switch-lang]').forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var langId = btn.dataset.switchLang;
+        switchWatchAudioLang(langId);
+        if (watchAudioMenu) watchAudioMenu.classList.add('hidden');
+        if (watchAudioToggle) watchAudioToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
   function switchWatchAudioLang(langId) {
     var langCfg = AUDIO_LANGS_CONFIG.find(function(l) { return l.id === langId; }) || AUDIO_LANGS_CONFIG[0];
     currentWatchLang = langCfg.code || langCfg.id;
 
-    var bar = document.getElementById('watch-audio-lang-bar');
-    if (bar) {
-      bar.querySelectorAll('[data-switch-lang]').forEach(function(btn) {
-        btn.classList.toggle('is-active', btn.dataset.switchLang === langId);
-      });
+    if (watchCurrentAudioLabel) {
+      watchCurrentAudioLabel.textContent = langCfg.label;
     }
+
+    renderWatchAudioDropdown();
 
     if (!activeWatchParams) return;
 
-    var tmdbId = activeWatchParams.tmdbId;
-    var type = activeWatchParams.type || 'movie';
-    var isTv = type === 'tv' || type === 'series';
-    var season = activeWatchParams.season || 1;
-    var episode = activeWatchParams.episode || 1;
-
     var newS1Url = buildNetmirrorServerUrl(activeWatchParams, currentWatchLang);
-    var newS2Url = buildVidlinkMultiAudioUrl(activeWatchParams, currentWatchLang);
+    var newS3Url = buildVidlinkMultiAudioUrl(activeWatchParams, currentWatchLang);
 
     activeWatchServers.s1 = newS1Url;
-    activeWatchServers.s2 = newS2Url;
+    activeWatchServers.s3 = newS3Url;
 
     // Switch to Server 1 to immediately provide user their chosen language stream
     currentWatchServer = 's1';
     updateActiveServerUi('s1');
+    hideWatchFailoverCard();
     watchModalIframe.src = newS1Url;
 
-    setWatchStatus('Language: ' + langCfg.label + ' (Server 1)', 'NetMirror Server 2 Multi-Audio Player active');
+    setWatchStatus('Audio: ' + langCfg.label + ' (Server 1)', 'NetMirror Server 2 Multi-Audio Engine active');
     if (window.__showToast) {
-      window.__showToast('Switched audio to ' + langCfg.label + ' • NetMirror Server 2 Player', '🎧');
+      window.__showToast('Switched audio to ' + langCfg.label + ' • 100% Multi-Audio Stream', '🎧');
     }
     resetWatchTopBarTimer();
   }
@@ -1871,18 +2022,7 @@
     currentWatchServer = serverId;
     var cfg = SERVERS_CONFIG.find(function(s) { return s.id === serverId; }) || SERVERS_CONFIG[0];
     if (watchCurrentServerLabel) {
-      watchCurrentServerLabel.textContent = cfg.name;
-    }
-    // Update visible Server Pills Bar
-    if (watchPlayerBar) {
-      watchPlayerBar.querySelectorAll('[data-switch-server]').forEach(function(btn) {
-        var isSel = btn.dataset.switchServer === serverId;
-        btn.classList.toggle('is-active', isSel);
-        var dot = btn.querySelector('.rounded-full');
-        if (dot) {
-          dot.className = 'w-2 h-2 rounded-full shrink-0 ' + (isSel ? 'bg-emerald-400 animate-pulse' : 'bg-white/40');
-        }
-      });
+      watchCurrentServerLabel.textContent = cfg.shortName || cfg.name;
     }
     // Update dropdown menu
     var serverListContainer = document.getElementById('watch-servers-list-container');
@@ -1897,6 +2037,8 @@
     if (!activeWatchServers[serverId]) return;
     var cfg = SERVERS_CONFIG.find(function(s) { return s.id === serverId; }) || SERVERS_CONFIG[0];
 
+    hideWatchFailoverCard();
+
     if (isManual) {
       isAutoSwitchEnabled = false;
       isPlaybackConfirmed = false;
@@ -1905,7 +2047,7 @@
         autoSwitchTimer = null;
       }
       updateAutoSwitchToggleUi(false);
-      setWatchStatus('Connecting ' + cfg.name + '…', 'Manual server selected • Checking stream health');
+      setWatchStatus('Connecting ' + (cfg.shortName || cfg.name) + '…', 'Manual server selected • Checking stream health');
     }
     updateActiveServerUi(serverId);
     if (activeWatchParams && activeWatchParams.backdrop) {
@@ -1920,23 +2062,14 @@
       if (seqToken !== currentAutoSwitchToken) return;
 
       if (!isHealthy && statusCode === 404) {
-        console.warn('[Netflix4U Manual Switch] Selected server ' + serverId + ' returned 404. Auto-recovering to next server.');
-        setWatchStatus(cfg.name + ' returned 404 (File Not Found)', 'Auto-switching to backup server…');
-        if (window.__showToast) {
-          window.__showToast(cfg.name + ' returned 404 (File Not Found). Switched to backup server.', '⚠️');
-        }
-        var nextIdx = (autoSwitchOrder.indexOf(serverId) + 1) % autoSwitchOrder.length;
-        var nextServer = autoSwitchOrder[nextIdx];
-        setTimeout(function() {
-          if (seqToken === currentAutoSwitchToken) {
-            switchWatchServer(nextServer, false);
-          }
-        }, 350);
+        console.warn('[Netflix4U Stream] Selected server ' + serverId + ' returned 404. Showing failover options.');
+        setWatchStatus((cfg.shortName || cfg.name) + ' returned 404 (File Not Found)', 'File not found on this server');
+        showWatchFailoverCard(serverId, '404 File Not Found');
         return;
       }
 
       watchModalIframe.src = serverUrl;
-      setWatchStatus('Connecting ' + cfg.name + '…', 'Stream verified • Loading playback…');
+      setWatchStatus('Connecting ' + (cfg.shortName || cfg.name) + '…', 'Stream verified • Loading playback…');
       setTimeout(function() {
         if (seqToken === currentAutoSwitchToken) {
           hideWatchBackdrop();
@@ -1946,6 +2079,34 @@
 
     resetWatchTopBarTimer();
   }
+
+  // Audio dropdown toggle listener
+  if (watchAudioToggle && watchAudioMenu) {
+    watchAudioToggle.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var isExpanded = watchAudioToggle.getAttribute('aria-expanded') === 'true';
+      watchAudioToggle.setAttribute('aria-expanded', String(!isExpanded));
+      watchAudioMenu.classList.toggle('hidden', isExpanded);
+      closeServerMenu();
+      if (watchExtMenu) watchExtMenu.classList.add('hidden');
+    });
+  }
+
+  // Close menus on outside click
+  document.addEventListener('click', function(e) {
+    if (watchServerMenu && !watchServerMenu.classList.contains('hidden')) {
+      if (!e.target.closest('#watch-server-dropdown-wrap')) closeServerMenu();
+    }
+    if (watchAudioMenu && !watchAudioMenu.classList.contains('hidden')) {
+      if (!e.target.closest('#watch-audio-dropdown-wrap')) {
+        watchAudioMenu.classList.add('hidden');
+        if (watchAudioToggle) watchAudioToggle.setAttribute('aria-expanded', 'false');
+      }
+    }
+    if (watchExtMenu && !watchExtMenu.classList.contains('hidden')) {
+      if (!e.target.closest('#watch-ext-player-wrap')) watchExtMenu.classList.add('hidden');
+    }
+  });
 
   function toggleServerMenu() {
     if (!watchServerMenu) return;
@@ -2340,7 +2501,7 @@
         if (!title && img && img.alt) title = img.alt;
         if (!tmdbId && !canonicalId) return;
         e.preventDefault();
-        openWatchModal(tmdbId, type, se, ep, backdrop, title, year, imdbId, canonicalId, poster);
+        openServerPickerModal(tmdbId, type, se, ep, backdrop, title, year, imdbId, canonicalId, poster);
       } else if (modalType === 'trailer') {
         var yt = modalTrigger.dataset.yt;
         if (!yt) return;
@@ -2522,6 +2683,7 @@
     openTitle: openTitleModal,
     closeTitle: closeTitleModal,
     openWatch: openWatchModal,
+    openServerPicker: openServerPickerModal,
     closeWatch: closeWatchAndReturnToDetails,
     closeWatchDirect: closeWatchModal,
     openTrailer: openTrailerModal,

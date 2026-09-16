@@ -1852,21 +1852,7 @@ async function resolveNetmirrorItem(id, title, type = 'tv', lang = 'hi') {
     return netmirrorItemCache.get(cacheKey);
   }
 
-  // 1. Direct NetMirror ID provided (e.g. 5069)
-  if (id && /^\d{1,9}$/.test(String(id))) {
-    const endpoint = (type === 'movie') ? 'movie' : 'tv';
-    let data = await fetchNetmirrorJson(`https://api2.imdb3.shop/api/${endpoint}/${id}`);
-    if (!data || !data.results || !data.results.length) {
-      const altEndpoint = (endpoint === 'movie') ? 'tv' : 'movie';
-      data = await fetchNetmirrorJson(`https://api2.imdb3.shop/api/${altEndpoint}/${id}`);
-    }
-    if (data && data.results && data.results.length) {
-      netmirrorItemCache.set(cacheKey, data.results[0]);
-      return data.results[0];
-    }
-  }
-
-  // 2. Search by Title
+  // 1. Search by Title & Language FIRST to get exact dubbed catalog item (e.g. 5069 for Reacher Hindi)
   if (title) {
     const clean = title.replace(/\s*\[.*?\]\s*/g, '').replace(/\s*S\d+.*$/i, '').replace(/[:\-–—]/g, ' ').replace(/\s+/g, ' ').trim();
     const searchData = await fetchNetmirrorJson(`https://api2.imdb4.shop/api/search2/${encodeURIComponent(clean)}?page=0`);
@@ -1890,6 +1876,20 @@ async function resolveNetmirrorItem(id, title, type = 'tv', lang = 'hi') {
           return itemData.results[0];
         }
       }
+    }
+  }
+
+  // 2. Direct NetMirror ID provided
+  if (id && /^\d{1,9}$/.test(String(id))) {
+    const endpoint = (type === 'movie') ? 'movie' : 'tv';
+    let data = await fetchNetmirrorJson(`https://api2.imdb3.shop/api/${endpoint}/${id}`);
+    if (!data || !data.results || !data.results.length) {
+      const altEndpoint = (endpoint === 'movie') ? 'tv' : 'movie';
+      data = await fetchNetmirrorJson(`https://api2.imdb3.shop/api/${altEndpoint}/${id}`);
+    }
+    if (data && data.results && data.results.length) {
+      netmirrorItemCache.set(cacheKey, data.results[0]);
+      return data.results[0];
     }
   }
 
@@ -2009,9 +2009,12 @@ async function handleDownloadFile(req, res) {
       });
     }
 
-    // 302 Found redirect directly to the genuine file download on Cloudflare R2!
+    const downloadFilename = (resolved?.title ? resolved.title.replace(/[^a-zA-Z0-9.\-_ ]/g, '').trim() : 'video_download') + '.mkv';
+
+    // 302 Found redirect directly to the genuine file download with Attachment headers
     res.writeHead(302, {
       'Location': targetUrl,
+      'Content-Disposition': `attachment; filename="${downloadFilename}"`,
       'Cache-Control': 'no-cache, no-store, must-revalidate',
       'Access-Control-Allow-Origin': '*'
     });
@@ -2042,10 +2045,9 @@ async function handleStreamPlayer(req, res) {
   const actualSe = isMovie ? '' : se;
   const actualEp = isMovie ? '' : ep;
 
-  // 1. Resolve Cloud Stream if available (Dual Audio AAC Hindi+English)
+  // 1. Resolve Cloud Stream if available
   let cloudStream = null;
   let rawCloudUrl = passedVcloud;
-
   if (!rawCloudUrl && id) {
     try {
       const rec = await resolveContentId(id);
@@ -2080,7 +2082,7 @@ async function handleStreamPlayer(req, res) {
     const nid = nmItem ? nmItem.id : (id && /^\d{1,9}$/.test(String(id)) ? id : null);
     const mediaType = (nmItem && nmItem.media_type) || type;
     if (nid) {
-      netmirrorEmbedUrl = `https://netmirror.center/${mediaType}/${nid}/?embed=1${actualSe ? '&se=' + actualSe : ''}${actualEp ? '&ep=' + actualEp : ''}`;
+      netmirrorEmbedUrl = `/api/netmirror-player?type=${mediaType}&id=${nid}${actualSe ? '&se=' + actualSe : ''}${actualEp ? '&ep=' + actualEp : ''}`;
     }
   } catch(e) {}
 
@@ -2095,6 +2097,10 @@ async function handleStreamPlayer(req, res) {
 
   const displayTitle = (title || 'Stream') + (isMovie ? '' : ` • S${se} E${ep}`);
   const directDlHref = rawCloudUrl ? `/api/download-file?url=${encodeURIComponent(rawCloudUrl)}` : '';
+
+  // When user asks for Hindi, prioritize NetMirror Server 2 Hindi stream or VidLink Hindi track!
+  const isHindiMode = (lang === 'hi');
+  const initialServer = isHindiMode ? (netmirrorEmbedUrl ? 'nm2' : 'vidlink') : (cloudStream ? 'cloud' : (netmirrorEmbedUrl ? 'nm2' : 'vidlink'));
 
   const playerHtml = `<!DOCTYPE html>
 <html lang="en">
@@ -2112,57 +2118,54 @@ async function handleStreamPlayer(req, res) {
     }
     #player-root { position: relative; width: 100%; height: 100%; display: flex; flex-direction: column; }
     
-    /* Sleek Top Control Bar */
+    /* Sleek, Minimal Top Bar */
     #top-bar {
       position: absolute; top: 0; left: 0; right: 0; z-index: 60;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 10px 14px;
-      background: linear-gradient(180deg, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.5) 75%, transparent 100%);
+      padding: 8px 12px;
+      background: linear-gradient(180deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 70%, transparent 100%);
       transition: opacity 0.3s ease, transform 0.3s ease;
-      gap: 10px;
+      gap: 8px;
     }
     .top-bar-hidden { opacity: 0; pointer-events: none; transform: translateY(-6px); }
 
-    .title-area { display: flex; align-items: center; gap: 8px; min-width: 0; }
-    .title-text { font-size: 13px; font-weight: 700; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 240px; }
-    .badge-ep { background: #e50914; color: #fff; font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 4px; }
+    .title-area { display: flex; align-items: center; gap: 6px; min-width: 0; }
+    .title-text { font-size: 12px; font-weight: 700; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px; }
+    .badge-ep { background: #e50914; color: #fff; font-size: 9px; font-weight: 800; padding: 2px 5px; border-radius: 4px; }
     
-    .controls-group { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    .controls-group { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; }
     .pill {
-      background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15);
       color: rgba(255,255,255,0.85); font-size: 11px; font-weight: 600;
-      padding: 4px 10px; border-radius: 16px; cursor: pointer;
+      padding: 3px 8px; border-radius: 12px; cursor: pointer;
       display: inline-flex; align-items: center; gap: 4px; transition: all 0.2s;
     }
-    .pill:hover { background: rgba(255,255,255,0.25); color: #fff; }
-    .pill.active { background: #e50914; border-color: #e50914; color: #fff; box-shadow: 0 0 10px rgba(229,9,20,0.5); }
+    .pill:hover { background: rgba(255,255,255,0.2); color: #fff; }
+    .pill.active { background: #e50914; border-color: #e50914; color: #fff; box-shadow: 0 0 8px rgba(229,9,20,0.4); }
 
     .server-pill {
-      background: rgba(30,35,45,0.85); border: 1px solid rgba(255,255,255,0.2);
-      color: #ddd; font-size: 11px; font-weight: 600; padding: 4px 9px; border-radius: 6px; cursor: pointer; transition: all 0.2s;
+      background: rgba(20,24,32,0.85); border: 1px solid rgba(255,255,255,0.15);
+      color: #bbb; font-size: 10px; font-weight: 600; padding: 3px 8px; border-radius: 6px; cursor: pointer; transition: all 0.2s;
     }
     .server-pill:hover { background: rgba(255,255,255,0.2); color: #fff; }
-    .server-pill.active { background: #2563eb; border-color: #3b82f6; color: #fff; font-weight: 700; box-shadow: 0 0 8px rgba(37,99,235,0.5); }
+    .server-pill.active { background: #2563eb; border-color: #3b82f6; color: #fff; font-weight: 700; }
 
     .dl-btn {
-      background: #16a34a; border: 1px solid #22c55e; color: #fff; font-size: 11px; font-weight: 700;
-      padding: 4px 10px; border-radius: 6px; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;
-      transition: background 0.2s;
+      background: #16a34a; border: 1px solid #22c55e; color: #fff; font-size: 10px; font-weight: 700;
+      padding: 3px 8px; border-radius: 6px; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 3px;
     }
-    .dl-btn:hover { background: #15803d; }
 
     /* Video Frame Container */
     #media-view { width: 100%; height: 100%; position: relative; flex: 1; background: #000; }
     .layer-view { width: 100%; height: 100%; border: none; display: none; position: absolute; inset: 0; }
     .layer-view.visible { display: block; }
 
-    /* Shield Notification Toast */
     #shield-toast {
-      position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+      position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%);
       background: rgba(15, 15, 20, 0.94); border: 1px solid rgba(255, 255, 255, 0.25);
-      color: #fff; font-size: 12px; font-weight: 600; padding: 8px 16px; border-radius: 24px;
-      backdrop-filter: blur(10px); z-index: 9999; display: none; align-items: center; gap: 8px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.7); pointer-events: none;
+      color: #fff; font-size: 11px; font-weight: 600; padding: 6px 14px; border-radius: 20px;
+      backdrop-filter: blur(10px); z-index: 9999; display: none; align-items: center; gap: 6px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.7); pointer-events: none;
     }
   </style>
   <script src="https://cdn.jsdelivr.net/npm/artplayer/dist/artplayer.min.js"></script>
@@ -2183,21 +2186,21 @@ async function handleStreamPlayer(req, res) {
         <button type="button" class="pill ${lang === 'te' ? 'active' : ''}" onclick="switchLanguage('te')">Telugu</button>
       </div>
 
-      <!-- Server Selectors & Download -->
+      <!-- Server Selectors -->
       <div class="controls-group">
-        ${cloudStream ? '<button type="button" id="btn-srv-cloud" class="server-pill active" onclick="activateServer(&quot;cloud&quot;)">⚡ Cloud Multi-Audio</button>' : ''}
-        ${netmirrorEmbedUrl ? '<button type="button" id="btn-srv-nm2" class="server-pill ' + (cloudStream ? '' : 'active') + '" onclick="activateServer(&quot;nm2&quot;)">🎬 Server 2 (NetMirror)</button>' : ''}
-        <button type="button" id="btn-srv-vidlink" class="server-pill ${!cloudStream && !netmirrorEmbedUrl ? 'active' : ''}" onclick="activateServer(&quot;vidlink&quot;)">🚀 VidLink Multi</button>
+        ${netmirrorEmbedUrl ? '<button type="button" id="btn-srv-nm2" class="server-pill ' + (initialServer === 'nm2' ? 'active' : '') + '" onclick="activateServer(&quot;nm2&quot;)">🎬 Server 2 (Multi-Audio)</button>' : ''}
+        <button type="button" id="btn-srv-vidlink" class="server-pill ${initialServer === 'vidlink' ? 'active' : ''}" onclick="activateServer(&quot;vidlink&quot;)">🚀 VidLink Multi</button>
+        ${cloudStream ? '<button type="button" id="btn-srv-cloud" class="server-pill ' + (initialServer === 'cloud' ? 'active' : '') + '" onclick="activateServer(&quot;cloud&quot;)">⚡ Cloud Stream</button>' : ''}
         <button type="button" id="btn-srv-smashy" class="server-pill" onclick="activateServer(&quot;smashy&quot;)">🛡️ SmashyStream</button>
-        ${directDlHref ? '<a href="' + directDlHref + '" class="dl-btn" target="_blank" rel="noopener">📥 Download File</a>' : ''}
+        ${directDlHref ? '<a href="' + directDlHref + '" class="dl-btn" target="_blank" rel="noopener">📥 Download</a>' : ''}
       </div>
     </div>
 
     <!-- Media Players View Area -->
     <div id="media-view">
-      <div id="artplayer-layer" class="layer-view ${cloudStream ? 'visible' : ''}"></div>
-      <iframe id="iframe-nm2" class="layer-view ${(!cloudStream && netmirrorEmbedUrl) ? 'visible' : ''}" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
-      <iframe id="iframe-vidlink" class="layer-view ${(!cloudStream && !netmirrorEmbedUrl) ? 'visible' : ''}" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+      <iframe id="iframe-nm2" class="layer-view ${initialServer === 'nm2' ? 'visible' : ''}" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+      <iframe id="iframe-vidlink" class="layer-view ${initialServer === 'vidlink' ? 'visible' : ''}" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+      <div id="artplayer-layer" class="layer-view ${initialServer === 'cloud' ? 'visible' : ''}"></div>
       <iframe id="iframe-smashy" class="layer-view" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
     </div>
 
@@ -2209,10 +2212,10 @@ async function handleStreamPlayer(req, res) {
     var nm2Url = ${JSON.stringify(netmirrorEmbedUrl || '')};
     var vidlinkUrl = ${JSON.stringify(vidlinkUrl)};
     var smashyUrl = ${JSON.stringify(smashyUrl)};
-    var currentServer = ${JSON.stringify(cloudStream ? 'cloud' : (netmirrorEmbedUrl ? 'nm2' : 'vidlink'))};
+    var currentServer = ${JSON.stringify(initialServer)};
     var art = null;
     var failoverIndex = 0;
-    var serverSequence = ['cloud', 'nm2', 'vidlink', 'smashy'].filter(function(s) {
+    var serverSequence = ${JSON.stringify(isHindiMode ? ['nm2', 'vidlink', 'smashy', 'cloud'] : ['cloud', 'nm2', 'vidlink', 'smashy'])}.filter(function(s) {
       if (s === 'cloud' && !cloudUrl) return false;
       if (s === 'nm2' && !nm2Url) return false;
       return true;
@@ -2223,7 +2226,7 @@ async function handleStreamPlayer(req, res) {
       if (!toast) return;
       toast.innerHTML = '<span style="color:#22c55e;">🛡️</span> ' + msg;
       toast.style.display = 'inline-flex';
-      setTimeout(function() { toast.style.display = 'none'; }, 3200);
+      setTimeout(function() { toast.style.display = 'none'; }, 3000);
     }
 
     function hideAllLayers() {
@@ -2237,7 +2240,17 @@ async function handleStreamPlayer(req, res) {
       var btn = document.getElementById('btn-srv-' + srv);
       if (btn) btn.classList.add('active');
 
-      if (srv === 'cloud' && cloudUrl) {
+      if (srv === 'nm2' && nm2Url) {
+        var frame = document.getElementById('iframe-nm2');
+        if (!frame.src || frame.src === 'about:blank' || frame.src.indexOf('/api/netmirror-player') === -1) {
+          frame.src = nm2Url;
+        }
+        frame.classList.add('visible');
+      } else if (srv === 'vidlink') {
+        var frame = document.getElementById('iframe-vidlink');
+        if (!frame.src || frame.src === 'about:blank') frame.src = vidlinkUrl;
+        frame.classList.add('visible');
+      } else if (srv === 'cloud' && cloudUrl) {
         var mount = document.getElementById('artplayer-layer');
         mount.classList.add('visible');
         if (!art) {
@@ -2245,14 +2258,6 @@ async function handleStreamPlayer(req, res) {
         } else {
           art.switchUrl(cloudUrl);
         }
-      } else if (srv === 'nm2' && nm2Url) {
-        var frame = document.getElementById('iframe-nm2');
-        if (!frame.src || frame.src === 'about:blank') frame.src = nm2Url;
-        frame.classList.add('visible');
-      } else if (srv === 'vidlink') {
-        var frame = document.getElementById('iframe-vidlink');
-        if (!frame.src || frame.src === 'about:blank') frame.src = vidlinkUrl;
-        frame.classList.add('visible');
       } else if (srv === 'smashy') {
         var frame = document.getElementById('iframe-smashy');
         if (!frame.src || frame.src === 'about:blank') frame.src = smashyUrl;
@@ -2261,8 +2266,8 @@ async function handleStreamPlayer(req, res) {
     }
 
     function triggerAutoBypass(reason) {
-      console.warn('[Zero-Error Shield] ' + reason + ' -> Automatically switching server...');
-      showShieldToast('Bypassing server error... Connecting to backup stream');
+      console.warn('[MultiAudio Shield] ' + reason + ' -> Switching server...');
+      showShieldToast('Connecting to backup streaming mirror...');
       failoverIndex = (failoverIndex + 1) % serverSequence.length;
       activateServer(serverSequence[failoverIndex]);
     }
@@ -2281,7 +2286,7 @@ async function handleStreamPlayer(req, res) {
         autoSize: false,
         theme: '#e50914',
         icons: {
-          loading: '<div style="color:#e50914;font-size:12px;font-weight:bold;">Connecting Multi-Audio Cloud Stream...</div>'
+          loading: '<div style="color:#e50914;font-size:12px;font-weight:bold;">Connecting Stream...</div>'
         },
         customType: {
           mkv: function(video, targetUrl) { video.src = targetUrl; }
@@ -2289,20 +2294,11 @@ async function handleStreamPlayer(req, res) {
       });
 
       art.on('error', function(err) {
-        triggerAutoBypass('Direct cloud stream error: ' + (err && err.message || ''));
+        triggerAutoBypass('Direct cloud stream error');
       });
       art.on('video:error', function(err) {
         triggerAutoBypass('Video decoding error');
       });
-
-      // Watchdog: If playback doesn't start in 8s, switch
-      var watchTimer = setTimeout(function() {
-        if (art && art.video && art.video.readyState === 0 && !art.video.currentTime) {
-          triggerAutoBypass('Initial stream timeout');
-        }
-      }, 8000);
-
-      art.on('play', function() { clearTimeout(watchTimer); });
     }
 
     function switchLanguage(targetLang) {
@@ -2319,7 +2315,7 @@ async function handleStreamPlayer(req, res) {
       clearTimeout(hideTimeout);
       hideTimeout = setTimeout(function() {
         topBar.classList.add('top-bar-hidden');
-      }, 4000);
+      }, 3000);
     }
     window.addEventListener('mousemove', resetTopBarTimer);
     window.addEventListener('touchstart', resetTopBarTimer);
@@ -2340,9 +2336,75 @@ async function handleStreamPlayer(req, res) {
   res.end(playerHtml);
 }
 
-// 11d. Legacy NetMirror route compatibility (routes directly to stream-player)
+// 11d. NetMirror Server 2 Direct Multi-Audio Player Proxy (/api/netmirror-player)
 async function handleNetmirrorPlayer(req, res) {
-  return handleStreamPlayer(req, res);
+  if (handleCors(req, res)) return;
+  const q = getQueryParams(req);
+  const id = q.get('id') || '5069';
+  const type = (q.get('type') || 'tv').toLowerCase();
+  const se = parseInt(q.get('se') || q.get('season') || '1', 10) || 1;
+  const ep = parseInt(q.get('ep') || q.get('episode') || '1', 10) || 1;
+  const endpoint = (type === 'movie') ? 'movie' : 'tv';
+
+  try {
+    let itemData = await fetchNetmirrorJson(`https://api2.imdb3.shop/api/${endpoint}/${id}`);
+    if (!itemData || !itemData.results || !itemData.results.length) {
+      const altEndpoint = (endpoint === 'movie') ? 'tv' : 'movie';
+      itemData = await fetchNetmirrorJson(`https://api2.imdb3.shop/api/${altEndpoint}/${id}`);
+    }
+
+    if (!itemData || !itemData.results || !itemData.results.length) {
+      return handleStreamPlayer(req, res);
+    }
+
+    const item = itemData.results[0];
+    const ts = Math.floor(Date.now() / 1000);
+    const sig = crypto.createHmac('sha256', 'net###@@sss').update(id + ':' + ts).digest('hex');
+    const na = encodeURIComponent(Buffer.from(item.title || '').toString('base64'));
+
+    const We = '?id=' + encodeURIComponent(item.subjectid || '') +
+      '&se=' + se + '&ep=' + ep +
+      '&dp=' + encodeURIComponent(item.dp || '') +
+      '&na=' + na +
+      '&year=' + encodeURIComponent(item.release_date || '') +
+      '&tm_id=' + encodeURIComponent(item.tm_id || '');
+    const Le = '&ts=' + ts + '&sig=' + sig + '&nid=' + item.id + '&exten=0&tv=&token=';
+    const targetUrl = 'https://play.watch21.shop/play/watchbox.php' + We + Le;
+
+    https.get(targetUrl, {
+      headers: {
+        'Referer': 'https://netmirror.center/',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+      },
+      timeout: 8000
+    }, proxyRes => {
+      let html = '';
+      proxyRes.on('data', c => html += c);
+      proxyRes.on('end', () => {
+        if (!html || html.length < 500) {
+          return handleStreamPlayer(req, res);
+        }
+        let modified = html;
+        if (modified.includes('<head>')) {
+          modified = modified.replace('<head>', '<head><base href="https://play.watch21.shop/play/"><meta name="referrer" content="origin">');
+        } else {
+          modified = '<base href="https://play.watch21.shop/play/"><meta name="referrer" content="origin">' + modified;
+        }
+
+        res.writeHead(200, {
+          'Content-Type': 'text/html; charset=utf-8',
+          'Cache-Control': 'no-cache, no-store, must-revalidate',
+          'X-Frame-Options': 'ALLOWALL',
+          'Content-Security-Policy': 'frame-ancestors *'
+        });
+        res.end(modified);
+      });
+    }).on('error', () => {
+      handleStreamPlayer(req, res);
+    });
+  } catch (err) {
+    handleStreamPlayer(req, res);
+  }
 }
 
 // 12. Master Universal Router
@@ -2355,7 +2417,7 @@ async function handleUniversalApi(req, res) {
   if (rawPath.startsWith('/watch-tmdb')) return handleWatchTmdb(req, res);
   if (cleanPath === 'download-file' || cleanPath.startsWith('download-file/')) return handleDownloadFile(req, res);
   if (cleanPath === 'stream-player' || cleanPath.startsWith('stream-player/')) return handleStreamPlayer(req, res);
-  if (cleanPath === 'netmirror-player' || cleanPath.startsWith('netmirror-player/')) return handleStreamPlayer(req, res);
+  if (cleanPath === 'netmirror-player' || cleanPath.startsWith('netmirror-player/')) return handleNetmirrorPlayer(req, res);
   if (cleanPath === 'embed-tmdb' || cleanPath.startsWith('embed-tmdb/')) return handleEmbedTmdb(req, res);
   if (cleanPath === 'probe-stream' || cleanPath.startsWith('probe-stream/')) return handleProbeStream(req, res);
   if (cleanPath === 'details' || cleanPath.startsWith('details/')) return handleDetails(req, res);
