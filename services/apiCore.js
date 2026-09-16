@@ -6,6 +6,7 @@
 
 const https = require('https');
 const http = require('http');
+const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
 const { resolveContentId, fetchTmdbRecord, findMatchingCatalogLinks, normalizeRawLinks, unwrapImageUrl } = require('./canonicalResolver');
@@ -1822,6 +1823,153 @@ async function handleProbeStream(req, res) {
   sendJson(res, 200, result, { 'Cache-Control': 'public, max-age=60' });
 }
 
+// 11b. NetMirror Server 2 Authentic Multi-Audio Player Engine
+const netmirrorItemCache = new Map();
+
+function fetchNetmirrorJson(url) {
+  return new Promise((resolve) => {
+    const req = https.get(url, {
+      headers: {
+        'Referer': 'https://netmirror.center/',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36'
+      },
+      timeout: 6000
+    }, res => {
+      let d = '';
+      res.on('data', c => d += c);
+      res.on('end', () => {
+        try { resolve(JSON.parse(d)); } catch(e) { resolve(null); }
+      });
+    });
+    req.on('error', () => resolve(null));
+    req.on('timeout', () => { req.destroy(); resolve(null); });
+  });
+}
+
+async function resolveNetmirrorItem(id, title, type = 'tv', lang = 'hi') {
+  const cacheKey = `${id || ''}_${title || ''}_${type}_${lang}`.toLowerCase();
+  if (netmirrorItemCache.has(cacheKey)) {
+    return netmirrorItemCache.get(cacheKey);
+  }
+
+  // 1. Direct NetMirror ID provided (e.g. 5069)
+  if (id && /^\d{1,9}$/.test(String(id))) {
+    const endpoint = (type === 'movie') ? 'movie' : 'tv';
+    let data = await fetchNetmirrorJson(`https://api2.imdb3.shop/api/${endpoint}/${id}`);
+    if (!data || !data.results || !data.results.length) {
+      const altEndpoint = (endpoint === 'movie') ? 'tv' : 'movie';
+      data = await fetchNetmirrorJson(`https://api2.imdb3.shop/api/${altEndpoint}/${id}`);
+    }
+    if (data && data.results && data.results.length) {
+      netmirrorItemCache.set(cacheKey, data.results[0]);
+      return data.results[0];
+    }
+  }
+
+  // 2. Search by Title
+  if (title) {
+    const clean = title.replace(/\s*\[.*?\]\s*/g, '').replace(/\s*S\d+.*$/i, '').replace(/[:\-–—]/g, ' ').replace(/\s+/g, ' ').trim();
+    const searchData = await fetchNetmirrorJson(`https://api2.imdb4.shop/api/search2/${encodeURIComponent(clean)}?page=0`);
+    if (searchData && searchData.results && searchData.results.length) {
+      const results = searchData.results;
+      const langMap = { hi: 'hindi', en: 'english', ta: 'tamil', te: 'telugu', ml: 'malayalam', kn: 'kannada' };
+      const targetLang = langMap[lang] || lang;
+      
+      let match = null;
+      if (lang && lang !== 'multi') {
+        match = results.find(r => r.title.toLowerCase().includes('[' + targetLang + ']'));
+        if (!match && lang === 'hi') match = results.find(r => r.title.toLowerCase().includes('hindi'));
+        if (!match && lang === 'en') match = results.find(r => !r.title.includes('[') || r.title.toLowerCase().includes('english'));
+      }
+      if (!match) match = results[0];
+
+      if (match && match.id) {
+        const itemData = await fetchNetmirrorJson(`https://api2.imdb3.shop/api/${match.media_type || type}/${match.id}`);
+        if (itemData && itemData.results && itemData.results.length) {
+          netmirrorItemCache.set(cacheKey, itemData.results[0]);
+          return itemData.results[0];
+        }
+      }
+    }
+  }
+
+  return null;
+}
+
+async function handleNetmirrorPlayer(req, res) {
+  if (handleCors(req, res)) return;
+  const q = getQueryParams(req);
+  const id = q.get('id') || '';
+  const title = q.get('title') || '';
+  const type = (q.get('type') || 'tv').toLowerCase();
+  const se = parseInt(q.get('se') || q.get('season') || '1', 10) || 1;
+  const ep = parseInt(q.get('ep') || q.get('episode') || '1', 10) || 1;
+  const lang = (q.get('lang') || 'hi').toLowerCase();
+
+  try {
+    const item = await resolveNetmirrorItem(id, title, type, lang);
+    if (!item) {
+      res.writeHead(404, { 'Content-Type': 'text/html; charset=utf-8' });
+      res.end('<!DOCTYPE html><html><body style="background:#000;color:#fff;font-family:sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;"><h3>NetMirror streaming source not found for this title.</h3></body></html>');
+      return;
+    }
+
+    const nid = item.id;
+    const ts = Math.floor(Date.now() / 1000);
+    const sig = crypto.createHmac('sha256', 'net###@@sss').update(`${nid}:${ts}`).digest('hex');
+
+    function Ee(ve) {
+      const bt = new TextEncoder().encode(ve || '');
+      return String.fromCharCode(...bt);
+    }
+    const na = encodeURIComponent(Buffer.from(Ee(item.title)).toString('base64'));
+
+    const We = `?id=${item.subjectid || ''}&se=${se}&ep=${ep}&dp=${encodeURIComponent(item.dp || '')}&na=${na}&year=${encodeURIComponent(item.release_date || '')}&tm_id=${encodeURIComponent(item.tm_id || '')}`;
+    const Le = `&ts=${ts}&sig=${sig}&nid=${nid}&exten=0&tv=&token=`;
+    const targetUrl = `https://play.watch21.shop/play/watchbox.php${We}${Le}`;
+
+    const playReq = https.get(targetUrl, {
+      headers: {
+        'Referer': 'https://netmirror.center/',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36'
+      },
+      timeout: 9000
+    }, playRes => {
+      let html = '';
+      playRes.on('data', c => html += c);
+      playRes.on('end', () => {
+        let modified = html;
+        if (modified.includes('<head>')) {
+          modified = modified.replace('<head>', '<head><base href="https://play.watch21.shop/play/"><meta name="referrer" content="no-referrer">');
+        } else {
+          modified = '<base href="https://play.watch21.shop/play/"><meta name="referrer" content="no-referrer">' + modified;
+        }
+
+        res.writeHead(200, {
+          'Content-Type': 'text/html; charset=utf-8',
+          'Cache-Control': 'no-cache, no-store, must-revalidate',
+          'X-Frame-Options': 'ALLOWALL',
+          'Content-Security-Policy': 'frame-ancestors *'
+        });
+        res.end(modified);
+      });
+    });
+
+    playReq.on('error', err => {
+      res.writeHead(502, { 'Content-Type': 'text/html; charset=utf-8' });
+      res.end(`<!DOCTYPE html><html><body style="background:#000;color:#fff;font-family:sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;"><h3>Error connecting to NetMirror Server 2: ${err.message}</h3></body></html>`);
+    });
+    playReq.on('timeout', () => {
+      playReq.destroy();
+      res.writeHead(504, { 'Content-Type': 'text/html; charset=utf-8' });
+      res.end('<!DOCTYPE html><html><body style="background:#000;color:#fff;font-family:sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;"><h3>NetMirror Server 2 connection timed out.</h3></body></html>');
+    });
+  } catch(err) {
+    res.writeHead(500, { 'Content-Type': 'text/html; charset=utf-8' });
+    res.end(`<!DOCTYPE html><html><body style="background:#000;color:#fff;font-family:sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;"><h3>Server 2 error: ${err.message}</h3></body></html>`);
+  }
+}
+
 // 12. Master Universal Router
 async function handleUniversalApi(req, res) {
   if (handleCors(req, res)) return;
@@ -1830,6 +1978,7 @@ async function handleUniversalApi(req, res) {
   const cleanPath = rawPath.replace(/^\/api\/?/, '').toLowerCase();
 
   if (rawPath.startsWith('/watch-tmdb')) return handleWatchTmdb(req, res);
+  if (cleanPath === 'netmirror-player' || cleanPath.startsWith('netmirror-player/')) return handleNetmirrorPlayer(req, res);
   if (cleanPath === 'embed-tmdb' || cleanPath.startsWith('embed-tmdb/')) return handleEmbedTmdb(req, res);
   if (cleanPath === 'probe-stream' || cleanPath.startsWith('probe-stream/')) return handleProbeStream(req, res);
   if (cleanPath === 'details' || cleanPath.startsWith('details/')) return handleDetails(req, res);
@@ -1855,6 +2004,7 @@ module.exports = {
   resolveTitleCast,
   handleDetails,
   handlePlayback,
+  handleNetmirrorPlayer,
   handleWatchTmdb,
   handleEmbedTmdb,
   handleProbeStream,

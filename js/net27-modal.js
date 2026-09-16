@@ -1178,7 +1178,7 @@
 
   // ─── WATCH MODAL (Net27 Streaming Player UI with Auto-Failover Engine) ───
   var SERVERS_CONFIG = [
-    { id: 's1', name: 'Server 1 (Multi-Audio NetMirror)', tag: '100% Multi-Audio', tagClass: 'tag-multi', desc: 'NetMirror Multi-Audio Player with Dual/Multi-Language Tracks (Hindi, English, Tamil, Telugu)' },
+    { id: 's1', name: 'Server 1 (NetMirror Server 2 Multi-Audio)', tag: '100% Multi-Audio', tagClass: 'tag-multi', desc: 'NetMirror Server 2 Authentic Multi-Audio Player with Dual/Multi-Language Tracks (Hindi, English, Tamil, Telugu)' },
     { id: 's2', name: 'Server 2 (Peachify Fast)', tag: 'Peachify', tagClass: 'tag-peachify', desc: 'Net27 Authentic Peachify Fast Multi-Stream' },
     { id: 's3', name: 'Server 3 (AllMovieLand)', tag: 'Indian Fast', tagClass: 'tag-fast', desc: 'AllMovieLand Indian & Global Fast Player' },
     { id: 's4', name: 'Server 4 (VidSrc PM)', tag: 'Global CDN', tagClass: 'tag-global', desc: 'VidSrc PM High Uptime Global Mirror' },
@@ -1312,6 +1312,9 @@
 
   function probeStream(url, cb) {
     if (!url) return cb(false, 404);
+    if (url.indexOf('/api/netmirror-player') !== -1 || url.startsWith('/api/')) {
+      return cb(true, 200);
+    }
     if (activeProbeController) {
       try { activeProbeController.abort(); } catch(e) {}
     }
@@ -1517,6 +1520,30 @@
     }
   });
 
+  function buildNetmirrorServerUrl(params, lang) {
+    if (!params) return '';
+    var type = (params.type === 'tv' || params.type === 'series') ? 'tv' : 'movie';
+    var title = params.title || '';
+    var se = params.season || 1;
+    var ep = params.episode || 1;
+    var year = params.year || '';
+    var activeLang = (lang && lang !== 'multi') ? lang : (currentWatchLang || 'hi');
+    var url = '/api/netmirror-player?type=' + encodeURIComponent(type) +
+      '&title=' + encodeURIComponent(title) +
+      '&se=' + encodeURIComponent(se) +
+      '&ep=' + encodeURIComponent(ep) +
+      '&year=' + encodeURIComponent(year) +
+      '&lang=' + encodeURIComponent(activeLang);
+
+    var cleanId = String(params.tmdbId || '').replace(/^(?:dotmobiz|tmdb(?:-movie|-series|-tv)?)-/, '');
+    if (cleanId && /^\d+$/.test(cleanId)) {
+      url += '&id=' + encodeURIComponent(cleanId);
+    } else if (params.canonicalId && /^\d+$/.test(String(params.canonicalId))) {
+      url += '&id=' + encodeURIComponent(params.canonicalId);
+    }
+    return url;
+  }
+
   function openWatchModal(tmdbId, type, season, episode, backdrop, title, year, imdbId, canonicalId, poster) {
     if (window.__closeSearchOverlay) window.__closeSearchOverlay();
     if (!watchModal || !watchModalIframe) return;
@@ -1632,12 +1659,10 @@
         }).catch(function() {});
     }
 
-    var langParam = (currentWatchLang && currentWatchLang !== 'multi') ? ('&lang=' + encodeURIComponent(currentWatchLang)) : '';
+    var s1Url = buildNetmirrorServerUrl(activeWatchParams, currentWatchLang);
 
     activeWatchServers = {
-      s1: isTv
-        ? 'https://vidlink.pro/tv/' + tmdbId + '/' + season + '/' + episode + '?multiLang=true' + langParam
-        : 'https://vidlink.pro/movie/' + tmdbId + '?multiLang=true' + langParam,
+      s1: s1Url,
       s2: isTv
         ? 'https://peachify.top/embed/tv/' + tmdbId + '/' + season + '/' + episode
         : 'https://peachify.top/embed/movie/' + tmdbId,
@@ -1795,10 +1820,7 @@
     var season = activeWatchParams.season || 1;
     var episode = activeWatchParams.episode || 1;
 
-    var langParam = (currentWatchLang && currentWatchLang !== 'multi') ? ('&lang=' + encodeURIComponent(currentWatchLang)) : '';
-    var newS1Url = isTv
-      ? 'https://vidlink.pro/tv/' + tmdbId + '/' + season + '/' + episode + '?multiLang=true' + langParam
-      : 'https://vidlink.pro/movie/' + tmdbId + '?multiLang=true' + langParam;
+    var newS1Url = buildNetmirrorServerUrl(activeWatchParams, currentWatchLang);
 
     activeWatchServers.s1 = newS1Url;
 
@@ -1807,9 +1829,9 @@
     updateActiveServerUi('s1');
     watchModalIframe.src = newS1Url;
 
-    setWatchStatus('Language: ' + langCfg.label + ' (Server 1)', '100% Multi-Audio Player active');
+    setWatchStatus('Language: ' + langCfg.label + ' (Server 1)', 'NetMirror Server 2 Multi-Audio Player active');
     if (window.__showToast) {
-      window.__showToast('Switched audio to ' + langCfg.label + ' • 100% Multi-Audio Player', '🎧');
+      window.__showToast('Switched audio to ' + langCfg.label + ' • NetMirror Server 2 Player', '🎧');
     }
     resetWatchTopBarTimer();
   }

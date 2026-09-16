@@ -629,8 +629,13 @@ const server = http.createServer(async (req, res) => {
     return handleProbeStream(req, res);
   }
 
+  // 2c-2. NetMirror Authentic Server 2 Multi-Audio Player
+  if (reqPath.startsWith('/api/netmirror-player')) {
+    return handleUniversalApi(req, res);
+  }
+
   // 2d. 🌐 NetMirror Live Catalog Proxy (/api/netmirror/:feed)
-  if (reqPath.startsWith('/api/netmirror')) {
+  if (reqPath === '/api/netmirror' || reqPath.startsWith('/api/netmirror/')) {
     const NM_BASE = 'https://api2.imdb3.shop/api';
     const NM_SEARCH_BASE = 'https://api2.imdb4.shop/api/search2';
     const NM_TMDB_KEY = '445f2b5a8941c1d4bd5a869761a916e3'; // same key as apiCore
@@ -1043,8 +1048,8 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
-  // 4a-2b. Catalog Engine, Net27 Embed TMDB & Watch TMDB
-  if (reqPath.startsWith('/api/catalog') || reqPath.startsWith('/api/embed-tmdb') || reqPath.startsWith('/watch-tmdb')) {
+  // 4a-2b. Catalog Engine, Net27 Embed TMDB, NetMirror Server 2 Player & Watch TMDB
+  if (reqPath.startsWith('/api/catalog') || reqPath.startsWith('/api/embed-tmdb') || reqPath.startsWith('/api/netmirror-player') || reqPath.startsWith('/watch-tmdb')) {
     return handleUniversalApi(req, res);
   }
 
