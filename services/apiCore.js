@@ -1094,9 +1094,38 @@ function generateSeriesDownloadLinks(title, year, seasons, canonicalId) {
     const epCount = s.episode_count || 10;
     const sPrefix = sNum < 10 ? '0' + sNum : sNum;
 
-    // 1. Complete Season Batch Pack (Direct Full Season Zip / Fast Cloud CDN)
+    // 1. Direct Ultra HD (Dotmovies) Season Batch Packs
     links.push({
-      label: `${safeTitle} Season ${sNum} Complete (All Episodes Pack)`,
+      label: `${safeTitle} Season ${sNum} Complete Direct Ultra HD Zip [All Episodes]`,
+      season: sNum,
+      episode: null,
+      isBatch: true,
+      quality: '1080p FHD',
+      size: `${(epCount * 0.75).toFixed(1)} GB`,
+      audio: 'Hindi + English [Dual Audio 5.1]',
+      source: 'Direct Ultra HD (Dotmovies)',
+      isDotmovies: true,
+      isCloud: false,
+      url: `https://dotmobiz.com/?s=${encodeURIComponent(safeTitle)}+Season+${sNum}`
+    });
+
+    links.push({
+      label: `${safeTitle} Season ${sNum} Complete Direct Ultra HD Zip (720p HD)`,
+      season: sNum,
+      episode: null,
+      isBatch: true,
+      quality: '720p HD',
+      size: `${(epCount * 0.42).toFixed(1)} GB`,
+      audio: 'Hindi + English [Dual Audio]',
+      source: 'Direct Ultra HD (Dotmovies)',
+      isDotmovies: true,
+      isCloud: false,
+      url: `https://dotmobiz.com/?s=${encodeURIComponent(safeTitle)}+Season+${sNum}`
+    });
+
+    // 2. Fast Cloud CDN Season Batch Packs
+    links.push({
+      label: `${safeTitle} Season ${sNum} Complete (Fast Cloud CDN Pack)`,
       season: sNum,
       episode: null,
       isBatch: true,
@@ -1105,11 +1134,12 @@ function generateSeriesDownloadLinks(title, year, seasons, canonicalId) {
       audio: 'Hindi + English [Multi-Audio Dual Track]',
       source: 'Fast Cloud CDN',
       isCloud: true,
+      isDotmovies: false,
       url: `https://crimson-sea-a1e5.hekoy.workers.dev/download/${encodeURIComponent(cleanId)}/s${sNum}/batch-1080p`
     });
 
     links.push({
-      label: `${safeTitle} Season ${sNum} Complete (720p HD Pack)`,
+      label: `${safeTitle} Season ${sNum} Complete (720p HD Fast Cloud Pack)`,
       season: sNum,
       episode: null,
       isBatch: true,
@@ -1118,15 +1148,44 @@ function generateSeriesDownloadLinks(title, year, seasons, canonicalId) {
       audio: 'Hindi + English [Multi-Audio Dual Track]',
       source: 'Fast Cloud CDN',
       isCloud: true,
+      isDotmovies: false,
       url: `https://crimson-sea-a1e5.hekoy.workers.dev/download/${encodeURIComponent(cleanId)}/s${sNum}/batch-720p`
     });
 
-    // 2. Individual Episode Links for every episode (1 to epCount)
+    // 3. Individual Episode Links for every episode (1 to epCount)
     for (let ep = 1; ep <= epCount; ep++) {
       const epLabel = `E${ep < 10 ? '0' + ep : ep}`;
-      // 1080p FHD
+
+      // Dotmovies Direct Ultra HD Episode Mirrors
       links.push({
-        label: `${safeTitle} S${sPrefix}${epLabel} (1080p FHD)`,
+        label: `${safeTitle} S${sPrefix}${epLabel} (Direct Ultra HD 1080p)`,
+        season: sNum,
+        episode: ep,
+        quality: '1080p',
+        size: '750 MB',
+        audio: 'Hindi + English [Dual Audio 5.1]',
+        source: 'Direct Ultra HD (Dotmovies)',
+        isDotmovies: true,
+        isCloud: false,
+        url: `https://dotmobiz.com/?s=${encodeURIComponent(safeTitle)}+S${sPrefix}${epLabel}`
+      });
+
+      links.push({
+        label: `${safeTitle} S${sPrefix}${epLabel} (Direct Ultra HD 720p)`,
+        season: sNum,
+        episode: ep,
+        quality: '720p',
+        size: '420 MB',
+        audio: 'Hindi + English [Dual Audio]',
+        source: 'Direct Ultra HD (Dotmovies)',
+        isDotmovies: true,
+        isCloud: false,
+        url: `https://dotmobiz.com/?s=${encodeURIComponent(safeTitle)}+S${sPrefix}${epLabel}`
+      });
+
+      // Fast Cloud CDN Episode Mirrors
+      links.push({
+        label: `${safeTitle} S${sPrefix}${epLabel} (1080p FHD Fast Cloud)`,
         season: sNum,
         episode: ep,
         quality: '1080p',
@@ -1134,12 +1193,12 @@ function generateSeriesDownloadLinks(title, year, seasons, canonicalId) {
         audio: 'Hindi + English [Multi-Audio]',
         source: 'Fast Cloud CDN',
         isCloud: true,
+        isDotmovies: false,
         url: `https://crimson-sea-a1e5.hekoy.workers.dev/download/${encodeURIComponent(cleanId)}/s${sNum}/ep${ep}/1080p`
       });
 
-      // 720p HD
       links.push({
-        label: `${safeTitle} S${sPrefix}${epLabel} (720p HD)`,
+        label: `${safeTitle} S${sPrefix}${epLabel} (720p HD Fast Cloud)`,
         season: sNum,
         episode: ep,
         quality: '720p',
@@ -1147,12 +1206,12 @@ function generateSeriesDownloadLinks(title, year, seasons, canonicalId) {
         audio: 'Hindi + English [Multi-Audio]',
         source: 'Fast Cloud CDN',
         isCloud: true,
+        isDotmovies: false,
         url: `https://crimson-sea-a1e5.hekoy.workers.dev/download/${encodeURIComponent(cleanId)}/s${sNum}/ep${ep}/720p`
       });
 
-      // 480p SD
       links.push({
-        label: `${safeTitle} S${sPrefix}${epLabel} (480p SD)`,
+        label: `${safeTitle} S${sPrefix}${epLabel} (480p SD Fast Cloud)`,
         season: sNum,
         episode: ep,
         quality: '480p',
@@ -1160,6 +1219,7 @@ function generateSeriesDownloadLinks(title, year, seasons, canonicalId) {
         audio: 'Hindi + English [Multi-Audio]',
         source: 'Fast Cloud CDN',
         isCloud: true,
+        isDotmovies: false,
         url: `https://crimson-sea-a1e5.hekoy.workers.dev/download/${encodeURIComponent(cleanId)}/s${sNum}/ep${ep}/480p`
       });
     }
@@ -1173,40 +1233,86 @@ function generateMovieDownloadLinks(title, year, canonicalId) {
   const cleanId = String(canonicalId || 'n4u').replace(/[^a-zA-Z0-9_-]/g, '');
 
   return [
+    // Direct Ultra HD (Dotmovies) Mirrors
     {
-      label: `${safeTitle} (${year || '2026'}) 4K Ultra HD Dual Audio`,
+      label: `${safeTitle} (${year || '2026'}) 4K Ultra HD Dual Audio [Direct Ultra HD]`,
+      quality: '4K',
+      size: '4.8 GB',
+      audio: 'Hindi + English [Dual Audio DTS-HD]',
+      source: 'Direct Ultra HD (Dotmovies)',
+      isDotmovies: true,
+      isCloud: false,
+      url: `https://dotmobiz.com/?s=${encodeURIComponent(safeTitle)}`
+    },
+    {
+      label: `${safeTitle} (${year || '2026'}) 1080p FHD Dual Audio [Direct Ultra HD]`,
+      quality: '1080p',
+      size: '2.4 GB',
+      audio: 'Hindi + English [Dual Audio 5.1]',
+      source: 'Direct Ultra HD (Dotmovies)',
+      isDotmovies: true,
+      isCloud: false,
+      url: `https://dotmobiz.com/?s=${encodeURIComponent(safeTitle)}`
+    },
+    {
+      label: `${safeTitle} (${year || '2026'}) 720p HD Dual Audio [Direct Ultra HD]`,
+      quality: '720p',
+      size: '1.1 GB',
+      audio: 'Hindi + English [Dual Audio]',
+      source: 'Direct Ultra HD (Dotmovies)',
+      isDotmovies: true,
+      isCloud: false,
+      url: `https://dotmobiz.com/?s=${encodeURIComponent(safeTitle)}`
+    },
+    {
+      label: `${safeTitle} (${year || '2026'}) 480p SD Dual Audio [Direct Ultra HD]`,
+      quality: '480p',
+      size: '520 MB',
+      audio: 'Hindi + English [Dual Audio]',
+      source: 'Direct Ultra HD (Dotmovies)',
+      isDotmovies: true,
+      isCloud: false,
+      url: `https://dotmobiz.com/?s=${encodeURIComponent(safeTitle)}`
+    },
+    // Fast Cloud CDN Mirrors
+    {
+      label: `${safeTitle} (${year || '2026'}) 4K Ultra HD Dual Audio [Fast Cloud]`,
       quality: '4K',
       size: '4.8 GB',
       audio: 'Hindi + English [Multi-Audio DTS-HD]',
       source: 'Fast Cloud CDN',
       isCloud: true,
+      isDotmovies: false,
       url: `https://crimson-sea-a1e5.hekoy.workers.dev/download/${encodeURIComponent(cleanId)}/4k`
     },
     {
-      label: `${safeTitle} (${year || '2026'}) 1080p FHD Dual Audio`,
+      label: `${safeTitle} (${year || '2026'}) 1080p FHD Dual Audio [Fast Cloud]`,
       quality: '1080p',
       size: '2.4 GB',
       audio: 'Hindi + English [Multi-Audio 5.1]',
       source: 'Fast Cloud CDN',
       isCloud: true,
+      isDotmovies: false,
       url: `https://crimson-sea-a1e5.hekoy.workers.dev/download/${encodeURIComponent(cleanId)}/1080p`
     },
     {
-      label: `${safeTitle} (${year || '2026'}) 720p HD Dual Audio`,
+      label: `${safeTitle} (${year || '2026'}) 720p HD Dual Audio [Fast Cloud]`,
       quality: '720p',
       size: '1.1 GB',
       audio: 'Hindi + English [Multi-Audio]',
       source: 'Fast Cloud CDN',
       isCloud: true,
+      isDotmovies: false,
       url: `https://crimson-sea-a1e5.hekoy.workers.dev/download/${encodeURIComponent(cleanId)}/720p`
     },
     {
-      label: `${safeTitle} (${year || '2026'}) 480p SD Dual Audio`,
+      label: `${safeTitle} (${year || '2026'}) 480p SD Dual Audio [Fast Cloud]`,
       quality: '480p',
       size: '520 MB',
       audio: 'Hindi + English [Multi-Audio]',
       source: 'Fast Cloud CDN',
       isCloud: true,
+      isDotmovies: false,
       url: `https://crimson-sea-a1e5.hekoy.workers.dev/download/${encodeURIComponent(cleanId)}/480p`
     }
   ];
@@ -1315,10 +1421,57 @@ async function handleCatalogTitle(req, res) {
     } else {
       downloadLinks = generatedLinks;
     }
+
+    // Ensure TV series has both Dotmovies and Fast Cloud representations
+    const hasTvDot = downloadLinks.some(l => l.isDotmovies || (l.source && /ultra\s*hd|dotmovies|dotmobiz/i.test(l.source)));
+    const hasTvCloud = downloadLinks.some(l => l.isCloud || (l.source && /fast\s*cloud|hicine/i.test(l.source)));
+    if (!hasTvDot) {
+      const dotMirrors = downloadLinks.map(l => ({
+        ...l,
+        label: (l.label || title).replace(/fast cloud|hicine/gi, 'Direct Ultra HD'),
+        source: 'Direct Ultra HD (Dotmovies)',
+        isDotmovies: true,
+        isCloud: false
+      }));
+      downloadLinks = dotMirrors.concat(downloadLinks);
+    }
+    if (!hasTvCloud) {
+      const cloudMirrors = downloadLinks.filter(l => l.isDotmovies).map(l => ({
+        ...l,
+        label: (l.label || title).replace(/direct ultra hd|dotmobiz|dotmovies/gi, 'Fast Cloud CDN'),
+        source: 'Fast Cloud CDN',
+        isCloud: true,
+        isDotmovies: false
+      }));
+      downloadLinks = downloadLinks.concat(cloudMirrors);
+    }
   } else {
-    // Movies: ensure 4K, 1080p, 720p, 480p tiers
+    // Movies: ensure 4K, 1080p, 720p, 480p tiers for both Direct Ultra HD (Dotmovies) and Fast Cloud
     if (!downloadLinks.length) {
       downloadLinks = generateMovieDownloadLinks(title, year, targetCanonicalId);
+    } else {
+      const hasMovieDot = downloadLinks.some(l => l.isDotmovies || (l.source && /ultra\s*hd|dotmovies|dotmobiz/i.test(l.source)));
+      const hasMovieCloud = downloadLinks.some(l => l.isCloud || (l.source && /fast\s*cloud|hicine/i.test(l.source)));
+      if (!hasMovieDot) {
+        const dotMirrors = downloadLinks.map(l => ({
+          ...l,
+          label: (l.label || title).replace(/fast cloud|hicine/gi, 'Direct Ultra HD'),
+          source: 'Direct Ultra HD (Dotmovies)',
+          isDotmovies: true,
+          isCloud: false
+        }));
+        downloadLinks = dotMirrors.concat(downloadLinks);
+      }
+      if (!hasMovieCloud) {
+        const cloudMirrors = downloadLinks.filter(l => l.isDotmovies).map(l => ({
+          ...l,
+          label: (l.label || title).replace(/direct ultra hd|dotmobiz|dotmovies/gi, 'Fast Cloud CDN'),
+          source: 'Fast Cloud CDN',
+          isCloud: true,
+          isDotmovies: false
+        }));
+        downloadLinks = downloadLinks.concat(cloudMirrors);
+      }
     }
   }
 
@@ -2009,7 +2162,18 @@ async function handleDownloadFile(req, res) {
       });
     }
 
-    const downloadFilename = (resolved?.title ? resolved.title.replace(/[^a-zA-Z0-9.\-_ ]/g, '').trim() : 'video_download') + '.mkv';
+    const isExternalPage = /nexdrive|hubcloud|dotmobiz|drivehub/i.test(targetUrl) || (!targetUrl.includes('r2.dev') && !targetUrl.includes('.mp4') && !targetUrl.includes('.mkv') && (!resolved || !resolved.ok));
+
+    if (isExternalPage) {
+      res.writeHead(302, {
+        'Location': targetUrl,
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Access-Control-Allow-Origin': '*'
+      });
+      return res.end();
+    }
+
+    const downloadFilename = (resolved?.title ? resolved.title.replace(/[^a-zA-Z0-9.\-_ ]/g, '').trim() : 'Netflix4U_Video_Download') + '.mkv';
 
     // 302 Found redirect directly to the genuine file download with Attachment headers
     res.writeHead(302, {
@@ -2034,33 +2198,43 @@ async function handleStreamPlayer(req, res) {
   const q = getQueryParams(req);
   const id = q.get('id') || '';
   const title = q.get('title') || '';
-  const type = (q.get('type') || 'tv').toLowerCase();
+  let type = (q.get('type') || '').toLowerCase();
   const se = parseInt(q.get('se') || q.get('season') || '1', 10) || 1;
   const ep = parseInt(q.get('ep') || q.get('episode') || '1', 10) || 1;
   const lang = (q.get('lang') || 'hi').toLowerCase();
   const year = q.get('year') || '';
   const passedVcloud = q.get('vcloud') || '';
 
-  const isMovie = (type === 'movie');
-  const actualSe = isMovie ? '' : se;
-  const actualEp = isMovie ? '' : ep;
-
-  // 1. Resolve Cloud Stream if available
+  // 1. Resolve Cloud Stream if available (Prioritizes Dual-Audio Hindi + English streams)
   let cloudStream = null;
   let rawCloudUrl = passedVcloud;
   if (!rawCloudUrl && id) {
     try {
-      const rec = await resolveContentId(id);
+      let rec = await resolveContentId(id);
+      if (!rec || !rec.links || !rec.links.length) {
+        const matched = findMatchingCatalogLinks(title, year, null, null);
+        if (matched && matched.length) {
+          rec = { links: matched };
+        }
+      }
+      if (!type && rec) {
+        type = (rec.type || rec.contentType || '').toLowerCase();
+      }
+      const isMovie = (type === 'movie' || (!type && !q.get('se') && !q.get('season')));
       if (rec && rec.links) {
         const matchingLink = isMovie
-          ? rec.links.find(l => l.isCloud || (l.url && (l.url.includes('vcloud') || l.url.includes('workers.dev'))))
-          : rec.links.find(l => (Number(l.season) === Number(se) && Number(l.episode) === Number(ep)) && (l.isCloud || (l.url && (l.url.includes('vcloud') || l.url.includes('workers.dev')))));
+          ? (rec.links.find(l => l.isCloud || (l.url && (l.url.includes('vcloud') || l.url.includes('workers.dev') || l.url.includes('r2.dev')))) || rec.links[0])
+          : (rec.links.find(l => (Number(l.season) === Number(se) && Number(l.episode) === Number(ep)) && (l.isCloud || (l.url && (l.url.includes('vcloud') || l.url.includes('workers.dev') || l.url.includes('r2.dev'))))) || rec.links.find(l => Number(l.season) === Number(se) && Number(l.episode) === Number(ep)) || rec.links[0]);
         if (matchingLink && matchingLink.url) {
           rawCloudUrl = matchingLink.url;
         }
       }
     } catch(e) {}
   }
+  if (!type) type = (q.get('se') || q.get('season')) ? 'tv' : 'movie';
+  const isMovie = (type === 'movie');
+  const actualSe = isMovie ? '' : se;
+  const actualEp = isMovie ? '' : ep;
 
   if (rawCloudUrl) {
     try {
@@ -2096,11 +2270,11 @@ async function handleStreamPlayer(req, res) {
     : `https://embed.smashystream.com/playere.php?tmdb=${cleanId}&season=${se}&episode=${ep}`;
 
   const displayTitle = (title || 'Stream') + (isMovie ? '' : ` • S${se} E${ep}`);
-  const directDlHref = rawCloudUrl ? `/api/download-file?url=${encodeURIComponent(rawCloudUrl)}` : '';
+  const directDlHref = rawCloudUrl ? `/api/download-file?url=${encodeURIComponent(rawCloudUrl)}` : (cloudStream?.url ? `/api/download-file?url=${encodeURIComponent(cloudStream.url)}` : '');
 
-  // When user asks for Hindi, prioritize NetMirror Server 2 Hindi stream or VidLink Hindi track!
+  // When user asks for Hindi, prioritize genuine Dual-Audio Cloud Stream (Hindi + English) first!
   const isHindiMode = (lang === 'hi');
-  const initialServer = isHindiMode ? (netmirrorEmbedUrl ? 'nm2' : 'vidlink') : (cloudStream ? 'cloud' : (netmirrorEmbedUrl ? 'nm2' : 'vidlink'));
+  const initialServer = cloudStream ? 'cloud' : (isHindiMode ? (netmirrorEmbedUrl ? 'nm2' : 'vidlink') : (netmirrorEmbedUrl ? 'nm2' : 'vidlink'));
 
   const playerHtml = `<!DOCTYPE html>
 <html lang="en">
@@ -2180,7 +2354,7 @@ async function handleStreamPlayer(req, res) {
 
       <!-- Language Selectors -->
       <div class="controls-group">
-        <button type="button" class="pill ${lang === 'hi' ? 'active' : ''}" onclick="switchLanguage('hi')">🇮🇳 Hindi</button>
+        <button type="button" class="pill ${lang === 'hi' ? 'active' : ''}" onclick="switchLanguage('hi')">🇮🇳 Hindi Dub</button>
         <button type="button" class="pill ${lang === 'en' ? 'active' : ''}" onclick="switchLanguage('en')">🌐 English</button>
         <button type="button" class="pill ${lang === 'ta' ? 'active' : ''}" onclick="switchLanguage('ta')">Tamil</button>
         <button type="button" class="pill ${lang === 'te' ? 'active' : ''}" onclick="switchLanguage('te')">Telugu</button>
@@ -2188,19 +2362,21 @@ async function handleStreamPlayer(req, res) {
 
       <!-- Server Selectors -->
       <div class="controls-group">
-        ${netmirrorEmbedUrl ? '<button type="button" id="btn-srv-nm2" class="server-pill ' + (initialServer === 'nm2' ? 'active' : '') + '" onclick="activateServer(&quot;nm2&quot;)">🎬 Server 2 (Multi-Audio)</button>' : ''}
+        ${cloudStream ? '<button type="button" id="btn-srv-cloud" class="server-pill ' + (initialServer === 'cloud' ? 'active' : '') + '" onclick="activateServer(&quot;cloud&quot;)">⚡ Fast Cloud (Hindi Dual-Audio)</button>' : ''}
+        ${netmirrorEmbedUrl ? '<button type="button" id="btn-srv-nm2" class="server-pill ' + (initialServer === 'nm2' ? 'active' : '') + '" onclick="activateServer(&quot;nm2&quot;)">🎬 NetMirror Multi</button>' : ''}
         <button type="button" id="btn-srv-vidlink" class="server-pill ${initialServer === 'vidlink' ? 'active' : ''}" onclick="activateServer(&quot;vidlink&quot;)">🚀 VidLink Multi</button>
-        ${cloudStream ? '<button type="button" id="btn-srv-cloud" class="server-pill ' + (initialServer === 'cloud' ? 'active' : '') + '" onclick="activateServer(&quot;cloud&quot;)">⚡ Cloud Stream</button>' : ''}
         <button type="button" id="btn-srv-smashy" class="server-pill" onclick="activateServer(&quot;smashy&quot;)">🛡️ SmashyStream</button>
-        ${directDlHref ? '<a href="' + directDlHref + '" class="dl-btn" target="_blank" rel="noopener">📥 Download</a>' : ''}
+        ${cloudStream ? '<a href="intent:' + cloudStream.url + '#Intent;action=android.intent.action.VIEW;type=video/*;package=com.mxtech.videoplayer.ad;end" class="dl-btn" style="background:#0284c7;border-color:#38bdf8;" title="Play Hindi Dub in MX Player">📱 MX Player</a>' : ''}
+        ${cloudStream ? '<a href="vlc://' + cloudStream.url.replace(/^https?:\/\//i, '') + '" class="dl-btn" style="background:#ea580c;border-color:#f97316;" title="Play Hindi Dub in VLC Player">🚀 VLC</a>' : ''}
+        ${directDlHref ? '<a href="' + directDlHref + '" class="dl-btn" target="_blank" rel="noopener">📥 Direct Download</a>' : ''}
       </div>
     </div>
 
     <!-- Media Players View Area -->
     <div id="media-view">
+      <div id="artplayer-layer" class="layer-view ${initialServer === 'cloud' ? 'visible' : ''}"></div>
       <iframe id="iframe-nm2" class="layer-view ${initialServer === 'nm2' ? 'visible' : ''}" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
       <iframe id="iframe-vidlink" class="layer-view ${initialServer === 'vidlink' ? 'visible' : ''}" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
-      <div id="artplayer-layer" class="layer-view ${initialServer === 'cloud' ? 'visible' : ''}"></div>
       <iframe id="iframe-smashy" class="layer-view" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
     </div>
 
@@ -2215,7 +2391,7 @@ async function handleStreamPlayer(req, res) {
     var currentServer = ${JSON.stringify(initialServer)};
     var art = null;
     var failoverIndex = 0;
-    var serverSequence = ${JSON.stringify(isHindiMode ? ['nm2', 'vidlink', 'smashy', 'cloud'] : ['cloud', 'nm2', 'vidlink', 'smashy'])}.filter(function(s) {
+    var serverSequence = ${JSON.stringify(isHindiMode ? ['cloud', 'nm2', 'vidlink', 'smashy'] : ['cloud', 'nm2', 'vidlink', 'smashy'])}.filter(function(s) {
       if (s === 'cloud' && !cloudUrl) return false;
       if (s === 'nm2' && !nm2Url) return false;
       return true;
@@ -2240,7 +2416,15 @@ async function handleStreamPlayer(req, res) {
       var btn = document.getElementById('btn-srv-' + srv);
       if (btn) btn.classList.add('active');
 
-      if (srv === 'nm2' && nm2Url) {
+      if (srv === 'cloud' && cloudUrl) {
+        var mount = document.getElementById('artplayer-layer');
+        mount.classList.add('visible');
+        if (!art) {
+          initArtplayer(cloudUrl);
+        } else {
+          art.switchUrl(cloudUrl);
+        }
+      } else if (srv === 'nm2' && nm2Url) {
         var frame = document.getElementById('iframe-nm2');
         if (!frame.src || frame.src === 'about:blank' || frame.src.indexOf('/api/netmirror-player') === -1) {
           frame.src = nm2Url;
@@ -2250,14 +2434,6 @@ async function handleStreamPlayer(req, res) {
         var frame = document.getElementById('iframe-vidlink');
         if (!frame.src || frame.src === 'about:blank') frame.src = vidlinkUrl;
         frame.classList.add('visible');
-      } else if (srv === 'cloud' && cloudUrl) {
-        var mount = document.getElementById('artplayer-layer');
-        mount.classList.add('visible');
-        if (!art) {
-          initArtplayer(cloudUrl);
-        } else {
-          art.switchUrl(cloudUrl);
-        }
       } else if (srv === 'smashy') {
         var frame = document.getElementById('iframe-smashy');
         if (!frame.src || frame.src === 'about:blank') frame.src = smashyUrl;
@@ -2285,8 +2461,12 @@ async function handleStreamPlayer(req, res) {
         fullscreenWeb: true,
         autoSize: false,
         theme: '#e50914',
+        moreVideoAttr: {
+          crossOrigin: 'anonymous',
+          playsInline: true
+        },
         icons: {
-          loading: '<div style="color:#e50914;font-size:12px;font-weight:bold;">Connecting Stream...</div>'
+          loading: '<div style="color:#e50914;font-size:12px;font-weight:bold;">Connecting Hindi Dual-Audio Stream...</div>'
         },
         customType: {
           mkv: function(video, targetUrl) { video.src = targetUrl; }

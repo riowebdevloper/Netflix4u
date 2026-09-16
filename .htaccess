@@ -19,6 +19,7 @@ DirectoryIndex index.html index.php
   RewriteRule ^scratch/ - [F,L]
 
   # 2. ⚡ Dynamic API Resolvers for cPanel / LiteSpeed & Apache
+  RewriteRule ^api/download-file/?$ api/download.php [QSA,L]
   RewriteRule ^api/download/hicine/?$ api/download.php [QSA,L]
   RewriteRule ^api/download/server/?$ api/download.php [QSA,L]
   RewriteRule ^api/download/?$ api/download.php [QSA,L]
