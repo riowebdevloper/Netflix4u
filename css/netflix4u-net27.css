@@ -355,6 +355,61 @@ body {
   box-shadow: 0 0 14px rgba(229, 9, 20, 0.6);
 }
 
+/* ─── NetMirror-Style Multi-Audio Language Pills ─── */
+.watch-lang-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3.5px 9.5px;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.85);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+  user-select: none;
+}
+.watch-lang-pill:hover {
+  background: rgba(245, 158, 11, 0.2);
+  border-color: rgba(245, 158, 11, 0.45);
+  color: #fbbf24;
+  transform: translateY(-1px);
+}
+.watch-lang-pill:active {
+  transform: scale(0.96);
+}
+.watch-lang-pill.is-active {
+  background: rgba(245, 158, 11, 0.9);
+  color: #0b0b14;
+  border-color: #f59e0b;
+  font-weight: 700;
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.45);
+}
+.watch-lang-tag {
+  font-size: 8.5px;
+  font-weight: 800;
+  padding: 1px 4px;
+  border-radius: 3px;
+  background: rgba(0, 0, 0, 0.25);
+  letter-spacing: 0.4px;
+}
+.watch-lang-pill.is-active .watch-lang-tag {
+  background: rgba(0, 0, 0, 0.45);
+  color: #ffffff;
+}
+
+/* Episode Download Trigger Button */
+.ep-download-trigger:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.35);
+}
+.ep-download-trigger:active {
+  transform: scale(0.96);
+}
+
 /* Composited Shimmer placeholder */
 .shimmer {
   position: relative;

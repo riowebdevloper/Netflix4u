@@ -545,11 +545,17 @@
       });
     }
 
-    // Audio tabs click
+    // Audio tabs click (preserves language preference into streaming player)
     titleModalBody.querySelectorAll('.nm-lang-tab').forEach(function(btn) {
       btn.addEventListener('click', function() {
         titleModalBody.querySelectorAll('.nm-lang-tab').forEach(function(b) { b.classList.remove('nm-lang-active'); });
         btn.classList.add('nm-lang-active');
+        var txt = (btn.textContent || '').trim().toLowerCase();
+        if (txt.includes('hin')) currentWatchLang = 'hi';
+        else if (txt.includes('eng')) currentWatchLang = 'en';
+        else if (txt.includes('tam')) currentWatchLang = 'ta';
+        else if (txt.includes('tel')) currentWatchLang = 'te';
+        else currentWatchLang = 'multi';
       });
     });
 
@@ -579,9 +585,51 @@
     }
   }
 
+  // Smooth scroll and highlight episode in download list
+  function handleEpisodeDownloadClick(sNum, eNum) {
+    var dlSection = document.getElementById('dotmovies-download-section') || document.getElementById('download-mirrors-section');
+    if (!dlSection) return;
+
+    var accBtn = dlSection.querySelector('[data-season="' + sNum + '"]');
+    if (accBtn) {
+      var parentAccordion = accBtn.closest('[data-accordion-item]');
+      if (parentAccordion && !parentAccordion.classList.contains('is-open')) {
+        parentAccordion.classList.add('is-open');
+      }
+    }
+
+    var epRow = document.getElementById('dl-ep-row-' + sNum + '-' + eNum) || document.getElementById('dl-dot-ep-row-' + sNum + '-' + eNum);
+    if (epRow) {
+      epRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      epRow.classList.add('ring-2', 'ring-red-500', 'bg-red-500/15');
+      setTimeout(function() {
+        epRow.classList.remove('ring-2', 'ring-red-500', 'bg-red-500/15');
+      }, 3500);
+      if (window.__showToast) {
+        window.__showToast('Season ' + sNum + ' Episode ' + eNum + ' download links highlighted below', '📥');
+      }
+    } else {
+      dlSection.scrollIntoView({ behavior: 'smooth' });
+      if (window.__showToast) {
+        window.__showToast('Showing Season ' + sNum + ' download mirrors below', '📥');
+      }
+    }
+  }
+
   // Delegated Download Click Listener on Title Modal Body (100% Quote-Safe)
   if (titleModalBody) {
     titleModalBody.addEventListener('click', function(e) {
+      // Direct Episode Download Trigger
+      var epDlBtn = e.target.closest('.ep-download-trigger');
+      if (epDlBtn) {
+        e.preventDefault();
+        e.stopPropagation();
+        var sNum = Number(epDlBtn.dataset.dlSe) || 1;
+        var eNum = Number(epDlBtn.dataset.dlEp) || 1;
+        handleEpisodeDownloadClick(sNum, eNum);
+        return;
+      }
+
       // Accordion Toggle for Series Seasons
       var accBtn = e.target.closest('[data-accordion-toggle]');
       if (accBtn) {
@@ -617,24 +665,68 @@
     var hasSeriesStructure = isTv || links.some(function(l) { return l.season || l.episode; });
 
     if (hasSeriesStructure) {
-      // Group series links by season -> episode
+      // Group series links by season: separate full batch packs from individual episodes
       var seasonMap = {};
+      var batchMap = {};
       links.forEach(function(l) {
         var sNum = Number(l.season) || 1;
-        var eNum = Number(l.episode) || 1;
-        if (!seasonMap[sNum]) seasonMap[sNum] = {};
-        if (!seasonMap[sNum][eNum]) seasonMap[sNum][eNum] = [];
-        seasonMap[sNum][eNum].push(l);
+        var isBatchLink = Boolean(l.isBatch || l.episode === null || typeof l.episode === 'undefined');
+        if (isBatchLink) {
+          if (!batchMap[sNum]) batchMap[sNum] = [];
+          batchMap[sNum].push(l);
+        } else {
+          var eNum = Number(l.episode) || 1;
+          if (!seasonMap[sNum]) seasonMap[sNum] = {};
+          if (!seasonMap[sNum][eNum]) seasonMap[sNum][eNum] = [];
+          seasonMap[sNum][eNum].push(l);
+        }
       });
 
-      var seasons = Object.keys(seasonMap).map(Number).sort(function(a, b) { return a - b; });
+      var allSeasonKeys = Object.keys(seasonMap).concat(Object.keys(batchMap));
+      var seasons = Array.from(new Set(allSeasonKeys.map(Number))).sort(function(a, b) { return a - b; });
       if (!seasons.length) seasons = [1];
 
       return '<div class="dl-accordion">' +
         seasons.map(function(sNum, sIdx) {
           var epMap = seasonMap[sNum] || {};
           var epNums = Object.keys(epMap).map(Number).sort(function(a, b) { return a - b; });
+          var batches = batchMap[sNum] || [];
           var isOpen = sIdx === 0 ? ' is-open' : '';
+
+          var batchHtml = '';
+          if (batches.length) {
+            var batchPills = batches.map(function(link) {
+              var q = String(link.quality || 'Batch Pack').toUpperCase();
+              var rawUrl = link.url || '#';
+              var cleanUrl = (window.getFastCloudDownloadHref && window.getFastCloudDownloadHref(rawUrl)) || rawUrl;
+              return '<a href="' + cleanUrl + '" data-fast-download="' + encodeURIComponent(rawUrl) + '" class="px-3 py-1.5 rounded-lg bg-red-600 hover:bg-red-500 active:scale-95 text-white font-bold text-xs flex items-center gap-1.5 transition cursor-pointer shadow-md">' +
+                '<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 3v12m0 0l-4-4m4 4l4-4"/><path d="M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>' +
+                '<span>' + escapeHtml(q) + '</span>' +
+                (link.size ? '<span class="text-white/80 text-[10px]">(' + escapeHtml(link.size) + ')</span>' : '') +
+              '</a>';
+            }).join('');
+
+            batchHtml =
+              '<div class="p-3.5 rounded-xl bg-gradient-to-r from-red-950/40 via-red-900/20 to-black/60 border border-red-500/30 mb-3 shadow-lg">' +
+                '<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">' +
+                  '<div class="flex items-center gap-2.5">' +
+                    '<div class="w-8 h-8 rounded-lg bg-red-600/25 text-red-400 border border-red-500/40 flex items-center justify-center shrink-0">' +
+                      '<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>' +
+                    '</div>' +
+                    '<div>' +
+                      '<div class="text-xs sm:text-sm font-bold text-white flex items-center gap-2">' +
+                        '<span>Season ' + sNum + ' Complete (All Episodes Pack)</span>' +
+                        '<span class="px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/40 text-[9px] font-black uppercase tracking-wider">FULL ZIP</span>' +
+                      '</div>' +
+                      '<div class="text-[11px] text-white/60">One-click download for entire Season ' + sNum + ' • Multi-Audio Tracks</div>' +
+                    '</div>' +
+                  '</div>' +
+                  '<div class="flex flex-wrap items-center gap-2 shrink-0">' +
+                    batchPills +
+                  '</div>' +
+                '</div>' +
+              '</div>';
+          }
 
           var epRowsHtml = epNums.map(function(eNum) {
             var epLinks = epMap[eNum] || [];
@@ -649,9 +741,9 @@
               '</a>';
             }).join('');
 
-            return '<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 p-2.5 rounded-lg bg-white/[0.03] border border-white/5 hover:bg-white/[0.05] transition">' +
+            return '<div id="dl-ep-row-' + sNum + '-' + eNum + '" class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 p-2.5 rounded-lg bg-white/[0.03] border border-white/5 hover:bg-white/[0.05] transition">' +
               '<div class="flex items-center gap-2">' +
-                '<span class="w-6 text-center text-xs font-bold text-white/50">E' + eNum + '</span>' +
+                '<span class="w-8 text-center text-xs font-bold text-red-400 bg-red-500/10 rounded py-0.5 border border-red-500/20">E' + eNum + '</span>' +
                 '<span class="text-xs font-semibold text-white/90">Episode ' + eNum + '</span>' +
               '</div>' +
               '<div class="flex flex-wrap items-center gap-1.5">' +
@@ -661,14 +753,15 @@
           }).join('');
 
           return '<div class="dl-accordion-item' + isOpen + '" data-accordion-item>' +
-            '<button type="button" class="dl-accordion-header" data-accordion-toggle>' +
+            '<button type="button" class="dl-accordion-header" data-accordion-toggle data-season="' + sNum + '">' +
               '<span class="flex items-center gap-2">' +
                 '<svg class="w-4 h-4 text-red-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg>' +
-                'Season ' + sNum + ' <span class="text-white/40 text-xs font-normal">(' + epNums.length + ' episodes available)</span>' +
+                'Season ' + sNum + ' <span class="text-white/40 text-xs font-normal">(' + epNums.length + ' Episodes + Full Season Pack)</span>' +
               '</span>' +
               '<svg class="dl-accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>' +
             '</button>' +
             '<div class="dl-accordion-body space-y-2">' +
+              batchHtml +
               epRowsHtml +
             '</div>' +
           '</div>';
@@ -846,22 +939,65 @@
 
     if (hasSeriesStructure) {
       var seasonMap = {};
+      var batchMap = {};
       links.forEach(function(l) {
         var sNum = Number(l.season) || 1;
-        var eNum = Number(l.episode) || 1;
-        if (!seasonMap[sNum]) seasonMap[sNum] = {};
-        if (!seasonMap[sNum][eNum]) seasonMap[sNum][eNum] = [];
-        seasonMap[sNum][eNum].push(l);
+        var isBatchLink = Boolean(l.isBatch || l.episode === null || typeof l.episode === 'undefined');
+        if (isBatchLink) {
+          if (!batchMap[sNum]) batchMap[sNum] = [];
+          batchMap[sNum].push(l);
+        } else {
+          var eNum = Number(l.episode) || 1;
+          if (!seasonMap[sNum]) seasonMap[sNum] = {};
+          if (!seasonMap[sNum][eNum]) seasonMap[sNum][eNum] = [];
+          seasonMap[sNum][eNum].push(l);
+        }
       });
 
-      var seasons = Object.keys(seasonMap).map(Number).sort(function(a, b) { return a - b; });
+      var allSeasonKeys = Object.keys(seasonMap).concat(Object.keys(batchMap));
+      var seasons = Array.from(new Set(allSeasonKeys.map(Number))).sort(function(a, b) { return a - b; });
       if (!seasons.length) seasons = [1];
 
       linksContent = '<div class="dl-accordion">' +
         seasons.map(function(sNum, sIdx) {
           var epMap = seasonMap[sNum] || {};
           var epNums = Object.keys(epMap).map(Number).sort(function(a, b) { return a - b; });
+          var batches = batchMap[sNum] || [];
           var isOpen = sIdx === 0 ? ' is-open' : '';
+
+          var batchHtml = '';
+          if (batches.length) {
+            var batchPills = batches.map(function(link) {
+              var q = String(link.quality || 'Full Season Zip').toUpperCase();
+              var rawUrl = link.url || '#';
+              return '<a href="' + rawUrl + '" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-400 active:scale-95 text-black font-bold text-xs flex items-center gap-1.5 transition cursor-pointer shadow-md">' +
+                '<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 3v12m0 0l-4-4m4 4l4-4"/><path d="M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>' +
+                '<span>' + escapeHtml(q) + '</span>' +
+                (link.size ? '<span class="text-black/70 text-[10px]">(' + escapeHtml(link.size) + ')</span>' : '') +
+              '</a>';
+            }).join('');
+
+            batchHtml =
+              '<div class="p-3.5 rounded-xl bg-gradient-to-r from-amber-950/40 via-amber-900/20 to-black/60 border border-amber-500/30 mb-3 shadow-lg">' +
+                '<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">' +
+                  '<div class="flex items-center gap-2.5">' +
+                    '<div class="w-8 h-8 rounded-lg bg-amber-500/25 text-amber-400 border border-amber-500/40 flex items-center justify-center shrink-0">' +
+                      '<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>' +
+                    '</div>' +
+                    '<div>' +
+                      '<div class="text-xs sm:text-sm font-bold text-white flex items-center gap-2">' +
+                        '<span>Season ' + sNum + ' Complete Direct Ultra HD Zip</span>' +
+                        '<span class="px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/40 text-[9px] font-black uppercase tracking-wider">ALL EPISODES</span>' +
+                      '</div>' +
+                      '<div class="text-[11px] text-white/60">One-click high-speed direct download for entire Season ' + sNum + '</div>' +
+                    '</div>' +
+                  '</div>' +
+                  '<div class="flex flex-wrap items-center gap-2 shrink-0">' +
+                    batchPills +
+                  '</div>' +
+                '</div>' +
+              '</div>';
+          }
 
           var epRowsHtml = epNums.map(function(eNum) {
             var epLinks = epMap[eNum] || [];
@@ -875,9 +1011,9 @@
               '</a>';
             }).join('');
 
-            return '<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 p-2.5 rounded-lg bg-amber-500/[0.03] border border-amber-500/10 hover:bg-amber-500/[0.06] transition">' +
+            return '<div id="dl-dot-ep-row-' + sNum + '-' + eNum + '" class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 p-2.5 rounded-lg bg-amber-500/[0.03] border border-amber-500/10 hover:bg-amber-500/[0.06] transition">' +
               '<div class="flex items-center gap-2">' +
-                '<span class="w-6 text-center text-xs font-bold text-amber-400">E' + eNum + '</span>' +
+                '<span class="w-8 text-center text-xs font-bold text-amber-400 bg-amber-500/10 rounded py-0.5 border border-amber-500/20">E' + eNum + '</span>' +
                 '<span class="text-xs font-semibold text-white/90">Episode ' + eNum + '</span>' +
               '</div>' +
               '<div class="flex flex-wrap items-center gap-1.5">' +
@@ -887,14 +1023,15 @@
           }).join('');
 
           return '<div class="dl-accordion-item' + isOpen + '" data-accordion-item>' +
-            '<button type="button" class="dl-accordion-header" data-accordion-toggle>' +
+            '<button type="button" class="dl-accordion-header" data-accordion-toggle data-season="' + sNum + '">' +
               '<span class="flex items-center gap-2">' +
                 '<svg class="w-4 h-4 text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg>' +
-                'Season ' + sNum + ' <span class="text-white/40 text-xs font-normal">(' + epNums.length + ' Direct Ultra HD episodes)</span>' +
+                'Season ' + sNum + ' <span class="text-white/40 text-xs font-normal">(' + epNums.length + ' Episodes + Full Season Pack)</span>' +
               '</span>' +
               '<svg class="dl-accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>' +
             '</button>' +
             '<div class="dl-accordion-body space-y-2">' +
+              batchHtml +
               epRowsHtml +
             '</div>' +
           '</div>';
@@ -997,6 +1134,10 @@
             '<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>' +
             '<span>Play</span>' +
           '</button>' +
+          '<button type="button" data-dl-se="' + seasonNum + '" data-dl-ep="' + epNum + '" class="ep-download-trigger px-3 py-1.5 rounded-lg bg-red-600/20 hover:bg-red-600 text-red-300 hover:text-white border border-red-500/30 font-semibold text-xs flex items-center gap-1.5 transition cursor-pointer" title="Download Season ' + seasonNum + ' Episode ' + epNum + '">' +
+            '<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3v12m0 0l-4-4m4 4l4-4"/><path d="M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>' +
+            '<span>Download</span>' +
+          '</button>' +
         '</div>' +
       '</div>';
     }).join('');
@@ -1037,13 +1178,22 @@
 
   // ─── WATCH MODAL (Net27 Streaming Player UI with Auto-Failover Engine) ───
   var SERVERS_CONFIG = [
-    { id: 's1', name: 'Server 1 (Net27 Peachify)', tag: 'Peachify', tagClass: 'tag-peachify', desc: 'Net27 Authentic Peachify Fast Multi-Stream' },
-    { id: 's2', name: 'Server 2 (VidLink Pro)', tag: 'Hindi/Dual', tagClass: 'tag-multi', desc: 'VidLink Pro Multi-Audio Track Selector (Hindi & English)' },
+    { id: 's1', name: 'Server 1 (Multi-Audio NetMirror)', tag: '100% Multi-Audio', tagClass: 'tag-multi', desc: 'NetMirror Multi-Audio Player with Dual/Multi-Language Tracks (Hindi, English, Tamil, Telugu)' },
+    { id: 's2', name: 'Server 2 (Peachify Fast)', tag: 'Peachify', tagClass: 'tag-peachify', desc: 'Net27 Authentic Peachify Fast Multi-Stream' },
     { id: 's3', name: 'Server 3 (AllMovieLand)', tag: 'Indian Fast', tagClass: 'tag-fast', desc: 'AllMovieLand Indian & Global Fast Player' },
     { id: 's4', name: 'Server 4 (VidSrc PM)', tag: 'Global CDN', tagClass: 'tag-global', desc: 'VidSrc PM High Uptime Global Mirror' },
     { id: 's5', name: 'Server 5 (AutoEmbed)', tag: 'Backup', tagClass: 'tag-fast', desc: 'AutoEmbed Reliable CDN Backup' },
     { id: 's6', name: 'Server 6 (2Embed Global)', tag: 'Universal', tagClass: 'tag-global', desc: '2Embed Global High-Speed Server' },
     { id: 's7', name: 'Server 7 (VidSrc In)', tag: 'Fast Mirror', tagClass: 'tag-multi', desc: 'VidSrc In High-Performance Mirror' }
+  ];
+
+  var currentWatchLang = 'hi';
+  var AUDIO_LANGS_CONFIG = [
+    { id: 'hi', label: 'Hindi', code: 'hi', tag: 'ORG DUB' },
+    { id: 'en', label: 'English', code: 'en', tag: 'ORIGINAL' },
+    { id: 'ta', label: 'Tamil', code: 'ta', tag: 'DUB' },
+    { id: 'te', label: 'Telugu', code: 'te', tag: 'DUB' },
+    { id: 'multi', label: 'Multi Audio', code: '', tag: '100% ALL' }
   ];
 
   // Auto-failover & orientation state
@@ -1482,13 +1632,15 @@
         }).catch(function() {});
     }
 
+    var langParam = (currentWatchLang && currentWatchLang !== 'multi') ? ('&lang=' + encodeURIComponent(currentWatchLang)) : '';
+
     activeWatchServers = {
       s1: isTv
+        ? 'https://vidlink.pro/tv/' + tmdbId + '/' + season + '/' + episode + '?multiLang=true' + langParam
+        : 'https://vidlink.pro/movie/' + tmdbId + '?multiLang=true' + langParam,
+      s2: isTv
         ? 'https://peachify.top/embed/tv/' + tmdbId + '/' + season + '/' + episode
         : 'https://peachify.top/embed/movie/' + tmdbId,
-      s2: isTv
-        ? 'https://vidlink.pro/tv/' + tmdbId + '/' + season + '/' + episode + '?multiLang=true'
-        : 'https://vidlink.pro/movie/' + tmdbId + '?multiLang=true',
       s3: allMovieLandUrl,
       s4: isTv
         ? 'https://vidsrc.pm/embed/tv/' + tmdbId + '/' + season + '/' + episode
@@ -1509,6 +1661,7 @@
     isPlaybackConfirmed = false;
     currentAutoSwitchToken++;
     renderWatchServerMenu();
+    renderWatchAudioLangBar();
     updateActiveServerUi('s1');
     updateAutoSwitchToggleUi(true);
 
@@ -1600,6 +1753,65 @@
         });
       });
     }
+  }
+
+  function renderWatchAudioLangBar() {
+    var bar = document.getElementById('watch-audio-lang-bar');
+    if (!bar) return;
+
+    bar.innerHTML = AUDIO_LANGS_CONFIG.map(function(lang) {
+      var isSelected = lang.id === currentWatchLang || lang.code === currentWatchLang;
+      return '<button type="button" data-switch-lang="' + lang.id + '" class="watch-lang-pill' + (isSelected ? ' is-active' : '') + '">' +
+        '<span>' + escapeHtml(lang.label) + '</span>' +
+        '<span class="watch-lang-tag">' + escapeHtml(lang.tag) + '</span>' +
+      '</button>';
+    }).join('');
+
+    bar.querySelectorAll('[data-switch-lang]').forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var langId = btn.dataset.switchLang;
+        switchWatchAudioLang(langId);
+      });
+    });
+  }
+
+  function switchWatchAudioLang(langId) {
+    var langCfg = AUDIO_LANGS_CONFIG.find(function(l) { return l.id === langId; }) || AUDIO_LANGS_CONFIG[0];
+    currentWatchLang = langCfg.code || langCfg.id;
+
+    var bar = document.getElementById('watch-audio-lang-bar');
+    if (bar) {
+      bar.querySelectorAll('[data-switch-lang]').forEach(function(btn) {
+        btn.classList.toggle('is-active', btn.dataset.switchLang === langId);
+      });
+    }
+
+    if (!activeWatchParams) return;
+
+    var tmdbId = activeWatchParams.tmdbId;
+    var type = activeWatchParams.type || 'movie';
+    var isTv = type === 'tv' || type === 'series';
+    var season = activeWatchParams.season || 1;
+    var episode = activeWatchParams.episode || 1;
+
+    var langParam = (currentWatchLang && currentWatchLang !== 'multi') ? ('&lang=' + encodeURIComponent(currentWatchLang)) : '';
+    var newS1Url = isTv
+      ? 'https://vidlink.pro/tv/' + tmdbId + '/' + season + '/' + episode + '?multiLang=true' + langParam
+      : 'https://vidlink.pro/movie/' + tmdbId + '?multiLang=true' + langParam;
+
+    activeWatchServers.s1 = newS1Url;
+
+    // Switch to Server 1 to immediately provide user their chosen language stream
+    currentWatchServer = 's1';
+    updateActiveServerUi('s1');
+    watchModalIframe.src = newS1Url;
+
+    setWatchStatus('Language: ' + langCfg.label + ' (Server 1)', '100% Multi-Audio Player active');
+    if (window.__showToast) {
+      window.__showToast('Switched audio to ' + langCfg.label + ' • 100% Multi-Audio Player', '🎧');
+    }
+    resetWatchTopBarTimer();
   }
 
   function updateActiveServerUi(serverId) {
