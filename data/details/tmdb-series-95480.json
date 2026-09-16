@@ -1,0 +1,96 @@
+{
+  "id": "tmdb-series-95480",
+  "canonicalId": "tmdb-series-95480",
+  "externalProvider": "tmdb",
+  "externalId": "95480",
+  "tmdbId": "95480",
+  "imdbId": "tt5875444",
+  "type": "series",
+  "contentType": "series",
+  "title": "Slow Horses",
+  "canonicalTitle": "Slow Horses",
+  "originalTitle": "Slow Horses",
+  "overview": "Follow a dysfunctional team of MI5 agents—and their obnoxious boss, the notorious Jackson Lamb—as they navigate the espionage world's smoke and mirrors to defend England from sinister forces.",
+  "description": "Follow a dysfunctional team of MI5 agents—and their obnoxious boss, the notorious Jackson Lamb—as they navigate the espionage world's smoke and mirrors to defend England from sinister forces.",
+  "shortDescription": "Follow a dysfunctional team of MI5 agents—and their obnoxious boss, the notorious Jackson Lamb—as they navigate the espi",
+  "year": 2022,
+  "releaseDate": "2022-04-01",
+  "rating": 8,
+  "votes": "1.0K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Crime",
+    "Drama",
+    "Mystery"
+  ],
+  "categories": [
+    "Crime",
+    "Drama",
+    "Mystery"
+  ],
+  "language": "English",
+  "country": "GB",
+  "director": "Director",
+  "poster": "https://image.tmdb.org/t/p/w500/w2jauz2PeSjFQifDObI3qDen4f7.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/bDfboQUb45Cv9MYyVBDZw8M8xSM.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/O9ZJChzPn0U?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/O9ZJChzPn0U?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "64",
+      "name": "Gary Oldman",
+      "character": "Jackson Lamb",
+      "photo": "https://image.tmdb.org/t/p/w185/yhaSM5habNNI1Tf4ALRwRk3VvSZ.jpg"
+    },
+    {
+      "id": "1334638",
+      "name": "Jack Lowden",
+      "character": "River Cartwright",
+      "photo": "https://image.tmdb.org/t/p/w185/3wSE6uHLkslE9xvRiMbnphuI0VK.jpg"
+    },
+    {
+      "id": "5470",
+      "name": "Kristin Scott Thomas",
+      "character": "Diana Taverner",
+      "photo": "https://image.tmdb.org/t/p/w185/axksw0vAjBPSW02ZqpcC0V8rPD7.jpg"
+    },
+    {
+      "id": "1331",
+      "name": "Hugo Weaving",
+      "character": "Frank Harkness",
+      "photo": "https://image.tmdb.org/t/p/w185/lSC8Et0PYi5zeQb3IpPkFje7hgR.jpg"
+    },
+    {
+      "id": "13363",
+      "name": "Saskia Reeves",
+      "character": "Catherine Standish",
+      "photo": "https://image.tmdb.org/t/p/w185/1NM6rp95ec83tPa2Tnq66RV6Frc.jpg"
+    },
+    {
+      "id": "1239342",
+      "name": "Christopher Chung",
+      "character": "Roddy Ho",
+      "photo": "https://image.tmdb.org/t/p/w185/wV4r6tVjP9Prk2acj7bYTmdtaMF.jpg"
+    },
+    {
+      "id": "1682679",
+      "name": "Rosalind Eleazar",
+      "character": "Louisa Guy",
+      "photo": "https://image.tmdb.org/t/p/w185/9Tb1rLSnyCfnZXYixfjWJuQJig9.jpg"
+    },
+    {
+      "id": "1224269",
+      "name": "Aimee-Ffion Edwards",
+      "character": "Shirley Dander",
+      "photo": "https://image.tmdb.org/t/p/w185/mpsq3UnNiFgmd3MY2Q6a3ZBMGQ8.jpg"
+    }
+  ],
+  "seasons": 6,
+  "episodes": 36,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-16T03:20:32.455Z",
+  "createdAt": "2026-09-16T03:20:32.455Z",
+  "updatedAt": "2026-09-16T03:20:32.455Z",
+  "links": []
+}

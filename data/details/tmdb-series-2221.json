@@ -1,0 +1,80 @@
+{
+  "id": "tmdb-series-2221",
+  "canonicalId": "tmdb-series-2221",
+  "externalProvider": "tmdb",
+  "externalId": "2221",
+  "tmdbId": "2221",
+  "imdbId": "tt0123366",
+  "type": "series",
+  "contentType": "series",
+  "title": "The View",
+  "canonicalTitle": "The View",
+  "originalTitle": "The View",
+  "overview": "ABC Daytime's morning chatfest, currently featuring Whoopi Goldberg, Joy Behar, Sunny Hostin, Sara Haines, Alyssa Farah Griffin, and Ana Navarro discussing the most exciting events of the day. Hot topics in the news, the best experts in their field, celebrity interviews and general entertainment are all part of The View.",
+  "description": "ABC Daytime's morning chatfest, currently featuring Whoopi Goldberg, Joy Behar, Sunny Hostin, Sara Haines, Alyssa Farah Griffin, and Ana Navarro discussing the most exciting events of the day. Hot topics in the news, the best experts in their field, celebrity interviews and general entertainment are all part of The View.",
+  "shortDescription": "ABC Daytime's morning chatfest, currently featuring Whoopi Goldberg, Joy Behar, Sunny Hostin, Sara Haines, Alyssa Farah ",
+  "year": 1997,
+  "releaseDate": "1997-08-11",
+  "rating": 4.3,
+  "votes": "0.1K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Talk"
+  ],
+  "categories": [
+    "Talk"
+  ],
+  "language": "English",
+  "country": "US",
+  "director": "Director",
+  "poster": "https://image.tmdb.org/t/p/w500/pEUNIxCMh2jFjUj7u09f4O5CcR4.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/tHZsAFdtNsKNxE58jopl9Eh4f7a.jpg",
+  "trailerUrl": null,
+  "trailer": null,
+  "cast": [
+    {
+      "id": "166772",
+      "name": "Joy Behar",
+      "character": "Self - Co-Host",
+      "photo": "https://image.tmdb.org/t/p/w185/kOKC57Pg5CXflrOtMryp2PqIcVn.jpg"
+    },
+    {
+      "id": "1683850",
+      "name": "Sara Haines",
+      "character": "Self - Co-Host",
+      "photo": "https://image.tmdb.org/t/p/w185/uCbsFTfUJe2iFosevtfsiDJcLjj.jpg"
+    },
+    {
+      "id": "2395",
+      "name": "Whoopi Goldberg",
+      "character": "Self - Co-Host",
+      "photo": "https://image.tmdb.org/t/p/w185/78LZMMzNUJVfLI1MObxejScwZz5.jpg"
+    },
+    {
+      "id": "3258505",
+      "name": "Alyssa Farah Griffin",
+      "character": "Self - Co-Host",
+      "photo": null
+    },
+    {
+      "id": "2216488",
+      "name": "Ana Navarro",
+      "character": "Self - Co-Host",
+      "photo": "https://image.tmdb.org/t/p/w185/qTZX59O7anX4QNGlyUpUcin0tu2.jpg"
+    },
+    {
+      "id": "1233245",
+      "name": "Sunny Hostin",
+      "character": "Self - Co Host",
+      "photo": "https://image.tmdb.org/t/p/w185/q53d695nbyb4YJUltGp7uAmwxPc.jpg"
+    }
+  ],
+  "seasons": 30,
+  "episodes": 5137,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-16T03:20:32.594Z",
+  "createdAt": "2026-09-16T03:20:32.594Z",
+  "updatedAt": "2026-09-16T03:20:32.594Z",
+  "links": []
+}

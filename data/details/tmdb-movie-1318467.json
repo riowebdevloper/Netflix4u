@@ -1,0 +1,120 @@
+{
+  "id": "tmdb-movie-1318467",
+  "canonicalId": "tmdb-movie-1318467",
+  "externalProvider": "tmdb",
+  "externalId": "1318467",
+  "tmdbId": "1318467",
+  "imdbId": "tt33253206",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "The Last Kiss",
+  "canonicalTitle": "The Last Kiss",
+  "originalTitle": "The Last Kiss",
+  "overview": "Laurel always imagined her first kiss would be a fairy tale. Instead, that fantasy turns frightening when she's cursed with an ability to see the death of anyone she kisses. After a vision reveals her crush is doomed to die in a strange murder spree targeting her closest friends, she races to unmask the killer before the mystery becomes a massacre.",
+  "description": "Laurel always imagined her first kiss would be a fairy tale. Instead, that fantasy turns frightening when she's cursed with an ability to see the death of anyone she kisses. After a vision reveals her crush is doomed to die in a strange murder spree targeting her closest friends, she races to unmask the killer before the mystery becomes a massacre.",
+  "shortDescription": "Laurel always imagined her first kiss would be a fairy tale. Instead, that fantasy turns frightening when she's cursed w",
+  "year": 2026,
+  "releaseDate": "2026-09-15",
+  "rating": 9,
+  "votes": "0.0K",
+  "quality": "FHD",
+  "duration": "1h 37m",
+  "genres": [
+    "Horror",
+    "Mystery",
+    "Thriller"
+  ],
+  "categories": [
+    "Horror",
+    "Mystery",
+    "Thriller"
+  ],
+  "language": "English",
+  "country": "US",
+  "director": "Yoko Okumura",
+  "poster": "https://image.tmdb.org/t/p/w500/cLZ7iFZc25vluSIKt3XtdSTait4.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/A8qiGvOJxFucIJzJfjv73i0egUW.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/lAKtuOVkAgU?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/lAKtuOVkAgU?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "1172108",
+      "name": "Mckenna Grace",
+      "character": "Laurel Hansen",
+      "photo": "https://image.tmdb.org/t/p/w185/sK0CVa56IIpFhCDrcXSTqPWxNbx.jpg"
+    },
+    {
+      "id": "3449368",
+      "name": "Arkira Chantaratananond",
+      "character": "Poppy Yang",
+      "photo": "https://image.tmdb.org/t/p/w185/zfD2LkIJAk4q3a1IJIxqOYOrV6Y.jpg"
+    },
+    {
+      "id": "1650148",
+      "name": "Jaden Michael",
+      "character": "Evan Geller",
+      "photo": "https://image.tmdb.org/t/p/w185/xXhbEcicacePnh7cH012Ji6JUFq.jpg"
+    },
+    {
+      "id": "2234168",
+      "name": "Riley Davis",
+      "character": "Tyler McKinney",
+      "photo": "https://image.tmdb.org/t/p/w185/7DFWO0dqsyI6WvV1JpV9xXeZD5m.jpg"
+    },
+    {
+      "id": "984711",
+      "name": "Kate Drummond",
+      "character": "Diane Hansen",
+      "photo": "https://image.tmdb.org/t/p/w185/p3yXIxHI2zvgn2MI9yXaAvoTBHN.jpg"
+    },
+    {
+      "id": "1014293",
+      "name": "Samantha Espie",
+      "character": "Ranger Pauline",
+      "photo": "https://image.tmdb.org/t/p/w185/pY56TYcyaREBSb9TtyeauJ88O3x.jpg"
+    },
+    {
+      "id": "3624549",
+      "name": "Cooper Levy",
+      "character": "Chuck Beasley",
+      "photo": "https://image.tmdb.org/t/p/w185/cffy89cf47GLzJxdXsGu7meuEyb.jpg"
+    },
+    {
+      "id": "3465111",
+      "name": "Eve Edwards",
+      "character": "Bree Williams",
+      "photo": "https://image.tmdb.org/t/p/w185/lwdf4exkA8foHw7w9SWoLHxQSzu.jpg"
+    },
+    {
+      "id": "5919",
+      "name": "Stephanie Moore",
+      "character": "Shannon McKinney",
+      "photo": "https://image.tmdb.org/t/p/w185/yywrsHi8RTyzK7QiCpfILKkZT63.jpg"
+    },
+    {
+      "id": "4702614",
+      "name": "Joseph Chiu",
+      "character": "Leo Brock",
+      "photo": "https://image.tmdb.org/t/p/w185/A0Np2cChL7NMNgQv4iyJ6xZ8axW.jpg"
+    },
+    {
+      "id": "1581107",
+      "name": "Ash Lee",
+      "character": "Principal Randy Yang",
+      "photo": "https://image.tmdb.org/t/p/w185/4utuaXs7Li4puP7TcdVwq9Owhyx.jpg"
+    },
+    {
+      "id": "2414683",
+      "name": "Bergman Freedman",
+      "character": "Noah Brock",
+      "photo": "https://image.tmdb.org/t/p/w185/bkw19Fc5WFUwJ5CMnDsqK180tbR.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 1,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-16T03:20:32.278Z",
+  "createdAt": "2026-09-16T03:20:32.279Z",
+  "updatedAt": "2026-09-16T03:20:32.279Z",
+  "links": []
+}

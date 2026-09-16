@@ -698,6 +698,51 @@
       "publishedAt": "2022-08-28T13:22:56.000Z"
     },
     {
+      "id": "tmdb-movie-1432474",
+      "canonicalId": "tmdb-movie-1432474",
+      "title": "Nimrods",
+      "rawTitle": "Nimrods",
+      "slug": "tmdb-movie-1432474-nimrods",
+      "type": "movie",
+      "year": 2026,
+      "quality": "FHD",
+      "provider": "tmdb",
+      "rating": 7.1,
+      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FaebmSpFu1lUV78PtOpqMUn4d82B.jpg&output=webp",
+      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FnwkfCcHIqzo5H4rsG4ug5AVdGZM.jpg&output=webp",
+      "imdbId": "tt34895535",
+      "tmdbId": "1432474",
+      "categories": [
+        "Comedy",
+        "Music"
+      ],
+      "status": "PUBLISHED",
+      "publishedAt": "2026-09-16T03:20:32.523Z"
+    },
+    {
+      "id": "tmdb-movie-1318467",
+      "canonicalId": "tmdb-movie-1318467",
+      "title": "The Last Kiss",
+      "rawTitle": "The Last Kiss",
+      "slug": "tmdb-movie-1318467-the-last-kiss",
+      "type": "movie",
+      "year": 2026,
+      "quality": "FHD",
+      "provider": "tmdb",
+      "rating": 9,
+      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FcLZ7iFZc25vluSIKt3XtdSTait4.jpg&output=webp",
+      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FA8qiGvOJxFucIJzJfjv73i0egUW.jpg&output=webp",
+      "imdbId": "tt33253206",
+      "tmdbId": "1318467",
+      "categories": [
+        "Horror",
+        "Mystery",
+        "Thriller"
+      ],
+      "status": "PUBLISHED",
+      "publishedAt": "2026-09-16T03:20:32.278Z"
+    },
+    {
       "id": "tmdb-movie-1482547",
       "canonicalId": "tmdb-movie-1482547",
       "title": "Zip Wire",
@@ -707,7 +752,7 @@
       "year": 2026,
       "quality": "FHD",
       "provider": "tmdb",
-      "rating": 7.9,
+      "rating": 7.5,
       "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FcO7J0XSVKPlAjUCMWC7DVBn1Py2.jpg&output=webp",
       "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FsbkkAtymJaH5UzExiK974uPzCY4.jpg&output=webp",
       "imdbId": "tt36980377",
@@ -820,7 +865,7 @@
       "year": 2026,
       "quality": "FHD",
       "provider": "tmdb",
-      "rating": 9.2,
+      "rating": 8.4,
       "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2Fqku2uWSoJ9amQV5MWo1Eek29iji.jpg&output=webp",
       "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F3icyRAqgakNcQn6aDVz9libFmBA.jpg&output=webp",
       "imdbId": "tt35538033",
@@ -1011,61 +1056,6 @@
       ],
       "status": "PUBLISHED",
       "publishedAt": "2026-08-29T13:37:31.000Z"
-    },
-    {
-      "id": "12113373",
-      "canonicalId": "12113373",
-      "title": "Grand Theft Auto VI: An Extended Look",
-      "rawTitle": "Grand Theft Auto VI: An Extended Look (2026)",
-      "slug": "grand-theft-auto-vi-an-extended-look-2026",
-      "type": "movie",
-      "year": 2026,
-      "quality": "FHD",
-      "provider": "dotmobiz",
-      "rating": 8,
-      "poster": "https://storage.hicine.sbs/images/xTZuh9ziUjIyHBWO9OvqNIPqVWe.webp",
-      "backdrop": "https://storage.hicine.sbs/images/xTZuh9ziUjIyHBWO9OvqNIPqVWe.webp",
-      "categories": [
-        "Hollywood",
-        "English",
-        "1080p",
-        "2026",
-        "720p",
-        "Action",
-        "Animation",
-        "Crime",
-        "Short",
-        "WEB-DL"
-      ],
-      "status": "PUBLISHED",
-      "publishedAt": "2026-08-28T13:37:31.000Z"
-    },
-    {
-      "id": "12113372",
-      "canonicalId": "12113372",
-      "title": "The Last Salute",
-      "rawTitle": "The Last Salute (2026)",
-      "slug": "the-last-salute-2026",
-      "type": "movie",
-      "year": 2026,
-      "quality": "FHD",
-      "provider": "dotmobiz",
-      "rating": 8,
-      "poster": "https://storage.hicine.sbs/images/the_last_salularge.webp",
-      "backdrop": "https://storage.hicine.sbs/images/the_last_salularge.webp",
-      "categories": [
-        "Hollywood",
-        "Dual Audio Movies",
-        "1080p",
-        "2026",
-        "480p",
-        "720p",
-        "Documentary",
-        "Netflix",
-        "WEB-DL"
-      ],
-      "status": "PUBLISHED",
-      "publishedAt": "2026-08-27T13:42:10.000Z"
     }
   ],
   "featured": [
@@ -1292,6 +1282,36 @@
     }
   ],
   "popularMovies": [
+    {
+      "id": "12113365",
+      "canonicalId": "12113365",
+      "title": "Batman: Knightfall – Part 1: Knightfall",
+      "rawTitle": "Batman: Knightfall – Part 1: Knightfall (2026)",
+      "slug": "batman-knightfall-part-1-knightfall-2026",
+      "type": "movie",
+      "year": 2026,
+      "quality": "FHD",
+      "provider": "dotmobiz",
+      "rating": 9.2,
+      "poster": "https://storage.hicine.sbs/images/mEhTkSgp7mkWrBpAccrUyMkaYDW.webp",
+      "backdrop": "https://storage.hicine.sbs/images/mEhTkSgp7mkWrBpAccrUyMkaYDW.webp",
+      "categories": [
+        "Hollywood",
+        "English",
+        "1080p",
+        "2026",
+        "720p",
+        "Action",
+        "Adventure",
+        "Animation",
+        "Crime",
+        "Drama",
+        "Thriller",
+        "WEB-DL"
+      ],
+      "status": "PUBLISHED",
+      "publishedAt": "2026-08-26T11:02:02.000Z"
+    },
     {
       "id": "12113226",
       "canonicalId": "12113226",
@@ -1818,35 +1838,6 @@
         "Adventure",
         "Blu-Ray",
         "Horror"
-      ],
-      "status": "PUBLISHED",
-      "publishedAt": "2026-09-01T11:52:55.000Z"
-    },
-    {
-      "id": "12113383",
-      "canonicalId": "12113383",
-      "title": "Skinwalkers",
-      "rawTitle": "Skinwalkers (2006)",
-      "slug": "skinwalkers-2006",
-      "type": "movie",
-      "year": 2006,
-      "quality": "FHD",
-      "provider": "dotmobiz",
-      "rating": 8,
-      "poster": "https://storage.hicine.sbs/images/88YhyDVF1XYn7e7cM01UDmaGvMV.webp",
-      "backdrop": "https://storage.hicine.sbs/images/88YhyDVF1XYn7e7cM01UDmaGvMV.webp",
-      "categories": [
-        "Hollywood",
-        "Dual Audio Movies",
-        "1080p",
-        "2006",
-        "480p",
-        "720p",
-        "Action",
-        "Blu-Ray",
-        "Fantasy",
-        "Horror",
-        "Thriller"
       ],
       "status": "PUBLISHED",
       "publishedAt": "2026-09-01T11:52:55.000Z"
@@ -3604,27 +3595,34 @@
       "publishedAt": "2026-06-08T05:00:26.000Z"
     },
     {
-      "id": "tmdb-movie-1423191",
-      "canonicalId": "tmdb-movie-1423191",
-      "title": "Resident Evil",
-      "rawTitle": "Resident Evil",
-      "slug": "tmdb-movie-1423191-resident-evil",
+      "id": "12113365",
+      "canonicalId": "12113365",
+      "title": "Batman: Knightfall – Part 1: Knightfall",
+      "rawTitle": "Batman: Knightfall – Part 1: Knightfall (2026)",
+      "slug": "batman-knightfall-part-1-knightfall-2026",
       "type": "movie",
       "year": 2026,
       "quality": "FHD",
-      "provider": "tmdb",
+      "provider": "dotmobiz",
       "rating": 9.2,
-      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2Fqku2uWSoJ9amQV5MWo1Eek29iji.jpg&output=webp",
-      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F3icyRAqgakNcQn6aDVz9libFmBA.jpg&output=webp",
-      "imdbId": "tt35538033",
-      "tmdbId": "1423191",
+      "poster": "https://storage.hicine.sbs/images/mEhTkSgp7mkWrBpAccrUyMkaYDW.webp",
+      "backdrop": "https://storage.hicine.sbs/images/mEhTkSgp7mkWrBpAccrUyMkaYDW.webp",
       "categories": [
-        "Horror",
+        "Hollywood",
+        "English",
+        "1080p",
+        "2026",
+        "720p",
+        "Action",
+        "Adventure",
+        "Animation",
+        "Crime",
+        "Drama",
         "Thriller",
-        "Adventure"
+        "WEB-DL"
       ],
       "status": "PUBLISHED",
-      "publishedAt": "2026-09-13T03:09:52.859Z"
+      "publishedAt": "2026-08-26T11:02:02.000Z"
     },
     {
       "id": "12113226",
@@ -3712,6 +3710,29 @@
       ],
       "status": "PUBLISHED",
       "publishedAt": "2026-07-30T02:10:03.000Z"
+    },
+    {
+      "id": "tmdb-movie-1318467",
+      "canonicalId": "tmdb-movie-1318467",
+      "title": "The Last Kiss",
+      "rawTitle": "The Last Kiss",
+      "slug": "tmdb-movie-1318467-the-last-kiss",
+      "type": "movie",
+      "year": 2026,
+      "quality": "FHD",
+      "provider": "tmdb",
+      "rating": 9,
+      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FcLZ7iFZc25vluSIKt3XtdSTait4.jpg&output=webp",
+      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FA8qiGvOJxFucIJzJfjv73i0egUW.jpg&output=webp",
+      "imdbId": "tt33253206",
+      "tmdbId": "1318467",
+      "categories": [
+        "Horror",
+        "Mystery",
+        "Thriller"
+      ],
+      "status": "PUBLISHED",
+      "publishedAt": "2026-09-16T03:20:32.278Z"
     },
     {
       "id": "12112907",
@@ -4107,33 +4128,6 @@
       ],
       "status": "PUBLISHED",
       "publishedAt": "2025-05-05T00:35:29.000Z"
-    },
-    {
-      "id": "12099631",
-      "canonicalId": "12099631",
-      "title": "Parasite",
-      "rawTitle": "Parasite (2019)",
-      "slug": "parasite-2019",
-      "type": "movie",
-      "year": 2019,
-      "quality": "FHD",
-      "provider": "dotmobiz",
-      "rating": 8.5,
-      "poster": "https://storage.hicine.sbs/images/Parasite-2019-Hindi-ORG-Dubbed.webp",
-      "backdrop": "https://storage.hicine.sbs/images/Parasite-2019-Hindi-ORG-Dubbed.webp",
-      "categories": [
-        "Hollywood",
-        "1080p",
-        "2019",
-        "480p",
-        "720p",
-        "Comedy",
-        "Crime",
-        "Drama",
-        "Dual Audio Movies"
-      ],
-      "status": "PUBLISHED",
-      "publishedAt": "2022-12-26T10:47:18.000Z"
     }
   ],
   "nowPlaying": [
@@ -4274,6 +4268,51 @@
       "publishedAt": "2022-08-28T13:22:56.000Z"
     },
     {
+      "id": "tmdb-movie-1432474",
+      "canonicalId": "tmdb-movie-1432474",
+      "title": "Nimrods",
+      "rawTitle": "Nimrods",
+      "slug": "tmdb-movie-1432474-nimrods",
+      "type": "movie",
+      "year": 2026,
+      "quality": "FHD",
+      "provider": "tmdb",
+      "rating": 7.1,
+      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FaebmSpFu1lUV78PtOpqMUn4d82B.jpg&output=webp",
+      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FnwkfCcHIqzo5H4rsG4ug5AVdGZM.jpg&output=webp",
+      "imdbId": "tt34895535",
+      "tmdbId": "1432474",
+      "categories": [
+        "Comedy",
+        "Music"
+      ],
+      "status": "PUBLISHED",
+      "publishedAt": "2026-09-16T03:20:32.523Z"
+    },
+    {
+      "id": "tmdb-movie-1318467",
+      "canonicalId": "tmdb-movie-1318467",
+      "title": "The Last Kiss",
+      "rawTitle": "The Last Kiss",
+      "slug": "tmdb-movie-1318467-the-last-kiss",
+      "type": "movie",
+      "year": 2026,
+      "quality": "FHD",
+      "provider": "tmdb",
+      "rating": 9,
+      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FcLZ7iFZc25vluSIKt3XtdSTait4.jpg&output=webp",
+      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FA8qiGvOJxFucIJzJfjv73i0egUW.jpg&output=webp",
+      "imdbId": "tt33253206",
+      "tmdbId": "1318467",
+      "categories": [
+        "Horror",
+        "Mystery",
+        "Thriller"
+      ],
+      "status": "PUBLISHED",
+      "publishedAt": "2026-09-16T03:20:32.278Z"
+    },
+    {
       "id": "tmdb-movie-1482547",
       "canonicalId": "tmdb-movie-1482547",
       "title": "Zip Wire",
@@ -4283,7 +4322,7 @@
       "year": 2026,
       "quality": "FHD",
       "provider": "tmdb",
-      "rating": 7.9,
+      "rating": 7.5,
       "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FcO7J0XSVKPlAjUCMWC7DVBn1Py2.jpg&output=webp",
       "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FsbkkAtymJaH5UzExiK974uPzCY4.jpg&output=webp",
       "imdbId": "tt36980377",
@@ -4396,7 +4435,7 @@
       "year": 2026,
       "quality": "FHD",
       "provider": "tmdb",
-      "rating": 9.2,
+      "rating": 8.4,
       "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2Fqku2uWSoJ9amQV5MWo1Eek29iji.jpg&output=webp",
       "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F3icyRAqgakNcQn6aDVz9libFmBA.jpg&output=webp",
       "imdbId": "tt35538033",
@@ -4473,63 +4512,7 @@
       ],
       "status": "PUBLISHED",
       "publishedAt": "2026-09-13T03:09:52.701Z"
-    },
-    {
-      "id": "12113386",
-      "canonicalId": "12113386",
-      "title": "I Want Your Sex",
-      "rawTitle": "I Want Your Sex (2026)",
-      "slug": "i-want-your-sex-2026",
-      "type": "movie",
-      "year": 2026,
-      "quality": "FHD",
-      "provider": "dotmobiz",
-      "rating": 8,
-      "poster": "https://storage.hicine.sbs/images/vx84ajQvHqGQmLx4GtOXyPyncVd.webp",
-      "backdrop": "https://storage.hicine.sbs/images/vx84ajQvHqGQmLx4GtOXyPyncVd.webp",
-      "categories": [
-        "Hollywood",
-        "English",
-        "1080p",
-        "2026",
-        "720p",
-        "Comedy",
-        "Drama",
-        "Romance",
-        "Thriller",
-        "WEB-DL"
-      ],
-      "status": "PUBLISHED",
-      "publishedAt": "2026-09-02T10:28:41.000Z"
-    },
-    {
-      "id": "12113381",
-      "canonicalId": "12113381",
-      "title": "The Orphans",
-      "rawTitle": "The Orphans (2026)",
-      "slug": "the-orphans-2026",
-      "type": "movie",
-      "year": 2026,
-      "quality": "FHD",
-      "provider": "dotmobiz",
-      "rating": 8,
-      "poster": "https://storage.hicine.sbs/images/The-Orphans.webp",
-      "backdrop": "https://storage.hicine.sbs/images/The-Orphans.webp",
-      "categories": [
-        "Hollywood",
-        "1080p",
-        "2026",
-        "480p",
-        "720p",
-        "Action",
-        "Dual Audio Movies",
-        "English",
-        "Netflix",
-        "WEB-DL"
-      ],
-      "status": "PUBLISHED",
-      "publishedAt": "2026-09-01T11:52:55.000Z"
     }
   ],
-  "updatedAt": "2026-09-15T03:24:44.763Z"
+  "updatedAt": "2026-09-16T03:20:33.212Z"
 }

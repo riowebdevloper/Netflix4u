@@ -1,0 +1,118 @@
+{
+  "id": "tmdb-movie-1432474",
+  "canonicalId": "tmdb-movie-1432474",
+  "externalProvider": "tmdb",
+  "externalId": "1432474",
+  "tmdbId": "1432474",
+  "imdbId": "tt34895535",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "Nimrods",
+  "canonicalTitle": "Nimrods",
+  "originalTitle": "Nimrods",
+  "overview": "Three friends journey from Kansas City to Los Angeles, mistakenly believing that their band is opening for Green Day on New Year’s Eve.",
+  "description": "Three friends journey from Kansas City to Los Angeles, mistakenly believing that their band is opening for Green Day on New Year’s Eve.",
+  "shortDescription": "Three friends journey from Kansas City to Los Angeles, mistakenly believing that their band is opening for Green Day on ",
+  "year": 2026,
+  "releaseDate": "2026-08-06",
+  "rating": 7.1,
+  "votes": "0.0K",
+  "quality": "FHD",
+  "duration": "1h 56m",
+  "genres": [
+    "Comedy",
+    "Music"
+  ],
+  "categories": [
+    "Comedy",
+    "Music"
+  ],
+  "language": "English",
+  "country": "US",
+  "director": "Lee Kirk",
+  "poster": "https://image.tmdb.org/t/p/w500/aebmSpFu1lUV78PtOpqMUn4d82B.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/nwkfCcHIqzo5H4rsG4ug5AVdGZM.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/5mtbOhpqroo?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/5mtbOhpqroo?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "2803710",
+      "name": "Mason Thames",
+      "character": "Tommy",
+      "photo": "https://image.tmdb.org/t/p/w185/kgEYHw8bblVtwRTkR9TLMOpx5WO.jpg"
+    },
+    {
+      "id": "3264041",
+      "name": "Kylr Coffman",
+      "character": "Fred",
+      "photo": "https://image.tmdb.org/t/p/w185/yJByP7Umju2FjCY16ePt9wRRPTZ.jpg"
+    },
+    {
+      "id": "1971197",
+      "name": "Ryan Foust",
+      "character": "Chad",
+      "photo": "https://image.tmdb.org/t/p/w185/kTGCcDGNMrsUM53k3pQ8LymE6pe.jpg"
+    },
+    {
+      "id": "1172108",
+      "name": "Mckenna Grace",
+      "character": "Olivia",
+      "photo": "https://image.tmdb.org/t/p/w185/sK0CVa56IIpFhCDrcXSTqPWxNbx.jpg"
+    },
+    {
+      "id": "1424191",
+      "name": "Keen Ruffalo",
+      "character": "Wayne",
+      "photo": "https://image.tmdb.org/t/p/w185/un5mysGvVychAs3Z2Dkls39dwYA.jpg"
+    },
+    {
+      "id": "3458679",
+      "name": "Ignacio Diaz-Silverio",
+      "character": "Keith",
+      "photo": "https://image.tmdb.org/t/p/w185/ccNZXbW6Grb7ugr7JOkJfCZFekx.jpg"
+    },
+    {
+      "id": "51856",
+      "name": "Jenna Fischer",
+      "character": "Jodi",
+      "photo": "https://image.tmdb.org/t/p/w185/mfKRbOHTPNi9jFSthtjl4FGVZv6.jpg"
+    },
+    {
+      "id": "113867",
+      "name": "Angela Kinsey",
+      "character": "Wilma",
+      "photo": "https://image.tmdb.org/t/p/w185/qHFidnMcFqUWdMFyjmXufBlYckd.jpg"
+    },
+    {
+      "id": "95866",
+      "name": "Billie Joe Armstrong",
+      "character": "Self",
+      "photo": "https://image.tmdb.org/t/p/w185/upYUoLOi7xypknbNQmYVbLCekM4.jpg"
+    },
+    {
+      "id": "95867",
+      "name": "Mike Dirnt",
+      "character": "Self",
+      "photo": "https://image.tmdb.org/t/p/w185/vIj8aqgzA07mpaev4kNYDCGJD3H.jpg"
+    },
+    {
+      "id": "95868",
+      "name": "Tré Cool",
+      "character": "Self",
+      "photo": "https://image.tmdb.org/t/p/w185/20HZWqKtW8r6Yo8i76yZOPYrEg8.jpg"
+    },
+    {
+      "id": "6367933",
+      "name": "Harper Marie Kirk",
+      "character": "Cassidy",
+      "photo": null
+    }
+  ],
+  "seasons": 1,
+  "episodes": 1,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-16T03:20:32.523Z",
+  "createdAt": "2026-09-16T03:20:32.523Z",
+  "updatedAt": "2026-09-16T03:20:32.523Z",
+  "links": []
+}

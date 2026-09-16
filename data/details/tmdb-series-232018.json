@@ -1,0 +1,82 @@
+{
+  "id": "tmdb-series-232018",
+  "canonicalId": "tmdb-series-232018",
+  "externalProvider": "tmdb",
+  "externalId": "232018",
+  "tmdbId": "232018",
+  "imdbId": "tt33184638",
+  "type": "series",
+  "contentType": "series",
+  "title": "Has Fallen",
+  "canonicalTitle": "Has Fallen",
+  "originalTitle": "Has Fallen",
+  "overview": "A protection officer and an MI6 operative team up after a terrorist attack. They suspect a mole as they race to thwart a larger conspiracy threatening Paris.",
+  "description": "A protection officer and an MI6 operative team up after a terrorist attack. They suspect a mole as they race to thwart a larger conspiracy threatening Paris.",
+  "shortDescription": "A protection officer and an MI6 operative team up after a terrorist attack. They suspect a mole as they race to thwart a",
+  "year": 2024,
+  "releaseDate": "2024-09-23",
+  "rating": 7,
+  "votes": "0.1K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Action & Adventure",
+    "War & Politics"
+  ],
+  "categories": [
+    "Action & Adventure",
+    "War & Politics"
+  ],
+  "language": "French",
+  "country": "FR",
+  "director": "Director",
+  "poster": "https://image.tmdb.org/t/p/w500/ei1jnjJ154XN1E4q9JKEpuEImup.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/v0eBR7tZIWQKNtb2MyJtAji5OjA.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/6HZ_mInIfk4?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/6HZ_mInIfk4?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "1135268",
+      "name": "Tewfik Jallab",
+      "character": "Vincent Taleb",
+      "photo": "https://image.tmdb.org/t/p/w185/bxQQdJtkhjHpasmd22YKSCHnM6D.jpg"
+    },
+    {
+      "id": "1742596",
+      "name": "Ritu Arya",
+      "character": "Zara Taylor",
+      "photo": "https://image.tmdb.org/t/p/w185/bBRGCBAW0wNS7fQeGQroOeA60yw.jpg"
+    },
+    {
+      "id": "1374534",
+      "name": "Ross Anderson",
+      "character": "Oscar",
+      "photo": "https://image.tmdb.org/t/p/w185/918MEQzDshopEdGBvotRNmp39c2.jpg"
+    },
+    {
+      "id": "6436259",
+      "name": "Agung Bagus",
+      "character": "Kane",
+      "photo": "https://image.tmdb.org/t/p/w185/iVD3sXOTrpvH8EbajI3gPTtEAJt.jpg"
+    },
+    {
+      "id": "1030255",
+      "name": "Ben Cura",
+      "character": "Marcos",
+      "photo": "https://image.tmdb.org/t/p/w185/zQu260CHVj1Ai507FZ3cLL4DUox.jpg"
+    },
+    {
+      "id": "6440490",
+      "name": "Shiraz Yasin",
+      "character": "Omar",
+      "photo": "https://image.tmdb.org/t/p/w185/IvrqhY1HwBneUHqVkcT4JH00fm.jpg"
+    }
+  ],
+  "seasons": 2,
+  "episodes": 16,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-16T03:20:32.387Z",
+  "createdAt": "2026-09-16T03:20:32.387Z",
+  "updatedAt": "2026-09-16T03:20:32.387Z",
+  "links": []
+}
