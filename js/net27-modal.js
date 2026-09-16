@@ -43,15 +43,12 @@
   var currentWatchServer = 's1';
   var activeWatchParams = null;
 
-  // Resilient Cloud Download Handlers
+  // Direct High-Speed Cloud File Download Handlers
   if (!window.getFastCloudDownloadHref) {
     window.getFastCloudDownloadHref = function(rawUrl) {
       if (!rawUrl) return '#';
-      if (rawUrl.indexOf('workers.dev') !== -1 || rawUrl.indexOf('vcloud') !== -1) {
-        var clean = rawUrl;
-        var m = clean.match(/[?&]vcloud=([^&#]+)/);
-        if (m) clean = decodeURIComponent(m[1]);
-        return 'https://wild-sun-9376.oriue.workers.dev/?vcloud=' + encodeURIComponent(clean);
+      if (rawUrl.indexOf('workers.dev') !== -1 || rawUrl.indexOf('vcloud') !== -1 || rawUrl.indexOf('r2.dev') !== -1) {
+        return '/api/download-file?url=' + encodeURIComponent(rawUrl);
       }
       return rawUrl;
     };
@@ -68,29 +65,35 @@
       if (targetEl) {
         originalHtml = targetEl.innerHTML;
         targetEl.style.pointerEvents = 'none';
-        targetEl.innerHTML = '<span style="display:inline-flex;align-items:center;gap:6px;"><svg style="animation:spinOnce 1s linear infinite;width:14px;height:14px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10" stroke-opacity="0.25"></circle><path d="M12 2a10 10 0 0 1 10 10" stroke-linecap="round"></path></svg>Connecting Stream...</span>';
+        targetEl.innerHTML = '<span style="display:inline-flex;align-items:center;gap:6px;"><svg style="animation:spinOnce 1s linear infinite;width:14px;height:14px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10" stroke-opacity="0.25"></circle><path d="M12 2a10 10 0 0 1 10 10" stroke-linecap="round"></path></svg>Starting Download...</span>';
       }
       var restore = function() {
         if (targetEl && originalHtml) {
           setTimeout(function() {
             targetEl.innerHTML = originalHtml;
             targetEl.style.pointerEvents = 'auto';
-          }, 2200);
+          }, 3000);
         }
       };
 
       var clean = rawUrl || '';
-      var m = clean.match(/[?&]vcloud=([^&#]+)/);
-      if (m) clean = decodeURIComponent(m[1]);
+      var dlUrl = (window.getFastCloudDownloadHref && window.getFastCloudDownloadHref(clean)) || clean;
 
-      if (clean.indexOf('workers.dev') === -1 && clean.indexOf('vcloud') === -1 && (clean.indexOf('http://') === 0 || clean.indexOf('https://') === 0)) {
-        window.open(clean, '_blank', 'noopener,noreferrer');
-        restore();
-        return;
+      if (window.__showToast) {
+        window.__showToast('📥 High-speed direct file download starting...', '⚡');
       }
 
-      var workerUrl = 'https://wild-sun-9376.oriue.workers.dev/?vcloud=' + encodeURIComponent(clean);
-      window.open(workerUrl, '_blank', 'noopener,noreferrer');
+      // Trigger direct native browser download without redirecting to ad/countdown pages
+      var dlLink = document.createElement('a');
+      dlLink.href = dlUrl;
+      dlLink.setAttribute('download', '');
+      dlLink.style.display = 'none';
+      document.body.appendChild(dlLink);
+      dlLink.click();
+      setTimeout(function() {
+        if (dlLink.parentNode) dlLink.parentNode.removeChild(dlLink);
+      }, 1000);
+
       restore();
     };
   }
@@ -1004,7 +1007,8 @@
             var epQualityPills = epLinks.map(function(link) {
               var q = String(link.quality || 'HD').toUpperCase();
               var rawUrl = link.url || '#';
-              return '<a href="' + rawUrl + '" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 rounded bg-amber-500/20 hover:bg-amber-500 hover:text-black active:scale-95 text-amber-300 font-bold text-xs flex items-center gap-1 transition cursor-pointer border border-amber-500/30">' +
+              var cleanUrl = (window.getFastCloudDownloadHref && window.getFastCloudDownloadHref(rawUrl)) || rawUrl;
+              return '<a href="' + cleanUrl + '" data-fast-download="' + encodeURIComponent(rawUrl) + '" class="px-2.5 py-1 rounded bg-amber-500/20 hover:bg-amber-500 hover:text-black active:scale-95 text-amber-300 font-bold text-xs flex items-center gap-1 transition cursor-pointer border border-amber-500/30">' +
                 '<svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 3v12m0 0l-4-4m4 4l4-4"/><path d="M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>' +
                 '<span>' + escapeHtml(q) + '</span>' +
                 (link.size ? '<span class="text-white/60 text-[10px]">(' + escapeHtml(link.size) + ')</span>' : '') +
@@ -1056,6 +1060,7 @@
         var sizeText = link.size || (rawQual.includes('4K') ? '4.8 GB' : rawQual.includes('1080') ? '2.4 GB' : rawQual.includes('720') ? '1.1 GB' : '550 MB');
         var audioText = (link.audio || 'Hindi Multi-Audio [Direct Fast Cloud]').replace(/dotmovies/gi, 'Direct').replace(/nexdrive/gi, 'Ultra HD');
         var rawUrl = link.url || '#';
+        var cleanUrl = (window.getFastCloudDownloadHref && window.getFastCloudDownloadHref(rawUrl)) || rawUrl;
         var rawLabel = (link.label || link.title || title).replace(/dotmovies/gi, 'Netflix4U').replace(/dotmobiz/gi, 'Direct').replace(/nexdrive/gi, 'Ultra HD');
 
         return '<div class="dl-card dl-dotmovies-card">' +
@@ -1071,7 +1076,7 @@
             '</div>' +
           '</div>' +
           '<div class="shrink-0">' +
-            '<a href="' + rawUrl + '" target="_blank" rel="noopener noreferrer" class="dl-btn dl-dotmovies-btn cursor-pointer">' +
+            '<a href="' + cleanUrl + '" data-fast-download="' + encodeURIComponent(rawUrl) + '" class="dl-btn dl-dotmovies-btn cursor-pointer">' +
               '<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 3v12m0 0l-4-4m4 4l4-4"/><path d="M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>' +
               '<span>Download (' + escapeHtml(rawQual) + ')</span>' +
             '</a>' +
@@ -1178,7 +1183,7 @@
 
   // ─── WATCH MODAL (Net27 Streaming Player UI with Auto-Failover Engine) ───
   var SERVERS_CONFIG = [
-    { id: 's1', name: 'Server 1 (NetMirror Server 2 Multi-Audio)', tag: '100% Multi-Audio', tagClass: 'tag-multi', desc: 'NetMirror Server 2 Multi-Audio Player with Dual/Multi-Language Tracks (Hindi, English, Tamil, Telugu)' },
+    { id: 's1', name: 'Server 1 (Multi-Audio Error-Bypassing Engine)', tag: '100% Multi-Audio', tagClass: 'tag-multi', desc: 'Resilient Multi-Audio Streaming Engine with Dual Audio Tracks (Hindi, English, Tamil, Telugu) & Auto-Bypass Error Shield' },
     { id: 's2', name: 'Server 2 (VidLink Pro Multi-Audio)', tag: 'Multi-Lang', tagClass: 'tag-multi', desc: 'VidLink Pro High-Speed Global Streaming Player' },
     { id: 's3', name: 'Server 3 (VidSrc PM Global)', tag: 'Global CDN', tagClass: 'tag-global', desc: 'VidSrc PM High Uptime Global Streaming Mirror' },
     { id: 's4', name: 'Server 4 (2Embed High-Speed)', tag: 'Fast Mirror', tagClass: 'tag-fast', desc: '2Embed Global High-Speed Streaming Server' },
@@ -1551,7 +1556,7 @@
     var ep = isTv ? (params.episode || 1) : '';
     var year = params.year || '';
     var activeLang = (lang && lang !== 'multi') ? lang : (currentWatchLang || 'hi');
-    var url = '/api/netmirror-player?type=' + encodeURIComponent(type) +
+    var url = '/api/stream-player?type=' + encodeURIComponent(type) +
       '&title=' + encodeURIComponent(title) +
       (se ? ('&se=' + encodeURIComponent(se)) : '') +
       (ep ? ('&ep=' + encodeURIComponent(ep)) : '') +

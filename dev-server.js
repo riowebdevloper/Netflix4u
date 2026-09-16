@@ -629,8 +629,8 @@ const server = http.createServer(async (req, res) => {
     return handleProbeStream(req, res);
   }
 
-  // 2c-2. NetMirror Authentic Server 2 Multi-Audio Player
-  if (reqPath.startsWith('/api/netmirror-player')) {
+  // 2c-2. Direct Cloud Download & Multi-Audio Player Endpoints
+  if (reqPath.startsWith('/api/download-file') || reqPath.startsWith('/api/stream-player') || reqPath.startsWith('/api/netmirror-player')) {
     return handleUniversalApi(req, res);
   }
 
@@ -1048,8 +1048,8 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
-  // 4a-2b. Catalog Engine, Net27 Embed TMDB, NetMirror Server 2 Player & Watch TMDB
-  if (reqPath.startsWith('/api/catalog') || reqPath.startsWith('/api/embed-tmdb') || reqPath.startsWith('/api/netmirror-player') || reqPath.startsWith('/watch-tmdb')) {
+  // 4a-2b. Catalog Engine, Net27 Embed TMDB, Multi-Audio Stream Player, Direct Download & Watch TMDB
+  if (reqPath.startsWith('/api/download-file') || reqPath.startsWith('/api/stream-player') || reqPath.startsWith('/api/catalog') || reqPath.startsWith('/api/embed-tmdb') || reqPath.startsWith('/api/netmirror-player') || reqPath.startsWith('/watch-tmdb')) {
     return handleUniversalApi(req, res);
   }
 

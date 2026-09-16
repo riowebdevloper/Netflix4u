@@ -1896,7 +1896,137 @@ async function resolveNetmirrorItem(id, title, type = 'tv', lang = 'hi') {
   return null;
 }
 
-async function handleNetmirrorPlayer(req, res) {
+function escapeHtml(str) {
+  if (!str) return '';
+  return String(str).replace(/[<>&"]/g, c => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;' }[c] || c));
+}
+
+// In-memory cache for resolved Cloudflare R2 direct download & stream links (TTL: 30 minutes)
+const cloudDownloadCache = new Map();
+
+async function resolveCloudDownloadUrl(rawUrl) {
+  if (!rawUrl) return null;
+  let clean = rawUrl;
+  const m = clean.match(/[?&]vcloud=([^&#]+)/);
+  if (m) clean = decodeURIComponent(m[1]);
+
+  if (clean.includes('r2.dev') || clean.endsWith('.mp4') || clean.endsWith('.mkv')) {
+    return { ok: true, directUrl: clean, title: '', size: '' };
+  }
+
+  const cacheKey = clean.toLowerCase();
+  const cached = cloudDownloadCache.get(cacheKey);
+  if (cached && (Date.now() - cached.timestamp < 1800 * 1000)) {
+    return cached.data;
+  }
+
+  return new Promise((resolve) => {
+    const linksApiUrl = 'https://wild-sun-9376.oriue.workers.dev/api/links?vcloud=' + encodeURIComponent(clean);
+    https.get(linksApiUrl, { headers: { 'User-Agent': 'Mozilla/5.0' }, timeout: 7000 }, res => {
+      let d = '';
+      res.on('data', c => d += c);
+      res.on('end', () => {
+        try {
+          const data = JSON.parse(d);
+          const tokens = data.tokens || {};
+          const candidateTypes = ['fsl', 'fsl2', 'pixel', 'server1', 'ten'];
+          const availableType = candidateTypes.find(t => tokens[t]) || Object.keys(tokens)[0];
+          if (!availableType || !tokens[availableType]) {
+            return resolve({ ok: false, directUrl: clean });
+          }
+          const { ts, sig } = tokens[availableType];
+          const goUrl = 'https://wild-sun-9376.oriue.workers.dev/go?type=' + availableType +
+            '&vcloud=' + encodeURIComponent(clean) + '&ts=' + ts + '&sig=' + sig;
+
+          https.get(goUrl, { headers: { 'User-Agent': 'Mozilla/5.0' }, timeout: 7000 }, goRes => {
+            if (goRes.statusCode >= 300 && goRes.statusCode < 400 && goRes.headers.location) {
+              const resData = {
+                ok: true,
+                directUrl: goRes.headers.location,
+                title: data.title || '',
+                size: data.size || ''
+              };
+              cloudDownloadCache.set(cacheKey, { timestamp: Date.now(), data: resData });
+              return resolve(resData);
+            }
+
+            // Fallback: Check /watch endpoint if /go didn't redirect
+            const watchUrl = 'https://wild-sun-9376.oriue.workers.dev/watch?type=' + availableType +
+              '&vcloud=' + encodeURIComponent(clean) + '&ts=' + ts + '&sig=' + sig;
+            https.get(watchUrl, { headers: { 'User-Agent': 'Mozilla/5.0' }, timeout: 7000 }, watchRes => {
+              let wHtml = '';
+              watchRes.on('data', c => wHtml += c);
+              watchRes.on('end', () => {
+                const urlMatch = wHtml.match(/intent:\/\/play\?url=([^&#]+)/i) || wHtml.match(/url=([a-zA-Z0-9%\-_:\.\/]+\.(?:mp4|mkv)[^"'\s&]*)/i);
+                if (urlMatch) {
+                  const directUrl = decodeURIComponent(urlMatch[1]);
+                  const resData = {
+                    ok: true,
+                    directUrl,
+                    title: data.title || '',
+                    size: data.size || ''
+                  };
+                  cloudDownloadCache.set(cacheKey, { timestamp: Date.now(), data: resData });
+                  return resolve(resData);
+                }
+                resolve({ ok: false, directUrl: clean });
+              });
+            }).on('error', () => resolve({ ok: false, directUrl: clean }));
+          }).on('error', () => resolve({ ok: false, directUrl: clean }));
+        } catch(e) {
+          resolve({ ok: false, directUrl: clean });
+        }
+      });
+    }).on('error', () => resolve({ ok: false, directUrl: clean }));
+  });
+}
+
+// 11b. Direct High-Speed File Download Handler (/api/download-file?url=...)
+async function handleDownloadFile(req, res) {
+  if (handleCors(req, res)) return;
+  const q = getQueryParams(req);
+  const rawUrl = q.get('url') || '';
+  const isJson = q.get('json') === '1' || q.get('format') === 'json';
+
+  if (!rawUrl) {
+    if (isJson) {
+      return sendJson(res, 400, { ok: false, error: 'Missing url parameter' });
+    }
+    res.writeHead(400, { 'Content-Type': 'text/plain' });
+    return res.end('Error: Missing download url parameter');
+  }
+
+  try {
+    const resolved = await resolveCloudDownloadUrl(rawUrl);
+    const targetUrl = (resolved && resolved.ok && resolved.directUrl) ? resolved.directUrl : rawUrl;
+
+    if (isJson) {
+      return sendJson(res, 200, {
+        ok: true,
+        directUrl: targetUrl,
+        title: resolved?.title || '',
+        size: resolved?.size || ''
+      });
+    }
+
+    // 302 Found redirect directly to the genuine file download on Cloudflare R2!
+    res.writeHead(302, {
+      'Location': targetUrl,
+      'Cache-Control': 'no-cache, no-store, must-revalidate',
+      'Access-Control-Allow-Origin': '*'
+    });
+    res.end();
+  } catch (err) {
+    if (isJson) {
+      return sendJson(res, 500, { ok: false, error: err.message, directUrl: rawUrl });
+    }
+    res.writeHead(302, { 'Location': rawUrl });
+    res.end();
+  }
+}
+
+// 11c. Ultra-Resilient Error-Bypassing Multi-Audio Player (/api/stream-player)
+async function handleStreamPlayer(req, res) {
   if (handleCors(req, res)) return;
   const q = getQueryParams(req);
   const id = q.get('id') || '';
@@ -1905,100 +2035,314 @@ async function handleNetmirrorPlayer(req, res) {
   const se = parseInt(q.get('se') || q.get('season') || '1', 10) || 1;
   const ep = parseInt(q.get('ep') || q.get('episode') || '1', 10) || 1;
   const lang = (q.get('lang') || 'hi').toLowerCase();
+  const year = q.get('year') || '';
+  const passedVcloud = q.get('vcloud') || '';
 
+  const isMovie = (type === 'movie');
+  const actualSe = isMovie ? '' : se;
+  const actualEp = isMovie ? '' : ep;
+
+  // 1. Resolve Cloud Stream if available (Dual Audio AAC Hindi+English)
+  let cloudStream = null;
+  let rawCloudUrl = passedVcloud;
+
+  if (!rawCloudUrl && id) {
+    try {
+      const rec = await resolveContentId(id);
+      if (rec && rec.links) {
+        const matchingLink = isMovie
+          ? rec.links.find(l => l.isCloud || (l.url && (l.url.includes('vcloud') || l.url.includes('workers.dev'))))
+          : rec.links.find(l => (Number(l.season) === Number(se) && Number(l.episode) === Number(ep)) && (l.isCloud || (l.url && (l.url.includes('vcloud') || l.url.includes('workers.dev')))));
+        if (matchingLink && matchingLink.url) {
+          rawCloudUrl = matchingLink.url;
+        }
+      }
+    } catch(e) {}
+  }
+
+  if (rawCloudUrl) {
+    try {
+      const resCloud = await resolveCloudDownloadUrl(rawCloudUrl);
+      if (resCloud && resCloud.ok && resCloud.directUrl) {
+        cloudStream = {
+          url: resCloud.directUrl,
+          title: resCloud.title || title,
+          size: resCloud.size || ''
+        };
+      }
+    } catch(e) {}
+  }
+
+  // 2. Resolve NetMirror Item ID with language routing
+  let netmirrorEmbedUrl = '';
   try {
-    const item = await resolveNetmirrorItem(id, title, type, lang);
-    let nid = item ? item.id : (id && /^\d{1,9}$/.test(String(id)) ? id : null);
-    let mediaType = (item && item.media_type) || type;
-    const isMovie = (mediaType === 'movie') || (item && (!item.season || !Array.isArray(item.season) || item.season.length === 0));
-    const actualSe = isMovie ? '' : se;
-    const actualEp = isMovie ? '' : ep;
+    const nmItem = await resolveNetmirrorItem(id, title, type, lang);
+    const nid = nmItem ? nmItem.id : (id && /^\d{1,9}$/.test(String(id)) ? id : null);
+    const mediaType = (nmItem && nmItem.media_type) || type;
+    if (nid) {
+      netmirrorEmbedUrl = `https://netmirror.center/${mediaType}/${nid}/?embed=1${actualSe ? '&se=' + actualSe : ''}${actualEp ? '&ep=' + actualEp : ''}`;
+    }
+  } catch(e) {}
 
-    if (!nid) {
-      // Fallback directly to VidLink Multi-Audio if no NetMirror item matched
-      const fallbackUrl = `https://vidlink.pro/${isMovie ? 'movie/' + id : 'tv/' + id + '/' + actualSe + '/' + actualEp}?multiLang=true${lang ? '&lang=' + lang : ''}`;
-      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'X-Frame-Options': 'ALLOWALL', 'Content-Security-Policy': 'frame-ancestors *' });
-      return res.end(`<!DOCTYPE html><html><body style="margin:0;background:#000;overflow:hidden;"><iframe src="${fallbackUrl}" style="width:100vw;height:100vh;border:none;" allowfullscreen></iframe></body></html>`);
+  // 3. Multi-Server Fallbacks
+  const cleanId = String(id || '').replace(/^(?:dotmobiz|tmdb(?:-movie|-series|-tv)?)-/, '');
+  const vidlinkUrl = isMovie
+    ? `https://vidlink.pro/movie/${cleanId}?multiLang=true${lang ? '&lang=' + lang : ''}`
+    : `https://vidlink.pro/tv/${cleanId}/${se}/${ep}?multiLang=true${lang ? '&lang=' + lang : ''}`;
+  const smashyUrl = isMovie
+    ? `https://embed.smashystream.com/playere.php?tmdb=${cleanId}`
+    : `https://embed.smashystream.com/playere.php?tmdb=${cleanId}&season=${se}&episode=${ep}`;
+
+  const displayTitle = (title || 'Stream') + (isMovie ? '' : ` • S${se} E${ep}`);
+  const directDlHref = rawCloudUrl ? `/api/download-file?url=${encodeURIComponent(rawCloudUrl)}` : '';
+
+  const playerHtml = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>${escapeHtml(displayTitle)} | Netflix4U Multi-Audio Stream</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/artplayer/dist/artplayer.min.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      width: 100vw; height: 100vh; overflow: hidden; background: #000;
+      color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      user-select: none;
+    }
+    #player-root { position: relative; width: 100%; height: 100%; display: flex; flex-direction: column; }
+    
+    /* Sleek Top Control Bar */
+    #top-bar {
+      position: absolute; top: 0; left: 0; right: 0; z-index: 60;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 14px;
+      background: linear-gradient(180deg, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.5) 75%, transparent 100%);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      gap: 10px;
+    }
+    .top-bar-hidden { opacity: 0; pointer-events: none; transform: translateY(-6px); }
+
+    .title-area { display: flex; align-items: center; gap: 8px; min-width: 0; }
+    .title-text { font-size: 13px; font-weight: 700; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 240px; }
+    .badge-ep { background: #e50914; color: #fff; font-size: 10px; font-weight: 800; padding: 2px 6px; border-radius: 4px; }
+    
+    .controls-group { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    .pill {
+      background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.18);
+      color: rgba(255,255,255,0.85); font-size: 11px; font-weight: 600;
+      padding: 4px 10px; border-radius: 16px; cursor: pointer;
+      display: inline-flex; align-items: center; gap: 4px; transition: all 0.2s;
+    }
+    .pill:hover { background: rgba(255,255,255,0.25); color: #fff; }
+    .pill.active { background: #e50914; border-color: #e50914; color: #fff; box-shadow: 0 0 10px rgba(229,9,20,0.5); }
+
+    .server-pill {
+      background: rgba(30,35,45,0.85); border: 1px solid rgba(255,255,255,0.2);
+      color: #ddd; font-size: 11px; font-weight: 600; padding: 4px 9px; border-radius: 6px; cursor: pointer; transition: all 0.2s;
+    }
+    .server-pill:hover { background: rgba(255,255,255,0.2); color: #fff; }
+    .server-pill.active { background: #2563eb; border-color: #3b82f6; color: #fff; font-weight: 700; box-shadow: 0 0 8px rgba(37,99,235,0.5); }
+
+    .dl-btn {
+      background: #16a34a; border: 1px solid #22c55e; color: #fff; font-size: 11px; font-weight: 700;
+      padding: 4px 10px; border-radius: 6px; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;
+      transition: background 0.2s;
+    }
+    .dl-btn:hover { background: #15803d; }
+
+    /* Video Frame Container */
+    #media-view { width: 100%; height: 100%; position: relative; flex: 1; background: #000; }
+    .layer-view { width: 100%; height: 100%; border: none; display: none; position: absolute; inset: 0; }
+    .layer-view.visible { display: block; }
+
+    /* Shield Notification Toast */
+    #shield-toast {
+      position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+      background: rgba(15, 15, 20, 0.94); border: 1px solid rgba(255, 255, 255, 0.25);
+      color: #fff; font-size: 12px; font-weight: 600; padding: 8px 16px; border-radius: 24px;
+      backdrop-filter: blur(10px); z-index: 9999; display: none; align-items: center; gap: 8px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.7); pointer-events: none;
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/artplayer/dist/artplayer.min.js"></script>
+</head>
+<body>
+  <div id="player-root">
+    <div id="top-bar">
+      <div class="title-area">
+        <span class="badge-ep">${isMovie ? 'MOVIE' : 'S' + actualSe + ' E' + actualEp}</span>
+        <span class="title-text">${escapeHtml(displayTitle)}</span>
+      </div>
+
+      <!-- Language Selectors -->
+      <div class="controls-group">
+        <button type="button" class="pill ${lang === 'hi' ? 'active' : ''}" onclick="switchLanguage('hi')">🇮🇳 Hindi</button>
+        <button type="button" class="pill ${lang === 'en' ? 'active' : ''}" onclick="switchLanguage('en')">🌐 English</button>
+        <button type="button" class="pill ${lang === 'ta' ? 'active' : ''}" onclick="switchLanguage('ta')">Tamil</button>
+        <button type="button" class="pill ${lang === 'te' ? 'active' : ''}" onclick="switchLanguage('te')">Telugu</button>
+      </div>
+
+      <!-- Server Selectors & Download -->
+      <div class="controls-group">
+        ${cloudStream ? '<button type="button" id="btn-srv-cloud" class="server-pill active" onclick="activateServer(&quot;cloud&quot;)">⚡ Cloud Multi-Audio</button>' : ''}
+        ${netmirrorEmbedUrl ? '<button type="button" id="btn-srv-nm2" class="server-pill ' + (cloudStream ? '' : 'active') + '" onclick="activateServer(&quot;nm2&quot;)">🎬 Server 2 (NetMirror)</button>' : ''}
+        <button type="button" id="btn-srv-vidlink" class="server-pill ${!cloudStream && !netmirrorEmbedUrl ? 'active' : ''}" onclick="activateServer(&quot;vidlink&quot;)">🚀 VidLink Multi</button>
+        <button type="button" id="btn-srv-smashy" class="server-pill" onclick="activateServer(&quot;smashy&quot;)">🛡️ SmashyStream</button>
+        ${directDlHref ? '<a href="' + directDlHref + '" class="dl-btn" target="_blank" rel="noopener">📥 Download File</a>' : ''}
+      </div>
+    </div>
+
+    <!-- Media Players View Area -->
+    <div id="media-view">
+      <div id="artplayer-layer" class="layer-view ${cloudStream ? 'visible' : ''}"></div>
+      <iframe id="iframe-nm2" class="layer-view ${(!cloudStream && netmirrorEmbedUrl) ? 'visible' : ''}" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+      <iframe id="iframe-vidlink" class="layer-view ${(!cloudStream && !netmirrorEmbedUrl) ? 'visible' : ''}" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+      <iframe id="iframe-smashy" class="layer-view" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+    </div>
+
+    <div id="shield-toast"></div>
+  </div>
+
+  <script>
+    var cloudUrl = ${JSON.stringify(cloudStream ? cloudStream.url : '')};
+    var nm2Url = ${JSON.stringify(netmirrorEmbedUrl || '')};
+    var vidlinkUrl = ${JSON.stringify(vidlinkUrl)};
+    var smashyUrl = ${JSON.stringify(smashyUrl)};
+    var currentServer = ${JSON.stringify(cloudStream ? 'cloud' : (netmirrorEmbedUrl ? 'nm2' : 'vidlink'))};
+    var art = null;
+    var failoverIndex = 0;
+    var serverSequence = ['cloud', 'nm2', 'vidlink', 'smashy'].filter(function(s) {
+      if (s === 'cloud' && !cloudUrl) return false;
+      if (s === 'nm2' && !nm2Url) return false;
+      return true;
+    });
+
+    function showShieldToast(msg) {
+      var toast = document.getElementById('shield-toast');
+      if (!toast) return;
+      toast.innerHTML = '<span style="color:#22c55e;">🛡️</span> ' + msg;
+      toast.style.display = 'inline-flex';
+      setTimeout(function() { toast.style.display = 'none'; }, 3200);
     }
 
-    const netmirrorEmbedUrl = `https://netmirror.center/${mediaType}/${nid}/?embed=1${actualSe ? '&se=' + actualSe : ''}${actualEp ? '&ep=' + actualEp : ''}`;
+    function hideAllLayers() {
+      document.querySelectorAll('.layer-view').forEach(function(el) { el.classList.remove('visible'); });
+      document.querySelectorAll('.server-pill').forEach(function(el) { el.classList.remove('active'); });
+    }
 
-    https.get(netmirrorEmbedUrl, {
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
-        'Referer': 'https://netmirror.center/',
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
-      },
-      timeout: 8000
-    }, nmRes => {
-      let html = '';
-      nmRes.on('data', c => html += c);
-      nmRes.on('end', () => {
-        let modified = html;
-        if (modified.includes('<head>')) {
-          modified = modified.replace('<head>', '<head><base href="https://netmirror.center/"><meta name="referrer" content="origin">');
+    function activateServer(srv) {
+      currentServer = srv;
+      hideAllLayers();
+      var btn = document.getElementById('btn-srv-' + srv);
+      if (btn) btn.classList.add('active');
+
+      if (srv === 'cloud' && cloudUrl) {
+        var mount = document.getElementById('artplayer-layer');
+        mount.classList.add('visible');
+        if (!art) {
+          initArtplayer(cloudUrl);
         } else {
-          modified = '<base href="https://netmirror.center/"><meta name="referrer" content="origin">' + modified;
+          art.switchUrl(cloudUrl);
         }
+      } else if (srv === 'nm2' && nm2Url) {
+        var frame = document.getElementById('iframe-nm2');
+        if (!frame.src || frame.src === 'about:blank') frame.src = nm2Url;
+        frame.classList.add('visible');
+      } else if (srv === 'vidlink') {
+        var frame = document.getElementById('iframe-vidlink');
+        if (!frame.src || frame.src === 'about:blank') frame.src = vidlinkUrl;
+        frame.classList.add('visible');
+      } else if (srv === 'smashy') {
+        var frame = document.getElementById('iframe-smashy');
+        if (!frame.src || frame.src === 'about:blank') frame.src = smashyUrl;
+        frame.classList.add('visible');
+      }
+    }
 
-        const autoServer2Script = `
-        <script>
-          window.llvpnLoaded = true;
-          try {
-            var path = '/${mediaType}/${nid}/?embed=1${actualSe ? '&se=' + actualSe : ''}${actualEp ? '&ep=' + actualEp : ''}';
-            window.history.replaceState(null, '', path);
-          } catch(e) {}
+    function triggerAutoBypass(reason) {
+      console.warn('[Zero-Error Shield] ' + reason + ' -> Automatically switching server...');
+      showShieldToast('Bypassing server error... Connecting to backup stream');
+      failoverIndex = (failoverIndex + 1) % serverSequence.length;
+      activateServer(serverSequence[failoverIndex]);
+    }
 
-          window.addEventListener('DOMContentLoaded', function() {
-            window.llvpnLoaded = true;
-            var clicked = false;
-            var timer = setInterval(function() {
-              if (clicked) return;
-              var buttons = Array.from(document.querySelectorAll('button, div[role="button"], span, a, .server-btn'));
-              var s2 = buttons.find(function(b) {
-                var txt = (b.textContent || '').trim();
-                return txt === 'Server 2' || txt.includes('Server 2');
-              });
-              if (s2) {
-                clicked = true;
-                s2.click();
-                clearInterval(timer);
-              }
-            }, 250);
-            setTimeout(function() { clearInterval(timer); }, 9000);
-          });
-        </script>
-        <style>
-          body, html { margin:0 !important; padding:0 !important; background:#000 !important; overflow:hidden !important; width:100vw !important; height:100vh !important; }
-          .navbar, header, footer, .recommendation-container, .related-titles { display:none !important; }
-          #idIframe, iframe { width:100% !important; height:100% !important; border:none !important; display:block !important; }
-        </style>
-        `;
-
-        if (modified.includes('</body>')) {
-          modified = modified.replace('</body>', autoServer2Script + '</body>');
-        } else {
-          modified += autoServer2Script;
+    function initArtplayer(url) {
+      art = new Artplayer({
+        container: '#artplayer-layer',
+        url: url,
+        title: ${JSON.stringify(displayTitle)},
+        playbackRate: true,
+        aspectRatio: true,
+        setting: true,
+        pip: true,
+        fullscreen: true,
+        fullscreenWeb: true,
+        autoSize: false,
+        theme: '#e50914',
+        icons: {
+          loading: '<div style="color:#e50914;font-size:12px;font-weight:bold;">Connecting Multi-Audio Cloud Stream...</div>'
+        },
+        customType: {
+          mkv: function(video, targetUrl) { video.src = targetUrl; }
         }
-
-        res.writeHead(200, {
-          'Content-Type': 'text/html; charset=utf-8',
-          'Cache-Control': 'no-cache, no-store, must-revalidate',
-          'X-Frame-Options': 'ALLOWALL',
-          'Content-Security-Policy': 'frame-ancestors *'
-        });
-        res.end(modified);
       });
-    }).on('error', () => {
-      const fallbackUrl = `https://vidlink.pro/${isMovie ? 'movie/' + id : 'tv/' + id + '/' + actualSe + '/' + actualEp}?multiLang=true${lang ? '&lang=' + lang : ''}`;
-      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'X-Frame-Options': 'ALLOWALL', 'Content-Security-Policy': 'frame-ancestors *' });
-      res.end(`<!DOCTYPE html><html><body style="margin:0;background:#000;overflow:hidden;"><iframe src="${fallbackUrl}" style="width:100vw;height:100vh;border:none;" allowfullscreen></iframe></body></html>`);
-    });
-  } catch(err) {
-    const fallbackUrl = `https://vidlink.pro/${type === 'tv' ? 'tv/' + id + '/' + se + '/' + ep : 'movie/' + id}?multiLang=true${lang ? '&lang=' + lang : ''}`;
-    res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'X-Frame-Options': 'ALLOWALL', 'Content-Security-Policy': 'frame-ancestors *' });
-    res.end(`<!DOCTYPE html><html><body style="margin:0;background:#000;overflow:hidden;"><iframe src="${fallbackUrl}" style="width:100vw;height:100vh;border:none;" allowfullscreen></iframe></body></html>`);
-  }
+
+      art.on('error', function(err) {
+        triggerAutoBypass('Direct cloud stream error: ' + (err && err.message || ''));
+      });
+      art.on('video:error', function(err) {
+        triggerAutoBypass('Video decoding error');
+      });
+
+      // Watchdog: If playback doesn't start in 8s, switch
+      var watchTimer = setTimeout(function() {
+        if (art && art.video && art.video.readyState === 0 && !art.video.currentTime) {
+          triggerAutoBypass('Initial stream timeout');
+        }
+      }, 8000);
+
+      art.on('play', function() { clearTimeout(watchTimer); });
+    }
+
+    function switchLanguage(targetLang) {
+      var currentParams = new URLSearchParams(window.location.search);
+      currentParams.set('lang', targetLang);
+      window.location.search = currentParams.toString();
+    }
+
+    // Auto-hide top bar on user inactivity
+    var topBar = document.getElementById('top-bar');
+    var hideTimeout = null;
+    function resetTopBarTimer() {
+      topBar.classList.remove('top-bar-hidden');
+      clearTimeout(hideTimeout);
+      hideTimeout = setTimeout(function() {
+        topBar.classList.add('top-bar-hidden');
+      }, 4000);
+    }
+    window.addEventListener('mousemove', resetTopBarTimer);
+    window.addEventListener('touchstart', resetTopBarTimer);
+    resetTopBarTimer();
+
+    // Start initial player
+    activateServer(currentServer);
+  </script>
+</body>
+</html>`;
+
+  res.writeHead(200, {
+    'Content-Type': 'text/html; charset=utf-8',
+    'Cache-Control': 'no-cache, no-store, must-revalidate',
+    'X-Frame-Options': 'ALLOWALL',
+    'Content-Security-Policy': 'frame-ancestors *'
+  });
+  res.end(playerHtml);
+}
+
+// 11d. Legacy NetMirror route compatibility (routes directly to stream-player)
+async function handleNetmirrorPlayer(req, res) {
+  return handleStreamPlayer(req, res);
 }
 
 // 12. Master Universal Router
@@ -2009,7 +2353,9 @@ async function handleUniversalApi(req, res) {
   const cleanPath = rawPath.replace(/^\/api\/?/, '').toLowerCase();
 
   if (rawPath.startsWith('/watch-tmdb')) return handleWatchTmdb(req, res);
-  if (cleanPath === 'netmirror-player' || cleanPath.startsWith('netmirror-player/')) return handleNetmirrorPlayer(req, res);
+  if (cleanPath === 'download-file' || cleanPath.startsWith('download-file/')) return handleDownloadFile(req, res);
+  if (cleanPath === 'stream-player' || cleanPath.startsWith('stream-player/')) return handleStreamPlayer(req, res);
+  if (cleanPath === 'netmirror-player' || cleanPath.startsWith('netmirror-player/')) return handleStreamPlayer(req, res);
   if (cleanPath === 'embed-tmdb' || cleanPath.startsWith('embed-tmdb/')) return handleEmbedTmdb(req, res);
   if (cleanPath === 'probe-stream' || cleanPath.startsWith('probe-stream/')) return handleProbeStream(req, res);
   if (cleanPath === 'details' || cleanPath.startsWith('details/')) return handleDetails(req, res);
@@ -2036,6 +2382,9 @@ module.exports = {
   handleDetails,
   handlePlayback,
   handleNetmirrorPlayer,
+  handleStreamPlayer,
+  handleDownloadFile,
+  resolveCloudDownloadUrl,
   handleWatchTmdb,
   handleEmbedTmdb,
   handleProbeStream,
