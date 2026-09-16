@@ -1935,16 +1935,16 @@ async function handleNetmirrorPlayer(req, res) {
     const actualSe = isMovie ? '' : se;
     const actualEp = isMovie ? '' : ep;
 
-    // 3. Construct upstream path & query
+    // 3. Construct upstream path & query (pass exten=true so NetMirror does not sabotage with dummy http://play_url)
     let playPath = 'watchbox.php';
     let queryParamsStr = '';
     if (embedEpisode && embedEpisode.url) {
       const epName = embedEpisode.name || 'watchdirect';
       playPath = `${epName}.php`;
-      queryParamsStr = `?url=${encodeURIComponent(embedEpisode.url)}&size=${encodeURIComponent(embedEpisode.size || '')}&se=${encodeURIComponent(embedEpisode.se || actualSe)}&ep=${encodeURIComponent(embedEpisode.ep || actualEp)}&name=${encodeURIComponent(epName)}&year=${encodeURIComponent(item.release_date || '')}&na=${na}&tm_id=${encodeURIComponent(item.tm_id || '')}&ts=${ts}&sig=${sig}&nid=${nid}&exten=0&tv=&token=`;
+      queryParamsStr = `?url=${encodeURIComponent(embedEpisode.url)}&size=${encodeURIComponent(embedEpisode.size || '')}&se=${encodeURIComponent(embedEpisode.se || actualSe)}&ep=${encodeURIComponent(embedEpisode.ep || actualEp)}&name=${encodeURIComponent(epName)}&year=${encodeURIComponent(item.release_date || '')}&na=${na}&tm_id=${encodeURIComponent(item.tm_id || '')}&ts=${ts}&sig=${sig}&nid=${nid}&exten=true&tv=&token=`;
     } else {
       playPath = 'watchbox.php';
-      queryParamsStr = `?id=${item.subjectid || ''}&se=${actualSe}&ep=${actualEp}&dp=${encodeURIComponent(item.dp || '')}&na=${na}&year=${encodeURIComponent(item.release_date || '')}&tm_id=${encodeURIComponent(item.tm_id || '')}&ts=${ts}&sig=${sig}&nid=${nid}&exten=0&tv=&token=`;
+      queryParamsStr = `?id=${item.subjectid || ''}&se=${actualSe}&ep=${actualEp}&dp=${encodeURIComponent(item.dp || '')}&na=${na}&year=${encodeURIComponent(item.release_date || '')}&tm_id=${encodeURIComponent(item.tm_id || '')}&ts=${ts}&sig=${sig}&nid=${nid}&exten=true&tv=&token=`;
     }
 
     // Upstream mirror hosts to try in case of upstream rate limit or temporary busy state
@@ -1984,12 +1984,58 @@ async function handleNetmirrorPlayer(req, res) {
       if (result.ok) break;
     }
 
+    const fallbackStreamUrl = `https://vidlink.pro/${isMovie ? 'movie/' + (item.tm_id || id) : 'tv/' + (item.tm_id || id) + '/' + actualSe + '/' + actualEp}?multiLang=true${lang ? '&lang=' + lang : ''}`;
+
     if (result && result.ok && result.html) {
       let modified = result.html;
       if (modified.includes('<head>')) {
         modified = modified.replace('<head>', '<head><base href="https://play.watch21.shop/play/"><meta name="referrer" content="no-referrer">');
       } else {
         modified = '<base href="https://play.watch21.shop/play/"><meta name="referrer" content="no-referrer">' + modified;
+      }
+
+      // Bypass NetMirror intentional sabotage where play_url returns dummy http://play_url
+      modified = modified.replace(/return\s+['"]http:\/\/play_url['"];?/g, 'return play_url;');
+      modified = modified.replace("art.notice.show = 'Please Add Extention for Fast Loading';", "");
+      modified = modified.replace("art.notice.show = 'Fast Loading.. (With Extension)';", "");
+
+      // Inject fail-safe script so if Artplayer receives 429 or Video load failed, it automatically falls over to VidLink Multi-Audio
+      const failSafeScript = `
+      <script>
+        (function() {
+          var fallbackUrl = ${JSON.stringify(fallbackStreamUrl)};
+          var switched = false;
+          function doFallback() {
+            if (switched) return;
+            switched = true;
+            console.warn('[NetMirror SafeGuard] Falling over to Multi-Audio Stream:', fallbackUrl);
+            window.location.replace(fallbackUrl);
+          }
+
+          window.addEventListener('error', function(e) {
+            if (e && (e.message || '').toLowerCase().includes('fail') || (e.target && e.target.tagName === 'VIDEO')) {
+              setTimeout(doFallback, 800);
+            }
+          }, true);
+
+          setInterval(function() {
+            var notice = document.querySelector('.art-notice, .art-error');
+            var video = document.querySelector('video');
+            if (notice && (notice.textContent.includes('failed') || notice.textContent.includes('Error'))) {
+              doFallback();
+            }
+            if (video && video.error) {
+              doFallback();
+            }
+          }, 1000);
+        })();
+      </script>
+      `;
+
+      if (modified.includes('</body>')) {
+        modified = modified.replace('</body>', failSafeScript + '</body>');
+      } else {
+        modified += failSafeScript;
       }
 
       res.writeHead(200, {
@@ -2002,8 +2048,8 @@ async function handleNetmirrorPlayer(req, res) {
       return;
     }
 
-    // If all NetMirror hosts return "Server Busy" or rate-limited:
-    // Render clean auto-failover page that signals parent modal to switch to Server 2 immediately!
+    // If upstream hosts returned Server Busy or 429 rate limit:
+    // Instantly stream the high-speed VidLink Multi-Audio player so video starts immediately without ANY error!
     res.writeHead(200, {
       'Content-Type': 'text/html; charset=utf-8',
       'Cache-Control': 'no-cache, no-store, must-revalidate',
@@ -2015,33 +2061,14 @@ async function handleNetmirrorPlayer(req, res) {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Switching Player...</title>
+  <title>Multi-Audio Player</title>
   <style>
-    body { background: #000; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; padding: 20px; box-sizing: border-box; text-align: center; }
-    .spinner { width: 44px; height: 44px; border: 3px solid rgba(255,255,255,0.15); border-top-color: #e50914; border-radius: 50%; animation: spin 0.8s linear infinite; margin-bottom: 20px; }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    h3 { font-size: 18px; margin: 0 0 8px; font-weight: 700; }
-    p { font-size: 13px; color: rgba(255,255,255,0.65); margin: 0 0 20px; max-width: 360px; line-height: 1.5; }
-    .btn { display: inline-flex; align-items: center; gap: 8px; background: #e50914; color: #fff; text-decoration: none; padding: 10px 22px; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer; border: none; transition: opacity 0.2s; }
-    .btn:hover { opacity: 0.9; }
+    body, html { margin:0; padding:0; width:100%; height:100%; overflow:hidden; background:#000; }
+    iframe { width:100%; height:100%; border:none; display:block; }
   </style>
 </head>
 <body>
-  <div class="spinner"></div>
-  <h3>NetMirror Server Busy • Switching Server…</h3>
-  <p>Connecting you to the fastest alternate streaming server with verified playback.</p>
-  <button class="btn" onclick="triggerSwitch()">Switch to Server 2 Now</button>
-  <script>
-    function triggerSwitch() {
-      try {
-        if (window.parent && window.parent !== window) {
-          window.parent.postMessage({ event: 'error', status: 503, message: 'Server Busy - switching to next server' }, '*');
-        }
-      } catch(e) {}
-    }
-    // Auto trigger failover after brief grace period
-    setTimeout(triggerSwitch, 1200);
-  </script>
+  <iframe src="${fallbackStreamUrl}" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
 </body>
 </html>`);
   } catch(err) {
