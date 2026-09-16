@@ -1524,14 +1524,15 @@
     if (!params) return '';
     var type = (params.type === 'tv' || params.type === 'series') ? 'tv' : 'movie';
     var title = params.title || '';
-    var se = params.season || 1;
-    var ep = params.episode || 1;
+    var isTv = type === 'tv';
+    var se = isTv ? (params.season || 1) : '';
+    var ep = isTv ? (params.episode || 1) : '';
     var year = params.year || '';
     var activeLang = (lang && lang !== 'multi') ? lang : (currentWatchLang || 'hi');
     var url = '/api/netmirror-player?type=' + encodeURIComponent(type) +
       '&title=' + encodeURIComponent(title) +
-      '&se=' + encodeURIComponent(se) +
-      '&ep=' + encodeURIComponent(ep) +
+      (se ? ('&se=' + encodeURIComponent(se)) : '') +
+      (ep ? ('&ep=' + encodeURIComponent(ep)) : '') +
       '&year=' + encodeURIComponent(year) +
       '&lang=' + encodeURIComponent(activeLang);
 

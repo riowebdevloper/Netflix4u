@@ -1924,46 +1924,126 @@ async function handleNetmirrorPlayer(req, res) {
     }
     const na = encodeURIComponent(Buffer.from(Ee(item.title)).toString('base64'));
 
-    const We = `?id=${item.subjectid || ''}&se=${se}&ep=${ep}&dp=${encodeURIComponent(item.dp || '')}&na=${na}&year=${encodeURIComponent(item.release_date || '')}&tm_id=${encodeURIComponent(item.tm_id || '')}`;
-    const Le = `&ts=${ts}&sig=${sig}&nid=${nid}&exten=0&tv=&token=`;
-    const targetUrl = `https://play.watch21.shop/play/watchbox.php${We}${Le}`;
+    // 1. Determine if item has embed_json (individual episode links like watchdirect/watchdrivehub)
+    const hasEmbedJson = Array.isArray(item.embed_json) && item.embed_json.length > 0;
+    const embedEpisode = hasEmbedJson
+      ? (item.embed_json.find(pe => Number(pe.se) === Number(se) && Number(pe.ep) === Number(ep)) || item.embed_json[0])
+      : null;
 
-    const playReq = https.get(targetUrl, {
-      headers: {
-        'Referer': 'https://netmirror.center/',
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36'
-      },
-      timeout: 9000
-    }, playRes => {
-      let html = '';
-      playRes.on('data', c => html += c);
-      playRes.on('end', () => {
-        let modified = html;
-        if (modified.includes('<head>')) {
-          modified = modified.replace('<head>', '<head><base href="https://play.watch21.shop/play/"><meta name="referrer" content="no-referrer">');
-        } else {
-          modified = '<base href="https://play.watch21.shop/play/"><meta name="referrer" content="no-referrer">' + modified;
-        }
+    // 2. For movies or non-episodic media, passing se=1/ep=1 causes NetMirror to return "Server Busy"
+    const isMovie = (type === 'movie') || !item.season || !Array.isArray(item.season) || item.season.length === 0;
+    const actualSe = isMovie ? '' : se;
+    const actualEp = isMovie ? '' : ep;
 
-        res.writeHead(200, {
-          'Content-Type': 'text/html; charset=utf-8',
-          'Cache-Control': 'no-cache, no-store, must-revalidate',
-          'X-Frame-Options': 'ALLOWALL',
-          'Content-Security-Policy': 'frame-ancestors *'
+    // 3. Construct upstream path & query
+    let playPath = 'watchbox.php';
+    let queryParamsStr = '';
+    if (embedEpisode && embedEpisode.url) {
+      const epName = embedEpisode.name || 'watchdirect';
+      playPath = `${epName}.php`;
+      queryParamsStr = `?url=${encodeURIComponent(embedEpisode.url)}&size=${encodeURIComponent(embedEpisode.size || '')}&se=${encodeURIComponent(embedEpisode.se || actualSe)}&ep=${encodeURIComponent(embedEpisode.ep || actualEp)}&name=${encodeURIComponent(epName)}&year=${encodeURIComponent(item.release_date || '')}&na=${na}&tm_id=${encodeURIComponent(item.tm_id || '')}&ts=${ts}&sig=${sig}&nid=${nid}&exten=0&tv=&token=`;
+    } else {
+      playPath = 'watchbox.php';
+      queryParamsStr = `?id=${item.subjectid || ''}&se=${actualSe}&ep=${actualEp}&dp=${encodeURIComponent(item.dp || '')}&na=${na}&year=${encodeURIComponent(item.release_date || '')}&tm_id=${encodeURIComponent(item.tm_id || '')}&ts=${ts}&sig=${sig}&nid=${nid}&exten=0&tv=&token=`;
+    }
+
+    // Upstream mirror hosts to try in case of upstream rate limit or temporary busy state
+    const upstreamHosts = [
+      'play.watch21.shop',
+      'bet.watch22.shop',
+      'limit.watch22.shop',
+      'spedostream2.shop',
+      'dv.watch22.shop'
+    ];
+
+    async function fetchFromHost(host) {
+      return new Promise((resolve) => {
+        const fullUrl = `https://${host}/play/${playPath}${queryParamsStr}`;
+        const req = https.get(fullUrl, {
+          headers: {
+            'Referer': 'https://netmirror.center/',
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36'
+          },
+          timeout: 7000
+        }, res => {
+          let html = '';
+          res.on('data', c => html += c);
+          res.on('end', () => {
+            const isBusy = html.includes('Server Busy') || html.includes('server busy') || html.includes('429 Too Many Requests');
+            resolve({ ok: res.statusCode === 200 && !isBusy, html, statusCode: res.statusCode, isBusy });
+          });
         });
-        res.end(modified);
+        req.on('error', () => resolve({ ok: false, html: '', statusCode: 502, isBusy: false }));
+        req.on('timeout', () => { req.destroy(); resolve({ ok: false, html: '', statusCode: 504, isBusy: false }); });
       });
-    });
+    }
 
-    playReq.on('error', err => {
-      res.writeHead(502, { 'Content-Type': 'text/html; charset=utf-8' });
-      res.end(`<!DOCTYPE html><html><body style="background:#000;color:#fff;font-family:sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;"><h3>Error connecting to NetMirror Server 2: ${err.message}</h3></body></html>`);
+    let result = null;
+    for (const host of upstreamHosts) {
+      result = await fetchFromHost(host);
+      if (result.ok) break;
+    }
+
+    if (result && result.ok && result.html) {
+      let modified = result.html;
+      if (modified.includes('<head>')) {
+        modified = modified.replace('<head>', '<head><base href="https://play.watch21.shop/play/"><meta name="referrer" content="no-referrer">');
+      } else {
+        modified = '<base href="https://play.watch21.shop/play/"><meta name="referrer" content="no-referrer">' + modified;
+      }
+
+      res.writeHead(200, {
+        'Content-Type': 'text/html; charset=utf-8',
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'X-Frame-Options': 'ALLOWALL',
+        'Content-Security-Policy': 'frame-ancestors *'
+      });
+      res.end(modified);
+      return;
+    }
+
+    // If all NetMirror hosts return "Server Busy" or rate-limited:
+    // Render clean auto-failover page that signals parent modal to switch to Server 2 immediately!
+    res.writeHead(200, {
+      'Content-Type': 'text/html; charset=utf-8',
+      'Cache-Control': 'no-cache, no-store, must-revalidate',
+      'X-Frame-Options': 'ALLOWALL',
+      'Content-Security-Policy': 'frame-ancestors *'
     });
-    playReq.on('timeout', () => {
-      playReq.destroy();
-      res.writeHead(504, { 'Content-Type': 'text/html; charset=utf-8' });
-      res.end('<!DOCTYPE html><html><body style="background:#000;color:#fff;font-family:sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;"><h3>NetMirror Server 2 connection timed out.</h3></body></html>');
-    });
+    res.end(`<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Switching Player...</title>
+  <style>
+    body { background: #000; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; padding: 20px; box-sizing: border-box; text-align: center; }
+    .spinner { width: 44px; height: 44px; border: 3px solid rgba(255,255,255,0.15); border-top-color: #e50914; border-radius: 50%; animation: spin 0.8s linear infinite; margin-bottom: 20px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    h3 { font-size: 18px; margin: 0 0 8px; font-weight: 700; }
+    p { font-size: 13px; color: rgba(255,255,255,0.65); margin: 0 0 20px; max-width: 360px; line-height: 1.5; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; background: #e50914; color: #fff; text-decoration: none; padding: 10px 22px; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer; border: none; transition: opacity 0.2s; }
+    .btn:hover { opacity: 0.9; }
+  </style>
+</head>
+<body>
+  <div class="spinner"></div>
+  <h3>NetMirror Server Busy • Switching Server…</h3>
+  <p>Connecting you to the fastest alternate streaming server with verified playback.</p>
+  <button class="btn" onclick="triggerSwitch()">Switch to Server 2 Now</button>
+  <script>
+    function triggerSwitch() {
+      try {
+        if (window.parent && window.parent !== window) {
+          window.parent.postMessage({ event: 'error', status: 503, message: 'Server Busy - switching to next server' }, '*');
+        }
+      } catch(e) {}
+    }
+    // Auto trigger failover after brief grace period
+    setTimeout(triggerSwitch, 1200);
+  </script>
+</body>
+</html>`);
   } catch(err) {
     res.writeHead(500, { 'Content-Type': 'text/html; charset=utf-8' });
     res.end(`<!DOCTYPE html><html><body style="background:#000;color:#fff;font-family:sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;"><h3>Server 2 error: ${err.message}</h3></body></html>`);
