@@ -1043,9 +1043,7 @@
     { id: 's4', name: 'Server 4 (VidSrc PM)', tag: 'Global CDN', tagClass: 'tag-global', desc: 'VidSrc PM High Uptime Global Mirror' },
     { id: 's5', name: 'Server 5 (AutoEmbed)', tag: 'Backup', tagClass: 'tag-fast', desc: 'AutoEmbed Reliable CDN Backup' },
     { id: 's6', name: 'Server 6 (2Embed Global)', tag: 'Universal', tagClass: 'tag-global', desc: '2Embed Global High-Speed Server' },
-    { id: 's7', name: 'Server 7 (VidSrc In)', tag: 'Fast Mirror', tagClass: 'tag-multi', desc: 'VidSrc In High-Performance Mirror' },
-    { id: 's8', name: 'Server 8 (SuperEmbed)', tag: 'Multi CDN', tagClass: 'tag-fast', desc: 'SuperEmbed High Uptime Multi-Stream' },
-    { id: 's9', name: 'Server 9 (RiveStream)', tag: 'Fast Stream', tagClass: 'tag-global', desc: 'RiveStream Adaptive High-Speed Stream' }
+    { id: 's7', name: 'Server 7 (VidSrc In)', tag: 'Fast Mirror', tagClass: 'tag-multi', desc: 'VidSrc In High-Performance Mirror' }
   ];
 
   // Auto-failover & orientation state
@@ -1053,7 +1051,7 @@
   var autoSwitchTimer = null;
   var autoSwitchIndex = 0;
   var isPlaybackConfirmed = false;
-  var autoSwitchOrder = ['s1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9'];
+  var autoSwitchOrder = ['s1', 's2', 's3', 's4', 's5', 's6', 's7'];
   var watchTopBarTimer = null;
   var currentAutoSwitchToken = 0;
   var activeProbeController = null;
@@ -1503,13 +1501,7 @@
         : 'https://www.2embed.cc/embed/' + tmdbId,
       s7: isTv
         ? 'https://vidsrc.in/embed/tv/' + tmdbId + '/' + season + '/' + episode
-        : 'https://vidsrc.in/embed/movie/' + tmdbId,
-      s8: isTv
-        ? 'https://multiembed.mov/?video_id=' + tmdbId + '&tmdb=1&s=' + season + '&e=' + episode
-        : 'https://multiembed.mov/?video_id=' + tmdbId + '&tmdb=1',
-      s9: isTv
-        ? 'https://rivestream.live/embed?type=tv&id=' + tmdbId + '&season=' + season + '&episode=' + episode
-        : 'https://rivestream.live/embed?type=movie&id=' + tmdbId
+        : 'https://vidsrc.in/embed/movie/' + tmdbId
     };
 
     currentWatchServer = 's1';
