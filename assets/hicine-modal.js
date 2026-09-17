@@ -9,20 +9,20 @@
  * - Trailers & Cloud Links
  */
 
-(function () {
-  'use strict';
+  (function () {
+    'use strict';
 
-  let currentTitleData = null;
-  let activeVcloudUrl = null;
-  let activeQuality = '1080p';
-  let serverCountdownInterval = null;
+    let currentTitleData = null;
+    let activeVcloudUrl = null;
+    let activeQuality = '1080p';
+    let serverCountdownInterval = null;
 
-  function initModalContainers() {
-    // 1. Detail Modal Container
-    if (!document.getElementById('hicine-modal-overlay')) {
-      const modalOverlay = document.createElement('div');
-      modalOverlay.id = 'hicine-modal-overlay';
-      modalOverlay.innerHTML = `
+    function initModalContainers() {
+      // 1. Detail Modal Container
+      if (!document.getElementById('hicine-modal-overlay')) {
+        const modalOverlay = document.createElement('div');
+        modalOverlay.id = 'hicine-modal-overlay';
+        modalOverlay.innerHTML = `
         <div class="hicine-modal-container" id="hicine-modal-container">
           <!-- Close Button -->
           <button class="hicine-modal-close-btn" id="hicine-modal-close" aria-label="Close modal">
@@ -132,36 +132,36 @@
           </div>
         </div>
       `;
-      document.body.appendChild(modalOverlay);
+        document.body.appendChild(modalOverlay);
 
-      document.getElementById('hicine-modal-close').addEventListener('click', closeModal);
-      modalOverlay.addEventListener('click', (e) => {
-        if (e.target === modalOverlay) closeModal();
-      });
-
-      // Quick Switcher Buttons
-      document.getElementById('hicine-quick-watch-btn').addEventListener('click', () => {
-        setTabActive('stream');
-      });
-      document.getElementById('hicine-quick-dl-btn').addEventListener('click', () => {
-        setTabActive('download');
-      });
-
-      // Tab switching
-      const tabBtns = modalOverlay.querySelectorAll('.hicine-tab-btn');
-      tabBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-          const tab = btn.getAttribute('data-tab');
-          setTabActive(tab);
+        document.getElementById('hicine-modal-close').addEventListener('click', closeModal);
+        modalOverlay.addEventListener('click', (e) => {
+          if (e.target === modalOverlay) closeModal();
         });
-      });
-    }
 
-    // 2. "Servers Ready" Multi-Server Modal (Screenshot 4)
-    if (!document.getElementById('hicine-servers-modal')) {
-      const srvModal = document.createElement('div');
-      srvModal.id = 'hicine-servers-modal';
-      srvModal.innerHTML = `
+        // Quick Switcher Buttons
+        document.getElementById('hicine-quick-watch-btn').addEventListener('click', () => {
+          setTabActive('stream');
+        });
+        document.getElementById('hicine-quick-dl-btn').addEventListener('click', () => {
+          setTabActive('download');
+        });
+
+        // Tab switching
+        const tabBtns = modalOverlay.querySelectorAll('.hicine-tab-btn');
+        tabBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            const tab = btn.getAttribute('data-tab');
+            setTabActive(tab);
+          });
+        });
+      }
+
+      // 2. "Servers Ready" Multi-Server Modal (Screenshot 4)
+      if (!document.getElementById('hicine-servers-modal')) {
+        const srvModal = document.createElement('div');
+        srvModal.id = 'hicine-servers-modal';
+        srvModal.innerHTML = `
         <div class="hicine-servers-card">
           <button class="hicine-modal-close-btn" id="hicine-servers-close" style="top: 1rem; right: 1rem;" aria-label="Close">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -241,218 +241,218 @@
           <p class="hicine-servers-footer">Links are signed &amp; time-limited (5 min).</p>
         </div>
       `;
-      document.body.appendChild(srvModal);
+        document.body.appendChild(srvModal);
 
-      document.getElementById('hicine-servers-close').addEventListener('click', closeServersModal);
-      srvModal.addEventListener('click', (e) => {
-        if (e.target === srvModal) closeServersModal();
-      });
-
-      // Wire up server triggers to REAL downloads
-      srvModal.querySelectorAll('.hicine-srv-trigger').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const srv = btn.getAttribute('data-server');
-          triggerServerDownload(srv, btn);
+        document.getElementById('hicine-servers-close').addEventListener('click', closeServersModal);
+        srvModal.addEventListener('click', (e) => {
+          if (e.target === srvModal) closeServersModal();
         });
+
+        // Wire up server triggers to REAL downloads
+        srvModal.querySelectorAll('.hicine-srv-trigger').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const srv = btn.getAttribute('data-server');
+            triggerServerDownload(srv, btn);
+          });
+        });
+      }
+    }
+
+    function setTabActive(tabName) {
+      const tabBtns = document.querySelectorAll('#hicine-tabs-bar .hicine-tab-btn');
+      tabBtns.forEach(b => {
+        if (b.getAttribute('data-tab') === tabName) {
+          b.classList.add('active');
+        } else {
+          b.classList.remove('active');
+        }
+      });
+
+      const panels = ['download', 'stream', 'trailer', 'cloud', 'details', 'previews'];
+      panels.forEach(p => {
+        const el = document.getElementById(`hicine-tab-panel-${p}`);
+        if (el) el.style.display = (p === tabName) ? 'block' : 'none';
+      });
+
+      if (tabName === 'stream') {
+        setupStreamingPlayer();
+      } else if (tabName === 'trailer') {
+        setupTrailerPlayer();
+      }
+    }
+
+    function triggerServerDownload(serverType, btn) {
+      if (!activeVcloudUrl) {
+        alert('Download link resolving, please wait...');
+        return;
+      }
+
+      btn.innerHTML = `<span style="font-size: 0.8rem;">Starting...</span>`;
+      const downloadEndpoint = `/api/download/server?vcloud=${encodeURIComponent(activeVcloudUrl)}&server=${serverType}`;
+
+      // Direct browser navigation triggers immediate file download or redirect
+      setTimeout(() => {
+        btn.innerHTML = `✓ Ready`;
+        window.open(downloadEndpoint, '_blank');
+        setTimeout(() => {
+          btn.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg> Download`;
+        }, 2500);
+      }, 400);
+    }
+
+    function setupStreamingPlayer() {
+      if (!currentTitleData) return;
+      const tmdbId = currentTitleData.tmdbId || '';
+      const imdbId = currentTitleData.imdbId || '';
+      const isSeries = currentTitleData.type === 'series' || currentTitleData.type === 'anime' || currentTitleData.type === 'kdrama';
+
+      // Initial stream load
+      updateStreamingSource('server1', isSeries, tmdbId, imdbId);
+
+      const srvBtns = document.querySelectorAll('#hicine-stream-servers .hicine-stream-server-btn');
+      srvBtns.forEach(btn => {
+        btn.onclick = () => {
+          srvBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          const src = btn.getAttribute('data-src');
+          updateStreamingSource(src, isSeries, tmdbId, imdbId);
+        };
       });
     }
-  }
 
-  function setTabActive(tabName) {
-    const tabBtns = document.querySelectorAll('#hicine-tabs-bar .hicine-tab-btn');
-    tabBtns.forEach(b => {
-      if (b.getAttribute('data-tab') === tabName) {
-        b.classList.add('active');
-      } else {
-        b.classList.remove('active');
-      }
-    });
+    function updateStreamingSource(server, isSeries, tmdbId, imdbId) {
+      const iframe = document.getElementById('hicine-stream-iframe');
+      if (!iframe) return;
 
-    const panels = ['download', 'stream', 'trailer', 'cloud', 'details', 'previews'];
-    panels.forEach(p => {
-      const el = document.getElementById(`hicine-tab-panel-${p}`);
-      if (el) el.style.display = (p === tabName) ? 'block' : 'none';
-    });
+      let url = '';
+      const targetId = imdbId || tmdbId || (currentTitleData ? currentTitleData.id : '');
 
-    if (tabName === 'stream') {
-      setupStreamingPlayer();
-    } else if (tabName === 'trailer') {
-      setupTrailerPlayer();
-    }
-  }
-
-  function triggerServerDownload(serverType, btn) {
-    if (!activeVcloudUrl) {
-      alert('Download link resolving, please wait...');
-      return;
-    }
-
-    btn.innerHTML = `<span style="font-size: 0.8rem;">Starting...</span>`;
-    const downloadEndpoint = `/api/download/server?vcloud=${encodeURIComponent(activeVcloudUrl)}&server=${serverType}`;
-
-    // Direct browser navigation triggers immediate file download or redirect
-    setTimeout(() => {
-      btn.innerHTML = `✓ Ready`;
-      window.open(downloadEndpoint, '_blank');
-      setTimeout(() => {
-        btn.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg> Download`;
-      }, 2500);
-    }, 400);
-  }
-
-  function setupStreamingPlayer() {
-    if (!currentTitleData) return;
-    const tmdbId = currentTitleData.tmdbId || '';
-    const imdbId = currentTitleData.imdbId || '';
-    const isSeries = currentTitleData.type === 'series' || currentTitleData.type === 'anime' || currentTitleData.type === 'kdrama';
-
-    // Initial stream load
-    updateStreamingSource('server1', isSeries, tmdbId, imdbId);
-
-    const srvBtns = document.querySelectorAll('#hicine-stream-servers .hicine-stream-server-btn');
-    srvBtns.forEach(btn => {
-      btn.onclick = () => {
-        srvBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const src = btn.getAttribute('data-src');
-        updateStreamingSource(src, isSeries, tmdbId, imdbId);
-      };
-    });
-  }
-
-  function updateStreamingSource(server, isSeries, tmdbId, imdbId) {
-    const iframe = document.getElementById('hicine-stream-iframe');
-    if (!iframe) return;
-
-    let url = '';
-    const targetId = imdbId || tmdbId || (currentTitleData ? currentTitleData.id : '');
-
-    if (server === 'server1') {
-      // AllMovieLand (Dotmobiz authentic Hindi stream)
-      if (imdbId) {
-        url = `https://slast430did.com/play/${imdbId}`;
-      } else {
+      if (server === 'server1') {
+        // AllMovieLand (Dotmobiz authentic Hindi stream)
+        if (imdbId) {
+          url = `https://slast430did.com/play/${imdbId}`;
+        } else {
+          url = `https://vidlink.pro/${isSeries ? 'tv' : 'movie'}/${targetId}?multiLang=true`;
+        }
+      } else if (server === 'server2') {
+        // Fast Cloud / VidLink
         url = `https://vidlink.pro/${isSeries ? 'tv' : 'movie'}/${targetId}?multiLang=true`;
+      } else if (server === 'server3') {
+        // VidLink
+        url = `https://vidlink.pro/${isSeries ? 'tv' : 'movie'}/${targetId}`;
+      } else {
+        // VidSrc
+        url = imdbId
+          ? `https://vidsrc.me/embed/${isSeries ? 'tv' : 'movie'}?imdb=${imdbId}`
+          : `https://vidsrc.me/embed/${isSeries ? 'tv' : 'movie'}?tmdb=${tmdbId}`;
       }
-    } else if (server === 'server2') {
-      // Fast Cloud / VidLink
-      url = `https://vidlink.pro/${isSeries ? 'tv' : 'movie'}/${targetId}?multiLang=true`;
-    } else if (server === 'server3') {
-      // VidLink
-      url = `https://vidlink.pro/${isSeries ? 'tv' : 'movie'}/${targetId}`;
-    } else {
-      // VidSrc
-      url = imdbId
-        ? `https://vidsrc.me/embed/${isSeries ? 'tv' : 'movie'}?imdb=${imdbId}`
-        : `https://vidsrc.me/embed/${isSeries ? 'tv' : 'movie'}?tmdb=${tmdbId}`;
+
+      iframe.src = url;
     }
 
-    iframe.src = url;
-  }
+    function setupTrailerPlayer() {
+      if (!currentTitleData) return;
+      const iframe = document.getElementById('hicine-trailer-iframe');
+      if (!iframe) return;
 
-  function setupTrailerPlayer() {
-    if (!currentTitleData) return;
-    const iframe = document.getElementById('hicine-trailer-iframe');
-    if (!iframe) return;
-
-    if (currentTitleData.trailerUrl) {
-      let tUrl = currentTitleData.trailerUrl;
-      if (!tUrl.includes('autoplay')) tUrl += (tUrl.includes('?') ? '&' : '?') + 'autoplay=1&rel=0';
-      iframe.src = tUrl;
-    } else {
-      const q = encodeURIComponent((currentTitleData.title || '') + ' official trailer');
-      iframe.src = `https://www.youtube-nocookie.com/embed?listType=search&list=${q}&autoplay=1`;
-    }
-  }
-
-  function openModal(data) {
-    initModalContainers();
-    currentTitleData = data;
-
-    // 1. Poster
-    const posterEl = document.getElementById('hicine-modal-poster');
-    posterEl.src = data.poster || data.image || '/images/no-poster.svg';
-    posterEl.onerror = () => { posterEl.src = '/images/no-poster.svg'; };
-
-    // 2. Title & Date
-    const titleEl = document.getElementById('hicine-modal-title');
-    titleEl.textContent = `${data.title || 'Movie'} (${data.year || '2026'})`;
-
-    const updatedEl = document.getElementById('hicine-modal-updated');
-    updatedEl.textContent = data.updatedAt || 'Updated on Sep 4, 2026';
-
-    // 3. Render Downloads (Both Hicine Cloud & Dotmovies Links)
-    renderAllDownloadCards(data);
-
-    // 4. Render Details & Previews
-    renderDetailsTab(data);
-    renderPreviewsTab(data);
-
-    // 5. Default to Download tab
-    setTabActive('download');
-
-    // 6. Open Modal Overlay
-    const overlay = document.getElementById('hicine-modal-overlay');
-    overlay.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeModal() {
-    const overlay = document.getElementById('hicine-modal-overlay');
-    if (overlay) overlay.classList.remove('open');
-    document.body.style.overflow = '';
-
-    const sIframe = document.getElementById('hicine-stream-iframe');
-    if (sIframe) sIframe.src = '';
-    const tIframe = document.getElementById('hicine-trailer-iframe');
-    if (tIframe) tIframe.src = '';
-  }
-
-  function renderAllDownloadCards(data) {
-    const cloudContainer = document.getElementById('hicine-cloud-downloads-list');
-    const dotContainer = document.getElementById('hicine-dotmovies-downloads-list');
-    cloudContainer.innerHTML = '';
-    dotContainer.innerHTML = '';
-
-    const rawLinks = Array.isArray(data.links) ? data.links : [];
-    const rawOptions = Array.isArray(data.downloadOptions) ? data.downloadOptions : [];
-
-    // Filter Hicine / Fast Cloud links
-    const hicineLinks = rawLinks.filter(l => l && (l.source === 'hicine' || l.isCloud || (l.url && (l.url.includes('vcloud') || l.url.includes('workers.dev')))));
-
-    // Fallback if no specific hicine links: create standard quality tiers
-    const cleanName = (data.title || 'Movie').replace(/\(\d{4}\)/g, '').trim();
-    const year = data.year || '2026';
-
-    const effectiveHicine = hicineLinks.length > 0 ? hicineLinks : [
-      {
-        quality: '480p',
-        size: '800MB',
-        label: `${cleanName} (${year}) Hindi-AAC2.0 HDTC 480p x264 [800MB]`,
-        url: `/api/download-file?title=${encodeURIComponent(cleanName)}&quality=480p`
-      },
-      {
-        quality: '720p',
-        size: '2GB',
-        label: `${cleanName} (${year}) Hindi-AAC2.0 HDTC 720p x264 [2GB]`,
-        url: `/api/download-file?title=${encodeURIComponent(cleanName)}&quality=720p`
-      },
-      {
-        quality: '1080p',
-        size: '3.8GB',
-        label: `${cleanName} (${year}) Hindi-AAC2.0 HDTC 1080p x264 [3.8GB]`,
-        url: `/api/download-file?title=${encodeURIComponent(cleanName)}&quality=1080p`
+      if (currentTitleData.trailerUrl) {
+        let tUrl = currentTitleData.trailerUrl;
+        if (!tUrl.includes('autoplay')) tUrl += (tUrl.includes('?') ? '&' : '?') + 'autoplay=1&rel=0';
+        iframe.src = tUrl;
+      } else {
+        const q = encodeURIComponent((currentTitleData.title || '') + ' official trailer');
+        iframe.src = `https://www.youtube-nocookie.com/embed?listType=search&list=${q}&autoplay=1`;
       }
-    ];
+    }
 
-    effectiveHicine.forEach(item => {
-      const q = (item.quality || '1080p').toUpperCase();
-      const sz = item.size || '2GB';
-      const fileInfo = item.label || `${cleanName} (${year}) Hindi-AAC2.0 HDTC ${q} x264 [${sz}]`;
+    function openModal(data) {
+      initModalContainers();
+      currentTitleData = data;
 
-      const card = document.createElement('div');
-      card.className = 'hicine-dl-card';
-      card.innerHTML = `
+      // 1. Poster
+      const posterEl = document.getElementById('hicine-modal-poster');
+      posterEl.src = data.poster || data.image || '/images/no-poster.svg';
+      posterEl.onerror = () => { posterEl.src = '/images/no-poster.svg'; };
+
+      // 2. Title & Date
+      const titleEl = document.getElementById('hicine-modal-title');
+      titleEl.textContent = `${data.title || 'Movie'} (${data.year || '2026'})`;
+
+      const updatedEl = document.getElementById('hicine-modal-updated');
+      updatedEl.textContent = data.updatedAt || 'Updated on Sep 4, 2026';
+
+      // 3. Render Downloads (Both Hicine Cloud & Dotmovies Links)
+      renderAllDownloadCards(data);
+
+      // 4. Render Details & Previews
+      renderDetailsTab(data);
+      renderPreviewsTab(data);
+
+      // 5. Default to Download tab
+      setTabActive('download');
+
+      // 6. Open Modal Overlay
+      const overlay = document.getElementById('hicine-modal-overlay');
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      const overlay = document.getElementById('hicine-modal-overlay');
+      if (overlay) overlay.classList.remove('open');
+      document.body.style.overflow = '';
+
+      const sIframe = document.getElementById('hicine-stream-iframe');
+      if (sIframe) sIframe.src = '';
+      const tIframe = document.getElementById('hicine-trailer-iframe');
+      if (tIframe) tIframe.src = '';
+    }
+
+    function renderAllDownloadCards(data) {
+      const cloudContainer = document.getElementById('hicine-cloud-downloads-list');
+      const dotContainer = document.getElementById('hicine-dotmovies-downloads-list');
+      cloudContainer.innerHTML = '';
+      dotContainer.innerHTML = '';
+
+      const rawLinks = Array.isArray(data.links) ? data.links : [];
+      const rawOptions = Array.isArray(data.downloadOptions) ? data.downloadOptions : [];
+
+      // Filter Hicine / Fast Cloud links
+      const hicineLinks = rawLinks.filter(l => l && (l.source === 'hicine' || l.isCloud || (l.url && (l.url.includes('vcloud') || l.url.includes('workers.dev')))));
+
+      // Fallback if no specific hicine links: create standard quality tiers
+      const cleanName = (data.title || 'Movie').replace(/\(\d{4}\)/g, '').trim();
+      const year = data.year || '2026';
+
+      const effectiveHicine = hicineLinks.length > 0 ? hicineLinks : [
+        {
+          quality: '480p',
+          size: '800MB',
+          label: `${cleanName} (${year}) Hindi-AAC2.0 HDTC 480p x264 [800MB]`,
+          url: `/api/download-file?title=${encodeURIComponent(cleanName)}&quality=480p`
+        },
+        {
+          quality: '720p',
+          size: '2GB',
+          label: `${cleanName} (${year}) Hindi-AAC2.0 HDTC 720p x264 [2GB]`,
+          url: `/api/download-file?title=${encodeURIComponent(cleanName)}&quality=720p`
+        },
+        {
+          quality: '1080p',
+          size: '3.8GB',
+          label: `${cleanName} (${year}) Hindi-AAC2.0 HDTC 1080p x264 [3.8GB]`,
+          url: `/api/download-file?title=${encodeURIComponent(cleanName)}&quality=1080p`
+        }
+      ];
+
+      effectiveHicine.forEach(item => {
+        const q = (item.quality || '1080p').toUpperCase();
+        const sz = item.size || '2GB';
+        const fileInfo = item.label || `${cleanName} (${year}) Hindi-AAC2.0 HDTC ${q} x264 [${sz}]`;
+
+        const card = document.createElement('div');
+        card.className = 'hicine-dl-card';
+        card.innerHTML = `
         <div class="hicine-dl-file-info">
           <strong>File Information:</strong>
           ${fileInfo}
@@ -473,33 +473,33 @@
         </div>
       `;
 
-      card.querySelector('.hicine-dl-btn').addEventListener('click', (e) => {
-        e.preventDefault();
-        activeQuality = q;
-        activeVcloudUrl = item.url || `/api/download-file?title=${encodeURIComponent(cleanName)}`;
-        openServersModal(q, sz, fileInfo);
+        card.querySelector('.hicine-dl-btn').addEventListener('click', (e) => {
+          e.preventDefault();
+          activeQuality = q;
+          activeVcloudUrl = item.url || `/api/download-file?title=${encodeURIComponent(cleanName)}`;
+          openServersModal(q, sz, fileInfo);
+        });
+
+        cloudContainer.appendChild(card);
       });
 
-      cloudContainer.appendChild(card);
-    });
+      // RENDER DOTMOVIES EXCLUSIVE DOWNLOADS
+      const dotLinks = rawOptions.length > 0 ? rawOptions : rawLinks.filter(l => l && (l.source === 'dotmobiz' || (!l.isCloud && l.url && l.url.includes('nexdrive'))));
 
-    // RENDER DOTMOVIES EXCLUSIVE DOWNLOADS
-    const dotLinks = rawOptions.length > 0 ? rawOptions : rawLinks.filter(l => l && (l.source === 'dotmobiz' || (!l.isCloud && l.url && l.url.includes('nexdrive'))));
+      const effectiveDot = dotLinks.length > 0 ? dotLinks : [
+        { quality: '480p', size: '630MB', label: 'Click Here To Download [630MB]', url: 'https://nexdrive.love/' },
+        { quality: '720p x264', size: '1.5GB', label: 'Click Here To Download [1.5GB]', url: 'https://nexdrive.love/' },
+        { quality: '1080p x264', size: '3.6GB', label: 'Click Here To Download [3.6GB]', url: 'https://nexdrive.love/' },
+        { quality: '1080p HQ', size: '19GB', label: 'Click Here To Download [19GB]', url: 'https://nexdrive.love/' }
+      ];
 
-    const effectiveDot = dotLinks.length > 0 ? dotLinks : [
-      { quality: '480p', size: '630MB', label: 'Click Here To Download [630MB]', url: 'https://nexdrive.love/' },
-      { quality: '720p x264', size: '1.5GB', label: 'Click Here To Download [1.5GB]', url: 'https://nexdrive.love/' },
-      { quality: '1080p x264', size: '3.6GB', label: 'Click Here To Download [3.6GB]', url: 'https://nexdrive.love/' },
-      { quality: '1080p HQ', size: '19GB', label: 'Click Here To Download [19GB]', url: 'https://nexdrive.love/' }
-    ];
-
-    effectiveDot.forEach(opt => {
-      const q = opt.quality || 'HD';
-      const sz = opt.size || '';
-      const dotCard = document.createElement('div');
-      dotCard.className = 'hicine-dl-card';
-      dotCard.style.borderColor = 'rgba(16, 185, 129, 0.18)';
-      dotCard.innerHTML = `
+      effectiveDot.forEach(opt => {
+        const q = opt.quality || 'HD';
+        const sz = opt.size || '';
+        const dotCard = document.createElement('div');
+        dotCard.className = 'hicine-dl-card';
+        dotCard.style.borderColor = 'rgba(16, 185, 129, 0.18)';
+        dotCard.innerHTML = `
         <div class="hicine-dl-file-info">
           <strong style="color: #34d399;">DotMovies Dual Audio Release:</strong>
           ${cleanName} (${year}) Hindi Dual Audio [${q}] ${sz}
@@ -519,12 +519,12 @@
           </a>
         </div>
       `;
-      dotContainer.appendChild(dotCard);
-    });
+        dotContainer.appendChild(dotCard);
+      });
 
-    // Populate Cloud Tab
-    const cloudEl = document.getElementById('hicine-cloud-list');
-    cloudEl.innerHTML = `
+      // Populate Cloud Tab
+      const cloudEl = document.getElementById('hicine-cloud-list');
+      cloudEl.innerHTML = `
       <div class="hicine-dl-card">
         <div class="hicine-dl-row">
           <div class="hicine-dl-meta-group">
@@ -544,11 +544,11 @@
         </div>
       </div>
     `;
-  }
+    }
 
-  function renderDetailsTab(data) {
-    const bodyEl = document.getElementById('hicine-details-body');
-    bodyEl.innerHTML = `
+    function renderDetailsTab(data) {
+      const bodyEl = document.getElementById('hicine-details-body');
+      bodyEl.innerHTML = `
       <p style="margin-bottom: 12px; color: #f1f5f9; font-size: 0.95rem;">${data.description || data.overview || 'Watch and download the latest blockbuster with high speed multi-server download links.'}</p>
       <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; margin-top: 16px;">
         <div><strong style="color: #94a3b8; font-size: 0.8rem; display: block;">DIRECTOR</strong> <span style="color: #fff;">${data.director || 'Director'}</span></div>
@@ -557,112 +557,112 @@
         <div><strong style="color: #94a3b8; font-size: 0.8rem; display: block;">AUDIO</strong> <span style="color: #fff;">Hindi (Dual Audio / Multi-Lang)</span></div>
       </div>
     `;
-  }
+    }
 
-  function renderPreviewsTab(data) {
-    const gridEl = document.getElementById('hicine-previews-grid');
-    gridEl.innerHTML = '';
-    const previews = Array.isArray(data.screenshots) && data.screenshots.length > 0
-      ? data.screenshots
-      : (data.backdrop ? [data.backdrop, data.poster] : ['/images/no-poster.svg']);
+    function renderPreviewsTab(data) {
+      const gridEl = document.getElementById('hicine-previews-grid');
+      gridEl.innerHTML = '';
+      const previews = Array.isArray(data.screenshots) && data.screenshots.length > 0
+        ? data.screenshots
+        : (data.backdrop ? [data.backdrop, data.poster] : ['/images/no-poster.svg']);
 
-    previews.forEach(imgUrl => {
-      const img = document.createElement('img');
-      img.src = imgUrl;
-      img.style.cssText = 'width: 100%; border-radius: 12px; aspect-ratio: 16/9; object-fit: cover; border: 1px solid rgba(255,255,255,0.08);';
-      gridEl.appendChild(img);
-    });
-  }
+      previews.forEach(imgUrl => {
+        const img = document.createElement('img');
+        img.src = imgUrl;
+        img.style.cssText = 'width: 100%; border-radius: 12px; aspect-ratio: 16/9; object-fit: cover; border: 1px solid rgba(255,255,255,0.08);';
+        gridEl.appendChild(img);
+      });
+    }
 
-  // 1:1 "Servers Ready" Modal (Screenshot 4)
-  function openServersModal(quality, size, fileInfo) {
-    initModalContainers();
-    const modal = document.getElementById('hicine-servers-modal');
-    const titleEl = document.getElementById('hicine-srv-meta-title');
-    const sizeEl = document.getElementById('hicine-srv-meta-size');
+    // 1:1 "Servers Ready" Modal (Screenshot 4)
+    function openServersModal(quality, size, fileInfo) {
+      initModalContainers();
+      const modal = document.getElementById('hicine-servers-modal');
+      const titleEl = document.getElementById('hicine-srv-meta-title');
+      const sizeEl = document.getElementById('hicine-srv-meta-size');
 
-    titleEl.textContent = fileInfo || `${currentTitleData?.title || 'Movie'} ${quality || '1080p'} HDTC Hindi LINE HC ESub x264 1VegaMovies`;
-    sizeEl.textContent = size || '3.69 GB';
+      titleEl.textContent = fileInfo || `${currentTitleData?.title || 'Movie'} ${quality || '1080p'} HDTC Hindi LINE HC ESub x264 1VegaMovies`;
+      sizeEl.textContent = size || '3.69 GB';
 
-    let totalSecs = 299; // 4:59
-    const timerEl = document.getElementById('hicine-server-countdown');
-    if (serverCountdownInterval) clearInterval(serverCountdownInterval);
+      let totalSecs = 299; // 4:59
+      const timerEl = document.getElementById('hicine-server-countdown');
+      if (serverCountdownInterval) clearInterval(serverCountdownInterval);
 
-    const updateTimer = () => {
-      const mins = Math.floor(totalSecs / 60);
-      const secs = totalSecs % 60;
-      if (timerEl) timerEl.textContent = `${mins}:${String(secs).padStart(2, '0')}`;
-      totalSecs--;
-      if (totalSecs < 0) {
-        clearInterval(serverCountdownInterval);
-        if (timerEl) timerEl.textContent = 'Expired';
-      }
+      const updateTimer = () => {
+        const mins = Math.floor(totalSecs / 60);
+        const secs = totalSecs % 60;
+        if (timerEl) timerEl.textContent = `${mins}:${String(secs).padStart(2, '0')}`;
+        totalSecs--;
+        if (totalSecs < 0) {
+          clearInterval(serverCountdownInterval);
+          if (timerEl) timerEl.textContent = 'Expired';
+        }
+      };
+      updateTimer();
+      serverCountdownInterval = setInterval(updateTimer, 1000);
+
+      modal.classList.add('open');
+    }
+
+    function closeServersModal() {
+      const modal = document.getElementById('hicine-servers-modal');
+      if (modal) modal.classList.remove('open');
+      if (serverCountdownInterval) clearInterval(serverCountdownInterval);
+    }
+
+    // Intercept movie clicks across the entire site
+    function attachMovieCardListeners() {
+      document.addEventListener('click', (e) => {
+        const card = e.target.closest('a[href^="/movie/"], a[href^="/series/"], .movie-card, [data-movie-id]');
+        if (!card) return;
+
+        const href = card.getAttribute('href') || '';
+        const match = href.match(/\/(movie|series)\/([^/?#]+)/);
+        if (match) {
+          e.preventDefault();
+          const type = match[1];
+          const id = match[2];
+
+          const img = card.querySelector('img');
+          const titleEl = card.querySelector('h3, p, .title');
+          const fallbackData = {
+            id: id,
+            type: type,
+            title: titleEl ? titleEl.textContent.trim() : 'Movie',
+            poster: img ? img.src : '/images/no-poster.svg',
+            year: '2026',
+            quality: '1080p'
+          };
+
+          // Fetch fresh details with links
+          fetch(`/api/details?id=${encodeURIComponent(id)}`)
+            .then(r => r.ok ? r.json() : null)
+            .then(json => {
+              const data = json ? (json.data || json) : fallbackData;
+              openModal(data);
+            })
+            .catch(() => {
+              openModal(fallbackData);
+            });
+        }
+      }, true);
+    }
+
+    window.HicineModal = {
+      open: openModal,
+      close: closeModal,
+      openServers: openServersModal,
+      closeServers: closeServersModal,
+      switchTab: setTabActive
     };
-    updateTimer();
-    serverCountdownInterval = setInterval(updateTimer, 1000);
 
-    modal.classList.add('open');
-  }
-
-  function closeServersModal() {
-    const modal = document.getElementById('hicine-servers-modal');
-    if (modal) modal.classList.remove('open');
-    if (serverCountdownInterval) clearInterval(serverCountdownInterval);
-  }
-
-  // Intercept movie clicks across the entire site
-  function attachMovieCardListeners() {
-    document.addEventListener('click', (e) => {
-      const card = e.target.closest('a[href^="/movie/"], a[href^="/series/"], .movie-card, [data-movie-id]');
-      if (!card) return;
-
-      const href = card.getAttribute('href') || '';
-      const match = href.match(/\/(movie|series)\/([^/?#]+)/);
-      if (match) {
-        e.preventDefault();
-        const type = match[1];
-        const id = match[2];
-
-        const img = card.querySelector('img');
-        const titleEl = card.querySelector('h3, p, .title');
-        const fallbackData = {
-          id: id,
-          type: type,
-          title: titleEl ? titleEl.textContent.trim() : 'Movie',
-          poster: img ? img.src : '/images/no-poster.svg',
-          year: '2026',
-          quality: '1080p'
-        };
-
-        // Fetch fresh details with links
-        fetch(`/api/details?id=${encodeURIComponent(id)}`)
-          .then(r => r.ok ? r.json() : null)
-          .then(json => {
-            const data = json ? (json.data || json) : fallbackData;
-            openModal(data);
-          })
-          .catch(() => {
-            openModal(fallbackData);
-          });
-      }
-    }, true);
-  }
-
-  window.HicineModal = {
-    open: openModal,
-    close: closeModal,
-    openServers: openServersModal,
-    closeServers: closeServersModal,
-    switchTab: setTabActive
-  };
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => {
+        initModalContainers();
+        attachMovieCardListeners();
+      });
+    } else {
       initModalContainers();
       attachMovieCardListeners();
-    });
-  } else {
-    initModalContainers();
-    attachMovieCardListeners();
-  }
-})();
+    }
+  })();

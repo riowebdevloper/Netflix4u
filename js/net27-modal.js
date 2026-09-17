@@ -28,6 +28,8 @@
   var watchMetaTitle = document.getElementById('watch-meta-title');
   var watchMetaYear = document.getElementById('watch-meta-year');
   var watchMetaType = document.getElementById('watch-meta-type');
+  var watchPortraitHint = document.getElementById('watch-portrait-hint');
+  var watchPortraitHintDismiss = document.getElementById('watch-portrait-hint-dismiss');
 
   var policyModal = document.getElementById('policy-modal');
   var policyModalBody = document.getElementById('policy-modal-body');
@@ -2348,9 +2350,9 @@
       clearTimeout(autoSwitchTimer);
       autoSwitchTimer = null;
     }
-    if (watchTopBarTimer) {
-      clearTimeout(watchTopBarTimer);
-      watchTopBarTimer = null;
+    if (watchTopBarHideTimeout) {
+      clearTimeout(watchTopBarHideTimeout);
+      watchTopBarHideTimeout = null;
     }
     if (activeProbeController) {
       try { activeProbeController.abort(); } catch(e) {}
@@ -2570,9 +2572,9 @@
     if (modalTrigger) {
       var modalType = modalTrigger.dataset.modal;
       if (modalType === 'title') {
-        var tmdbId = modalTrigger.dataset.tmdbid;
-        var canonicalId = modalTrigger.dataset.canonicalId;
-        var imdbId = modalTrigger.dataset.imdbid;
+        var tmdbId = modalTrigger.dataset.tmdbid || modalTrigger.dataset.tmdbId || modalTrigger.getAttribute('data-tmdbid') || modalTrigger.getAttribute('data-tmdb-id');
+        var canonicalId = modalTrigger.dataset.canonicalId || modalTrigger.dataset.canonicalid || modalTrigger.getAttribute('data-canonical-id') || modalTrigger.dataset.subject || modalTrigger.getAttribute('data-subject');
+        var imdbId = modalTrigger.dataset.imdbid || modalTrigger.getAttribute('data-imdbid') || '';
         var type = modalTrigger.dataset.type || 'movie';
         var title = modalTrigger.dataset.title || '';
         var year = modalTrigger.dataset.year || '';
@@ -2583,12 +2585,22 @@
         if (!poster && img && img.src) poster = img.src;
         if (!backdrop && poster) backdrop = poster;
         if (!title && img && img.alt) title = img.alt;
+        if (!tmdbId && !canonicalId) {
+          var parentWithData = modalTrigger.closest('[data-tmdbid], [data-tmdb-id], [data-canonical-id], [data-subject]');
+          if (parentWithData) {
+            tmdbId = parentWithData.dataset.tmdbid || parentWithData.dataset.tmdbId || parentWithData.getAttribute('data-tmdbid') || parentWithData.getAttribute('data-tmdb-id');
+            canonicalId = parentWithData.dataset.canonicalId || parentWithData.dataset.canonicalid || parentWithData.getAttribute('data-canonical-id') || parentWithData.dataset.subject;
+          }
+        }
+        if (!tmdbId && !canonicalId) {
+          canonicalId = modalTrigger.dataset.id || modalTrigger.getAttribute('data-id');
+        }
         if (!tmdbId && !canonicalId) return;
         e.preventDefault();
         openTitleModal(tmdbId, type, true, canonicalId, imdbId, title, year, poster, backdrop);
       } else if (modalType === 'watch') {
-        var tmdbId = modalTrigger.dataset.tmdbid;
-        var canonicalId = modalTrigger.dataset.canonicalId;
+        var tmdbId = modalTrigger.dataset.tmdbid || modalTrigger.dataset.tmdbId || modalTrigger.getAttribute('data-tmdbid') || modalTrigger.getAttribute('data-tmdb-id');
+        var canonicalId = modalTrigger.dataset.canonicalId || modalTrigger.dataset.canonicalid || modalTrigger.getAttribute('data-canonical-id') || modalTrigger.dataset.subject || modalTrigger.getAttribute('data-subject');
         var type = modalTrigger.dataset.type || 'movie';
         var se = modalTrigger.dataset.se || 1;
         var ep = modalTrigger.dataset.ep || 1;
@@ -2596,12 +2608,22 @@
         var poster = modalTrigger.dataset.poster || '';
         var title = modalTrigger.dataset.title || '';
         var year = modalTrigger.dataset.year || '';
-        var imdbId = modalTrigger.dataset.imdbid || '';
+        var imdbId = modalTrigger.dataset.imdbid || modalTrigger.getAttribute('data-imdbid') || '';
         var card = modalTrigger.closest('.nm-card') || modalTrigger.closest('.card') || modalTrigger.closest('#title-modal') || modalTrigger;
         var img = card.querySelector('img');
         if (!poster && img && img.src) poster = img.src;
         if (!backdrop && poster) backdrop = poster;
         if (!title && img && img.alt) title = img.alt;
+        if (!tmdbId && !canonicalId) {
+          var parentWithData = modalTrigger.closest('[data-tmdbid], [data-tmdb-id], [data-canonical-id], [data-subject]');
+          if (parentWithData) {
+            tmdbId = parentWithData.dataset.tmdbid || parentWithData.dataset.tmdbId || parentWithData.getAttribute('data-tmdbid') || parentWithData.getAttribute('data-tmdb-id');
+            canonicalId = parentWithData.dataset.canonicalId || parentWithData.dataset.canonicalid || parentWithData.getAttribute('data-canonical-id') || parentWithData.dataset.subject;
+          }
+        }
+        if (!tmdbId && !canonicalId) {
+          canonicalId = modalTrigger.dataset.id || modalTrigger.getAttribute('data-id');
+        }
         if (!tmdbId && !canonicalId) return;
         e.preventDefault();
         openServerPickerModal(tmdbId, type, se, ep, backdrop, title, year, imdbId, canonicalId, poster);
