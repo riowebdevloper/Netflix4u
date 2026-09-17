@@ -1,0 +1,80 @@
+{
+  "id": "tmdb-series-295089",
+  "canonicalId": "tmdb-series-295089",
+  "externalProvider": "tmdb",
+  "externalId": "295089",
+  "tmdbId": "295089",
+  "imdbId": "tt37578538",
+  "type": "series",
+  "contentType": "series",
+  "title": "The Doll",
+  "canonicalTitle": "The Doll",
+  "originalTitle": "Lalka",
+  "overview": "When Stanisław falls in love with the aristocratic Izabela, he dedicates his entire life to winning her over.",
+  "description": "When Stanisław falls in love with the aristocratic Izabela, he dedicates his entire life to winning her over.",
+  "shortDescription": "When Stanisław falls in love with the aristocratic Izabela, he dedicates his entire life to winning her over.",
+  "year": 2026,
+  "releaseDate": "2026-09-16",
+  "rating": 10,
+  "votes": "0.0K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Drama"
+  ],
+  "categories": [
+    "Drama"
+  ],
+  "language": "Polish",
+  "country": "PL",
+  "director": "Director",
+  "poster": "https://image.tmdb.org/t/p/w500/zJSceCJMF7C6AtdRycZjNjavCT.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/7Q8H2rxsNzoNHagDEMcTlmAKtfb.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/OwYFO5kmHbU?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/OwYFO5kmHbU?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "1873160",
+      "name": "Sandra Drzymalska",
+      "character": "Izabela Łęcka",
+      "photo": "https://image.tmdb.org/t/p/w185/qO4jn3TiQ0Ig1Zf1DhHVCb4lYoe.jpg"
+    },
+    {
+      "id": "980177",
+      "name": "Tomasz Schuchardt",
+      "character": "Stanisław Wokulski",
+      "photo": "https://image.tmdb.org/t/p/w185/2WOX4dBr97itzYzNqEUbxXrYeE3.jpg"
+    },
+    {
+      "id": "1177167",
+      "name": "Dariusz Chojnacki",
+      "character": "Ignacy Rzecki",
+      "photo": "https://image.tmdb.org/t/p/w185/uzdik3FJwIbbOKusISw6Wkytqqk.jpg"
+    },
+    {
+      "id": "144001",
+      "name": "Jacek Braciak",
+      "character": "Tomasz Łęcki",
+      "photo": "https://image.tmdb.org/t/p/w185/c5gcI2kIvi7pjXr2BpdMDmAYpMd.jpg"
+    },
+    {
+      "id": "1866603",
+      "name": "Julia Wyszyńska",
+      "character": "Panna Florentyna",
+      "photo": "https://image.tmdb.org/t/p/w185/10L2QRI6T1At67tJNcckONedIyM.jpg"
+    },
+    {
+      "id": "591258",
+      "name": "Magdalena Cielecka",
+      "character": "Kazimiera Wąsowska",
+      "photo": "https://image.tmdb.org/t/p/w185/5lL9yMqYrUAnoi8Twq782YDbL7P.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 6,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-17T03:25:48.844Z",
+  "createdAt": "2026-09-17T03:25:48.844Z",
+  "updatedAt": "2026-09-17T03:25:48.844Z",
+  "links": []
+}

@@ -429,29 +429,28 @@
   }
 
   async function syncHeroWithTrending() {
-    // Preserve exact net27.cc featured hero titles if already present in data-hero
-    if (heroItems && heroItems.length >= 5) return;
     try {
       var items = null;
-      var cached = getCachedRail('trending-day');
-      if (cached && cached.items && cached.items.length) {
-        items = cached.items;
-      } else {
-        var res = await fetch('/api/catalog/trending?window=day');
+      var feedRes = await fetch('/data/home_feed.json?_t=' + Date.now()).catch(function() {});
+      if (feedRes && feedRes.ok) {
+        var feedData = await feedRes.json().catch(function() {});
+        if (feedData && Array.isArray(feedData.featured) && feedData.featured.length >= 3) {
+          items = feedData.featured;
+        }
+      }
+      if (!items || !items.length) {
+        var res = await fetch('/api/catalog/trending?window=day').catch(function() {});
         if (res && res.ok) {
-          var data = await res.json();
+          var data = await res.json().catch(function() {});
           items = data && data.items;
-          if (items && items.length) {
-            setCachedRail('trending-day', items);
-          }
         }
       }
 
       if (!items || !items.length) return;
 
       var valid = items.filter(function(it) {
-        return it && it.tmdbId && it.title && (it.backdrop || it.poster);
-      }).slice(0, 5);
+        return it && (it.tmdbId || it.id) && it.title && (it.backdrop || it.poster);
+      }).slice(0, 6);
 
       if (valid.length < 3) return;
 

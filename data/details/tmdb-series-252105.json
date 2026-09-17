@@ -1,0 +1,76 @@
+{
+  "id": "tmdb-series-252105",
+  "canonicalId": "tmdb-series-252105",
+  "externalProvider": "tmdb",
+  "externalId": "252105",
+  "tmdbId": "252105",
+  "imdbId": "tt32149571",
+  "type": "series",
+  "contentType": "series",
+  "title": "Golden Axe",
+  "canonicalTitle": "Golden Axe",
+  "originalTitle": "Golden Axe",
+  "overview": "Legendary warriors Ax Battler, Tyris Flare, and Gilius Thunderhead reunite to save Yuria from the evil giant Death Adder, who just won't seem to stay dead. Their quest is complicated by Hampton Squib, an inexperienced and wildly underprepared adventurer whose dream of heroism far exceeds his abilities. Forced to work together despite their flaws, they must find a way to stop Death Adder once and for all.",
+  "description": "Legendary warriors Ax Battler, Tyris Flare, and Gilius Thunderhead reunite to save Yuria from the evil giant Death Adder, who just won't seem to stay dead. Their quest is complicated by Hampton Squib, an inexperienced and wildly underprepared adventurer whose dream of heroism far exceeds his abilities. Forced to work together despite their flaws, they must find a way to stop Death Adder once and for all.",
+  "shortDescription": "Legendary warriors Ax Battler, Tyris Flare, and Gilius Thunderhead reunite to save Yuria from the evil giant Death Adder",
+  "year": 2026,
+  "releaseDate": "2026-09-16",
+  "rating": 10,
+  "votes": "0.0K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Animation",
+    "Sci-Fi & Fantasy"
+  ],
+  "categories": [
+    "Animation",
+    "Sci-Fi & Fantasy"
+  ],
+  "language": "English",
+  "country": "US",
+  "director": "Director",
+  "poster": "https://image.tmdb.org/t/p/w500/toEwR5VTFzHmxW1pX1HjtTXH6QH.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/zOcEo3oQf9KDPPxZueNhReN6TBr.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/sStbBtfGaLA?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/sStbBtfGaLA?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "29528",
+      "name": "Matthew Rhys",
+      "character": "Gilius Thunderhead (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/8uktKexgPn0tsW3dsXVNqkqiNh7.jpg"
+    },
+    {
+      "id": "205179",
+      "name": "Danny Pudi",
+      "character": "Hampton Squib (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/w0zT8Y2dQHU8FgV03NJoHJE6tmD.jpg"
+    },
+    {
+      "id": "2655972",
+      "name": "Lisa Gilroy",
+      "character": "Tyris Flare (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/zEv5PRAKeQo7a3yCGhm2DJwf20B.jpg"
+    },
+    {
+      "id": "934219",
+      "name": "Liam McIntyre",
+      "character": "Ax Battler (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/vTw11F1awNW8AlxInljEsK96cNB.jpg"
+    },
+    {
+      "id": "2039030",
+      "name": "Carl Tart",
+      "character": "Chronos 'Evil' Lait (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/tSGLxpTVzO3NotWtc3wkzNPdhlR.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 10,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-17T03:25:48.830Z",
+  "createdAt": "2026-09-17T03:25:48.830Z",
+  "updatedAt": "2026-09-17T03:25:48.830Z",
+  "links": []
+}

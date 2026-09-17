@@ -489,32 +489,41 @@ function rebuildHomeFeed(catalogList) {
     .filter(item => item.status === 'PUBLISHED' && verifyPosterUrl(item.poster))
     .map(normalizeFeedItem);
 
-  // Top high-demand blockbuster titles with verified downloads to headline the Hero Carousel
-  const priorityIds = ['18013', '23933', '18025', '18029', '83865', '18026', '18027', '90545'];
-
   const withPlayback = published.filter(i => hasVerifiedContent(i) && i.backdrop && !i.backdrop.includes('no-poster'));
-  
-  // Sort priority titles first
-  const priorityItems = [];
-  for (const pid of priorityIds) {
-    const match = withPlayback.find(i => String(i.id).includes(pid) || String(i.record_id).includes(pid));
-    if (match && !priorityItems.some(p => p.id === match.id)) {
-      priorityItems.push(match);
+
+  // Dynamically select top trending and fresh releases for the Hero Carousel
+  // Prioritize 2026/2025 high-rated releases with verified playback and stunning backdrops
+  const sortedByFreshness = [...withPlayback].sort((a, b) => {
+    const yearDiff = (b.year || 0) - (a.year || 0);
+    if (yearDiff !== 0) return yearDiff;
+    const dateA = a.publishedAt ? new Date(a.publishedAt).getTime() : 0;
+    const dateB = b.publishedAt ? new Date(b.publishedAt).getTime() : 0;
+    if (dateB !== dateA) return dateB - dateA;
+    return (b.rating || 0) - (a.rating || 0);
+  });
+
+  // Balanced mix of movies and series for Hero Carousel
+  const featured = [];
+  const heroMovies = sortedByFreshness.filter(i => i.type === 'movie' && (i.rating || 0) >= 6.5);
+  const heroSeries = sortedByFreshness.filter(i => i.type === 'series' && (i.rating || 0) >= 6.5);
+
+  for (let i = 0; i < 8; i++) {
+    if (heroSeries[i] && !featured.some(f => f.id === heroSeries[i].id)) featured.push(heroSeries[i]);
+    if (heroMovies[i] && !featured.some(f => f.id === heroMovies[i].id)) featured.push(heroMovies[i]);
+    if (featured.length >= 8) break;
+  }
+  if (featured.length < 8) {
+    for (const item of sortedByFreshness) {
+      if (!featured.some(f => f.id === item.id)) featured.push(item);
+      if (featured.length >= 8) break;
     }
   }
 
-  const otherPlayback = withPlayback.filter(i => !priorityItems.some(p => p.id === i.id));
-
-  // Balanced mix of movies and series
-  const featured = [...priorityItems, ...otherPlayback]
-    .filter(i => i.backdrop && !i.backdrop.includes('no-poster'))
-    .slice(0, 8);
-
-  // 2. Trending: Verified high-demand titles first, followed by top rating
+  // 2. Trending: Fresh releases first, followed by top rating
   const trending = [
     ...featured,
-    ...withPlayback.filter(i => !featured.some(f => f.id === i.id))
-  ].slice(0, 20);
+    ...sortedByFreshness.filter(i => !featured.some(f => f.id === i.id))
+  ].slice(0, 24);
 
   // 3. Recent Releases: Sorted by year / date
   const recent = [...published]

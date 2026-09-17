@@ -13,7 +13,7 @@
 (function() {
   'use strict';
 
-  var CURRENT_VERSION = '3.3.0';
+  var CURRENT_VERSION = '3.4.0';
   window.__NETFLIX4U_VERSION = CURRENT_VERSION;
 
   var POLL_INTERVAL_MS = 60 * 1000; // Check every 60 seconds

@@ -1,0 +1,84 @@
+{
+  "id": "tmdb-series-273207",
+  "canonicalId": "tmdb-series-273207",
+  "externalProvider": "tmdb",
+  "externalId": "273207",
+  "tmdbId": "273207",
+  "imdbId": "tt33539520",
+  "type": "series",
+  "contentType": "series",
+  "title": "Neagley",
+  "canonicalTitle": "Neagley",
+  "originalTitle": "Neagley",
+  "overview": "Frances Neagley is a private investigator in Chicago and former military colleague of Jack Reacher in the Army's 110th Special Investigations Unit. When she learns that a beloved friend from her past has been killed in a suspicious accident, she becomes hell-bent on justice.",
+  "description": "Frances Neagley is a private investigator in Chicago and former military colleague of Jack Reacher in the Army's 110th Special Investigations Unit. When she learns that a beloved friend from her past has been killed in a suspicious accident, she becomes hell-bent on justice.",
+  "shortDescription": "Frances Neagley is a private investigator in Chicago and former military colleague of Jack Reacher in the Army's 110th S",
+  "year": 2026,
+  "releaseDate": "2026-09-16",
+  "rating": 7,
+  "votes": "0.0K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Drama",
+    "Mystery",
+    "Crime"
+  ],
+  "categories": [
+    "Drama",
+    "Mystery",
+    "Crime"
+  ],
+  "language": "English",
+  "country": "US",
+  "director": "Director",
+  "poster": "https://image.tmdb.org/t/p/w500/1m6CxPAuGv2oHc1ahERrcVWnk2J.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/uYOYLFQ4q7asuhdiKXCqGaeAQUH.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/BOzNaa_o9_g?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/BOzNaa_o9_g?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "2123496",
+      "name": "Maria Sten",
+      "character": "Frances Neagley",
+      "photo": "https://image.tmdb.org/t/p/w185/7QlPWbZRH2ORMmAHKAj0rq54t4A.jpg"
+    },
+    {
+      "id": "206405",
+      "name": "Greyston Holt",
+      "character": "Detective Hudson Riley",
+      "photo": "https://image.tmdb.org/t/p/w185/OefIUfHekZLHwGVjyZmFauUI5W.jpg"
+    },
+    {
+      "id": "2168270",
+      "name": "Adeline Rudolph",
+      "character": "Renee",
+      "photo": "https://image.tmdb.org/t/p/w185/sWjjm53MeVrpQH2dxtFD3gfEt3v.jpg"
+    },
+    {
+      "id": "85484",
+      "name": "Matthew Del Negro",
+      "character": "Pierce Woodrow",
+      "photo": "https://image.tmdb.org/t/p/w185/h3wcgMRunRmeFhFo16BJpKsqQQC.jpg"
+    },
+    {
+      "id": "62752",
+      "name": "Damon Herriman",
+      "character": "Lawrence Cole",
+      "photo": "https://image.tmdb.org/t/p/w185/hzh9i0BlAEQDAhJxEgkEcBxMlJv.jpg"
+    },
+    {
+      "id": "3598266",
+      "name": "Jasper Jones",
+      "character": "Keno",
+      "photo": "https://image.tmdb.org/t/p/w185/wf8SZh1ylique9RJidepV1u1C9p.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 8,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-17T03:25:48.743Z",
+  "createdAt": "2026-09-17T03:25:48.774Z",
+  "updatedAt": "2026-09-17T03:25:48.774Z",
+  "links": []
+}

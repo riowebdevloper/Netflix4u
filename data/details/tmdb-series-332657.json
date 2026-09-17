@@ -1,0 +1,94 @@
+{
+  "id": "tmdb-series-332657",
+  "canonicalId": "tmdb-series-332657",
+  "externalProvider": "tmdb",
+  "externalId": "332657",
+  "tmdbId": "332657",
+  "imdbId": "tt32132697",
+  "type": "series",
+  "contentType": "series",
+  "title": "Route 187",
+  "canonicalTitle": "Route 187",
+  "originalTitle": "Route 187",
+  "overview": "Citizens combat urban violence until a bus driver and student's murders by thugs spark outrage, leading authorities to hunt the culprits captured on video.",
+  "description": "Citizens combat urban violence until a bus driver and student's murders by thugs spark outrage, leading authorities to hunt the culprits captured on video.",
+  "shortDescription": "Citizens combat urban violence until a bus driver and student's murders by thugs spark outrage, leading authorities to h",
+  "year": 2026,
+  "releaseDate": "2026-09-16",
+  "rating": 10,
+  "votes": "0.0K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Crime",
+    "Drama"
+  ],
+  "categories": [
+    "Crime",
+    "Drama"
+  ],
+  "language": "English",
+  "country": "US",
+  "director": "Mark E. Swinton",
+  "poster": "https://image.tmdb.org/t/p/w500/yfP9A3IaKE00U1ap1y7wAoZRzeC.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/Agx8RmlBBDJrlH9MyUOd5JYYZPS.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/r-x0zCk3f64?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/r-x0zCk3f64?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "1522266",
+      "name": "Rico Ball",
+      "character": "Coach Lowe",
+      "photo": "https://image.tmdb.org/t/p/w185/yU6shm32hLfDgnNIKMR2sphap4A.jpg"
+    },
+    {
+      "id": "146483",
+      "name": "Clark Moore",
+      "character": "Lt. Jeff Gibson",
+      "photo": "https://image.tmdb.org/t/p/w185/xhjFpYm51s9on9IRMiEMGdWEjfs.jpg"
+    },
+    {
+      "id": "1023673",
+      "name": "Cuyle Carvin",
+      "character": "Detective Finley",
+      "photo": "https://image.tmdb.org/t/p/w185/6TFz6bsOAdMkcN17IyAg41uNAzd.jpg"
+    },
+    {
+      "id": "1667818",
+      "name": "Christopher Livingstone",
+      "character": "Mason James",
+      "photo": "https://image.tmdb.org/t/p/w185/nQfrQzgMBg81dlIZ64S2lye75Co.jpg"
+    },
+    {
+      "id": "144303",
+      "name": "Josef Cannon",
+      "character": "Paul",
+      "photo": "https://image.tmdb.org/t/p/w185/s1RP7bSwV4KFUNfK01p9Z087dSs.jpg"
+    },
+    {
+      "id": "6433426",
+      "name": "Bibby Bankz",
+      "character": "Thugger",
+      "photo": "https://image.tmdb.org/t/p/w185/6QdcwsnNoz0X7gtCOkGlUkA2eMl.jpg"
+    },
+    {
+      "id": "1840839",
+      "name": "Mia Hunt",
+      "character": "Ms. Douglas",
+      "photo": "https://image.tmdb.org/t/p/w185/fNdA1I1dXfThTcAZob8U3fht7oI.jpg"
+    },
+    {
+      "id": "168709",
+      "name": "Nicky Buggs",
+      "character": "Tory Martin",
+      "photo": "https://image.tmdb.org/t/p/w185/2yhO7xNP2rdzrR0J5IoGm4LoF3y.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 4,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-17T03:25:48.809Z",
+  "createdAt": "2026-09-17T03:25:48.809Z",
+  "updatedAt": "2026-09-17T03:25:48.809Z",
+  "links": []
+}
