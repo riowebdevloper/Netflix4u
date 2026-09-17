@@ -1,0 +1,116 @@
+{
+  "id": "tmdb-series-332401",
+  "canonicalId": "tmdb-series-332401",
+  "externalProvider": "tmdb",
+  "externalId": "332401",
+  "tmdbId": "332401",
+  "imdbId": "tt32642114",
+  "type": "series",
+  "contentType": "series",
+  "title": "City of Blood",
+  "canonicalTitle": "City of Blood",
+  "originalTitle": "City of Blood",
+  "overview": "Berlin — a city-state on the brink. While a privileged few live beneath a climate-controlled dome, those outside struggle to survive in a world ravaged by heat, corruption, and crime. After years apart, sisters Bea and Phoebe are reunited and uncover a dark secret: Vampires are determined to seize political power — and blood has become the city's new currency.",
+  "description": "Berlin — a city-state on the brink. While a privileged few live beneath a climate-controlled dome, those outside struggle to survive in a world ravaged by heat, corruption, and crime. After years apart, sisters Bea and Phoebe are reunited and uncover a dark secret: Vampires are determined to seize political power — and blood has become the city's new currency.",
+  "shortDescription": "Berlin — a city-state on the brink. While a privileged few live beneath a climate-controlled dome, those outside struggl",
+  "year": 2026,
+  "releaseDate": "2026-09-16",
+  "rating": 10,
+  "votes": "0.0K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Mystery"
+  ],
+  "categories": [
+    "Mystery"
+  ],
+  "language": "German",
+  "country": "DE",
+  "director": "Director",
+  "poster": "https://image.tmdb.org/t/p/w500/Njr0Rlb4CobAfrGE8NVffYDGqx.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/nAEIr2b9M9ya8SXOTA1bDDMjhCA.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/zzjxf3ExHc4?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/zzjxf3ExHc4?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "2454083",
+      "name": "Lea Drinda",
+      "character": "Bea Hoffmann",
+      "photo": "https://image.tmdb.org/t/p/w185/1HYkiGcfdo9Gc5klqbRHpn1jJ4P.jpg"
+    },
+    {
+      "id": "2136059",
+      "name": "Soma Pysall",
+      "character": "Phoebe Kaya",
+      "photo": "https://image.tmdb.org/t/p/w185/n6FI3M8AeMQnm1MjActLjo4rrfC.jpg"
+    },
+    {
+      "id": "1397634",
+      "name": "Franz Hartwig",
+      "character": "Johan Moderson",
+      "photo": "https://image.tmdb.org/t/p/w185/x1sAXpEBTRVFq0yc6xkWuX166Lc.jpg"
+    },
+    {
+      "id": "1327315",
+      "name": "David Schütter",
+      "character": "Oliver Lawal",
+      "photo": "https://image.tmdb.org/t/p/w185/eCyL55l0fb9tccOQfdCGCd7XKAf.jpg"
+    },
+    {
+      "id": "4585394",
+      "name": "Mouataz Alshaltouh",
+      "character": "Yassin",
+      "photo": "https://image.tmdb.org/t/p/w185/24189XQS0pUOZjHSMXuGJyT73cI.jpg"
+    },
+    {
+      "id": "73926",
+      "name": "Jördis Triebel",
+      "character": "Laura Hoffmann",
+      "photo": "https://image.tmdb.org/t/p/w185/ccKpVED4GwvqpbDpSDvZ5a7Be2Z.jpg"
+    },
+    {
+      "id": "43358",
+      "name": "Jenny Schily",
+      "character": "Szen",
+      "photo": "https://image.tmdb.org/t/p/w185/uLSzbVgZCL2v80G5eP2KIbExnVo.jpg"
+    },
+    {
+      "id": "111420",
+      "name": "Lars Eidinger",
+      "character": "Zeno Gennardi",
+      "photo": "https://image.tmdb.org/t/p/w185/l42T2eq3UTlQWsGlpIJUTyyp7sp.jpg"
+    },
+    {
+      "id": "57064",
+      "name": "Melika Foroutan",
+      "character": "Farah Lawal",
+      "photo": "https://image.tmdb.org/t/p/w185/nlXZFeqhXGbR5KePkO4UCcEUfg4.jpg"
+    },
+    {
+      "id": "13805",
+      "name": "Dagmar Manzel",
+      "character": "Hilda Klein",
+      "photo": "https://image.tmdb.org/t/p/w185/eCG8xLUcMbmnYJUXBRnUCldw1zf.jpg"
+    },
+    {
+      "id": "1449964",
+      "name": "Ulrich Brandhoff",
+      "character": "Carl Hoffmann",
+      "photo": "https://image.tmdb.org/t/p/w185/j5zKBLKGM9C42Pgv86AvMKEq58J.jpg"
+    },
+    {
+      "id": "1365859",
+      "name": "Yasin el Harrouk",
+      "character": "Kevin Kleinhans",
+      "photo": "https://image.tmdb.org/t/p/w185/cBZ0pQBVRRMnUm8wX5IW3xAMKWk.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 8,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-17T03:26:16.164Z",
+  "createdAt": "2026-09-17T03:26:16.164Z",
+  "updatedAt": "2026-09-17T03:26:16.164Z",
+  "links": []
+}
