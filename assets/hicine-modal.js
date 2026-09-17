@@ -487,21 +487,25 @@
     const dotLinks = rawOptions.length > 0 ? rawOptions : rawLinks.filter(l => l && (l.source === 'dotmobiz' || (!l.isCloud && l.url && l.url.includes('nexdrive'))));
 
     const effectiveDot = dotLinks.length > 0 ? dotLinks : [
-      { quality: '480p', size: '630MB', label: 'Click Here To Download [630MB]', url: 'https://nexdrive.love/' },
-      { quality: '720p x264', size: '1.5GB', label: 'Click Here To Download [1.5GB]', url: 'https://nexdrive.love/' },
-      { quality: '1080p x264', size: '3.6GB', label: 'Click Here To Download [3.6GB]', url: 'https://nexdrive.love/' },
-      { quality: '1080p HQ', size: '19GB', label: 'Click Here To Download [19GB]', url: 'https://nexdrive.love/' }
+      { quality: '480p', size: '630MB', label: 'Click Here To Download [630MB]', url: `/api/download-file?title=${encodeURIComponent(cleanName)}&quality=480p&download=1` },
+      { quality: '720p x264', size: '1.5GB', label: 'Click Here To Download [1.5GB]', url: `/api/download-file?title=${encodeURIComponent(cleanName)}&quality=720p&download=1` },
+      { quality: '1080p x264', size: '3.6GB', label: 'Click Here To Download [3.6GB]', url: `/api/download-file?title=${encodeURIComponent(cleanName)}&quality=1080p&download=1` },
+      { quality: '1080p HQ', size: '19GB', label: 'Click Here To Download [19GB]', url: `/api/download-file?title=${encodeURIComponent(cleanName)}&quality=1080pHQ&download=1` }
     ];
 
     effectiveDot.forEach(opt => {
       const q = opt.quality || 'HD';
       const sz = opt.size || '';
+      const rawDlUrl = opt.url || '';
+      const finalUrl = (rawDlUrl && !rawDlUrl.endsWith('nexdrive.love/') && !rawDlUrl.includes('dotmobiz.com'))
+        ? rawDlUrl
+        : `/api/download-file?title=${encodeURIComponent(cleanName)}&quality=${encodeURIComponent(q)}&download=1`;
       const dotCard = document.createElement('div');
       dotCard.className = 'hicine-dl-card';
       dotCard.style.borderColor = 'rgba(16, 185, 129, 0.18)';
       dotCard.innerHTML = `
         <div class="hicine-dl-file-info">
-          <strong style="color: #34d399;">DotMovies Dual Audio Release:</strong>
+          <strong style="color: #34d399;">Direct Ultra HD Download:</strong>
           ${cleanName} (${year}) Hindi Dual Audio [${q}] ${sz}
         </div>
         <div class="hicine-dl-row">
@@ -509,13 +513,13 @@
             <span class="hicine-quality-pill" style="border-color: rgba(16,185,129,0.35); color: #34d399; background: rgba(16,185,129,0.1);">${q}</span>
             <span class="hicine-dl-size-label">${q} ${sz ? `<span>|</span> ${sz}` : ''}</span>
           </div>
-          <a href="${opt.url}" target="_blank" rel="noopener noreferrer" class="hicine-dl-btn" style="background: #10b981; box-shadow: 0 4px 14px rgba(16,185,129,0.35);">
+          <a href="${finalUrl}" target="_blank" rel="noopener noreferrer" class="hicine-dl-btn" style="background: #10b981; box-shadow: 0 4px 14px rgba(16,185,129,0.35);">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
               <polyline points="7 10 12 15 17 10"></polyline>
               <line x1="12" y1="15" x2="12" y2="3"></line>
             </svg>
-            Download (NexDrive)
+            Download File
           </a>
         </div>
       `;

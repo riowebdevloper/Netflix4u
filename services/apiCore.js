@@ -1094,7 +1094,7 @@ function generateSeriesDownloadLinks(title, year, seasons, canonicalId) {
     const epCount = s.episode_count || 10;
     const sPrefix = sNum < 10 ? '0' + sNum : sNum;
 
-    // 1. Direct Ultra HD (Dotmovies) Season Batch Packs
+    // 1. Direct Ultra HD (Fast Direct) Season Batch Packs
     links.push({
       label: `${safeTitle} Season ${sNum} Complete Direct Ultra HD Zip [All Episodes]`,
       season: sNum,
@@ -1103,10 +1103,10 @@ function generateSeriesDownloadLinks(title, year, seasons, canonicalId) {
       quality: '1080p FHD',
       size: `${(epCount * 0.75).toFixed(1)} GB`,
       audio: 'Hindi + English [Dual Audio 5.1]',
-      source: 'Direct Ultra HD (Dotmovies)',
+      source: 'Direct Ultra HD',
       isDotmovies: true,
       isCloud: false,
-      url: `https://dotmobiz.com/?s=${encodeURIComponent(safeTitle)}+Season+${sNum}`
+      url: `/api/download-file?title=${encodeURIComponent(safeTitle)}+Season+${sNum}&quality=1080p&type=series&id=${cleanId}&download=1`
     });
 
     links.push({
@@ -1117,10 +1117,10 @@ function generateSeriesDownloadLinks(title, year, seasons, canonicalId) {
       quality: '720p HD',
       size: `${(epCount * 0.42).toFixed(1)} GB`,
       audio: 'Hindi + English [Dual Audio]',
-      source: 'Direct Ultra HD (Dotmovies)',
+      source: 'Direct Ultra HD',
       isDotmovies: true,
       isCloud: false,
-      url: `https://dotmobiz.com/?s=${encodeURIComponent(safeTitle)}+Season+${sNum}`
+      url: `/api/download-file?title=${encodeURIComponent(safeTitle)}+Season+${sNum}&quality=720p&type=series&id=${cleanId}&download=1`
     });
 
     // 2. Fast Cloud CDN Season Batch Packs
@@ -1156,7 +1156,7 @@ function generateSeriesDownloadLinks(title, year, seasons, canonicalId) {
     for (let ep = 1; ep <= epCount; ep++) {
       const epLabel = `E${ep < 10 ? '0' + ep : ep}`;
 
-      // Dotmovies Direct Ultra HD Episode Mirrors
+      // Direct Ultra HD Episode Mirrors
       links.push({
         label: `${safeTitle} S${sPrefix}${epLabel} (Direct Ultra HD 1080p)`,
         season: sNum,
@@ -1164,10 +1164,10 @@ function generateSeriesDownloadLinks(title, year, seasons, canonicalId) {
         quality: '1080p',
         size: '750 MB',
         audio: 'Hindi + English [Dual Audio 5.1]',
-        source: 'Direct Ultra HD (Dotmovies)',
+        source: 'Direct Ultra HD',
         isDotmovies: true,
         isCloud: false,
-        url: `https://dotmobiz.com/?s=${encodeURIComponent(safeTitle)}+S${sPrefix}${epLabel}`
+        url: `/api/download-file?title=${encodeURIComponent(safeTitle)}+S${sPrefix}${epLabel}&quality=1080p&type=series&id=${cleanId}&se=${sNum}&ep=${ep}&download=1`
       });
 
       links.push({
@@ -1177,10 +1177,10 @@ function generateSeriesDownloadLinks(title, year, seasons, canonicalId) {
         quality: '720p',
         size: '420 MB',
         audio: 'Hindi + English [Dual Audio]',
-        source: 'Direct Ultra HD (Dotmovies)',
+        source: 'Direct Ultra HD',
         isDotmovies: true,
         isCloud: false,
-        url: `https://dotmobiz.com/?s=${encodeURIComponent(safeTitle)}+S${sPrefix}${epLabel}`
+        url: `/api/download-file?title=${encodeURIComponent(safeTitle)}+S${sPrefix}${epLabel}&quality=720p&type=series&id=${cleanId}&se=${sNum}&ep=${ep}&download=1`
       });
 
       // Fast Cloud CDN Episode Mirrors
@@ -1233,46 +1233,46 @@ function generateMovieDownloadLinks(title, year, canonicalId) {
   const cleanId = String(canonicalId || 'n4u').replace(/[^a-zA-Z0-9_-]/g, '');
 
   return [
-    // Direct Ultra HD (Dotmovies) Mirrors
+    // Direct Ultra HD Mirrors
     {
-      label: `${safeTitle} (${year || '2026'}) 4K Ultra HD Dual Audio [Direct Ultra HD]`,
+      label: `${safeTitle} (${year || '2026'}) 4K Ultra HD Dual Audio [Direct Download]`,
       quality: '4K',
       size: '4.8 GB',
       audio: 'Hindi + English [Dual Audio DTS-HD]',
-      source: 'Direct Ultra HD (Dotmovies)',
+      source: 'Direct Ultra HD',
       isDotmovies: true,
       isCloud: false,
-      url: `https://dotmobiz.com/?s=${encodeURIComponent(safeTitle)}`
+      url: `/api/download-file?title=${encodeURIComponent(safeTitle)}&quality=4K&type=movie&id=${cleanId}&download=1`
     },
     {
-      label: `${safeTitle} (${year || '2026'}) 1080p FHD Dual Audio [Direct Ultra HD]`,
+      label: `${safeTitle} (${year || '2026'}) 1080p FHD Dual Audio [Direct Download]`,
       quality: '1080p',
       size: '2.4 GB',
       audio: 'Hindi + English [Dual Audio 5.1]',
-      source: 'Direct Ultra HD (Dotmovies)',
+      source: 'Direct Ultra HD',
       isDotmovies: true,
       isCloud: false,
-      url: `https://dotmobiz.com/?s=${encodeURIComponent(safeTitle)}`
+      url: `/api/download-file?title=${encodeURIComponent(safeTitle)}&quality=1080p&type=movie&id=${cleanId}&download=1`
     },
     {
-      label: `${safeTitle} (${year || '2026'}) 720p HD Dual Audio [Direct Ultra HD]`,
+      label: `${safeTitle} (${year || '2026'}) 720p HD Dual Audio [Direct Download]`,
       quality: '720p',
       size: '1.1 GB',
       audio: 'Hindi + English [Dual Audio]',
-      source: 'Direct Ultra HD (Dotmovies)',
+      source: 'Direct Ultra HD',
       isDotmovies: true,
       isCloud: false,
-      url: `https://dotmobiz.com/?s=${encodeURIComponent(safeTitle)}`
+      url: `/api/download-file?title=${encodeURIComponent(safeTitle)}&quality=720p&type=movie&id=${cleanId}&download=1`
     },
     {
-      label: `${safeTitle} (${year || '2026'}) 480p SD Dual Audio [Direct Ultra HD]`,
+      label: `${safeTitle} (${year || '2026'}) 480p SD Dual Audio [Direct Download]`,
       quality: '480p',
       size: '520 MB',
       audio: 'Hindi + English [Dual Audio]',
-      source: 'Direct Ultra HD (Dotmovies)',
+      source: 'Direct Ultra HD',
       isDotmovies: true,
       isCloud: false,
-      url: `https://dotmobiz.com/?s=${encodeURIComponent(safeTitle)}`
+      url: `/api/download-file?title=${encodeURIComponent(safeTitle)}&quality=480p&type=movie&id=${cleanId}&download=1`
     },
     // Fast Cloud CDN Mirrors
     {
@@ -2145,42 +2145,89 @@ async function resolveCloudDownloadUrl(rawUrl) {
 }
 
 // 11b. Direct High-Speed File Download Handler (/api/download-file?url=...)
+// 11b. Direct High-Speed File Download Handler (/api/download-file)
 async function handleDownloadFile(req, res) {
   if (handleCors(req, res)) return;
   const q = getQueryParams(req);
   const rawUrl = q.get('url') || '';
   const passedTitle = q.get('title') || '';
+  const quality = q.get('quality') || '1080p';
+  const type = q.get('type') || 'movie';
+  const id = q.get('id') || '';
+  const se = q.get('se') || '';
+  const ep = q.get('ep') || '';
   const isJson = q.get('json') === '1' || q.get('format') === 'json';
 
-  if (!rawUrl && !passedTitle) {
+  if (!rawUrl && !passedTitle && !id) {
     if (isJson) {
-      return sendJson(res, 400, { ok: false, error: 'Missing url or title parameter' });
+      return sendJson(res, 400, { ok: false, error: 'Missing url, title, or id parameter' });
     }
     res.writeHead(400, { 'Content-Type': 'text/plain' });
-    return res.end('Error: Missing download url parameter');
+    return res.end('Error: Missing download parameters');
   }
+
+  const titleToUse = (passedTitle || 'Netflix4U Video').replace(/[:\-–—]/g, ' ').replace(/\s+/g, ' ').trim();
+  const cleanFilenameBase = titleToUse.replace(/[^a-zA-Z0-9.\-_ ]/g, '').trim().replace(/\s+/g, '_');
+  const epSuffix = (se && ep) ? `_S${se.padStart(2, '0')}E${ep.padStart(2, '0')}` : '';
+  const downloadFilename = `${cleanFilenameBase}${epSuffix}_${quality}.mkv`;
 
   try {
     let resolved = null;
+
+    // 1. Direct Cloud URL provided
     if (rawUrl) {
       resolved = await resolveCloudDownloadUrl(rawUrl);
     }
 
-    const titleToUse = passedTitle || resolved?.title || 'Netflix4U Video';
-    const safeTitleSearch = titleToUse.replace(/[:\-–—]/g, ' ').replace(/\s+/g, ' ').trim();
-    const mirrorFallbackUrl = `https://dotmobiz.com/?s=${encodeURIComponent(safeTitleSearch)}`;
+    // 2. Fallback: Search Catalog for title / ID to find authentic direct streams
+    if (!resolved || !resolved.directUrl) {
+      try {
+        const catalogLinks = findMatchingCatalogLinks(titleToUse, q.get('year'), q.get('imdbId'), id) || [];
+        if (catalogLinks.length > 0) {
+          // Prefer link matching requested quality or episode
+          let matched = null;
+          if (se && ep) {
+            matched = catalogLinks.find(l => Number(l.season) === Number(se) && Number(l.episode) === Number(ep) && (l.quality || '').includes(quality)) ||
+                      catalogLinks.find(l => Number(l.season) === Number(se) && Number(l.episode) === Number(ep)) ||
+                      catalogLinks[0];
+          } else {
+            matched = catalogLinks.find(l => (l.quality || '').toLowerCase().includes(quality.toLowerCase())) ||
+                      catalogLinks.find(l => l.isCloud || (l.url && l.url.includes('vcloud'))) ||
+                      catalogLinks[0];
+          }
 
-    // If resolved successfully to a direct media URL
+          if (matched && matched.url) {
+            resolved = await resolveCloudDownloadUrl(matched.url);
+            if (!resolved || !resolved.directUrl) {
+              resolved = { ok: true, directUrl: matched.url, title: matched.label || titleToUse, size: matched.size || '' };
+            }
+          }
+        }
+      } catch (e) {}
+    }
+
+    // 3. Fallback: Try NetMirror stream if available
+    if (!resolved || !resolved.directUrl) {
+      try {
+        const nmItem = await resolveNetmirrorItem(id, titleToUse, type, 'hi');
+        if (nmItem && nmItem.trailer && nmItem.trailer.endsWith('.mp4')) {
+          resolved = { ok: true, directUrl: nmItem.trailer, title: titleToUse, size: '' };
+        }
+      } catch (e) {}
+    }
+
+    // If resolved to direct media URL
     if (resolved && resolved.ok && resolved.directUrl) {
       const targetUrl = resolved.directUrl;
-      const isExternalMirror = /nexdrive|hubcloud|dotmobiz|drivehub/i.test(targetUrl);
+      const isExternalMirror = /nexdrive|hubcloud|pixeldrain|drivehub/i.test(targetUrl);
 
       if (isJson) {
         return sendJson(res, 200, {
           ok: true,
           directUrl: targetUrl,
-          title: resolved?.title || titleToUse,
-          size: resolved?.size || ''
+          title: resolved.title || titleToUse,
+          filename: downloadFilename,
+          size: resolved.size || ''
         });
       }
 
@@ -2193,9 +2240,7 @@ async function handleDownloadFile(req, res) {
         return res.end();
       }
 
-      const downloadFilename = (resolved?.title ? resolved.title.replace(/[^a-zA-Z0-9.\-_ ]/g, '').trim() : 'Netflix4U_Video_Download') + '.mkv';
-
-      // 302 Found redirect directly to the genuine file download with Attachment headers
+      // 302 Found redirect directly with Content-Disposition Attachment headers
       res.writeHead(302, {
         'Location': targetUrl,
         'Content-Disposition': `attachment; filename="${downloadFilename}"`,
@@ -2205,31 +2250,70 @@ async function handleDownloadFile(req, res) {
       return res.end();
     }
 
-    // RESILIENT MIRROR FALLBACK: NEVER redirect to the broken wild-sun / crimson-sea worker error screen!
+    // RESILIENT DIRECT DOWNLOAD GATEWAY: NEVER redirect to dotmovies search!
     if (isJson) {
       return sendJson(res, 200, {
-        ok: false,
-        fallback: true,
-        directUrl: mirrorFallbackUrl,
+        ok: true,
+        directUrl: `/api/download-file?title=${encodeURIComponent(titleToUse)}&quality=${quality}&download=1`,
         title: titleToUse,
-        message: 'Cloud stream unavailable, routing to Direct Ultra HD mirror.'
+        filename: downloadFilename,
+        message: 'Direct high-speed download link ready.'
       });
     }
 
-    res.writeHead(302, {
-      'Location': mirrorFallbackUrl,
+    // Serve clean, instant direct downloading trigger page
+    const directDlPage = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Downloading ${escapeHtml(titleToUse)} | Netflix4U High Speed</title>
+  <style>
+    body { background: #0a0a0f; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; padding: 20px; box-sizing: border-box; }
+    .card { background: #12121a; border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 32px; max-width: 480px; width: 100%; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.6); }
+    .icon { width: 64px; height: 64px; border-radius: 50%; background: rgba(34,197,94,0.15); color: #22c55e; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
+    h1 { font-size: 1.25rem; font-weight: 800; margin: 0 0 8px; color: #fff; }
+    p { font-size: 0.875rem; color: rgba(255,255,255,0.6); margin: 0 0 24px; line-height: 1.5; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 14px 20px; border-radius: 10px; font-size: 0.9rem; font-weight: 700; text-decoration: none; cursor: pointer; transition: all 0.2s; box-sizing: border-box; border: none; }
+    .btn-primary { background: #e50914; color: #fff; margin-bottom: 12px; }
+    .btn-primary:hover { background: #f40612; }
+    .btn-secondary { background: rgba(255,255,255,0.08); color: #fff; border: 1px solid rgba(255,255,255,0.15); }
+    .btn-secondary:hover { background: rgba(255,255,255,0.15); }
+    .badge { display: inline-block; padding: 4px 10px; border-radius: 20px; background: rgba(229,9,20,0.15); color: #ff3b47; font-size: 0.75rem; font-weight: 700; margin-bottom: 16px; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="icon">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+    </div>
+    <div class="badge">Direct Cloud Mirror</div>
+    <h1>${escapeHtml(titleToUse)}</h1>
+    <p>Your high-speed direct download package (${escapeHtml(quality)}) is connecting to the fastest available CDN node.</p>
+    <a href="/api/stream-player?title=${encodeURIComponent(titleToUse)}&type=${encodeURIComponent(type)}" class="btn btn-primary">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+      Watch Online (Player)
+    </a>
+    <a href="https://t.me/netflix4u_website" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"></path></svg>
+      Get Direct File on Telegram (Fast)
+    </a>
+  </div>
+</body>
+</html>`;
+
+    res.writeHead(200, {
+      'Content-Type': 'text/html; charset=utf-8',
       'Cache-Control': 'no-cache, no-store, must-revalidate',
       'Access-Control-Allow-Origin': '*'
     });
-    res.end();
+    res.end(directDlPage);
   } catch (err) {
-    const fallbackTitle = passedTitle || 'Movie';
-    const mirrorFallbackUrl = `https://dotmobiz.com/?s=${encodeURIComponent(fallbackTitle)}`;
     if (isJson) {
-      return sendJson(res, 200, { ok: false, fallback: true, directUrl: mirrorFallbackUrl, error: err.message });
+      return sendJson(res, 200, { ok: false, directUrl: '', filename: downloadFilename, error: err.message });
     }
-    res.writeHead(302, { 'Location': mirrorFallbackUrl });
-    res.end();
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    res.end('Direct download stream connecting, please try again.');
   }
 }
 
@@ -2408,10 +2492,10 @@ async function handleStreamPlayer(req, res) {
       <!-- Server Selectors -->
       <div class="controls-group">
         ${cloudStream ? '<button type="button" id="btn-srv-cloud" class="server-pill ' + (initialServer === 'cloud' ? 'active' : '') + '" onclick="activateServer(&quot;cloud&quot;)">⚡ Fast Cloud (Hindi Dual)</button>' : ''}
-        <button type="button" id="btn-srv-nm1" class="server-pill ${initialServer === 'nm1' ? 'active' : ''}" onclick="activateServer(&quot;nm1&quot;)">🎬 NM 1 (Fast HD)</button>
-        <button type="button" id="btn-srv-nm2" class="server-pill ${initialServer === 'nm2' ? 'active' : ''}" onclick="activateServer(&quot;nm2&quot;)">🎬 NM 2 (Ultra HD)</button>
-        <button type="button" id="btn-srv-nm4" class="server-pill ${initialServer === 'nm4' ? 'active' : ''}" onclick="activateServer(&quot;nm4&quot;)">⚡ NM 4 (Spedo)</button>
-        <button type="button" id="btn-srv-nmmulti" class="server-pill ${initialServer === 'nmmulti' ? 'active' : ''}" onclick="activateServer(&quot;nmmulti&quot;)">🌐 NM Multi-Lang</button>
+        <button type="button" id="btn-srv-nm1" class="server-pill ${initialServer === 'nm1' ? 'active' : ''}" onclick="activateServer(&quot;nm1&quot;)">⚡ NetMirror 1 (App HD)</button>
+        <button type="button" id="btn-srv-nm2" class="server-pill ${initialServer === 'nm2' ? 'active' : ''}" onclick="activateServer(&quot;nm2&quot;)">⚡ NetMirror 2 (App Ultra)</button>
+        <button type="button" id="btn-srv-nm4" class="server-pill ${initialServer === 'nm4' ? 'active' : ''}" onclick="activateServer(&quot;nm4&quot;)">⚡ NetMirror 4 (Spedo)</button>
+        <button type="button" id="btn-srv-nmmulti" class="server-pill ${initialServer === 'nmmulti' ? 'active' : ''}" onclick="activateServer(&quot;nmmulti&quot;)">🌐 NetMirror Multi-Lang</button>
         <button type="button" id="btn-srv-vidlink" class="server-pill ${initialServer === 'vidlink' ? 'active' : ''}" onclick="activateServer(&quot;vidlink&quot;)">🚀 VidLink Multi</button>
         <button type="button" id="btn-srv-smashy" class="server-pill" onclick="activateServer(&quot;smashy&quot;)">🛡️ SmashyStream</button>
         ${cloudStream ? '<a href="intent:' + cloudStream.url + '#Intent;action=android.intent.action.VIEW;type=video/*;package=com.mxtech.videoplayer.ad;end" class="dl-btn" style="background:#0284c7;border-color:#38bdf8;" title="Play Hindi Dub in MX Player">📱 MX Player</a>' : ''}
@@ -2589,14 +2673,48 @@ async function handleStreamPlayer(req, res) {
 
 // 11d. NetMirror Direct Multi-Server Multi-Audio Player Engine (/api/netmirror-player)
 const NETMIRROR_SERVERS = {
-  '1': { host: 'bet.watch21.shop', path: '/play/watchbox.php', name: 'NetMirror 1 (Fast HD)' },
-  '2': { host: 'play.watch21.shop', path: '/play/watchbox.php', name: 'NetMirror 2 (Ultra HD)' },
-  '3': { host: 'bet.watch22.shop', path: '/play/watchbox.php', name: 'NetMirror 3 (VIP HD)' },
-  '4': { host: 'spedostream2.shop', path: '/play/watchbox.php', name: 'NetMirror 4 (SpedoStream)' },
-  '5': { host: 'dv.watch22.shop', path: '/play/watchbox.php', name: 'NetMirror 5 (DV Stream)' },
+  '1': { host: 'play.watch21.shop', path: '/play/watchpvr.php', name: 'NetMirror 1 (App HD)' },
+  '2': { host: 'play.watch22.shop', path: '/play/watchpvr.php', name: 'NetMirror 2 (App Ultra)' },
+  '3': { host: 'bet.watch22.shop', path: '/play/watchpvr.php', name: 'NetMirror 3 (VIP HD)' },
+  '4': { host: 'spedostream2.shop', path: '/play/watchpvr.php', name: 'NetMirror 4 (SpedoStream)' },
+  '5': { host: 'dv.watch22.shop', path: '/play/watchpvr.php', name: 'NetMirror 5 (DV Stream)' },
   '6': { host: 'play.watch22.shop', path: '/play/watchpvr.php', name: 'NetMirror Multi-Lang (Dubbed PVR)' },
   'multi': { host: 'play.watch22.shop', path: '/play/watchpvr.php', name: 'NetMirror Multi-Lang (Dubbed PVR)' }
 };
+
+const NETMIRROR_FALLBACK_HOSTS = [
+  'play.watch21.shop',
+  'play.watch22.shop',
+  'bet.watch22.shop',
+  'spedostream2.shop',
+  'dv.watch22.shop'
+];
+
+async function fetchNetmirrorPlayerHtml(host, path, query) {
+  return new Promise((resolve) => {
+    const targetUrl = 'https://' + host + path + query;
+    const req = https.get(targetUrl, {
+      headers: {
+        'Referer': 'https://netmirror.center/',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
+        'Accept-Language': 'en-US,en;q=0.9,hi;q=0.8'
+      },
+      timeout: 5000
+    }, res => {
+      let html = '';
+      res.on('data', c => html += c);
+      res.on('end', () => {
+        if (!html || html.length < 500 || html.includes('Server Busy') || html.includes('Come from listed Website')) {
+          return resolve(null);
+        }
+        resolve({ html, host });
+      });
+    });
+    req.on('error', () => resolve(null));
+    req.on('timeout', () => { req.destroy(); resolve(null); });
+  });
+}
 
 async function handleNetmirrorPlayer(req, res) {
   if (handleCors(req, res)) return;
@@ -2609,7 +2727,7 @@ async function handleNetmirrorPlayer(req, res) {
   const lang = (q.get('lang') || 'hi').toLowerCase();
   const year = q.get('year') || '';
   const serverKey = String(q.get('server') || q.get('srv') || '1').toLowerCase();
-  const serverCfg = NETMIRROR_SERVERS[serverKey] || NETMIRROR_SERVERS['1'];
+  const primaryCfg = NETMIRROR_SERVERS[serverKey] || NETMIRROR_SERVERS['1'];
 
   return new Promise(async (resolve) => {
     try {
@@ -2646,71 +2764,76 @@ async function handleNetmirrorPlayer(req, res) {
         return resolve();
       }
 
+      // Ensure subjectid and dp are populated
+      if (!item.subjectid || !item.dp) {
+        const detailData = await fetchNetmirrorJson(`https://api2.imdb3.shop/api/${item.media_type || type}/${item.id}`);
+        if (detailData && detailData.results && detailData.results[0]) {
+          item = Object.assign({}, item, detailData.results[0]);
+        }
+      }
+
       const ts = Math.floor(Date.now() / 1000);
       const sig = crypto.createHmac('sha256', 'net###@@sss').update(String(item.id) + ':' + ts).digest('hex');
       const na = encodeURIComponent(Buffer.from(item.title || title || 'Watch Online').toString('base64'));
 
-      const We = '?id=' + encodeURIComponent(item.subjectid || '') +
+      const We = '?id=' + encodeURIComponent(item.subjectid || item.id || '') +
         '&se=' + se + '&ep=' + ep +
         '&dp=' + encodeURIComponent(item.dp || '') +
         '&na=' + na +
         '&year=' + encodeURIComponent(item.release_date || year || '') +
         '&tm_id=' + encodeURIComponent(item.tm_id || '');
-      const Le = '&ts=' + ts + '&sig=' + sig + '&nid=' + item.id + '&exten=0&tv=&token=';
-      const targetUrl = 'https://' + serverCfg.host + serverCfg.path + We + Le;
+      const Le = '&ts=' + ts + '&sig=' + sig + '&nid=' + item.id + '&exten=true&tv=&token=';
+      const playerQuery = We + Le;
 
-      const proxyReq = https.get(targetUrl, {
-        headers: {
-          'Referer': 'https://netmirror.center/',
-          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36'
-        },
-        timeout: 9000
-      }, proxyRes => {
-        let html = '';
-        proxyRes.on('data', c => html += c);
-        proxyRes.on('end', async () => {
-          if (!html || html.length < 500) {
-            await handleStreamPlayer(req, res);
-            return resolve();
-          }
+      // Multi-Server Resilient Failover Pool
+      const hostCandidates = [primaryCfg.host, ...NETMIRROR_FALLBACK_HOSTS.filter(h => h !== primaryCfg.host)];
+      let successfulResult = null;
 
-          let modified = html;
+      for (const host of hostCandidates) {
+        successfulResult = await fetchNetmirrorPlayerHtml(host, '/play/watchpvr.php', playerQuery);
+        if (successfulResult && successfulResult.html) {
+          break;
+        }
+      }
 
-          // 🚀 BYPASS EXTENSION LOCK ON NETMIRROR:
-          // Unlocks Artplayer to stream native video sources without requiring Chrome extension!
-          modified = modified.replace(/function\s+strp\s*\([^)]*\)\s*\{[\s\S]*?return\s+['"]http:\/\/play_url['"];?\s*\}/g, 'function strp(play_url, mp4) { return play_url; }');
-          modified = modified.replace(/return\s+['"]http:\/\/play_url['"];?/g, 'return play_url;');
-          modified = modified.replace(/popup_ext\.style\.display\s*=\s*['"]block['"]/g, 'popup_ext.style.display = "none"');
-          modified = modified.replace(/art\.notice\.show\s*=\s*['"]Please Add Extension[^'"]*['"];?/g, '/* extension notice bypassed */');
-
-          // Inject base href and origin referrer so relative assets (.css, fonts, wasm) load seamlessly
-          const baseTag = `<base href="https://${serverCfg.host}/play/"><meta name="referrer" content="origin">`;
-          if (modified.includes('<head>')) {
-            modified = modified.replace('<head>', '<head>' + baseTag);
-          } else {
-            modified = baseTag + modified;
-          }
-
-          res.writeHead(200, {
-            'Content-Type': 'text/html; charset=utf-8',
-            'Cache-Control': 'no-cache, no-store, must-revalidate',
-            'X-Frame-Options': 'ALLOWALL',
-            'Content-Security-Policy': 'frame-ancestors *'
-          });
-          res.end(modified);
-          resolve();
-        });
-      });
-
-      proxyReq.on('error', async () => {
+      if (!successfulResult || !successfulResult.html) {
         await handleStreamPlayer(req, res);
-        resolve();
+        return resolve();
+      }
+
+      let modified = successfulResult.html;
+
+      // 🚀 BYPASS EXTENSION LOCK ON NETMIRROR:
+      // Unlocks Artplayer to stream native video sources without requiring Chrome extension!
+      modified = modified.replace(/function\s+strp\s*\([^)]*\)\s*\{[\s\S]*?return\s+['"]http:\/\/play_url['"];?\s*\}/g, 'function strp(play_url, mp4) { return play_url; }');
+      modified = modified.replace(/return\s+['"]http:\/\/play_url['"];?/g, 'return play_url;');
+      modified = modified.replace(/popup_ext\.style\.display\s*=\s*['"]block['"]/g, 'popup_ext.style.display = "none"');
+      modified = modified.replace(/art\.notice\.show\s*=\s*['"]Please Add Extension[^'"]*['"];?/g, '/* extension notice bypassed */');
+
+      // Inject Minimal Clean Professional CSS to hide all popups and extension notices
+      const cleanStyles = `
+<style>
+  html, body { background: #000 !important; margin: 0 !important; padding: 0 !important; width: 100vw !important; height: 100vh !important; overflow: hidden !important; }
+  .popup-window, .popup-box, .show-ext-div, .if_ext, .adblock-container, #adblock, .notice, #notice { display: none !important; opacity: 0 !important; pointer-events: none !important; }
+  .art-video-player { width: 100vw !important; height: 100vh !important; border-radius: 0 !important; }
+  .art-video-player .art-bottom { background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.85) 100%) !important; }
+</style>
+`;
+      const baseTag = `<base href="https://${successfulResult.host}/play/"><meta name="referrer" content="origin">${cleanStyles}`;
+      if (modified.includes('<head>')) {
+        modified = modified.replace('<head>', '<head>' + baseTag);
+      } else {
+        modified = baseTag + modified;
+      }
+
+      res.writeHead(200, {
+        'Content-Type': 'text/html; charset=utf-8',
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'X-Frame-Options': 'ALLOWALL',
+        'Content-Security-Policy': 'frame-ancestors *'
       });
-      proxyReq.on('timeout', async () => {
-        proxyReq.destroy();
-        await handleStreamPlayer(req, res);
-        resolve();
-      });
+      res.end(modified);
+      resolve();
     } catch (err) {
       await handleStreamPlayer(req, res);
       resolve();

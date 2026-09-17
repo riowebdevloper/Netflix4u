@@ -186,21 +186,29 @@
       } catch(e) {}
     }
 
-    // RESILIENT MIRROR FALLBACK: NEVER dump the user onto the broken worker page!
-    // Instead, open the title's Direct Ultra HD (Dotmovies) mirror which is guaranteed to have working links
+    // Direct High-Speed Download Trigger: NEVER redirect to Dotmovies search page!
     var title = getActiveTitle();
-    var mirrorFallback = title ? ('https://dotmobiz.com/?s=' + encodeURIComponent(title)) : 'https://dotmobiz.com/';
+    var directFallbackUrl = '/api/download-file?title=' + encodeURIComponent(title || 'Video') + '&download=1';
 
     if (window.__showToast) {
-      window.__showToast('⚡ Cloud stream busy. Opening Direct Ultra HD download mirror...', '🚀');
+      window.__showToast('📥 Starting Direct High-Speed File Download...', '⚡');
     }
     if (targetEl) {
       targetEl.innerHTML = '<div style="display:flex;align-items:center;gap:8px;justify-content:center;width:100%;">' +
-        '<span style="color:#facc15;font-weight:700;font-size:12px;">Opening Direct Ultra HD Mirror...</span>' +
+        '<span style="color:#4ade80;font-weight:700;font-size:12px;">✓ Starting Download...</span>' +
       '</div>';
     }
 
-    window.open(mirrorFallback, '_blank', 'noopener,noreferrer');
+    try {
+      window.location.assign(directFallbackUrl);
+    } catch(e) {
+      var a = document.createElement('a');
+      a.href = directFallbackUrl;
+      a.setAttribute('download', (title ? title.replace(/[^a-zA-Z0-9.\-_ ]/g, '') : 'Netflix4U_Download') + '.mkv');
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
     restore();
   };
 

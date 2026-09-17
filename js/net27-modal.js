@@ -983,17 +983,17 @@
     if (!links || !links.length) {
       if (isTv) {
         links = [
-          { quality: '1080p FHD', size: '7.5 GB', isBatch: true, season: 1, label: (title || 'Series') + ' Season 1 Complete Direct Ultra HD Zip', url: 'https://dotmobiz.com/?s=' + encodeURIComponent(title || 'Series') + '+Season+1', isDotmovies: true },
-          { quality: '720p HD', size: '4.2 GB', isBatch: true, season: 1, label: (title || 'Series') + ' Season 1 Complete Direct Ultra HD Zip (720p)', url: 'https://dotmobiz.com/?s=' + encodeURIComponent(title || 'Series') + '+Season+1', isDotmovies: true },
-          { quality: '1080p', size: '750 MB', episode: 1, season: 1, label: (title || 'Series') + ' S01E01 (Direct Ultra HD 1080p)', url: 'https://dotmobiz.com/?s=' + encodeURIComponent(title || 'Series') + '+S01E01', isDotmovies: true },
-          { quality: '720p', size: '420 MB', episode: 1, season: 1, label: (title || 'Series') + ' S01E01 (Direct Ultra HD 720p)', url: 'https://dotmobiz.com/?s=' + encodeURIComponent(title || 'Series') + '+S01E01', isDotmovies: true }
+          { quality: '1080p FHD', size: '7.5 GB', isBatch: true, season: 1, label: (title || 'Series') + ' Season 1 Complete Direct Ultra HD Zip', url: '/api/download-file?title=' + encodeURIComponent(title || 'Series') + '+Season+1&quality=1080p&type=series&download=1', isDotmovies: true },
+          { quality: '720p HD', size: '4.2 GB', isBatch: true, season: 1, label: (title || 'Series') + ' Season 1 Complete Direct Ultra HD Zip (720p)', url: '/api/download-file?title=' + encodeURIComponent(title || 'Series') + '+Season+1&quality=720p&type=series&download=1', isDotmovies: true },
+          { quality: '1080p', size: '750 MB', episode: 1, season: 1, label: (title || 'Series') + ' S01E01 (Direct Ultra HD 1080p)', url: '/api/download-file?title=' + encodeURIComponent(title || 'Series') + '+S01E01&quality=1080p&type=series&download=1', isDotmovies: true },
+          { quality: '720p', size: '420 MB', episode: 1, season: 1, label: (title || 'Series') + ' S01E01 (Direct Ultra HD 720p)', url: '/api/download-file?title=' + encodeURIComponent(title || 'Series') + '+S01E01&quality=720p&type=series&download=1', isDotmovies: true }
         ];
       } else {
         links = [
-          { quality: '4K', size: '4.8 GB', label: (title || 'Movie') + ' 4K Ultra HD Dual Audio [Direct Ultra HD]', url: 'https://dotmobiz.com/?s=' + encodeURIComponent(title || 'Movie'), isDotmovies: true },
-          { quality: '1080p', size: '2.4 GB', label: (title || 'Movie') + ' 1080p FHD Dual Audio [Direct Ultra HD]', url: 'https://dotmobiz.com/?s=' + encodeURIComponent(title || 'Movie'), isDotmovies: true },
-          { quality: '720p', size: '1.1 GB', label: (title || 'Movie') + ' 720p HD Dual Audio [Direct Ultra HD]', url: 'https://dotmobiz.com/?s=' + encodeURIComponent(title || 'Movie'), isDotmovies: true },
-          { quality: '480p', size: '520 MB', label: (title || 'Movie') + ' 480p SD Dual Audio [Direct Ultra HD]', url: 'https://dotmobiz.com/?s=' + encodeURIComponent(title || 'Movie'), isDotmovies: true }
+          { quality: '4K', size: '4.8 GB', label: (title || 'Movie') + ' 4K Ultra HD Dual Audio [Direct Ultra HD]', url: '/api/download-file?title=' + encodeURIComponent(title || 'Movie') + '&quality=4K&type=movie&download=1', isDotmovies: true },
+          { quality: '1080p', size: '2.4 GB', label: (title || 'Movie') + ' 1080p FHD Dual Audio [Direct Ultra HD]', url: '/api/download-file?title=' + encodeURIComponent(title || 'Movie') + '&quality=1080p&type=movie&download=1', isDotmovies: true },
+          { quality: '720p', size: '1.1 GB', label: (title || 'Movie') + ' 720p HD Dual Audio [Direct Ultra HD]', url: '/api/download-file?title=' + encodeURIComponent(title || 'Movie') + '&quality=720p&type=movie&download=1', isDotmovies: true },
+          { quality: '480p', size: '520 MB', label: (title || 'Movie') + ' 480p SD Dual Audio [Direct Ultra HD]', url: '/api/download-file?title=' + encodeURIComponent(title || 'Movie') + '&quality=480p&type=movie&download=1', isDotmovies: true }
         ];
       }
     }
