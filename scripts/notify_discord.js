@@ -14,12 +14,29 @@
 const fs = require('fs');
 const path = require('path');
 const https = require('https');
+const { execSync } = require('child_process');
 
 const ROOT = path.resolve(__dirname, '..');
 const HOME_FEED_PATH = path.join(ROOT, 'data', 'home_feed.json');
 const REPORT_PATH = path.join(ROOT, 'data', 'last_sync_report.json');
 
 const DEFAULT_WEBHOOK = 'https://discord.com/api/webhooks/1549714027846963240/sdeYGglawTUFdbcUFpYccJ5lCD5YQUho8A-rmNV0EZIK9tdcGp0w3yO_y0k1fO7LMztb';
+
+function getGitMetadata() {
+  let msg = '';
+  let author = '';
+  let sha = '';
+  try {
+    msg = execSync('git log -1 --pretty=format:%s', { cwd: ROOT, encoding: 'utf8' }).trim();
+  } catch (e) {}
+  try {
+    author = execSync('git log -1 --pretty=format:%an', { cwd: ROOT, encoding: 'utf8' }).trim();
+  } catch (e) {}
+  try {
+    sha = execSync('git rev-parse --short HEAD', { cwd: ROOT, encoding: 'utf8' }).trim();
+  } catch (e) {}
+  return { msg, author, sha };
+}
 
 function getWebhookUrl() {
   const envUrl = process.env.DISCORD_WEBHOOK_URL;
@@ -127,9 +144,10 @@ function buildCatalogSyncEmbed() {
 }
 
 function buildSiteUpdateEmbed(customData = {}) {
-  const commitMsg = customData.commitMsg || process.env.COMMIT_MESSAGE || 'Website enhancements and fixes';
-  const commitAuthor = customData.commitAuthor || process.env.COMMIT_AUTHOR || 'Rio';
-  const commitSha = (customData.commitSha || process.env.COMMIT_SHA || '').substring(0, 7);
+  const git = getGitMetadata();
+  const commitMsg = customData.commitMsg || process.env.COMMIT_MESSAGE || git.msg || 'Website enhancements and fixes';
+  const commitAuthor = customData.commitAuthor || process.env.COMMIT_AUTHOR || git.author || 'Rio';
+  const commitSha = (customData.commitSha || process.env.COMMIT_SHA || git.sha || '').substring(0, 7);
   const version = customData.version || '3.3.0';
 
   return {

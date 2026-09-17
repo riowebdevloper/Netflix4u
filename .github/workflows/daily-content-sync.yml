@@ -30,11 +30,8 @@ jobs:
           node-version: 20
 
       - name: Run Automated Content Ingestion Pipeline
-        env:
-          TMDB_API_KEY: ${{ secrets['TMDB_API_KEY'] }}
-          DISCORD_WEBHOOK_URL: ${{ secrets['DISCORD_WEBHOOK_URL'] }}
         run: |
-          MAX_DISC="${{ github.event.inputs.max_discovery || '30' }}"
+          MAX_DISC="${{ inputs.max_discovery || '30' }}"
           echo "Starting catalog synchronization with maxDiscovery=${MAX_DISC}..."
           node scripts/cron_sync.js --max=${MAX_DISC}
 
