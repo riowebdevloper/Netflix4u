@@ -1167,7 +1167,7 @@ function generateSeriesDownloadLinks(title, year, seasons, canonicalId) {
         source: 'Direct Ultra HD',
         isDotmovies: true,
         isCloud: false,
-        url: `/api/download-file?title=${encodeURIComponent(safeTitle)}+S${sPrefix}${epLabel}&quality=1080p&type=series&id=${cleanId}&se=${sNum}&ep=${ep}&download=1`
+        url: `/api/download-file?title=${encodeURIComponent(safeTitle)}&quality=1080p&type=series&id=${cleanId}&se=${sNum}&ep=${ep}&download=1`
       });
 
       links.push({
@@ -1180,7 +1180,7 @@ function generateSeriesDownloadLinks(title, year, seasons, canonicalId) {
         source: 'Direct Ultra HD',
         isDotmovies: true,
         isCloud: false,
-        url: `/api/download-file?title=${encodeURIComponent(safeTitle)}+S${sPrefix}${epLabel}&quality=720p&type=series&id=${cleanId}&se=${sNum}&ep=${ep}&download=1`
+        url: `/api/download-file?title=${encodeURIComponent(safeTitle)}&quality=720p&type=series&id=${cleanId}&se=${sNum}&ep=${ep}&download=1`
       });
 
       // Fast Cloud CDN Episode Mirrors
@@ -1194,7 +1194,7 @@ function generateSeriesDownloadLinks(title, year, seasons, canonicalId) {
         source: 'Fast Cloud CDN',
         isCloud: true,
         isDotmovies: false,
-        url: `/api/download-file?title=${encodeURIComponent(safeTitle)}+S${sPrefix}${epLabel}&quality=1080p&type=series`
+        url: `/api/download-file?title=${encodeURIComponent(safeTitle)}&quality=1080p&type=series&id=${cleanId}&se=${sNum}&ep=${ep}&download=1`
       });
 
       links.push({
@@ -1207,7 +1207,7 @@ function generateSeriesDownloadLinks(title, year, seasons, canonicalId) {
         source: 'Fast Cloud CDN',
         isCloud: true,
         isDotmovies: false,
-        url: `/api/download-file?title=${encodeURIComponent(safeTitle)}+S${sPrefix}${epLabel}&quality=720p&type=series`
+        url: `/api/download-file?title=${encodeURIComponent(safeTitle)}&quality=720p&type=series&id=${cleanId}&se=${sNum}&ep=${ep}&download=1`
       });
 
       links.push({
@@ -1220,7 +1220,7 @@ function generateSeriesDownloadLinks(title, year, seasons, canonicalId) {
         source: 'Fast Cloud CDN',
         isCloud: true,
         isDotmovies: false,
-        url: `/api/download-file?title=${encodeURIComponent(safeTitle)}+S${sPrefix}${epLabel}&quality=480p&type=series`
+        url: `/api/download-file?title=${encodeURIComponent(safeTitle)}&quality=480p&type=series&id=${cleanId}&se=${sNum}&ep=${ep}&download=1`
       });
     }
   });
@@ -2166,9 +2166,18 @@ async function handleDownloadFile(req, res) {
     return res.end('Error: Missing download parameters');
   }
 
-  const titleToUse = (passedTitle || 'Netflix4U Video').replace(/[:\-–—]/g, ' ').replace(/\s+/g, ' ').trim();
-  const cleanFilenameBase = titleToUse.replace(/[^a-zA-Z0-9.\-_ ]/g, '').trim().replace(/\s+/g, '_');
-  const epSuffix = (se && ep) ? `_S${se.padStart(2, '0')}E${ep.padStart(2, '0')}` : '';
+  // Extract clean base series/movie title without episode tags for reliable catalog matching
+  const baseTitle = (passedTitle || '')
+    .replace(/\b(?:s\d{1,2}\s*e\d{1,2}|season\s*\d{1,2}|episode\s*\d{1,2}|ep\s*\d{1,2})\b.*/i, '')
+    .replace(/[:\-–—]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+  const titleToUse = baseTitle || (passedTitle || 'Netflix4U Video').replace(/[:\-–—]/g, ' ').replace(/\s+/g, ' ').trim();
+
+  // Strip duplicate SxxExx from cleanFilenameBase before appending epSuffix
+  let cleanFilenameBase = titleToUse.replace(/[^a-zA-Z0-9.\-_ ]/g, '').trim().replace(/\s+/g, '_');
+  cleanFilenameBase = cleanFilenameBase.replace(/_?S\d{1,2}E\d{1,2}.*/i, '');
+  const epSuffix = (se && ep) ? `_S${String(se).padStart(2, '0')}E${String(ep).padStart(2, '0')}` : '';
   const downloadFilename = `${cleanFilenameBase}${epSuffix}_${quality}.mkv`;
 
   try {
@@ -2179,17 +2188,33 @@ async function handleDownloadFile(req, res) {
       resolved = await resolveCloudDownloadUrl(rawUrl);
     }
 
-    // 2. Fallback: Search Catalog for title / ID to find authentic direct streams
+    // 2. Direct Content ID Resolution (Exact TMDB / Catalog Match)
+    let contentRec = null;
+    if (id && (!resolved || !resolved.directUrl)) {
+      try {
+        contentRec = await resolveContentId(id);
+      } catch (e) {}
+    }
+
+    // 3. Fallback: Search Catalog for title / ID to find authentic direct streams
     if (!resolved || !resolved.directUrl) {
       try {
-        const catalogLinks = findMatchingCatalogLinks(titleToUse, q.get('year'), q.get('imdbId'), id) || [];
+        let catalogLinks = (contentRec && contentRec.links && contentRec.links.length) ? contentRec.links : [];
+        if (!catalogLinks.length) {
+          catalogLinks = findMatchingCatalogLinks(titleToUse, q.get('year'), q.get('imdbId'), id) || [];
+          if (!catalogLinks.length && passedTitle && passedTitle !== titleToUse) {
+            catalogLinks = findMatchingCatalogLinks(passedTitle, q.get('year'), q.get('imdbId'), id) || [];
+          }
+        }
+
         if (catalogLinks.length > 0) {
           // Prefer link matching requested quality or episode
           let matched = null;
           if (se && ep) {
-            matched = catalogLinks.find(l => Number(l.season) === Number(se) && Number(l.episode) === Number(ep) && (l.quality || '').includes(quality)) ||
-                      catalogLinks.find(l => Number(l.season) === Number(se) && Number(l.episode) === Number(ep)) ||
-                      catalogLinks[0];
+            // STRICT MATCH: Only match when season and episode genuinely match!
+            // CRITICAL FIX: NEVER fall back to catalogLinks[0] for TV episodes (which would download wrong episode/title)!
+            matched = catalogLinks.find(l => Number(l.season) === Number(se) && Number(l.episode) === Number(ep) && (l.quality || '').toLowerCase().includes(quality.toLowerCase())) ||
+                      catalogLinks.find(l => Number(l.season) === Number(se) && Number(l.episode) === Number(ep));
           } else {
             matched = catalogLinks.find(l => (l.quality || '').toLowerCase().includes(quality.toLowerCase())) ||
                       catalogLinks.find(l => l.isCloud || (l.url && l.url.includes('vcloud'))) ||
@@ -2206,7 +2231,7 @@ async function handleDownloadFile(req, res) {
       } catch (e) {}
     }
 
-    // 3. Fallback: Try NetMirror stream if available
+    // 4. Fallback: Try NetMirror stream if available
     if (!resolved || !resolved.directUrl) {
       try {
         const nmItem = await resolveNetmirrorItem(id, titleToUse, type, 'hi');
@@ -2391,19 +2416,19 @@ async function handleStreamPlayer(req, res) {
 
   // 3. Multi-Server Fallbacks
   const cleanId = String(id || '').replace(/^(?:dotmobiz|tmdb(?:-movie|-series|-tv)?)-/, '');
+  const peachifyDub = (lang === 'hi') ? 'Hindi' : (lang === 'ta' ? 'Tamil' : (lang === 'te' ? 'Telugu' : 'English'));
+  const peachifyUrl = isMovie
+    ? `https://peachify.pro/embed/movie/${cleanId}?accent=E50914&autoPlay=true${peachifyDub ? '&dub=' + encodeURIComponent(peachifyDub) : ''}`
+    : `https://peachify.pro/embed/tv/${cleanId}/${se}/${ep}?accent=E50914&autoPlay=true&autoNext=true&showNextBtn=true${peachifyDub ? '&dub=' + encodeURIComponent(peachifyDub) : ''}`;
   const vidlinkUrl = isMovie
     ? `https://vidlink.pro/movie/${cleanId}?multiLang=true${lang ? '&lang=' + lang : ''}`
     : `https://vidlink.pro/tv/${cleanId}/${se}/${ep}?multiLang=true${lang ? '&lang=' + lang : ''}`;
-  const smashyUrl = isMovie
-    ? `https://embed.smashystream.com/playere.php?tmdb=${cleanId}`
-    : `https://embed.smashystream.com/playere.php?tmdb=${cleanId}&season=${se}&episode=${ep}`;
 
   const displayTitle = (title || 'Stream') + (isMovie ? '' : ` • S${se} E${ep}`);
   const directDlHref = rawCloudUrl ? `/api/download-file?url=${encodeURIComponent(rawCloudUrl)}` : (cloudStream?.url ? `/api/download-file?url=${encodeURIComponent(cloudStream.url)}` : '');
 
-  // Default initial server: Fast Cloud if available, else NetMirror 1 (Fast HD)
-  const isHindiMode = (lang === 'hi');
-  const initialServer = cloudStream ? 'cloud' : 'nm1';
+  // Default initial server: Peachify (Ad-Free HD) or Fast Cloud if direct cloud stream available
+  const initialServer = cloudStream ? 'cloud' : 'peachify';
 
   const playerHtml = `<!DOCTYPE html>
 <html lang="en">
@@ -2432,7 +2457,7 @@ async function handleStreamPlayer(req, res) {
     }
     .top-bar-hidden { opacity: 0; pointer-events: none; transform: translateY(-6px); }
 
-    .title-area { display: flex; align-items: center; gap: 6px; min-width: 0; }
+    .title-area { display: flex; align-items: center; gap: 6px; min-width: 0; flex-wrap: wrap; }
     .title-text { font-size: 12px; font-weight: 700; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px; }
     .badge-ep { background: #e50914; color: #fff; font-size: 9px; font-weight: 800; padding: 2px 5px; border-radius: 4px; }
     
@@ -2479,6 +2504,11 @@ async function handleStreamPlayer(req, res) {
       <div class="title-area">
         <span class="badge-ep">${isMovie ? 'MOVIE' : 'S' + actualSe + ' E' + actualEp}</span>
         <span class="title-text">${escapeHtml(displayTitle)}</span>
+        ${!isMovie ? `
+        <div class="ep-nav-group" style="display:inline-flex;align-items:center;gap:4px;margin-left:6px;">
+          <button type="button" id="player-prev-ep" class="pill" ${ep <= 1 ? 'disabled style="opacity:0.4;pointer-events:none;"' : ''} onclick="navigateEpisode(-1)" title="Previous Episode">⏮️ Prev Ep</button>
+          <button type="button" id="player-next-ep" class="pill" onclick="navigateEpisode(1)" title="Next Episode">Next Ep ⏭️</button>
+        </div>` : ''}
       </div>
 
       <!-- Language Selectors -->
@@ -2491,13 +2521,13 @@ async function handleStreamPlayer(req, res) {
 
       <!-- Server Selectors -->
       <div class="controls-group">
+        <button type="button" id="btn-srv-peachify" class="server-pill ${initialServer === 'peachify' ? 'active' : ''}" onclick="activateServer(&quot;peachify&quot;)">🍑 Peachify (Ad-Free HD)</button>
         ${cloudStream ? '<button type="button" id="btn-srv-cloud" class="server-pill ' + (initialServer === 'cloud' ? 'active' : '') + '" onclick="activateServer(&quot;cloud&quot;)">⚡ Fast Cloud (Hindi Dual)</button>' : ''}
         <button type="button" id="btn-srv-nm1" class="server-pill ${initialServer === 'nm1' ? 'active' : ''}" onclick="activateServer(&quot;nm1&quot;)">⚡ NetMirror 1 (App HD)</button>
         <button type="button" id="btn-srv-nm2" class="server-pill ${initialServer === 'nm2' ? 'active' : ''}" onclick="activateServer(&quot;nm2&quot;)">⚡ NetMirror 2 (App Ultra)</button>
         <button type="button" id="btn-srv-nm4" class="server-pill ${initialServer === 'nm4' ? 'active' : ''}" onclick="activateServer(&quot;nm4&quot;)">⚡ NetMirror 4 (Spedo)</button>
         <button type="button" id="btn-srv-nmmulti" class="server-pill ${initialServer === 'nmmulti' ? 'active' : ''}" onclick="activateServer(&quot;nmmulti&quot;)">🌐 NetMirror Multi-Lang</button>
         <button type="button" id="btn-srv-vidlink" class="server-pill ${initialServer === 'vidlink' ? 'active' : ''}" onclick="activateServer(&quot;vidlink&quot;)">🚀 VidLink Multi</button>
-        <button type="button" id="btn-srv-smashy" class="server-pill" onclick="activateServer(&quot;smashy&quot;)">🛡️ SmashyStream</button>
         ${cloudStream ? '<a href="intent:' + cloudStream.url + '#Intent;action=android.intent.action.VIEW;type=video/*;package=com.mxtech.videoplayer.ad;end" class="dl-btn" style="background:#0284c7;border-color:#38bdf8;" title="Play Hindi Dub in MX Player">📱 MX Player</a>' : ''}
         ${cloudStream ? '<a href="vlc://' + cloudStream.url.replace(/^https?:\/\//i, '') + '" class="dl-btn" style="background:#ea580c;border-color:#f97316;" title="Play Hindi Dub in VLC Player">🚀 VLC</a>' : ''}
         ${directDlHref ? '<a href="' + directDlHref + '" class="dl-btn" target="_blank" rel="noopener">📥 Direct Download</a>' : ''}
@@ -2506,30 +2536,30 @@ async function handleStreamPlayer(req, res) {
 
     <!-- Media Players View Area -->
     <div id="media-view">
+      <iframe id="iframe-peachify" class="layer-view ${initialServer === 'peachify' ? 'visible' : ''}" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
       <div id="artplayer-layer" class="layer-view ${initialServer === 'cloud' ? 'visible' : ''}"></div>
       <iframe id="iframe-nm1" class="layer-view ${initialServer === 'nm1' ? 'visible' : ''}" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
       <iframe id="iframe-nm2" class="layer-view ${initialServer === 'nm2' ? 'visible' : ''}" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
       <iframe id="iframe-nm4" class="layer-view ${initialServer === 'nm4' ? 'visible' : ''}" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
       <iframe id="iframe-nmmulti" class="layer-view ${initialServer === 'nmmulti' ? 'visible' : ''}" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
       <iframe id="iframe-vidlink" class="layer-view ${initialServer === 'vidlink' ? 'visible' : ''}" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
-      <iframe id="iframe-smashy" class="layer-view" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
     </div>
 
     <div id="shield-toast"></div>
   </div>
 
   <script>
+    var peachifyUrl = ${JSON.stringify(peachifyUrl)};
     var cloudUrl = ${JSON.stringify(cloudStream ? cloudStream.url : '')};
     var nm1Url = ${JSON.stringify(nm1Url)};
     var nm2Url = ${JSON.stringify(nm2Url)};
     var nm4Url = ${JSON.stringify(nm4Url)};
     var nmMultiUrl = ${JSON.stringify(nmMultiUrl)};
     var vidlinkUrl = ${JSON.stringify(vidlinkUrl)};
-    var smashyUrl = ${JSON.stringify(smashyUrl)};
     var currentServer = ${JSON.stringify(initialServer)};
     var art = null;
     var failoverIndex = 0;
-    var serverSequence = ['nm1', 'nm2', 'nmmulti', 'nm4', 'cloud', 'vidlink', 'smashy'].filter(function(s) {
+    var serverSequence = ['peachify', 'nm1', 'nm2', 'nmmulti', 'nm4', 'cloud', 'vidlink'].filter(function(s) {
       if (s === 'cloud' && !cloudUrl) return false;
       return true;
     });
@@ -2553,7 +2583,13 @@ async function handleStreamPlayer(req, res) {
       var btn = document.getElementById('btn-srv-' + srv);
       if (btn) btn.classList.add('active');
 
-      if (srv === 'cloud' && cloudUrl) {
+      if (srv === 'peachify') {
+        var frame = document.getElementById('iframe-peachify');
+        if (!frame.src || frame.src === 'about:blank') {
+          frame.src = peachifyUrl;
+        }
+        frame.classList.add('visible');
+      } else if (srv === 'cloud' && cloudUrl) {
         var mount = document.getElementById('artplayer-layer');
         mount.classList.add('visible');
         if (!art) {
@@ -2588,10 +2624,6 @@ async function handleStreamPlayer(req, res) {
       } else if (srv === 'vidlink') {
         var frame = document.getElementById('iframe-vidlink');
         if (!frame.src || frame.src === 'about:blank') frame.src = vidlinkUrl;
-        frame.classList.add('visible');
-      } else if (srv === 'smashy') {
-        var frame = document.getElementById('iframe-smashy');
-        if (!frame.src || frame.src === 'about:blank') frame.src = smashyUrl;
         frame.classList.add('visible');
       }
     }
@@ -2641,6 +2673,37 @@ async function handleStreamPlayer(req, res) {
       currentParams.set('lang', targetLang);
       window.location.search = currentParams.toString();
     }
+
+    function navigateEpisode(delta) {
+      var currentParams = new URLSearchParams(window.location.search);
+      var currentEp = parseInt(currentParams.get('ep') || currentParams.get('episode') || '1', 10) || 1;
+      var newEp = currentEp + delta;
+      if (newEp < 1) newEp = 1;
+      currentParams.set('ep', String(newEp));
+      currentParams.set('episode', String(newEp));
+      window.location.search = currentParams.toString();
+    }
+
+    // Peachify API Message Listener & Progress Sync
+    window.addEventListener('message', function(event) {
+      if (event.origin !== 'https://peachify.pro') return;
+      var payload = event.data;
+      if (payload && payload.type === 'MEDIA_DATA') {
+        try {
+          localStorage.setItem('peachifyProgress', JSON.stringify(payload.data));
+        } catch(e) {}
+      }
+      if (payload && payload.type === 'PLAYER_EVENT') {
+        var pData = payload.data || {};
+        var playerEvt = pData.event;
+        if (playerEvt === 'play' || playerEvt === 'playing' || playerEvt === 'timeupdate') {
+          showShieldToast('Playing on Peachify Ad-Free HD Stream');
+        }
+        if (playerEvt === 'ended' && !${isMovie}) {
+          navigateEpisode(1);
+        }
+      }
+    });
 
     // Auto-hide top bar on user inactivity
     var topBar = document.getElementById('top-bar');

@@ -1245,17 +1245,13 @@
   // ─── WATCH MODAL (Net27 Streaming Player UI with Auto-Failover Engine) ───
   // ─── WATCH MODAL (Net27 Streaming Player UI with Auto-Failover Engine) ───
   var SERVERS_CONFIG = [
-    { id: 's1', name: 'Server 1 (Fast Cloud Multi-Audio • Hindi Dub)', shortName: 'Server 1 • Hindi Multi', tag: 'Hindi Dual-Audio', tagClass: 'tag-multi', desc: 'Direct Fast Cloud & Multi-Audio Engine (Hindi Dubbed + English) with MX/VLC launch' },
+    { id: 'peachify', name: 'Peachify (Ad-Free HD • Multi-Audio)', shortName: 'Peachify • Ad-Free', tag: 'Ad-Free HD', tagClass: 'tag-peachify', desc: 'Peachify Pro Ad-Free Player • Auto-Next & Multi-Audio Synchronized Stream' },
     { id: 'nm1', name: 'NetMirror 1 (Fast HD Server)', shortName: 'NetMirror 1 • Fast HD', tag: 'NetMirror HD', tagClass: 'tag-multi', desc: 'NetMirror App Server 1 • High-Speed Fast HD Stream with Audio Selection' },
     { id: 'nm2', name: 'NetMirror 2 (Ultra HD Server)', shortName: 'NetMirror 2 • Ultra HD', tag: 'NetMirror Ultra', tagClass: 'tag-multi', desc: 'NetMirror App Server 2 • 1080p Ultra HD High-Bitrate Stream' },
     { id: 'nm4', name: 'NetMirror 4 (SpedoStream)', shortName: 'NetMirror 4 • Spedo', tag: 'SpedoStream', tagClass: 'tag-fast', desc: 'NetMirror App Server 4 • SpedoStream CDN Fast Playback Engine' },
     { id: 'nm_multi', name: 'NetMirror Multi-Lang (Dubbed PVR)', shortName: 'NetMirror Multi-Lang', tag: 'Multi-Dub', tagClass: 'tag-multi', desc: 'NetMirror App Multi-Audio Server • Hindi, Tamil, Telugu, English' },
-    { id: 's2', name: 'Server 2 (AllMovieLand Player)', shortName: 'Server 2 • AllMovieLand', tag: 'AllMovieLand', tagClass: 'tag-peachify', desc: 'AllMovieLand Ultra HD High-Speed Streaming Player' },
-    { id: 's3', name: 'Server 3 (VidLink Pro Multi-Audio)', shortName: 'Server 3 • VidLink', tag: 'Multi-Lang', tagClass: 'tag-multi', desc: 'VidLink Pro High-Speed Global Streaming Player' },
-    { id: 's4', name: 'Server 4 (VidSrc PM Global)', shortName: 'Server 4 • VidSrc', tag: 'Global CDN', tagClass: 'tag-global', desc: 'VidSrc PM High Uptime Global Streaming Mirror' },
-    { id: 's5', name: 'Server 5 (2Embed High-Speed)', shortName: 'Server 5 • 2Embed', tag: 'Fast Mirror', tagClass: 'tag-fast', desc: '2Embed Global High-Speed Streaming Server' },
-    { id: 's6', name: 'Server 6 (SuperEmbed Multi)', shortName: 'Server 6 • SuperEmbed', tag: 'Backup', tagClass: 'tag-global', desc: 'SuperEmbed Multi CDN Backup Stream' },
-    { id: 's7', name: 'Server 7 (AutoEmbed)', shortName: 'Server 7 • AutoEmbed', tag: 'Backup CDN', tagClass: 'tag-fast', desc: 'AutoEmbed Fast Streaming Player' }
+    { id: 's1', name: 'Server 1 (Fast Cloud Multi-Audio • Hindi Dub)', shortName: 'Server 1 • Hindi Multi', tag: 'Hindi Dual-Audio', tagClass: 'tag-multi', desc: 'Direct Fast Cloud & Multi-Audio Engine (Hindi Dubbed + English) with MX/VLC launch' },
+    { id: 's3', name: 'Server 3 (VidLink Pro Multi-Audio)', shortName: 'Server 3 • VidLink', tag: 'Multi-Lang', tagClass: 'tag-multi', desc: 'VidLink Pro High-Speed Global Streaming Player' }
   ];
 
   var currentWatchLang = 'hi';
@@ -1272,7 +1268,7 @@
   var autoSwitchTimer = null;
   var autoSwitchIndex = 0;
   var isPlaybackConfirmed = false;
-  var autoSwitchOrder = ['s1', 'nm1', 'nm2', 'nm_multi', 'nm4', 's2', 's3', 's4', 's5', 's6', 's7'];
+  var autoSwitchOrder = ['peachify', 'nm1', 'nm2', 'nm_multi', 'nm4', 's1', 's3'];
   var currentAutoSwitchToken = 0;
   var activeProbeController = null;
   var watchTopBarHideTimeout = null;
@@ -1285,6 +1281,94 @@
   var watchAudioToggle = document.getElementById('watch-audio-toggle');
   var watchAudioMenu = document.getElementById('watch-audio-menu');
   var watchCurrentAudioLabel = document.getElementById('watch-current-audio-label');
+
+  // TV Episode Navigation Controls
+  var watchEpNav = document.getElementById('watch-ep-nav');
+  var watchPrevEpBtn = document.getElementById('watch-prev-ep-btn');
+  var watchNextEpBtn = document.getElementById('watch-next-ep-btn');
+  var watchEpIndicator = document.getElementById('watch-ep-indicator');
+
+  function updateEpisodeNavUi() {
+    if (!watchEpNav) return;
+    if (!activeWatchParams) {
+      watchEpNav.classList.add('hidden');
+      return;
+    }
+    var isTv = Boolean(activeWatchParams.isTv || activeWatchParams.type === 'tv' || activeWatchParams.type === 'series');
+    if (!isTv) {
+      watchEpNav.classList.add('hidden');
+      return;
+    }
+
+    watchEpNav.classList.remove('hidden');
+    var curEp = parseInt(activeWatchParams.episode || 1, 10) || 1;
+    var curSe = parseInt(activeWatchParams.season || 1, 10) || 1;
+
+    if (watchEpIndicator) {
+      watchEpIndicator.textContent = 'S' + curSe + ':E' + curEp;
+    }
+    if (watchMetaType) {
+      watchMetaType.textContent = 'S' + curSe + ' E' + curEp;
+    }
+    if (watchPrevEpBtn) {
+      watchPrevEpBtn.disabled = (curEp <= 1);
+    }
+  }
+
+  function navigateToEpisode(targetEp) {
+    if (!activeWatchParams || targetEp < 1) return;
+    activeWatchParams.episode = targetEp;
+    updateEpisodeNavUi();
+
+    // Rebuild server URLs for target episode
+    activeWatchServers.peachify = buildPeachifyUrl(activeWatchParams, currentWatchLang);
+    activeWatchServers.s1 = buildNetmirrorServerUrl(activeWatchParams, currentWatchLang);
+    activeWatchServers.nm1 = buildNetmirrorDirectServerUrl(activeWatchParams, currentWatchLang, '1');
+    activeWatchServers.nm2 = buildNetmirrorDirectServerUrl(activeWatchParams, currentWatchLang, '2');
+    activeWatchServers.nm4 = buildNetmirrorDirectServerUrl(activeWatchParams, currentWatchLang, '4');
+    activeWatchServers.nm_multi = buildNetmirrorDirectServerUrl(activeWatchParams, currentWatchLang, 'multi');
+    activeWatchServers.s3 = buildVidlinkMultiAudioUrl(activeWatchParams, currentWatchLang);
+
+    // Reload active server iframe with the target episode
+    var srv = currentWatchServer || 'peachify';
+    var targetUrl = activeWatchServers[srv] || activeWatchServers.peachify || activeWatchServers.nm1;
+    if (watchModalIframe && targetUrl) {
+      watchModalIframe.src = targetUrl;
+    }
+
+    var se = activeWatchParams.season || 1;
+    setWatchStatus('Episode ' + targetEp + ' Loaded', 'Playing Season ' + se + ' Episode ' + targetEp);
+    if (window.__showToast) {
+      window.__showToast('Playing Episode ' + targetEp, '⏭️');
+    }
+
+    // Update history URL hash
+    try {
+      var tmdbId = activeWatchParams.tmdbId;
+      var newHash = '#w=' + tmdbId + '-tv-' + se + '-' + targetEp;
+      history.replaceState({ modal: 'watch', tmdbId: tmdbId, type: 'tv', se: se, ep: targetEp }, '', newHash);
+    } catch(e) {}
+  }
+
+  if (watchPrevEpBtn) {
+    watchPrevEpBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      if (!activeWatchParams) return;
+      var curEp = parseInt(activeWatchParams.episode || 1, 10) || 1;
+      if (curEp > 1) {
+        navigateToEpisode(curEp - 1);
+      }
+    });
+  }
+
+  if (watchNextEpBtn) {
+    watchNextEpBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      if (!activeWatchParams) return;
+      var curEp = parseInt(activeWatchParams.episode || 1, 10) || 1;
+      navigateToEpisode(curEp + 1);
+    });
+  }
 
   function setWatchStatus(status, substatus) {
     if (watchStreamStatusText && status) watchStreamStatusText.textContent = status;
@@ -1396,15 +1480,15 @@
     var pickerList = document.getElementById('picker-server-list');
     if (pickerList) {
       pickerList.innerHTML = SERVERS_CONFIG.map(function(s, idx) {
+        var isPeach = s.id === 'peachify';
         var isS1 = s.id === 's1';
-        var isS2 = s.id === 's2';
         var isNm = s.id.indexOf('nm') === 0;
-        var badge = isS1 ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">RECOMMENDED</span>' :
+        var badge = isPeach ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-pink-500/20 text-pink-400 border border-pink-500/30">AD-FREE HD</span>' :
+                    isS1 ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">HINDI DUB</span>' :
                     isNm ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-red-500/20 text-red-400 border border-red-500/30">' + escapeHtml(s.tag) + '</span>' :
-                    isS2 ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-orange-500/20 text-orange-400 border border-orange-500/30">ALLMOVIELAND</span>' :
                     '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-white/10 text-white/60">' + escapeHtml(s.tag) + '</span>';
 
-        return '<button type="button" data-select-server="' + s.id + '" class="picker-server-card' + (isS1 ? ' is-active' : '') + '">' +
+        return '<button type="button" data-select-server="' + s.id + '" class="picker-server-card' + (isPeach ? ' is-active' : '') + '">' +
           '<div class="flex items-center gap-3">' +
             '<div class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center font-bold text-xs text-white">' + (idx + 1) + '</div>' +
             '<div>' +
@@ -1629,6 +1713,29 @@
   // Cross-origin postMessage listener for HTML5 video player events
   window.addEventListener('message', function(event) {
     if (!watchModal || watchModal.classList.contains('hidden')) return;
+
+    // Peachify Pro Outbound PostMessage Sync (API Reference)
+    if (event.origin === 'https://peachify.pro') {
+      var peachData = event.data;
+      if (peachData && peachData.type === 'MEDIA_DATA') {
+        try {
+          localStorage.setItem('peachifyProgress', JSON.stringify(peachData.data));
+        } catch(e) {}
+      }
+      if (peachData && peachData.type === 'PLAYER_EVENT') {
+        var pInfo = peachData.data || {};
+        var pEvent = (pInfo.event || '').toLowerCase();
+        if (pEvent === 'play' || pEvent === 'playing' || pEvent === 'timeupdate') {
+          confirmPlaybackActive();
+        }
+        if (pEvent === 'ended' && activeWatchParams && (activeWatchParams.isTv || activeWatchParams.type === 'tv' || activeWatchParams.type === 'series')) {
+          var nextEp = (parseInt(activeWatchParams.episode || 1, 10) || 1) + 1;
+          navigateToEpisode(nextEp);
+        }
+      }
+      return;
+    }
+
     var data = event.data;
     if (!data) return;
     
@@ -1709,6 +1816,38 @@
       confirmPlaybackActive();
     }
   });
+
+  function buildPeachifyUrl(params, lang) {
+    if (!params) return '';
+    var cleanId = String(params.tmdbId || '').replace(/^(?:dotmobiz|tmdb(?:-movie|-series|-tv)?)-/, '');
+    if (!cleanId || !/^\d+$/.test(cleanId)) {
+      if (params.canonicalId && /^\d+$/.test(String(params.canonicalId))) {
+        cleanId = String(params.canonicalId);
+      }
+    }
+    if (!cleanId && params.imdbId && typeof params.imdbId === 'string' && params.imdbId.startsWith('tt')) {
+      cleanId = params.imdbId;
+    }
+    if (!cleanId) cleanId = '76479';
+
+    var isTv = Boolean(params.isTv || params.type === 'tv' || params.type === 'series');
+    var s = params.season || 1;
+    var e = params.episode || 1;
+
+    var baseEndpoint = isTv
+      ? 'https://peachify.pro/embed/tv/' + encodeURIComponent(cleanId) + '/' + encodeURIComponent(s) + '/' + encodeURIComponent(e)
+      : 'https://peachify.pro/embed/movie/' + encodeURIComponent(cleanId);
+
+    var dubParam = (lang === 'hi' || (!lang && currentWatchLang === 'hi')) ? 'Hindi' : ((lang === 'ta' || currentWatchLang === 'ta') ? 'Tamil' : ((lang === 'te' || currentWatchLang === 'te') ? 'Telugu' : 'English'));
+    var query = '?accent=E50914&autoPlay=true';
+    if (dubParam) {
+      query += '&dub=' + encodeURIComponent(dubParam);
+    }
+    if (isTv) {
+      query += '&autoNext=true&showNextBtn=true';
+    }
+    return baseEndpoint + query;
+  }
 
   function buildVidlinkMultiAudioUrl(params, lang) {
     if (!params) return '';
@@ -1873,39 +2012,16 @@
         }).catch(function() {});
     }
 
-    // Update Top Floating Header Metadata
+    // Update Top Floating Header Metadata & Episode Controls
     if (watchMetaTitle) watchMetaTitle.textContent = title || 'Netflix4U';
     if (watchMetaYear) watchMetaYear.textContent = year || '2026';
     if (watchMetaType) {
       watchMetaType.textContent = isTv ? ('S' + season + ' E' + episode) : 'Movie';
     }
+    updateEpisodeNavUi();
 
-    // Build Server URLs (Server 2 is 100% AllMovieLand)
-    var allMovieLandUrl = '';
-    if (imdbId && typeof imdbId === 'string' && imdbId.startsWith('tt')) {
-      allMovieLandUrl = isTv
-        ? 'https://slast430did.com/play/' + encodeURIComponent(imdbId) + '?s=' + season + '&e=' + episode
-        : 'https://slast430did.com/play/' + encodeURIComponent(imdbId);
-    } else {
-      allMovieLandUrl = isTv
-        ? 'https://slast430did.com/play/' + encodeURIComponent(tmdbId) + '?s=' + season + '&e=' + episode
-        : 'https://slast430did.com/play/' + encodeURIComponent(tmdbId);
-      // Fetch IMDb ID asynchronously if not available at boot
-      fetch('/api/catalog/title/' + encodeURIComponent(type) + '/' + encodeURIComponent(tmdbId))
-        .then(function(res) { return res.json(); })
-        .then(function(data) {
-          if (data && data.imdbId) {
-            activeWatchParams.imdbId = data.imdbId;
-            activeWatchServers.s2 = isTv
-              ? 'https://slast430did.com/play/' + encodeURIComponent(data.imdbId) + '?s=' + season + '&e=' + episode
-              : 'https://slast430did.com/play/' + encodeURIComponent(data.imdbId);
-            if (currentWatchServer === 's2' && watchModalIframe) {
-              watchModalIframe.src = activeWatchServers.s2;
-            }
-          }
-        }).catch(function() {});
-    }
-
+    // Build Server URLs
+    var peachifyUrl = buildPeachifyUrl(activeWatchParams, currentWatchLang);
     var s1Url = buildNetmirrorServerUrl(activeWatchParams, currentWatchLang);
     var nm1Url = buildNetmirrorDirectServerUrl(activeWatchParams, currentWatchLang, '1');
     var nm2Url = buildNetmirrorDirectServerUrl(activeWatchParams, currentWatchLang, '2');
@@ -1914,28 +2030,16 @@
     var s3Url = buildVidlinkMultiAudioUrl(activeWatchParams, currentWatchLang);
 
     activeWatchServers = {
-      s1: s1Url,
+      peachify: peachifyUrl,
       nm1: nm1Url,
       nm2: nm2Url,
       nm4: nm4Url,
       nm_multi: nmMultiUrl,
-      s2: allMovieLandUrl,
-      s3: s3Url,
-      s4: isTv
-        ? 'https://vidsrc.pm/embed/tv/' + tmdbId + '/' + season + '/' + episode
-        : 'https://vidsrc.pm/embed/movie/' + tmdbId,
-      s5: isTv
-        ? 'https://www.2embed.cc/embedtv/' + tmdbId + '&s=' + season + '&e=' + episode
-        : 'https://www.2embed.cc/embed/' + tmdbId,
-      s6: isTv
-        ? 'https://multiembed.mov/?video_id=' + tmdbId + '&tmdb=1&s=' + season + '&e=' + episode
-        : 'https://multiembed.mov/?video_id=' + tmdbId + '&tmdb=1',
-      s7: isTv
-        ? 'https://autoembed.co/tv/tmdb/' + tmdbId + '/' + season + '/' + episode
-        : 'https://autoembed.co/movie/tmdb/' + tmdbId
+      s1: s1Url,
+      s3: s3Url
     };
 
-    var startingServer = chosenServer || 's1';
+    var startingServer = chosenServer || 'peachify';
     currentWatchServer = startingServer;
     isAutoSwitchEnabled = !chosenServer;
     isPlaybackConfirmed = false;
@@ -2100,9 +2204,11 @@
 
     if (!activeWatchParams) return;
 
+    var newPeachifyUrl = buildPeachifyUrl(activeWatchParams, currentWatchLang);
     var newS1Url = buildNetmirrorServerUrl(activeWatchParams, currentWatchLang);
     var newS3Url = buildVidlinkMultiAudioUrl(activeWatchParams, currentWatchLang);
 
+    activeWatchServers.peachify = newPeachifyUrl;
     activeWatchServers.s1 = newS1Url;
     activeWatchServers.nm1 = buildNetmirrorDirectServerUrl(activeWatchParams, currentWatchLang, '1');
     activeWatchServers.nm2 = buildNetmirrorDirectServerUrl(activeWatchParams, currentWatchLang, '2');
@@ -2110,15 +2216,15 @@
     activeWatchServers.nm_multi = buildNetmirrorDirectServerUrl(activeWatchParams, currentWatchLang, 'multi');
     activeWatchServers.s3 = newS3Url;
 
-    // Switch to Server 1 to immediately provide user their chosen language stream
-    currentWatchServer = 's1';
-    updateActiveServerUi('s1');
+    var activeSrv = currentWatchServer || 'peachify';
+    var activeUrl = activeWatchServers[activeSrv] || newPeachifyUrl;
     hideWatchFailoverCard();
-    watchModalIframe.src = newS1Url;
+    watchModalIframe.src = activeUrl;
 
-    setWatchStatus('Audio: ' + langCfg.label + ' (Server 1)', 'Fast Cloud Multi-Audio Engine • Hindi Dub Stream Active');
+    var activeCfg = SERVERS_CONFIG.find(function(s) { return s.id === activeSrv; }) || SERVERS_CONFIG[0];
+    setWatchStatus('Audio: ' + langCfg.label + ' (' + (activeCfg.shortName || activeCfg.name) + ')', 'Multi-Audio Stream Active');
     if (window.__showToast) {
-      window.__showToast('Switched audio to ' + langCfg.label + ' • Hindi Multi-Audio Active', '🎧');
+      window.__showToast('Switched audio to ' + langCfg.label, '🎧');
     }
     resetWatchTopBarTimer();
   }

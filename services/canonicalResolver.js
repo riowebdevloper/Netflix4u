@@ -255,10 +255,17 @@ function findMatchingCatalogLinks(title, year, imdbId, slug) {
 
   // 3. Check by normalized alphanumeric title
   const clean = String(title || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+  const strippedTitle = String(title || '')
+    .replace(/\b(?:s\d{1,2}\s*e\d{1,2}|season\s*\d{1,2}|episode\s*\d{1,2}|ep\s*\d{1,2})\b.*/i, '')
+    .trim();
+  const strippedClean = strippedTitle.toLowerCase().replace(/[^a-z0-9]/g, '');
   const primaryTitle = String(title || '').split(/[:\-–—]/)[0].trim().toLowerCase().replace(/[^a-z0-9]/g, '');
 
   const candidates = [clean];
-  if (primaryTitle && primaryTitle !== clean && primaryTitle.length >= 3) {
+  if (strippedClean && strippedClean !== clean && strippedClean.length >= 3) {
+    candidates.push(strippedClean);
+  }
+  if (primaryTitle && primaryTitle !== clean && primaryTitle !== strippedClean && primaryTitle.length >= 3) {
     candidates.push(primaryTitle);
   }
 
