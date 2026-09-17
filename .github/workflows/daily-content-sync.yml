@@ -31,8 +31,8 @@ jobs:
 
       - name: Run Automated Content Ingestion Pipeline
         env:
-          TMDB_API_KEY: ${{ secrets.TMDB_API_KEY || '445f2b5a8941c1d4bd5a869761a916e3' }}
-          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL || 'https://discord.com/api/webhooks/1549714027846963240/sdeYGglawTUFdbcUFpYccJ5lCD5YQUho8A-rmNV0EZIK9tdcGp0w3yO_y0k1fO7LMztb' }}
+          TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
         run: |
           MAX_DISC="${{ github.event.inputs.max_discovery || '30' }}"
           echo "Starting catalog synchronization with maxDiscovery=${MAX_DISC}..."

@@ -22,6 +22,7 @@ audit_artifacts/
 *.tar.gz
 *.tgz
 *.rar
+*.apk
 
 # Screenshots & debugging assets
 screenshot*.png
