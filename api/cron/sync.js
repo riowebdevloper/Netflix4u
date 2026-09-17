@@ -13,6 +13,10 @@ module.exports = async (req, res) => {
   try {
     console.log('[CronSync] Initiating automated catalog sync...');
     const result = await runIngestionPipeline({ maxDiscovery: 30, concurrency: 3 });
+    try {
+      const { sendDiscordNotification } = require('../../scripts/notify_discord');
+      await sendDiscordNotification({ event: 'catalog' });
+    } catch(e) {}
     return res.status(200).json({
       success: true,
       timestamp: new Date().toISOString(),

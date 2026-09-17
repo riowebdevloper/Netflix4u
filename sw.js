@@ -9,7 +9,7 @@ try {
 } catch (e) {}
 
 // PWA Shell & Offline Support (Network-First for HTML to guarantee fresh updates)
-var CACHE_NAME = 'n4u-pwa-v7';
+var CACHE_NAME = 'n4u-pwa-v8';
 var STATIC_ASSETS = [
   '/',
   '/index.html',
@@ -19,6 +19,7 @@ var STATIC_ASSETS = [
   '/css/index.P3dZcbru.css',
   '/js/net27-core.js',
   '/js/net27-modal.js',
+  '/js/version-checker.js',
   '/manifest.json',
   '/favicon.ico',
   '/favicon.svg',
@@ -53,6 +54,12 @@ self.addEventListener('activate', function(event) {
       );
     }).then(function() {
       return self.clients.claim();
+    }).then(function() {
+      return self.clients.matchAll({ type: 'window' }).then(function(clients) {
+        clients.forEach(function(client) {
+          client.postMessage({ type: 'SW_UPDATED', version: CACHE_NAME });
+        });
+      });
     })
   );
 });
@@ -61,7 +68,7 @@ self.addEventListener('fetch', function(event) {
   if (event.request.method !== 'GET') return;
   var url = new URL(event.request.url);
   if (url.origin !== self.location.origin) return;
-  if (url.pathname.startsWith('/api/')) return;
+  if (url.pathname === '/version.json' || url.pathname.startsWith('/api/')) return;
 
   // Network-First for Navigation & HTML documents: Ensures users ALWAYS get live site updates
   var isNavOrHtml = event.request.mode === 'navigate' ||

@@ -9,6 +9,11 @@
   <meta name="description" content="Stream and download high quality movies, web series, anime and K-dramas with multi-audio and high-speed cloud servers on Netflix4U.">
   <meta name="keywords" content="Netflix4u, stream movies online, download movies 4k, web series hindi dubbed, free streaming hd">
 
+  <!-- Cache Invalidation & Anti-Stale Tags -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+
   <!-- HilltopAds Verification -->
   <meta name="676d243f6147231bddf2863dfb1033ddbbd89377" content="676d243f6147231bddf2863dfb1033ddbbd89377">
 
@@ -867,6 +872,7 @@
   <!-- ─── END AADS AD UNIT 2455136 ─── -->
 
   <!-- Client Application Scripts (Deferred for Zero Render-Blocking) -->
+  <script defer src="/js/version-checker.js?v=3.3.0"></script>
   <script defer src="/js/ads-manager.js?v=3.0.0"></script>
   <script defer src="/js/net27-core.js?v=3.0.0"></script>
   <script defer src="/js/download-resolver.js?v=3.0.0"></script>
@@ -905,9 +911,23 @@
   <!-- ─── SERVICE WORKER REGISTRATION & BROKEN IMAGE SHIELD ─── -->
   <script>
     (function() {
-      // Immediate Service Worker Registration (Zero PWA Delay)
+      // Immediate Service Worker Registration & Live Updates
       if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/sw.js').catch(function() {});
+        navigator.serviceWorker.register('/sw.js').then(function(reg) {
+          if (reg) {
+            reg.update().catch(function() {});
+            setInterval(function() {
+              reg.update().catch(function() {});
+            }, 60 * 1000);
+          }
+        }).catch(function() {});
+
+        var refreshing = false;
+        navigator.serviceWorker.addEventListener('controllerchange', function() {
+          if (refreshing) return;
+          refreshing = true;
+          window.location.reload();
+        });
       }
 
       // Suppress any broken/missing images so they never render grey placeholder boxes

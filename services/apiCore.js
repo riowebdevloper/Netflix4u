@@ -2718,6 +2718,20 @@ async function handleNetmirrorPlayer(req, res) {
   });
 }
 
+function handleVersion(req, res) {
+  if (handleCors(req, res)) return;
+  const versionPath = path.join(ROOT, 'version.json');
+  let verData = { version: '3.3.0', build: 1742201000, updatedAt: new Date().toISOString() };
+  if (fs.existsSync(versionPath)) {
+    try { verData = JSON.parse(fs.readFileSync(versionPath, 'utf8')); } catch(e) {}
+  }
+  sendJson(res, 200, verData, {
+    'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0',
+    'Pragma': 'no-cache',
+    'Expires': '0'
+  });
+}
+
 // 12. Master Universal Router
 async function handleUniversalApi(req, res) {
   if (handleCors(req, res)) return;
@@ -2726,6 +2740,7 @@ async function handleUniversalApi(req, res) {
   const cleanPath = rawPath.replace(/^\/api\/?/, '').toLowerCase();
 
   if (rawPath.startsWith('/watch-tmdb')) return handleWatchTmdb(req, res);
+  if (cleanPath === 'version') return handleVersion(req, res);
   if (cleanPath === 'download-file' || cleanPath.startsWith('download-file/')) return handleDownloadFile(req, res);
   if (cleanPath === 'stream-player' || cleanPath.startsWith('stream-player/')) return handleStreamPlayer(req, res);
   if (cleanPath === 'netmirror-player' || cleanPath.startsWith('netmirror-player/')) return handleNetmirrorPlayer(req, res);

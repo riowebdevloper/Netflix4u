@@ -53,14 +53,14 @@ async function main() {
     fs.writeFileSync(reportPath, JSON.stringify({ ...summary, duration, timestamp: new Date().toISOString() }, null, 2), 'utf8');
   } catch (e) {}
 
-  // Trigger Discord Webhook notification if configured
-  if (process.env.DISCORD_WEBHOOK_URL) {
-    try {
-      console.log('[CLI] Dispatching Discord notification...');
-      require('./notify_discord');
-    } catch (e) {
-      console.error('[CLI] Failed to send Discord notification:', e.message);
-    }
+  // Trigger Discord Webhook notification
+  try {
+    console.log('[CLI] Dispatching Discord notification...');
+    const { sendDiscordNotification } = require('./notify_discord');
+    await sendDiscordNotification({ event: 'catalog' });
+    console.log('[CLI] Discord notification dispatched.');
+  } catch (e) {
+    console.error('[CLI] Failed to send Discord notification:', e.message);
   }
 
   process.exit(summary.status === 'error' ? 1 : 0);
