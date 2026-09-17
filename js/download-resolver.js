@@ -25,40 +25,37 @@
     return cur;
   }
 
+  function getActiveTitle() {
+    var titleEl = document.getElementById('modal-title') ||
+      document.querySelector('.title-text') ||
+      document.querySelector('h1') ||
+      document.querySelector('#hicine-srv-meta-title');
+    var raw = titleEl ? titleEl.textContent.trim() : '';
+    return raw.replace(/[:\-–—]/g, ' ').replace(/\s+/g, ' ').trim();
+  }
+
   window.getFastCloudDownloadHref = function(rawUrl) {
     if (!rawUrl) return '#';
-    var vcloud = extractVcloudUrl(rawUrl);
-
-    // If it's a direct external download link (like nexdrive, google drive, direct mp4, etc.)
-    if (vcloud.indexOf('vcloud') === -1 && vcloud.indexOf('workers.dev') === -1 && (vcloud.indexOf('http://') === 0 || vcloud.indexOf('https://') === 0)) {
-      return vcloud;
+    var isExternal = /nexdrive|hubcloud|dotmobiz|drivehub/i.test(rawUrl);
+    if (isExternal) {
+      return rawUrl;
     }
 
-    if (vcloud.indexOf('vcloud') !== -1 || vcloud.indexOf('workers.dev') !== -1) {
-      // Ensure clean unwrapped vcloud URL for the worker
-      var cleanTarget = vcloud;
-      if (cleanTarget.indexOf('vcloud=') !== -1) {
-        var m = cleanTarget.match(/vcloud=([^&#]+)/);
-        if (m) cleanTarget = decodeURIComponent(m[1]);
-      }
-      return WORKER_HOSTS[0] + '/?vcloud=' + encodeURIComponent(cleanTarget);
+    if (rawUrl.indexOf('/api/download-file') === 0) {
+      return rawUrl;
     }
 
-    // Safety guard: Never return internal /api/download path
-    if (rawUrl.indexOf('/api/download') === 0 || rawUrl.indexOf('api/download') === 0) {
-      return WORKER_HOSTS[0] + '/?vcloud=' + encodeURIComponent(rawUrl);
-    }
-
-    return rawUrl;
+    // Always route cloud & vcloud streams through the safe universal download file handler
+    return '/api/download-file?url=' + encodeURIComponent(rawUrl);
   };
 
-  window.handleFastCloudDownload = async function(event, rawUrl) {
+  window.handleFastCloudDownload = async function(event, rawUrl, buttonEl) {
     if (event) {
       event.preventDefault();
       event.stopPropagation();
     }
 
-    var targetEl = event && (event.currentTarget || (event.target && event.target.closest('a')));
+    var targetEl = buttonEl || (event && (event.currentTarget || (event.target && event.target.closest('a'))));
     var originalHtml = '';
     if (targetEl) {
       originalHtml = targetEl.innerHTML;
@@ -69,7 +66,7 @@
           '<circle cx="12" cy="12" r="10" stroke="currentColor" stroke-opacity="0.25"></circle>' +
           '<path d="M12 2a10 10 0 0 1 10 10" stroke="currentColor" stroke-linecap="round"></path>' +
         '</svg>' +
-        '<span style="font-weight:600;font-size:12px;letter-spacing:0.3px;">Connecting High-Speed Stream...</span>' +
+        '<span style="font-weight:600;font-size:12px;letter-spacing:0.3px;">Connecting Stream...</span>' +
       '</div>';
     }
 
@@ -84,34 +81,61 @@
     };
 
     var cleanVcloud = extractVcloudUrl(rawUrl);
+    var isExternal = /nexdrive|hubcloud|dotmobiz|drivehub/i.test(cleanVcloud) || /nexdrive|hubcloud|dotmobiz|drivehub/i.test(rawUrl);
 
-    // If direct link (not vcloud or workers), open directly
-    if (cleanVcloud.indexOf('vcloud') === -1 && cleanVcloud.indexOf('workers.dev') === -1 && (cleanVcloud.indexOf('http://') === 0 || cleanVcloud.indexOf('https://') === 0)) {
-      window.open(cleanVcloud, '_blank', 'noopener,noreferrer');
+    // If external mirror (Dotmovies, Nexdrive, Hubcloud), open directly in new tab
+    if (isExternal) {
+      if (window.__showToast) {
+        window.__showToast('🚀 Opening high-speed direct download mirror...', '⚡');
+      }
+      window.open(cleanVcloud || rawUrl, '_blank', 'noopener,noreferrer');
       restore();
       return;
     }
 
-    // Ensure we have the raw target for workers
-    if (cleanVcloud.indexOf('vcloud=') !== -1) {
-      var m = cleanVcloud.match(/vcloud=([^&#]+)/);
-      if (m) cleanVcloud = decodeURIComponent(m[1]);
-    }
+    // First try our own universal API endpoint with JSON mode
+    try {
+      var directApi = '/api/download-file?url=' + encodeURIComponent(cleanVcloud || rawUrl) + '&json=1';
+      var controller0 = typeof AbortController !== 'undefined' ? new AbortController() : null;
+      var timeoutId0 = controller0 ? setTimeout(function() { controller0.abort(); }, 3500) : null;
+      var res0 = await fetch(directApi, { signal: controller0 ? controller0.signal : undefined });
+      if (timeoutId0) clearTimeout(timeoutId0);
+      if (res0.ok) {
+        var json0 = await res0.json();
+        if (json0 && json0.ok && json0.directUrl && !json0.directUrl.includes('workers.dev')) {
+          if (targetEl) {
+            targetEl.innerHTML = '<div style="display:flex;align-items:center;gap:8px;justify-content:center;width:100%;">' +
+              '<span style="color:#4ade80;font-weight:700;font-size:12px;">✓ Starting Download...</span>' +
+            '</div>';
+          }
+          if (window.__showToast) {
+            window.__showToast('📥 High-speed direct file download starting...', '⚡');
+          }
+          try {
+            window.location.assign(json0.directUrl);
+          } catch(e) {
+            window.open(json0.directUrl, '_blank');
+          }
+          restore();
+          return;
+        }
+      }
+    } catch(e) {}
 
-    // Try high-speed direct resolution via Workers
+    // Next try high-speed direct resolution via Workers
     for (var i = 0; i < WORKER_HOSTS.length; i++) {
       var host = WORKER_HOSTS[i];
       try {
         var apiUrl = host + '/api/links?vcloud=' + encodeURIComponent(cleanVcloud);
         var controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
-        var timeoutId = controller ? setTimeout(function() { controller.abort(); }, 3500) : null;
+        var timeoutId = controller ? setTimeout(function() { controller.abort(); }, 3000) : null;
 
         var res = await fetch(apiUrl, { signal: controller ? controller.signal : undefined });
         if (timeoutId) clearTimeout(timeoutId);
 
         if (!res.ok) continue;
         var json = await res.json();
-        if (!json || !json.tokens) continue;
+        if (!json || !json.tokens || Object.keys(json.tokens).length === 0 || json.title === null) continue;
 
         var preferred = ['fsl', 'fsl2', 'server1', 'ten', 'gofile'];
         var type = null;
@@ -140,24 +164,43 @@
             '<span style="color:#4ade80;font-weight:700;font-size:12px;">✓ Starting Download...</span>' +
           '</div>';
         }
+        if (window.__showToast) {
+          window.__showToast('📥 High-speed direct file download starting...', '⚡');
+        }
 
         // Trigger download directly in browser
-        var dlLink = document.createElement('a');
-        dlLink.href = goUrl;
-        dlLink.target = '_blank';
-        dlLink.rel = 'noopener noreferrer';
-        document.body.appendChild(dlLink);
-        dlLink.click();
-        document.body.removeChild(dlLink);
+        try {
+          window.location.assign(goUrl);
+        } catch(e) {
+          var dlLink = document.createElement('a');
+          dlLink.href = goUrl;
+          dlLink.target = '_blank';
+          dlLink.rel = 'noopener noreferrer';
+          document.body.appendChild(dlLink);
+          dlLink.click();
+          document.body.removeChild(dlLink);
+        }
 
         restore();
         return;
       } catch(e) {}
     }
 
-    // Fallback: If direct worker API is unreachable or timed out, open fallback worker interface
-    var fallback = WORKER_HOSTS[0] + '/?vcloud=' + encodeURIComponent(cleanVcloud);
-    window.open(fallback, '_blank', 'noopener,noreferrer');
+    // RESILIENT MIRROR FALLBACK: NEVER dump the user onto the broken worker page!
+    // Instead, open the title's Direct Ultra HD (Dotmovies) mirror which is guaranteed to have working links
+    var title = getActiveTitle();
+    var mirrorFallback = title ? ('https://dotmobiz.com/?s=' + encodeURIComponent(title)) : 'https://dotmobiz.com/';
+
+    if (window.__showToast) {
+      window.__showToast('⚡ Cloud stream busy. Opening Direct Ultra HD download mirror...', '🚀');
+    }
+    if (targetEl) {
+      targetEl.innerHTML = '<div style="display:flex;align-items:center;gap:8px;justify-content:center;width:100%;">' +
+        '<span style="color:#facc15;font-weight:700;font-size:12px;">Opening Direct Ultra HD Mirror...</span>' +
+      '</div>';
+    }
+
+    window.open(mirrorFallback, '_blank', 'noopener,noreferrer');
     restore();
   };
 

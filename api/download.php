@@ -202,6 +202,12 @@ foreach ($workerHosts as $host) {
     }
 }
 
-// Fallback to worker UI
-header("Location: " . $fallbackUrl, true, 302);
+// Fallback to Direct Ultra HD (Dotmovies) search mirror (Never dump user on dead worker error screen!)
+$titleParam = isset($_GET['title']) ? trim($_GET['title']) : ($slug ?: 'Movie');
+$cleanTitle = preg_replace('/[:\-–—]/', ' ', $titleParam);
+$cleanTitle = trim(preg_replace('/\s+/', ' ', $cleanTitle));
+$fallbackMirror = 'https://dotmobiz.com/?s=' . urlencode($cleanTitle);
+
+header("Location: " . $fallbackMirror, true, 302);
 exit;
+

@@ -429,19 +429,19 @@
         quality: '480p',
         size: '800MB',
         label: `${cleanName} (${year}) Hindi-AAC2.0 HDTC 480p x264 [800MB]`,
-        url: 'https://wild-sun-9376.oriue.workers.dev/?vcloud=https://vcloud.fit/jvcvcbyokytoy31'
+        url: `/api/download-file?title=${encodeURIComponent(cleanName)}&quality=480p`
       },
       {
         quality: '720p',
         size: '2GB',
         label: `${cleanName} (${year}) Hindi-AAC2.0 HDTC 720p x264 [2GB]`,
-        url: 'https://wild-sun-9376.oriue.workers.dev/?vcloud=https://vcloud.fit/ikjxq-2bqaqxikk'
+        url: `/api/download-file?title=${encodeURIComponent(cleanName)}&quality=720p`
       },
       {
         quality: '1080p',
         size: '3.8GB',
         label: `${cleanName} (${year}) Hindi-AAC2.0 HDTC 1080p x264 [3.8GB]`,
-        url: 'https://wild-sun-9376.oriue.workers.dev/?vcloud=https://vcloud.fit/e95thnzh550mpys'
+        url: `/api/download-file?title=${encodeURIComponent(cleanName)}&quality=1080p`
       }
     ];
 
@@ -476,7 +476,7 @@
       card.querySelector('.hicine-dl-btn').addEventListener('click', (e) => {
         e.preventDefault();
         activeQuality = q;
-        activeVcloudUrl = item.url || 'https://wild-sun-9376.oriue.workers.dev/?vcloud=https://vcloud.fit/ikjxq-2bqaqxikk';
+        activeVcloudUrl = item.url || `/api/download-file?title=${encodeURIComponent(cleanName)}`;
         openServersModal(q, sz, fileInfo);
       });
 

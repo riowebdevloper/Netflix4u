@@ -1243,7 +1243,11 @@
   // ─── WATCH MODAL (Net27 Streaming Player UI with Auto-Failover Engine) ───
   // ─── WATCH MODAL (Net27 Streaming Player UI with Auto-Failover Engine) ───
   var SERVERS_CONFIG = [
-    { id: 's1', name: 'Server 1 (Fast Cloud Multi-Audio • Hindi Dub)', shortName: 'Server 1 • Hindi Multi', tag: 'Hindi Dual-Audio', tagClass: 'tag-multi', desc: 'Direct Fast Cloud & NetMirror Multi-Audio Engine (Hindi Dubbed + English) with MX/VLC launch' },
+    { id: 's1', name: 'Server 1 (Fast Cloud Multi-Audio • Hindi Dub)', shortName: 'Server 1 • Hindi Multi', tag: 'Hindi Dual-Audio', tagClass: 'tag-multi', desc: 'Direct Fast Cloud & Multi-Audio Engine (Hindi Dubbed + English) with MX/VLC launch' },
+    { id: 'nm1', name: 'NetMirror 1 (Fast HD Server)', shortName: 'NetMirror 1 • Fast HD', tag: 'NetMirror HD', tagClass: 'tag-multi', desc: 'NetMirror App Server 1 • High-Speed Fast HD Stream with Audio Selection' },
+    { id: 'nm2', name: 'NetMirror 2 (Ultra HD Server)', shortName: 'NetMirror 2 • Ultra HD', tag: 'NetMirror Ultra', tagClass: 'tag-multi', desc: 'NetMirror App Server 2 • 1080p Ultra HD High-Bitrate Stream' },
+    { id: 'nm4', name: 'NetMirror 4 (SpedoStream)', shortName: 'NetMirror 4 • Spedo', tag: 'SpedoStream', tagClass: 'tag-fast', desc: 'NetMirror App Server 4 • SpedoStream CDN Fast Playback Engine' },
+    { id: 'nm_multi', name: 'NetMirror Multi-Lang (Dubbed PVR)', shortName: 'NetMirror Multi-Lang', tag: 'Multi-Dub', tagClass: 'tag-multi', desc: 'NetMirror App Multi-Audio Server • Hindi, Tamil, Telugu, English' },
     { id: 's2', name: 'Server 2 (AllMovieLand Player)', shortName: 'Server 2 • AllMovieLand', tag: 'AllMovieLand', tagClass: 'tag-peachify', desc: 'AllMovieLand Ultra HD High-Speed Streaming Player' },
     { id: 's3', name: 'Server 3 (VidLink Pro Multi-Audio)', shortName: 'Server 3 • VidLink', tag: 'Multi-Lang', tagClass: 'tag-multi', desc: 'VidLink Pro High-Speed Global Streaming Player' },
     { id: 's4', name: 'Server 4 (VidSrc PM Global)', shortName: 'Server 4 • VidSrc', tag: 'Global CDN', tagClass: 'tag-global', desc: 'VidSrc PM High Uptime Global Streaming Mirror' },
@@ -1266,7 +1270,7 @@
   var autoSwitchTimer = null;
   var autoSwitchIndex = 0;
   var isPlaybackConfirmed = false;
-  var autoSwitchOrder = ['s1', 's2', 's3', 's4', 's5', 's6', 's7'];
+  var autoSwitchOrder = ['s1', 'nm1', 'nm2', 'nm_multi', 'nm4', 's2', 's3', 's4', 's5', 's6', 's7'];
   var currentAutoSwitchToken = 0;
   var activeProbeController = null;
   var watchTopBarHideTimeout = null;
@@ -1392,7 +1396,9 @@
       pickerList.innerHTML = SERVERS_CONFIG.map(function(s, idx) {
         var isS1 = s.id === 's1';
         var isS2 = s.id === 's2';
+        var isNm = s.id.indexOf('nm') === 0;
         var badge = isS1 ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">RECOMMENDED</span>' :
+                    isNm ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-red-500/20 text-red-400 border border-red-500/30">' + escapeHtml(s.tag) + '</span>' :
                     isS2 ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-orange-500/20 text-orange-400 border border-orange-500/30">ALLMOVIELAND</span>' :
                     '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-white/10 text-white/60">' + escapeHtml(s.tag) + '</span>';
 
@@ -1748,6 +1754,33 @@
     return url;
   }
 
+  function buildNetmirrorDirectServerUrl(params, lang, srv) {
+    if (!params) return '';
+    var type = (params.type === 'tv' || params.type === 'series') ? 'tv' : 'movie';
+    var title = params.title || '';
+    var isTv = type === 'tv';
+    var se = isTv ? (params.season || 1) : '';
+    var ep = isTv ? (params.episode || 1) : '';
+    var year = params.year || '';
+    var activeLang = (lang && lang !== 'multi') ? lang : (currentWatchLang || 'hi');
+    var srvKey = srv || '1';
+    var url = '/api/netmirror-player?server=' + encodeURIComponent(srvKey) +
+      '&type=' + encodeURIComponent(type) +
+      '&title=' + encodeURIComponent(title) +
+      (se ? ('&se=' + encodeURIComponent(se)) : '') +
+      (ep ? ('&ep=' + encodeURIComponent(ep)) : '') +
+      '&year=' + encodeURIComponent(year) +
+      '&lang=' + encodeURIComponent(activeLang);
+
+    var cleanId = String(params.tmdbId || '').replace(/^(?:dotmobiz|tmdb(?:-movie|-series|-tv)?)-/, '');
+    if (cleanId && /^\d+$/.test(cleanId)) {
+      url += '&id=' + encodeURIComponent(cleanId);
+    } else if (params.canonicalId && /^\d+$/.test(String(params.canonicalId))) {
+      url += '&id=' + encodeURIComponent(params.canonicalId);
+    }
+    return url;
+  }
+
   function openWatchModal(tmdbId, type, season, episode, backdrop, title, year, imdbId, canonicalId, poster, chosenServer) {
     if (window.__closeSearchOverlay) window.__closeSearchOverlay();
     if (!watchModal || !watchModalIframe) return;
@@ -1872,10 +1905,18 @@
     }
 
     var s1Url = buildNetmirrorServerUrl(activeWatchParams, currentWatchLang);
+    var nm1Url = buildNetmirrorDirectServerUrl(activeWatchParams, currentWatchLang, '1');
+    var nm2Url = buildNetmirrorDirectServerUrl(activeWatchParams, currentWatchLang, '2');
+    var nm4Url = buildNetmirrorDirectServerUrl(activeWatchParams, currentWatchLang, '4');
+    var nmMultiUrl = buildNetmirrorDirectServerUrl(activeWatchParams, currentWatchLang, 'multi');
     var s3Url = buildVidlinkMultiAudioUrl(activeWatchParams, currentWatchLang);
 
     activeWatchServers = {
       s1: s1Url,
+      nm1: nm1Url,
+      nm2: nm2Url,
+      nm4: nm4Url,
+      nm_multi: nmMultiUrl,
       s2: allMovieLandUrl,
       s3: s3Url,
       s4: isTv
@@ -2061,6 +2102,10 @@
     var newS3Url = buildVidlinkMultiAudioUrl(activeWatchParams, currentWatchLang);
 
     activeWatchServers.s1 = newS1Url;
+    activeWatchServers.nm1 = buildNetmirrorDirectServerUrl(activeWatchParams, currentWatchLang, '1');
+    activeWatchServers.nm2 = buildNetmirrorDirectServerUrl(activeWatchParams, currentWatchLang, '2');
+    activeWatchServers.nm4 = buildNetmirrorDirectServerUrl(activeWatchParams, currentWatchLang, '4');
+    activeWatchServers.nm_multi = buildNetmirrorDirectServerUrl(activeWatchParams, currentWatchLang, 'multi');
     activeWatchServers.s3 = newS3Url;
 
     // Switch to Server 1 to immediately provide user their chosen language stream

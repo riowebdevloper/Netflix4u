@@ -308,7 +308,7 @@ function resolveHicineFastLink(vcloudUrl) {
       ? 'https://wild-sun-9376.oriue.workers.dev'
       : 'https://crimson-sea-a1e5.hekoy.workers.dev';
       
-    const directFallback = host + '/?vcloud=' + encodeURIComponent(cleanVcloud);
+    const directFallback = 'https://dotmobiz.com/';
     const apiUrl = host + '/api/links?vcloud=' + encodeURIComponent(cleanVcloud);
 
     const req = https.get(apiUrl, { timeout: 4500, headers: { 'User-Agent': 'Mozilla/5.0' } }, res => {
@@ -319,7 +319,8 @@ function resolveHicineFastLink(vcloudUrl) {
           const json = JSON.parse(d);
           // If tokens is empty or title is null, upstream file was deleted
           if (!json.tokens || Object.keys(json.tokens).length === 0 || json.title === null) {
-            return resolve(directFallback);
+            const titleSearch = json && json.title ? `https://dotmobiz.com/?s=${encodeURIComponent(json.title)}` : directFallback;
+            return resolve(titleSearch);
           }
           // Prioritize FAST DIRECT CLOUD STREAMS (fsl, fsl2, server1, ten, gofile)
           // NEVER pick 'pixel' (pixeldrain) because pixeldrain links 404
