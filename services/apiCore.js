@@ -1834,6 +1834,8 @@ async function handleWatchTmdb(req, res) {
 
     gtag('config', 'G-8SPEG4KZ28');
   </script>
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9082698285506451" crossorigin="anonymous"></script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Watch Player - Netflix4U</title>
@@ -2308,6 +2310,8 @@ async function handleDownloadFile(req, res) {
 
     gtag('config', 'G-8SPEG4KZ28');
   </script>
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9082698285506451" crossorigin="anonymous"></script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Downloading ${escapeHtml(titleToUse)} | Netflix4U High Speed</title>
@@ -2460,6 +2464,8 @@ async function handleStreamPlayer(req, res) {
 
     gtag('config', 'G-8SPEG4KZ28');
   </script>
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9082698285506451" crossorigin="anonymous"></script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>${escapeHtml(displayTitle)} | Netflix4U Multi-Audio Stream</title>
