@@ -1317,37 +1317,43 @@
   var watchAudioMenu = document.getElementById('watch-audio-menu');
   var watchCurrentAudioLabel = document.getElementById('watch-current-audio-label');
 
-  // TV Episode Navigation Controls
+  // TV Episode Navigation Controls (Desktop + Mobile Floating Bar)
   var watchEpNav = document.getElementById('watch-ep-nav');
   var watchPrevEpBtn = document.getElementById('watch-prev-ep-btn');
   var watchNextEpBtn = document.getElementById('watch-next-ep-btn');
   var watchEpIndicator = document.getElementById('watch-ep-indicator');
 
+  var watchMobileEpBar = document.getElementById('watch-mobile-ep-bar');
+  var watchMobilePrevEp = document.getElementById('watch-mobile-prev-ep');
+  var watchMobileNextEp = document.getElementById('watch-mobile-next-ep');
+  var watchMobileEpIndicator = document.getElementById('watch-mobile-ep-indicator');
+
   function updateEpisodeNavUi() {
-    if (!watchEpNav) return;
     if (!activeWatchParams) {
-      watchEpNav.classList.add('hidden');
+      if (watchEpNav) watchEpNav.classList.add('hidden');
+      if (watchMobileEpBar) watchMobileEpBar.classList.add('hidden');
       return;
     }
     var isTv = Boolean(activeWatchParams.isTv || activeWatchParams.type === 'tv' || activeWatchParams.type === 'series');
     if (!isTv) {
-      watchEpNav.classList.add('hidden');
+      if (watchEpNav) watchEpNav.classList.add('hidden');
+      if (watchMobileEpBar) watchMobileEpBar.classList.add('hidden');
       return;
     }
 
-    watchEpNav.classList.remove('hidden');
+    if (watchEpNav) watchEpNav.classList.remove('hidden');
+    if (watchMobileEpBar) watchMobileEpBar.classList.remove('hidden');
+
     var curEp = parseInt(activeWatchParams.episode || 1, 10) || 1;
     var curSe = parseInt(activeWatchParams.season || 1, 10) || 1;
+    var epLabel = 'S' + curSe + ':E' + curEp;
 
-    if (watchEpIndicator) {
-      watchEpIndicator.textContent = 'S' + curSe + ':E' + curEp;
-    }
-    if (watchMetaType) {
-      watchMetaType.textContent = 'S' + curSe + ' E' + curEp;
-    }
-    if (watchPrevEpBtn) {
-      watchPrevEpBtn.disabled = (curEp <= 1);
-    }
+    if (watchEpIndicator) watchEpIndicator.textContent = epLabel;
+    if (watchMobileEpIndicator) watchMobileEpIndicator.textContent = epLabel;
+    if (watchMetaType) watchMetaType.textContent = 'S' + curSe + ' E' + curEp;
+
+    if (watchPrevEpBtn) watchPrevEpBtn.disabled = (curEp <= 1);
+    if (watchMobilePrevEp) watchMobilePrevEp.disabled = (curEp <= 1);
   }
 
   function navigateToEpisode(targetEp) {
@@ -1355,12 +1361,11 @@
     activeWatchParams.episode = targetEp;
     updateEpisodeNavUi();
 
-    // Rebuild server URLs for target episode using Centralized Player Resolver
+    // Rebuild server URLs for target episode across ALL 34 servers via Universal Resolver
     if (window.Netflix4uPlayerResolver) {
-      activeWatchServers.vidsrc_sbs = window.Netflix4uPlayerResolver.resolvePlayerUrl(activeWatchParams, 'vidsrc_sbs');
-      activeWatchServers.peachify = window.Netflix4uPlayerResolver.resolvePlayerUrl(activeWatchParams, 'peachify', { lang: currentWatchLang });
-      activeWatchServers.allmovieland = window.Netflix4uPlayerResolver.resolvePlayerUrl(activeWatchParams, 'allmovieland');
-      activeWatchServers.s3 = window.Netflix4uPlayerResolver.resolvePlayerUrl(activeWatchParams, 'vidlink', { lang: currentWatchLang });
+      SERVERS_CONFIG.forEach(function(s) {
+        activeWatchServers[s.id] = window.Netflix4uPlayerResolver.resolvePlayerUrl(activeWatchParams, s.id, { lang: currentWatchLang });
+      });
     } else {
       var sTid = String(activeWatchParams.tmdbId || '').replace(/^(?:dotmobiz|tmdb(?:-movie|-series|-tv)?)-/, '');
       activeWatchServers.vidsrc_sbs = 'https://vidsrc.pm/embed/tv/' + sTid + '/' + (activeWatchParams.season || 1) + '/' + targetEp;
@@ -1415,6 +1420,26 @@
     });
   }
 
+  if (watchMobilePrevEp) {
+    watchMobilePrevEp.addEventListener('click', function(e) {
+      e.stopPropagation();
+      if (!activeWatchParams) return;
+      var curEp = parseInt(activeWatchParams.episode || 1, 10) || 1;
+      if (curEp > 1) {
+        navigateToEpisode(curEp - 1);
+      }
+    });
+  }
+
+  if (watchMobileNextEp) {
+    watchMobileNextEp.addEventListener('click', function(e) {
+      e.stopPropagation();
+      if (!activeWatchParams) return;
+      var curEp = parseInt(activeWatchParams.episode || 1, 10) || 1;
+      navigateToEpisode(curEp + 1);
+    });
+  }
+
   function setWatchStatus(status, substatus) {
     if (watchStreamStatusText && status) watchStreamStatusText.textContent = status;
     if (watchStreamSubstatusText && substatus) watchStreamSubstatusText.textContent = substatus;
@@ -1451,8 +1476,8 @@
   }
 
   function resetWatchTopBarTimer() {
-    if (!watchTopBar) return;
-    watchTopBar.classList.remove('watch-bar-hidden');
+    if (watchTopBar) watchTopBar.classList.remove('watch-bar-hidden');
+    if (watchMobileEpBar) watchMobileEpBar.classList.remove('watch-bar-hidden');
     clearTimeout(watchTopBarHideTimeout);
     
     var isServerOpen = watchServerMenu && !watchServerMenu.classList.contains('hidden');
@@ -1463,7 +1488,8 @@
 
     watchTopBarHideTimeout = setTimeout(function() {
       if (watchModal && !watchModal.classList.contains('hidden')) {
-        watchTopBar.classList.add('watch-bar-hidden');
+        if (watchTopBar) watchTopBar.classList.add('watch-bar-hidden');
+        if (watchMobileEpBar) watchMobileEpBar.classList.add('watch-bar-hidden');
       }
     }, 3000);
   }
@@ -1509,7 +1535,7 @@
     if (card) card.classList.add('hidden');
   }
 
-  // Choose Streaming Server Modal Handler
+  // Choose Streaming Server Modal Handler (Bottom Sheet on Mobile, Centered on Desktop)
   function openServerPickerModal(tmdbId, type, season, episode, backdrop, title, year, imdbId, canonicalId, poster) {
     var pickerModal = document.getElementById('watch-server-picker-modal');
     if (!pickerModal) {
@@ -1530,47 +1556,69 @@
         { id: 'regional', label: '🎧 Multi-Audio & Dubbed Regional' }
       ];
 
-      var html = '';
-      categories.forEach(function(cat) {
-        var groupServers = SERVERS_CONFIG.filter(function(s) { return s.category === cat.id; });
-        if (!groupServers.length) return;
+      function renderPickerServers(filterCat) {
+        var html = '';
+        var activeCats = categories;
+        if (filterCat && filterCat !== 'all') {
+          activeCats = categories.filter(function(c) { return c.id === filterCat; });
+        }
 
-        html += '<div class="col-span-full mt-3 mb-1">' +
-          '<div class="text-xs font-black uppercase tracking-wider text-white/50 px-1">' + escapeHtml(cat.label) + ' (' + groupServers.length + ')</div>' +
-        '</div>';
+        activeCats.forEach(function(cat) {
+          var groupServers = SERVERS_CONFIG.filter(function(s) { return s.category === cat.id; });
+          if (!groupServers.length) return;
 
-        html += groupServers.map(function(s) {
-          var isCurrent = s.id === currentWatchServer;
-          var badge = '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-white/10 text-white/80 border border-white/10">' + escapeHtml(s.tag) + '</span>';
+          html += '<div class="col-span-full mt-2 mb-0.5">' +
+            '<div class="text-[11px] sm:text-xs font-black uppercase tracking-wider text-white/50 px-1">' + escapeHtml(cat.label) + ' (' + groupServers.length + ')</div>' +
+          '</div>';
 
-          return '<button type="button" data-select-server="' + s.id + '" class="picker-server-card' + (isCurrent ? ' is-active' : '') + '">' +
-            '<div class="flex items-center gap-3 min-w-0">' +
-              '<div class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center font-bold text-xs text-white shrink-0">' +
-                (isCurrent ? '▶' : '⚡') +
-              '</div>' +
-              '<div class="min-w-0">' +
-                '<div class="text-xs sm:text-sm font-bold text-white truncate flex items-center gap-2">' +
-                  '<span>' + escapeHtml(s.name) + '</span>' +
+          html += groupServers.map(function(s) {
+            var isCurrent = s.id === currentWatchServer;
+            var badge = '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-white/10 text-white/80 border border-white/10 shrink-0">' + escapeHtml(s.tag) + '</span>';
+
+            return '<button type="button" data-select-server="' + s.id + '" class="picker-server-card' + (isCurrent ? ' is-active' : '') + '">' +
+              '<div class="flex items-center gap-2.5 min-w-0">' +
+                '<div class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center font-bold text-xs text-white shrink-0">' +
+                  (isCurrent ? '▶' : '⚡') +
                 '</div>' +
-                '<div class="text-[11px] text-white/50 truncate">' + escapeHtml(s.desc || '') + '</div>' +
+                '<div class="min-w-0">' +
+                  '<div class="text-xs sm:text-sm font-bold text-white truncate flex items-center gap-1.5">' +
+                    '<span>' + escapeHtml(s.name) + '</span>' +
+                  '</div>' +
+                  '<div class="text-[10px] sm:text-[11px] text-white/50 truncate">' + escapeHtml(s.desc || '') + '</div>' +
+                '</div>' +
               '</div>' +
-            '</div>' +
-            '<div class="shrink-0">' + badge + '</div>' +
-          '</button>';
-        }).join('');
-      });
-
-      pickerList.innerHTML = html;
-
-      pickerList.querySelectorAll('[data-select-server]').forEach(function(card) {
-        card.addEventListener('click', function(e) {
-          e.stopPropagation();
-          var serverId = card.dataset.selectServer;
-          pickerModal.classList.add('hidden');
-          pickerModal.setAttribute('aria-hidden', 'true');
-          openWatchModal(tmdbId, type, season, episode, backdrop, title, year, imdbId, canonicalId, poster, serverId);
+              '<div class="shrink-0 ml-2">' + badge + '</div>' +
+            '</button>';
+          }).join('');
         });
-      });
+
+        pickerList.innerHTML = html;
+
+        pickerList.querySelectorAll('[data-select-server]').forEach(function(card) {
+          card.addEventListener('click', function(e) {
+            e.stopPropagation();
+            var serverId = card.dataset.selectServer;
+            pickerModal.classList.add('hidden');
+            pickerModal.setAttribute('aria-hidden', 'true');
+            openWatchModal(tmdbId, type, season, episode, backdrop, title, year, imdbId, canonicalId, poster, serverId);
+          });
+        });
+      }
+
+      renderPickerServers('all');
+
+      var pickerTabs = document.getElementById('picker-category-tabs');
+      if (pickerTabs) {
+        pickerTabs.querySelectorAll('[data-picker-filter]').forEach(function(tabBtn) {
+          tabBtn.onclick = function(e) {
+            e.stopPropagation();
+            pickerTabs.querySelectorAll('[data-picker-filter]').forEach(function(tb) { tb.classList.remove('is-active'); });
+            tabBtn.classList.add('is-active');
+            var f = tabBtn.dataset.pickerFilter || 'all';
+            renderPickerServers(f);
+          };
+        });
+      }
     }
 
     pickerModal.classList.remove('hidden');
@@ -1584,6 +1632,16 @@
       if (pickerModal) {
         pickerModal.classList.add('hidden');
         pickerModal.setAttribute('aria-hidden', 'true');
+      }
+    });
+  }
+
+  var pickerModalEl = document.getElementById('watch-server-picker-modal');
+  if (pickerModalEl) {
+    pickerModalEl.addEventListener('click', function(e) {
+      if (e.target === pickerModalEl) {
+        pickerModalEl.classList.add('hidden');
+        pickerModalEl.setAttribute('aria-hidden', 'true');
       }
     });
   }
@@ -1626,12 +1684,19 @@
   if (watchPortraitHintDismiss) {
     watchPortraitHintDismiss.addEventListener('click', function(e) {
       e.stopPropagation();
+      try { sessionStorage.setItem('watch_portrait_hint_dismissed', '1'); } catch(e) {}
       if (watchPortraitHint) watchPortraitHint.classList.add('hidden');
     });
   }
 
   function checkOrientationHint() {
     if (!watchPortraitHint) return;
+    var isDismissed = false;
+    try { isDismissed = sessionStorage.getItem('watch_portrait_hint_dismissed') === '1'; } catch(e) {}
+    if (isDismissed) {
+      watchPortraitHint.classList.add('hidden');
+      return;
+    }
     var isPortrait = window.matchMedia && window.matchMedia('(max-width: 768px) and (orientation: portrait)').matches;
     if (isPortrait && watchModal && !watchModal.classList.contains('hidden')) {
       watchPortraitHint.classList.remove('hidden');
@@ -1642,6 +1707,9 @@
       watchPortraitHint.classList.add('hidden');
     }
   }
+
+  window.addEventListener('resize', checkOrientationHint, { passive: true });
+  window.addEventListener('orientationchange', checkOrientationHint, { passive: true });
 
   function probeStream(url, cb) {
     if (!url) return cb(false, 404);
@@ -2085,6 +2153,7 @@
     watchModal.classList.remove('hidden');
     watchModal.setAttribute('aria-hidden', 'false');
     lockBodyScroll();
+    checkOrientationHint();
 
     if (chosenServer && activeWatchServers[chosenServer]) {
       watchModalIframe.src = activeWatchServers[chosenServer];
