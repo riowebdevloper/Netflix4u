@@ -1,0 +1,332 @@
+{
+  "ok": true,
+  "tab": "PrimeVideo",
+  "hero": [
+    {
+      "tmdbId": 801688,
+      "type": "movie",
+      "title": "Kalki 2898-AD",
+      "year": "2024",
+      "backdrop": "https://image.tmdb.org/t/p/original/o8XSR1SONnjcsv84NRu6Mwsl5io.jpg",
+      "rating": 6.388,
+      "overview": ""
+    },
+    {
+      "tmdbId": 76479,
+      "type": "tv",
+      "title": "The Boys",
+      "year": "2019",
+      "backdrop": "https://image.tmdb.org/t/p/original/bq28ajZaoMyzEIm6REelqyqtEDZ.jpg",
+      "rating": 8.462,
+      "overview": ""
+    },
+    {
+      "tmdbId": 533535,
+      "type": "movie",
+      "title": "Deadpool & Wolverine",
+      "year": "2024",
+      "backdrop": "https://image.tmdb.org/t/p/original/ufpeVEM64uZHPpzzeiDNIAdaeOD.jpg",
+      "rating": 7.565,
+      "overview": ""
+    },
+    {
+      "tmdbId": 857598,
+      "type": "movie",
+      "title": "Pushpa 2 - The Rule",
+      "year": "2024",
+      "backdrop": "https://image.tmdb.org/t/p/original/keC82cQ8q0ZHthrbvzWq04kGnbv.jpg",
+      "rating": 6.285,
+      "overview": ""
+    }
+  ],
+  "rails": [
+    {
+      "key": "prime-top-series",
+      "title": "Top Series on Prime Video",
+      "ranked": true,
+      "logo": "",
+      "auto": null,
+      "items": [
+        {
+          "tmdbId": 76479,
+          "type": "tv",
+          "title": "The Boys",
+          "year": "2019",
+          "poster": "https://image.tmdb.org/t/p/w342/in1R2dDc421JxsoRWaIIAqVI2KE.jpg",
+          "backdrop": "",
+          "rating": 8.462
+        },
+        {
+          "tmdbId": 84773,
+          "type": "tv",
+          "title": "The Lord of the Rings: The Rings of Power",
+          "year": "2022",
+          "poster": "https://image.tmdb.org/t/p/w342/mYLOqiStMxDK3fYZFirgrMt8z5d.jpg",
+          "backdrop": "",
+          "rating": 7
+        },
+        {
+          "tmdbId": 82856,
+          "type": "tv",
+          "title": "The Mandalorian",
+          "year": "2019",
+          "poster": "https://image.tmdb.org/t/p/w342/sWgBv7LV2PRoQgkxwlibdGXKz1S.jpg",
+          "backdrop": "",
+          "rating": 8.407
+        },
+        {
+          "tmdbId": 85552,
+          "type": "tv",
+          "title": "Euphoria",
+          "year": "2019",
+          "poster": "https://image.tmdb.org/t/p/w342/aJrG7OkoTMPWG5c8opz8a93AZPY.jpg",
+          "backdrop": "",
+          "rating": 8.29
+        }
+      ]
+    },
+    {
+      "key": "prime-2025-releases",
+      "title": "Latest Releases (2025)",
+      "ranked": false,
+      "logo": "",
+      "auto": null,
+      "items": [
+        {
+          "tmdbId": 1291608,
+          "type": "movie",
+          "title": "Dhurandhar",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/8FHOtUpNIk5ZPEay2N2EY5lrxkv.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/snYOXem8pUGOffnLbbGq4aB1pg4.jpg",
+          "rating": 7.117
+        },
+        {
+          "tmdbId": 83533,
+          "type": "movie",
+          "title": "Avatar: Fire and Ash",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/aabwWZWx6z1aYP4PX2ADvbDKktd.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/iN41Ccw4DctL8npfmYg1j5Tr1eb.jpg",
+          "rating": 7.498
+        },
+        {
+          "tmdbId": 575265,
+          "type": "movie",
+          "title": "Mission: Impossible - The Final Reckoning",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/z53D72EAOxGRqdr7KXXWp9dJiDe.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/538U9snNc2fpnOmYXAPUh3zn31H.jpg",
+          "rating": 7.159
+        },
+        {
+          "tmdbId": 822119,
+          "type": "movie",
+          "title": "Captain America: Brave New World",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/pzIddUEMWhWzfvLI3TwxUG2wGoi.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/ce3prrjh9ZehEl5JinNqr4jIeaB.jpg",
+          "rating": 5.979
+        },
+        {
+          "tmdbId": 1234821,
+          "type": "movie",
+          "title": "Jurassic World Rebirth",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/1RICxzeoNCAO5NpcRMIgg1XT6fm.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/zNriRTr0kWwyaXPzdg1EIxf0BWk.jpg",
+          "rating": 6.3
+        }
+      ]
+    },
+    {
+      "key": "prime-2024-blockbusters",
+      "title": "2024 Blockbusters",
+      "ranked": false,
+      "logo": "",
+      "auto": null,
+      "items": [
+        {
+          "tmdbId": 533535,
+          "type": "movie",
+          "title": "Deadpool & Wolverine",
+          "year": "2024",
+          "poster": "https://image.tmdb.org/t/p/w342/8cdWjvZQUExUUTzyp4t6EDMubfO.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/by8z9Fe8y7p4jo2YlW2SZDnptyT.jpg",
+          "rating": 7.565
+        },
+        {
+          "tmdbId": 1022789,
+          "type": "movie",
+          "title": "Inside Out 2",
+          "year": "2024",
+          "poster": "https://image.tmdb.org/t/p/w342/vpnVM9B6NMmQpWeZvzLvDESb2QY.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/p5ozvmdgsmbWe0H8Xk7Rc8SCwAB.jpg",
+          "rating": 7.546
+        },
+        {
+          "tmdbId": 402431,
+          "type": "movie",
+          "title": "Wicked",
+          "year": "2024",
+          "poster": "https://image.tmdb.org/t/p/w342/xDGbZ0JJ3mYaGKy4Nzd9Kph6M9L.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/w22GVYotTIVC1dUd58mRhwPqiS.jpg",
+          "rating": 6.909
+        },
+        {
+          "tmdbId": 558449,
+          "type": "movie",
+          "title": "Gladiator II",
+          "year": "2024",
+          "poster": "https://image.tmdb.org/t/p/w342/2cxhvwyEwRlysAmRH4iodkvo0z5.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/tOqIwliWMovSIZ9DyvHcHI7p2im.jpg",
+          "rating": 6.614
+        },
+        {
+          "tmdbId": 786892,
+          "type": "movie",
+          "title": "Furiosa: A Mad Max Saga",
+          "year": "2024",
+          "poster": "https://image.tmdb.org/t/p/w342/iADOJ8Zymht2JPMoy3R7xceZprc.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/raph7qjAGTMXaIjVxt6ZDSXRzUr.jpg",
+          "rating": 7.454
+        },
+        {
+          "tmdbId": 929590,
+          "type": "movie",
+          "title": "Civil War",
+          "year": "2024",
+          "poster": "https://image.tmdb.org/t/p/w342/sh7Rg8Er3tFcN9BpKIPOMvALgZd.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/t2SXZ7KLriaLyf5QT8Iar6fSOGp.jpg",
+          "rating": 6.86
+        },
+        {
+          "tmdbId": 718821,
+          "type": "movie",
+          "title": "Twisters",
+          "year": "2024",
+          "poster": "https://image.tmdb.org/t/p/w342/pjnD08FlMAIXsfOLKQbvmO0f0MD.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/58D6ZAvOKxlHjyX9S8qNKSBE9Y.jpg",
+          "rating": 6.782
+        },
+        {
+          "tmdbId": 872585,
+          "type": "movie",
+          "title": "Oppenheimer",
+          "year": "2023",
+          "poster": "https://image.tmdb.org/t/p/w342/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/7CENyUim29IEsaJhUxIGymCRvPu.jpg",
+          "rating": 8.032
+        },
+        {
+          "tmdbId": 361743,
+          "type": "movie",
+          "title": "Top Gun: Maverick",
+          "year": "2022",
+          "poster": "https://image.tmdb.org/t/p/w342/n0YuM4f5lvGAP6MAW2kBIzugXnc.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/AaV1YIdWKnjAIAOe8UUKBFm327v.jpg",
+          "rating": 8.158
+        },
+        {
+          "tmdbId": 438631,
+          "type": "movie",
+          "title": "Dune",
+          "year": "2021",
+          "poster": "https://image.tmdb.org/t/p/w342/gDzOcq0pfeCeqMBwKIJlSmQpjkZ.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/zRKQW58MBEY078AxkHxEJzUskCl.jpg",
+          "rating": 7.781
+        }
+      ]
+    },
+    {
+      "key": "prime-indian",
+      "title": "Latest Indian Films (2024-25)",
+      "ranked": false,
+      "logo": "",
+      "auto": null,
+      "items": [
+        {
+          "tmdbId": 1291608,
+          "type": "movie",
+          "title": "Dhurandhar",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/8FHOtUpNIk5ZPEay2N2EY5lrxkv.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/snYOXem8pUGOffnLbbGq4aB1pg4.jpg",
+          "rating": 7.117
+        },
+        {
+          "tmdbId": 801688,
+          "type": "movie",
+          "title": "Kalki 2898-AD",
+          "year": "2024",
+          "poster": "https://image.tmdb.org/t/p/w342/rstcAnBeCkxNQjNp3YXrF6IP1tW.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/o8XSR1SONnjcsv84NRu6Mwsl5io.jpg",
+          "rating": 6.388
+        },
+        {
+          "tmdbId": 857598,
+          "type": "movie",
+          "title": "Pushpa 2 - The Rule",
+          "year": "2024",
+          "poster": "https://image.tmdb.org/t/p/w342/bhxZj3y59cK7JtGdV285dhDRaMe.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/7jGItf7idJsBm9QTNoTNTU3KiGe.jpg",
+          "rating": 6.285
+        },
+        {
+          "tmdbId": 1112426,
+          "type": "movie",
+          "title": "Stree 2",
+          "year": "2024",
+          "poster": "https://image.tmdb.org/t/p/w342/iwEJp4WBM8b3AjCeNcgvv86FEFr.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/fVV0A67kDjTTQ4CvUn8LoletRmI.jpg",
+          "rating": 6.6
+        },
+        {
+          "tmdbId": 1014214,
+          "type": "movie",
+          "title": "Singham Again",
+          "year": "2024",
+          "poster": "https://image.tmdb.org/t/p/w342/2JbNkHg8m7LaBy61LyrnnlenaxY.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/lexEx0B4WDOXGfqPTj4R8FCrE7H.jpg",
+          "rating": 5
+        },
+        {
+          "tmdbId": 811941,
+          "type": "movie",
+          "title": "Devara: Part 1",
+          "year": "2024",
+          "poster": "https://image.tmdb.org/t/p/w342/lQfuaXjANoTsdx5iS0gCXlK9D2L.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/hAQnXxOwCjgYcKRgTdYPRC8neqL.jpg",
+          "rating": 6.921
+        },
+        {
+          "tmdbId": 781732,
+          "type": "movie",
+          "title": "Animal",
+          "year": "2023",
+          "poster": "https://image.tmdb.org/t/p/w342/hr9rjR3J0xBBKmlJ4n3gHId9ccx.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/lprsAHkwMxk2iC6VZxNmV0H7g1t.jpg",
+          "rating": 6.12
+        },
+        {
+          "tmdbId": 872906,
+          "type": "movie",
+          "title": "Jawan",
+          "year": "2023",
+          "poster": "https://image.tmdb.org/t/p/w342/jFt1gS4BGHlK8xt76Y81Alp4dbt.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/5LtSjMNw6j3LkG29Oa4O0iY5U8.jpg",
+          "rating": 7.074
+        },
+        {
+          "tmdbId": 579974,
+          "type": "movie",
+          "title": "RRR",
+          "year": "2022",
+          "poster": "https://image.tmdb.org/t/p/w342/u0XUBNQWlOvrh0Gd97ARGpIkL0.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/i0Y0wP8H6SRgjr6QmuwbtQbS24D.jpg",
+          "rating": 7.711
+        }
+      ]
+    }
+  ]
+}

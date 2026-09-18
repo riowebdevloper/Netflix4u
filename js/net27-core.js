@@ -431,11 +431,20 @@
   async function syncHeroWithTrending() {
     try {
       var items = null;
-      var feedRes = await fetch('/data/home_feed.json?_t=' + Date.now()).catch(function() {});
-      if (feedRes && feedRes.ok) {
-        var feedData = await feedRes.json().catch(function() {});
-        if (feedData && Array.isArray(feedData.featured) && feedData.featured.length >= 3) {
-          items = feedData.featured;
+      var heroRes = await fetch('/api/catalog/hero').catch(function() {});
+      if (heroRes && heroRes.ok) {
+        var heroData = await heroRes.json().catch(function() {});
+        if (heroData && Array.isArray(heroData.hero) && heroData.hero.length >= 3) {
+          items = heroData.hero;
+        }
+      }
+      if (!items || !items.length) {
+        var curRes = await fetch('/data/curated_trending.json').catch(function() {});
+        if (curRes && curRes.ok) {
+          var curData = await curRes.json().catch(function() {});
+          if (curData && Array.isArray(curData.hero) && curData.hero.length >= 3) {
+            items = curData.hero;
+          }
         }
       }
       if (!items || !items.length) {
@@ -457,7 +466,7 @@
       heroItems = valid.map(function(it) {
         var bdrop = it.backdrop || it.poster;
         if (bdrop && !bdrop.startsWith('http') && !bdrop.startsWith('data:')) {
-          bdrop = 'https://wsrv.nl/?url=image.tmdb.org/t/p/w1280/' + bdrop.replace(/^\//, '');
+          bdrop = 'https://image.tmdb.org/t/p/original/' + bdrop.replace(/^\//, '');
         }
         return {
           tmdbId: it.tmdbId,
@@ -648,43 +657,23 @@
     var reg = '&region=IN';
     if (platform === 'trending') {
       return [
-        // ─── Top of Homepage ───
-        { key: 'trending-day',    title: '🔥 Top 10 Today',            url: '/api/catalog/trending?window=day', ranked: true },
-        { key: 'nm-trending',     title: '🌐 Trending Now',             url: '/api/netmirror/trending?count=15' },
-        { key: 'nm-recently',     title: '🕐 Recently Added',           url: '/api/netmirror/recently-added?count=15' },
-        { key: 'nm-new-movies',   title: '🆕 Latest Cinema Movies',     url: '/api/netmirror/new-movies?count=15' },
-        // ─── Streaming Platforms ───
-        { key: 'nm-netflix-m',    title: '▶️ Trending on Netflix',      url: '/api/netmirror/netflix-movies?count=15' },
-        { key: 'nm-netflix-s',    title: '📺 Top Shows on Netflix',     url: '/api/netmirror/netflix-shows?count=15' },
-        { key: 'nm-prime-m',      title: '🎬 Top Movies on Prime',      url: '/api/netmirror/prime-movies?count=15' },
-        { key: 'nm-prime-s',      title: '📡 Top Shows on Prime',       url: '/api/netmirror/prime-shows?count=15' },
-        // ─── Indian Cinema ───
-        { key: 'nm-bollywood',    title: '🎬 Bollywood Blockbusters',   url: '/api/netmirror/bollywood?count=15' },
-        { key: 'nm-south',        title: '🌴 South Indian (Hindi)',      url: '/api/netmirror/south-hindi?count=15' },
-        { key: 'nm-indian-series',title: '📺 Trending Indian Series',   url: '/api/netmirror/indian-series?count=15' },
-        { key: 'nm-indian-drama', title: '🎭 Indian Drama',             url: '/api/netmirror/indian-drama?count=15' },
-        { key: 'nm-top-series',   title: '🏆 Top Series This Week',     url: '/api/netmirror/top-series?count=15' },
-        { key: 'nm-bollywood-cl', title: '🎪 Top 100 Bollywood Movies', url: '/api/netmirror/bollywood-classics?count=15' },
-        // ─── Hollywood & English ───
-        { key: 'nm-hollywood',    title: '🎥 Hollywood Hits',           url: '/api/netmirror/hollywood?count=15' },
-        { key: 'nm-top-imdb',     title: '⭐ Top Rated IMDB Series',    url: '/api/netmirror/top-imdb-series?count=15' },
-        { key: 'nm-box-office',   title: '🏆 Top 200 Box Office',       url: '/api/netmirror/top-box-office?count=15' },
-        // ─── Genre ───
-        { key: 'nm-action',       title: '💥 Action Movies',            url: '/api/netmirror/action?count=15' },
-        { key: 'nm-horror',       title: '👻 Horror Movies',            url: '/api/netmirror/horror?count=15' },
-        { key: 'nm-romance',      title: '💕 Romantic Movies',          url: '/api/netmirror/romance?count=15' },
-        { key: 'nm-adventure',    title: '🗺️ Adventure',                url: '/api/netmirror/adventure?count=15' },
-        { key: 'nm-mystery',      title: '🔍 Mystery & Thriller',       url: '/api/netmirror/mystery?count=15' },
-        { key: 'nm-scifi',        title: '🚀 Sci-Fi Spectrum',          url: '/api/netmirror/sci-fi?count=15' },
-        { key: 'nm-superhero',    title: '🦸 Superhero Movies',         url: '/api/netmirror/superhero?count=15' },
-        { key: 'nm-marvel',       title: '⚡ Marvel Movies',            url: '/api/netmirror/marvel?count=15' },
-        { key: 'nm-superhero-hi', title: '🦸 Superhero (Hindi)',        url: '/api/netmirror/superhero-hindi?count=15' },
-        { key: 'nm-anime',        title: '⚡ Anime (English)',           url: '/api/netmirror/anime?count=15' },
-        // ─── Asian Content ───
-        { key: 'nm-kdrama',       title: '🇰🇷 Korean Dramas (Hindi)',   url: '/api/netmirror/kdrama?count=15' },
-        { key: 'nm-kdrama-en',    title: '🇰🇷 Korean Dramas (English)', url: '/api/netmirror/kdrama-en?count=15' },
-        { key: 'nm-turkish',      title: '🌙 Turkish Drama (Hindi)',    url: '/api/netmirror/turkish-drama?count=15' },
-        { key: 'nm-c-drama',      title: '🇨🇳 Chinese Drama (Hindi)',   url: '/api/netmirror/c-drama-hindi?count=15' },
+        { key: 'top-10-today',        title: 'Top 10 Today',                        url: '/api/catalog/curated/trending', ranked: true },
+        { key: 'trending-playable',   title: 'Trending Now',                        url: '/api/catalog/curated/trending' },
+        { key: 'latest-2025-2026',    title: 'Latest Release',                      url: '/api/catalog/curated/trending' },
+        { key: 'new-releases-2024',   title: 'Hot New Releases',                    url: '/api/catalog/curated/trending' },
+        { key: 'bollywood-2024-25',   title: 'Bollywood',                           url: '/api/catalog/curated/trending' },
+        { key: 'south-indian-2024-25',title: 'South Indian Hits',                   url: '/api/catalog/curated/trending' },
+        { key: 'indian-originals',    title: 'Indian Originals',                    url: '/api/catalog/curated/trending' },
+        { key: 'hollywood-2024-25',   title: 'Hollywood',                           url: '/api/catalog/curated/trending' },
+        { key: 'action-now',          title: 'Action Movies',                       url: '/api/catalog/curated/trending' },
+        { key: 'drama-tv',            title: 'Drama Series',                        url: '/api/catalog/curated/trending' },
+        { key: 'comedy-now',          title: 'Comedy',                              url: '/api/catalog/curated/trending' },
+        { key: 'thriller-now',        title: 'Thrillers',                           url: '/api/catalog/curated/trending' },
+        { key: 'scifi-now',           title: 'Sci-Fi',                              url: '/api/catalog/curated/trending' },
+        { key: 'romance-now',         title: 'Romance',                             url: '/api/catalog/curated/trending' },
+        { key: 'horror-now',          title: 'Horror',                              url: '/api/catalog/curated/trending' },
+        { key: 'animation-family',    title: 'Animation & Family',                  url: '/api/catalog/curated/trending' },
+        { key: 'trending-coming-soon',title: 'Trending Globally — Coming Soon',     url: '/api/catalog/curated/trending' }
       ];
 
     } else if (platform === 'LatestRelease') {
@@ -756,11 +745,21 @@
     initRailScrollButtons(railSection);
   }
 
+  var curatedFeedCache = {};
+
   async function fetchRailItems(cfg) {
+    if (cfg.items && cfg.items.length) {
+      setCachedRail(cfg.key, cfg.items);
+      return cfg.items;
+    }
     try {
       var res = await apiFetch(cfg.url);
       var data = await res.json();
       var items = (data && data.items) || [];
+      if (!items.length && data && data.rails) {
+        var foundRail = data.rails.find(function(r) { return r.key === cfg.key; });
+        if (foundRail) items = foundRail.items || [];
+      }
       var valid = items.filter(function(it) { return it && (it.poster || it.title); });
       if (valid.length) {
         setCachedRail(cfg.key, valid);
@@ -772,11 +771,15 @@
     try {
       var fbKey = cfg.key.replace(/^lr-/, '');
       var fbFeed = '/data/' + fbKey + '.json';
-      if (cfg.ranked) fbFeed = '/data/trending.json';
+      if (cfg.ranked) fbFeed = '/data/curated_trending.json';
       var fbRes = await fetch(fbFeed);
       if (fbRes.ok) {
         var fbData = await fbRes.json();
         var fbRaw = Array.isArray(fbData) ? fbData : (fbData.items || fbData.results || []);
+        if (!fbRaw.length && fbData && fbData.rails) {
+          var fRail = fbData.rails.find(function(r) { return r.key === cfg.key; });
+          if (fRail) fbRaw = fRail.items || [];
+        }
         var fbValid = fbRaw.map(function(it) {
           return {
             tmdbId: it.tmdbId || it.id,
@@ -846,12 +849,50 @@
       });
     }
 
+    // Check for platform curated bundle (Trending, Netflix, Prime, etc.)
+    var curData = curatedFeedCache[platform];
+    if (!curData) {
+      try {
+        var curRes = await fetch('/api/catalog/curated/' + encodeURIComponent(platform)).catch(function() {});
+        if (curRes && curRes.ok) {
+          curData = await curRes.json().catch(function() {});
+        }
+        if (!curData || !curData.rails) {
+          var localCur = await fetch('/data/curated_' + encodeURIComponent(platform) + '.json').catch(function() {});
+          if (localCur && localCur.ok) {
+            curData = await localCur.json().catch(function() {});
+          }
+        }
+        if (curData && curData.rails && curData.rails.length) {
+          curatedFeedCache[platform] = curData;
+        }
+      } catch(e) {}
+    }
+
+    if (curData && curData.rails && curData.rails.length) {
+      configs = curData.rails.map(function(r) {
+        var items = (r.items || []).filter(function(it) { return it && (it.poster || it.title); });
+        setCachedRail(r.key, items);
+        return {
+          key: r.key,
+          title: r.title,
+          ranked: Boolean(r.ranked),
+          logo: r.logo || null,
+          items: items
+        };
+      });
+    }
+
     // Fast SWR Check: Pre-read cached rails for instant rendering (<50ms)
     var cachedDataMap = {};
     configs.forEach(function(cfg) {
-      var cached = getCachedRail(cfg.key);
-      if (cached && cached.items && cached.items.length) {
-        cachedDataMap[cfg.key] = cached;
+      if (cfg.items && cfg.items.length) {
+        cachedDataMap[cfg.key] = { items: cfg.items, isFresh: true };
+      } else {
+        var cached = getCachedRail(cfg.key);
+        if (cached && cached.items && cached.items.length) {
+          cachedDataMap[cfg.key] = cached;
+        }
       }
     });
 

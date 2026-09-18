@@ -1,0 +1,2250 @@
+{
+  "ok": true,
+  "tab": "trending",
+  "hero": [
+    {
+      "tmdbId": 108978,
+      "type": "tv",
+      "title": "Reacher",
+      "year": "2022",
+      "backdrop": "https://image.tmdb.org/t/p/original/pF0qkRsrHkdYadPWY9AMeFZfcwk.jpg",
+      "rating": 8.1,
+      "overview": "Jack Reacher, a veteran military police investigator, has just recently entered civilian life. Reacher is a drifter, carrying no phone and the barest of essentials as he travels the country and explores the nation he once served."
+    },
+    {
+      "tmdbId": 1408162,
+      "type": "movie",
+      "title": "Vishwanath & Sons",
+      "year": "2026",
+      "backdrop": "https://image.tmdb.org/t/p/original/nfNaAiiILjYRc2CKkId1ZfPTtlh.jpg",
+      "rating": 7.2,
+      "overview": "A celebrated Olympian shooter travels to America looking for a donor to help his sick child — but unexpected romance complicates his search."
+    },
+    {
+      "tmdbId": 1423191,
+      "type": "movie",
+      "title": "Resident Evil",
+      "year": "2026",
+      "backdrop": "https://image.tmdb.org/t/p/original/1CIaRYKf3zg2Xyce1CSfCMg2Vfw.jpg",
+      "rating": 7.8,
+      "overview": "A hapless medical courier fights for his life amid an outbreak of a deadly mutagenic virus in an isolated mountain town."
+    },
+    {
+      "tmdbId": 84105,
+      "type": "tv",
+      "title": "Mirzapur",
+      "year": "2018",
+      "backdrop": "https://image.tmdb.org/t/p/original/3dV7pWAdwIPKR2lMIACMfObXdgK.jpg",
+      "rating": 8.0,
+      "overview": "The iron-fisted Akhandanand Tripathi is a millionaire carpet exporter and the mafia don of Mirzapur. His son, Munna, is an unworthy, power-hungry heir who will stop at nothing to inherit his father's legacy."
+    },
+    {
+      "tmdbId": 5920,
+      "type": "tv",
+      "title": "The Mentalist",
+      "year": "2008",
+      "backdrop": "https://image.tmdb.org/t/p/original/rJFqKcmMSttdNP58l0dVzY2NcTA.jpg",
+      "rating": 8.4,
+      "overview": "Patrick Jane, a former celebrity psychic medium, uses his razor sharp skills of observation and expertise at \"reading\" people to solve serious crimes with the California Bureau of Investigation."
+    },
+    {
+      "tmdbId": 1709391,
+      "type": "movie",
+      "title": "Hanuman Ansh",
+      "year": "2026",
+      "backdrop": "https://image.tmdb.org/t/p/original/tKYOK8iMxkhJhug3LJ2yvC5QY8M.jpg",
+      "rating": 8.6,
+      "overview": "A grieving boy seeks God to meet his departed mother, and in finding the divine, learns to serve humanity with miracles of love, food and silent blessings, becoming Hanuman Ansh, Neem Karoli Baba."
+    }
+  ],
+  "rails": [
+    {
+      "key": "top-10-today",
+      "title": "Top 10 Today",
+      "ranked": true,
+      "logo": "",
+      "auto": "userTop10",
+      "items": [
+        {
+          "tmdbId": 108978,
+          "type": "tv",
+          "title": "Reacher",
+          "poster": "https://image.tmdb.org/t/p/w500/f1VCQIG2iCyOookdgOzwtUpwWC0.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/pF0qkRsrHkdYadPWY9AMeFZfcwk.jpg",
+          "rating": 8.1,
+          "overview": "Jack Reacher, a veteran military police investigator, has just recently entered civilian life. Reacher is a drifter, carrying no phone and the barest of essentials as he travels the country and explores the nation he once served."
+        },
+        {
+          "tmdbId": 1408162,
+          "type": "movie",
+          "title": "Vishwanath & Sons",
+          "poster": "https://image.tmdb.org/t/p/w500/mLsvCffzpxxDwC7yVLJSLLjgzoq.jpg",
+          "backdrop": "",
+          "rating": 7.2,
+          "overview": "A celebrated Olympian shooter travels to America looking for a donor to help his sick child — but unexpected romance complicates his search."
+        },
+        {
+          "tmdbId": 84105,
+          "type": "tv",
+          "title": "Mirzapur",
+          "poster": "https://image.tmdb.org/t/p/w500/1rxLUFVrtTo82OxhbDXJDiJVkwL.jpg",
+          "backdrop": "",
+          "rating": 8,
+          "overview": "The iron-fisted Akhandanand Tripathi is a millionaire carpet exporter and the mafia don of Mirzapur. His son, Munna, is an unworthy, power-hungry heir who will stop at nothing to inherit his father's legacy. An incident at a wedding procession forces him to cross paths with Ramakant Pandit, an upsta"
+        },
+        {
+          "tmdbId": 1423191,
+          "type": "movie",
+          "title": "Resident Evil",
+          "poster": "https://image.tmdb.org/t/p/w500/i7UyjfPio0VFHB9rBUZSFyhOoM8.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/1CIaRYKf3zg2Xyce1CSfCMg2Vfw.jpg",
+          "rating": 7.8,
+          "overview": "Medical courier Bryan unwittingly finds himself fighting for survival as one fateful, horrifying night collapses around him in chaos."
+        },
+        {
+          "tmdbId": 5920,
+          "type": "tv",
+          "title": "The Mentalist",
+          "poster": "https://image.tmdb.org/t/p/w500/acYXu4KaDj1NIkMgObnhe4C4a0T.jpg",
+          "backdrop": "",
+          "rating": 8.4,
+          "overview": "Patrick Jane, a former celebrity psychic medium, uses his razor sharp skills of observation and expertise at \"reading\" people to solve serious crimes with the California Bureau of Investigation."
+        },
+        {
+          "tmdbId": 1709391,
+          "type": "movie",
+          "title": "Hanuman Ansh",
+          "poster": "https://image.tmdb.org/t/p/w500/as2Y3zGUa2IUS3uAx2sh6Ano3es.jpg",
+          "backdrop": "",
+          "rating": 8.6,
+          "overview": "A grieving boy seeks God to meet his departed mother, and in finding the divine, learns to serve humanity with miracles of love, food and silent blessings, becoming Hanuman Ansh, Neem Karoli Baba."
+        },
+        {
+          "tmdbId": 31910,
+          "type": "tv",
+          "title": "Naruto Shippūden",
+          "poster": "https://image.tmdb.org/t/p/w500/kV27j3Nz4d5z8u6mN3EJw9RiLg2.jpg",
+          "backdrop": "",
+          "rating": 8.5,
+          "overview": "After 2 and a half years Naruto finally returns to his village of Konoha, and sets about putting his ambitions to work. It will not be easy though as he has amassed a few more dangerous enemies, in the likes of the shinobi organization; Akatsuki."
+        },
+        {
+          "tmdbId": 1399,
+          "type": "tv",
+          "title": "Game of Thrones",
+          "poster": "https://image.tmdb.org/t/p/w500/1XS1oqL89opfnbLl8WnZY1O1uJx.jpg",
+          "backdrop": "",
+          "rating": 8.5,
+          "overview": "Seven noble families fight for control of the mythical land of Westeros. Friction between the houses leads to full-scale war. All while a very ancient evil awakens in the farthest north. Amidst the war, a neglected military order of misfits, the Night's Watch, is all that stands between the realms o"
+        },
+        {
+          "tmdbId": 71446,
+          "type": "tv",
+          "title": "Money Heist",
+          "poster": "https://image.tmdb.org/t/p/w500/reEMJA1uzscCbkpeRJeTT2bjqUp.jpg",
+          "backdrop": "",
+          "rating": 8.2,
+          "overview": "To carry out the biggest heist in history, a mysterious man called The Professor recruits a band of eight robbers who have a single characteristic: none of them has anything to lose. Five months of seclusion - memorizing every step, every detail, every probability - culminate in eleven days locked u"
+        },
+        {
+          "tmdbId": 66732,
+          "type": "tv",
+          "title": "Stranger Things",
+          "poster": "https://image.tmdb.org/t/p/w500/uOOtwVbSr4QDjAGIifLDwpb2Pdl.jpg",
+          "backdrop": "",
+          "rating": 8.6,
+          "overview": "When a young boy vanishes, a small town uncovers a mystery involving secret experiments, terrifying supernatural forces, and one strange little girl."
+        }
+      ]
+    },
+    {
+      "key": "trending-playable",
+      "title": "Trending Now",
+      "ranked": false,
+      "logo": "",
+      "auto": "tmdbTrendingPlayable:week",
+      "items": [
+        {
+          "tmdbId": 1423191,
+          "type": "movie",
+          "title": "Resident Evil",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/i7UyjfPio0VFHB9rBUZSFyhOoM8.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/1CIaRYKf3zg2Xyce1CSfCMg2Vfw.jpg",
+          "rating": 7.716,
+          "overview": "A hapless medical courier fights for his life amid an outbreak of a deadly mutagenic virus in an isolated mountain town."
+        },
+        {
+          "tmdbId": 108978,
+          "type": "tv",
+          "title": "Reacher",
+          "year": "2022",
+          "poster": "https://image.tmdb.org/t/p/w342/f1VCQIG2iCyOookdgOzwtUpwWC0.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/pF0qkRsrHkdYadPWY9AMeFZfcwk.jpg",
+          "rating": 8.123,
+          "overview": "Jack Reacher, a veteran military police investigator, has just recently entered civilian life. Reacher is a drifter, carrying no phone and the barest of essentials as he travels the country and explores the nation he once served."
+        },
+        {
+          "tmdbId": 247718,
+          "type": "tv",
+          "title": "MobLand",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/5Xc7WpWsgflfgEMoBlf9TmWhfbH.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/tQqbbxBAdW2ql8vbOqMOJbtSQ7O.jpg",
+          "rating": 8.4,
+          "overview": "Two mob families clash in a war that threatens to topple empires and lives."
+        },
+        {
+          "tmdbId": 95350,
+          "type": "tv",
+          "title": "Lanterns",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/gpC7h43xPMEV3goYMQShfJbTtLq.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/wJjnJbVUwPz0GADAgpFt9nWtzUu.jpg",
+          "rating": 8.238,
+          "overview": "Two intergalactic cops, new recruit John Stewart and Lantern legend Hal Jordan, are drawn into a dark, Earth-based mystery as they investigate a murder in the American heartland."
+        },
+        {
+          "tmdbId": 1368337,
+          "type": "movie",
+          "title": "The Odyssey",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/5rhTDKUhPYvpdQIijFIs5VoWsON.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/RMXG8myu1aGlNUsRjtxzmpdMK0.jpg",
+          "rating": 8.014,
+          "overview": "Odysseus, the legendary King of Ithaca, embarks on a long and perilous journey home following the Trojan War. Throughout his voyage, he is forced to confront the whims of gods, mythological monsters, and trials that stretch both his cunning and his humanity to the breaking point."
+        },
+        {
+          "tmdbId": 1108427,
+          "type": "movie",
+          "title": "Moana",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/s20ZqOKFqGVWOUtDz9XurwwBoF1.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/c6BPbkO5Npt1OdwttAxCFo06wtH.jpg",
+          "rating": 7.316,
+          "overview": "Teenage Moana answers the Ocean's call and, for the first time, voyages beyond the reef of her island of Motunui with infamous demigod Maui on an unforgettable journey to restore prosperity to her people."
+        },
+        {
+          "tmdbId": 95480,
+          "type": "tv",
+          "title": "Slow Horses",
+          "year": "2022",
+          "poster": "https://image.tmdb.org/t/p/w342/AdYr4DjOgXvDUMwu6vEhZy1Rnxk.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/bDfboQUb45Cv9MYyVBDZw8M8xSM.jpg",
+          "rating": 8,
+          "overview": "Follow a dysfunctional team of MI5 agents—and their obnoxious boss, the notorious Jackson Lamb—as they navigate the espionage world's smoke and mirrors to defend England from sinister forces."
+        },
+        {
+          "tmdbId": 1339713,
+          "type": "movie",
+          "title": "Obsession",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/bRwnj8WEKBCvmfeUNOukJPwB43K.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/rZfmzpixLKLR3Hg2u0WgC7XLFl8.jpg",
+          "rating": 8.195,
+          "overview": "After breaking the mysterious \"One Wish Willow\" to win his crush's heart, a hopeless romantic finds himself getting exactly what he asked for but soon discovers that some desires come at a dark, sinister price."
+        },
+        {
+          "tmdbId": 113962,
+          "type": "tv",
+          "title": "Lioness",
+          "year": "2023",
+          "poster": "https://image.tmdb.org/t/p/w342/rzpHPSEgPTpRs8EHbygwsOw7jC0.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/4NBYDOnEjAzyuP7CMkD5s7fs44K.jpg",
+          "rating": 8.198,
+          "overview": "Cruz Manuelos, a rough-around-the-edges but passionate young Marine, is recruited to join the CIA's Lioness Engagement Team to help bring down a terrorist organization from within. Joe, the station chief of the Lioness program, is tasked with training, managing and leading her female undercover operatives."
+        },
+        {
+          "tmdbId": 1058424,
+          "type": "movie",
+          "title": "Hope",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/1n37BJchWHLiSYQkuFxe5KjB951.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/hrCTKrc3Tz2wbPOt5rcrlAhqF11.jpg",
+          "rating": 7.375,
+          "overview": "In the remote South Korean village of Hope Harbor, police chief Bum-seok and officer Sung-ae are called to investigate a mysterious creature wreaking havoc on the community. But all is not as it seems, and perceptions can be misleading. What begins as ignorance plants the seed of disaster, escalating through human conflict into a tragedy of cosmic proportions."
+        },
+        {
+          "tmdbId": 1137844,
+          "type": "movie",
+          "title": "Mayday",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/hVXjX1jLZ1ljFSNGXpjJfbTUOa7.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/g7Ccid5kuD7A8hXWlsQiNfwOxaD.jpg",
+          "rating": 7.99,
+          "overview": "When a U.S. Navy pilot on a top-secret mission during the Cold War gets trapped behind enemy lines, his only chance at survival is to form an alliance with an eccentric ex-KGB agent."
+        },
+        {
+          "tmdbId": 125988,
+          "type": "tv",
+          "title": "Silo",
+          "year": "2023",
+          "poster": "https://image.tmdb.org/t/p/w342/gMYZZvnkVNTqSVnVCphWbPXwWwb.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/fQGrzO0Iwo7CO4b2zVdJLkcnhwK.jpg",
+          "rating": 8.218,
+          "overview": "In a ruined and toxic future, thousands live in a giant silo deep underground. After its sheriff breaks a cardinal rule and residents die mysteriously, engineer Juliette starts to uncover shocking secrets and the truth about the silo."
+        }
+      ]
+    },
+    {
+      "key": "latest-2025-2026",
+      "title": "Latest Release",
+      "ranked": false,
+      "logo": "",
+      "auto": null,
+      "items": [
+        {
+          "tmdbId": 1291608,
+          "type": "movie",
+          "title": "Dhurandhar",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/8FHOtUpNIk5ZPEay2N2EY5lrxkv.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/snYOXem8pUGOffnLbbGq4aB1pg4.jpg",
+          "rating": 7.117
+        },
+        {
+          "tmdbId": 1061474,
+          "type": "movie",
+          "title": "Superman",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/ldyfo0BKmz5rWtJJKCvwaNS4cJT.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/yRBc6WY3r1Fz5Cjd6DhSvzqunED.jpg",
+          "rating": 7.338
+        },
+        {
+          "tmdbId": 83533,
+          "type": "movie",
+          "title": "Avatar: Fire and Ash",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/bRBeSHfGHwkEpImlhxPmOcUsaeg.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/iN41Ccw4DctL8npfmYg1j5Tr1eb.jpg",
+          "rating": 7.609
+        },
+        {
+          "tmdbId": 1084242,
+          "type": "movie",
+          "title": "Zootopia 2",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/oJ7g2CifqpStmoYQyaLQgEU32qO.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/lgotja3xMoJZbynwHfcQcJAEMWH.jpg",
+          "rating": 7.669
+        },
+        {
+          "tmdbId": 1311031,
+          "type": "movie",
+          "title": "Demon Slayer: Kimetsu no Yaiba Infinity Castle",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/fWVSwgjpT2D78VUh6X8UBd2rorW.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/1RgPyOhN4DRs225BGTlHJqCudII.jpg",
+          "rating": 7.726
+        },
+        {
+          "tmdbId": 1242898,
+          "type": "movie",
+          "title": "Predator: Badlands",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/pHpq9yNUIo6aDoCXEBzjSolywgz.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/82lM4GJ9uuNvNDOEpxFy77uv4Ak.jpg",
+          "rating": 7.813
+        },
+        {
+          "tmdbId": 1368166,
+          "type": "movie",
+          "title": "The Housemaid",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/cWsBscZzwu5brg9YjNkGewRUvJX.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/zTnAnYIn0Iv3cn0ZHlzLhou3ybm.jpg",
+          "rating": 7.262
+        },
+        {
+          "tmdbId": 1159559,
+          "type": "movie",
+          "title": "Scream 7",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/jjyuk0edLiW8vOSnlfwWCCLpbh5.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/3eUyLEF5M0ky3h6KJsWiWzaakB8.jpg",
+          "rating": 6.184
+        }
+      ]
+    },
+    {
+      "key": "new-releases-2024",
+      "title": "Hot New Releases",
+      "ranked": false,
+      "logo": "",
+      "auto": null,
+      "items": [
+        {
+          "tmdbId": 801688,
+          "type": "movie",
+          "title": "Kalki 2898-AD",
+          "year": "2024",
+          "poster": "https://image.tmdb.org/t/p/w342/rstcAnBeCkxNQjNp3YXrF6IP1tW.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/o8XSR1SONnjcsv84NRu6Mwsl5io.jpg",
+          "rating": 6.388
+        },
+        {
+          "tmdbId": 857598,
+          "type": "movie",
+          "title": "Pushpa 2 - The Rule",
+          "year": "2024",
+          "poster": "https://image.tmdb.org/t/p/w342/bhxZj3y59cK7JtGdV285dhDRaMe.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/7jGItf7idJsBm9QTNoTNTU3KiGe.jpg",
+          "rating": 6.285
+        },
+        {
+          "tmdbId": 1112426,
+          "type": "movie",
+          "title": "Stree 2",
+          "year": "2024",
+          "poster": "https://image.tmdb.org/t/p/w342/iwEJp4WBM8b3AjCeNcgvv86FEFr.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/fVV0A67kDjTTQ4CvUn8LoletRmI.jpg",
+          "rating": 6.6
+        },
+        {
+          "tmdbId": 533535,
+          "type": "movie",
+          "title": "Deadpool & Wolverine",
+          "year": "2024",
+          "poster": "https://image.tmdb.org/t/p/w342/8cdWjvZQUExUUTzyp4t6EDMubfO.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/by8z9Fe8y7p4jo2YlW2SZDnptyT.jpg",
+          "rating": 7.565
+        },
+        {
+          "tmdbId": 1022789,
+          "type": "movie",
+          "title": "Inside Out 2",
+          "year": "2024",
+          "poster": "https://image.tmdb.org/t/p/w342/vpnVM9B6NMmQpWeZvzLvDESb2QY.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/p5ozvmdgsmbWe0H8Xk7Rc8SCwAB.jpg",
+          "rating": 7.546
+        },
+        {
+          "tmdbId": 402431,
+          "type": "movie",
+          "title": "Wicked",
+          "year": "2024",
+          "poster": "https://image.tmdb.org/t/p/w342/xDGbZ0JJ3mYaGKy4Nzd9Kph6M9L.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/w22GVYotTIVC1dUd58mRhwPqiS.jpg",
+          "rating": 6.909
+        },
+        {
+          "tmdbId": 558449,
+          "type": "movie",
+          "title": "Gladiator II",
+          "year": "2024",
+          "poster": "https://image.tmdb.org/t/p/w342/2cxhvwyEwRlysAmRH4iodkvo0z5.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/tOqIwliWMovSIZ9DyvHcHI7p2im.jpg",
+          "rating": 6.614
+        },
+        {
+          "tmdbId": 811941,
+          "type": "movie",
+          "title": "Devara: Part 1",
+          "year": "2024",
+          "poster": "https://image.tmdb.org/t/p/w342/lQfuaXjANoTsdx5iS0gCXlK9D2L.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/hAQnXxOwCjgYcKRgTdYPRC8neqL.jpg",
+          "rating": 6.921
+        },
+        {
+          "tmdbId": 786892,
+          "type": "movie",
+          "title": "Furiosa: A Mad Max Saga",
+          "year": "2024",
+          "poster": "https://image.tmdb.org/t/p/w342/iADOJ8Zymht2JPMoy3R7xceZprc.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/raph7qjAGTMXaIjVxt6ZDSXRzUr.jpg",
+          "rating": 7.454
+        },
+        {
+          "tmdbId": 929590,
+          "type": "movie",
+          "title": "Civil War",
+          "year": "2024",
+          "poster": "https://image.tmdb.org/t/p/w342/sh7Rg8Er3tFcN9BpKIPOMvALgZd.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/t2SXZ7KLriaLyf5QT8Iar6fSOGp.jpg",
+          "rating": 6.86
+        }
+      ]
+    },
+    {
+      "key": "bollywood-2024-25",
+      "title": "Bollywood",
+      "ranked": false,
+      "logo": "",
+      "auto": null,
+      "items": [
+        {
+          "tmdbId": 1291608,
+          "type": "movie",
+          "title": "Dhurandhar",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/8FHOtUpNIk5ZPEay2N2EY5lrxkv.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/snYOXem8pUGOffnLbbGq4aB1pg4.jpg",
+          "rating": 7.117
+        },
+        {
+          "tmdbId": 1112426,
+          "type": "movie",
+          "title": "Stree 2",
+          "year": "2024",
+          "poster": "https://image.tmdb.org/t/p/w342/iwEJp4WBM8b3AjCeNcgvv86FEFr.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/fVV0A67kDjTTQ4CvUn8LoletRmI.jpg",
+          "rating": 6.6
+        },
+        {
+          "tmdbId": 1014214,
+          "type": "movie",
+          "title": "Singham Again",
+          "year": "2024",
+          "poster": "https://image.tmdb.org/t/p/w342/2JbNkHg8m7LaBy61LyrnnlenaxY.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/lexEx0B4WDOXGfqPTj4R8FCrE7H.jpg",
+          "rating": 5
+        },
+        {
+          "tmdbId": 980599,
+          "type": "movie",
+          "title": "Bhool Bhulaiyaa 3",
+          "year": "2024",
+          "poster": "https://image.tmdb.org/t/p/w342/3AfHD1HoaQpQwKH8kxRdBKVmzeU.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/1TdCtQaAqZhKRSOSbPi1EPToJxN.jpg",
+          "rating": 5.5
+        },
+        {
+          "tmdbId": 984101,
+          "type": "movie",
+          "title": "Bad Newz",
+          "year": "2024",
+          "poster": "https://image.tmdb.org/t/p/w342/qDlqxGATpYBWqGciPB4tmQm3bFT.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/dRot2ng1pN6uJpLPikxDrbkngmu.jpg",
+          "rating": 5
+        },
+        {
+          "tmdbId": 1233531,
+          "type": "movie",
+          "title": "Article 370",
+          "year": "2024",
+          "poster": "https://image.tmdb.org/t/p/w342/9VTemjHMpyxzfC3JsG2aFy8Bf9Y.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/qYXnMDuwaApMRtV8JunFmieZo8R.jpg",
+          "rating": 6.939
+        },
+        {
+          "tmdbId": 899718,
+          "type": "movie",
+          "title": "Yodha",
+          "year": "2024",
+          "poster": "https://image.tmdb.org/t/p/w342/rkCRwuWgrkGTya4vLqwFugwSqeh.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/pnoOhdjceFu62dns1B1pfbdZOEy.jpg",
+          "rating": 6.6
+        },
+        {
+          "tmdbId": 1187058,
+          "type": "movie",
+          "title": "Munjya",
+          "year": "2024",
+          "poster": "https://image.tmdb.org/t/p/w342/ylYdXu0SM79Qs7vOz6q7mBxanVD.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/4Yr1efAiQ55YdV9R7N4WOntpmZ5.jpg",
+          "rating": 6.1
+        },
+        {
+          "tmdbId": 872906,
+          "type": "movie",
+          "title": "Jawan",
+          "year": "2023",
+          "poster": "https://image.tmdb.org/t/p/w342/jFt1gS4BGHlK8xt76Y81Alp4dbt.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/5LtSjMNw6j3LkG29Oa4O0iY5U8.jpg",
+          "rating": 7.074
+        },
+        {
+          "tmdbId": 781732,
+          "type": "movie",
+          "title": "Animal",
+          "year": "2023",
+          "poster": "https://image.tmdb.org/t/p/w342/hr9rjR3J0xBBKmlJ4n3gHId9ccx.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/lprsAHkwMxk2iC6VZxNmV0H7g1t.jpg",
+          "rating": 6.12
+        }
+      ]
+    },
+    {
+      "key": "south-indian-2024-25",
+      "title": "South Indian Hits",
+      "ranked": false,
+      "logo": "",
+      "auto": null,
+      "items": [
+        {
+          "tmdbId": 801688,
+          "type": "movie",
+          "title": "Kalki 2898-AD",
+          "year": "2024",
+          "poster": "https://image.tmdb.org/t/p/w342/rstcAnBeCkxNQjNp3YXrF6IP1tW.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/o8XSR1SONnjcsv84NRu6Mwsl5io.jpg",
+          "rating": 6.388
+        },
+        {
+          "tmdbId": 857598,
+          "type": "movie",
+          "title": "Pushpa 2 - The Rule",
+          "year": "2024",
+          "poster": "https://image.tmdb.org/t/p/w342/bhxZj3y59cK7JtGdV285dhDRaMe.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/7jGItf7idJsBm9QTNoTNTU3KiGe.jpg",
+          "rating": 6.285
+        },
+        {
+          "tmdbId": 811941,
+          "type": "movie",
+          "title": "Devara: Part 1",
+          "year": "2024",
+          "poster": "https://image.tmdb.org/t/p/w342/lQfuaXjANoTsdx5iS0gCXlK9D2L.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/hAQnXxOwCjgYcKRgTdYPRC8neqL.jpg",
+          "rating": 6.921
+        },
+        {
+          "tmdbId": 579974,
+          "type": "movie",
+          "title": "RRR",
+          "year": "2022",
+          "poster": "https://image.tmdb.org/t/p/w342/u0XUBNQWlOvrh0Gd97ARGpIkL0.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/i0Y0wP8H6SRgjr6QmuwbtQbS24D.jpg",
+          "rating": 7.711
+        },
+        {
+          "tmdbId": 690957,
+          "type": "movie",
+          "title": "Pushpa: The Rise",
+          "year": "2021",
+          "poster": "https://image.tmdb.org/t/p/w342/oaRk2HgOirEeNuDCwwScmq7rKvS.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/jQIcn51nsvMrpB9NFwEOb9QHhFt.jpg",
+          "rating": 6.75
+        },
+        {
+          "tmdbId": 743563,
+          "type": "movie",
+          "title": "Vikram",
+          "year": "2022",
+          "poster": "https://image.tmdb.org/t/p/w342/774UV1aCURb4s4JfEFg3IEMu5Zj.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/dkIX4dSMuVqjfrPGunBJUR7K3LQ.jpg",
+          "rating": 7.55
+        }
+      ]
+    },
+    {
+      "key": "indian-originals",
+      "title": "Indian Originals",
+      "ranked": false,
+      "logo": "",
+      "auto": "catalogDirect:hindi",
+      "items": [
+        {
+          "tmdbId": -834268758,
+          "type": "movie",
+          "title": "Welcome to the Jungle [Hindi][CAM]",
+          "year": "2026",
+          "poster": "https://pbcdnw.aoneroom.com/image/2026/06/22/ee805e50c92e36ae03b2bee7510cca50.jpg",
+          "backdrop": "",
+          "overview": "",
+          "source": "aoneroom-direct",
+          "subjectId": "5091094358426900488"
+        },
+        {
+          "tmdbId": -1198967856,
+          "type": "tv",
+          "title": "Elle [Hindi]",
+          "year": "2026",
+          "poster": "https://pbcdnw.aoneroom.com/image/2026/06/29/caad09f246f0b56a36e5c17f6c568b15.jpg",
+          "backdrop": "",
+          "overview": "",
+          "source": "aoneroom-direct",
+          "subjectId": "8140141944514171200"
+        },
+        {
+          "tmdbId": -1049104247,
+          "type": "movie",
+          "title": "Blast [Hindi]",
+          "year": "2026",
+          "poster": "https://pbcdnw.aoneroom.com/image/2026/05/26/fd2ab6ff61525932d056bddb51eef046.jpg",
+          "backdrop": "",
+          "overview": "",
+          "source": "aoneroom-direct",
+          "subjectId": "8354513314264793488"
+        },
+        {
+          "tmdbId": -2137242643,
+          "type": "movie",
+          "title": "Cocktail 2 [Hindi][CAM]",
+          "year": "2026",
+          "poster": "https://pbcdnw.aoneroom.com/image/2026/06/19/833c2267c91a5b1740283e7e2d5e3e6a.jpg",
+          "backdrop": "",
+          "overview": "",
+          "source": "aoneroom-direct",
+          "subjectId": "2897664112366868144"
+        },
+        {
+          "tmdbId": -849420926,
+          "type": "tv",
+          "title": "Resort [Hindi]",
+          "year": "2026",
+          "poster": "https://pbcdnw.aoneroom.com/image/2026/03/30/7c84bd5e22fd7fad90e8cad4a966baee.jpeg",
+          "backdrop": "",
+          "overview": "",
+          "source": "aoneroom-direct",
+          "subjectId": "1887346909019262736"
+        },
+        {
+          "tmdbId": -360607062,
+          "type": "tv",
+          "title": "Notes from the Last Row [Hindi]",
+          "year": "2026",
+          "poster": "https://pbcdnw.aoneroom.com/image/2026/06/22/20f154e2012952abfe91e67d600ce512.jpg",
+          "backdrop": "",
+          "overview": "",
+          "source": "aoneroom-direct",
+          "subjectId": "8132924062994681496"
+        },
+        {
+          "tmdbId": -394244478,
+          "type": "movie",
+          "title": "Enola Holmes 3 [Hindi]",
+          "year": "2026",
+          "poster": "https://pbcdnw.aoneroom.com/image/2026/06/29/63f924dc46774eb0bf5e36ab185e2662.jpg",
+          "backdrop": "",
+          "overview": "",
+          "source": "aoneroom-direct",
+          "subjectId": "6308513902313855344"
+        },
+        {
+          "tmdbId": -1189489150,
+          "type": "tv",
+          "title": "See You at Work Tomorrow! [Hindi]",
+          "year": "2026",
+          "poster": "https://pbcdnw.aoneroom.com/image/2026/07/03/eacabf6e1a3dc0a59c11562c0860d533.jpg",
+          "backdrop": "",
+          "overview": "",
+          "source": "aoneroom-direct",
+          "subjectId": "6657365783343416200"
+        },
+        {
+          "tmdbId": -932512917,
+          "type": "movie",
+          "title": "Masters of the Universe [Hindi]",
+          "year": "2026",
+          "poster": "https://pbcdnw.aoneroom.com/image/2026/01/27/8a4e2dd1db60d7d2a3e9754d8f91db10.jpg",
+          "backdrop": "",
+          "overview": "",
+          "source": "aoneroom-direct",
+          "subjectId": "6077405251169148112"
+        },
+        {
+          "tmdbId": -2046739121,
+          "type": "movie",
+          "title": "The Sheep Detectives [Hindi]",
+          "year": "2026",
+          "poster": "https://pbcdnw.aoneroom.com/image/2026/01/27/56a8e2bb7004620d0121c885a5d4f9e6.jpg",
+          "backdrop": "",
+          "overview": "",
+          "source": "aoneroom-direct",
+          "subjectId": "6347518567281839416"
+        },
+        {
+          "tmdbId": -123702518,
+          "type": "movie",
+          "title": "Obsess [Hindi][CAM]",
+          "year": "2026",
+          "poster": "https://pbcdnw.aoneroom.com/image/2026/06/01/5dbd4890a00b6bda23913e9d4c393692.jpg",
+          "backdrop": "",
+          "overview": "",
+          "source": "aoneroom-direct",
+          "subjectId": "8704473468655519768"
+        },
+        {
+          "tmdbId": -1745174004,
+          "type": "movie",
+          "title": "Shree Baba Neeb Karori Maharaj [Hindi][CAM]",
+          "year": "2026",
+          "poster": "https://pbcdnw.aoneroom.com/image/2026/05/30/2131315de8e6bb1f6f05700731def0e5.jpg",
+          "backdrop": "",
+          "overview": "",
+          "source": "aoneroom-direct",
+          "subjectId": "4548952834359943408"
+        },
+        {
+          "tmdbId": -972702777,
+          "type": "movie",
+          "title": "Indian Institute of Zombies [Hindi][CAM]",
+          "year": "2026",
+          "poster": "https://pbcdnw.aoneroom.com/image/2026/05/08/693b86db216e6d62567584e1ab778690.jpg",
+          "backdrop": "",
+          "overview": "",
+          "source": "aoneroom-direct",
+          "subjectId": "8839249642261989400"
+        },
+        {
+          "tmdbId": -1060680440,
+          "type": "movie",
+          "title": "Gaayapadda Simham [Hindi]",
+          "year": "2026",
+          "poster": "https://pbcdnw.aoneroom.com/image/2026/04/29/4aad7c2c4385975ca3b16e79cc4849f1.jpg",
+          "backdrop": "",
+          "overview": "",
+          "source": "aoneroom-direct",
+          "subjectId": "3184347266278637680"
+        },
+        {
+          "tmdbId": -312676893,
+          "type": "movie",
+          "title": "Main Actor Nahin Hoon [Hindi][CAM]",
+          "year": "2026",
+          "poster": "https://pbcdnw.aoneroom.com/image/2026/05/06/471e0172cda1845cc14437cb158f20a9.jpg",
+          "backdrop": "",
+          "overview": "",
+          "source": "aoneroom-direct",
+          "subjectId": "4573946826382001112"
+        },
+        {
+          "tmdbId": -134918494,
+          "type": "movie",
+          "title": "Deep Water[CAM] [Hindi]",
+          "year": "2026",
+          "poster": "https://pbcdnw.aoneroom.com/image/2026/01/26/eec0f1a1fdff5cc3ef7fccd0b3a1e144.jpg",
+          "backdrop": "",
+          "overview": "",
+          "source": "aoneroom-direct",
+          "subjectId": "3310354459917698008"
+        },
+        {
+          "tmdbId": -2062907892,
+          "type": "movie",
+          "title": "Desert Warrior [Hindi][CAM]",
+          "year": "2026",
+          "poster": "https://pbcdnw.aoneroom.com/image/2026/03/30/a49f556752c128c1852af004540c0251-s.jpg",
+          "backdrop": "",
+          "overview": "",
+          "source": "aoneroom-direct",
+          "subjectId": "3221212808826210296"
+        },
+        {
+          "tmdbId": -952188104,
+          "type": "movie",
+          "title": "Ginny Wedss Sunny 2 [Hindi]",
+          "year": "2026",
+          "poster": "https://pbcdnw.aoneroom.com/image/2026/03/26/3c71cac8a9285a68713f157d1927ce87.jpg",
+          "backdrop": "",
+          "overview": "",
+          "source": "aoneroom-direct",
+          "subjectId": "878110923959980512"
+        },
+        {
+          "tmdbId": -449873522,
+          "type": "movie",
+          "title": "Star Wars: The Mandalorian and Grogu [Hindi]",
+          "year": "2026",
+          "poster": "https://pbcdnw.aoneroom.com/image/2026/01/26/ff97b22cdfbb169168e440955d5fd3d8.jpg",
+          "backdrop": "",
+          "overview": "",
+          "source": "aoneroom-direct",
+          "subjectId": "5242085098727559032"
+        },
+        {
+          "tmdbId": -591079825,
+          "type": "movie",
+          "title": "In the Grey [Hindi][CAM] [Hindi]",
+          "year": "2026",
+          "poster": "https://pbcdnw.aoneroom.com/image/2026/05/09/98578574f9e2c57716c9c2a53fc94ca7.jpg",
+          "backdrop": "",
+          "overview": "",
+          "source": "aoneroom-direct",
+          "subjectId": "5094928764568489848"
+        },
+        {
+          "tmdbId": -1558770329,
+          "type": "movie",
+          "title": "O' Romeo [Hindi]",
+          "year": "2026",
+          "poster": "https://pbcdnw.aoneroom.com/image/2026/01/26/804f962772bbe260d810b3514adecf1f.jpg",
+          "backdrop": "",
+          "overview": "",
+          "source": "aoneroom-direct",
+          "subjectId": "4329833125934255736"
+        },
+        {
+          "tmdbId": -94149777,
+          "type": "movie",
+          "title": "Subedaar [Hindi]",
+          "year": "2026",
+          "poster": "https://pbcdnw.aoneroom.com/image/2026/02/11/4ac2313b7d578d9ad64040cdf68391cf.jpg",
+          "backdrop": "",
+          "overview": "",
+          "source": "aoneroom-direct",
+          "subjectId": "5154937558001931592"
+        },
+        {
+          "tmdbId": -490179230,
+          "type": "movie",
+          "title": "The Legend of Udham Singh [Hindi]",
+          "year": "2026",
+          "poster": "https://pbcdnw.aoneroom.com/image/2026/03/23/cc06c90890e89aa47c25bad15216595a.jpg",
+          "backdrop": "",
+          "overview": "",
+          "source": "aoneroom-direct",
+          "subjectId": "1628991474975003976"
+        },
+        {
+          "tmdbId": -289503452,
+          "type": "movie",
+          "title": "Ramyaa [Hindi][CAM]",
+          "year": "2026",
+          "poster": "https://pbcdnw.aoneroom.com/image/2026/03/16/7e9da2d7ce4e75f6d82b7455c851c3a9.jpg",
+          "backdrop": "",
+          "overview": "",
+          "source": "aoneroom-direct",
+          "subjectId": "1276499523262629624"
+        },
+        {
+          "tmdbId": -1957972531,
+          "type": "movie",
+          "title": "Kissa Court Kachahari Ka [Hindi][CAM]",
+          "year": "2026",
+          "poster": "https://pbcdnw.aoneroom.com/image/2026/03/12/1cac9bf0b49ca3ea1c8c0b2ed95b5f82.jpg",
+          "backdrop": "",
+          "overview": "",
+          "source": "aoneroom-direct",
+          "subjectId": "7821097296506279240"
+        },
+        {
+          "tmdbId": -1468293973,
+          "type": "movie",
+          "title": "Na Jaane Kaun Aa Gaya [Hindi][CAM]",
+          "year": "2026",
+          "poster": "https://pbcdnw.aoneroom.com/image/2026/02/28/3dd1770f7c9ca28b200260bf08b7589c.jpg",
+          "backdrop": "",
+          "overview": "",
+          "source": "aoneroom-direct",
+          "subjectId": "3927830079723685016"
+        },
+        {
+          "tmdbId": -564621235,
+          "type": "movie",
+          "title": "Made in Korea [Hindi]",
+          "year": "2026",
+          "poster": "https://pbcdnw.aoneroom.com/image/2026/03/12/c5decc6f9b5b54b54d0879a86e5ccd82.jpg",
+          "backdrop": "",
+          "overview": "",
+          "source": "aoneroom-direct",
+          "subjectId": "8139299431918226968"
+        },
+        {
+          "tmdbId": -780585558,
+          "type": "movie",
+          "title": "Vishnu Vinyasam [Hindi]",
+          "year": "2026",
+          "poster": "https://pbcdnw.aoneroom.com/image/2026/02/28/a18da3adf7d2d1aa4ab4758ea7256677.jpg",
+          "backdrop": "",
+          "overview": "",
+          "source": "aoneroom-direct",
+          "subjectId": "7694797632774227736"
+        },
+        {
+          "tmdbId": -987257533,
+          "type": "movie",
+          "title": "Lockdown [Hindi]",
+          "year": "2026",
+          "poster": "https://pbcdnw.aoneroom.com/image/2026/02/01/fa8f8b5b55458cf24f51821e8ffa793a.jpg",
+          "backdrop": "",
+          "overview": "",
+          "source": "aoneroom-direct",
+          "subjectId": "4256149268299404384"
+        },
+        {
+          "tmdbId": -46131321,
+          "type": "movie",
+          "title": "War Machine [Hindi]",
+          "year": "2026",
+          "poster": "https://pbcdnw.aoneroom.com/image/2026/02/05/d5be2dae572c023092eae5a207458296.jpg",
+          "backdrop": "",
+          "overview": "",
+          "source": "aoneroom-direct",
+          "subjectId": "4947413860769747464"
+        }
+      ]
+    },
+    {
+      "key": "hollywood-2024-25",
+      "title": "Hollywood",
+      "ranked": false,
+      "logo": "",
+      "auto": null,
+      "items": [
+        {
+          "tmdbId": 83533,
+          "type": "movie",
+          "title": "Avatar: Fire and Ash",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/aabwWZWx6z1aYP4PX2ADvbDKktd.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/iN41Ccw4DctL8npfmYg1j5Tr1eb.jpg",
+          "rating": 7.498
+        },
+        {
+          "tmdbId": 533535,
+          "type": "movie",
+          "title": "Deadpool & Wolverine",
+          "year": "2024",
+          "poster": "https://image.tmdb.org/t/p/w342/8cdWjvZQUExUUTzyp4t6EDMubfO.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/by8z9Fe8y7p4jo2YlW2SZDnptyT.jpg",
+          "rating": 7.565
+        },
+        {
+          "tmdbId": 575265,
+          "type": "movie",
+          "title": "Mission: Impossible - The Final Reckoning",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/z53D72EAOxGRqdr7KXXWp9dJiDe.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/538U9snNc2fpnOmYXAPUh3zn31H.jpg",
+          "rating": 7.159
+        },
+        {
+          "tmdbId": 1022789,
+          "type": "movie",
+          "title": "Inside Out 2",
+          "year": "2024",
+          "poster": "https://image.tmdb.org/t/p/w342/vpnVM9B6NMmQpWeZvzLvDESb2QY.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/p5ozvmdgsmbWe0H8Xk7Rc8SCwAB.jpg",
+          "rating": 7.546
+        },
+        {
+          "tmdbId": 402431,
+          "type": "movie",
+          "title": "Wicked",
+          "year": "2024",
+          "poster": "https://image.tmdb.org/t/p/w342/xDGbZ0JJ3mYaGKy4Nzd9Kph6M9L.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/w22GVYotTIVC1dUd58mRhwPqiS.jpg",
+          "rating": 6.909
+        },
+        {
+          "tmdbId": 558449,
+          "type": "movie",
+          "title": "Gladiator II",
+          "year": "2024",
+          "poster": "https://image.tmdb.org/t/p/w342/2cxhvwyEwRlysAmRH4iodkvo0z5.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/tOqIwliWMovSIZ9DyvHcHI7p2im.jpg",
+          "rating": 6.614
+        },
+        {
+          "tmdbId": 786892,
+          "type": "movie",
+          "title": "Furiosa: A Mad Max Saga",
+          "year": "2024",
+          "poster": "https://image.tmdb.org/t/p/w342/iADOJ8Zymht2JPMoy3R7xceZprc.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/raph7qjAGTMXaIjVxt6ZDSXRzUr.jpg",
+          "rating": 7.454
+        },
+        {
+          "tmdbId": 929590,
+          "type": "movie",
+          "title": "Civil War",
+          "year": "2024",
+          "poster": "https://image.tmdb.org/t/p/w342/sh7Rg8Er3tFcN9BpKIPOMvALgZd.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/t2SXZ7KLriaLyf5QT8Iar6fSOGp.jpg",
+          "rating": 6.86
+        },
+        {
+          "tmdbId": 718821,
+          "type": "movie",
+          "title": "Twisters",
+          "year": "2024",
+          "poster": "https://image.tmdb.org/t/p/w342/pjnD08FlMAIXsfOLKQbvmO0f0MD.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/58D6ZAvOKxlHjyX9S8qNKSBE9Y.jpg",
+          "rating": 6.782
+        },
+        {
+          "tmdbId": 822119,
+          "type": "movie",
+          "title": "Captain America: Brave New World",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/pzIddUEMWhWzfvLI3TwxUG2wGoi.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/ce3prrjh9ZehEl5JinNqr4jIeaB.jpg",
+          "rating": 5.979
+        },
+        {
+          "tmdbId": 1234821,
+          "type": "movie",
+          "title": "Jurassic World Rebirth",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/1RICxzeoNCAO5NpcRMIgg1XT6fm.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/zNriRTr0kWwyaXPzdg1EIxf0BWk.jpg",
+          "rating": 6.3
+        }
+      ]
+    },
+    {
+      "key": "action-now",
+      "title": "Action Movies",
+      "ranked": false,
+      "logo": "",
+      "auto": "tmdbGenre:movie:28",
+      "items": [
+        {
+          "tmdbId": 1375646,
+          "type": "movie",
+          "title": "Colony",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/tN799oUR0f1gUKDYdMNrDaY7I51.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/hpBGCnzOvdtQoMyE48gvwp2y5yx.jpg",
+          "rating": 8.1,
+          "overview": "Professor Se-jeong is thrust into a bloody nightmare when a rapidly mutating virus is released during a biotech conference causing authorities to seal the facility. Trapped inside with no escape, Se-jeong along with a small group of survivors must fight to stay alive while the infected undergo horrific transformations."
+        },
+        {
+          "tmdbId": 1368337,
+          "type": "movie",
+          "title": "The Odyssey",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/5rhTDKUhPYvpdQIijFIs5VoWsON.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/RMXG8myu1aGlNUsRjtxzmpdMK0.jpg",
+          "rating": 8.013,
+          "overview": "Odysseus, the legendary King of Ithaca, embarks on a long and perilous journey home following the Trojan War. Throughout his voyage, he is forced to confront the whims of gods, mythological monsters, and trials that stretch both his cunning and his humanity to the breaking point."
+        },
+        {
+          "tmdbId": 1137844,
+          "type": "movie",
+          "title": "Mayday",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/hVXjX1jLZ1ljFSNGXpjJfbTUOa7.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/g7Ccid5kuD7A8hXWlsQiNfwOxaD.jpg",
+          "rating": 7.992,
+          "overview": "When a U.S. Navy pilot on a top-secret mission during the Cold War gets trapped behind enemy lines, his only chance at survival is to form an alliance with an eccentric ex-KGB agent."
+        },
+        {
+          "tmdbId": 1058424,
+          "type": "movie",
+          "title": "Hope",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/1n37BJchWHLiSYQkuFxe5KjB951.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/hrCTKrc3Tz2wbPOt5rcrlAhqF11.jpg",
+          "rating": 7.4,
+          "overview": "In the remote South Korean village of Hope Harbor, police chief Bum-seok and officer Sung-ae are called to investigate a mysterious creature wreaking havoc on the community. But all is not as it seems, and perceptions can be misleading. What begins as ignorance plants the seed of disaster, escalating through human conflict into a tragedy of cosmic proportions."
+        },
+        {
+          "tmdbId": 980431,
+          "type": "movie",
+          "title": "Avatar Aang: The Last Airbender",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/3sgnSfNT27Bx5O5ukr7B26mhEQq.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/ezbrL1dMymKQZw7mDEWa2ZTzN7d.jpg",
+          "rating": 9.142,
+          "overview": "Avatar Aang, the world's last Airbender, learns of an ancient power that could save his culture from extinction. With the help of his friends, he embarks on a global quest to find it before it falls into the wrong hands and threatens to upend the peace they sacrificed everything to achieve."
+        },
+        {
+          "tmdbId": 299534,
+          "type": "movie",
+          "title": "Avengers: Endgame",
+          "year": "2019",
+          "poster": "https://image.tmdb.org/t/p/w342/ulzhLuWrPK07P1YkdWQLZnQh1JL.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/7RyHsO4yDXtBv1zUU3mTpHeQ0d5.jpg",
+          "rating": 8.2,
+          "overview": "After the devastating events of Avengers: Infinity War, the universe is in ruins due to the efforts of the Mad Titan, Thanos. With the help of remaining allies, the Avengers must assemble once more in order to undo Thanos' actions and restore order to the universe once and for all, no matter what consequences may be in store."
+        },
+        {
+          "tmdbId": 1419406,
+          "type": "movie",
+          "title": "The Shadow's Edge",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/cHKo3m8N1fwvEy2ZEr0xGmmMODV.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/4BtL2vvEufDXDP4u6xQjjQ1Y2aT.jpg",
+          "rating": 8.264,
+          "overview": "Macau Police brings the tracking expert police officer out of retirement to help catch a dangerous group of professional thieves."
+        },
+        {
+          "tmdbId": 19995,
+          "type": "movie",
+          "title": "Avatar",
+          "year": "2009",
+          "poster": "https://image.tmdb.org/t/p/w342/gKY6q7SjCkAU6FqvqWybDYgUKIF.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/vL5LR6WdxWPjLPFRLe133jXWsh5.jpg",
+          "rating": 7.609,
+          "overview": "In the 22nd century, a paraplegic Marine is dispatched to the moon Pandora on a unique mission, but becomes torn between following orders and protecting an alien civilization."
+        },
+        {
+          "tmdbId": 1081003,
+          "type": "movie",
+          "title": "Supergirl",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/uhzRnTW4DM13UQBvZP3eVNzQTuz.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/heZQmyNvkH236ha2M3JckdUQQqb.jpg",
+          "rating": 6.683,
+          "overview": "When an unexpected and ruthless adversary strikes too close to home, Kara Zor-El, aka Supergirl, reluctantly joins forces with an unlikely companion on an epic, interstellar journey of vengeance and justice."
+        },
+        {
+          "tmdbId": 299536,
+          "type": "movie",
+          "title": "Avengers: Infinity War",
+          "year": "2018",
+          "poster": "https://image.tmdb.org/t/p/w342/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/mDfJG3LC3Dqb67AZ52x3Z0jU0uB.jpg",
+          "rating": 8.242,
+          "overview": "As the Avengers and their allies have continued to protect the world from threats too large for any one hero to handle, a new danger has emerged from the cosmic shadows: Thanos. A despot of intergalactic infamy, his goal is to collect all six Infinity Stones, artifacts of unimaginable power, and use them to inflict his twisted will on all of reality. Everything the Avengers have fought for has led up to this moment - the fate of Earth and existence itself has never been more uncertain."
+        }
+      ]
+    },
+    {
+      "key": "drama-tv",
+      "title": "Drama Series",
+      "ranked": false,
+      "logo": "",
+      "auto": "tmdbGenre:tv:18",
+      "items": [
+        {
+          "tmdbId": 113962,
+          "type": "tv",
+          "title": "Lioness",
+          "year": "2023",
+          "poster": "https://image.tmdb.org/t/p/w342/rzpHPSEgPTpRs8EHbygwsOw7jC0.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/4NBYDOnEjAzyuP7CMkD5s7fs44K.jpg",
+          "rating": 8.197,
+          "overview": "Cruz Manuelos, a rough-around-the-edges but passionate young Marine, is recruited to join the CIA's Lioness Engagement Team to help bring down a terrorist organization from within. Joe, the station chief of the Lioness program, is tasked with training, managing and leading her female undercover operatives."
+        },
+        {
+          "tmdbId": 18165,
+          "type": "tv",
+          "title": "The Vampire Diaries",
+          "year": "2009",
+          "poster": "https://image.tmdb.org/t/p/w342/b3vl6wV1W8PBezFfntKTrhrehCY.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/cJYLon9ejKJV7ua03ab8Tj9u067.jpg",
+          "rating": 8.3,
+          "overview": "The story of two vampire brothers obsessed with the same girl, who bears a striking resemblance to the beautiful but ruthless vampire they knew and loved in 1864."
+        },
+        {
+          "tmdbId": 206693,
+          "type": "tv",
+          "title": "My Dearest",
+          "year": "2023",
+          "poster": "https://image.tmdb.org/t/p/w342/d00uWx8T84ZRsguQTqITl3HnFJO.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/3MkrzqX1jog9ItFux72MvYyYfuT.jpg",
+          "rating": 8.333,
+          "overview": "A love-story between a noblewoman and a mysterious man who shows up in her hometown set in the 1600s during the Qing invasion."
+        },
+        {
+          "tmdbId": 1396,
+          "type": "tv",
+          "title": "Breaking Bad",
+          "year": "2008",
+          "poster": "https://image.tmdb.org/t/p/w342/anFx9aTOOYqgS3v7x3R84Kz67ly.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/tsRy63Mu5cu8etL1X7ZLyf7UP1M.jpg",
+          "rating": 8.951,
+          "overview": "Walter White, a New Mexico chemistry teacher, is diagnosed with Stage III cancer and given a prognosis of only two years left to live. He becomes filled with a sense of fearlessness and an unrelenting desire to secure his family's financial future at any cost as he enters the dangerous world of drugs and crime."
+        },
+        {
+          "tmdbId": 2734,
+          "type": "tv",
+          "title": "Law & Order: Special Victims Unit",
+          "year": "1999",
+          "poster": "https://image.tmdb.org/t/p/w342/iofokHZoUB4Qhik4PflvJl8TT6a.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/obtdxPgmfykYwVnvuYXC5f2xKlQ.jpg",
+          "rating": 7.96,
+          "overview": "In the criminal justice system, sexually-based offenses are considered especially heinous. In New York City, the dedicated detectives who investigate these vicious felonies are members of an elite squad known as the Special Victims Unit. These are their stories."
+        },
+        {
+          "tmdbId": 549,
+          "type": "tv",
+          "title": "Law & Order",
+          "year": "1990",
+          "poster": "https://image.tmdb.org/t/p/w342/haJ9eHytVO3H3JooMJG1DiWwDNm.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/tc7canPSAn2X14hYi6Rl3gZm1o4.jpg",
+          "rating": 7.278,
+          "overview": "In cases ripped from the headlines, police investigate serious and often deadly crimes, weighing the evidence and questioning the suspects until someone is taken into custody. The district attorney's office then builds a case to convict the perpetrator by proving the person guilty beyond a reasonable doubt. Working together, these expert teams navigate all sides of the complex criminal justice system to make New York a safer place."
+        },
+        {
+          "tmdbId": 97546,
+          "type": "tv",
+          "title": "Ted Lasso",
+          "year": "2020",
+          "poster": "https://image.tmdb.org/t/p/w342/uRHsiw1wLxPHFXkkv4Ix1s0O6f4.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/nE94ejEbzNCU48bW1oju0dqBONz.jpg",
+          "rating": 8.4,
+          "overview": "Ted Lasso, an American football coach, moves to England when he's hired to manage a soccer team—despite having no experience. With cynical players and a doubtful town, will he get them to see the Ted Lasso Way?"
+        },
+        {
+          "tmdbId": 95350,
+          "type": "tv",
+          "title": "Lanterns",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/gpC7h43xPMEV3goYMQShfJbTtLq.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/wJjnJbVUwPz0GADAgpFt9nWtzUu.jpg",
+          "rating": 8.3,
+          "overview": "Two intergalactic cops, new recruit John Stewart and Lantern legend Hal Jordan, are drawn into a dark, Earth-based mystery as they investigate a murder in the American heartland."
+        },
+        {
+          "tmdbId": 1622,
+          "type": "tv",
+          "title": "Supernatural",
+          "year": "2005",
+          "poster": "https://image.tmdb.org/t/p/w342/8iixmfGx5EIFPdpNvB2JvI3VIqX.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/ro0tlgnsco4SwbdAgmscLkSlMSL.jpg",
+          "rating": 8.316,
+          "overview": "When they were boys, Sam and Dean Winchester lost their mother to a mysterious and demonic supernatural force. Subsequently, their father raised them to be soldiers. He taught them about the paranormal evil that lives in the dark corners and on the back roads of America ... and he taught them how to kill it. Now, the Winchester brothers crisscross the country in their '67 Chevy Impala, battling every kind of supernatural threat they encounter along the way. "
+        },
+        {
+          "tmdbId": 125988,
+          "type": "tv",
+          "title": "Silo",
+          "year": "2023",
+          "poster": "https://image.tmdb.org/t/p/w342/gMYZZvnkVNTqSVnVCphWbPXwWwb.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/fQGrzO0Iwo7CO4b2zVdJLkcnhwK.jpg",
+          "rating": 8.218,
+          "overview": "In a ruined and toxic future, thousands live in a giant silo deep underground. After its sheriff breaks a cardinal rule and residents die mysteriously, engineer Juliette starts to uncover shocking secrets and the truth about the silo."
+        },
+        {
+          "tmdbId": 4614,
+          "type": "tv",
+          "title": "NCIS",
+          "year": "2003",
+          "poster": "https://image.tmdb.org/t/p/w342/mBcu8d6x6zB1el3MPNl7cZQEQ31.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/c1aBrG5s5xFa6Tbnihu2Hhj4t2q.jpg",
+          "rating": 7.611,
+          "overview": "From murder and espionage to terrorism and stolen submarines, a team of special agents investigates any crime that has any connection to Navy and Marine Corps personnel, regardless of rank or position."
+        },
+        {
+          "tmdbId": 106449,
+          "type": "tv",
+          "title": "A Record of a Mortal's Journey to Immortality",
+          "year": "2020",
+          "poster": "https://image.tmdb.org/t/p/w342/rXX12X3Lx7jmlvfUc3glIwJVLCH.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/8NIvQY34tNPc4txNeym2zEYk9ek.jpg",
+          "rating": 8.425,
+          "overview": "A poor and ordinary boy from a village joins a minor sect in Jiang Hu and becomes an Unofficial Disciple by chance. How will Han Li, a commoner by birth, establish a foothold for himself in his sect? With his mediocre aptitude, he must successfully traverse the treacherous path of cultivation and avoid the notice of those who may do him harm. This is a story of an ordinary mortal who, against all odds, clashes with devilish demons and ancient celestials in order to find his own path towards immortality."
+        }
+      ]
+    },
+    {
+      "key": "comedy-now",
+      "title": "Comedy",
+      "ranked": false,
+      "logo": "",
+      "auto": "tmdbGenre:movie:35",
+      "items": [
+        {
+          "tmdbId": 1108427,
+          "type": "movie",
+          "title": "Moana",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/cRrf3UIw1HmiFEkKo0Vi85fFjqF.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/c6BPbkO5Npt1OdwttAxCFo06wtH.jpg",
+          "rating": 7.322,
+          "overview": "Teenage Moana answers the Ocean's call and, for the first time, voyages beyond the reef of her island of Motunui with infamous demigod Maui on an unforgettable journey to restore prosperity to her people."
+        },
+        {
+          "tmdbId": 1393326,
+          "type": "movie",
+          "title": "Ghost in the Cell",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/zxcMdx0w5Zmg8yZuuiS7CJ8vOea.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/tK3QdOOrX4qEkmSlvrmc8cK7iOU.jpg",
+          "rating": 7.208,
+          "overview": "In a notorious prison, an invisible force begins killing inmates brutally, compelling enemy gangs and corrupt guards to work together as they try to survive the mounting bloodshed."
+        },
+        {
+          "tmdbId": 1137844,
+          "type": "movie",
+          "title": "Mayday",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/hVXjX1jLZ1ljFSNGXpjJfbTUOa7.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/g7Ccid5kuD7A8hXWlsQiNfwOxaD.jpg",
+          "rating": 7.995,
+          "overview": "When a U.S. Navy pilot on a top-secret mission during the Cold War gets trapped behind enemy lines, his only chance at survival is to form an alliance with an eccentric ex-KGB agent."
+        },
+        {
+          "tmdbId": 1084244,
+          "type": "movie",
+          "title": "Toy Story 5",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/sfQtVlIHljToOwYjhe21KPGzZWK.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/qjTqY5coNiz6sVtPng40IzltsoN.jpg",
+          "rating": 8.355,
+          "overview": "When Bonnie receives a Lilypad tablet as a gift and becomes obsessed, Buzz, Woody, Jessie and the rest of the gang's jobs become exponentially harder when they have to go head to head with the all-new threat to playtime."
+        },
+        {
+          "tmdbId": 1315772,
+          "type": "movie",
+          "title": "Minions & Monsters",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/4LwvU9SZc8QQzW1X1FAPhNbXnEU.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/kkcwhgSFd81QDlXo8ytrpHPQjhy.jpg",
+          "rating": 7.5,
+          "overview": "This is the rambunctious, ridiculous and totally true story of how the Minions conquered Hollywood, became movie stars, lost everything, unleashed monsters onto the world and then banded together to try and save the planet from the mayhem they had just created."
+        },
+        {
+          "tmdbId": 1301421,
+          "type": "movie",
+          "title": "The Sheep Detectives",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/iKy5460GdsoknM8ppmGlJbKxAKa.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/a8uQvrplTkhGJQog6GZ6CqF8An6.jpg",
+          "rating": 7.938,
+          "overview": "George Hardy is a shepherd who reads detective novels to his beloved sheep every night, assuming they can't possibly understand. But when a mysterious incident disrupts life on the farm, the sheep realize they must become the detectives. As they follow the clues and investigate human suspects, they prove that even sheep can be brilliant crime-solvers."
+        },
+        {
+          "tmdbId": 1084242,
+          "type": "movie",
+          "title": "Zootopia 2",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/oJ7g2CifqpStmoYQyaLQgEU32qO.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/lgotja3xMoJZbynwHfcQcJAEMWH.jpg",
+          "rating": 7.674,
+          "overview": "After cracking the biggest case in Zootopia's history, rookie cops Judy Hopps and Nick Wilde find themselves on the twisting trail of a great mystery when Gary De'Snake arrives and turns the animal metropolis upside down. To crack the case, Judy and Nick must go undercover to unexpected new parts of town, where their growing partnership is tested like never before."
+        },
+        {
+          "tmdbId": 1288059,
+          "type": "movie",
+          "title": "I Want Your Sex",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/pR7SIX3AwqdoD96OI44oLG98e7g.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/34z9eBtEBv6QoroLuUA55cU3e8Q.jpg",
+          "rating": 6.183,
+          "overview": "When a naive young man becomes the sexual muse for a renowned and provocative artist, his dream job quickly turns dangerous as he is drawn into an obsessive world of power, betrayal, and murder."
+        },
+        {
+          "tmdbId": 1226863,
+          "type": "movie",
+          "title": "The Super Mario Galaxy Movie",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/eJGWx219ZcEMVQJhAgMiqo8tYY.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/kxQiIJ4gVcD3K6o14MJ72p5yRcE.jpg",
+          "rating": 8.225,
+          "overview": "Having thwarted Bowser's previous plot to marry Princess Peach, Mario and Luigi now face a fresh threat in Bowser Jr., who is determined to liberate his father from captivity and restore the family legacy. Alongside companions new and old, the brothers travel across the stars to stop the young heir's crusade."
+        },
+        {
+          "tmdbId": 1273221,
+          "type": "movie",
+          "title": "Scary Movie",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/znHT8peERZRWG1ME3r0Db0EV8k8.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/xWBiXclrRmTggQHMRsIn84YHavs.jpg",
+          "rating": 6.39,
+          "overview": "Twenty-six years after outrunning a suspiciously familiar masked killer, the Core Four are back in the killer's crosshairs and no horror movie IP is safe."
+        },
+        {
+          "tmdbId": 1433367,
+          "type": "movie",
+          "title": "One Night Only",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/46q8z1TbbVcF8uhRHsvt5s0h2SH.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/bpll0oy6gHwLvypfFNfT2QI4VkT.jpg",
+          "rating": 6.531,
+          "overview": "Two love-starved strangers crash into each other on the one night of the year when single people are allowed to have sex."
+        },
+        {
+          "tmdbId": 533535,
+          "type": "movie",
+          "title": "Deadpool & Wolverine",
+          "year": "2024",
+          "poster": "https://image.tmdb.org/t/p/w342/8cdWjvZQUExUUTzyp4t6EDMubfO.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/by8z9Fe8y7p4jo2YlW2SZDnptyT.jpg",
+          "rating": 7.589,
+          "overview": "A listless Wade Wilson toils away in civilian life with his days as the morally flexible mercenary, Deadpool, behind him. But when his homeworld faces an existential threat, Wade must reluctantly suit-up again with an even more reluctant Wolverine."
+        },
+        {
+          "tmdbId": 1327819,
+          "type": "movie",
+          "title": "Hoppers",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/xjtWQ2CL1mpmMNwuU5HeS4Iuwuu.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/u53UYu5XG2hNgWGvs3xGhAVzypl.jpg",
+          "rating": 8.152,
+          "overview": "Scientists have discovered how to 'hop' human consciousness into lifelike robotic animals, allowing people to communicate with animals as animals. Animal lover Mabel seizes an opportunity to use the technology, uncovering mysteries within the animal world beyond anything she could have imagined."
+        },
+        {
+          "tmdbId": 1314481,
+          "type": "movie",
+          "title": "The Devil Wears Prada 2",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/xTI42pmsP5EDnvsNJPEDubwWBQO.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/Af907x5h9W1wVis8XrSd7ynTWuy.jpg",
+          "rating": 7.043,
+          "overview": "Andy Sachs returns to Runway as Miranda Priestly navigates a new media landscape and Runway's position within. The duo reconnect with former assistant Emily Charlton, now the head of a luxury brand that possesses funding which could ensure Runway's survival."
+        }
+      ]
+    },
+    {
+      "key": "thriller-now",
+      "title": "Thrillers",
+      "ranked": false,
+      "logo": "",
+      "auto": "tmdbGenre:movie:53",
+      "items": [
+        {
+          "tmdbId": 1393326,
+          "type": "movie",
+          "title": "Ghost in the Cell",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/zxcMdx0w5Zmg8yZuuiS7CJ8vOea.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/tK3QdOOrX4qEkmSlvrmc8cK7iOU.jpg",
+          "rating": 7.208,
+          "overview": "In a notorious prison, an invisible force begins killing inmates brutally, compelling enemy gangs and corrupt guards to work together as they try to survive the mounting bloodshed."
+        },
+        {
+          "tmdbId": 1339713,
+          "type": "movie",
+          "title": "Obsession",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/bRwnj8WEKBCvmfeUNOukJPwB43K.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/rZfmzpixLKLR3Hg2u0WgC7XLFl8.jpg",
+          "rating": 8.2,
+          "overview": "After breaking the mysterious \"One Wish Willow\" to win his crush's heart, a hopeless romantic finds himself getting exactly what he asked for but soon discovers that some desires come at a dark, sinister price."
+        },
+        {
+          "tmdbId": 1127384,
+          "type": "movie",
+          "title": "Deep Water",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/ZWHxL2ETItcZzeVsVfs6gv3SZ7.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/szKv713FcUXx6hcfdY369vtkmzr.jpg",
+          "rating": 7.308,
+          "overview": "A group of international passengers on a flight from Los Angeles to Shanghai is forced to make an emergency landing in shark-infested waters. The terrified group is forced to work together and overcome their differences if they hope to escape their sinking plane and the frenzy of sharks drawn to the wreckage."
+        },
+        {
+          "tmdbId": 755898,
+          "type": "movie",
+          "title": "War of the Worlds",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/yvirUYrva23IudARHn3mMGVxWqM.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/iZLqwEwUViJdSkGVjePGhxYzbDb.jpg",
+          "rating": 4.02,
+          "overview": "Will Radford is a top analyst for Homeland Security who tracks potential threats through a mass surveillance program, until one day an attack by an unknown entity leads him to question whether the government is hiding something from him... and from the rest of the world."
+        },
+        {
+          "tmdbId": 1275779,
+          "type": "movie",
+          "title": "Disclosure Day",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/AnJ8IQJI23hNpYXVNaythu061Ru.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/flxau5Iu7bChQHsESqvGZ3FQRaI.jpg",
+          "rating": 7.471,
+          "overview": "A cybersecurity expert becomes a whistleblower after uncovering secrets about aliens, putting him on the run from a corporation. Meanwhile, a meteorologist experiencing strange phenomena joins forces with him to prove there's life beyond our understanding."
+        },
+        {
+          "tmdbId": 1419406,
+          "type": "movie",
+          "title": "The Shadow's Edge",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/cHKo3m8N1fwvEy2ZEr0xGmmMODV.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/4BtL2vvEufDXDP4u6xQjjQ1Y2aT.jpg",
+          "rating": 8.263,
+          "overview": "Macau Police brings the tracking expert police officer out of retirement to help catch a dangerous group of professional thieves."
+        }
+      ]
+    },
+    {
+      "key": "scifi-now",
+      "title": "Sci-Fi",
+      "ranked": false,
+      "logo": "",
+      "auto": "tmdbGenre:movie:878",
+      "items": [
+        {
+          "tmdbId": 1375646,
+          "type": "movie",
+          "title": "Colony",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/tN799oUR0f1gUKDYdMNrDaY7I51.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/hpBGCnzOvdtQoMyE48gvwp2y5yx.jpg",
+          "rating": 8.1,
+          "overview": "Professor Se-jeong is thrust into a bloody nightmare when a rapidly mutating virus is released during a biotech conference causing authorities to seal the facility. Trapped inside with no escape, Se-jeong along with a small group of survivors must fight to stay alive while the infected undergo horrific transformations."
+        },
+        {
+          "tmdbId": 1423191,
+          "type": "movie",
+          "title": "Resident Evil",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/i7UyjfPio0VFHB9rBUZSFyhOoM8.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/1CIaRYKf3zg2Xyce1CSfCMg2Vfw.jpg",
+          "rating": 7.8,
+          "overview": "Medical courier Bryan unwittingly finds himself fighting for survival as one fateful, horrifying night collapses around him in chaos."
+        },
+        {
+          "tmdbId": 1058424,
+          "type": "movie",
+          "title": "Hope",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/1n37BJchWHLiSYQkuFxe5KjB951.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/hrCTKrc3Tz2wbPOt5rcrlAhqF11.jpg",
+          "rating": 7.4,
+          "overview": "In the remote South Korean village of Hope Harbor, police chief Bum-seok and officer Sung-ae are called to investigate a mysterious creature wreaking havoc on the community. But all is not as it seems, and perceptions can be misleading. What begins as ignorance plants the seed of disaster, escalating through human conflict into a tragedy of cosmic proportions."
+        },
+        {
+          "tmdbId": 687163,
+          "type": "movie",
+          "title": "Project Hail Mary",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/yihdXomYb5kTeSivtFndMy5iDmf.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/8Tfys3mDZVp4tNoH2ktm06a0Tau.jpg",
+          "rating": 8.6,
+          "overview": "Science teacher Ryland Grace wakes up on a spaceship light years from home with no recollection of who he is or how he got there. As his memory returns, he begins to uncover his mission: solve the riddle of the mysterious substance causing the sun to die out. He must call on his scientific knowledge and unorthodox ideas to save everything on Earth from extinction."
+        },
+        {
+          "tmdbId": 755898,
+          "type": "movie",
+          "title": "War of the Worlds",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/yvirUYrva23IudARHn3mMGVxWqM.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/iZLqwEwUViJdSkGVjePGhxYzbDb.jpg",
+          "rating": 4.02,
+          "overview": "Will Radford is a top analyst for Homeland Security who tracks potential threats through a mass surveillance program, until one day an attack by an unknown entity leads him to question whether the government is hiding something from him... and from the rest of the world."
+        },
+        {
+          "tmdbId": 1275779,
+          "type": "movie",
+          "title": "Disclosure Day",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/AnJ8IQJI23hNpYXVNaythu061Ru.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/flxau5Iu7bChQHsESqvGZ3FQRaI.jpg",
+          "rating": 7.471,
+          "overview": "A cybersecurity expert becomes a whistleblower after uncovering secrets about aliens, putting him on the run from a corporation. Meanwhile, a meteorologist experiencing strange phenomena joins forces with him to prove there's life beyond our understanding."
+        },
+        {
+          "tmdbId": 299534,
+          "type": "movie",
+          "title": "Avengers: Endgame",
+          "year": "2019",
+          "poster": "https://image.tmdb.org/t/p/w342/ulzhLuWrPK07P1YkdWQLZnQh1JL.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/7RyHsO4yDXtBv1zUU3mTpHeQ0d5.jpg",
+          "rating": 8.2,
+          "overview": "After the devastating events of Avengers: Infinity War, the universe is in ruins due to the efforts of the Mad Titan, Thanos. With the help of remaining allies, the Avengers must assemble once more in order to undo Thanos' actions and restore order to the universe once and for all, no matter what consequences may be in store."
+        },
+        {
+          "tmdbId": 1083381,
+          "type": "movie",
+          "title": "Backrooms",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/rhGx6E3qRNMgj3i5su2oukNHwIQ.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/dqmMWNWfLnExDRpMtIMqI97GQFR.jpg",
+          "rating": 7.047,
+          "overview": "A strange doorway appears in the basement of a furniture showroom."
+        },
+        {
+          "tmdbId": 19995,
+          "type": "movie",
+          "title": "Avatar",
+          "year": "2009",
+          "poster": "https://image.tmdb.org/t/p/w342/gKY6q7SjCkAU6FqvqWybDYgUKIF.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/vL5LR6WdxWPjLPFRLe133jXWsh5.jpg",
+          "rating": 7.609,
+          "overview": "In the 22nd century, a paraplegic Marine is dispatched to the moon Pandora on a unique mission, but becomes torn between following orders and protecting an alien civilization."
+        },
+        {
+          "tmdbId": 1081003,
+          "type": "movie",
+          "title": "Supergirl",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/uhzRnTW4DM13UQBvZP3eVNzQTuz.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/heZQmyNvkH236ha2M3JckdUQQqb.jpg",
+          "rating": 6.683,
+          "overview": "When an unexpected and ruthless adversary strikes too close to home, Kara Zor-El, aka Supergirl, reluctantly joins forces with an unlikely companion on an epic, interstellar journey of vengeance and justice."
+        },
+        {
+          "tmdbId": 299536,
+          "type": "movie",
+          "title": "Avengers: Infinity War",
+          "year": "2018",
+          "poster": "https://image.tmdb.org/t/p/w342/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/mDfJG3LC3Dqb67AZ52x3Z0jU0uB.jpg",
+          "rating": 8.242,
+          "overview": "As the Avengers and their allies have continued to protect the world from threats too large for any one hero to handle, a new danger has emerged from the cosmic shadows: Thanos. A despot of intergalactic infamy, his goal is to collect all six Infinity Stones, artifacts of unimaginable power, and use them to inflict his twisted will on all of reality. Everything the Avengers have fought for has led up to this moment - the fate of Earth and existence itself has never been more uncertain."
+        },
+        {
+          "tmdbId": 83533,
+          "type": "movie",
+          "title": "Avatar: Fire and Ash",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/bRBeSHfGHwkEpImlhxPmOcUsaeg.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/iN41Ccw4DctL8npfmYg1j5Tr1eb.jpg",
+          "rating": 7.643,
+          "overview": "In the wake of the devastating war against the RDA and the loss of their eldest son, Jake Sully and Neytiri face a new threat on Pandora: the Ash People, a violent and power-hungry Na'vi tribe led by the ruthless Varang. Jake's family must fight for their survival and the future of Pandora in a conflict that pushes them to their emotional and physical limits."
+        },
+        {
+          "tmdbId": 634649,
+          "type": "movie",
+          "title": "Spider-Man: No Way Home",
+          "year": "2021",
+          "poster": "https://image.tmdb.org/t/p/w342/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/iQFcwSGbZXMkeyKrxbPnwnRo5fl.jpg",
+          "rating": 7.947,
+          "overview": "Peter Parker is unmasked and no longer able to separate his normal life from the high-stakes of being a super-hero. When he asks for help from Doctor Strange the stakes become even more dangerous, forcing him to discover what it truly means to be Spider-Man."
+        }
+      ]
+    },
+    {
+      "key": "romance-now",
+      "title": "Romance",
+      "ranked": false,
+      "logo": "",
+      "auto": "tmdbGenre:movie:10749",
+      "items": [
+        {
+          "tmdbId": 1433367,
+          "type": "movie",
+          "title": "One Night Only",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/46q8z1TbbVcF8uhRHsvt5s0h2SH.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/bpll0oy6gHwLvypfFNfT2QI4VkT.jpg",
+          "rating": 6.531,
+          "overview": "Two love-starved strangers crash into each other on the one night of the year when single people are allowed to have sex."
+        },
+        {
+          "tmdbId": 1523145,
+          "type": "movie",
+          "title": "Your Heart Will Be Broken",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/7wIBfBl2gejt6xHxNSK0reVIm7E.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/fRjy6zDeNjfzmjpKz8mElA9Aa6l.jpg",
+          "rating": 7.082,
+          "overview": "High school student Polina is saved from bullying at her new school and makes a deal with the main bully Bars: he must pretend to be her boyfriend and protect her, and she must do everything he says. During this game, the couple develops real feelings, but her family and classmates have reasons to separate the lovers."
+        },
+        {
+          "tmdbId": 1564614,
+          "type": "movie",
+          "title": "Leviticus",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/gnAsZvBygplNpp8PtjoTEYv3VPB.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/7y8zWGEjs7tresw4Hzkkf4TdkcL.jpg",
+          "rating": 6.8,
+          "overview": "Two teenage boys must escape a violent entity that takes the form of the person they desire most:  each other."
+        },
+        {
+          "tmdbId": 13,
+          "type": "movie",
+          "title": "Forrest Gump",
+          "year": "1994",
+          "poster": "https://image.tmdb.org/t/p/w342/Cw4hIUIAmSYfK9QfaUW5igp9La.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/66Kn4XWhkuPkJxOJyPEx4U2CUfN.jpg",
+          "rating": 8.462,
+          "overview": "A man with a low IQ has accomplished great things in his life and been present during significant historic events—in each case, far exceeding what anyone imagined he could do. But despite all he has achieved, his one true love eludes him."
+        },
+        {
+          "tmdbId": 1325734,
+          "type": "movie",
+          "title": "The Drama",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/rnIOUhzwJDfgQakx8EjoNyItKgs.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/1oKLEA9JOhvaBwLpqjROisvWMy7.jpg",
+          "rating": 6.903,
+          "overview": "A happily engaged couple is put to the test when an unexpected turn sends their wedding week off the rails."
+        },
+        {
+          "tmdbId": 950396,
+          "type": "movie",
+          "title": "The Gorge",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/7iMBZzVZtG0oBug4TfqDb9ZxAOa.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/9nhjGaFLKtddDPtPaX5EmKqsWdH.jpg",
+          "rating": 7.695,
+          "overview": "Two highly trained operatives grow close from a distance after being sent to guard opposite sides of a mysterious gorge. When an evil below emerges, they must work together to survive what lies within."
+        },
+        {
+          "tmdbId": 950028,
+          "type": "movie",
+          "title": "The Invite",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/b7Dr8Chzse8VagexAporUu2RtLx.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/lEwqBGNR65KZv6Ej5ufcmhZu2y2.jpg",
+          "rating": 7.265,
+          "overview": "Joe and Angela's marriage is on thin ice. When they invite their enigmatic upstairs neighbors for a dinner party, the night spirals into unexpected places. Have they reignited the spark or lit the match that burns it all down?"
+        },
+        {
+          "tmdbId": 1218925,
+          "type": "movie",
+          "title": "Chainsaw Man - The Movie: Reze Arc",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/pHyxb2RV5wLlboAwm9ZJ9qTVEDw.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/gqTz24ZRsCP6AKjARmEivY7m0cK.jpg",
+          "rating": 8.549,
+          "overview": "In a brutal war between devils, hunters, and secret enemies, a mysterious girl named Reze has stepped into Denji's world, and he faces his deadliest battle yet, fueled by love in a world where survival knows no rules."
+        },
+        {
+          "tmdbId": 1010581,
+          "type": "movie",
+          "title": "My Fault",
+          "year": "2023",
+          "poster": "https://image.tmdb.org/t/p/w342/w46Vw536HwNnEzOa7J24YH9DPRS.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/oz4U9eA6ilYf1tyiVuGmkftdLac.jpg",
+          "rating": 7.7,
+          "overview": "Noah must leave her city, boyfriend, and friends to move into William Leister's mansion, the flashy and wealthy husband of her mother Rafaela. As a proud and independent 17 year old, Noah resists living in a mansion surrounded by luxury. However, it is there where she meets Nick, her new stepbrother, and the clash of their strong personalities becomes evident from the very beginning."
+        },
+        {
+          "tmdbId": 1379963,
+          "type": "movie",
+          "title": "Tell Me Softly",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/6Z37lW0JfLdeFcgH9yaTyg6B9A6.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/rtv6da2U8poERiAZSAbCOePXzql.jpg",
+          "rating": 6.276,
+          "overview": "Kamila has everything under control: studies, social life, her image... Everything except the unexpected return of her neighbors, the Di Bianco brothers, after seven years of absence. Thiago stole her first kiss, and Taylor was her best friend, but now their return will turn Kami's world upside down. Can the three overcome the past that binds them? Or will everything explode into pieces once again?"
+        },
+        {
+          "tmdbId": 321612,
+          "type": "movie",
+          "title": "Beauty and the Beast",
+          "year": "2017",
+          "poster": "https://image.tmdb.org/t/p/w342/hKegSKIDep2ewJWPUQD7u0KqFIp.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/uU1Mt4JWhDvl4vKb3AfxNsorkoM.jpg",
+          "rating": 6.967,
+          "overview": "A live-action adaptation of Disney's version of the classic tale of a cursed prince and a beautiful young woman who helps him break the spell."
+        },
+        {
+          "tmdbId": 967941,
+          "type": "movie",
+          "title": "Wicked: For Good",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/si9tolnefLSUKaqQEGz1bWArOaL.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/cGbPBHKSFO7hSIjxkb3KOaGdOep.jpg",
+          "rating": 6.584,
+          "overview": "As an angry mob rises against the Wicked Witch, Glinda and Elphaba must unite one last time with honesty and empathy to fulfill their shared destiny and change the fate of Oz forever."
+        },
+        {
+          "tmdbId": 372058,
+          "type": "movie",
+          "title": "Your Name.",
+          "year": "2016",
+          "poster": "https://image.tmdb.org/t/p/w342/vfJFJPepRKapMd5G2ro7klIRysq.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/mMtUybQ6hL24FXo0F3Z4j2KG7kZ.jpg",
+          "rating": 8.488,
+          "overview": "High schoolers Mitsuha and Taki are complete strangers living separate lives. But one night, they suddenly switch places. Mitsuha wakes up in Taki’s body, and he in hers. This bizarre occurrence continues to happen randomly, and the two must adjust their lives around each other."
+        },
+        {
+          "tmdbId": 1515615,
+          "type": "movie",
+          "title": "Kissing Is the Easy Part",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/gPxlb7LLqbsKgjltgVrgYdhfxCZ.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/7yuHdP85F2ZxhKbSoPgCBT9uJT3.jpg",
+          "rating": 7.341,
+          "overview": "Sean's gunning for MIT. Flora's ditching the SAT. A secret deal with her tenured parents sparks a romance that challenges everything they believe in."
+        }
+      ]
+    },
+    {
+      "key": "horror-now",
+      "title": "Horror",
+      "ranked": false,
+      "logo": "",
+      "auto": "tmdbGenre:movie:27",
+      "items": [
+        {
+          "tmdbId": 1375646,
+          "type": "movie",
+          "title": "Colony",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/tN799oUR0f1gUKDYdMNrDaY7I51.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/hpBGCnzOvdtQoMyE48gvwp2y5yx.jpg",
+          "rating": 8.1,
+          "overview": "Professor Se-jeong is thrust into a bloody nightmare when a rapidly mutating virus is released during a biotech conference causing authorities to seal the facility. Trapped inside with no escape, Se-jeong along with a small group of survivors must fight to stay alive while the infected undergo horrific transformations."
+        },
+        {
+          "tmdbId": 1423191,
+          "type": "movie",
+          "title": "Resident Evil",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/i7UyjfPio0VFHB9rBUZSFyhOoM8.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/1CIaRYKf3zg2Xyce1CSfCMg2Vfw.jpg",
+          "rating": 7.806,
+          "overview": "Medical courier Bryan unwittingly finds himself fighting for survival as one fateful, horrifying night collapses around him in chaos."
+        },
+        {
+          "tmdbId": 1393326,
+          "type": "movie",
+          "title": "Ghost in the Cell",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/zxcMdx0w5Zmg8yZuuiS7CJ8vOea.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/tK3QdOOrX4qEkmSlvrmc8cK7iOU.jpg",
+          "rating": 7.208,
+          "overview": "In a notorious prison, an invisible force begins killing inmates brutally, compelling enemy gangs and corrupt guards to work together as they try to survive the mounting bloodshed."
+        },
+        {
+          "tmdbId": 1339713,
+          "type": "movie",
+          "title": "Obsession",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/bRwnj8WEKBCvmfeUNOukJPwB43K.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/rZfmzpixLKLR3Hg2u0WgC7XLFl8.jpg",
+          "rating": 8.2,
+          "overview": "After breaking the mysterious \"One Wish Willow\" to win his crush's heart, a hopeless romantic finds himself getting exactly what he asked for but soon discovers that some desires come at a dark, sinister price."
+        },
+        {
+          "tmdbId": 1232569,
+          "type": "movie",
+          "title": "Pinocchio: Unstrung",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/eUJXk3bTvLBi5Zcb0BCedZU7lVL.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/dNKFETDDujxm2PUN873Jwiw5VML.jpg",
+          "rating": 6.6,
+          "overview": "Influenced by a sinister Cricket and created by Geppetto, Pinocchio launches a violent crusade to carve himself into a real boy like his brother James, one piece at a time."
+        },
+        {
+          "tmdbId": 1127384,
+          "type": "movie",
+          "title": "Deep Water",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/ZWHxL2ETItcZzeVsVfs6gv3SZ7.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/szKv713FcUXx6hcfdY369vtkmzr.jpg",
+          "rating": 7.313,
+          "overview": "A group of international passengers on a flight from Los Angeles to Shanghai is forced to make an emergency landing in shark-infested waters. The terrified group is forced to work together and overcome their differences if they hope to escape their sinking plane and the frenzy of sharks drawn to the wreckage."
+        },
+        {
+          "tmdbId": 1083381,
+          "type": "movie",
+          "title": "Backrooms",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/rhGx6E3qRNMgj3i5su2oukNHwIQ.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/dqmMWNWfLnExDRpMtIMqI97GQFR.jpg",
+          "rating": 7.047,
+          "overview": "A strange doorway appears in the basement of a furniture showroom."
+        },
+        {
+          "tmdbId": 1110034,
+          "type": "movie",
+          "title": "Kraken",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/xdZ8k5s8DTwWyPBMIcflrYLgcAK.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/oV472EbPedkc5QzqolGc7sCgCnn.jpg",
+          "rating": 6.266,
+          "overview": "A marine biologist is doing research on a fish farm when she encounters several strange occurrences. Along with the brutal deaths of two teenagers, all signs point to the deep fjord; can there be more to the depths than the eye can see?"
+        },
+        {
+          "tmdbId": 1564614,
+          "type": "movie",
+          "title": "Leviticus",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/gnAsZvBygplNpp8PtjoTEYv3VPB.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/7y8zWGEjs7tresw4Hzkkf4TdkcL.jpg",
+          "rating": 6.8,
+          "overview": "Two teenage boys must escape a violent entity that takes the form of the person they desire most:  each other."
+        },
+        {
+          "tmdbId": 1304313,
+          "type": "movie",
+          "title": "Lee Cronin's The Mummy",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/1q308iixueCU4pFtSYugNOevtNx.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/xugEpZk9YQ0DIz1aFvH5HGkqpZK.jpg",
+          "rating": 7.871,
+          "overview": "The young daughter of a journalist disappears into the desert without a trace—eight years later, the broken family is shocked when she is returned to them, as what should be a joyful reunion turns into a living nightmare."
+        },
+        {
+          "tmdbId": 933260,
+          "type": "movie",
+          "title": "The Substance",
+          "year": "2024",
+          "poster": "https://image.tmdb.org/t/p/w342/lqoMzCcZYEFK729d6qzt349fB4o.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/wMEhptvj6pcp2QSzHYcl4DFA5Pz.jpg",
+          "rating": 7.133,
+          "overview": "A fading celebrity decides to use a black market drug, a cell-replicating substance that temporarily creates a younger, better version of herself."
+        },
+        {
+          "tmdbId": 14836,
+          "type": "movie",
+          "title": "Coraline",
+          "year": "2009",
+          "poster": "https://image.tmdb.org/t/p/w342/4jeFXQYytChdZYE9JYO7Un87IlW.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/hofnlIyF6bePkgQOpcuRWLvzf15.jpg",
+          "rating": 7.939,
+          "overview": "Wandering her rambling old house in her boring new town, 11-year-old Coraline discovers a hidden door to a strangely idealized version of her life. In order to stay in the fantasy, she must make a frighteningly real sacrifice."
+        },
+        {
+          "tmdbId": 1233413,
+          "type": "movie",
+          "title": "Sinners",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/fWPgbnt2LSqkQ6cdQc0SZN9CpLm.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/nAxGnGHOsfzufThz20zgmRwKur3.jpg",
+          "rating": 7.5,
+          "overview": "Trying to leave their troubled lives behind, twin brothers return to their hometown to start again, only to discover that an even greater evil is waiting to welcome them back."
+        },
+        {
+          "tmdbId": 945961,
+          "type": "movie",
+          "title": "Alien: Romulus",
+          "year": "2024",
+          "poster": "https://image.tmdb.org/t/p/w342/2uSWRTtCG336nuBiG8jOTEUKSy8.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/iYqSQaWDttQIQzsxg9xHyg0bttG.jpg",
+          "rating": 7.157,
+          "overview": "While scavenging the deep ends of a derelict space station, a group of young space colonizers come face to face with the most terrifying life form in the universe."
+        }
+      ]
+    },
+    {
+      "key": "animation-family",
+      "title": "Animation & Family",
+      "ranked": false,
+      "logo": "",
+      "auto": "tmdbGenre:movie:16",
+      "items": [
+        {
+          "tmdbId": 1084244,
+          "type": "movie",
+          "title": "Toy Story 5",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/sfQtVlIHljToOwYjhe21KPGzZWK.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/qjTqY5coNiz6sVtPng40IzltsoN.jpg",
+          "rating": 8.355,
+          "overview": "When Bonnie receives a Lilypad tablet as a gift and becomes obsessed, Buzz, Woody, Jessie and the rest of the gang's jobs become exponentially harder when they have to go head to head with the all-new threat to playtime."
+        },
+        {
+          "tmdbId": 1315772,
+          "type": "movie",
+          "title": "Minions & Monsters",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/4LwvU9SZc8QQzW1X1FAPhNbXnEU.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/kkcwhgSFd81QDlXo8ytrpHPQjhy.jpg",
+          "rating": 7.5,
+          "overview": "This is the rambunctious, ridiculous and totally true story of how the Minions conquered Hollywood, became movie stars, lost everything, unleashed monsters onto the world and then banded together to try and save the planet from the mayhem they had just created."
+        },
+        {
+          "tmdbId": 980431,
+          "type": "movie",
+          "title": "Avatar Aang: The Last Airbender",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/3sgnSfNT27Bx5O5ukr7B26mhEQq.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/ezbrL1dMymKQZw7mDEWa2ZTzN7d.jpg",
+          "rating": 9.143,
+          "overview": "Avatar Aang, the world's last Airbender, learns of an ancient power that could save his culture from extinction. With the help of his friends, he embarks on a global quest to find it before it falls into the wrong hands and threatens to upend the peace they sacrificed everything to achieve."
+        },
+        {
+          "tmdbId": 1311031,
+          "type": "movie",
+          "title": "Demon Slayer: Kimetsu no Yaiba Infinity Castle",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/fWVSwgjpT2D78VUh6X8UBd2rorW.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/1RgPyOhN4DRs225BGTlHJqCudII.jpg",
+          "rating": 8.795,
+          "overview": "The Demon Slayer Corps are drawn into the Infinity Castle, where Tanjiro, Nezuko, and the Hashira face terrifying Upper Rank demons in a desperate fight as the final battle against Muzan Kibutsuji begins."
+        },
+        {
+          "tmdbId": 1084242,
+          "type": "movie",
+          "title": "Zootopia 2",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/oJ7g2CifqpStmoYQyaLQgEU32qO.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/lgotja3xMoJZbynwHfcQcJAEMWH.jpg",
+          "rating": 7.674,
+          "overview": "After cracking the biggest case in Zootopia's history, rookie cops Judy Hopps and Nick Wilde find themselves on the twisting trail of a great mystery when Gary De'Snake arrives and turns the animal metropolis upside down. To crack the case, Judy and Nick must go undercover to unexpected new parts of town, where their growing partnership is tested like never before."
+        },
+        {
+          "tmdbId": 1226863,
+          "type": "movie",
+          "title": "The Super Mario Galaxy Movie",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/eJGWx219ZcEMVQJhAgMiqo8tYY.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/kxQiIJ4gVcD3K6o14MJ72p5yRcE.jpg",
+          "rating": 8.224,
+          "overview": "Having thwarted Bowser's previous plot to marry Princess Peach, Mario and Luigi now face a fresh threat in Bowser Jr., who is determined to liberate his father from captivity and restore the family legacy. Alongside companions new and old, the brothers travel across the stars to stop the young heir's crusade."
+        },
+        {
+          "tmdbId": 1184918,
+          "type": "movie",
+          "title": "The Wild Robot",
+          "year": "2024",
+          "poster": "https://image.tmdb.org/t/p/w342/wTnV3PCVW5O92JMrFvvrRcV39RU.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/1pmXyN3sKeYoUhu5VBZiDU4BX21.jpg",
+          "rating": 8.306,
+          "overview": "After a shipwreck, an intelligent robot called Roz is stranded on an uninhabited island. To survive the harsh environment, Roz bonds with the island's animals and cares for an orphaned baby goose."
+        },
+        {
+          "tmdbId": 324857,
+          "type": "movie",
+          "title": "Spider-Man: Into the Spider-Verse",
+          "year": "2018",
+          "poster": "https://image.tmdb.org/t/p/w342/iiZZdoQBEYBv6id8su7ImL0oCbD.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/1ntePsIqeklfmrQJqZPncCydsqY.jpg",
+          "rating": 8.4,
+          "overview": "Struggling to find his place in the world while juggling school and family, Brooklyn teenager Miles Morales is unexpectedly bitten by a radioactive spider and develops unfathomable powers just like the one and only Spider-Man. While wrestling with the implications of his new abilities, Miles discovers a super collider created by the madman Wilson \"Kingpin\" Fisk, causing others from across the Spider-Verse to be inadvertently transported to his dimension."
+        },
+        {
+          "tmdbId": 569094,
+          "type": "movie",
+          "title": "Spider-Man: Across the Spider-Verse",
+          "year": "2023",
+          "poster": "https://image.tmdb.org/t/p/w342/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/kVd3a9YeLGkoeR50jGEXM6EqseS.jpg",
+          "rating": 8.349,
+          "overview": "After reuniting with Gwen Stacy, Brooklyn’s full-time, friendly neighborhood Spider-Man is catapulted across the Multiverse, where he encounters the Spider Society, a team of Spider-People charged with protecting the Multiverse's very existence. But when the heroes clash on how to handle a new threat, Miles finds himself pitted against the other Spiders and must set out on his own to save those he loves most."
+        },
+        {
+          "tmdbId": 1327819,
+          "type": "movie",
+          "title": "Hoppers",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/xjtWQ2CL1mpmMNwuU5HeS4Iuwuu.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/u53UYu5XG2hNgWGvs3xGhAVzypl.jpg",
+          "rating": 8.152,
+          "overview": "Scientists have discovered how to 'hop' human consciousness into lifelike robotic animals, allowing people to communicate with animals as animals. Animal lover Mabel seizes an opportunity to use the technology, uncovering mysteries within the animal world beyond anything she could have imagined."
+        },
+        {
+          "tmdbId": 129,
+          "type": "movie",
+          "title": "Spirited Away",
+          "year": "2001",
+          "poster": "https://image.tmdb.org/t/p/w342/39wmItIWsg5sZMyRUHLkWBcuVCM.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/6oaL4DP75yABrd5EbC4H2zq5ghc.jpg",
+          "rating": 8.535,
+          "overview": "A young girl, Chihiro, becomes trapped in a strange new world of spirits. When her parents undergo a mysterious transformation, she must call upon the courage she never knew she had to free her family."
+        },
+        {
+          "tmdbId": 585,
+          "type": "movie",
+          "title": "Monsters, Inc.",
+          "year": "2001",
+          "poster": "https://image.tmdb.org/t/p/w342/wFSpyMsp7H0ttERbxY7Trlv8xry.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/sDTnMOJ3H5wI38OxObmCtK7wfd5.jpg",
+          "rating": 7.857,
+          "overview": "Lovable Sulley and his wisecracking sidekick Mike Wazowski are the top scare team at Monsters, Inc., the scream-processing factory in Monstropolis. When a little girl named Boo wanders into their world, it's the monsters who are scared silly, and it's up to Sulley and Mike to keep her out of sight and get her back home."
+        },
+        {
+          "tmdbId": 1007757,
+          "type": "movie",
+          "title": "Swapped",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/tHhxWxge06goXU6ZQH1hj7vK8Hd.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/zMwhWailP1WY7sb6AoE6b8ugoy.jpg",
+          "rating": 8.869,
+          "overview": "A small woodland creature and a majestic bird, two natural sworn enemies of the Valley, magically trade places and set off on an adventure of a lifetime to switch back. Their journey soon uncovers a greater threat—one that could endanger not only their species, but the entire valley they call home."
+        },
+        {
+          "tmdbId": 8587,
+          "type": "movie",
+          "title": "The Lion King",
+          "year": "1994",
+          "poster": "https://image.tmdb.org/t/p/w342/sKCr78MXSLixwmZ8DyJLrpMsd15.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/bqFxtuGNsz30HTk5mzgGs8m9Po.jpg",
+          "rating": 8.251,
+          "overview": "Young lion prince Simba, eager to one day become king of the Pride Lands, grows up under the watchful eye of his father Mufasa; all the while his villainous uncle Scar conspires to take the throne for himself. Amid betrayal and tragedy, Simba must confront his past and find his rightful place in the Circle of Life."
+        },
+        {
+          "tmdbId": 354912,
+          "type": "movie",
+          "title": "Coco",
+          "year": "2017",
+          "poster": "https://image.tmdb.org/t/p/w342/6Ryitt95xrO8KXuqRGm1fUuNwqF.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/g7CHF8gTLGooTbP4GznIGwaqAGL.jpg",
+          "rating": 8.197,
+          "overview": "Despite his family’s baffling generations-old ban on music, Miguel dreams of becoming an accomplished musician like his idol, Ernesto de la Cruz. Desperate to prove his talent, Miguel finds himself in the stunning and colorful Land of the Dead following a mysterious chain of events. Along the way, he meets charming trickster Hector, and together, they set off on an extraordinary journey to unlock the real story behind Miguel's family history."
+        },
+        {
+          "tmdbId": 14836,
+          "type": "movie",
+          "title": "Coraline",
+          "year": "2009",
+          "poster": "https://image.tmdb.org/t/p/w342/4jeFXQYytChdZYE9JYO7Un87IlW.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/hofnlIyF6bePkgQOpcuRWLvzf15.jpg",
+          "rating": 7.939,
+          "overview": "Wandering her rambling old house in her boring new town, 11-year-old Coraline discovers a hidden door to a strangely idealized version of her life. In order to stay in the fantasy, she must make a frighteningly real sacrifice."
+        },
+        {
+          "tmdbId": 177572,
+          "type": "movie",
+          "title": "Big Hero 6",
+          "year": "2014",
+          "poster": "https://image.tmdb.org/t/p/w342/2mxS4wUimwlLmI1xp6QW6NSU361.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/4s2d3xdyqotiVNHTlTlJjrr3q0H.jpg",
+          "rating": 7.724,
+          "overview": "A special bond develops between plus-sized inflatable robot Baymax, and prodigy Hiro Hamada, who team up with a group of friends to form a band of high-tech heroes."
+        },
+        {
+          "tmdbId": 862,
+          "type": "movie",
+          "title": "Toy Story",
+          "year": "1995",
+          "poster": "https://image.tmdb.org/t/p/w342/uXDfjJbdP4ijW5hWSBrPrlKpxab.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/3Rfvhy1Nl6sSGJwyjb0QiZzZYlB.jpg",
+          "rating": 7.989,
+          "overview": "Led by Woody, Andy's toys live happily in his room until Andy's birthday brings Buzz Lightyear onto the scene. Afraid of losing his place in Andy's heart, Woody plots against Buzz. But when circumstances separate Buzz and Woody from their owner, the duo eventually learns to put aside their differences."
+        }
+      ]
+    },
+    {
+      "key": "trending-coming-soon",
+      "title": "Trending Globally — Coming Soon",
+      "ranked": false,
+      "logo": "",
+      "auto": "tmdbTrendingMissing:week",
+      "items": [
+        {
+          "tmdbId": 1101383,
+          "type": "movie",
+          "title": "The End of Oak Street",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/fYXqpgPmHMphSF2W30GbTeJVIa5.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/b9q9VmbXDvJmTziRqkwdEmFdwhr.jpg",
+          "rating": 6.919,
+          "overview": "After a mysterious cosmic event rips Oak Street from suburbia and transports their neighborhood to someplace unknown, the Platt family soon discovers that their very survival depends on them sticking together as they navigate their now unrecognizable surroundings."
+        },
+        {
+          "tmdbId": 273207,
+          "type": "tv",
+          "title": "Neagley",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/lKOPmO0ah17ogQ9hWg7lSd40kIr.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/uYOYLFQ4q7asuhdiKXCqGaeAQUH.jpg",
+          "rating": 7.9,
+          "overview": "Frances Neagley is a private investigator in Chicago and former military colleague of Jack Reacher in the Army's 110th Special Investigations Unit. When she learns that a beloved friend from her past has been killed in a suspicious accident, she becomes hell-bent on justice."
+        },
+        {
+          "tmdbId": 299939,
+          "type": "tv",
+          "title": "Monster: The Lizzie Borden Story",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/57XScX1aYtKi1LvHYFQLPUxVhTG.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/gaew60NXUxok3Vmls7gkAT7lYW0.jpg",
+          "rating": 7.9,
+          "overview": "Trapped in a cruel Victorian-era household, Lizzie Borden kills her parents in a gory ax murder that shocks the nation."
+        },
+        {
+          "tmdbId": 969681,
+          "type": "movie",
+          "title": "Spider-Man: Brand New Day",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/bjiS5ipwxb9JFy3XRRN4OAilSeX.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/qeQJx07rK2xm8SD2sJxFKhE7gs0.jpg",
+          "rating": 7.848,
+          "overview": "Fighting crime full-time as Spider-Man in a world that doesn't remember him—and the pressure of seeing his old friends move on without him—sparks a change in Peter Parker he may not have the power to control. But that transformation might also be the only thing that can stop a shocking new threat to the city and those he loves - a powerful villain no one can even see."
+        },
+        {
+          "tmdbId": 275102,
+          "type": "tv",
+          "title": "The Scandal",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/pJsIzlTjmx07ilwEkl0cglrMVa1.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/uc1p1PEbEMpdIHqnU9TESNC6Jhp.jpg",
+          "rating": 0,
+          "overview": "In Joseon, a secret proposal ignites hidden desires in a gifted noblewoman, a famed lover and an unsuspecting lady caught in their dangerous game."
+        },
+        {
+          "tmdbId": 1302904,
+          "type": "movie",
+          "title": "Practical Magic 2",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/ogwQOLbCfncjvBhFb5l0OmQH8KC.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/nUcauJ000dFBYkgGpxyxJ5aWEH2.jpg",
+          "rating": 6.1,
+          "overview": "The Owens sisters must confront the dark curse that threatens to unravel their family once and for all."
+        },
+        {
+          "tmdbId": 1204680,
+          "type": "movie",
+          "title": "Coyote vs. Acme",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/kYDCl2y0VPvhT5eYWbMRInPoB03.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/7GOW6jod9lLurW5utokAatxg7ql.jpg",
+          "rating": 7.5,
+          "overview": "After Acme products fail him one too many times in his dogged pursuit of the Roadrunner, Wile E. Coyote decides to hire a billboard lawyer to sue the Acme Corporation."
+        },
+        {
+          "tmdbId": 332401,
+          "type": "tv",
+          "title": "City of Blood",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/Njr0Rlb4CobAfrGE8NVffYDGqx.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/icPBB9V5IX1hggtNs1fvskP2lsi.jpg",
+          "rating": 10,
+          "overview": "Berlin — a city-state on the brink. While a privileged few live beneath a climate-controlled dome, those outside struggle to survive in a world ravaged by heat, corruption, and crime. After years apart, sisters Bea and Phoebe are reunited and uncover a dark secret: Vampires are determined to seize political power — and blood has become the city's new currency."
+        }
+      ]
+    }
+  ]
+}

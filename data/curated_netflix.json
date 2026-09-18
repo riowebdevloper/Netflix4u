@@ -1,0 +1,431 @@
+{
+  "ok": true,
+  "tab": "Netflix",
+  "hero": [
+    {
+      "tmdbId": 66732,
+      "type": "tv",
+      "title": "Stranger Things",
+      "year": "2016",
+      "backdrop": "https://image.tmdb.org/t/p/original/56v2KjBlU4XaOv9rVYEQypROD7P.jpg",
+      "rating": 8.567,
+      "overview": ""
+    },
+    {
+      "tmdbId": 93405,
+      "type": "tv",
+      "title": "Squid Game",
+      "year": "2021",
+      "backdrop": "https://image.tmdb.org/t/p/original/2meX1nMdScFOoV4370rqHWKmXhY.jpg",
+      "rating": 7.856,
+      "overview": ""
+    },
+    {
+      "tmdbId": 119051,
+      "type": "tv",
+      "title": "Wednesday",
+      "year": "2022",
+      "backdrop": "https://image.tmdb.org/t/p/original/iHSwvRVsRyxpX7FE7GbviaDvgGZ.jpg",
+      "rating": 8.348,
+      "overview": ""
+    },
+    {
+      "tmdbId": 1022789,
+      "type": "movie",
+      "title": "Inside Out 2",
+      "year": "2024",
+      "backdrop": "https://image.tmdb.org/t/p/original/p5ozvmdgsmbWe0H8Xk7Rc8SCwAB.jpg",
+      "rating": 7.546,
+      "overview": ""
+    },
+    {
+      "tmdbId": 929590,
+      "type": "movie",
+      "title": "Civil War",
+      "year": "2024",
+      "backdrop": "https://image.tmdb.org/t/p/original/en3GU5uGkKaYmSyetHV4csHHiH3.jpg",
+      "rating": 6.86,
+      "overview": ""
+    }
+  ],
+  "rails": [
+    {
+      "key": "netflix-top-series",
+      "title": "Top Series on Netflix",
+      "ranked": true,
+      "logo": "",
+      "auto": null,
+      "items": [
+        {
+          "tmdbId": 66732,
+          "type": "tv",
+          "title": "Stranger Things",
+          "year": "2016",
+          "poster": "https://image.tmdb.org/t/p/w342/uOOtwVbSr4QDjAGIifLDwpb2Pdl.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/56v2KjBlU4XaOv9rVYEQypROD7P.jpg",
+          "rating": 8.567
+        },
+        {
+          "tmdbId": 93405,
+          "type": "tv",
+          "title": "Squid Game",
+          "year": "2021",
+          "poster": "https://image.tmdb.org/t/p/w342/1QdXdRYfktUSONkl1oD5gc6Be0s.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/2meX1nMdScFOoV4370rqHWKmXhY.jpg",
+          "rating": 7.856
+        },
+        {
+          "tmdbId": 119051,
+          "type": "tv",
+          "title": "Wednesday",
+          "year": "2022",
+          "poster": "https://image.tmdb.org/t/p/w342/36xXlhEpQqVVPuiZhfoQuaY4OlA.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/iHSwvRVsRyxpX7FE7GbviaDvgGZ.jpg",
+          "rating": 8.348
+        },
+        {
+          "tmdbId": 71912,
+          "type": "tv",
+          "title": "The Witcher",
+          "year": "2019",
+          "poster": "https://image.tmdb.org/t/p/w342/AoGsDM02UVt0npBA8OvpDcZbaMi.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/foGkPxpw9h8zln81j63mix5B7m8.jpg",
+          "rating": 7.921
+        },
+        {
+          "tmdbId": 71446,
+          "type": "tv",
+          "title": "Money Heist",
+          "year": "2017",
+          "poster": "https://image.tmdb.org/t/p/w342/reEMJA1uzscCbkpeRJeTT2bjqUp.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/gFZriCkpJYsApPZEF3jhxL4yLzG.jpg",
+          "rating": 8.232
+        },
+        {
+          "tmdbId": 94796,
+          "type": "tv",
+          "title": "Crash Landing on You",
+          "year": "2019",
+          "poster": "https://image.tmdb.org/t/p/w342/fgBNLPr6mC8pxuR79ENAJY4nBmj.jpg",
+          "backdrop": "",
+          "rating": 8.538
+        },
+        {
+          "tmdbId": 99966,
+          "type": "tv",
+          "title": "All of Us Are Dead",
+          "year": "2022",
+          "poster": "https://image.tmdb.org/t/p/w342/pTEFqAjLd5YTsMD6NSUxV6Dq7A6.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/8hp2CuGnw1iP5dLBVMAPUv23swx.jpg",
+          "rating": 8.278
+        },
+        {
+          "tmdbId": 106651,
+          "type": "tv",
+          "title": "Hellbound",
+          "year": "2021",
+          "poster": "https://image.tmdb.org/t/p/w342/5NYdSAnDVIXePrSG2dznHdiibMk.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/ikN8ABD9pXHuW4JFqTEHr3ae8rd.jpg",
+          "rating": 7.324
+        }
+      ]
+    },
+    {
+      "key": "netflix-popular-now",
+      "title": "Popular on Netflix",
+      "ranked": false,
+      "logo": "",
+      "auto": null,
+      "items": [
+        {
+          "tmdbId": 66732,
+          "type": "tv",
+          "title": "Stranger Things",
+          "year": "2016",
+          "poster": "https://image.tmdb.org/t/p/w342/uOOtwVbSr4QDjAGIifLDwpb2Pdl.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/56v2KjBlU4XaOv9rVYEQypROD7P.jpg",
+          "rating": 8.567
+        },
+        {
+          "tmdbId": 93405,
+          "type": "tv",
+          "title": "Squid Game",
+          "year": "2021",
+          "poster": "https://image.tmdb.org/t/p/w342/1QdXdRYfktUSONkl1oD5gc6Be0s.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/2meX1nMdScFOoV4370rqHWKmXhY.jpg",
+          "rating": 7.856
+        },
+        {
+          "tmdbId": 119051,
+          "type": "tv",
+          "title": "Wednesday",
+          "year": "2022",
+          "poster": "https://image.tmdb.org/t/p/w342/36xXlhEpQqVVPuiZhfoQuaY4OlA.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/iHSwvRVsRyxpX7FE7GbviaDvgGZ.jpg",
+          "rating": 8.348
+        },
+        {
+          "tmdbId": 71912,
+          "type": "tv",
+          "title": "The Witcher",
+          "year": "2019",
+          "poster": "https://image.tmdb.org/t/p/w342/AoGsDM02UVt0npBA8OvpDcZbaMi.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/foGkPxpw9h8zln81j63mix5B7m8.jpg",
+          "rating": 7.921
+        },
+        {
+          "tmdbId": 71446,
+          "type": "tv",
+          "title": "Money Heist",
+          "year": "2017",
+          "poster": "https://image.tmdb.org/t/p/w342/reEMJA1uzscCbkpeRJeTT2bjqUp.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/gFZriCkpJYsApPZEF3jhxL4yLzG.jpg",
+          "rating": 8.232
+        },
+        {
+          "tmdbId": 117376,
+          "type": "tv",
+          "title": "Vincenzo",
+          "year": "2021",
+          "poster": "https://image.tmdb.org/t/p/w342/qbkSS1cTjT4DzIwD44bdhTuYgdT.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/sf7NCqyVUNoyjYuwW5oJke1T1lH.jpg",
+          "rating": 8.509
+        },
+        {
+          "tmdbId": 96648,
+          "type": "tv",
+          "title": "Sweet Home",
+          "year": "2020",
+          "poster": "https://image.tmdb.org/t/p/w342/7rNWciOcHOH97XIeS1KFuMmjyky.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/mceCXNTny6a5F3rQgShLoyARw4l.jpg",
+          "rating": 8.229
+        },
+        {
+          "tmdbId": 110534,
+          "type": "tv",
+          "title": "D.P.",
+          "year": "2021",
+          "poster": "https://image.tmdb.org/t/p/w342/akvPsqe1u1NpIQ8Ln2Vt06uhOv9.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/kTf8vPcZVONrBHB35hEg1lG2Bk.jpg",
+          "rating": 8
+        },
+        {
+          "tmdbId": 96162,
+          "type": "tv",
+          "title": "Itaewon Class",
+          "year": "2020",
+          "poster": "https://image.tmdb.org/t/p/w342/qg7q0piY0fTt2enlIRHwKKRwNjS.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/rtYQCa2NzX8RspbOmwfAla6BemO.jpg",
+          "rating": 8.383
+        }
+      ]
+    },
+    {
+      "key": "netflix-thrillers",
+      "title": "Thrillers on Netflix",
+      "ranked": false,
+      "logo": "",
+      "auto": null,
+      "items": [
+        {
+          "tmdbId": 93405,
+          "type": "tv",
+          "title": "Squid Game",
+          "year": "2021",
+          "poster": "https://image.tmdb.org/t/p/w342/1QdXdRYfktUSONkl1oD5gc6Be0s.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/2meX1nMdScFOoV4370rqHWKmXhY.jpg",
+          "rating": 7.856
+        },
+        {
+          "tmdbId": 99966,
+          "type": "tv",
+          "title": "All of Us Are Dead",
+          "year": "2022",
+          "poster": "https://image.tmdb.org/t/p/w342/pTEFqAjLd5YTsMD6NSUxV6Dq7A6.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/8hp2CuGnw1iP5dLBVMAPUv23swx.jpg",
+          "rating": 8.278
+        },
+        {
+          "tmdbId": 96648,
+          "type": "tv",
+          "title": "Sweet Home",
+          "year": "2020",
+          "poster": "https://image.tmdb.org/t/p/w342/7rNWciOcHOH97XIeS1KFuMmjyky.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/mceCXNTny6a5F3rQgShLoyARw4l.jpg",
+          "rating": 8.229
+        },
+        {
+          "tmdbId": 106651,
+          "type": "tv",
+          "title": "Hellbound",
+          "year": "2021",
+          "poster": "https://image.tmdb.org/t/p/w342/5NYdSAnDVIXePrSG2dznHdiibMk.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/ikN8ABD9pXHuW4JFqTEHr3ae8rd.jpg",
+          "rating": 7.324
+        },
+        {
+          "tmdbId": 110534,
+          "type": "tv",
+          "title": "D.P.",
+          "year": "2021",
+          "poster": "https://image.tmdb.org/t/p/w342/akvPsqe1u1NpIQ8Ln2Vt06uhOv9.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/kTf8vPcZVONrBHB35hEg1lG2Bk.jpg",
+          "rating": 8
+        }
+      ]
+    },
+    {
+      "key": "netflix-bollywood",
+      "title": "Latest Bollywood (2024-25)",
+      "ranked": false,
+      "logo": "",
+      "auto": null,
+      "items": [
+        {
+          "tmdbId": 1291608,
+          "type": "movie",
+          "title": "Dhurandhar",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/8FHOtUpNIk5ZPEay2N2EY5lrxkv.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/snYOXem8pUGOffnLbbGq4aB1pg4.jpg",
+          "rating": 7.117
+        },
+        {
+          "tmdbId": 1112426,
+          "type": "movie",
+          "title": "Stree 2",
+          "year": "2024",
+          "poster": "https://image.tmdb.org/t/p/w342/iwEJp4WBM8b3AjCeNcgvv86FEFr.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/fVV0A67kDjTTQ4CvUn8LoletRmI.jpg",
+          "rating": 6.6
+        },
+        {
+          "tmdbId": 1014214,
+          "type": "movie",
+          "title": "Singham Again",
+          "year": "2024",
+          "poster": "https://image.tmdb.org/t/p/w342/2JbNkHg8m7LaBy61LyrnnlenaxY.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/lexEx0B4WDOXGfqPTj4R8FCrE7H.jpg",
+          "rating": 5
+        },
+        {
+          "tmdbId": 984101,
+          "type": "movie",
+          "title": "Bad Newz",
+          "year": "2024",
+          "poster": "https://image.tmdb.org/t/p/w342/qDlqxGATpYBWqGciPB4tmQm3bFT.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/dRot2ng1pN6uJpLPikxDrbkngmu.jpg",
+          "rating": 5
+        },
+        {
+          "tmdbId": 1233531,
+          "type": "movie",
+          "title": "Article 370",
+          "year": "2024",
+          "poster": "https://image.tmdb.org/t/p/w342/9VTemjHMpyxzfC3JsG2aFy8Bf9Y.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/qYXnMDuwaApMRtV8JunFmieZo8R.jpg",
+          "rating": 6.939
+        },
+        {
+          "tmdbId": 872906,
+          "type": "movie",
+          "title": "Jawan",
+          "year": "2023",
+          "poster": "https://image.tmdb.org/t/p/w342/jFt1gS4BGHlK8xt76Y81Alp4dbt.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/5LtSjMNw6j3LkG29Oa4O0iY5U8.jpg",
+          "rating": 7.074
+        },
+        {
+          "tmdbId": 864692,
+          "type": "movie",
+          "title": "Pathaan",
+          "year": "2023",
+          "poster": "https://image.tmdb.org/t/p/w342/arf00BkwvXo0CFKbaD9OpqdE4Nu.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/9wRAIQeOv2qzcgpfvA4dYZKeezl.jpg",
+          "rating": 6.414
+        },
+        {
+          "tmdbId": 1163258,
+          "type": "movie",
+          "title": "12th Fail",
+          "year": "2023",
+          "poster": "https://image.tmdb.org/t/p/w342/eebUPRI4Z5e1Z7Hev4JZAwMIFkX.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/6RV2o8PBCEyw9ylOWViV1CtULIF.jpg",
+          "rating": 7.907
+        }
+      ]
+    },
+    {
+      "key": "netflix-2024-hits",
+      "title": "Hot 2024 Hits",
+      "ranked": false,
+      "logo": "",
+      "auto": null,
+      "items": [
+        {
+          "tmdbId": 533535,
+          "type": "movie",
+          "title": "Deadpool & Wolverine",
+          "year": "2024",
+          "poster": "https://image.tmdb.org/t/p/w342/8cdWjvZQUExUUTzyp4t6EDMubfO.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/by8z9Fe8y7p4jo2YlW2SZDnptyT.jpg",
+          "rating": 7.565
+        },
+        {
+          "tmdbId": 1022789,
+          "type": "movie",
+          "title": "Inside Out 2",
+          "year": "2024",
+          "poster": "https://image.tmdb.org/t/p/w342/vpnVM9B6NMmQpWeZvzLvDESb2QY.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/p5ozvmdgsmbWe0H8Xk7Rc8SCwAB.jpg",
+          "rating": 7.546
+        },
+        {
+          "tmdbId": 402431,
+          "type": "movie",
+          "title": "Wicked",
+          "year": "2024",
+          "poster": "https://image.tmdb.org/t/p/w342/xDGbZ0JJ3mYaGKy4Nzd9Kph6M9L.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/w22GVYotTIVC1dUd58mRhwPqiS.jpg",
+          "rating": 6.909
+        },
+        {
+          "tmdbId": 558449,
+          "type": "movie",
+          "title": "Gladiator II",
+          "year": "2024",
+          "poster": "https://image.tmdb.org/t/p/w342/2cxhvwyEwRlysAmRH4iodkvo0z5.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/tOqIwliWMovSIZ9DyvHcHI7p2im.jpg",
+          "rating": 6.614
+        },
+        {
+          "tmdbId": 929590,
+          "type": "movie",
+          "title": "Civil War",
+          "year": "2024",
+          "poster": "https://image.tmdb.org/t/p/w342/sh7Rg8Er3tFcN9BpKIPOMvALgZd.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/t2SXZ7KLriaLyf5QT8Iar6fSOGp.jpg",
+          "rating": 6.86
+        },
+        {
+          "tmdbId": 718821,
+          "type": "movie",
+          "title": "Twisters",
+          "year": "2024",
+          "poster": "https://image.tmdb.org/t/p/w342/pjnD08FlMAIXsfOLKQbvmO0f0MD.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/58D6ZAvOKxlHjyX9S8qNKSBE9Y.jpg",
+          "rating": 6.782
+        },
+        {
+          "tmdbId": 786892,
+          "type": "movie",
+          "title": "Furiosa: A Mad Max Saga",
+          "year": "2024",
+          "poster": "https://image.tmdb.org/t/p/w342/iADOJ8Zymht2JPMoy3R7xceZprc.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/raph7qjAGTMXaIjVxt6ZDSXRzUr.jpg",
+          "rating": 7.454
+        }
+      ]
+    }
+  ]
+}

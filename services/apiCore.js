@@ -1769,6 +1769,78 @@ function handleCategoryFeed(req, res, rawCat) {
   return true;
 }
 
+async function handleCatalogHero(req, res) {
+  if (handleCors(req, res)) return;
+  const filePath = path.join(DATA_DIR, 'curated_trending.json');
+  if (fs.existsSync(filePath)) {
+    try {
+      const data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+      if (data && data.hero && data.hero.length) {
+        return sendJson(res, 200, { ok: true, hero: data.hero }, { 'Cache-Control': 'public, max-age=1800' });
+      }
+    } catch (e) { }
+  }
+  return sendJson(res, 200, { ok: true, hero: [] });
+}
+
+async function handleCatalogCurated(req, res) {
+  if (handleCors(req, res)) return;
+  const q = getQueryParams(req);
+  const [rawPath] = (req.url || '').split('?');
+  const match = rawPath.match(/^\/api\/catalog\/curated(?:\/([^\/?#]+)|$)/i);
+  let tab = (match && match[1]) || q.get('tab') || 'trending';
+  tab = tab.toLowerCase().replace(/[^a-z0-9_-]/g, '');
+  if (!tab) tab = 'trending';
+
+  const fileName = `curated_${tab}.json`;
+  const filePath = path.join(DATA_DIR, fileName);
+
+  if (fs.existsSync(filePath)) {
+    try {
+      const raw = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+      return sendJson(res, 200, raw, { 'Cache-Control': 'public, max-age=1800' });
+    } catch (e) { }
+  }
+
+  // Fallback: If not found, try upstream net27.cc or curated_trending.json
+  try {
+    const upstreamUrl = `https://net27.cc/api/catalog/curated/${tab}`;
+    const data = await new Promise((resolve) => {
+      const uReq = https.get(upstreamUrl, {
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
+          'Referer': 'https://net27.cc/',
+          'Accept': 'application/json'
+        },
+        timeout: 4000
+      }, uRes => {
+        let buf = '';
+        uRes.on('data', chunk => buf += chunk);
+        uRes.on('end', () => {
+          try { resolve(JSON.parse(buf)); } catch (e) { resolve(null); }
+        });
+      });
+      uReq.on('error', () => resolve(null));
+      uReq.on('timeout', () => { uReq.destroy(); resolve(null); });
+    });
+    if (data && data.ok) {
+      try { fs.writeFileSync(filePath, JSON.stringify(data, null, 2), 'utf8'); } catch (e) { }
+      return sendJson(res, 200, data, { 'Cache-Control': 'public, max-age=1800' });
+    }
+  } catch (e) { }
+
+  // Fallback to trending
+  const fallbackPath = path.join(DATA_DIR, 'curated_trending.json');
+  if (fs.existsSync(fallbackPath)) {
+    try {
+      const raw = JSON.parse(fs.readFileSync(fallbackPath, 'utf8'));
+      return sendJson(res, 200, raw, { 'Cache-Control': 'public, max-age=1800' });
+    } catch (e) { }
+  }
+
+  sendJson(res, 404, { ok: false, error: 'Curated feed not found for tab: ' + tab });
+}
+
 async function handleCatalogApi(req, res) {
   if (handleCors(req, res)) return;
   const q = getQueryParams(req);
@@ -1780,6 +1852,8 @@ async function handleCatalogApi(req, res) {
   }
 
   if (cleanPath === '' || cleanPath === 'summary') return handleSummary(req, res);
+  if (cleanPath === 'hero') return handleCatalogHero(req, res);
+  if (cleanPath === 'curated' || cleanPath.startsWith('curated')) return handleCatalogCurated(req, res);
   if (cleanPath === 'trending' || cleanPath.startsWith('trending')) return handleCatalogTrending(req, res);
   if (cleanPath === 'discover' || cleanPath.startsWith('discover')) return handleCatalogDiscover(req, res);
   if (cleanPath.startsWith('title/') || cleanPath === 'title') return handleCatalogTitle(req, res);
