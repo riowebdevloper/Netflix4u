@@ -2437,22 +2437,7 @@ async function handleStreamPlayer(req, res) {
     } catch(e) {}
   }
 
-  // 2. Resolve NetMirror Item ID with language routing
-  let nmItem = null;
-  try {
-    nmItem = await resolveNetmirrorItem(id, title, type, lang);
-  } catch(e) {}
-
-  const nid = nmItem ? nmItem.id : (id && /^\d{1,9}$/.test(String(id)) ? id : null);
-  const mediaType = (nmItem && nmItem.media_type) || type;
-  const commonNmQuery = `type=${mediaType}&id=${nid || ''}&title=${encodeURIComponent(title || '')}&year=${encodeURIComponent(year || '')}&lang=${encodeURIComponent(lang || 'hi')}${actualSe ? '&se=' + actualSe : ''}${actualEp ? '&ep=' + actualEp : ''}`;
-
-  const nm1Url = `/api/netmirror-player?server=1&${commonNmQuery}`;
-  const nm2Url = `/api/netmirror-player?server=2&${commonNmQuery}`;
-  const nm4Url = `/api/netmirror-player?server=4&${commonNmQuery}`;
-  const nmMultiUrl = `/api/netmirror-player?server=multi&${commonNmQuery}`;
-
-  // 3. Multi-Server Fallbacks
+  // 2. Multi-Server Stream Providers (VidSrc SBS direct TMDB, Peachify Ad-Free HD, VidLink Global Multi)
   const cleanId = String(id || '').replace(/^(?:dotmobiz|tmdb(?:-movie|-series|-tv)?)-/, '');
   const vidsrcUrl = isMovie
     ? `https://vidsrc.sbs/embed/movie/${cleanId}`
@@ -2575,12 +2560,8 @@ async function handleStreamPlayer(req, res) {
       <div class="controls-group">
         <button type="button" id="btn-srv-vidsrc" class="server-pill ${initialServer === 'vidsrc' ? 'active' : ''}" onclick="activateServer(&quot;vidsrc&quot;)">📺 VidSrc SBS (Direct TMDB)</button>
         <button type="button" id="btn-srv-peachify" class="server-pill ${initialServer === 'peachify' ? 'active' : ''}" onclick="activateServer(&quot;peachify&quot;)">🍑 Peachify (Ad-Free HD)</button>
-        ${cloudStream ? '<button type="button" id="btn-srv-cloud" class="server-pill ' + (initialServer === 'cloud' ? 'active' : '') + '" onclick="activateServer(&quot;cloud&quot;)">⚡ Fast Cloud (Hindi Dual)</button>' : ''}
-        <button type="button" id="btn-srv-nm1" class="server-pill ${initialServer === 'nm1' ? 'active' : ''}" onclick="activateServer(&quot;nm1&quot;)">⚡ NetMirror 1 (App HD)</button>
-        <button type="button" id="btn-srv-nm2" class="server-pill ${initialServer === 'nm2' ? 'active' : ''}" onclick="activateServer(&quot;nm2&quot;)">⚡ NetMirror 2 (App Ultra)</button>
-        <button type="button" id="btn-srv-nm4" class="server-pill ${initialServer === 'nm4' ? 'active' : ''}" onclick="activateServer(&quot;nm4&quot;)">⚡ NetMirror 4 (Spedo)</button>
-        <button type="button" id="btn-srv-nmmulti" class="server-pill ${initialServer === 'nmmulti' ? 'active' : ''}" onclick="activateServer(&quot;nmmulti&quot;)">🌐 NetMirror Multi-Lang</button>
         <button type="button" id="btn-srv-vidlink" class="server-pill ${initialServer === 'vidlink' ? 'active' : ''}" onclick="activateServer(&quot;vidlink&quot;)">🚀 VidLink Multi</button>
+        ${cloudStream ? '<button type="button" id="btn-srv-cloud" class="server-pill ' + (initialServer === 'cloud' ? 'active' : '') + '" onclick="activateServer(&quot;cloud&quot;)">⚡ Fast Cloud (Hindi Dual)</button>' : ''}
         ${cloudStream ? '<a href="intent:' + cloudStream.url + '#Intent;action=android.intent.action.VIEW;type=video/*;package=com.mxtech.videoplayer.ad;end" class="dl-btn" style="background:#0284c7;border-color:#38bdf8;" title="Play Hindi Dub in MX Player">📱 MX Player</a>' : ''}
         ${cloudStream ? '<a href="vlc://' + cloudStream.url.replace(/^https?:\/\//i, '') + '" class="dl-btn" style="background:#ea580c;border-color:#f97316;" title="Play Hindi Dub in VLC Player">🚀 VLC</a>' : ''}
         ${directDlHref ? '<a href="' + directDlHref + '" class="dl-btn" target="_blank" rel="noopener">📥 Direct Download</a>' : ''}
@@ -2591,12 +2572,8 @@ async function handleStreamPlayer(req, res) {
     <div id="media-view">
       <iframe id="iframe-vidsrc" class="layer-view ${initialServer === 'vidsrc' ? 'visible' : ''}" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
       <iframe id="iframe-peachify" class="layer-view ${initialServer === 'peachify' ? 'visible' : ''}" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
-      <div id="artplayer-layer" class="layer-view ${initialServer === 'cloud' ? 'visible' : ''}"></div>
-      <iframe id="iframe-nm1" class="layer-view ${initialServer === 'nm1' ? 'visible' : ''}" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
-      <iframe id="iframe-nm2" class="layer-view ${initialServer === 'nm2' ? 'visible' : ''}" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
-      <iframe id="iframe-nm4" class="layer-view ${initialServer === 'nm4' ? 'visible' : ''}" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
-      <iframe id="iframe-nmmulti" class="layer-view ${initialServer === 'nmmulti' ? 'visible' : ''}" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
       <iframe id="iframe-vidlink" class="layer-view ${initialServer === 'vidlink' ? 'visible' : ''}" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+      <div id="artplayer-layer" class="layer-view ${initialServer === 'cloud' ? 'visible' : ''}"></div>
     </div>
 
     <div id="shield-toast"></div>
@@ -2606,15 +2583,11 @@ async function handleStreamPlayer(req, res) {
     var vidsrcUrl = ${JSON.stringify(vidsrcUrl)};
     var peachifyUrl = ${JSON.stringify(peachifyUrl)};
     var cloudUrl = ${JSON.stringify(cloudStream ? cloudStream.url : '')};
-    var nm1Url = ${JSON.stringify(nm1Url)};
-    var nm2Url = ${JSON.stringify(nm2Url)};
-    var nm4Url = ${JSON.stringify(nm4Url)};
-    var nmMultiUrl = ${JSON.stringify(nmMultiUrl)};
     var vidlinkUrl = ${JSON.stringify(vidlinkUrl)};
     var currentServer = ${JSON.stringify(initialServer)};
     var art = null;
     var failoverIndex = 0;
-    var serverSequence = ['vidsrc', 'peachify', 'nm1', 'nm2', 'nmmulti', 'nm4', 'cloud', 'vidlink'].filter(function(s) {
+    var serverSequence = ['vidsrc', 'peachify', 'vidlink', 'cloud'].filter(function(s) {
       if (s === 'cloud' && !cloudUrl) return false;
       return true;
     });
@@ -2650,6 +2623,10 @@ async function handleStreamPlayer(req, res) {
           frame.src = peachifyUrl;
         }
         frame.classList.add('visible');
+      } else if (srv === 'vidlink') {
+        var frame = document.getElementById('iframe-vidlink');
+        if (!frame.src || frame.src === 'about:blank') frame.src = vidlinkUrl;
+        frame.classList.add('visible');
       } else if (srv === 'cloud' && cloudUrl) {
         var mount = document.getElementById('artplayer-layer');
         mount.classList.add('visible');
@@ -2658,34 +2635,6 @@ async function handleStreamPlayer(req, res) {
         } else {
           art.switchUrl(cloudUrl);
         }
-      } else if (srv === 'nm1') {
-        var frame = document.getElementById('iframe-nm1');
-        if (!frame.src || frame.src === 'about:blank' || frame.src.indexOf('/api/netmirror-player') === -1) {
-          frame.src = nm1Url;
-        }
-        frame.classList.add('visible');
-      } else if (srv === 'nm2') {
-        var frame = document.getElementById('iframe-nm2');
-        if (!frame.src || frame.src === 'about:blank' || frame.src.indexOf('/api/netmirror-player') === -1) {
-          frame.src = nm2Url;
-        }
-        frame.classList.add('visible');
-      } else if (srv === 'nm4') {
-        var frame = document.getElementById('iframe-nm4');
-        if (!frame.src || frame.src === 'about:blank' || frame.src.indexOf('/api/netmirror-player') === -1) {
-          frame.src = nm4Url;
-        }
-        frame.classList.add('visible');
-      } else if (srv === 'nmmulti') {
-        var frame = document.getElementById('iframe-nmmulti');
-        if (!frame.src || frame.src === 'about:blank' || frame.src.indexOf('/api/netmirror-player') === -1) {
-          frame.src = nmMultiUrl;
-        }
-        frame.classList.add('visible');
-      } else if (srv === 'vidlink') {
-        var frame = document.getElementById('iframe-vidlink');
-        if (!frame.src || frame.src === 'about:blank') frame.src = vidlinkUrl;
-        frame.classList.add('visible');
       }
     }
 
@@ -2795,174 +2744,9 @@ async function handleStreamPlayer(req, res) {
   res.end(playerHtml);
 }
 
-// 11d. NetMirror Direct Multi-Server Multi-Audio Player Engine (/api/netmirror-player)
-const NETMIRROR_SERVERS = {
-  '1': { host: 'play.watch21.shop', path: '/play/watchpvr.php', name: 'NetMirror 1 (App HD)' },
-  '2': { host: 'play.watch22.shop', path: '/play/watchpvr.php', name: 'NetMirror 2 (App Ultra)' },
-  '3': { host: 'bet.watch22.shop', path: '/play/watchpvr.php', name: 'NetMirror 3 (VIP HD)' },
-  '4': { host: 'spedostream2.shop', path: '/play/watchpvr.php', name: 'NetMirror 4 (SpedoStream)' },
-  '5': { host: 'dv.watch22.shop', path: '/play/watchpvr.php', name: 'NetMirror 5 (DV Stream)' },
-  '6': { host: 'play.watch22.shop', path: '/play/watchpvr.php', name: 'NetMirror Multi-Lang (Dubbed PVR)' },
-  'multi': { host: 'play.watch22.shop', path: '/play/watchpvr.php', name: 'NetMirror Multi-Lang (Dubbed PVR)' }
-};
-
-const NETMIRROR_FALLBACK_HOSTS = [
-  'play.watch21.shop',
-  'play.watch22.shop',
-  'bet.watch22.shop',
-  'spedostream2.shop',
-  'dv.watch22.shop'
-];
-
-async function fetchNetmirrorPlayerHtml(host, path, query) {
-  return new Promise((resolve) => {
-    const targetUrl = 'https://' + host + path + query;
-    const req = https.get(targetUrl, {
-      headers: {
-        'Referer': 'https://netmirror.center/',
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
-        'Accept-Language': 'en-US,en;q=0.9,hi;q=0.8'
-      },
-      timeout: 5000
-    }, res => {
-      let html = '';
-      res.on('data', c => html += c);
-      res.on('end', () => {
-        if (!html || html.length < 500 || html.includes('Server Busy') || html.includes('Come from listed Website')) {
-          return resolve(null);
-        }
-        resolve({ html, host });
-      });
-    });
-    req.on('error', () => resolve(null));
-    req.on('timeout', () => { req.destroy(); resolve(null); });
-  });
-}
-
+// 11d. NetMirror Streaming Player Route (Forwarded to Verified Stream Player)
 async function handleNetmirrorPlayer(req, res) {
-  if (handleCors(req, res)) return;
-  const q = getQueryParams(req);
-  let id = q.get('id') || '';
-  const title = q.get('title') || '';
-  let type = (q.get('type') || 'tv').toLowerCase();
-  const se = parseInt(q.get('se') || q.get('season') || '1', 10) || 1;
-  const ep = parseInt(q.get('ep') || q.get('episode') || '1', 10) || 1;
-  const lang = (q.get('lang') || 'hi').toLowerCase();
-  const year = q.get('year') || '';
-  const serverKey = String(q.get('server') || q.get('srv') || '1').toLowerCase();
-  const primaryCfg = NETMIRROR_SERVERS[serverKey] || NETMIRROR_SERVERS['1'];
-
-  return new Promise(async (resolve) => {
-    try {
-      let item = null;
-
-      // 1. Resolve via NetMirror Item Cache or catalog resolver
-      if (title || id) {
-        item = await resolveNetmirrorItem(id, title, type, lang);
-      }
-
-      // 2. Direct lookup by ID if still needed
-      if (!item && id && /^\d{1,9}$/.test(String(id))) {
-        const endpoint = (type === 'movie') ? 'movie' : 'tv';
-        let itemData = await fetchNetmirrorJson(`https://api2.imdb3.shop/api/${endpoint}/${id}`);
-        if (!itemData || !itemData.results || !itemData.results.length) {
-          const altEndpoint = (endpoint === 'movie') ? 'tv' : 'movie';
-          itemData = await fetchNetmirrorJson(`https://api2.imdb3.shop/api/${altEndpoint}/${id}`);
-        }
-        if (itemData && itemData.results && itemData.results.length) {
-          item = itemData.results[0];
-        }
-      }
-
-      // 3. Fallback to default Reacher demo item if completely unresolvable
-      if (!item) {
-        let defaultData = await fetchNetmirrorJson('https://api2.imdb3.shop/api/tv/5069');
-        if (defaultData && defaultData.results && defaultData.results.length) {
-          item = defaultData.results[0];
-        }
-      }
-
-      if (!item) {
-        await handleStreamPlayer(req, res);
-        return resolve();
-      }
-
-      // Ensure subjectid and dp are populated
-      if (!item.subjectid || !item.dp) {
-        const detailData = await fetchNetmirrorJson(`https://api2.imdb3.shop/api/${item.media_type || type}/${item.id}`);
-        if (detailData && detailData.results && detailData.results[0]) {
-          item = Object.assign({}, item, detailData.results[0]);
-        }
-      }
-
-      const ts = Math.floor(Date.now() / 1000);
-      const sig = crypto.createHmac('sha256', 'net###@@sss').update(String(item.id) + ':' + ts).digest('hex');
-      const na = encodeURIComponent(Buffer.from(item.title || title || 'Watch Online').toString('base64'));
-
-      const We = '?id=' + encodeURIComponent(item.subjectid || item.id || '') +
-        '&se=' + se + '&ep=' + ep +
-        '&dp=' + encodeURIComponent(item.dp || '') +
-        '&na=' + na +
-        '&year=' + encodeURIComponent(item.release_date || year || '') +
-        '&tm_id=' + encodeURIComponent(item.tm_id || '');
-      const Le = '&ts=' + ts + '&sig=' + sig + '&nid=' + item.id + '&exten=true&tv=&token=';
-      const playerQuery = We + Le;
-
-      // Multi-Server Resilient Failover Pool
-      const hostCandidates = [primaryCfg.host, ...NETMIRROR_FALLBACK_HOSTS.filter(h => h !== primaryCfg.host)];
-      let successfulResult = null;
-
-      for (const host of hostCandidates) {
-        successfulResult = await fetchNetmirrorPlayerHtml(host, '/play/watchpvr.php', playerQuery);
-        if (successfulResult && successfulResult.html) {
-          break;
-        }
-      }
-
-      if (!successfulResult || !successfulResult.html) {
-        await handleStreamPlayer(req, res);
-        return resolve();
-      }
-
-      let modified = successfulResult.html;
-
-      // 🚀 BYPASS EXTENSION LOCK ON NETMIRROR:
-      // Unlocks Artplayer to stream native video sources without requiring Chrome extension!
-      modified = modified.replace(/function\s+strp\s*\([^)]*\)\s*\{[\s\S]*?return\s+['"]http:\/\/play_url['"];?\s*\}/g, 'function strp(play_url, mp4) { return play_url; }');
-      modified = modified.replace(/return\s+['"]http:\/\/play_url['"];?/g, 'return play_url;');
-      modified = modified.replace(/popup_ext\.style\.display\s*=\s*['"]block['"]/g, 'popup_ext.style.display = "none"');
-      modified = modified.replace(/art\.notice\.show\s*=\s*['"]Please Add Extension[^'"]*['"];?/g, '/* extension notice bypassed */');
-
-      // Inject Minimal Clean Professional CSS to hide all popups and extension notices
-      const cleanStyles = `
-<style>
-  html, body { background: #000 !important; margin: 0 !important; padding: 0 !important; width: 100vw !important; height: 100vh !important; overflow: hidden !important; }
-  .popup-window, .popup-box, .show-ext-div, .if_ext, .adblock-container, #adblock, .notice, #notice { display: none !important; opacity: 0 !important; pointer-events: none !important; }
-  .art-video-player { width: 100vw !important; height: 100vh !important; border-radius: 0 !important; }
-  .art-video-player .art-bottom { background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.85) 100%) !important; }
-</style>
-`;
-      const baseTag = `<base href="https://${successfulResult.host}/play/"><meta name="referrer" content="origin">${cleanStyles}`;
-      if (modified.includes('<head>')) {
-        modified = modified.replace('<head>', '<head>' + baseTag);
-      } else {
-        modified = baseTag + modified;
-      }
-
-      res.writeHead(200, {
-        'Content-Type': 'text/html; charset=utf-8',
-        'Cache-Control': 'no-cache, no-store, must-revalidate',
-        'X-Frame-Options': 'ALLOWALL',
-        'Content-Security-Policy': 'frame-ancestors *'
-      });
-      res.end(modified);
-      resolve();
-    } catch (err) {
-      await handleStreamPlayer(req, res);
-      resolve();
-    }
-  });
+  return handleStreamPlayer(req, res);
 }
 
 function handleVersion(req, res) {

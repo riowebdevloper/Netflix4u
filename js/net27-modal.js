@@ -1251,12 +1251,8 @@
   var SERVERS_CONFIG = [
     { id: 'vidsrc_sbs', name: 'VidSrc SBS (Direct TMDB • Primary)', shortName: 'VidSrc SBS • Direct', tag: 'Direct TMDB', tagClass: 'tag-peachify', desc: 'VidSrc SBS Direct TMDB Stream • Canonical TMDB ID Playback' },
     { id: 'peachify', name: 'Peachify (Ad-Free HD • Multi-Audio)', shortName: 'Peachify • Ad-Free', tag: 'Ad-Free HD', tagClass: 'tag-peachify', desc: 'Peachify Pro Ad-Free Player • Auto-Next & Multi-Audio Synchronized Stream' },
-    { id: 'nm1', name: 'NetMirror 1 (Fast HD Server)', shortName: 'NetMirror 1 • Fast HD', tag: 'NetMirror HD', tagClass: 'tag-multi', desc: 'NetMirror App Server 1 • High-Speed Fast HD Stream with Audio Selection' },
-    { id: 'nm2', name: 'NetMirror 2 (Ultra HD Server)', shortName: 'NetMirror 2 • Ultra HD', tag: 'NetMirror Ultra', tagClass: 'tag-multi', desc: 'NetMirror App Server 2 • 1080p Ultra HD High-Bitrate Stream' },
-    { id: 'nm4', name: 'NetMirror 4 (SpedoStream)', shortName: 'NetMirror 4 • Spedo', tag: 'SpedoStream', tagClass: 'tag-fast', desc: 'NetMirror App Server 4 • SpedoStream CDN Fast Playback Engine' },
-    { id: 'nm_multi', name: 'NetMirror Multi-Lang (Dubbed PVR)', shortName: 'NetMirror Multi-Lang', tag: 'Multi-Dub', tagClass: 'tag-multi', desc: 'NetMirror App Multi-Audio Server • Hindi, Tamil, Telugu, English' },
-    { id: 's1', name: 'Server 1 (Fast Cloud Multi-Audio • Hindi Dub)', shortName: 'Server 1 • Hindi Multi', tag: 'Hindi Dual-Audio', tagClass: 'tag-multi', desc: 'Direct Fast Cloud & Multi-Audio Engine (Hindi Dubbed + English) with MX/VLC launch' },
-    { id: 's3', name: 'Server 3 (VidLink Pro Multi-Audio)', shortName: 'Server 3 • VidLink', tag: 'Multi-Lang', tagClass: 'tag-multi', desc: 'VidLink Pro High-Speed Global Streaming Player' }
+    { id: 's3', name: 'VidLink Pro (Multi-Audio Global)', shortName: 'VidLink Pro • Global', tag: 'Multi-Lang', tagClass: 'tag-multi', desc: 'VidLink Pro High-Speed Global Streaming Player with Multi-Language Audio' },
+    { id: 's1', name: 'Fast Cloud (Direct CDN Multi-Audio)', shortName: 'Fast Cloud • Stream', tag: 'Hindi Dual', tagClass: 'tag-fast', desc: 'Direct Fast Cloud & Multi-Audio Engine with MX Player / VLC App Launch' }
   ];
 
   var currentWatchLang = 'hi';
@@ -1273,7 +1269,7 @@
   var autoSwitchTimer = null;
   var autoSwitchIndex = 0;
   var isPlaybackConfirmed = false;
-  var autoSwitchOrder = ['vidsrc_sbs', 'peachify', 'nm1', 'nm2', 'nm_multi', 'nm4', 's1', 's3'];
+  var autoSwitchOrder = ['vidsrc_sbs', 'peachify', 's3', 's1'];
   var currentAutoSwitchToken = 0;
   var activeProbeController = null;
   var watchTopBarHideTimeout = null;
@@ -1336,15 +1332,11 @@
       activeWatchServers.peachify = buildPeachifyUrl(activeWatchParams, currentWatchLang);
       activeWatchServers.s3 = buildVidlinkMultiAudioUrl(activeWatchParams, currentWatchLang);
     }
-    activeWatchServers.s1 = buildNetmirrorServerUrl(activeWatchParams, currentWatchLang);
-    activeWatchServers.nm1 = buildNetmirrorDirectServerUrl(activeWatchParams, currentWatchLang, '1');
-    activeWatchServers.nm2 = buildNetmirrorDirectServerUrl(activeWatchParams, currentWatchLang, '2');
-    activeWatchServers.nm4 = buildNetmirrorDirectServerUrl(activeWatchParams, currentWatchLang, '4');
-    activeWatchServers.nm_multi = buildNetmirrorDirectServerUrl(activeWatchParams, currentWatchLang, 'multi');
+    activeWatchServers.s1 = buildFastCloudStreamUrl(activeWatchParams, currentWatchLang);
 
     // Reload active server iframe cleanly (zero stale artifacts)
     var srv = currentWatchServer || 'vidsrc_sbs';
-    var targetUrl = activeWatchServers[srv] || activeWatchServers.vidsrc_sbs || activeWatchServers.peachify || activeWatchServers.nm1;
+    var targetUrl = activeWatchServers[srv] || activeWatchServers.vidsrc_sbs || activeWatchServers.peachify || activeWatchServers.s3;
     if (watchModalIframe && targetUrl) {
       watchModalIframe.src = 'about:blank';
       watchModalIframe.title = (activeWatchParams.title || 'Series') + ' Season ' + (activeWatchParams.season || 1) + ' Episode ' + targetEp + ' player';
@@ -1499,12 +1491,12 @@
       pickerList.innerHTML = SERVERS_CONFIG.map(function(s, idx) {
         var isVidsrc = s.id === 'vidsrc_sbs';
         var isPeach = s.id === 'peachify';
+        var isS3 = s.id === 's3';
         var isS1 = s.id === 's1';
-        var isNm = s.id.indexOf('nm') === 0;
         var badge = isVidsrc ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-blue-500/20 text-blue-400 border border-blue-500/30">DIRECT TMDB</span>' :
                     isPeach ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-pink-500/20 text-pink-400 border border-pink-500/30">AD-FREE HD</span>' :
+                    isS3 ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-purple-500/20 text-purple-400 border border-purple-500/30">GLOBAL MULTI</span>' :
                     isS1 ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">HINDI DUB</span>' :
-                    isNm ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-red-500/20 text-red-400 border border-red-500/30">' + escapeHtml(s.tag) + '</span>' :
                     '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-white/10 text-white/60">' + escapeHtml(s.tag) + '</span>';
 
         return '<button type="button" data-select-server="' + s.id + '" class="picker-server-card' + (isVidsrc ? ' is-active' : '') + '">' +
@@ -1604,7 +1596,7 @@
 
   function probeStream(url, cb) {
     if (!url) return cb(false, 404);
-    if (url.indexOf('/api/netmirror-player') !== -1 || url.startsWith('/api/')) {
+    if (url.startsWith('/api/')) {
       return cb(true, 200);
     }
     if (activeProbeController) {
@@ -1889,7 +1881,7 @@
     return url;
   }
 
-  function buildNetmirrorServerUrl(params, lang) {
+  function buildFastCloudStreamUrl(params, lang) {
     if (!params) return '';
     var type = (params.type === 'tv' || params.type === 'series') ? 'tv' : 'movie';
     var title = params.title || '';
@@ -1899,33 +1891,6 @@
     var year = params.year || '';
     var activeLang = (lang && lang !== 'multi') ? lang : (currentWatchLang || 'hi');
     var url = '/api/stream-player?type=' + encodeURIComponent(type) +
-      '&title=' + encodeURIComponent(title) +
-      (se ? ('&se=' + encodeURIComponent(se)) : '') +
-      (ep ? ('&ep=' + encodeURIComponent(ep)) : '') +
-      '&year=' + encodeURIComponent(year) +
-      '&lang=' + encodeURIComponent(activeLang);
-
-    var cleanId = String(params.tmdbId || '').replace(/^(?:dotmobiz|tmdb(?:-movie|-series|-tv)?)-/, '');
-    if (cleanId && /^\d+$/.test(cleanId)) {
-      url += '&id=' + encodeURIComponent(cleanId);
-    } else if (params.canonicalId && /^\d+$/.test(String(params.canonicalId))) {
-      url += '&id=' + encodeURIComponent(params.canonicalId);
-    }
-    return url;
-  }
-
-  function buildNetmirrorDirectServerUrl(params, lang, srv) {
-    if (!params) return '';
-    var type = (params.type === 'tv' || params.type === 'series') ? 'tv' : 'movie';
-    var title = params.title || '';
-    var isTv = type === 'tv';
-    var se = isTv ? (params.season || 1) : '';
-    var ep = isTv ? (params.episode || 1) : '';
-    var year = params.year || '';
-    var activeLang = (lang && lang !== 'multi') ? lang : (currentWatchLang || 'hi');
-    var srvKey = srv || '1';
-    var url = '/api/netmirror-player?server=' + encodeURIComponent(srvKey) +
-      '&type=' + encodeURIComponent(type) +
       '&title=' + encodeURIComponent(title) +
       (se ? ('&se=' + encodeURIComponent(se)) : '') +
       (ep ? ('&ep=' + encodeURIComponent(ep)) : '') +
@@ -2032,11 +1997,7 @@
     var peachifyUrl = window.Netflix4uPlayerResolver
       ? window.Netflix4uPlayerResolver.resolvePlayerUrl(activeWatchParams, 'peachify', { lang: currentWatchLang })
       : buildPeachifyUrl(activeWatchParams, currentWatchLang);
-    var s1Url = buildNetmirrorServerUrl(activeWatchParams, currentWatchLang);
-    var nm1Url = buildNetmirrorDirectServerUrl(activeWatchParams, currentWatchLang, '1');
-    var nm2Url = buildNetmirrorDirectServerUrl(activeWatchParams, currentWatchLang, '2');
-    var nm4Url = buildNetmirrorDirectServerUrl(activeWatchParams, currentWatchLang, '4');
-    var nmMultiUrl = buildNetmirrorDirectServerUrl(activeWatchParams, currentWatchLang, 'multi');
+    var s1Url = buildFastCloudStreamUrl(activeWatchParams, currentWatchLang);
     var s3Url = window.Netflix4uPlayerResolver
       ? window.Netflix4uPlayerResolver.resolvePlayerUrl(activeWatchParams, 'vidlink', { lang: currentWatchLang })
       : buildVidlinkMultiAudioUrl(activeWatchParams, currentWatchLang);
@@ -2044,12 +2005,8 @@
     activeWatchServers = {
       vidsrc_sbs: vidsrcUrl,
       peachify: peachifyUrl,
-      nm1: nm1Url,
-      nm2: nm2Url,
-      nm4: nm4Url,
-      nm_multi: nmMultiUrl,
-      s1: s1Url,
-      s3: s3Url
+      s3: s3Url,
+      s1: s1Url
     };
 
     var startingServer = chosenServer || 'vidsrc_sbs';
@@ -2217,20 +2174,24 @@
 
     if (!activeWatchParams) return;
 
-    var newPeachifyUrl = buildPeachifyUrl(activeWatchParams, currentWatchLang);
-    var newS1Url = buildNetmirrorServerUrl(activeWatchParams, currentWatchLang);
-    var newS3Url = buildVidlinkMultiAudioUrl(activeWatchParams, currentWatchLang);
+    var newVidsrcUrl = window.Netflix4uPlayerResolver
+      ? window.Netflix4uPlayerResolver.resolvePlayerUrl(activeWatchParams, 'vidsrc_sbs')
+      : activeWatchServers.vidsrc_sbs;
+    var newPeachifyUrl = window.Netflix4uPlayerResolver
+      ? window.Netflix4uPlayerResolver.resolvePlayerUrl(activeWatchParams, 'peachify', { lang: currentWatchLang })
+      : buildPeachifyUrl(activeWatchParams, currentWatchLang);
+    var newS3Url = window.Netflix4uPlayerResolver
+      ? window.Netflix4uPlayerResolver.resolvePlayerUrl(activeWatchParams, 'vidlink', { lang: currentWatchLang })
+      : buildVidlinkMultiAudioUrl(activeWatchParams, currentWatchLang);
+    var newS1Url = buildFastCloudStreamUrl(activeWatchParams, currentWatchLang);
 
+    activeWatchServers.vidsrc_sbs = newVidsrcUrl;
     activeWatchServers.peachify = newPeachifyUrl;
-    activeWatchServers.s1 = newS1Url;
-    activeWatchServers.nm1 = buildNetmirrorDirectServerUrl(activeWatchParams, currentWatchLang, '1');
-    activeWatchServers.nm2 = buildNetmirrorDirectServerUrl(activeWatchParams, currentWatchLang, '2');
-    activeWatchServers.nm4 = buildNetmirrorDirectServerUrl(activeWatchParams, currentWatchLang, '4');
-    activeWatchServers.nm_multi = buildNetmirrorDirectServerUrl(activeWatchParams, currentWatchLang, 'multi');
     activeWatchServers.s3 = newS3Url;
+    activeWatchServers.s1 = newS1Url;
 
-    var activeSrv = currentWatchServer || 'peachify';
-    var activeUrl = activeWatchServers[activeSrv] || newPeachifyUrl;
+    var activeSrv = currentWatchServer || 'vidsrc_sbs';
+    var activeUrl = activeWatchServers[activeSrv] || newVidsrcUrl || newPeachifyUrl;
     hideWatchFailoverCard();
     watchModalIframe.src = activeUrl;
 

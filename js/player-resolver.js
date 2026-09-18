@@ -126,7 +126,7 @@
   /**
    * Resolves exact player embed URL for a given provider.
    * @param {Object} req - Playback request
-   * @param {string} provider - 'vidsrc_sbs' | 'peachify' | 'vidlink' | 'nm1' | 'nm2' | 'nm4' | 'nm_multi' | 's1'
+   * @param {string} provider - 'vidsrc_sbs' | 'peachify' | 'vidlink' | 's1'
    * @param {Object} options - { lang: string, autoPlay: boolean }
    * @returns {string|null} - Embed URL or null if invalid
    */
@@ -168,18 +168,7 @@
       return 'https://vidlink.pro/tv/' + s.tmdbId + '/' + s.season + '/' + s.episode + '?multiLang=true' + langParam;
     }
 
-    // 4. NetMirror Direct Server 1 / 2 / 4 / Multi
-    if (p === 'nm1' || p === 'nm2' || p === 'nm4' || p === 'nm_multi') {
-      var srvKey = (p === 'nm1') ? '1' : (p === 'nm2' ? '2' : (p === 'nm4' ? '4' : 'multi'));
-      var nmQuery = 'server=' + srvKey +
-        '&type=' + s.type +
-        '&id=' + s.tmdbId +
-        '&lang=' + encodeURIComponent(lang) +
-        (s.type === 'tv' ? ('&se=' + s.season + '&ep=' + s.episode) : '');
-      return '/api/netmirror-player?' + nmQuery;
-    }
-
-    // 5. Server 1 (Unified NetMirror / Fast Cloud Stream)
+    // 4. Server 1 (Fast Cloud Multi-Audio Stream)
     if (p === 's1') {
       var s1Query = 'type=' + s.type +
         '&id=' + s.tmdbId +
