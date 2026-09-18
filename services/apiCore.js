@@ -387,17 +387,17 @@ async function handlePlayback(req, res) {
   const hasVerifiedTmdb = Boolean(item.externalProvider === 'tmdb' || (item.tmdbId && String(item.tmdbId).length >= 2));
   const hasVerifiedImdb = Boolean(item.imdbId && item.imdbId.startsWith('tt'));
 
-  // 1. Server 1 (VidSrc SBS) - Primary canonical TMDB-ID streaming player
+  // 1. Server 1 (VidSrc Global) - Primary canonical TMDB-ID streaming player
   if (hasVerifiedTmdb) {
     const tid = String(item.tmdbId).replace(/^(?:tmdb-(?:movie|series|tv)-|dotmobiz-)/i, '');
     const vidsrcSbsUrl = isTv
-      ? `https://vidsrc.sbs/embed/tv/${tid}/${season}/${episode}`
-      : `https://vidsrc.sbs/embed/movie/${tid}`;
+      ? `https://vidsrc.pm/embed/tv/${tid}/${season}/${episode}`
+      : `https://vidsrc.pm/embed/movie/${tid}`;
 
     sources.push({
       id: 'vidsrc_sbs',
-      name: 'Server 1 (VidSrc SBS - Primary)',
-      label: 'Server 1 (VidSrc SBS)',
+      name: 'Server 1 (VidSrc Global - Primary)',
+      label: 'Server 1 (VidSrc Global)',
       canonicalId,
       provider: 'vidsrc_sbs',
       url: vidsrcSbsUrl,
@@ -2437,11 +2437,11 @@ async function handleStreamPlayer(req, res) {
     } catch(e) {}
   }
 
-  // 2. Multi-Server Stream Providers (VidSrc SBS direct TMDB, Peachify Ad-Free HD, VidLink Global Multi)
+  // 2. Multi-Server Stream Providers (VidSrc Global direct TMDB, Peachify Ad-Free HD, VidLink Global Multi)
   const cleanId = String(id || '').replace(/^(?:dotmobiz|tmdb(?:-movie|-series|-tv)?)-/, '');
   const vidsrcUrl = isMovie
-    ? `https://vidsrc.sbs/embed/movie/${cleanId}`
-    : `https://vidsrc.sbs/embed/tv/${cleanId}/${se}/${ep}`;
+    ? `https://vidsrc.pm/embed/movie/${cleanId}`
+    : `https://vidsrc.pm/embed/tv/${cleanId}/${se}/${ep}`;
   const peachifyDub = (lang === 'hi') ? 'Hindi' : (lang === 'ta' ? 'Tamil' : (lang === 'te' ? 'Telugu' : 'English'));
   const peachifyUrl = isMovie
     ? `https://peachify.pro/embed/movie/${cleanId}?accent=E50914&autoPlay=true${peachifyDub ? '&dub=' + encodeURIComponent(peachifyDub) : ''}`
@@ -2558,7 +2558,7 @@ async function handleStreamPlayer(req, res) {
 
       <!-- Server Selectors -->
       <div class="controls-group">
-        <button type="button" id="btn-srv-vidsrc" class="server-pill ${initialServer === 'vidsrc' ? 'active' : ''}" onclick="activateServer(&quot;vidsrc&quot;)">📺 VidSrc SBS (Direct TMDB)</button>
+        <button type="button" id="btn-srv-vidsrc" class="server-pill ${initialServer === 'vidsrc' ? 'active' : ''}" onclick="activateServer(&quot;vidsrc&quot;)">📺 VidSrc (Direct TMDB • Global)</button>
         <button type="button" id="btn-srv-peachify" class="server-pill ${initialServer === 'peachify' ? 'active' : ''}" onclick="activateServer(&quot;peachify&quot;)">🍑 Peachify (Ad-Free HD)</button>
         <button type="button" id="btn-srv-vidlink" class="server-pill ${initialServer === 'vidlink' ? 'active' : ''}" onclick="activateServer(&quot;vidlink&quot;)">🚀 VidLink Multi</button>
         ${cloudStream ? '<button type="button" id="btn-srv-cloud" class="server-pill ' + (initialServer === 'cloud' ? 'active' : '') + '" onclick="activateServer(&quot;cloud&quot;)">⚡ Fast Cloud (Hindi Dual)</button>' : ''}

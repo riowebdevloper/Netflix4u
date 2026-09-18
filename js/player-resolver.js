@@ -23,7 +23,12 @@
 
   // Strict allowlist for embed origins
   var ALLOWED_ORIGINS = [
+    'https://vidsrc.pm',
+    'https://vidsrc.in',
+    'https://vidsrc.sh',
     'https://vidsrc.sbs',
+    'https://vidsrc.to',
+    'https://vidsrc.net',
     'https://peachify.pro',
     'https://peachify.top',
     'https://vidlink.pro',
@@ -141,12 +146,13 @@
     var opt = options || {};
     var lang = (opt.lang || 'hi').toLowerCase();
 
-    // 1. Primary Reference Provider: VidSrc SBS
-    if (p === 'vidsrc_sbs' || p === 'vidsrc' || p === 'default') {
+    // 1. Primary Reference Provider: VidSrc Global (Unblocked worldwide)
+    if (p === 'vidsrc_pm' || p === 'vidsrc_sbs' || p === 'vidsrc' || p === 'default' || p === 'vidsrc_in') {
+      var vHost = (p === 'vidsrc_in') ? 'vidsrc.in' : (opt.domain || 'vidsrc.pm');
       if (s.type === 'movie') {
-        return 'https://vidsrc.sbs/embed/movie/' + s.tmdbId;
+        return 'https://' + vHost + '/embed/movie/' + s.tmdbId;
       }
-      return 'https://vidsrc.sbs/embed/tv/' + s.tmdbId + '/' + s.season + '/' + s.episode;
+      return 'https://' + vHost + '/embed/tv/' + s.tmdbId + '/' + s.season + '/' + s.episode;
     }
 
     // 2. Peachify Pro (Ad-Free HD with multi-audio sync)
@@ -179,9 +185,9 @@
 
     // Fallback to Primary Provider
     if (s.type === 'movie') {
-      return 'https://vidsrc.sbs/embed/movie/' + s.tmdbId;
+      return 'https://vidsrc.pm/embed/movie/' + s.tmdbId;
     }
-    return 'https://vidsrc.sbs/embed/tv/' + s.tmdbId + '/' + s.season + '/' + s.episode;
+    return 'https://vidsrc.pm/embed/tv/' + s.tmdbId + '/' + s.season + '/' + s.episode;
   }
 
   /**

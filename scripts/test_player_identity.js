@@ -45,24 +45,24 @@ function runTest(name, fn) {
 // -----------------------------------------------------------------------------
 console.log('--- 1. PLAYER RESOLVER UNIT & VALIDATION TESTS ---');
 
-runTest('Movie resolver produces exact vidsrc.sbs format (TMDB 533535)', () => {
+runTest('Movie resolver produces exact vidsrc format (TMDB 533535)', () => {
   const url = resolver.resolvePlayerUrl({ type: 'movie', tmdbId: 533535 }, 'vidsrc_sbs');
-  assert.strictEqual(url, 'https://vidsrc.sbs/embed/movie/533535');
+  assert.strictEqual(url, 'https://vidsrc.pm/embed/movie/533535');
 });
 
-runTest('TV resolver produces exact vidsrc.sbs format (TMDB 79744 / S1 / E1)', () => {
+runTest('TV resolver produces exact vidsrc format (TMDB 79744 / S1 / E1)', () => {
   const url = resolver.resolvePlayerUrl({ type: 'tv', tmdbId: 79744, season: 1, episode: 1 }, 'vidsrc_sbs');
-  assert.strictEqual(url, 'https://vidsrc.sbs/embed/tv/79744/1/1');
+  assert.strictEqual(url, 'https://vidsrc.pm/embed/tv/79744/1/1');
 });
 
 runTest('Movie resolver handles string numeric TMDB ID with prefix (tmdb-movie-533535)', () => {
   const url = resolver.resolvePlayerUrl({ type: 'movie', tmdbId: 'tmdb-movie-533535' }, 'vidsrc_sbs');
-  assert.strictEqual(url, 'https://vidsrc.sbs/embed/movie/533535');
+  assert.strictEqual(url, 'https://vidsrc.pm/embed/movie/533535');
 });
 
 runTest('TV resolver handles string numeric TMDB ID with prefix (tmdb-series-79744)', () => {
   const url = resolver.resolvePlayerUrl({ type: 'tv', tmdbId: 'tmdb-series-79744', season: '2', episode: '4' }, 'vidsrc_sbs');
-  assert.strictEqual(url, 'https://vidsrc.sbs/embed/tv/79744/2/4');
+  assert.strictEqual(url, 'https://vidsrc.pm/embed/tv/79744/2/4');
 });
 
 runTest('Validation strictly rejects non-numeric / fuzzy title text as TMDB ID', () => {
@@ -117,6 +117,7 @@ runTest('Cache key isolation: Movie and TV produce unique canonical cache keys',
 });
 
 runTest('Iframe security allowlist authorizes approved origins and blocks untrusted', () => {
+  assert.strictEqual(resolver.isAllowedOrigin('https://vidsrc.pm/embed/movie/533535'), true);
   assert.strictEqual(resolver.isAllowedOrigin('https://vidsrc.sbs/embed/movie/533535'), true);
   assert.strictEqual(resolver.isAllowedOrigin('https://peachify.pro/embed/movie/533535'), true);
   assert.strictEqual(resolver.isAllowedOrigin('https://vidlink.pro/movie/533535'), true);
@@ -154,7 +155,7 @@ sampleMovies.forEach((m, idx) => {
 
     // 3. Player Source Identity Simulation
     const playerUrl = resolver.resolvePlayerUrl({ type: 'movie', tmdbId: detailTmdbId }, 'vidsrc_sbs');
-    assert.strictEqual(playerUrl, `https://vidsrc.sbs/embed/movie/${cardTmdbId}`);
+    assert.strictEqual(playerUrl, `https://vidsrc.pm/embed/movie/${cardTmdbId}`);
 
     // Verify exact TMDB ID is in the player source URL
     assert.ok(playerUrl.includes(`/movie/${cardTmdbId}`), `Player URL must contain /movie/${cardTmdbId}`);
@@ -195,27 +196,27 @@ sampleSeries.forEach((s, idx) => {
 
     // 2. First Episode (Season 1 Episode 1)
     const ep1Url = resolver.resolvePlayerUrl({ type: 'tv', tmdbId: seriesTmdbId, season: 1, episode: 1 }, 'vidsrc_sbs');
-    assert.strictEqual(ep1Url, `https://vidsrc.sbs/embed/tv/${seriesTmdbId}/1/1`);
+    assert.strictEqual(ep1Url, `https://vidsrc.pm/embed/tv/${seriesTmdbId}/1/1`);
 
     // 3. Next Navigation: Episode 1 -> Episode 2
     const ep2Url = resolver.resolvePlayerUrl({ type: 'tv', tmdbId: seriesTmdbId, season: 1, episode: 2 }, 'vidsrc_sbs');
-    assert.strictEqual(ep2Url, `https://vidsrc.sbs/embed/tv/${seriesTmdbId}/1/2`);
+    assert.strictEqual(ep2Url, `https://vidsrc.pm/embed/tv/${seriesTmdbId}/1/2`);
 
     // 4. Middle Episode (Season 1 Episode 5)
     const ep5Url = resolver.resolvePlayerUrl({ type: 'tv', tmdbId: seriesTmdbId, season: 1, episode: 5 }, 'vidsrc_sbs');
-    assert.strictEqual(ep5Url, `https://vidsrc.sbs/embed/tv/${seriesTmdbId}/1/5`);
+    assert.strictEqual(ep5Url, `https://vidsrc.pm/embed/tv/${seriesTmdbId}/1/5`);
 
     // 5. Prev Navigation: Episode 5 -> Episode 4
     const ep4Url = resolver.resolvePlayerUrl({ type: 'tv', tmdbId: seriesTmdbId, season: 1, episode: 4 }, 'vidsrc_sbs');
-    assert.strictEqual(ep4Url, `https://vidsrc.sbs/embed/tv/${seriesTmdbId}/1/4`);
+    assert.strictEqual(ep4Url, `https://vidsrc.pm/embed/tv/${seriesTmdbId}/1/4`);
 
     // 6. Multiple Seasons: Season 2 Episode 1
     const s2Ep1Url = resolver.resolvePlayerUrl({ type: 'tv', tmdbId: seriesTmdbId, season: 2, episode: 1 }, 'vidsrc_sbs');
-    assert.strictEqual(s2Ep1Url, `https://vidsrc.sbs/embed/tv/${seriesTmdbId}/2/1`);
+    assert.strictEqual(s2Ep1Url, `https://vidsrc.pm/embed/tv/${seriesTmdbId}/2/1`);
 
     // 7. Identity Lock: Verify series TMDB ID remained constant throughout all episodes
     [ep1Url, ep2Url, ep4Url, ep5Url, s2Ep1Url].forEach(u => {
-      assert.ok(u.startsWith(`https://vidsrc.sbs/embed/tv/${seriesTmdbId}/`), `URL ${u} must start with series TMDB ID ${seriesTmdbId}`);
+      assert.ok(u.startsWith(`https://vidsrc.pm/embed/tv/${seriesTmdbId}/`), `URL ${u} must start with series TMDB ID ${seriesTmdbId}`);
     });
   });
 });

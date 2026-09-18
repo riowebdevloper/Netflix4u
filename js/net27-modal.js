@@ -1249,7 +1249,7 @@
   // ─── WATCH MODAL (Net27 Streaming Player UI with Auto-Failover Engine) ───
   // ─── WATCH MODAL (Net27 Streaming Player UI with Auto-Failover Engine) ───
   var SERVERS_CONFIG = [
-    { id: 'vidsrc_sbs', name: 'VidSrc SBS (Direct TMDB • Primary)', shortName: 'VidSrc SBS • Direct', tag: 'Direct TMDB', tagClass: 'tag-peachify', desc: 'VidSrc SBS Direct TMDB Stream • Canonical TMDB ID Playback' },
+    { id: 'vidsrc_sbs', name: 'VidSrc (Direct TMDB • Global)', shortName: 'VidSrc • Global', tag: 'Direct TMDB', tagClass: 'tag-peachify', desc: 'VidSrc Global Direct TMDB Stream • Canonical TMDB ID Playback (Unblocked Worldwide)' },
     { id: 'peachify', name: 'Peachify (Ad-Free HD • Multi-Audio)', shortName: 'Peachify • Ad-Free', tag: 'Ad-Free HD', tagClass: 'tag-peachify', desc: 'Peachify Pro Ad-Free Player • Auto-Next & Multi-Audio Synchronized Stream' },
     { id: 's3', name: 'VidLink Pro (Multi-Audio Global)', shortName: 'VidLink Pro • Global', tag: 'Multi-Lang', tagClass: 'tag-multi', desc: 'VidLink Pro High-Speed Global Streaming Player with Multi-Language Audio' },
     { id: 's1', name: 'Fast Cloud (Direct CDN Multi-Audio)', shortName: 'Fast Cloud • Stream', tag: 'Hindi Dual', tagClass: 'tag-fast', desc: 'Direct Fast Cloud & Multi-Audio Engine with MX Player / VLC App Launch' }
@@ -1328,7 +1328,7 @@
       activeWatchServers.s3 = window.Netflix4uPlayerResolver.resolvePlayerUrl(activeWatchParams, 'vidlink', { lang: currentWatchLang });
     } else {
       var sTid = String(activeWatchParams.tmdbId || '').replace(/^(?:dotmobiz|tmdb(?:-movie|-series|-tv)?)-/, '');
-      activeWatchServers.vidsrc_sbs = 'https://vidsrc.sbs/embed/tv/' + sTid + '/' + (activeWatchParams.season || 1) + '/' + targetEp;
+      activeWatchServers.vidsrc_sbs = 'https://vidsrc.pm/embed/tv/' + sTid + '/' + (activeWatchParams.season || 1) + '/' + targetEp;
       activeWatchServers.peachify = buildPeachifyUrl(activeWatchParams, currentWatchLang);
       activeWatchServers.s3 = buildVidlinkMultiAudioUrl(activeWatchParams, currentWatchLang);
     }
@@ -1993,7 +1993,7 @@
     // Build Server URLs via Centralized Player Resolver
     var vidsrcUrl = window.Netflix4uPlayerResolver
       ? window.Netflix4uPlayerResolver.resolvePlayerUrl(activeWatchParams, 'vidsrc_sbs')
-      : (isTv ? ('https://vidsrc.sbs/embed/tv/' + tmdbId + '/' + season + '/' + episode) : ('https://vidsrc.sbs/embed/movie/' + tmdbId));
+      : (isTv ? ('https://vidsrc.pm/embed/tv/' + tmdbId + '/' + season + '/' + episode) : ('https://vidsrc.pm/embed/movie/' + tmdbId));
     var peachifyUrl = window.Netflix4uPlayerResolver
       ? window.Netflix4uPlayerResolver.resolvePlayerUrl(activeWatchParams, 'peachify', { lang: currentWatchLang })
       : buildPeachifyUrl(activeWatchParams, currentWatchLang);
