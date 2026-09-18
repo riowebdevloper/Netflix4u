@@ -21,7 +21,7 @@
 }(typeof self !== 'undefined' ? self : this, function () {
   'use strict';
 
-  // Strict allowlist for embed origins
+  // Strict allowlist for embed origins (including verified multi-server providers, zero Rivestream)
   var ALLOWED_ORIGINS = [
     'https://vidsrc.pm',
     'https://vidsrc.in',
@@ -35,6 +35,34 @@
     'https://allmovieland.link',
     'https://laika422mon.com',
     'https://vidlink.pro',
+    'https://www.vidsrc.party',
+    'https://api.cineby.homes',
+    'https://vidbolt.xyz',
+    'https://vidrock.ru',
+    'https://player.videasy.net',
+    'https://embed.wplay.me',
+    'https://play.xpass.top',
+    'https://vidnest.fun',
+    'https://vidcore.net',
+    'https://vaplayer.ru',
+    'https://zxcstream.xyz',
+    'https://1embed.cc',
+    'https://cinesrc.st',
+    'https://vidlux.site',
+    'https://vsembed.ru',
+    'https://vixsrc.to',
+    'https://player.vidify.top',
+    'https://mapple.rip',
+    'https://vidfast.pro',
+    'https://vidflix.club',
+    'https://vidsrc.su',
+    'https://www.viduki.net',
+    'https://vidsrc2.ru',
+    'https://www.2embed.stream',
+    'https://frembed.asia',
+    'https://moviesapi.to',
+    'https://111movies.com',
+    'https://superflixapi.beer',
     'https://acceptable.a-ads.com',
     'https://www.youtube-nocookie.com',
     'https://www.youtube.com'
@@ -194,6 +222,31 @@
         (s.type === 'tv' ? ('&se=' + s.season + '&ep=' + s.episode) : '');
       return '/api/stream-player?' + s1Query;
     }
+
+    // Absolute Exclusion Guard: Rivestream / Fade must strictly never resolve
+    if (/rivestream|fade/i.test(p)) {
+      console.warn('[Netflix4U Security] Blocked attempt to resolve excluded Rivestream / Fade provider');
+      return null;
+    }
+
+    // Try multi-server provider manager in Node / universal environment if available
+    try {
+      if (typeof require === 'function') {
+        var pm = require('../src/player/providers/provider-manager').providerManager;
+        if (pm) {
+          var input = {
+            canonicalId: req.canonicalId || ('tmdb-' + s.tmdbId),
+            contentType: s.type,
+            tmdbId: s.tmdbId,
+            imdbId: opt.imdbId || req.imdbId,
+            season: s.season,
+            episode: s.episode
+          };
+          var resolvedFromPm = pm.resolvePlayerUrl(input, p, opt);
+          if (resolvedFromPm) return resolvedFromPm;
+        }
+      }
+    } catch(e) {}
 
     // Fallback to Primary Provider
     if (s.type === 'movie') {

@@ -141,6 +141,108 @@ runTest('Iframe security allowlist authorizes approved origins and blocks untrus
 });
 
 // -----------------------------------------------------------------------------
+// 1B. REBUILT ARCHITECTURE & MULTI-SERVER PROVIDER ADAPTER TESTS
+// -----------------------------------------------------------------------------
+console.log('\n--- 1B. EXTRACTED PROVIDER REGISTRY & ADAPTER TESTS ---');
+
+runTest('Provider manager loads registry and excludes Rivestream/Fade unconditionally', () => {
+  const pm = resolver.providerManager;
+  assert.ok(pm, 'Provider manager must be exported and initialized');
+
+  // Fade / Rivestream must NOT be registered or resolvable
+  const fadeProvider = resolver.getProvider('fade');
+  assert.strictEqual(fadeProvider, null, 'Fade must not be in provider registry');
+  const rivestreamProvider = resolver.getProvider('rivestream');
+  assert.strictEqual(rivestreamProvider, null, 'Rivestream must not be in provider registry');
+
+  // Resolving Rivestream must return null
+  const blockedUrl = pm.resolvePlayerUrl({ type: 'movie', tmdbId: 533535 }, 'fade');
+  assert.strictEqual(blockedUrl, null, 'Fade resolution must be blocked and return null');
+  const blockedRivestreamUrl = pm.resolvePlayerUrl({ type: 'movie', tmdbId: 533535 }, 'rivestream');
+  assert.strictEqual(blockedRivestreamUrl, null, 'Rivestream resolution must be blocked and return null');
+
+  // Check allowlist excludes rivestream
+  assert.strictEqual(resolver.isAllowedOrigin('https://rivestream.org/embed'), false, 'Rivestream must be disallowed in origin allowlist');
+});
+
+runTest('Bolt and Flix mirror deduplication: Both map cleanly to vidbolt cluster', () => {
+  const bolt = resolver.getProvider('vidbolt');
+  assert.ok(bolt, 'Bolt provider must exist');
+  assert.strictEqual(bolt.providerGroup, 'vidbolt_cluster');
+  assert.strictEqual(bolt.baseUrl, 'https://vidbolt.xyz');
+});
+
+runTest('Extracted provider adapters construct exact Movie and TV URLs', () => {
+  const pm = resolver.providerManager;
+
+  // Wootly (VidSrc Party)
+  const wootlyMovie = pm.resolvePlayerUrl({ type: 'movie', tmdbId: 533535 }, 'wootly');
+  assert.strictEqual(wootlyMovie, 'https://www.vidsrc.party/movie/533535');
+  const wootlyTv = pm.resolvePlayerUrl({ type: 'tv', tmdbId: 79744, season: 1, episode: 1 }, 'wootly');
+  assert.strictEqual(wootlyTv, 'https://www.vidsrc.party/tv/79744/1/1');
+
+  // Braflix (Cineby) with autonext
+  const braflixMovie = pm.resolvePlayerUrl({ type: 'movie', tmdbId: 533535 }, 'braflix');
+  assert.strictEqual(braflixMovie, 'https://api.cineby.homes/embed/movie/533535');
+  const braflixTv = pm.resolvePlayerUrl({ type: 'tv', tmdbId: 79744, season: 2, episode: 3 }, 'braflix');
+  assert.strictEqual(braflixTv, 'https://api.cineby.homes/embed/tv/79744/2/3?autonext=1&ds_lang=en');
+
+  // 4K (Videasy) with custom controls parameter
+  const videasyTv = pm.resolvePlayerUrl({ type: 'tv', tmdbId: 79744, season: 1, episode: 4 }, 'videasy');
+  assert.match(videasyTv, /^https:\/\/player\.videasy\.net\/tv\/79744\/1\/4\?nextEpisode=true/);
+
+  // Nero (Vidfast)
+  const vidfastMovie = pm.resolvePlayerUrl({ type: 'movie', tmdbId: 533535 }, 'vidfast');
+  assert.strictEqual(vidfastMovie, 'https://vidfast.pro/movie/533535');
+
+  // French (FrEmbed)
+  const frenchMovie = pm.resolvePlayerUrl({ type: 'movie', tmdbId: 533535 }, 'frembed');
+  assert.strictEqual(frenchMovie, 'https://frembed.asia/api/film.php?id=533535');
+  const frenchTv = pm.resolvePlayerUrl({ type: 'tv', tmdbId: 79744, season: 1, episode: 2 }, 'frembed');
+  assert.strictEqual(frenchTv, 'https://frembed.asia/api/serie.php?id=79744&sa=1&epi=2');
+
+  // Italian (VixSrc)
+  const italianMovie = pm.resolvePlayerUrl({ type: 'movie', tmdbId: 533535 }, 'vixsrc');
+  assert.strictEqual(italianMovie, 'https://vixsrc.to/movie/533535?autoplay=true&lang=it');
+
+  // Portuguese (Superflix)
+  const ptMovie = pm.resolvePlayerUrl({ type: 'movie', tmdbId: 533535 }, 'superflix');
+  assert.strictEqual(ptMovie, 'https://superflixapi.beer/filme/533535');
+  const ptTv = pm.resolvePlayerUrl({ type: 'tv', tmdbId: 79744, season: 3, episode: 1 }, 'superflix');
+  assert.strictEqual(ptTv, 'https://superflixapi.beer/serie/79744/3/1');
+});
+
+runTest('Multi-Server Switching strictly locks canonical content identity (Movie & TV)', () => {
+  const pm = resolver.providerManager;
+  const inputMovie = { canonicalId: 'tmdb-movie-533535', contentType: 'movie', tmdbId: 533535 };
+  
+  // Switching between servers must retain exact TMDB ID 533535
+  const s1 = pm.resolvePlayerUrl(inputMovie, 'vidsrc_sbs');
+  const s2 = pm.resolvePlayerUrl(inputMovie, 'peachify');
+  const s3 = pm.resolvePlayerUrl(inputMovie, 'allmovieland');
+  const s4 = pm.resolvePlayerUrl(inputMovie, 'vidlink');
+  const s5 = pm.resolvePlayerUrl(inputMovie, 'wootly');
+
+  assert.match(s1, /533535/);
+  assert.match(s2, /533535/);
+  assert.match(s3, /533535/);
+  assert.match(s4, /533535/);
+  assert.match(s5, /533535/);
+
+  // TV server switching preserves exact series TMDB ID, season, and episode
+  const inputTv = { canonicalId: 'tmdb-series-79744', contentType: 'tv', tmdbId: 79744, season: 2, episode: 7 };
+  const tvS1 = pm.resolvePlayerUrl(inputTv, 'vidsrc_sbs');
+  const tvS2 = pm.resolvePlayerUrl(inputTv, 'peachify');
+  const tvS3 = pm.resolvePlayerUrl(inputTv, 'allmovieland');
+  const tvS4 = pm.resolvePlayerUrl(inputTv, 'braflix');
+
+  assert.match(tvS1, /79744\/2\/7/);
+  assert.match(tvS2, /79744\/2\/7/);
+  assert.match(tvS3, /79744\?s=2&e=7/);
+  assert.match(tvS4, /79744\/2\/7/);
+});
+
+// -----------------------------------------------------------------------------
 // 2. MOVIE TEST MATRIX (20 REAL MOVIES FROM CATALOG)
 // -----------------------------------------------------------------------------
 console.log('\n--- 2. MOVIE TEST MATRIX (20 MOVIES) ---');
