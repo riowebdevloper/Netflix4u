@@ -387,37 +387,53 @@ async function handlePlayback(req, res) {
   const hasVerifiedTmdb = Boolean(item.externalProvider === 'tmdb' || (item.tmdbId && String(item.tmdbId).length >= 2));
   const hasVerifiedImdb = Boolean(item.imdbId && item.imdbId.startsWith('tt'));
 
-  // 1. Server 1 (VidLink) - Premier ultra-fast streaming player with multi-audio
+  // 1. Server 1 (VidSrc SBS) - Primary canonical TMDB-ID streaming player
   if (hasVerifiedTmdb) {
-    const tid = item.tmdbId;
+    const tid = String(item.tmdbId).replace(/^(?:tmdb-(?:movie|series|tv)-|dotmobiz-)/i, '');
+    const vidsrcSbsUrl = isTv
+      ? `https://vidsrc.sbs/embed/tv/${tid}/${season}/${episode}`
+      : `https://vidsrc.sbs/embed/movie/${tid}`;
+
+    sources.push({
+      id: 'vidsrc_sbs',
+      name: 'Server 1 (VidSrc SBS - Primary)',
+      label: 'Server 1 (VidSrc SBS)',
+      canonicalId,
+      provider: 'vidsrc_sbs',
+      url: vidsrcSbsUrl,
+      embedUrl: vidsrcSbsUrl,
+      isDirect: false
+    });
+
+    // 2. Server 2 (Peachify Pro) - Ad-free HD with multi-audio
+    const peachifyUrl = isTv
+      ? `https://peachify.pro/embed/tv/${tid}/${season}/${episode}?accent=E50914&autoPlay=true&autoNext=true`
+      : `https://peachify.pro/embed/movie/${tid}?accent=E50914&autoPlay=true`;
+
+    sources.push({
+      id: 'peachify',
+      name: 'Server 2 (Peachify Pro)',
+      label: 'Server 2 (Peachify Pro)',
+      canonicalId,
+      provider: 'peachify',
+      url: peachifyUrl,
+      embedUrl: peachifyUrl,
+      isDirect: false
+    });
+
+    // 3. Server 3 (VidLink Pro) - Ultra-fast multi-language
     const vidlinkUrl = isTv
       ? `https://vidlink.pro/tv/${tid}/${season}/${episode}?multiLang=true`
       : `https://vidlink.pro/movie/${tid}?multiLang=true`;
 
     sources.push({
       id: 'vidlink',
-      name: 'Server 1 (VidLink)',
-      label: 'Server 1 (VidLink)',
+      name: 'Server 3 (VidLink)',
+      label: 'Server 3 (VidLink)',
       canonicalId,
       provider: 'vidlink',
       url: vidlinkUrl,
       embedUrl: vidlinkUrl,
-      isDirect: false
-    });
-
-    // 2. Server 2 (VidSrc) - Primary reliable backup mirror
-    const vidsrcUrl = isTv
-      ? `https://vidsrc.me/embed/tv?tmdb=${tid}&season=${season}&episode=${episode}`
-      : `https://vidsrc.me/embed/movie?tmdb=${tid}`;
-
-    sources.push({
-      id: 'vidsrcme',
-      name: 'Server 2 (VidSrc)',
-      label: 'Server 2 (VidSrc)',
-      canonicalId,
-      provider: 'vidsrcme',
-      url: vidsrcUrl,
-      embedUrl: vidsrcUrl,
       isDirect: false
     });
   }
@@ -2438,6 +2454,9 @@ async function handleStreamPlayer(req, res) {
 
   // 3. Multi-Server Fallbacks
   const cleanId = String(id || '').replace(/^(?:dotmobiz|tmdb(?:-movie|-series|-tv)?)-/, '');
+  const vidsrcUrl = isMovie
+    ? `https://vidsrc.sbs/embed/movie/${cleanId}`
+    : `https://vidsrc.sbs/embed/tv/${cleanId}/${se}/${ep}`;
   const peachifyDub = (lang === 'hi') ? 'Hindi' : (lang === 'ta' ? 'Tamil' : (lang === 'te' ? 'Telugu' : 'English'));
   const peachifyUrl = isMovie
     ? `https://peachify.pro/embed/movie/${cleanId}?accent=E50914&autoPlay=true${peachifyDub ? '&dub=' + encodeURIComponent(peachifyDub) : ''}`
@@ -2449,8 +2468,8 @@ async function handleStreamPlayer(req, res) {
   const displayTitle = (title || 'Stream') + (isMovie ? '' : ` • S${se} E${ep}`);
   const directDlHref = rawCloudUrl ? `/api/download-file?url=${encodeURIComponent(rawCloudUrl)}` : (cloudStream?.url ? `/api/download-file?url=${encodeURIComponent(cloudStream.url)}` : '');
 
-  // Default initial server: Peachify (Ad-Free HD) or Fast Cloud if direct cloud stream available
-  const initialServer = cloudStream ? 'cloud' : 'peachify';
+  // Default initial server: VidSrc SBS (Direct TMDB) or Fast Cloud if direct cloud stream available
+  const initialServer = cloudStream ? 'cloud' : 'vidsrc';
 
   const playerHtml = `<!DOCTYPE html>
 <html lang="en">
@@ -2554,6 +2573,7 @@ async function handleStreamPlayer(req, res) {
 
       <!-- Server Selectors -->
       <div class="controls-group">
+        <button type="button" id="btn-srv-vidsrc" class="server-pill ${initialServer === 'vidsrc' ? 'active' : ''}" onclick="activateServer(&quot;vidsrc&quot;)">📺 VidSrc SBS (Direct TMDB)</button>
         <button type="button" id="btn-srv-peachify" class="server-pill ${initialServer === 'peachify' ? 'active' : ''}" onclick="activateServer(&quot;peachify&quot;)">🍑 Peachify (Ad-Free HD)</button>
         ${cloudStream ? '<button type="button" id="btn-srv-cloud" class="server-pill ' + (initialServer === 'cloud' ? 'active' : '') + '" onclick="activateServer(&quot;cloud&quot;)">⚡ Fast Cloud (Hindi Dual)</button>' : ''}
         <button type="button" id="btn-srv-nm1" class="server-pill ${initialServer === 'nm1' ? 'active' : ''}" onclick="activateServer(&quot;nm1&quot;)">⚡ NetMirror 1 (App HD)</button>
@@ -2569,6 +2589,7 @@ async function handleStreamPlayer(req, res) {
 
     <!-- Media Players View Area -->
     <div id="media-view">
+      <iframe id="iframe-vidsrc" class="layer-view ${initialServer === 'vidsrc' ? 'visible' : ''}" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
       <iframe id="iframe-peachify" class="layer-view ${initialServer === 'peachify' ? 'visible' : ''}" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
       <div id="artplayer-layer" class="layer-view ${initialServer === 'cloud' ? 'visible' : ''}"></div>
       <iframe id="iframe-nm1" class="layer-view ${initialServer === 'nm1' ? 'visible' : ''}" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
@@ -2582,6 +2603,7 @@ async function handleStreamPlayer(req, res) {
   </div>
 
   <script>
+    var vidsrcUrl = ${JSON.stringify(vidsrcUrl)};
     var peachifyUrl = ${JSON.stringify(peachifyUrl)};
     var cloudUrl = ${JSON.stringify(cloudStream ? cloudStream.url : '')};
     var nm1Url = ${JSON.stringify(nm1Url)};
@@ -2592,7 +2614,7 @@ async function handleStreamPlayer(req, res) {
     var currentServer = ${JSON.stringify(initialServer)};
     var art = null;
     var failoverIndex = 0;
-    var serverSequence = ['peachify', 'nm1', 'nm2', 'nmmulti', 'nm4', 'cloud', 'vidlink'].filter(function(s) {
+    var serverSequence = ['vidsrc', 'peachify', 'nm1', 'nm2', 'nmmulti', 'nm4', 'cloud', 'vidlink'].filter(function(s) {
       if (s === 'cloud' && !cloudUrl) return false;
       return true;
     });
@@ -2616,7 +2638,13 @@ async function handleStreamPlayer(req, res) {
       var btn = document.getElementById('btn-srv-' + srv);
       if (btn) btn.classList.add('active');
 
-      if (srv === 'peachify') {
+      if (srv === 'vidsrc') {
+        var frame = document.getElementById('iframe-vidsrc');
+        if (!frame.src || frame.src === 'about:blank') {
+          frame.src = vidsrcUrl;
+        }
+        frame.classList.add('visible');
+      } else if (srv === 'peachify') {
         var frame = document.getElementById('iframe-peachify');
         if (!frame.src || frame.src === 'about:blank') {
           frame.src = peachifyUrl;

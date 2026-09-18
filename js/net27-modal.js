@@ -435,7 +435,7 @@
       '<div class="p-4 sm:p-6 space-y-6">' +
         '<!-- Action Buttons -->' +
         '<div class="flex flex-wrap items-center gap-2.5 sm:gap-3">' +
-          '<button type="button" data-modal="watch" data-tmdbid="' + (data.tmdbId || tmdbId) + '" data-canonical-id="' + escapeHtml(data.canonicalId || tmdbId) + '" data-type="' + type + '" data-title="' + escapeHtml(data.title) + '" data-year="' + (data.year || '') + '" data-imdbid="' + (data.imdbId || '') + '" data-backdrop="' + (data.backdrop || '') + '" data-poster="' + (data.poster || '') + '"' + (isTv ? ' data-se="' + (data.initialSeason || 1) + '" data-ep="1"' : '') + ' class="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg bg-white text-black font-bold hover:bg-white/90 active:scale-95 transition text-sm shadow-xl cursor-pointer">' +
+          '<button type="button" data-modal="watch" data-tmdbid="' + ((typeof Netflix4uPlayerResolver !== 'undefined' && Netflix4uPlayerResolver.cleanTmdbId) ? (Netflix4uPlayerResolver.cleanTmdbId(data.tmdbId || tmdbId) || data.tmdbId || tmdbId) : (data.tmdbId || tmdbId)) + '" data-canonical-id="' + escapeHtml(data.canonicalId || tmdbId) + '" data-type="' + type + '" data-title="' + escapeHtml(data.title) + '" data-year="' + (data.year || '') + '" data-imdbid="' + (data.imdbId || '') + '" data-backdrop="' + (data.backdrop || '') + '" data-poster="' + (data.poster || '') + '"' + (isTv ? ' data-se="' + (data.initialSeason || 1) + '" data-ep="1"' : '') + ' class="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg bg-white text-black font-bold hover:bg-white/90 active:scale-95 transition text-sm shadow-xl cursor-pointer">' +
             '<svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>' +
             (isTv ? 'Play S' + (data.initialSeason || 1) + ' E1' : 'Watch Now') +
           '</button>' +
@@ -1159,6 +1159,10 @@
       return '<div class="text-white/40 text-sm p-4 text-center">No episodes available.</div>';
     }
 
+    var cleanSeriesTmdb = (typeof Netflix4uPlayerResolver !== 'undefined' && Netflix4uPlayerResolver.cleanTmdbId)
+      ? (Netflix4uPlayerResolver.cleanTmdbId(tmdbId) || tmdbId)
+      : tmdbId;
+
     var safeFallback = unwrapImageUrl(fallbackBackdrop || '');
 
     return episodes.map(function(ep) {
@@ -1178,7 +1182,7 @@
           '<div class="relative w-28 sm:w-36 aspect-video rounded-lg overflow-hidden bg-white/5 shrink-0">' +
             (still ? '<img src="' + still + '" alt="' + escapeHtml(epTitle) + '" class="w-full h-full object-cover" loading="lazy" onerror="this.onerror=null;' + (safeFallback ? 'this.src=\'' + escapeHtml(safeFallback) + '\';' : 'this.style.display=\'none\';') + '" />' : (safeFallback ? '<img src="' + safeFallback + '" alt="' + escapeHtml(epTitle) + '" class="w-full h-full object-cover" />' : '')) +
             '<div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">' +
-              '<button type="button" data-modal="watch" data-tmdbid="' + tmdbId + '" data-type="tv" data-se="' + seasonNum + '" data-ep="' + epNum + '" data-title="' + escapeHtml(fullTitle) + '" data-year="' + (parentYear || '') + '" data-imdbid="' + (parentImdbId || '') + '" data-poster="' + escapeHtml(still || safeFallback || '') + '" data-backdrop="' + escapeHtml(still || safeFallback || '') + '" class="w-8 h-8 rounded-full bg-white text-black flex items-center justify-center shadow-lg transform active:scale-95 cursor-pointer">' +
+              '<button type="button" data-modal="watch" data-tmdbid="' + cleanSeriesTmdb + '" data-type="tv" data-se="' + seasonNum + '" data-ep="' + epNum + '" data-title="' + escapeHtml(fullTitle) + '" data-year="' + (parentYear || '') + '" data-imdbid="' + (parentImdbId || '') + '" data-poster="' + escapeHtml(still || safeFallback || '') + '" data-backdrop="' + escapeHtml(still || safeFallback || '') + '" class="w-8 h-8 rounded-full bg-white text-black flex items-center justify-center shadow-lg transform active:scale-95 cursor-pointer">' +
                 '<svg class="w-4 h-4 ml-0.5" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>' +
               '</button>' +
             '</div>' +
@@ -1196,7 +1200,7 @@
           '<p class="text-xs text-white/60 line-clamp-2 leading-relaxed">' + escapeHtml(overview) + '</p>' +
         '</div>' +
         '<div class="flex items-center gap-2 self-end sm:self-center shrink-0">' +
-          '<button type="button" data-modal="watch" data-tmdbid="' + tmdbId + '" data-type="tv" data-se="' + seasonNum + '" data-ep="' + epNum + '" data-title="' + escapeHtml(fullTitle) + '" data-year="' + (parentYear || '') + '" data-imdbid="' + (parentImdbId || '') + '" data-poster="' + escapeHtml(still || safeFallback || '') + '" data-backdrop="' + escapeHtml(still || safeFallback || '') + '" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white font-semibold text-xs flex items-center gap-1.5 transition cursor-pointer">' +
+          '<button type="button" data-modal="watch" data-tmdbid="' + cleanSeriesTmdb + '" data-type="tv" data-se="' + seasonNum + '" data-ep="' + epNum + '" data-title="' + escapeHtml(fullTitle) + '" data-year="' + (parentYear || '') + '" data-imdbid="' + (parentImdbId || '') + '" data-poster="' + escapeHtml(still || safeFallback || '') + '" data-backdrop="' + escapeHtml(still || safeFallback || '') + '" class="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white font-semibold text-xs flex items-center gap-1.5 transition cursor-pointer">' +
             '<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>' +
             '<span>Play</span>' +
           '</button>' +
@@ -1245,6 +1249,7 @@
   // ─── WATCH MODAL (Net27 Streaming Player UI with Auto-Failover Engine) ───
   // ─── WATCH MODAL (Net27 Streaming Player UI with Auto-Failover Engine) ───
   var SERVERS_CONFIG = [
+    { id: 'vidsrc_sbs', name: 'VidSrc SBS (Direct TMDB • Primary)', shortName: 'VidSrc SBS • Direct', tag: 'Direct TMDB', tagClass: 'tag-peachify', desc: 'VidSrc SBS Direct TMDB Stream • Canonical TMDB ID Playback' },
     { id: 'peachify', name: 'Peachify (Ad-Free HD • Multi-Audio)', shortName: 'Peachify • Ad-Free', tag: 'Ad-Free HD', tagClass: 'tag-peachify', desc: 'Peachify Pro Ad-Free Player • Auto-Next & Multi-Audio Synchronized Stream' },
     { id: 'nm1', name: 'NetMirror 1 (Fast HD Server)', shortName: 'NetMirror 1 • Fast HD', tag: 'NetMirror HD', tagClass: 'tag-multi', desc: 'NetMirror App Server 1 • High-Speed Fast HD Stream with Audio Selection' },
     { id: 'nm2', name: 'NetMirror 2 (Ultra HD Server)', shortName: 'NetMirror 2 • Ultra HD', tag: 'NetMirror Ultra', tagClass: 'tag-multi', desc: 'NetMirror App Server 2 • 1080p Ultra HD High-Bitrate Stream' },
@@ -1268,7 +1273,7 @@
   var autoSwitchTimer = null;
   var autoSwitchIndex = 0;
   var isPlaybackConfirmed = false;
-  var autoSwitchOrder = ['peachify', 'nm1', 'nm2', 'nm_multi', 'nm4', 's1', 's3'];
+  var autoSwitchOrder = ['vidsrc_sbs', 'peachify', 'nm1', 'nm2', 'nm_multi', 'nm4', 's1', 's3'];
   var currentAutoSwitchToken = 0;
   var activeProbeController = null;
   var watchTopBarHideTimeout = null;
@@ -1320,20 +1325,32 @@
     activeWatchParams.episode = targetEp;
     updateEpisodeNavUi();
 
-    // Rebuild server URLs for target episode
-    activeWatchServers.peachify = buildPeachifyUrl(activeWatchParams, currentWatchLang);
+    // Rebuild server URLs for target episode using Centralized Player Resolver
+    if (window.Netflix4uPlayerResolver) {
+      activeWatchServers.vidsrc_sbs = window.Netflix4uPlayerResolver.resolvePlayerUrl(activeWatchParams, 'vidsrc_sbs');
+      activeWatchServers.peachify = window.Netflix4uPlayerResolver.resolvePlayerUrl(activeWatchParams, 'peachify', { lang: currentWatchLang });
+      activeWatchServers.s3 = window.Netflix4uPlayerResolver.resolvePlayerUrl(activeWatchParams, 'vidlink', { lang: currentWatchLang });
+    } else {
+      var sTid = String(activeWatchParams.tmdbId || '').replace(/^(?:dotmobiz|tmdb(?:-movie|-series|-tv)?)-/, '');
+      activeWatchServers.vidsrc_sbs = 'https://vidsrc.sbs/embed/tv/' + sTid + '/' + (activeWatchParams.season || 1) + '/' + targetEp;
+      activeWatchServers.peachify = buildPeachifyUrl(activeWatchParams, currentWatchLang);
+      activeWatchServers.s3 = buildVidlinkMultiAudioUrl(activeWatchParams, currentWatchLang);
+    }
     activeWatchServers.s1 = buildNetmirrorServerUrl(activeWatchParams, currentWatchLang);
     activeWatchServers.nm1 = buildNetmirrorDirectServerUrl(activeWatchParams, currentWatchLang, '1');
     activeWatchServers.nm2 = buildNetmirrorDirectServerUrl(activeWatchParams, currentWatchLang, '2');
     activeWatchServers.nm4 = buildNetmirrorDirectServerUrl(activeWatchParams, currentWatchLang, '4');
     activeWatchServers.nm_multi = buildNetmirrorDirectServerUrl(activeWatchParams, currentWatchLang, 'multi');
-    activeWatchServers.s3 = buildVidlinkMultiAudioUrl(activeWatchParams, currentWatchLang);
 
-    // Reload active server iframe with the target episode
-    var srv = currentWatchServer || 'peachify';
-    var targetUrl = activeWatchServers[srv] || activeWatchServers.peachify || activeWatchServers.nm1;
+    // Reload active server iframe cleanly (zero stale artifacts)
+    var srv = currentWatchServer || 'vidsrc_sbs';
+    var targetUrl = activeWatchServers[srv] || activeWatchServers.vidsrc_sbs || activeWatchServers.peachify || activeWatchServers.nm1;
     if (watchModalIframe && targetUrl) {
-      watchModalIframe.src = targetUrl;
+      watchModalIframe.src = 'about:blank';
+      watchModalIframe.title = (activeWatchParams.title || 'Series') + ' Season ' + (activeWatchParams.season || 1) + ' Episode ' + targetEp + ' player';
+      setTimeout(function() {
+        if (watchModalIframe) watchModalIframe.src = targetUrl;
+      }, 30);
     }
 
     var se = activeWatchParams.season || 1;
@@ -1468,7 +1485,7 @@
   function openServerPickerModal(tmdbId, type, season, episode, backdrop, title, year, imdbId, canonicalId, poster) {
     var pickerModal = document.getElementById('watch-server-picker-modal');
     if (!pickerModal) {
-      openWatchModal(tmdbId, type, season, episode, backdrop, title, year, imdbId, canonicalId, poster, 's1');
+      openWatchModal(tmdbId, type, season, episode, backdrop, title, year, imdbId, canonicalId, poster, 'vidsrc_sbs');
       return;
     }
 
@@ -1480,15 +1497,17 @@
     var pickerList = document.getElementById('picker-server-list');
     if (pickerList) {
       pickerList.innerHTML = SERVERS_CONFIG.map(function(s, idx) {
+        var isVidsrc = s.id === 'vidsrc_sbs';
         var isPeach = s.id === 'peachify';
         var isS1 = s.id === 's1';
         var isNm = s.id.indexOf('nm') === 0;
-        var badge = isPeach ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-pink-500/20 text-pink-400 border border-pink-500/30">AD-FREE HD</span>' :
+        var badge = isVidsrc ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-blue-500/20 text-blue-400 border border-blue-500/30">DIRECT TMDB</span>' :
+                    isPeach ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-pink-500/20 text-pink-400 border border-pink-500/30">AD-FREE HD</span>' :
                     isS1 ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">HINDI DUB</span>' :
                     isNm ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-red-500/20 text-red-400 border border-red-500/30">' + escapeHtml(s.tag) + '</span>' :
                     '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-white/10 text-white/60">' + escapeHtml(s.tag) + '</span>';
 
-        return '<button type="button" data-select-server="' + s.id + '" class="picker-server-card' + (isPeach ? ' is-active' : '') + '">' +
+        return '<button type="button" data-select-server="' + s.id + '" class="picker-server-card' + (isVidsrc ? ' is-active' : '') + '">' +
           '<div class="flex items-center gap-3">' +
             '<div class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center font-bold text-xs text-white">' + (idx + 1) + '</div>' +
             '<div>' +
@@ -1931,16 +1950,6 @@
     episode = Number(episode) || 1;
     var isTv = type === 'tv' || type === 'series';
 
-    // Verify Streaming Identity
-    var cleanTmdbId = String(tmdbId || '').replace(/^(?:dotmobiz|tmdb(?:-movie|-series|-tv)?)-/, '');
-    var hasValidStreamSource = false;
-    if (/^\d{1,9}$/.test(cleanTmdbId) && Number(cleanTmdbId) > 0) {
-      hasValidStreamSource = true;
-      tmdbId = cleanTmdbId;
-    } else if (imdbId && typeof imdbId === 'string' && imdbId.startsWith('tt')) {
-      hasValidStreamSource = true;
-    }
-
     function showUnavailableBanner(streamTitle) {
       watchModalIframe.src = 'about:blank';
       watchModal.classList.remove('hidden');
@@ -1959,30 +1968,26 @@
       fallbackBanner.innerHTML =
         '<div class="w-16 h-16 rounded-full bg-red-600/20 text-red-500 flex items-center justify-center mb-2"><svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>' +
         '<h3 class="text-xl font-bold text-white">Streaming source unavailable for this title.</h3>' +
-        '<p class="text-sm text-white/60 max-w-md">Our streaming CDN is searching for verified playback sources for "' + escapeHtml(streamTitle) + '". You can download this title directly from the title details page.</p>' +
+        '<p class="text-sm text-white/60 max-w-md">Our streaming CDN could not verify a canonical playback source for "' + escapeHtml(streamTitle) + '". You can download this title directly from the title details page.</p>' +
         '<button onclick="window.Netflix4uModal.closeWatch();" class="px-6 py-2.5 rounded-lg bg-red-600 hover:bg-red-700 text-white font-semibold text-sm transition cursor-pointer">Back to Details</button>';
     }
 
-    if (!hasValidStreamSource) {
-      if (title || canonicalId) {
-        var queryTarget = canonicalId || title;
-        fetch('/api/catalog/title/' + encodeURIComponent(type) + '/' + encodeURIComponent(queryTarget) + '?title=' + encodeURIComponent(title || ''))
-          .then(function(res) { return res.json(); })
-          .then(function(resolved) {
-            var rawT = resolved && resolved.tmdbId ? String(resolved.tmdbId).replace(/^tmdb-(?:movie|series)-/, '') : '';
-            if (/^\d{1,9}$/.test(rawT) && Number(rawT) > 0) {
-              openWatchModal(rawT, type, season, episode, backdrop || resolved.backdrop, title || resolved.title, year || resolved.year, imdbId || resolved.imdbId, canonicalId || resolved.canonicalId, poster || resolved.poster);
-            } else {
-              showUnavailableBanner(title);
-            }
-          }).catch(function() {
-            showUnavailableBanner(title);
-          });
-        return;
-      }
+    // Strict Canonical Validation using Centralized Player Resolver
+    var reqPayload = { type: type, tmdbId: tmdbId, season: season, episode: episode };
+    var validation = window.Netflix4uPlayerResolver
+      ? window.Netflix4uPlayerResolver.validatePlaybackRequest(reqPayload)
+      : { valid: (/^\d{1,10}$/.test(String(tmdbId || '')) && Number(tmdbId) > 0) };
+
+    if (!validation.valid || !validation.sanitized) {
+      console.warn('[Netflix4U Player Identity Blocked]', validation.error || 'Invalid canonical ID');
       showUnavailableBanner(title);
       return;
     }
+
+    var sRecord = validation.sanitized;
+    tmdbId = sRecord.tmdbId;
+    season = sRecord.season || season;
+    episode = sRecord.episode || episode;
 
     var bannerEl = document.getElementById('watch-unavailable-banner');
     if (bannerEl) bannerEl.style.display = 'none';
@@ -2020,16 +2025,24 @@
     }
     updateEpisodeNavUi();
 
-    // Build Server URLs
-    var peachifyUrl = buildPeachifyUrl(activeWatchParams, currentWatchLang);
+    // Build Server URLs via Centralized Player Resolver
+    var vidsrcUrl = window.Netflix4uPlayerResolver
+      ? window.Netflix4uPlayerResolver.resolvePlayerUrl(activeWatchParams, 'vidsrc_sbs')
+      : (isTv ? ('https://vidsrc.sbs/embed/tv/' + tmdbId + '/' + season + '/' + episode) : ('https://vidsrc.sbs/embed/movie/' + tmdbId));
+    var peachifyUrl = window.Netflix4uPlayerResolver
+      ? window.Netflix4uPlayerResolver.resolvePlayerUrl(activeWatchParams, 'peachify', { lang: currentWatchLang })
+      : buildPeachifyUrl(activeWatchParams, currentWatchLang);
     var s1Url = buildNetmirrorServerUrl(activeWatchParams, currentWatchLang);
     var nm1Url = buildNetmirrorDirectServerUrl(activeWatchParams, currentWatchLang, '1');
     var nm2Url = buildNetmirrorDirectServerUrl(activeWatchParams, currentWatchLang, '2');
     var nm4Url = buildNetmirrorDirectServerUrl(activeWatchParams, currentWatchLang, '4');
     var nmMultiUrl = buildNetmirrorDirectServerUrl(activeWatchParams, currentWatchLang, 'multi');
-    var s3Url = buildVidlinkMultiAudioUrl(activeWatchParams, currentWatchLang);
+    var s3Url = window.Netflix4uPlayerResolver
+      ? window.Netflix4uPlayerResolver.resolvePlayerUrl(activeWatchParams, 'vidlink', { lang: currentWatchLang })
+      : buildVidlinkMultiAudioUrl(activeWatchParams, currentWatchLang);
 
     activeWatchServers = {
+      vidsrc_sbs: vidsrcUrl,
       peachify: peachifyUrl,
       nm1: nm1Url,
       nm2: nm2Url,
@@ -2039,7 +2052,7 @@
       s3: s3Url
     };
 
-    var startingServer = chosenServer || 'peachify';
+    var startingServer = chosenServer || 'vidsrc_sbs';
     currentWatchServer = startingServer;
     isAutoSwitchEnabled = !chosenServer;
     isPlaybackConfirmed = false;

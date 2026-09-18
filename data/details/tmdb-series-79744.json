@@ -1,0 +1,103 @@
+{
+  "id": "tmdb-series-79744",
+  "canonicalId": "tmdb-series-79744",
+  "externalProvider": "tmdb",
+  "externalId": "79744",
+  "tmdbId": "79744",
+  "imdbId": "tt7587890",
+  "type": "series",
+  "contentType": "series",
+  "title": "The Rookie",
+  "canonicalTitle": "The Rookie",
+  "originalTitle": "The Rookie",
+  "overview": "Starting over isn't easy, especially for small-town guy John Nolan who, after a life-altering incident, is pursuing his dream of being an LAPD officer. As the force's oldest rookie, he's met with skepticism from some higher-ups who see him as just a walking midlife crisis.",
+  "description": "Starting over isn't easy, especially for small-town guy John Nolan who, after a life-altering incident, is pursuing his dream of being an LAPD officer. As the force's oldest rookie, he's met with skepticism from some higher-ups who see him as just a walking midlife crisis.",
+  "shortDescription": "Starting over isn't easy, especially for small-town guy John Nolan who, after a life-altering incident, is pursuing his ",
+  "year": 2018,
+  "rating": 8.5,
+  "votes": "3.5K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Crime",
+    "Drama",
+    "Comedy"
+  ],
+  "categories": [
+    "Crime",
+    "Drama",
+    "Comedy"
+  ],
+  "language": "English",
+  "country": "US",
+  "poster": "https://image.tmdb.org/t/p/w500/70kTz0OmjjZe7zHvIDrq2iKW7PJ.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/6iNWfGVCEfASDdlNb05TP5nG0ll.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/8BPlx6eK1vc?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/8BPlx6eK1vc?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "51797",
+      "name": "Nathan Fillion",
+      "character": "John Nolan",
+      "photo": "https://image.tmdb.org/t/p/w185/aW6vCxkUZtwb6iH2Wf88Uq0XNVv.jpg"
+    },
+    {
+      "id": "1234713",
+      "name": "Melissa O'Neil",
+      "character": "Lucy Chen",
+      "photo": "https://image.tmdb.org/t/p/w185/9KqgbNttW79hAP9xQ5Ffd2fjGk.jpg"
+    },
+    {
+      "id": "74409",
+      "name": "Eric Winter",
+      "character": "Tim Bradford",
+      "photo": "https://image.tmdb.org/t/p/w185/tDQSZv5rHm4s2hwwVWpp5EMQ0w9.jpg"
+    },
+    {
+      "id": "134180",
+      "name": "Alyssa Diaz",
+      "character": "Angela Lopez",
+      "photo": "https://image.tmdb.org/t/p/w185/ihLNjM4E1Fjx5h4l8EL6r3iDRTa.jpg"
+    },
+    {
+      "id": "202952",
+      "name": "Mekia Cox",
+      "character": "Nyla Harper",
+      "photo": "https://image.tmdb.org/t/p/w185/r8RrebMle9U3Xiwl2hiD6pFdfSl.jpg"
+    },
+    {
+      "id": "55755",
+      "name": "Richard T. Jones",
+      "character": "Wade Grey",
+      "photo": "https://image.tmdb.org/t/p/w185/hdko2C45Wr5G03Z8JwGjWMynP84.jpg"
+    },
+    {
+      "id": "11023",
+      "name": "Shawn Ashmore",
+      "character": "Wesley Evers",
+      "photo": "https://image.tmdb.org/t/p/w185/tXA1gFtsp9HWnzlQsaZSoZC8L4r.jpg"
+    },
+    {
+      "id": "20381",
+      "name": "Jenna Dewan",
+      "character": "Bailey Nune",
+      "photo": "https://image.tmdb.org/t/p/w185/8zZkN1ewGxN8MHiqB8lRmBle8yf.jpg"
+    },
+    {
+      "id": "1600095",
+      "name": "Lisseth Chavez",
+      "character": "Celina Juarez",
+      "photo": "https://image.tmdb.org/t/p/w185/fFnGQVFGAtTZcmLAr7XuUhvtjEW.jpg"
+    },
+    {
+      "id": "1411745",
+      "name": "Deric Augustine",
+      "character": "Miles Penn",
+      "photo": "https://image.tmdb.org/t/p/w185/lJNKxDavwDrGhingpGpzlKfd6I9.jpg"
+    }
+  ],
+  "seasons": 9,
+  "episodes": 145,
+  "status": "PUBLISHED",
+  "links": []
+}

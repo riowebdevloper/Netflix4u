@@ -966,7 +966,10 @@
     options = options || {};
     var title = item.title || 'Untitled';
     var canonicalId = item.canonicalId || item.id || item.tmdbId || '';
-    var tmdbId = item.tmdbId || item.id || '';
+    var cleanTmdb = (typeof Netflix4uPlayerResolver !== 'undefined' && Netflix4uPlayerResolver.cleanTmdbId)
+      ? Netflix4uPlayerResolver.cleanTmdbId(item.tmdbId || item.id)
+      : null;
+    var tmdbId = cleanTmdb ? String(cleanTmdb) : '';
     var imdbId = item.imdbId || '';
     var posterUrl = item.poster;
     if (posterUrl) {
@@ -1174,7 +1177,10 @@
         var isTv = item.type === 'tv';
         var canonicalId = item.canonicalId || item.id || item.tmdbId || '';
         var imdbId = item.imdbId || '';
-        var tmdbId = item.tmdbId || item.id || '';
+        var cleanTmdb = (typeof Netflix4uPlayerResolver !== 'undefined' && Netflix4uPlayerResolver.cleanTmdbId)
+          ? Netflix4uPlayerResolver.cleanTmdbId(item.tmdbId || item.id)
+          : null;
+        var tmdbId = cleanTmdb ? String(cleanTmdb) : '';
         return '<a href="#" data-modal="title" data-tmdbid="' + tmdbId + '" data-canonical-id="' + escapeHtml(canonicalId) + '" data-imdbid="' + escapeHtml(imdbId) + '" data-type="' + (item.type || 'movie') + '" class="flex items-center gap-3 p-2.5 rounded-xl hover:bg-white/[0.08] transition group block">' +
           '<div class="relative w-16 sm:w-20 aspect-video rounded-md overflow-hidden bg-white/5 shrink-0">' +
             '<img src="' + poster + '" alt="' + escapeHtml(item.title) + '" referrerpolicy="no-referrer" class="w-full h-full object-cover" loading="lazy" onerror="window.__healPoster(this);" />' +
