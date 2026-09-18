@@ -1249,10 +1249,10 @@
   // ─── WATCH MODAL (Net27 Streaming Player UI with Auto-Failover Engine) ───
   // ─── WATCH MODAL (Net27 Streaming Player UI with Auto-Failover Engine) ───
   var SERVERS_CONFIG = [
-    { id: 'vidsrc_sbs', name: 'VidSrc (Direct TMDB • Global)', shortName: 'VidSrc • Global', tag: 'Direct TMDB', tagClass: 'tag-peachify', desc: 'VidSrc Global Direct TMDB Stream • Canonical TMDB ID Playback (Unblocked Worldwide)' },
-    { id: 'peachify', name: 'Peachify (Ad-Free HD • Multi-Audio)', shortName: 'Peachify • Ad-Free', tag: 'Ad-Free HD', tagClass: 'tag-peachify', desc: 'Peachify Pro Ad-Free Player • Auto-Next & Multi-Audio Synchronized Stream' },
+    { id: 'vidsrc_sbs', name: 'VidSrc (Original Audio • Global)', shortName: 'VidSrc • Original', tag: 'Direct TMDB', tagClass: 'tag-peachify', desc: 'VidSrc Global Direct TMDB Stream • Original English Audio (For Hindi/Regional Dubs select Peachify/VidLink)' },
+    { id: 'peachify', name: 'Peachify (Hindi Dub • Multi-Audio HD)', shortName: 'Peachify • Hindi Dub', tag: 'Hindi Dub HD', tagClass: 'tag-peachify', desc: 'Peachify Pro Ad-Free Player • Auto-Next & Multi-Audio Synchronized Stream (Hindi / Tamil / Telugu / English)' },
     { id: 'allmovieland', name: 'AllMovieLand (Ultra HD • Fast)', shortName: 'AllMovieLand • Ultra', tag: 'AllMovieLand', tagClass: 'tag-peachify', desc: 'AllMovieLand Ultra HD High-Speed Indian & Global Streaming Player' },
-    { id: 's3', name: 'VidLink Pro (Multi-Audio Global)', shortName: 'VidLink Pro • Global', tag: 'Multi-Lang', tagClass: 'tag-multi', desc: 'VidLink Pro High-Speed Global Streaming Player with Multi-Language Audio' },
+    { id: 's3', name: 'VidLink Pro (Multi-Audio Global)', shortName: 'VidLink Pro • Global', tag: 'Multi-Lang', tagClass: 'tag-multi', desc: 'VidLink Pro High-Speed Global Streaming Player with Multi-Language Audio (Hindi / Tamil / Telugu / English)' },
     { id: 's1', name: 'Fast Cloud (Direct CDN Multi-Audio)', shortName: 'Fast Cloud • Stream', tag: 'Hindi Dual', tagClass: 'tag-fast', desc: 'Direct Fast Cloud & Multi-Audio Engine with MX Player / VLC App Launch' }
   ];
 
@@ -2172,7 +2172,7 @@
     var list = document.getElementById('watch-audio-list-container');
     if (!list) return;
 
-    list.innerHTML = AUDIO_LANGS_CONFIG.map(function(lang) {
+    var itemsHtml = AUDIO_LANGS_CONFIG.map(function(lang) {
       var isSelected = lang.id === currentWatchLang || lang.code === currentWatchLang;
       return '<button type="button" data-switch-lang="' + lang.id + '" class="watch-server-item' + (isSelected ? ' is-selected' : '') + '">' +
         '<div class="flex items-center gap-2">' +
@@ -2182,6 +2182,12 @@
         '<span class="watch-server-tag ' + (isSelected ? 'tag-multi' : 'tag-fast') + '">' + escapeHtml(lang.tag) + '</span>' +
       '</button>';
     }).join('');
+
+    var hintHtml = '<div class="px-2.5 py-1.5 text-[10px] text-amber-300/80 bg-amber-500/10 rounded-lg mt-1 border border-amber-500/20 leading-tight">' +
+      '⚡ Multi-Audio & Dubs stream via Peachify & VidLink Pro' +
+    '</div>';
+
+    list.innerHTML = itemsHtml + hintHtml;
 
     list.querySelectorAll('[data-switch-lang]').forEach(function(btn) {
       btn.addEventListener('click', function(e) {
@@ -2227,14 +2233,23 @@
     activeWatchServers.s1 = newS1Url;
 
     var activeSrv = currentWatchServer || 'vidsrc_sbs';
-    var activeUrl = activeWatchServers[activeSrv] || newVidsrcUrl || newPeachifyUrl;
+    // If user is currently on VidSrc (which is single-stream Original Audio) and requests a Dub (Hindi/Tamil/Telugu/Multi),
+    // automatically switch them to Peachify Pro which streams the selected audio track!
+    if (activeSrv === 'vidsrc_sbs' && currentWatchLang !== 'en') {
+      activeSrv = 'peachify';
+      currentWatchServer = 'peachify';
+      updateActiveServerUi('peachify');
+      renderWatchServerMenu();
+    }
+
+    var activeUrl = activeWatchServers[activeSrv] || newPeachifyUrl || newVidsrcUrl;
     hideWatchFailoverCard();
     watchModalIframe.src = activeUrl;
 
     var activeCfg = SERVERS_CONFIG.find(function(s) { return s.id === activeSrv; }) || SERVERS_CONFIG[0];
     setWatchStatus('Audio: ' + langCfg.label + ' (' + (activeCfg.shortName || activeCfg.name) + ')', 'Multi-Audio Stream Active');
     if (window.__showToast) {
-      window.__showToast('Switched audio to ' + langCfg.label, '🎧');
+      window.__showToast('Playing ' + langCfg.label + ' on ' + (activeCfg.shortName || activeCfg.name), '🎧');
     }
     resetWatchTopBarTimer();
   }

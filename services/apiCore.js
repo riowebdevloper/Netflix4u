@@ -2463,8 +2463,9 @@ async function handleStreamPlayer(req, res) {
   const displayTitle = (title || 'Stream') + (isMovie ? '' : ` • S${se} E${ep}`);
   const directDlHref = rawCloudUrl ? `/api/download-file?url=${encodeURIComponent(rawCloudUrl)}` : (cloudStream?.url ? `/api/download-file?url=${encodeURIComponent(cloudStream.url)}` : '');
 
-  // Default initial server: VidSrc SBS (Direct TMDB) or Fast Cloud if direct cloud stream available
-  const initialServer = cloudStream ? 'cloud' : 'vidsrc';
+  // Default initial server: Fast Cloud (if available) or Peachify (for Hindi/regional dub) or VidSrc (for English original)
+  const isDubLang = (lang === 'hi' || lang === 'ta' || lang === 'te');
+  const initialServer = cloudStream ? 'cloud' : (isDubLang ? 'peachify' : 'vidsrc');
 
   const playerHtml = `<!DOCTYPE html>
 <html lang="en">
