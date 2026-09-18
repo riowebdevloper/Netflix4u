@@ -1,0 +1,84 @@
+{
+  "id": "tmdb-series-312663",
+  "canonicalId": "tmdb-series-312663",
+  "externalProvider": "tmdb",
+  "externalId": "312663",
+  "tmdbId": "312663",
+  "imdbId": "tt39495239",
+  "type": "series",
+  "contentType": "series",
+  "title": "The Fixers",
+  "canonicalTitle": "The Fixers",
+  "originalTitle": "黑白清道夫",
+  "overview": "A washed-up gangster reluctantly teams up with an arrogant political heir to become \"fixers\", cleaning up dangerous secrets for both sides of the law.",
+  "description": "A washed-up gangster reluctantly teams up with an arrogant political heir to become \"fixers\", cleaning up dangerous secrets for both sides of the law.",
+  "shortDescription": "A washed-up gangster reluctantly teams up with an arrogant political heir to become \"fixers\", cleaning up dangerous secr",
+  "year": 2026,
+  "releaseDate": "2026-09-17",
+  "rating": 8,
+  "votes": "0.0K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Action & Adventure",
+    "Comedy",
+    "Crime"
+  ],
+  "categories": [
+    "Action & Adventure",
+    "Comedy",
+    "Crime"
+  ],
+  "language": "Mandarin",
+  "country": "TW",
+  "director": "Hung Tzu-hsuan",
+  "poster": "https://image.tmdb.org/t/p/w500/hwEfhJNLii8oUfuiRBPk11DDv8y.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/iyHgIyMJ6Vd5w79dLeGOTOkqDS5.jpg",
+  "trailerUrl": null,
+  "trailer": null,
+  "cast": [
+    {
+      "id": "112477",
+      "name": "Christopher Lee",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/8QvDvbUxkwhbrWHr3Po6liw1jAX.jpg"
+    },
+    {
+      "id": "3353541",
+      "name": "Shou Lou",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/7IAgKBtCJw9ubH4TdLLtIuldoLX.jpg"
+    },
+    {
+      "id": "2874730",
+      "name": "Regina Lei",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/gnd2t2Ya9AfAKAlOovqXZbMVXp2.jpg"
+    },
+    {
+      "id": "2033784",
+      "name": "Fu Meng-po",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/efznd3HAadw6hF9Ir9Xz1xEyFif.jpg"
+    },
+    {
+      "id": "1366128",
+      "name": "Tou Tsung-hua",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/pLbLftVzy5A1BkYlET2gb563WeV.jpg"
+    },
+    {
+      "id": "1583536",
+      "name": "Chang Yung-cheng",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/mI3yeAyFHFikNqglp92tlICMHQQ.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 10,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-18T03:12:51.542Z",
+  "createdAt": "2026-09-18T03:12:51.542Z",
+  "updatedAt": "2026-09-18T03:12:51.542Z",
+  "links": []
+}

@@ -1,0 +1,74 @@
+{
+  "id": "tmdb-series-320760",
+  "canonicalId": "tmdb-series-320760",
+  "externalProvider": "tmdb",
+  "externalId": "320760",
+  "tmdbId": "320760",
+  "imdbId": "tt39397536",
+  "type": "series",
+  "contentType": "series",
+  "title": "Not a Stranger",
+  "canonicalTitle": "Not a Stranger",
+  "originalTitle": "Seni Tanıyorum",
+  "overview": "After giving birth, painter Funda put her career on hold to focus on her child. Ready to return to painting, she finally finds the nanny she has been searching for: Nazlı. But the mysterious and increasingly unsettling woman soon begins to disrupt the seemingly peaceful lives of Funda and her husband İlker. What begins as a simple employment arrangement develops into a dangerous psychological game in which desire, secrets and loyalty are put to the test.",
+  "description": "After giving birth, painter Funda put her career on hold to focus on her child. Ready to return to painting, she finally finds the nanny she has been searching for: Nazlı. But the mysterious and increasingly unsettling woman soon begins to disrupt the seemingly peaceful lives of Funda and her husband İlker. What begins as a simple employment arrangement develops into a dangerous psychological game in which desire, secrets and loyalty are put to the test.",
+  "shortDescription": "After giving birth, painter Funda put her career on hold to focus on her child. Ready to return to painting, she finally",
+  "year": 2026,
+  "releaseDate": "2026-09-17",
+  "rating": 8,
+  "votes": "1.2K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Drama"
+  ],
+  "categories": [
+    "Drama"
+  ],
+  "language": "Turkish",
+  "country": "TR",
+  "director": "Director",
+  "poster": "https://image.tmdb.org/t/p/w500/tgBRNtynz81e0DE4bWo8XwTbCw9.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/vPQ4Ctn8MS6NBP73duf0GHtbziU.jpg",
+  "trailerUrl": null,
+  "trailer": null,
+  "cast": [
+    {
+      "id": "1969653",
+      "name": "Melis Sezen",
+      "character": "Nazlı",
+      "photo": "https://image.tmdb.org/t/p/w185/kiTyCXXX1s6vtwtjKGCYKkhwTsx.jpg"
+    },
+    {
+      "id": "1494304",
+      "name": "Elçin Sangu",
+      "character": "Funda",
+      "photo": "https://image.tmdb.org/t/p/w185/5jGVTT2ykGro046rvKP75y7Mnyi.jpg"
+    },
+    {
+      "id": "1584426",
+      "name": "Ozan Dolunay",
+      "character": "İlker",
+      "photo": "https://image.tmdb.org/t/p/w185/vLXxGS3DOlK5C8nbAPVndWurnmu.jpg"
+    },
+    {
+      "id": "120877",
+      "name": "Cemal Hünal",
+      "character": "Kemal",
+      "photo": "https://image.tmdb.org/t/p/w185/fR3xGBAeOaLVI0W4XGsR9khWE3O.jpg"
+    },
+    {
+      "id": "3475166",
+      "name": "Efe Taşdelen",
+      "character": "Emre",
+      "photo": "https://image.tmdb.org/t/p/w185/zNxVyYTQmzCvBNOrsL4KwdoFF9i.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 8,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-18T03:12:51.487Z",
+  "createdAt": "2026-09-18T03:12:51.487Z",
+  "updatedAt": "2026-09-18T03:12:51.487Z",
+  "links": []
+}

@@ -1,5 +1,27 @@
 [
   {
+    "id": "tmdb-series-2190",
+    "canonicalId": "tmdb-series-2190",
+    "title": "South Park",
+    "rawTitle": "South Park",
+    "slug": "tmdb-series-2190-south-park",
+    "type": "series",
+    "year": 1997,
+    "quality": "FHD",
+    "provider": "tmdb",
+    "rating": 8.3,
+    "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2Fk7n2EVge7G77eMr3brztRGG1fFU.jpg&output=webp",
+    "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F3UviYOlhn8EgXMBuiT6MnUuo1w9.jpg&output=webp",
+    "imdbId": "tt0121955",
+    "tmdbId": "2190",
+    "categories": [
+      "Animation",
+      "Comedy"
+    ],
+    "status": "PUBLISHED",
+    "publishedAt": "2026-09-18T03:12:51.457Z"
+  },
+  {
     "id": "12112724",
     "canonicalId": "12112724",
     "title": "Kings of South Beach",

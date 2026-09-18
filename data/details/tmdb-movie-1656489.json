@@ -1,0 +1,118 @@
+{
+  "id": "tmdb-movie-1656489",
+  "canonicalId": "tmdb-movie-1656489",
+  "externalProvider": "tmdb",
+  "externalId": "1656489",
+  "tmdbId": "1656489",
+  "imdbId": "tt41228546",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "Sultana",
+  "canonicalTitle": "Sultana",
+  "originalTitle": "Sultana",
+  "overview": "Sultana is a drama set in Istanbul's one and only strip club, telling a story of a women, power, rivalry and solidarity. A new Turkish story where women are not victims in a fairy tale, but warriors learning that the 'handsome prince' is often the real monster- and their only salvation is each other. Meral the long reigning queen of the one and only strip club of Istanbul which is Sultana, takes a talented new Belarusian dancer named Anna under her wing. But she soon realizes she has created a rival powerful enough to replace her, and a ruthless power struggle erupts between the two women.",
+  "description": "Sultana is a drama set in Istanbul's one and only strip club, telling a story of a women, power, rivalry and solidarity. A new Turkish story where women are not victims in a fairy tale, but warriors learning that the 'handsome prince' is often the real monster- and their only salvation is each other. Meral the long reigning queen of the one and only strip club of Istanbul which is Sultana, takes a talented new Belarusian dancer named Anna under her wing. But she soon realizes she has created a rival powerful enough to replace her, and a ruthless power struggle erupts between the two women.",
+  "shortDescription": "Sultana is a drama set in Istanbul's one and only strip club, telling a story of a women, power, rivalry and solidarity.",
+  "year": 2026,
+  "releaseDate": "2026-04-17",
+  "rating": 5,
+  "votes": "0.0K",
+  "quality": "FHD",
+  "duration": "2h 0m",
+  "genres": [
+    "Drama",
+    "Music"
+  ],
+  "categories": [
+    "Drama",
+    "Music"
+  ],
+  "language": "Turkish",
+  "country": "TR",
+  "director": "Ali Kemal Güven",
+  "poster": "https://image.tmdb.org/t/p/w500/wDebpR4NplIM8EteAGfd51Zdisu.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/29XMlo2zt5LTA0YMjA3hubbM942.jpg",
+  "trailerUrl": null,
+  "trailer": null,
+  "cast": [
+    {
+      "id": "142855",
+      "name": "Tuba Büyüküstün",
+      "character": "Meral",
+      "photo": "https://image.tmdb.org/t/p/w185/14QRLZqXAZglMB7Z25uXg6IG3LG.jpg"
+    },
+    {
+      "id": "2414436",
+      "name": "Derya Pınar Ak",
+      "character": "Anna",
+      "photo": "https://image.tmdb.org/t/p/w185/9PxHCK6FifopvrEgsAnwOrRcxs5.jpg"
+    },
+    {
+      "id": "1987247",
+      "name": "Seray Kaya",
+      "character": "Tülay",
+      "photo": "https://image.tmdb.org/t/p/w185/c2E3RGJSoc9IA0NXrCh4g4GIx4i.jpg"
+    },
+    {
+      "id": "1108184",
+      "name": "Begüm Akkaya",
+      "character": "Gülistan",
+      "photo": "https://image.tmdb.org/t/p/w185/5JqzpYhyio17y0ievgDGEDiacBg.jpg"
+    },
+    {
+      "id": "3619915",
+      "name": "Rojbin Erden",
+      "character": "Fahriye",
+      "photo": "https://image.tmdb.org/t/p/w185/nRTrcE1UHlPlaztsGvrawMHUN4Q.jpg"
+    },
+    {
+      "id": "2786245",
+      "name": "Şirin Saldamlı",
+      "character": "Nezo",
+      "photo": "https://image.tmdb.org/t/p/w185/fHCuvVh6SGBW2VMh5gTMCUsIbxL.jpg"
+    },
+    {
+      "id": "1246607",
+      "name": "Itır Esen",
+      "character": "Selin",
+      "photo": "https://image.tmdb.org/t/p/w185/g6nYeWkmL4bI0fxRNYxcX1QArm7.jpg"
+    },
+    {
+      "id": "3004117",
+      "name": "Taro Emir Tekin",
+      "character": "Arif",
+      "photo": "https://image.tmdb.org/t/p/w185/jzq1kYMT7YZSRVbpqQTB3fcL9fW.jpg"
+    },
+    {
+      "id": "1504186",
+      "name": "Hakan Kurtaş",
+      "character": "Cemal",
+      "photo": "https://image.tmdb.org/t/p/w185/bPqpPuQddPLqMNxbSwVYl4nc5O2.jpg"
+    },
+    {
+      "id": "142781",
+      "name": "Nur Sürer",
+      "character": "Asuman",
+      "photo": "https://image.tmdb.org/t/p/w185/dHTgCwwmGyvJK5LyCpFtzYpap2d.jpg"
+    },
+    {
+      "id": "1159710",
+      "name": "Çağlar Çorumlu",
+      "character": "Bekir",
+      "photo": "https://image.tmdb.org/t/p/w185/xv15eYrkRvGvIFyvxIW4544XMAq.jpg"
+    },
+    {
+      "id": "239037",
+      "name": "Melike Güner",
+      "character": "Leyla",
+      "photo": "https://image.tmdb.org/t/p/w185/8dX00GPMBNYmAXGnrhRp7ocA9Yv.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 1,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-18T03:12:51.472Z",
+  "createdAt": "2026-09-18T03:12:51.472Z",
+  "updatedAt": "2026-09-18T03:12:51.472Z",
+  "links": []
+}

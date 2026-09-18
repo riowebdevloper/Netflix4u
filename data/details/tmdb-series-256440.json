@@ -1,0 +1,100 @@
+{
+  "id": "tmdb-series-256440",
+  "canonicalId": "tmdb-series-256440",
+  "externalProvider": "tmdb",
+  "externalId": "256440",
+  "tmdbId": "256440",
+  "imdbId": "tt45382417",
+  "type": "series",
+  "contentType": "series",
+  "title": "Alıkara",
+  "canonicalTitle": "Alıkara",
+  "originalTitle": "Alıkara",
+  "overview": "A mysterious corpse draws Chief Inspector Deniz and Psychologist Işık into a grueling struggle. As the investigation deepens, long-hidden traumas from the past come to light, and the hunt for an anonymous killer begins…",
+  "description": "A mysterious corpse draws Chief Inspector Deniz and Psychologist Işık into a grueling struggle. As the investigation deepens, long-hidden traumas from the past come to light, and the hunt for an anonymous killer begins…",
+  "shortDescription": "A mysterious corpse draws Chief Inspector Deniz and Psychologist Işık into a grueling struggle. As the investigation dee",
+  "year": 2026,
+  "releaseDate": "2026-09-10",
+  "rating": 8,
+  "votes": "1.2K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Crime",
+    "Drama"
+  ],
+  "categories": [
+    "Crime",
+    "Drama"
+  ],
+  "language": "Turkish",
+  "country": "TR",
+  "director": "Hülya Gezer",
+  "poster": "https://image.tmdb.org/t/p/w500/3Vp8LSlyJY34q8jnGTNs0FHgnXP.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/7leJka0INkfFgZ3RpAKfDShyCTq.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/-4dItx7M1bs?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/-4dItx7M1bs?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "1258610",
+      "name": "Miray Daner",
+      "character": "Işık And",
+      "photo": "https://image.tmdb.org/t/p/w185/dIUzfeixAOGYCXmGR5U79928swt.jpg"
+    },
+    {
+      "id": "2934265",
+      "name": "Halit Özgür Sarı",
+      "character": "Deniz Baran Dağ",
+      "photo": "https://image.tmdb.org/t/p/w185/5bnAgK5n3Edy9GTc0TbYgJ8GMfZ.jpg"
+    },
+    {
+      "id": "1398581",
+      "name": "Sezin Akbaşoğulları",
+      "character": "Piraye And",
+      "photo": "https://image.tmdb.org/t/p/w185/eGSZ389Q8geMgggG7e585wx1mmK.jpg"
+    },
+    {
+      "id": "1320969",
+      "name": "Serpil Gül",
+      "character": "Kado",
+      "photo": "https://image.tmdb.org/t/p/w185/b7bZIQ5sVJvfgj6nEb7mbBSM6l1.jpg"
+    },
+    {
+      "id": "1253159",
+      "name": "Fatih Al",
+      "character": "Levent",
+      "photo": "https://image.tmdb.org/t/p/w185/sOwd6BYLRRGO7XBNYQUSkmESPMi.jpg"
+    },
+    {
+      "id": "1728616",
+      "name": "Gökhan Soylu",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/dH7Ylw2p7t8Kj6ralGDv6l2NLBh.jpg"
+    },
+    {
+      "id": "1554462",
+      "name": "Can Atak",
+      "character": "Özgür",
+      "photo": "https://image.tmdb.org/t/p/w185/zGMqnqs1mttjCBaPg9E3v2kiogm.jpg"
+    },
+    {
+      "id": "1963247",
+      "name": "Bahadır Vatanoğlu",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/A40e3krw9mTlBarbNnHRYOLP4t.jpg"
+    },
+    {
+      "id": "4625829",
+      "name": "Elif Gülhan",
+      "character": "Neşe",
+      "photo": null
+    }
+  ],
+  "seasons": 1,
+  "episodes": 4,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-18T03:12:51.583Z",
+  "createdAt": "2026-09-18T03:12:51.583Z",
+  "updatedAt": "2026-09-18T03:12:51.583Z",
+  "links": []
+}

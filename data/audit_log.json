@@ -1,5 +1,16 @@
 [
   {
+    "timestamp": "2026-09-18T03:12:52.305Z",
+    "discovered": 95,
+    "added": 10,
+    "updated": 7,
+    "skipped": 78,
+    "published": 10,
+    "poster_pending": 0,
+    "failed": 0,
+    "durationMs": 1365
+  },
+  {
     "timestamp": "2026-09-17T03:25:54.453Z",
     "discovered": 89,
     "added": 5,

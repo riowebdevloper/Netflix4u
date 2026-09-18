@@ -1,0 +1,86 @@
+{
+  "id": "tmdb-series-298008",
+  "canonicalId": "tmdb-series-298008",
+  "externalProvider": "tmdb",
+  "externalId": "298008",
+  "tmdbId": "298008",
+  "imdbId": "tt37884325",
+  "type": "series",
+  "contentType": "series",
+  "title": "Plastic Beauty",
+  "canonicalTitle": "Plastic Beauty",
+  "originalTitle": "ダウンタイム",
+  "overview": "When a gifted ER surgeon is thrust into cosmetic medicine, her clash with a celebrity doctor exposes the greed and desire beneath the glamour.",
+  "description": "When a gifted ER surgeon is thrust into cosmetic medicine, her clash with a celebrity doctor exposes the greed and desire beneath the glamour.",
+  "shortDescription": "When a gifted ER surgeon is thrust into cosmetic medicine, her clash with a celebrity doctor exposes the greed and desir",
+  "year": 2026,
+  "releaseDate": "2026-09-17",
+  "rating": 8,
+  "votes": "1.2K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Drama"
+  ],
+  "categories": [
+    "Drama"
+  ],
+  "language": "Japanese",
+  "country": "JP",
+  "director": "Director",
+  "poster": "https://image.tmdb.org/t/p/w500/6HLl3jgLQmUO0mw2TspFf5jIU3M.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/mIjERiWlnDzQWHTcZdtucLmTCeO.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/pnoF99qg46A?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/pnoF99qg46A?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "1130611",
+      "name": "Mayu Matsuoka",
+      "character": "Fumi Numata",
+      "photo": "https://image.tmdb.org/t/p/w185/f7Pn68PjbhbsgwdAcQ7mxpkAYPJ.jpg"
+    },
+    {
+      "id": "122468",
+      "name": "Riisa Naka",
+      "character": "Rin Tohyama",
+      "photo": "https://image.tmdb.org/t/p/w185/lQHNZeMCqEK8AJvNb15BFnji7qO.jpg"
+    },
+    {
+      "id": "1565630",
+      "name": "Shotaro Mamiya",
+      "character": "Rui Komiya",
+      "photo": "https://image.tmdb.org/t/p/w185/rTyurOXMTcSyLfjGxLZ1rDedyPt.jpg"
+    },
+    {
+      "id": "2695029",
+      "name": "Minami Tanaka",
+      "character": "Nanami Todoroki",
+      "photo": "https://image.tmdb.org/t/p/w185/a4owLLPAec6N6cO5UWf8Uq5SsaI.jpg"
+    },
+    {
+      "id": "1668193",
+      "name": "Riku Hagiwara",
+      "character": "Riku Hagiwara",
+      "photo": "https://image.tmdb.org/t/p/w185/yX2Zjhy7FdPwLexGxG8sgoSgakN.jpg"
+    },
+    {
+      "id": "148469",
+      "name": "Hiromi Nagasaku",
+      "character": "Taeko Numata",
+      "photo": "https://image.tmdb.org/t/p/w185/l0NR6D6aOaTqqtrgd0VrRg62Us1.jpg"
+    },
+    {
+      "id": "46624",
+      "name": "Atsuro Watabe",
+      "character": "Arata Toyama",
+      "photo": "https://image.tmdb.org/t/p/w185/nhG7XVt3QfNgQQHnetBUJvfv79Q.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 8,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-18T03:12:51.504Z",
+  "createdAt": "2026-09-18T03:12:51.504Z",
+  "updatedAt": "2026-09-18T03:12:51.504Z",
+  "links": []
+}

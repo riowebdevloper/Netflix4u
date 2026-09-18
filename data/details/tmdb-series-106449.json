@@ -1,0 +1,120 @@
+{
+  "id": "tmdb-series-106449",
+  "canonicalId": "tmdb-series-106449",
+  "externalProvider": "tmdb",
+  "externalId": "106449",
+  "tmdbId": "106449",
+  "imdbId": "tt12879782",
+  "type": "series",
+  "contentType": "series",
+  "title": "A Record of a Mortal's Journey to Immortality",
+  "canonicalTitle": "A Record of a Mortal's Journey to Immortality",
+  "originalTitle": "凡人修仙传",
+  "overview": "A poor and ordinary boy from a village joins a minor sect in Jiang Hu and becomes an Unofficial Disciple by chance. How will Han Li, a commoner by birth, establish a foothold for himself in his sect? With his mediocre aptitude, he must successfully traverse the treacherous path of cultivation and avoid the notice of those who may do him harm. This is a story of an ordinary mortal who, against all odds, clashes with devilish demons and ancient celestials in order to find his own path towards immortality.",
+  "description": "A poor and ordinary boy from a village joins a minor sect in Jiang Hu and becomes an Unofficial Disciple by chance. How will Han Li, a commoner by birth, establish a foothold for himself in his sect? With his mediocre aptitude, he must successfully traverse the treacherous path of cultivation and avoid the notice of those who may do him harm. This is a story of an ordinary mortal who, against all odds, clashes with devilish demons and ancient celestials in order to find his own path towards immortality.",
+  "shortDescription": "A poor and ordinary boy from a village joins a minor sect in Jiang Hu and becomes an Unofficial Disciple by chance. How ",
+  "year": 2020,
+  "releaseDate": "2020-07-25",
+  "rating": 8.4,
+  "votes": "0.1K",
+  "quality": "FHD",
+  "duration": "20m/ep",
+  "genres": [
+    "Animation",
+    "Action & Adventure",
+    "Drama"
+  ],
+  "categories": [
+    "Animation",
+    "Action & Adventure",
+    "Drama"
+  ],
+  "language": "Mandarin",
+  "country": "CN",
+  "director": "Director",
+  "poster": "https://image.tmdb.org/t/p/w500/5JV6AfPMHbCrtB5oUhKkSiPARQ3.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/8NIvQY34tNPc4txNeym2zEYk9ek.jpg",
+  "trailerUrl": null,
+  "trailer": null,
+  "cast": [
+    {
+      "id": "3082032",
+      "name": "Qian Wenqing",
+      "character": "Han Li (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/42V5un2Vw23rfU4NWWi1VLox31D.jpg"
+    },
+    {
+      "id": "2164942",
+      "name": "Ireine Song",
+      "character": "Han Yun Zhi (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/q97r6UwDSuNeWk0eq3ddXKBCspz.jpg"
+    },
+    {
+      "id": "2463716",
+      "name": "Li Shimeng",
+      "character": "Nangong Wan (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/i7hKjBsuxiMHuj3v68yWhbLXNbi.jpg"
+    },
+    {
+      "id": "2104118",
+      "name": "Xu Jiaqi",
+      "character": "Dong Xuaner (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/km2vHirWi4yMvlUU0j3Ge70smA7.jpg"
+    },
+    {
+      "id": "3769888",
+      "name": "Yang Mo",
+      "character": "墨居仁 (配音)",
+      "photo": "https://image.tmdb.org/t/p/w185/3LtgZ7r9vEQ0lxONharP7vq8GfT.jpg"
+    },
+    {
+      "id": "2532243",
+      "name": "Gu Jiangshan",
+      "character": "万小山 (配音)",
+      "photo": "https://image.tmdb.org/t/p/w185/9AHZohwKutKWdsexJDbfFf1SP6i.jpg"
+    },
+    {
+      "id": "2199334",
+      "name": "Qiao Shiyu",
+      "character": "墨彩环 (配音)",
+      "photo": "https://image.tmdb.org/t/p/w185/pRz9GB7toXRPlAUSTs0jSiU2nU6.jpg"
+    },
+    {
+      "id": "3174708",
+      "name": "Zhang Fuzheng",
+      "character": "张铁 (配音)",
+      "photo": "https://image.tmdb.org/t/p/w185/gB3NHNnG2WSC1SnjGQ36Z9qD8Rp.jpg"
+    },
+    {
+      "id": "2541894",
+      "name": "Liangwei Hu",
+      "character": "玄骨 (配音)",
+      "photo": "https://image.tmdb.org/t/p/w185/l5nVITrXiYTocyCTWevHR9Lgvqn.jpg"
+    },
+    {
+      "id": "4651979",
+      "name": "Liu Rui",
+      "character": "紫灵 (配音)",
+      "photo": "https://image.tmdb.org/t/p/w185/bKhG2kjnLK7xcFDwfdgWzOgWCCx.jpg"
+    },
+    {
+      "id": "3837524",
+      "name": "Ba He",
+      "character": "蛮胡子 (配音)",
+      "photo": "https://image.tmdb.org/t/p/w185/hdR8G4PqdalOkk6TguUTksQZuRY.jpg"
+    },
+    {
+      "id": "2339332",
+      "name": "Zhao Mingzhou",
+      "character": "极阴 (配音)",
+      "photo": "https://image.tmdb.org/t/p/w185/pXUlknCuP3u5FIfC7DluQzsKWAz.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 206,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-18T03:12:51.562Z",
+  "createdAt": "2026-09-18T03:12:51.562Z",
+  "updatedAt": "2026-09-18T03:12:51.562Z",
+  "links": []
+}

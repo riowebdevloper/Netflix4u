@@ -1,0 +1,92 @@
+{
+  "id": "tmdb-series-224263",
+  "canonicalId": "tmdb-series-224263",
+  "externalProvider": "tmdb",
+  "externalId": "224263",
+  "tmdbId": "224263",
+  "imdbId": "tt27486290",
+  "type": "series",
+  "contentType": "series",
+  "title": "Stranger Things: Tales from '85",
+  "canonicalTitle": "Stranger Things: Tales from '85",
+  "originalTitle": "Stranger Things: Tales from '85",
+  "overview": "Winter. Hawkins. 1985. Welcome back to a town crawling with secrets, where beloved heroes are facing fresh mysteries... and an all-new breed of strange.",
+  "description": "Winter. Hawkins. 1985. Welcome back to a town crawling with secrets, where beloved heroes are facing fresh mysteries... and an all-new breed of strange.",
+  "shortDescription": "Winter. Hawkins. 1985. Welcome back to a town crawling with secrets, where beloved heroes are facing fresh mysteries... ",
+  "year": 2026,
+  "releaseDate": "2026-04-23",
+  "rating": 7.6,
+  "votes": "0.1K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Animation",
+    "Sci-Fi & Fantasy",
+    "Mystery",
+    "Action & Adventure"
+  ],
+  "categories": [
+    "Animation",
+    "Sci-Fi & Fantasy",
+    "Mystery",
+    "Action & Adventure"
+  ],
+  "language": "English",
+  "country": "US",
+  "director": "Director",
+  "poster": "https://image.tmdb.org/t/p/w500/xyVpiSZNA2fYJUuuagkqiSHJqjr.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/ulBGaxq9GmJexyEOi4Xci74g6Vt.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/kajCUhg36R0?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/kajCUhg36R0?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "4895462",
+      "name": "Brooklyn Davey Norstedt",
+      "character": "Eleven (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/14WC82gvwj7MI3C2ptGybOqvwEh.jpg"
+    },
+    {
+      "id": "2444659",
+      "name": "Jolie Hoang-Rappaport",
+      "character": "Max (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/eV1xQFvXg9FnMwRgTEwImDSLK58.jpg"
+    },
+    {
+      "id": "3765659",
+      "name": "Luca Diaz",
+      "character": "Mike (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/aycLbBk6XXkhdJsLLVRn142hHP9.jpg"
+    },
+    {
+      "id": "3122038",
+      "name": "Elisha Williams",
+      "character": "Lucas (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/7ltCBzbbS9uEMA1DQBN1XhZwFSK.jpg"
+    },
+    {
+      "id": "5801123",
+      "name": "Braxton Quinney",
+      "character": "Dustin (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/rbCpMPzbPKZLJrO2Cm1RiSnz5U3.jpg"
+    },
+    {
+      "id": "3463959",
+      "name": "Benjamin Plessala",
+      "character": "Will (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/z0MzRPtYwviecYYx8zVIoXrxDII.jpg"
+    },
+    {
+      "id": "1972166",
+      "name": "Odessa A'zion",
+      "character": "Nikki (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/5Q0Z5O3nkZH5JvueTyc2q0anw2B.jpg"
+    }
+  ],
+  "seasons": 2,
+  "episodes": 18,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-18T03:12:51.440Z",
+  "createdAt": "2026-09-18T03:12:51.440Z",
+  "updatedAt": "2026-09-18T03:12:51.440Z",
+  "links": []
+}

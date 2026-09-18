@@ -1,0 +1,88 @@
+{
+  "id": "tmdb-series-299939",
+  "canonicalId": "tmdb-series-299939",
+  "externalProvider": "tmdb",
+  "externalId": "299939",
+  "tmdbId": "299939",
+  "imdbId": "",
+  "type": "series",
+  "contentType": "series",
+  "title": "Monster: The Lizzie Borden Story",
+  "canonicalTitle": "Monster: The Lizzie Borden Story",
+  "originalTitle": "Monster: The Lizzie Borden Story",
+  "overview": "Trapped in a cruel Victorian-era household, Lizzie Borden kills her parents in a gory ax murder that shocks the nation.",
+  "description": "Trapped in a cruel Victorian-era household, Lizzie Borden kills her parents in a gory ax murder that shocks the nation.",
+  "shortDescription": "Trapped in a cruel Victorian-era household, Lizzie Borden kills her parents in a gory ax murder that shocks the nation.",
+  "year": 2026,
+  "releaseDate": "2026-09-17",
+  "rating": 8.3,
+  "votes": "0.0K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Drama",
+    "Crime"
+  ],
+  "categories": [
+    "Drama",
+    "Crime"
+  ],
+  "language": "English",
+  "country": "US",
+  "director": "Director",
+  "poster": "https://image.tmdb.org/t/p/w500/57XScX1aYtKi1LvHYFQLPUxVhTG.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/3JVjgaqfX5MhxxHKpGWz05QV7Dz.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/gYTzF1vna40?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/gYTzF1vna40?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "4481381",
+      "name": "Ella Beatty",
+      "character": "Lizzie Borden",
+      "photo": "https://image.tmdb.org/t/p/w185/ksWqDRv0knHs9vFffeRD0c28UKH.jpg"
+    },
+    {
+      "id": "1080195",
+      "name": "Vicky Krieps",
+      "character": "Bridget Sullivan",
+      "photo": "https://image.tmdb.org/t/p/w185/9laK3w40qBnE5UY41wJfnUAYMmC.jpg"
+    },
+    {
+      "id": "34490",
+      "name": "Sarah Paulson",
+      "character": "Aileen Wuornos",
+      "photo": "https://image.tmdb.org/t/p/w185/tJnhBV516yrekR3hTDUw15UMbxS.jpg"
+    },
+    {
+      "id": "56365",
+      "name": "Charlie Hunnam",
+      "character": "Andrew Borden",
+      "photo": "https://image.tmdb.org/t/p/w185/5WIDrnY25Ps2RYu0zIzHSVuSt5n.jpg"
+    },
+    {
+      "id": "15556",
+      "name": "Rebecca Hall",
+      "character": "Abby Borden",
+      "photo": "https://image.tmdb.org/t/p/w185/coC58ANiDbqRIyle5zEl9QDektf.jpg"
+    },
+    {
+      "id": "1399531",
+      "name": "Billie Lourd",
+      "character": "Emma Borden",
+      "photo": "https://image.tmdb.org/t/p/w185/1u8bZL6ZXu5iDbPO3Z0Spetyt34.jpg"
+    },
+    {
+      "id": "550552",
+      "name": "Jessica Barden",
+      "character": "Nance O'Neil",
+      "photo": "https://image.tmdb.org/t/p/w185/yff76hxi2Y2yjezWZQ7jAWmbeGk.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 8,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-18T03:12:51.423Z",
+  "createdAt": "2026-09-18T03:12:51.423Z",
+  "updatedAt": "2026-09-18T03:12:51.423Z",
+  "links": []
+}

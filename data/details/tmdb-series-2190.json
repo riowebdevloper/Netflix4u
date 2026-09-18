@@ -1,0 +1,70 @@
+{
+  "id": "tmdb-series-2190",
+  "canonicalId": "tmdb-series-2190",
+  "externalProvider": "tmdb",
+  "externalId": "2190",
+  "tmdbId": "2190",
+  "imdbId": "tt0121955",
+  "type": "series",
+  "contentType": "series",
+  "title": "South Park",
+  "canonicalTitle": "South Park",
+  "originalTitle": "South Park",
+  "overview": "Follow the misadventures of four irreverent grade-schoolers in the quiet, dysfunctional town of South Park, Colorado.",
+  "description": "Follow the misadventures of four irreverent grade-schoolers in the quiet, dysfunctional town of South Park, Colorado.",
+  "shortDescription": "Follow the misadventures of four irreverent grade-schoolers in the quiet, dysfunctional town of South Park, Colorado.",
+  "year": 1997,
+  "releaseDate": "1997-08-13",
+  "rating": 8.3,
+  "votes": "5.1K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Animation",
+    "Comedy"
+  ],
+  "categories": [
+    "Animation",
+    "Comedy"
+  ],
+  "language": "English",
+  "country": "US",
+  "director": "Director",
+  "poster": "https://image.tmdb.org/t/p/w500/k7n2EVge7G77eMr3brztRGG1fFU.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/3UviYOlhn8EgXMBuiT6MnUuo1w9.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/oUIK01ek-Ko?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/oUIK01ek-Ko?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "34517",
+      "name": "Trey Parker",
+      "character": "Eric Cartman / Stan Marsh (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/3tJe8t90lrcQzXj9cRcpW9wmj2c.jpg"
+    },
+    {
+      "id": "34518",
+      "name": "Matt Stone",
+      "character": "Kyle Broflovski / Kenny McCormick (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/nS3BOaF0EHd7vyATV7WBnFEvTLr.jpg"
+    },
+    {
+      "id": "111466",
+      "name": "Mona Marshall",
+      "character": "Sheila Broflovski (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/A2RCAt0Xmm3jLBKZogQAJX6eD9n.jpg"
+    },
+    {
+      "id": "1229787",
+      "name": "Jennifer Howell",
+      "character": "Bebe Stevens (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/tYgRyRGtDRyo5LBVv7McaRNY7LX.jpg"
+    }
+  ],
+  "seasons": 29,
+  "episodes": 337,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-18T03:12:51.457Z",
+  "createdAt": "2026-09-18T03:12:51.457Z",
+  "updatedAt": "2026-09-18T03:12:51.457Z",
+  "links": []
+}
