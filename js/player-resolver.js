@@ -31,8 +31,10 @@
     'https://vidsrc.net',
     'https://peachify.pro',
     'https://peachify.top',
-    'https://vidlink.pro',
     'https://slast430did.com',
+    'https://allmovieland.link',
+    'https://laika422mon.com',
+    'https://vidlink.pro',
     'https://acceptable.a-ads.com',
     'https://www.youtube-nocookie.com',
     'https://www.youtube.com'
@@ -131,7 +133,7 @@
   /**
    * Resolves exact player embed URL for a given provider.
    * @param {Object} req - Playback request
-   * @param {string} provider - 'vidsrc_sbs' | 'peachify' | 'vidlink' | 's1'
+   * @param {string} provider - 'vidsrc_sbs' | 'peachify' | 'allmovieland' | 'vidlink' | 's1'
    * @param {Object} options - { lang: string, autoPlay: boolean }
    * @returns {string|null} - Embed URL or null if invalid
    */
@@ -165,7 +167,17 @@
       return 'https://peachify.pro/embed/tv/' + s.tmdbId + '/' + s.season + '/' + s.episode + '?accent=E50914&autoPlay=true&autoNext=true&showNextBtn=true' + dubParam;
     }
 
-    // 3. VidLink Pro Multi-Audio
+    // 3. AllMovieLand Streaming Player (Ultra HD Indian & Global Fast Player)
+    if (p === 'allmovieland' || p === 's2' || p === 'aml') {
+      var amlBase = opt.domain ? ('https://' + opt.domain + '/play/') : 'https://slast430did.com/play/';
+      var mediaId = (opt.imdbId && String(opt.imdbId).startsWith('tt')) ? opt.imdbId : s.tmdbId;
+      if (s.type === 'movie') {
+        return amlBase + encodeURIComponent(mediaId);
+      }
+      return amlBase + encodeURIComponent(mediaId) + '?s=' + s.season + '&e=' + s.episode;
+    }
+
+    // 4. VidLink Pro Multi-Audio
     if (p === 'vidlink' || p === 's3') {
       var langParam = (opt.lang) ? '&lang=' + encodeURIComponent(String(opt.lang).toLowerCase()) : '';
       if (s.type === 'movie') {
@@ -174,7 +186,7 @@
       return 'https://vidlink.pro/tv/' + s.tmdbId + '/' + s.season + '/' + s.episode + '?multiLang=true' + langParam;
     }
 
-    // 4. Server 1 (Fast Cloud Multi-Audio Stream)
+    // 5. Server 1 (Fast Cloud Multi-Audio Stream)
     if (p === 's1') {
       var s1Query = 'type=' + s.type +
         '&id=' + s.tmdbId +

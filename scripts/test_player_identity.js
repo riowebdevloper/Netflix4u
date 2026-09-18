@@ -108,6 +108,15 @@ runTest('VidLink multi-server provider generates valid URL', () => {
   assert.strictEqual(url, 'https://vidlink.pro/movie/533535?multiLang=true');
 });
 
+runTest('AllMovieLand multi-server provider generates valid Movie & TV URLs', () => {
+  const movieUrl = resolver.resolvePlayerUrl({ type: 'movie', tmdbId: 533535 }, 'allmovieland');
+  assert.strictEqual(movieUrl, 'https://slast430did.com/play/533535');
+  const tvUrl = resolver.resolvePlayerUrl({ type: 'tv', tmdbId: 79744, season: 2, episode: 5 }, 'allmovieland');
+  assert.strictEqual(tvUrl, 'https://slast430did.com/play/79744?s=2&e=5');
+  const imdbMovieUrl = resolver.resolvePlayerUrl({ type: 'movie', tmdbId: 533535 }, 'allmovieland', { imdbId: 'tt33379543' });
+  assert.strictEqual(imdbMovieUrl, 'https://slast430did.com/play/tt33379543');
+});
+
 runTest('Cache key isolation: Movie and TV produce unique canonical cache keys', () => {
   const movieKey = resolver.getCanonicalCacheKey({ type: 'movie', tmdbId: 533535 });
   const tvKey = resolver.getCanonicalCacheKey({ type: 'tv', tmdbId: 79744, season: 1, episode: 1 });
@@ -120,6 +129,8 @@ runTest('Iframe security allowlist authorizes approved origins and blocks untrus
   assert.strictEqual(resolver.isAllowedOrigin('https://vidsrc.pm/embed/movie/533535'), true);
   assert.strictEqual(resolver.isAllowedOrigin('https://vidsrc.sbs/embed/movie/533535'), true);
   assert.strictEqual(resolver.isAllowedOrigin('https://peachify.pro/embed/movie/533535'), true);
+  assert.strictEqual(resolver.isAllowedOrigin('https://slast430did.com/play/533535'), true);
+  assert.strictEqual(resolver.isAllowedOrigin('https://allmovieland.link/play/533535'), true);
   assert.strictEqual(resolver.isAllowedOrigin('https://vidlink.pro/movie/533535'), true);
   assert.strictEqual(resolver.isAllowedOrigin('https://acceptable.a-ads.com/2455136'), true);
   assert.strictEqual(resolver.isAllowedOrigin('/api/stream-player?type=movie&id=533535'), true);

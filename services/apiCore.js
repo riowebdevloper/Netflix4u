@@ -438,21 +438,28 @@ async function handlePlayback(req, res) {
     });
   }
 
-  // 3. Server 3 (AllMovieLand) - If verified IMDb ID exists
-  if (hasVerifiedImdb) {
+  // 4. Server 4 (AllMovieLand) - If verified TMDB or IMDb ID exists
+  if (hasVerifiedImdb || hasVerifiedTmdb) {
+    const amlMediaId = (item.imdbId && item.imdbId.startsWith('tt'))
+      ? item.imdbId
+      : String(item.tmdbId).replace(/^(?:tmdb-(?:movie|series|tv)-|dotmobiz-)/i, '');
+    const amlUrl = isTv
+      ? `https://slast430did.com/play/${amlMediaId}?s=${season}&e=${episode}`
+      : `https://slast430did.com/play/${amlMediaId}`;
+
     sources.push({
       id: 'allmovieland',
-      name: 'Server 3 (AllMovieLand)',
-      label: 'Server 3 (AllMovieLand)',
+      name: 'Server 4 (AllMovieLand)',
+      label: 'Server 4 (AllMovieLand)',
       canonicalId,
       provider: 'allmovieland',
-      url: `https://slast430did.com/play/${item.imdbId}`,
-      embedUrl: `https://slast430did.com/play/${item.imdbId}`,
+      url: amlUrl,
+      embedUrl: amlUrl,
       isDirect: false
     });
   }
 
-  // 4. Fast Cloud Stream
+  // 5. Fast Cloud Stream
   if (item.links && Array.isArray(item.links) && item.links.length > 0) {
     const cloudLink = item.links.find(l => l.isCloud || /1080|720|HD/i.test(l.quality)) || item.links[0];
     if (cloudLink && cloudLink.url) {
@@ -2449,6 +2456,9 @@ async function handleStreamPlayer(req, res) {
   const vidlinkUrl = isMovie
     ? `https://vidlink.pro/movie/${cleanId}?multiLang=true${lang ? '&lang=' + lang : ''}`
     : `https://vidlink.pro/tv/${cleanId}/${se}/${ep}?multiLang=true${lang ? '&lang=' + lang : ''}`;
+  const allMovieLandUrl = isMovie
+    ? `https://slast430did.com/play/${cleanId}`
+    : `https://slast430did.com/play/${cleanId}?s=${se}&e=${ep}`;
 
   const displayTitle = (title || 'Stream') + (isMovie ? '' : ` • S${se} E${ep}`);
   const directDlHref = rawCloudUrl ? `/api/download-file?url=${encodeURIComponent(rawCloudUrl)}` : (cloudStream?.url ? `/api/download-file?url=${encodeURIComponent(cloudStream.url)}` : '');
@@ -2560,6 +2570,7 @@ async function handleStreamPlayer(req, res) {
       <div class="controls-group">
         <button type="button" id="btn-srv-vidsrc" class="server-pill ${initialServer === 'vidsrc' ? 'active' : ''}" onclick="activateServer(&quot;vidsrc&quot;)">📺 VidSrc (Direct TMDB • Global)</button>
         <button type="button" id="btn-srv-peachify" class="server-pill ${initialServer === 'peachify' ? 'active' : ''}" onclick="activateServer(&quot;peachify&quot;)">🍑 Peachify (Ad-Free HD)</button>
+        <button type="button" id="btn-srv-allmovieland" class="server-pill ${initialServer === 'allmovieland' ? 'active' : ''}" onclick="activateServer(&quot;allmovieland&quot;)">🎬 AllMovieLand (Ultra HD)</button>
         <button type="button" id="btn-srv-vidlink" class="server-pill ${initialServer === 'vidlink' ? 'active' : ''}" onclick="activateServer(&quot;vidlink&quot;)">🚀 VidLink Multi</button>
         ${cloudStream ? '<button type="button" id="btn-srv-cloud" class="server-pill ' + (initialServer === 'cloud' ? 'active' : '') + '" onclick="activateServer(&quot;cloud&quot;)">⚡ Fast Cloud (Hindi Dual)</button>' : ''}
         ${cloudStream ? '<a href="intent:' + cloudStream.url + '#Intent;action=android.intent.action.VIEW;type=video/*;package=com.mxtech.videoplayer.ad;end" class="dl-btn" style="background:#0284c7;border-color:#38bdf8;" title="Play Hindi Dub in MX Player">📱 MX Player</a>' : ''}
@@ -2572,6 +2583,7 @@ async function handleStreamPlayer(req, res) {
     <div id="media-view">
       <iframe id="iframe-vidsrc" class="layer-view ${initialServer === 'vidsrc' ? 'visible' : ''}" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
       <iframe id="iframe-peachify" class="layer-view ${initialServer === 'peachify' ? 'visible' : ''}" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+      <iframe id="iframe-allmovieland" class="layer-view ${initialServer === 'allmovieland' ? 'visible' : ''}" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
       <iframe id="iframe-vidlink" class="layer-view ${initialServer === 'vidlink' ? 'visible' : ''}" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
       <div id="artplayer-layer" class="layer-view ${initialServer === 'cloud' ? 'visible' : ''}"></div>
     </div>
@@ -2582,12 +2594,13 @@ async function handleStreamPlayer(req, res) {
   <script>
     var vidsrcUrl = ${JSON.stringify(vidsrcUrl)};
     var peachifyUrl = ${JSON.stringify(peachifyUrl)};
+    var allMovieLandUrl = ${JSON.stringify(allMovieLandUrl)};
     var cloudUrl = ${JSON.stringify(cloudStream ? cloudStream.url : '')};
     var vidlinkUrl = ${JSON.stringify(vidlinkUrl)};
     var currentServer = ${JSON.stringify(initialServer)};
     var art = null;
     var failoverIndex = 0;
-    var serverSequence = ['vidsrc', 'peachify', 'vidlink', 'cloud'].filter(function(s) {
+    var serverSequence = ['vidsrc', 'peachify', 'allmovieland', 'vidlink', 'cloud'].filter(function(s) {
       if (s === 'cloud' && !cloudUrl) return false;
       return true;
     });
@@ -2621,6 +2634,12 @@ async function handleStreamPlayer(req, res) {
         var frame = document.getElementById('iframe-peachify');
         if (!frame.src || frame.src === 'about:blank') {
           frame.src = peachifyUrl;
+        }
+        frame.classList.add('visible');
+      } else if (srv === 'allmovieland') {
+        var frame = document.getElementById('iframe-allmovieland');
+        if (!frame.src || frame.src === 'about:blank') {
+          frame.src = allMovieLandUrl;
         }
         frame.classList.add('visible');
       } else if (srv === 'vidlink') {

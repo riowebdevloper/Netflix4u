@@ -1251,6 +1251,7 @@
   var SERVERS_CONFIG = [
     { id: 'vidsrc_sbs', name: 'VidSrc (Direct TMDB • Global)', shortName: 'VidSrc • Global', tag: 'Direct TMDB', tagClass: 'tag-peachify', desc: 'VidSrc Global Direct TMDB Stream • Canonical TMDB ID Playback (Unblocked Worldwide)' },
     { id: 'peachify', name: 'Peachify (Ad-Free HD • Multi-Audio)', shortName: 'Peachify • Ad-Free', tag: 'Ad-Free HD', tagClass: 'tag-peachify', desc: 'Peachify Pro Ad-Free Player • Auto-Next & Multi-Audio Synchronized Stream' },
+    { id: 'allmovieland', name: 'AllMovieLand (Ultra HD • Fast)', shortName: 'AllMovieLand • Ultra', tag: 'AllMovieLand', tagClass: 'tag-peachify', desc: 'AllMovieLand Ultra HD High-Speed Indian & Global Streaming Player' },
     { id: 's3', name: 'VidLink Pro (Multi-Audio Global)', shortName: 'VidLink Pro • Global', tag: 'Multi-Lang', tagClass: 'tag-multi', desc: 'VidLink Pro High-Speed Global Streaming Player with Multi-Language Audio' },
     { id: 's1', name: 'Fast Cloud (Direct CDN Multi-Audio)', shortName: 'Fast Cloud • Stream', tag: 'Hindi Dual', tagClass: 'tag-fast', desc: 'Direct Fast Cloud & Multi-Audio Engine with MX Player / VLC App Launch' }
   ];
@@ -1269,7 +1270,7 @@
   var autoSwitchTimer = null;
   var autoSwitchIndex = 0;
   var isPlaybackConfirmed = false;
-  var autoSwitchOrder = ['vidsrc_sbs', 'peachify', 's3', 's1'];
+  var autoSwitchOrder = ['vidsrc_sbs', 'peachify', 'allmovieland', 's3', 's1'];
   var currentAutoSwitchToken = 0;
   var activeProbeController = null;
   var watchTopBarHideTimeout = null;
@@ -1325,11 +1326,13 @@
     if (window.Netflix4uPlayerResolver) {
       activeWatchServers.vidsrc_sbs = window.Netflix4uPlayerResolver.resolvePlayerUrl(activeWatchParams, 'vidsrc_sbs');
       activeWatchServers.peachify = window.Netflix4uPlayerResolver.resolvePlayerUrl(activeWatchParams, 'peachify', { lang: currentWatchLang });
+      activeWatchServers.allmovieland = window.Netflix4uPlayerResolver.resolvePlayerUrl(activeWatchParams, 'allmovieland');
       activeWatchServers.s3 = window.Netflix4uPlayerResolver.resolvePlayerUrl(activeWatchParams, 'vidlink', { lang: currentWatchLang });
     } else {
       var sTid = String(activeWatchParams.tmdbId || '').replace(/^(?:dotmobiz|tmdb(?:-movie|-series|-tv)?)-/, '');
       activeWatchServers.vidsrc_sbs = 'https://vidsrc.pm/embed/tv/' + sTid + '/' + (activeWatchParams.season || 1) + '/' + targetEp;
       activeWatchServers.peachify = buildPeachifyUrl(activeWatchParams, currentWatchLang);
+      activeWatchServers.allmovieland = buildAllMovieLandUrl(activeWatchParams);
       activeWatchServers.s3 = buildVidlinkMultiAudioUrl(activeWatchParams, currentWatchLang);
     }
     activeWatchServers.s1 = buildFastCloudStreamUrl(activeWatchParams, currentWatchLang);
@@ -1491,10 +1494,12 @@
       pickerList.innerHTML = SERVERS_CONFIG.map(function(s, idx) {
         var isVidsrc = s.id === 'vidsrc_sbs';
         var isPeach = s.id === 'peachify';
+        var isAml = s.id === 'allmovieland';
         var isS3 = s.id === 's3';
         var isS1 = s.id === 's1';
         var badge = isVidsrc ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-blue-500/20 text-blue-400 border border-blue-500/30">DIRECT TMDB</span>' :
                     isPeach ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-pink-500/20 text-pink-400 border border-pink-500/30">AD-FREE HD</span>' :
+                    isAml ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/20 text-amber-400 border border-amber-500/30">ALLMOVIELAND</span>' :
                     isS3 ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-purple-500/20 text-purple-400 border border-purple-500/30">GLOBAL MULTI</span>' :
                     isS1 ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">HINDI DUB</span>' :
                     '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-white/10 text-white/60">' + escapeHtml(s.tag) + '</span>';
@@ -1860,6 +1865,29 @@
     return baseEndpoint + query;
   }
 
+  function buildAllMovieLandUrl(params) {
+    if (!params) return '';
+    var cleanId = '';
+    if (params.imdbId && String(params.imdbId).startsWith('tt')) {
+      cleanId = params.imdbId;
+    } else {
+      cleanId = String(params.tmdbId || '').replace(/^(?:dotmobiz|tmdb(?:-movie|-series|-tv)?)-/, '');
+      if (!cleanId || !/^\d+$/.test(cleanId)) {
+        if (params.canonicalId && /^\d+$/.test(String(params.canonicalId))) {
+          cleanId = String(params.canonicalId);
+        }
+      }
+    }
+    if (!cleanId) cleanId = '533535';
+    var isTv = Boolean(params.isTv || params.type === 'tv' || params.type === 'series');
+    var s = params.season || 1;
+    var e = params.episode || 1;
+    if (isTv) {
+      return 'https://slast430did.com/play/' + encodeURIComponent(cleanId) + '?s=' + encodeURIComponent(s) + '&e=' + encodeURIComponent(e);
+    }
+    return 'https://slast430did.com/play/' + encodeURIComponent(cleanId);
+  }
+
   function buildVidlinkMultiAudioUrl(params, lang) {
     if (!params) return '';
     var cleanId = String(params.tmdbId || '').replace(/^(?:dotmobiz|tmdb(?:-movie|-series|-tv)?)-/, '');
@@ -1997,6 +2025,9 @@
     var peachifyUrl = window.Netflix4uPlayerResolver
       ? window.Netflix4uPlayerResolver.resolvePlayerUrl(activeWatchParams, 'peachify', { lang: currentWatchLang })
       : buildPeachifyUrl(activeWatchParams, currentWatchLang);
+    var allmovielandUrl = window.Netflix4uPlayerResolver
+      ? window.Netflix4uPlayerResolver.resolvePlayerUrl(activeWatchParams, 'allmovieland')
+      : buildAllMovieLandUrl(activeWatchParams);
     var s1Url = buildFastCloudStreamUrl(activeWatchParams, currentWatchLang);
     var s3Url = window.Netflix4uPlayerResolver
       ? window.Netflix4uPlayerResolver.resolvePlayerUrl(activeWatchParams, 'vidlink', { lang: currentWatchLang })
@@ -2005,6 +2036,7 @@
     activeWatchServers = {
       vidsrc_sbs: vidsrcUrl,
       peachify: peachifyUrl,
+      allmovieland: allmovielandUrl,
       s3: s3Url,
       s1: s1Url
     };
@@ -2180,6 +2212,9 @@
     var newPeachifyUrl = window.Netflix4uPlayerResolver
       ? window.Netflix4uPlayerResolver.resolvePlayerUrl(activeWatchParams, 'peachify', { lang: currentWatchLang })
       : buildPeachifyUrl(activeWatchParams, currentWatchLang);
+    var newAllmovielandUrl = window.Netflix4uPlayerResolver
+      ? window.Netflix4uPlayerResolver.resolvePlayerUrl(activeWatchParams, 'allmovieland')
+      : (activeWatchServers.allmovieland || buildAllMovieLandUrl(activeWatchParams));
     var newS3Url = window.Netflix4uPlayerResolver
       ? window.Netflix4uPlayerResolver.resolvePlayerUrl(activeWatchParams, 'vidlink', { lang: currentWatchLang })
       : buildVidlinkMultiAudioUrl(activeWatchParams, currentWatchLang);
@@ -2187,6 +2222,7 @@
 
     activeWatchServers.vidsrc_sbs = newVidsrcUrl;
     activeWatchServers.peachify = newPeachifyUrl;
+    activeWatchServers.allmovieland = newAllmovielandUrl;
     activeWatchServers.s3 = newS3Url;
     activeWatchServers.s1 = newS1Url;
 
