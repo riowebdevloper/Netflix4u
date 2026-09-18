@@ -1246,14 +1246,47 @@
     openTitleModal(prev.tmdbId, prev.type);
   }
 
-  // ─── WATCH MODAL (Net27 Streaming Player UI with Auto-Failover Engine) ───
-  // ─── WATCH MODAL (Net27 Streaming Player UI with Auto-Failover Engine) ───
+  // ─── WATCH MODAL (Net27 Multi-Server Streaming Player UI with Full Vidsrc.win Suite) ───
   var SERVERS_CONFIG = [
-    { id: 'vidsrc_sbs', name: 'VidSrc (Original Audio • Global)', shortName: 'VidSrc • Original', tag: 'Direct TMDB', tagClass: 'tag-peachify', desc: 'VidSrc Global Direct TMDB Stream • Original English Audio (For Hindi/Regional Dubs select Peachify/VidLink)' },
-    { id: 'peachify', name: 'Peachify (Hindi Dub • Multi-Audio HD)', shortName: 'Peachify • Hindi Dub', tag: 'Hindi Dub HD', tagClass: 'tag-peachify', desc: 'Peachify Pro Ad-Free Player • Auto-Next & Multi-Audio Synchronized Stream (Hindi / Tamil / Telugu / English)' },
-    { id: 'allmovieland', name: 'AllMovieLand (Ultra HD • Fast)', shortName: 'AllMovieLand • Ultra', tag: 'AllMovieLand', tagClass: 'tag-peachify', desc: 'AllMovieLand Ultra HD High-Speed Indian & Global Streaming Player' },
-    { id: 's3', name: 'VidLink Pro (Multi-Audio Global)', shortName: 'VidLink Pro • Global', tag: 'Multi-Lang', tagClass: 'tag-multi', desc: 'VidLink Pro High-Speed Global Streaming Player with Multi-Language Audio (Hindi / Tamil / Telugu / English)' },
-    { id: 's1', name: 'Fast Cloud (Direct CDN Multi-Audio)', shortName: 'Fast Cloud • Stream', tag: 'Hindi Dual', tagClass: 'tag-fast', desc: 'Direct Fast Cloud & Multi-Audio Engine with MX Player / VLC App Launch' }
+    // ─── FEATURED & PRIMARY PLAYERS ───
+    { id: 'vidsrc_sbs', name: 'VidSrc Global (Primary Direct TMDB)', shortName: 'VidSrc • Global', tag: 'Direct TMDB', tagClass: 'tag-peachify', category: 'featured', isFeatured: true, desc: 'VidSrc Global Direct Stream • Original English Audio • Worldwide Unblocked CDN' },
+    { id: 'braflix', name: 'Braflix (Auto-Next & Ultra HD)', shortName: 'Braflix • AutoNext', tag: 'AutoNext HD', tagClass: 'tag-multi', category: 'featured', isFeatured: true, desc: 'Braflix High-Speed Player • Auto-Next Episodes & Multi-Source Cloud' },
+    { id: 'videasy', name: '4K Cinema (Videasy Ultra)', shortName: '4K • Videasy', tag: '4K ULTRA', tagClass: 'tag-fast', category: 'featured', isFeatured: true, desc: 'Videasy 4K Ultra HD Engine • Direct TMDB Player with Responsive Controls' },
+    { id: 's3', name: 'VidLink Pro (Multi-Audio Global)', shortName: 'VidLink • Global', tag: 'Multi-Lang', tagClass: 'tag-multi', category: 'featured', isFeatured: true, desc: 'VidLink Pro Ultra-Fast Player with Multi-Language Audio Selection' },
+    { id: 'peachify', name: 'Peachify (Hindi Dub • Multi-Audio HD)', shortName: 'Peachify • Hindi', tag: 'Hindi Dub HD', tagClass: 'tag-peachify', category: 'featured', isFeatured: true, desc: 'Peachify Pro Ad-Free Player • Synchronized Multi-Audio Dubbing (Hindi/Tamil/Telugu/English)' },
+    { id: 's1', name: 'Fast Cloud (Direct CDN Multi-Audio)', shortName: 'Fast Cloud • App', tag: 'Direct CDN', tagClass: 'tag-fast', category: 'featured', isFeatured: true, desc: 'Direct Fast Cloud Media Engine with MX Player / VLC App Launch' },
+
+    // ─── VIDSRC.WIN REVERSE-ENGINEERED HIGH-SPEED SERVERS ───
+    { id: 'wootly', name: 'Wootly (VidSrc Party)', shortName: 'Wootly • Party', tag: 'Party CDN', tagClass: 'tag-multi', category: 'vidsrc', isFeatured: false, desc: 'VidSrc Party Direct Stream Engine' },
+    { id: 'vidbolt', name: 'Bolt (VidBolt High-Speed)', shortName: 'Bolt • HighSpeed', tag: 'Fast CDN', tagClass: 'tag-fast', category: 'vidsrc', isFeatured: false, desc: 'VidBolt Cloud Streaming Cluster' },
+    { id: 'vidfast', name: 'Nero (VidFast Pro)', shortName: 'Nero • VidFast', tag: 'Ultra Fast', tagClass: 'tag-fast', category: 'vidsrc', isFeatured: false, desc: 'VidFast High-Speed Direct Cloud Stream' },
+    { id: 'vidflix', name: 'Flixify (VidFlix Club)', shortName: 'Flixify • Club', tag: 'HD Cloud', tagClass: 'tag-multi', category: 'vidsrc', isFeatured: false, desc: 'VidFlix High-Definition Streaming Mirror' },
+    { id: 'vidsrc_su', name: 'Astra (VidSrc Astra Direct)', shortName: 'Astra • VidSrc', tag: 'Astra CDN', tagClass: 'tag-peachify', category: 'vidsrc', isFeatured: false, desc: 'VidSrc Astra Cloud Embed Engine' },
+    { id: 'wplay', name: 'Vid (WPlay Media)', shortName: 'Vid • WPlay', tag: 'WPlay', tagClass: 'tag-multi', category: 'vidsrc', isFeatured: false, desc: 'WPlay Cloud Player Embed' },
+    { id: 'xpass', name: 'Mist (XPass Stream)', shortName: 'Mist • XPass', tag: 'XPass', tagClass: 'tag-multi', category: 'vidsrc', isFeatured: false, desc: 'XPass Media Direct Player' },
+    { id: 'peach', name: 'Peach (Peachify Mirror)', shortName: 'Peach • Mirror', tag: 'Peach Mirror', tagClass: 'tag-peachify', category: 'vidsrc', isFeatured: false, desc: 'Peachify Top High-Speed Mirror' },
+    { id: 'vidnest', name: 'Nest (VidNest Fun)', shortName: 'Nest • VidNest', tag: 'VidNest', tagClass: 'tag-multi', category: 'vidsrc', isFeatured: false, desc: 'VidNest Direct Stream Engine' },
+    { id: 'vidcore', name: 'Pass (VidCore Net)', shortName: 'Pass • VidCore', tag: 'VidCore', tagClass: 'tag-multi', category: 'vidsrc', isFeatured: false, desc: 'VidCore Cloud Embed Player' },
+    { id: 'vaplayer', name: 'Mistify (VAPlayer RU)', shortName: 'Mistify • VAP', tag: 'VAPlayer', tagClass: 'tag-multi', category: 'vidsrc', isFeatured: false, desc: 'VAPlayer Direct Russian & Global CDN' },
+    { id: 'zxcstream', name: 'Simplify (ZXCStream)', shortName: 'Simplify • ZXC', tag: 'ZXCStream', tagClass: 'tag-fast', category: 'vidsrc', isFeatured: false, desc: 'ZXCStream Player with Custom Subtitles' },
+    { id: 'embed_cc', name: 'Asia (1Embed Asian CDN)', shortName: 'Asia • 1Embed', tag: 'Asia CDN', tagClass: 'tag-multi', category: 'vidsrc', isFeatured: false, desc: '1Embed Fast Asia-Pacific Cloud Stream' },
+    { id: 'cinesrc', name: 'Cine (CineSrc ST)', shortName: 'Cine • CineSrc', tag: 'CineSrc', tagClass: 'tag-multi', category: 'vidsrc', isFeatured: false, desc: 'CineSrc Media Embed Player' },
+    { id: 'vidlux', name: 'Vidmux (VidLux Site)', shortName: 'Vidmux • VidLux', tag: 'VidLux', tagClass: 'tag-multi', category: 'vidsrc', isFeatured: false, desc: 'VidLux High-Speed Stream' },
+    { id: 'vsembed', name: 'Diablo (VSEmbed RU)', shortName: 'Diablo • VSE', tag: 'VSEmbed', tagClass: 'tag-multi', category: 'vidsrc', isFeatured: false, desc: 'VSEmbed Cloud Stream' },
+    { id: 'vidify', name: 'Vidind (Vidify TOP)', shortName: 'Vidind • Vidify', tag: 'Vidify', tagClass: 'tag-multi', category: 'vidsrc', isFeatured: false, desc: 'Vidify Cloud Player' },
+    { id: 'mapple', name: '4KHD (Mapple RIP)', shortName: '4KHD • Mapple', tag: '4KHD RIP', tagClass: 'tag-fast', category: 'vidsrc', isFeatured: false, desc: 'Mapple 4K Streaming Engine' },
+    { id: 'vidsrc2', name: 'Vidsrc 2 (VidSrc RU Mirror)', shortName: 'VidSrc 2 • RU', tag: 'VidSrc 2', tagClass: 'tag-peachify', category: 'vidsrc', isFeatured: false, desc: 'VidSrc 2 Alternate Global Cluster' },
+    { id: 'twoembed', name: '2embed (2Embed Stream)', shortName: '2embed • Global', tag: '2Embed', tagClass: 'tag-multi', category: 'vidsrc', isFeatured: false, desc: '2Embed Global TMDB Stream Engine' },
+    { id: 'moviesapi', name: 'Club (MoviesAPI TO)', shortName: 'Club • MoviesAPI', tag: 'MoviesAPI', tagClass: 'tag-multi', category: 'vidsrc', isFeatured: false, desc: 'MoviesAPI Club Direct Player' },
+    { id: 'onemovies', name: 'Sage (111Movies COM)', shortName: 'Sage • 111Movies', tag: '111Movies', tagClass: 'tag-multi', category: 'vidsrc', isFeatured: false, desc: '111Movies Stream Server' },
+    { id: 'vidrock', name: 'Azute (VidRock RU)', shortName: 'Azute • VidRock', tag: 'VidRock', tagClass: 'tag-multi', category: 'vidsrc', isFeatured: false, desc: 'VidRock Cloud Stream' },
+    { id: 'allmovieland', name: 'AllMovieLand (Ultra HD Fast)', shortName: 'AllMovieLand', tag: 'Ultra HD', tagClass: 'tag-peachify', category: 'vidsrc', isFeatured: false, desc: 'AllMovieLand Indian & Global Stream Player' },
+
+    // ─── REGIONAL & MULTI-AUDIO DUBBED ───
+    { id: 'viduki', name: 'Hindi Dub (Viduki NET)', shortName: 'Hindi • Viduki', tag: 'Hindi Dub', tagClass: 'tag-peachify', category: 'regional', isFeatured: false, desc: 'Viduki Hindi-first Audio Stream Engine' },
+    { id: 'vixsrc', name: 'Italian (VixSrc TO)', shortName: 'Italian • VixSrc', tag: 'Italian Dub', tagClass: 'tag-multi', category: 'regional', isFeatured: false, desc: 'VixSrc Stream with Italian Audio Track' },
+    { id: 'frembed', name: 'French (FrEmbed ASIA)', shortName: 'French • FrEmbed', tag: 'French Dub', tagClass: 'tag-multi', category: 'regional', isFeatured: false, desc: 'FrEmbed with French Dubbing' },
+    { id: 'superflix', name: 'Portuguese (Superflix BEER)', shortName: 'Portuguese • Super', tag: 'Portuguese', tagClass: 'tag-multi', category: 'regional', isFeatured: false, desc: 'Superflix with Portuguese Dubbing' }
   ];
 
   var currentWatchLang = 'hi';
@@ -1270,7 +1303,7 @@
   var autoSwitchTimer = null;
   var autoSwitchIndex = 0;
   var isPlaybackConfirmed = false;
-  var autoSwitchOrder = ['vidsrc_sbs', 'peachify', 'allmovieland', 's3', 's1'];
+  var autoSwitchOrder = ['vidsrc_sbs', 'braflix', 'videasy', 's3', 'peachify', 's1', 'wootly', 'vidbolt', 'vidfast', 'allmovieland'];
   var currentAutoSwitchToken = 0;
   var activeProbeController = null;
   var watchTopBarHideTimeout = null;
@@ -1491,32 +1524,43 @@
 
     var pickerList = document.getElementById('picker-server-list');
     if (pickerList) {
-      pickerList.innerHTML = SERVERS_CONFIG.map(function(s, idx) {
-        var isVidsrc = s.id === 'vidsrc_sbs';
-        var isPeach = s.id === 'peachify';
-        var isAml = s.id === 'allmovieland';
-        var isS3 = s.id === 's3';
-        var isS1 = s.id === 's1';
-        var badge = isVidsrc ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-blue-500/20 text-blue-400 border border-blue-500/30">DIRECT TMDB</span>' :
-                    isPeach ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-pink-500/20 text-pink-400 border border-pink-500/30">AD-FREE HD</span>' :
-                    isAml ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/20 text-amber-400 border border-amber-500/30">ALLMOVIELAND</span>' :
-                    isS3 ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-purple-500/20 text-purple-400 border border-purple-500/30">GLOBAL MULTI</span>' :
-                    isS1 ? '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">HINDI DUB</span>' :
-                    '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-white/10 text-white/60">' + escapeHtml(s.tag) + '</span>';
+      var categories = [
+        { id: 'featured', label: '🌟 Featured & Primary' },
+        { id: 'vidsrc', label: '⚡ VidSrc.win High-Speed CDN Mirrors' },
+        { id: 'regional', label: '🎧 Multi-Audio & Dubbed Regional' }
+      ];
 
-        return '<button type="button" data-select-server="' + s.id + '" class="picker-server-card' + (isVidsrc ? ' is-active' : '') + '">' +
-          '<div class="flex items-center gap-3">' +
-            '<div class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center font-bold text-xs text-white">' + (idx + 1) + '</div>' +
-            '<div>' +
-              '<div class="text-xs sm:text-sm font-bold text-white flex items-center gap-2">' +
-                '<span>' + escapeHtml(s.name) + '</span>' +
+      var html = '';
+      categories.forEach(function(cat) {
+        var groupServers = SERVERS_CONFIG.filter(function(s) { return s.category === cat.id; });
+        if (!groupServers.length) return;
+
+        html += '<div class="col-span-full mt-3 mb-1">' +
+          '<div class="text-xs font-black uppercase tracking-wider text-white/50 px-1">' + escapeHtml(cat.label) + ' (' + groupServers.length + ')</div>' +
+        '</div>';
+
+        html += groupServers.map(function(s) {
+          var isCurrent = s.id === currentWatchServer;
+          var badge = '<span class="px-2 py-0.5 rounded text-[10px] font-bold bg-white/10 text-white/80 border border-white/10">' + escapeHtml(s.tag) + '</span>';
+
+          return '<button type="button" data-select-server="' + s.id + '" class="picker-server-card' + (isCurrent ? ' is-active' : '') + '">' +
+            '<div class="flex items-center gap-3 min-w-0">' +
+              '<div class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center font-bold text-xs text-white shrink-0">' +
+                (isCurrent ? '▶' : '⚡') +
               '</div>' +
-              '<div class="text-[11px] text-white/50">' + escapeHtml(s.desc || '') + '</div>' +
+              '<div class="min-w-0">' +
+                '<div class="text-xs sm:text-sm font-bold text-white truncate flex items-center gap-2">' +
+                  '<span>' + escapeHtml(s.name) + '</span>' +
+                '</div>' +
+                '<div class="text-[11px] text-white/50 truncate">' + escapeHtml(s.desc || '') + '</div>' +
+              '</div>' +
             '</div>' +
-          '</div>' +
-          badge +
-        '</button>';
-      }).join('');
+            '<div class="shrink-0">' + badge + '</div>' +
+          '</button>';
+        }).join('');
+      });
+
+      pickerList.innerHTML = html;
 
       pickerList.querySelectorAll('[data-select-server]').forEach(function(card) {
         card.addEventListener('click', function(e) {
@@ -2018,28 +2062,15 @@
     }
     updateEpisodeNavUi();
 
-    // Build Server URLs via Centralized Player Resolver
-    var vidsrcUrl = window.Netflix4uPlayerResolver
-      ? window.Netflix4uPlayerResolver.resolvePlayerUrl(activeWatchParams, 'vidsrc_sbs')
-      : (isTv ? ('https://vidsrc.pm/embed/tv/' + tmdbId + '/' + season + '/' + episode) : ('https://vidsrc.pm/embed/movie/' + tmdbId));
-    var peachifyUrl = window.Netflix4uPlayerResolver
-      ? window.Netflix4uPlayerResolver.resolvePlayerUrl(activeWatchParams, 'peachify', { lang: currentWatchLang })
-      : buildPeachifyUrl(activeWatchParams, currentWatchLang);
-    var allmovielandUrl = window.Netflix4uPlayerResolver
-      ? window.Netflix4uPlayerResolver.resolvePlayerUrl(activeWatchParams, 'allmovieland')
-      : buildAllMovieLandUrl(activeWatchParams);
-    var s1Url = buildFastCloudStreamUrl(activeWatchParams, currentWatchLang);
-    var s3Url = window.Netflix4uPlayerResolver
-      ? window.Netflix4uPlayerResolver.resolvePlayerUrl(activeWatchParams, 'vidlink', { lang: currentWatchLang })
-      : buildVidlinkMultiAudioUrl(activeWatchParams, currentWatchLang);
-
-    activeWatchServers = {
-      vidsrc_sbs: vidsrcUrl,
-      peachify: peachifyUrl,
-      allmovieland: allmovielandUrl,
-      s3: s3Url,
-      s1: s1Url
-    };
+    // Build Server URLs for ALL reverse-engineered vidsrc.win providers via Universal Resolver
+    activeWatchServers = {};
+    SERVERS_CONFIG.forEach(function(s) {
+      if (window.Netflix4uPlayerResolver) {
+        activeWatchServers[s.id] = window.Netflix4uPlayerResolver.resolvePlayerUrl(activeWatchParams, s.id, { lang: currentWatchLang });
+      } else {
+        activeWatchServers[s.id] = 'https://vidsrc.pm/embed/' + (isTv ? ('tv/' + tmdbId + '/' + season + '/' + episode) : ('movie/' + tmdbId));
+      }
+    });
 
     var startingServer = chosenServer || 'vidsrc_sbs';
     currentWatchServer = startingServer;
@@ -2103,15 +2134,34 @@
   function renderWatchServerMenu() {
     // 1. Render visible horizontal Server Pills Bar in Watch Header
     if (watchPlayerBar) {
-      watchPlayerBar.innerHTML = SERVERS_CONFIG.map(function(s) {
+      var featuredServers = SERVERS_CONFIG.filter(function(s) { return s.isFeatured; });
+      var isOtherSelected = !featuredServers.some(function(s) { return s.id === currentWatchServer; });
+      var currentOtherCfg = isOtherSelected ? SERVERS_CONFIG.find(function(s) { return s.id === currentWatchServer; }) : null;
+
+      var barHtml = featuredServers.map(function(s) {
         var isSelected = s.id === currentWatchServer;
-        var shortName = s.name.replace(/^Server\s*/i, 'S');
+        var shortName = s.shortName || s.name;
         return '<button type="button" data-switch-server="' + s.id + '" class="server-tab-btn' + (isSelected ? ' is-active' : '') + '" title="' + escapeHtml(s.desc) + '">' +
           '<span class="w-2 h-2 rounded-full ' + (isSelected ? 'bg-emerald-400 animate-pulse' : 'bg-white/40') + ' shrink-0"></span>' +
           '<span class="truncate max-w-[130px] sm:max-w-none">' + escapeHtml(shortName) + '</span>' +
           '<span class="watch-server-tag ' + s.tagClass + ' shrink-0 ml-1">' + escapeHtml(s.tag) + '</span>' +
         '</button>';
       }).join('');
+
+      if (currentOtherCfg) {
+        barHtml += '<button type="button" data-switch-server="' + currentOtherCfg.id + '" class="server-tab-btn is-active" title="' + escapeHtml(currentOtherCfg.desc) + '">' +
+          '<span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>' +
+          '<span class="truncate max-w-[130px] sm:max-w-none">' + escapeHtml(currentOtherCfg.shortName || currentOtherCfg.name) + '</span>' +
+          '<span class="watch-server-tag ' + currentOtherCfg.tagClass + ' shrink-0 ml-1">' + escapeHtml(currentOtherCfg.tag) + '</span>' +
+        '</button>';
+      }
+
+      barHtml += '<button type="button" id="watch-all-servers-btn" class="server-tab-btn bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold shrink-0 ml-1" title="View all ' + SERVERS_CONFIG.length + ' streaming servers">' +
+        '<span class="text-amber-400 font-black text-xs">⚡</span>' +
+        '<span class="text-xs">All Servers (' + SERVERS_CONFIG.length + ')</span>' +
+      '</button>';
+
+      watchPlayerBar.innerHTML = barHtml;
 
       watchPlayerBar.querySelectorAll('[data-switch-server]').forEach(function(btn) {
         btn.addEventListener('click', function(e) {
@@ -2120,17 +2170,41 @@
           switchWatchServer(sId, true);
         });
       });
+
+      var allServersBtn = document.getElementById('watch-all-servers-btn');
+      if (allServersBtn) {
+        allServersBtn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          if (activeWatchParams) {
+            openServerPickerModal(
+              activeWatchParams.tmdbId,
+              activeWatchParams.type,
+              activeWatchParams.season,
+              activeWatchParams.episode,
+              activeWatchParams.backdrop,
+              activeWatchParams.title,
+              activeWatchParams.year,
+              activeWatchParams.imdbId,
+              activeWatchParams.canonicalId,
+              activeWatchParams.poster
+            );
+          } else {
+            toggleServerMenu();
+          }
+        });
+      }
     }
 
-    // 2. Render dropdown menu list
+    // 2. Render dropdown menu list with all reverse-engineered servers
     var serverListContainer = document.getElementById('watch-servers-list-container');
     if (serverListContainer) {
-      serverListContainer.innerHTML = SERVERS_CONFIG.map(function(s) {
+      serverListContainer.innerHTML = SERVERS_CONFIG.map(function(s, idx) {
         var isSelected = s.id === currentWatchServer;
         return '<button type="button" data-switch-server="' + s.id + '" class="watch-server-item' + (isSelected ? ' is-selected' : '') + '">' +
           '<div class="flex items-center gap-2 min-w-0">' +
+            '<span class="text-[10px] text-white/40 font-mono w-4">' + (idx + 1) + '</span>' +
             '<span class="w-2 h-2 rounded-full bg-emerald-400 shrink-0 ' + (isSelected ? 'animate-pulse' : 'opacity-70') + '"></span>' +
-            '<span class="truncate">' + escapeHtml(s.name) + '</span>' +
+            '<span class="truncate text-xs font-semibold">' + escapeHtml(s.name) + '</span>' +
           '</div>' +
           '<span class="watch-server-tag ' + s.tagClass + ' shrink-0 ml-2">' + escapeHtml(s.tag) + '</span>' +
         '</button>';
@@ -2212,25 +2286,12 @@
 
     if (!activeWatchParams) return;
 
-    var newVidsrcUrl = window.Netflix4uPlayerResolver
-      ? window.Netflix4uPlayerResolver.resolvePlayerUrl(activeWatchParams, 'vidsrc_sbs')
-      : activeWatchServers.vidsrc_sbs;
-    var newPeachifyUrl = window.Netflix4uPlayerResolver
-      ? window.Netflix4uPlayerResolver.resolvePlayerUrl(activeWatchParams, 'peachify', { lang: currentWatchLang })
-      : buildPeachifyUrl(activeWatchParams, currentWatchLang);
-    var newAllmovielandUrl = window.Netflix4uPlayerResolver
-      ? window.Netflix4uPlayerResolver.resolvePlayerUrl(activeWatchParams, 'allmovieland')
-      : (activeWatchServers.allmovieland || buildAllMovieLandUrl(activeWatchParams));
-    var newS3Url = window.Netflix4uPlayerResolver
-      ? window.Netflix4uPlayerResolver.resolvePlayerUrl(activeWatchParams, 'vidlink', { lang: currentWatchLang })
-      : buildVidlinkMultiAudioUrl(activeWatchParams, currentWatchLang);
-    var newS1Url = buildFastCloudStreamUrl(activeWatchParams, currentWatchLang);
-
-    activeWatchServers.vidsrc_sbs = newVidsrcUrl;
-    activeWatchServers.peachify = newPeachifyUrl;
-    activeWatchServers.allmovieland = newAllmovielandUrl;
-    activeWatchServers.s3 = newS3Url;
-    activeWatchServers.s1 = newS1Url;
+    // Re-resolve active servers for updated language
+    SERVERS_CONFIG.forEach(function(s) {
+      if (window.Netflix4uPlayerResolver) {
+        activeWatchServers[s.id] = window.Netflix4uPlayerResolver.resolvePlayerUrl(activeWatchParams, s.id, { lang: currentWatchLang });
+      }
+    });
 
     var activeSrv = currentWatchServer || 'vidsrc_sbs';
     // If user is currently on VidSrc (which is single-stream Original Audio) and requests a Dub (Hindi/Tamil/Telugu/Multi),
@@ -2270,6 +2331,9 @@
   }
 
   function switchWatchServer(serverId, isManual) {
+    if (!activeWatchServers[serverId] && window.Netflix4uPlayerResolver && activeWatchParams) {
+      activeWatchServers[serverId] = window.Netflix4uPlayerResolver.resolvePlayerUrl(activeWatchParams, serverId, { lang: currentWatchLang });
+    }
     if (!activeWatchServers[serverId]) return;
     var cfg = SERVERS_CONFIG.find(function(s) { return s.id === serverId; }) || SERVERS_CONFIG[0];
 

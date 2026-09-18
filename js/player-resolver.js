@@ -158,12 +158,269 @@
     return 'player:tv:tmdb:' + s.tmdbId + ':s' + s.season + ':e' + s.episode;
   }
 
+  // ─── VIDSRC.WIN REVERSE-ENGINEERED PROVIDERS ADAPTER SUITE ───
+  // Strictly excludes Rivestream / Fade per architectural mandate.
+  var PROVIDER_BUILDERS = {
+    // 1. VidSrc Global Reference
+    vidsrc_sbs: function(s, opt) {
+      var vHost = (opt && opt.domain) || 'vidsrc.pm';
+      return s.type === 'movie'
+        ? 'https://' + vHost + '/embed/movie/' + s.tmdbId
+        : 'https://' + vHost + '/embed/tv/' + s.tmdbId + '/' + s.season + '/' + s.episode;
+    },
+    // 2. Braflix (api.cineby.homes)
+    braflix: function(s, opt) {
+      if (s.type === 'movie') {
+        return 'https://api.cineby.homes/embed/movie/' + s.tmdbId;
+      }
+      return 'https://api.cineby.homes/embed/tv/' + s.tmdbId + '/' + s.season + '/' + s.episode + '?autonext=1&ds_lang=en';
+    },
+    // 3. Videasy 4K (player.videasy.net)
+    videasy: function(s, opt) {
+      var c = 'nextEpisode=true&autoplayNextEpisode=true&episodeSelector=true&color=#E50914';
+      if (s.type === 'movie') {
+        return 'https://player.videasy.net/movie/' + s.tmdbId;
+      }
+      return 'https://player.videasy.net/tv/' + s.tmdbId + '/' + s.season + '/' + s.episode + '?' + c;
+    },
+    '4k': function(s, opt) { return PROVIDER_BUILDERS.videasy(s, opt); },
+    // 4. VidLink Pro Multi-Audio
+    vidlink: function(s, opt) {
+      var langParam = (opt && opt.lang) ? '&lang=' + encodeURIComponent(String(opt.lang).toLowerCase()) : '';
+      if (s.type === 'movie') {
+        return 'https://vidlink.pro/movie/' + s.tmdbId + '?multiLang=true' + langParam;
+      }
+      return 'https://vidlink.pro/tv/' + s.tmdbId + '/' + s.season + '/' + s.episode + '?multiLang=true' + langParam;
+    },
+    s3: function(s, opt) { return PROVIDER_BUILDERS.vidlink(s, opt); },
+    // 5. Wootly (vidsrc.party)
+    wootly: function(s, opt) {
+      return s.type === 'movie'
+        ? 'https://www.vidsrc.party/movie/' + s.tmdbId
+        : 'https://www.vidsrc.party/tv/' + s.tmdbId + '/' + s.season + '/' + s.episode;
+    },
+    // 6. Bolt & Flix (vidbolt.xyz)
+    vidbolt: function(s, opt) {
+      return s.type === 'movie'
+        ? 'https://vidbolt.xyz/movie/' + s.tmdbId
+        : 'https://vidbolt.xyz/tv/' + s.tmdbId + '/' + s.season + '/' + s.episode;
+    },
+    bolt: function(s, opt) { return PROVIDER_BUILDERS.vidbolt(s, opt); },
+    flix: function(s, opt) { return PROVIDER_BUILDERS.vidbolt(s, opt); },
+    // 7. Nero (vidfast.pro)
+    vidfast: function(s, opt) {
+      return s.type === 'movie'
+        ? 'https://vidfast.pro/movie/' + s.tmdbId
+        : 'https://vidfast.pro/tv/' + s.tmdbId + '/' + s.season + '/' + s.episode;
+    },
+    nero: function(s, opt) { return PROVIDER_BUILDERS.vidfast(s, opt); },
+    // 8. Flixify (vidflix.club)
+    vidflix: function(s, opt) {
+      return s.type === 'movie'
+        ? 'https://vidflix.club/movie/' + s.tmdbId
+        : 'https://vidflix.club/tv/' + s.tmdbId + '/' + s.season + '/' + s.episode;
+    },
+    flixify: function(s, opt) { return PROVIDER_BUILDERS.vidflix(s, opt); },
+    // 9. Astra (vidsrc.su)
+    vidsrc_su: function(s, opt) {
+      return s.type === 'movie'
+        ? 'https://vidsrc.su/embed/movie/' + s.tmdbId
+        : 'https://vidsrc.su/embed/tv/' + s.tmdbId + '/' + s.season + '/' + s.episode;
+    },
+    astra: function(s, opt) { return PROVIDER_BUILDERS.vidsrc_su(s, opt); },
+    // 10. Vid (embed.wplay.me)
+    wplay: function(s, opt) {
+      return s.type === 'movie'
+        ? 'https://embed.wplay.me/embed/movie/' + s.tmdbId
+        : 'https://embed.wplay.me/embed/tv/' + s.tmdbId + '/' + s.season + '/' + s.episode;
+    },
+    vid: function(s, opt) { return PROVIDER_BUILDERS.wplay(s, opt); },
+    // 11. Mist (play.xpass.top)
+    xpass: function(s, opt) {
+      return s.type === 'movie'
+        ? 'https://play.xpass.top/e/movie/' + s.tmdbId
+        : 'https://play.xpass.top/e/tv/' + s.tmdbId + '/' + s.season + '/' + s.episode;
+    },
+    mist: function(s, opt) { return PROVIDER_BUILDERS.xpass(s, opt); },
+    // 12. Peachify Pro (peachify.pro)
+    peachify: function(s, opt) {
+      var lang = ((opt && opt.lang) || 'hi').toLowerCase();
+      var dub = (lang === 'hi') ? 'Hindi' : (lang === 'ta' ? 'Tamil' : (lang === 'te' ? 'Telugu' : 'English'));
+      var dubParam = dub ? '&dub=' + encodeURIComponent(dub) : '';
+      if (s.type === 'movie') {
+        return 'https://peachify.pro/embed/movie/' + s.tmdbId + '?accent=E50914&autoPlay=true' + dubParam;
+      }
+      return 'https://peachify.pro/embed/tv/' + s.tmdbId + '/' + s.season + '/' + s.episode + '?accent=E50914&autoPlay=true&autoNext=true&showNextBtn=true' + dubParam;
+    },
+    // 13. Peach (peachify.top)
+    peach: function(s, opt) {
+      return s.type === 'movie'
+        ? 'https://peachify.top/embed/movie/' + s.tmdbId
+        : 'https://peachify.top/embed/tv/' + s.tmdbId + '/' + s.season + '/' + s.episode;
+    },
+    peachify_top: function(s, opt) { return PROVIDER_BUILDERS.peach(s, opt); },
+    // 14. Nest (vidnest.fun)
+    vidnest: function(s, opt) {
+      return s.type === 'movie'
+        ? 'https://vidnest.fun/movie/' + s.tmdbId
+        : 'https://vidnest.fun/tv/' + s.tmdbId + '/' + s.season + '/' + s.episode;
+    },
+    nest: function(s, opt) { return PROVIDER_BUILDERS.vidnest(s, opt); },
+    // 15. Pass (vidcore.net)
+    vidcore: function(s, opt) {
+      return s.type === 'movie'
+        ? 'https://vidcore.net/movie/' + s.tmdbId
+        : 'https://vidcore.net/tv/' + s.tmdbId + '/' + s.season + '/' + s.episode;
+    },
+    pass: function(s, opt) { return PROVIDER_BUILDERS.vidcore(s, opt); },
+    // 16. Mistify (vaplayer.ru)
+    vaplayer: function(s, opt) {
+      return s.type === 'movie'
+        ? 'https://vaplayer.ru/embed/movie/' + s.tmdbId
+        : 'https://vaplayer.ru/embed/tv/' + s.tmdbId + '/' + s.season + '/' + s.episode;
+    },
+    mistify: function(s, opt) { return PROVIDER_BUILDERS.vaplayer(s, opt); },
+    // 17. Simplify (zxcstream.xyz)
+    zxcstream: function(s, opt) {
+      if (s.type === 'movie') {
+        return 'https://zxcstream.xyz/player/movie/' + s.tmdbId + '?autoplay=true&color=addc35&back=false&domainAd=braflix.win';
+      }
+      return 'https://zxcstream.xyz/player/tv/' + s.tmdbId + '/' + s.season + '/' + s.episode + '?autoplay=true&color=addc35&back=false&domainAd=braflix.win';
+    },
+    simplify: function(s, opt) { return PROVIDER_BUILDERS.zxcstream(s, opt); },
+    // 18. Asia (1embed.cc)
+    embed_cc: function(s, opt) {
+      return s.type === 'movie'
+        ? 'https://1embed.cc/embed/movie/' + s.tmdbId
+        : 'https://1embed.cc/embed/tv/' + s.tmdbId + '/' + s.season + '/' + s.episode;
+    },
+    asia: function(s, opt) { return PROVIDER_BUILDERS.embed_cc(s, opt); },
+    // 19. Cine (cinesrc.st)
+    cinesrc: function(s, opt) {
+      return s.type === 'movie'
+        ? 'https://cinesrc.st/embed/movie/' + s.tmdbId
+        : 'https://cinesrc.st/embed/tv/' + s.tmdbId + '/' + s.season + '/' + s.episode;
+    },
+    cine: function(s, opt) { return PROVIDER_BUILDERS.cinesrc(s, opt); },
+    // 20. Vidmux (vidlux.site)
+    vidlux: function(s, opt) {
+      return s.type === 'movie'
+        ? 'https://vidlux.site/embed/movie/' + s.tmdbId
+        : 'https://vidlux.site/embed/tv/' + s.tmdbId + '/' + s.season + '/' + s.episode;
+    },
+    vidmux: function(s, opt) { return PROVIDER_BUILDERS.vidlux(s, opt); },
+    // 21. Diablo (vsembed.ru)
+    vsembed: function(s, opt) {
+      return s.type === 'movie'
+        ? 'https://vsembed.ru/embed/movie/' + s.tmdbId
+        : 'https://vsembed.ru/embed/tv/' + s.tmdbId + '/' + s.season + '/' + s.episode;
+    },
+    diablo: function(s, opt) { return PROVIDER_BUILDERS.vsembed(s, opt); },
+    // 22. Italian (vixsrc.to)
+    vixsrc: function(s, opt) {
+      return s.type === 'movie'
+        ? 'https://vixsrc.to/movie/' + s.tmdbId + '?autoplay=true&lang=it'
+        : 'https://vixsrc.to/tv/' + s.tmdbId + '/' + s.season + '/' + s.episode + '?autoplay=true&lang=it';
+    },
+    italian: function(s, opt) { return PROVIDER_BUILDERS.vixsrc(s, opt); },
+    // 23. Vidind (player.vidify.top)
+    vidify: function(s, opt) {
+      return s.type === 'movie'
+        ? 'https://player.vidify.top/embed/movie/' + s.tmdbId
+        : 'https://player.vidify.top/embed/tv/' + s.tmdbId + '/' + s.season + '/' + s.episode;
+    },
+    vidind: function(s, opt) { return PROVIDER_BUILDERS.vidify(s, opt); },
+    // 24. 4KHD (mapple.rip)
+    mapple: function(s, opt) {
+      return s.type === 'movie'
+        ? 'https://mapple.rip/watch/movie/' + s.tmdbId + '?autoPlay=true&theme=addc35'
+        : 'https://mapple.rip/watch/tv/' + s.tmdbId + '/' + s.season + '/' + s.episode + '?autoPlay=true&theme=addc35';
+    },
+    '4khd': function(s, opt) { return PROVIDER_BUILDERS.mapple(s, opt); },
+    // 25. Hindi (viduki.net)
+    viduki: function(s, opt) {
+      return s.type === 'movie'
+        ? 'https://www.viduki.net/1/movie/?id=' + s.tmdbId + '&color=ffffff'
+        : 'https://www.viduki.net/1/tv/?id=' + s.tmdbId + '&s=' + s.season + '&e=' + s.episode + '&color=ffffff';
+    },
+    hindi: function(s, opt) { return PROVIDER_BUILDERS.viduki(s, opt); },
+    // 26. Vidsrc2 (vidsrc2.ru)
+    vidsrc2: function(s, opt) {
+      return s.type === 'movie'
+        ? 'https://vidsrc2.ru/embed/movie/' + s.tmdbId
+        : 'https://vidsrc2.ru/embed/tv/' + s.tmdbId + '/' + s.season + '/' + s.episode;
+    },
+    vidsrc2_ru: function(s, opt) { return PROVIDER_BUILDERS.vidsrc2(s, opt); },
+    // 27. 2embed (2embed.stream)
+    twoembed: function(s, opt) {
+      return s.type === 'movie'
+        ? 'https://www.2embed.stream/embed/movie/' + s.tmdbId
+        : 'https://www.2embed.stream/embed/tv/' + s.tmdbId + '/' + s.season + '/' + s.episode;
+    },
+    '2embed': function(s, opt) { return PROVIDER_BUILDERS.twoembed(s, opt); },
+    // 28. French (frembed.asia)
+    frembed: function(s, opt) {
+      return s.type === 'movie'
+        ? 'https://frembed.asia/api/film.php?id=' + s.tmdbId
+        : 'https://frembed.asia/api/serie.php?id=' + s.tmdbId + '&sa=' + s.season + '&epi=' + s.episode;
+    },
+    french: function(s, opt) { return PROVIDER_BUILDERS.frembed(s, opt); },
+    // 29. Club (moviesapi.to)
+    moviesapi: function(s, opt) {
+      return s.type === 'movie'
+        ? 'https://moviesapi.to/movie/' + s.tmdbId
+        : 'https://moviesapi.to/tv/' + s.tmdbId + '-' + s.season + '-' + s.episode;
+    },
+    club: function(s, opt) { return PROVIDER_BUILDERS.moviesapi(s, opt); },
+    // 30. Sage (111movies.com)
+    onemovies: function(s, opt) {
+      return s.type === 'movie'
+        ? 'https://111movies.com/movie/' + s.tmdbId
+        : 'https://111movies.com/tv/' + s.tmdbId + '/' + s.season + '/' + s.episode;
+    },
+    sage: function(s, opt) { return PROVIDER_BUILDERS.onemovies(s, opt); },
+    // 31. Portuguese (superflixapi.beer)
+    superflix: function(s, opt) {
+      return s.type === 'movie'
+        ? 'https://superflixapi.beer/filme/' + s.tmdbId
+        : 'https://superflixapi.beer/serie/' + s.tmdbId + '/' + s.season + '/' + s.episode;
+    },
+    portuguese: function(s, opt) { return PROVIDER_BUILDERS.superflix(s, opt); },
+    // 32. Azute (vidrock.ru)
+    vidrock: function(s, opt) {
+      return s.type === 'movie'
+        ? 'https://vidrock.ru/movie/' + s.tmdbId
+        : 'https://vidrock.ru/tv/' + s.tmdbId + '/' + s.season + '/' + s.episode;
+    },
+    azute: function(s, opt) { return PROVIDER_BUILDERS.vidrock(s, opt); },
+    // 33. AllMovieLand
+    allmovieland: function(s, opt) {
+      var amlBase = (opt && opt.domain) ? ('https://' + opt.domain + '/play/') : 'https://slast430did.com/play/';
+      var mediaId = (opt && opt.imdbId && String(opt.imdbId).startsWith('tt')) ? opt.imdbId : s.tmdbId;
+      return s.type === 'movie'
+        ? amlBase + encodeURIComponent(mediaId)
+        : amlBase + encodeURIComponent(mediaId) + '?s=' + s.season + '&e=' + s.episode;
+    },
+    s2: function(s, opt) { return PROVIDER_BUILDERS.allmovieland(s, opt); },
+    aml: function(s, opt) { return PROVIDER_BUILDERS.allmovieland(s, opt); },
+    // 34. Fast Cloud Stream (/api/stream-player)
+    s1: function(s, opt) {
+      var lang = ((opt && opt.lang) || 'hi').toLowerCase();
+      var s1Query = 'type=' + s.type +
+        '&id=' + s.tmdbId +
+        '&lang=' + encodeURIComponent(lang) +
+        (s.type === 'tv' ? ('&se=' + s.season + '&ep=' + s.episode) : '');
+      return '/api/stream-player?' + s1Query;
+    },
+    fastcloud: function(s, opt) { return PROVIDER_BUILDERS.s1(s, opt); }
+  };
+
   /**
    * Resolves exact player embed URL for a given provider.
    * @param {Object} req - Playback request
-   * @param {string} provider - 'vidsrc_sbs' | 'peachify' | 'allmovieland' | 'vidlink' | 's1'
-   * @param {Object} options - { lang: string, autoPlay: boolean }
-   * @returns {string|null} - Embed URL or null if invalid
+   * @param {string} provider - Provider ID or Alias
+   * @param {Object} options - { lang: string, domain: string, imdbId: string }
+   * @returns {string|null} - Embed URL or null if invalid / excluded
    */
   function resolvePlayerUrl(req, provider, options) {
     var validation = validatePlaybackRequest(req);
@@ -172,61 +429,22 @@
     }
 
     var s = validation.sanitized;
-    var p = (provider || 'vidsrc_sbs').toLowerCase();
+    var p = (provider || 'vidsrc_sbs').toLowerCase().trim();
     var opt = options || {};
-    var lang = (opt.lang || 'hi').toLowerCase();
-
-    // 1. Primary Reference Provider: VidSrc Global (Unblocked worldwide)
-    if (p === 'vidsrc_pm' || p === 'vidsrc_sbs' || p === 'vidsrc' || p === 'default' || p === 'vidsrc_in') {
-      var vHost = (p === 'vidsrc_in') ? 'vidsrc.in' : (opt.domain || 'vidsrc.pm');
-      if (s.type === 'movie') {
-        return 'https://' + vHost + '/embed/movie/' + s.tmdbId;
-      }
-      return 'https://' + vHost + '/embed/tv/' + s.tmdbId + '/' + s.season + '/' + s.episode;
-    }
-
-    // 2. Peachify Pro (Ad-Free HD with multi-audio sync)
-    if (p === 'peachify') {
-      var peachifyDub = (lang === 'hi') ? 'Hindi' : (lang === 'ta' ? 'Tamil' : (lang === 'te' ? 'Telugu' : 'English'));
-      var dubParam = peachifyDub ? '&dub=' + encodeURIComponent(peachifyDub) : '';
-      if (s.type === 'movie') {
-        return 'https://peachify.pro/embed/movie/' + s.tmdbId + '?accent=E50914&autoPlay=true' + dubParam;
-      }
-      return 'https://peachify.pro/embed/tv/' + s.tmdbId + '/' + s.season + '/' + s.episode + '?accent=E50914&autoPlay=true&autoNext=true&showNextBtn=true' + dubParam;
-    }
-
-    // 3. AllMovieLand Streaming Player (Ultra HD Indian & Global Fast Player)
-    if (p === 'allmovieland' || p === 's2' || p === 'aml') {
-      var amlBase = opt.domain ? ('https://' + opt.domain + '/play/') : 'https://slast430did.com/play/';
-      var mediaId = (opt.imdbId && String(opt.imdbId).startsWith('tt')) ? opt.imdbId : s.tmdbId;
-      if (s.type === 'movie') {
-        return amlBase + encodeURIComponent(mediaId);
-      }
-      return amlBase + encodeURIComponent(mediaId) + '?s=' + s.season + '&e=' + s.episode;
-    }
-
-    // 4. VidLink Pro Multi-Audio
-    if (p === 'vidlink' || p === 's3') {
-      var langParam = (opt.lang) ? '&lang=' + encodeURIComponent(String(opt.lang).toLowerCase()) : '';
-      if (s.type === 'movie') {
-        return 'https://vidlink.pro/movie/' + s.tmdbId + '?multiLang=true' + langParam;
-      }
-      return 'https://vidlink.pro/tv/' + s.tmdbId + '/' + s.season + '/' + s.episode + '?multiLang=true' + langParam;
-    }
-
-    // 5. Server 1 (Fast Cloud Multi-Audio Stream)
-    if (p === 's1') {
-      var s1Query = 'type=' + s.type +
-        '&id=' + s.tmdbId +
-        '&lang=' + encodeURIComponent(lang) +
-        (s.type === 'tv' ? ('&se=' + s.season + '&ep=' + s.episode) : '');
-      return '/api/stream-player?' + s1Query;
-    }
 
     // Absolute Exclusion Guard: Rivestream / Fade must strictly never resolve
     if (/rivestream|fade/i.test(p)) {
       console.warn('[Netflix4U Security] Blocked attempt to resolve excluded Rivestream / Fade provider');
       return null;
+    }
+
+    // Check direct builder in provider suite
+    if (PROVIDER_BUILDERS[p]) {
+      try {
+        return PROVIDER_BUILDERS[p](s, opt);
+      } catch(e) {
+        console.error('[Netflix4U Resolver] Error generating URL for provider ' + p, e);
+      }
     }
 
     // Try multi-server provider manager in Node / universal environment if available
@@ -248,11 +466,8 @@
       }
     } catch(e) {}
 
-    // Fallback to Primary Provider
-    if (s.type === 'movie') {
-      return 'https://vidsrc.pm/embed/movie/' + s.tmdbId;
-    }
-    return 'https://vidsrc.pm/embed/tv/' + s.tmdbId + '/' + s.season + '/' + s.episode;
+    // Fallback to Primary Reference Provider
+    return PROVIDER_BUILDERS.vidsrc_sbs(s, opt);
   }
 
   /**
@@ -282,6 +497,7 @@
     getCanonicalCacheKey: getCanonicalCacheKey,
     resolvePlayerUrl: resolvePlayerUrl,
     isAllowedOrigin: isAllowedOrigin,
-    ALLOWED_ORIGINS: ALLOWED_ORIGINS
+    ALLOWED_ORIGINS: ALLOWED_ORIGINS,
+    PROVIDER_BUILDERS: PROVIDER_BUILDERS
   };
 }));

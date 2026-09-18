@@ -242,6 +242,31 @@ runTest('Multi-Server Switching strictly locks canonical content identity (Movie
   assert.match(tvS4, /79744\/2\/7/);
 });
 
+runTest('Universal player resolver directly resolves all reverse-engineered vidsrc.win providers', () => {
+  const providersToTest = [
+    'vidsrc_sbs', 'braflix', 'videasy', 'wootly', 'vidbolt', 'vidfast',
+    'vidflix', 'vidsrc_su', 'wplay', 'xpass', 'peach', 'vidnest',
+    'vidcore', 'vaplayer', 'zxcstream', 'embed_cc', 'cinesrc', 'vidlux',
+    'vsembed', 'vixsrc', 'vidify', 'mapple', 'viduki', 'vidsrc2',
+    'twoembed', 'frembed', 'moviesapi', 'onemovies', 'superflix', 'vidrock'
+  ];
+
+  const testMovie = { type: 'movie', tmdbId: 533535 };
+  const testTv = { type: 'tv', tmdbId: 79744, season: 1, episode: 1 };
+
+  providersToTest.forEach(p => {
+    const movieUrl = resolver.resolvePlayerUrl(testMovie, p);
+    assert.ok(movieUrl, `Provider ${p} must resolve Movie URL`);
+    assert.match(movieUrl, /533535/, `Provider ${p} Movie URL must contain canonical TMDB ID`);
+    assert.strictEqual(resolver.isAllowedOrigin(movieUrl), true, `Provider ${p} origin must be in ALLOWED_ORIGINS`);
+
+    const tvUrl = resolver.resolvePlayerUrl(testTv, p);
+    assert.ok(tvUrl, `Provider ${p} must resolve TV URL`);
+    assert.match(tvUrl, /79744/, `Provider ${p} TV URL must contain canonical series TMDB ID`);
+    assert.strictEqual(resolver.isAllowedOrigin(tvUrl), true, `Provider ${p} TV origin must be in ALLOWED_ORIGINS`);
+  });
+});
+
 // -----------------------------------------------------------------------------
 // 2. MOVIE TEST MATRIX (20 REAL MOVIES FROM CATALOG)
 // -----------------------------------------------------------------------------

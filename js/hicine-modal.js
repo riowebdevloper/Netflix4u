@@ -91,12 +91,12 @@
 
             <!-- TAB 2: STREAMING PLAYER -->
             <div id="hicine-tab-panel-stream" class="hicine-tab-content" style="display: none;">
-              <div class="hicine-player-tab-wrapper">
                 <div class="hicine-player-servers-row" id="hicine-stream-servers">
-                  <button class="hicine-stream-server-btn active" data-src="server1">AllMovieLand (Hindi Audio)</button>
-                  <button class="hicine-stream-server-btn" data-src="server2">Fast Cloud</button>
-                  <button class="hicine-stream-server-btn" data-src="server3">VidLink Multi-Lang</button>
-                  <button class="hicine-stream-server-btn" data-src="server4">VidSrc Pro</button>
+                  <button class="hicine-stream-server-btn active" data-src="vidsrc_sbs">VidSrc Global</button>
+                  <button class="hicine-stream-server-btn" data-src="braflix">Braflix HD</button>
+                  <button class="hicine-stream-server-btn" data-src="videasy">4K Videasy</button>
+                  <button class="hicine-stream-server-btn" data-src="vidlink">VidLink Multi</button>
+                  <button class="hicine-stream-server-btn" data-src="peachify">Peachify Dub</button>
                 </div>
                 <div class="hicine-iframe-container">
                   <iframe id="hicine-stream-iframe" src="" allowfullscreen allow="autoplay; fullscreen; encrypted-media"></iframe>
@@ -325,26 +325,21 @@
     if (!iframe) return;
 
     let url = '';
-    const targetId = imdbId || tmdbId || (currentTitleData ? currentTitleData.id : '');
+    const cleanTmdb = String(tmdbId || (currentTitleData ? currentTitleData.id : '')).replace(/^(?:dotmobiz|tmdb(?:-movie|-series|-tv)?)-/, '');
+    const req = {
+      type: isSeries ? 'tv' : 'movie',
+      tmdbId: cleanTmdb,
+      imdbId: imdbId,
+      season: 1,
+      episode: 1
+    };
 
-    if (server === 'server1') {
-      // AllMovieLand (Dotmobiz authentic Hindi stream)
-      if (imdbId) {
-        url = `https://slast430did.com/play/${imdbId}`;
-      } else {
-        url = `https://vidlink.pro/${isSeries ? 'tv' : 'movie'}/${targetId}?multiLang=true`;
-      }
-    } else if (server === 'server2') {
-      // Fast Cloud / VidLink
-      url = `https://vidlink.pro/${isSeries ? 'tv' : 'movie'}/${targetId}?multiLang=true`;
-    } else if (server === 'server3') {
-      // VidLink
-      url = `https://vidlink.pro/${isSeries ? 'tv' : 'movie'}/${targetId}`;
-    } else {
-      // VidSrc
-      url = imdbId
-        ? `https://vidsrc.me/embed/${isSeries ? 'tv' : 'movie'}?imdb=${imdbId}`
-        : `https://vidsrc.me/embed/${isSeries ? 'tv' : 'movie'}?tmdb=${tmdbId}`;
+    if (window.Netflix4uPlayerResolver) {
+      url = window.Netflix4uPlayerResolver.resolvePlayerUrl(req, server || 'vidsrc_sbs');
+    }
+
+    if (!url) {
+      url = isSeries ? `https://vidsrc.pm/embed/tv/${cleanTmdb}/1/1` : `https://vidsrc.pm/embed/movie/${cleanTmdb}`;
     }
 
     iframe.src = url;

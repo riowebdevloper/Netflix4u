@@ -436,6 +436,54 @@ async function handlePlayback(req, res) {
       embedUrl: vidlinkUrl,
       isDirect: false
     });
+
+    // 4. Server 4 (Braflix Pro) - Extracted from vidsrc.win
+    const braflixUrl = isTv
+      ? `https://api.cineby.homes/embed/tv/${tid}/${season}/${episode}?autonext=1&ds_lang=en`
+      : `https://api.cineby.homes/embed/movie/${tid}`;
+
+    sources.push({
+      id: 'braflix',
+      name: 'Server 4 (Braflix Pro)',
+      label: 'Server 4 (Braflix)',
+      canonicalId,
+      provider: 'braflix',
+      url: braflixUrl,
+      embedUrl: braflixUrl,
+      isDirect: false
+    });
+
+    // 5. Server 5 (4K Videasy) - Extracted from vidsrc.win
+    const videasyUrl = isTv
+      ? `https://player.videasy.net/tv/${tid}/${season}/${episode}?nextEpisode=true&autoplayNextEpisode=true&episodeSelector=true&color=%23E50914`
+      : `https://player.videasy.net/movie/${tid}`;
+
+    sources.push({
+      id: 'videasy',
+      name: 'Server 5 (4K Cinema)',
+      label: 'Server 5 (4K Videasy)',
+      canonicalId,
+      provider: 'videasy',
+      url: videasyUrl,
+      embedUrl: videasyUrl,
+      isDirect: false
+    });
+
+    // 6. Server 6 (Wootly) - Extracted from vidsrc.win
+    const wootlyUrl = isTv
+      ? `https://www.vidsrc.party/tv/${tid}/${season}/${episode}`
+      : `https://www.vidsrc.party/movie/${tid}`;
+
+    sources.push({
+      id: 'wootly',
+      name: 'Server 6 (Wootly)',
+      label: 'Server 6 (Wootly)',
+      canonicalId,
+      provider: 'wootly',
+      url: wootlyUrl,
+      embedUrl: wootlyUrl,
+      isDirect: false
+    });
   }
 
   // 4. Server 4 (AllMovieLand) - If verified TMDB or IMDb ID exists
