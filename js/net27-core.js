@@ -499,7 +499,9 @@
       heroItems = valid.map(function(it) {
         var bdrop = it.backdrop || it.poster;
         if (bdrop && !bdrop.startsWith('http') && !bdrop.startsWith('data:')) {
-          bdrop = 'https://image.tmdb.org/t/p/original/' + bdrop.replace(/^\//, '');
+          bdrop = 'https://image.tmdb.org/t/p/w1280/' + bdrop.replace(/^\//, '');
+        } else if (bdrop && bdrop.indexOf('/original/') !== -1) {
+          bdrop = bdrop.replace('/original/', '/w1280/');
         }
         return {
           tmdbId: it.tmdbId,
@@ -512,23 +514,37 @@
         };
       });
 
-      // Update background layers seamlessly
+      // Update background layers seamlessly without destroying slide 0 LCP element
       var existingBgs = heroSection.querySelectorAll('.hero-bg');
-      existingBgs.forEach(function(el) { el.remove(); });
-
-      var clickTrigger = heroSection.querySelector('#hero-click');
-      heroItems.forEach(function(item, i) {
-        var bg = document.createElement('div');
-        bg.className = 'hero-bg absolute inset-0 bg-cover bg-center transition-opacity duration-[1200ms]';
-        bg.style.backgroundImage = 'url("' + item.backdrop + '")';
-        bg.style.opacity = (i === currentHeroIdx) ? '1' : '0';
-        bg.style.zIndex = String(10 - i);
-        if (clickTrigger) {
-          heroSection.insertBefore(bg, clickTrigger);
-        } else {
-          heroSection.prepend(bg);
-        }
-      });
+      if (existingBgs.length === 0) {
+        var clickTrigger = heroSection.querySelector('#hero-click');
+        heroItems.forEach(function(item, i) {
+          var bg = document.createElement('div');
+          bg.className = 'hero-bg absolute inset-0 bg-cover bg-center transition-opacity duration-[1200ms]';
+          bg.dataset.heroIdx = String(i);
+          if (i === 0) {
+            bg.style.backgroundImage = 'url("' + item.backdrop + '")';
+            bg.style.opacity = '1';
+            bg.style.zIndex = '10';
+          } else {
+            bg.dataset.bg = item.backdrop;
+            bg.style.opacity = '0';
+            bg.style.zIndex = String(9 - i);
+          }
+          if (clickTrigger) {
+            heroSection.insertBefore(bg, clickTrigger);
+          } else {
+            heroSection.prepend(bg);
+          }
+        });
+      } else {
+        // Existing static backdrops exist: preserve slide 0 LCP element and set dataset.bg on adjacent slides
+        existingBgs.forEach(function(bg, i) {
+          if (i > 0 && heroItems[i]) {
+            bg.dataset.bg = heroItems[i].backdrop;
+          }
+        });
+      }
 
       renderHeroDots();
       showHeroSlide(currentHeroIdx % heroItems.length);
@@ -991,12 +1007,18 @@
       var railSection = railsView.querySelector('[data-rail-key="' + cfg.key + '"]');
       if (!railSection) return;
 
+      initRailScrollButtons(railSection);
+
+      var contentEl = railSection.querySelector('[data-rail-content]');
+      var hasPreRenderedCards = contentEl && contentEl.children.length > 0 && !railSection.querySelector('.shimmer');
+      if (hasPreRenderedCards) {
+        // Pre-rendered static markup is already present and hydrated — keep 100% stable
+        return;
+      }
+
       var cached = cachedDataMap[cfg.key];
-      if (cached) {
-        initRailScrollButtons(railSection);
-        if (cached.isFresh) {
-          return;
-        }
+      if (cached && cached.isFresh) {
+        return;
       }
 
       var doLoad = async function() {
@@ -1054,16 +1076,29 @@
       }, { rootMargin: '600px 0px' });
     }
 
-    // Initial render: first batch only to maintain ultra-compact DOM (<600 nodes)
+    // Check if initial static rails already exist in DOM (pre-rendered for zero CLS)
+    var existingRailsCount = railsView.querySelectorAll('[data-rail-key]').length;
+    var hasStaticInitialRails = (platform === 'trending' && existingRailsCount >= 3);
+
     var initialEnd = Math.min(configs.length, INITIAL_BATCH);
-    var initialHtml = '';
-    for (var k = 0; k < initialEnd; k++) {
-      initialHtml += renderSingleRail(configs[k], k);
+    if (!hasStaticInitialRails) {
+      var initialHtml = '';
+      for (var k = 0; k < initialEnd; k++) {
+        initialHtml += renderSingleRail(configs[k], k);
+      }
+      if (initialEnd < configs.length) {
+        initialHtml += '<div id="nm-rail-sentinel" class="w-full h-10 pointer-events-none"></div>';
+      }
+      railsView.innerHTML = initialHtml;
+    } else {
+      // Ensure sentinel exists if more rails need to be hydated
+      if (initialEnd < configs.length && !document.getElementById('nm-rail-sentinel')) {
+        var sent = document.createElement('div');
+        sent.id = 'nm-rail-sentinel';
+        sent.className = 'w-full h-10 pointer-events-none';
+        railsView.appendChild(sent);
+      }
     }
-    if (initialEnd < configs.length) {
-      initialHtml += '<div id="nm-rail-sentinel" class="w-full h-10 pointer-events-none"></div>';
-    }
-    railsView.innerHTML = initialHtml;
 
     for (var m = 0; m < initialEnd; m++) {
       wireRail(configs[m], m);
