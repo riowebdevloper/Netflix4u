@@ -1,0 +1,106 @@
+{
+  "id": "tmdb-movie-1451944",
+  "canonicalId": "tmdb-movie-1451944",
+  "externalProvider": "tmdb",
+  "externalId": "1451944",
+  "tmdbId": "1451944",
+  "imdbId": "tt39667834",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "Lust Stories 3",
+  "canonicalTitle": "Lust Stories 3",
+  "originalTitle": "Lust Stories 3",
+  "overview": "Through four bite-sized yet emotionally resonant films, the anthology once again explores lust, love, relationships, and repressed desire, offering fresh perspectives on intimacy, longing, and human connection in all their complexity.",
+  "description": "Through four bite-sized yet emotionally resonant films, the anthology once again explores lust, love, relationships, and repressed desire, offering fresh perspectives on intimacy, longing, and human connection in all their complexity.",
+  "shortDescription": "Through four bite-sized yet emotionally resonant films, the anthology once again explores lust, love, relationships, and",
+  "year": 2026,
+  "releaseDate": "2026-09-18",
+  "rating": 7,
+  "votes": "0.0K",
+  "quality": "FHD",
+  "duration": "2h 33m",
+  "genres": [
+    "Romance",
+    "Drama"
+  ],
+  "categories": [
+    "Romance",
+    "Drama"
+  ],
+  "language": "Hindi",
+  "country": "IN",
+  "director": "Vikramaditya Motwane",
+  "poster": "https://image.tmdb.org/t/p/w500/1GBe4TeCeXa1ENg0rv2JH8cH0ry.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/ygMNjFOBuLVoInEoPzqPU2U0pfg.jpg",
+  "trailerUrl": null,
+  "trailer": null,
+  "cast": [
+    {
+      "id": "223167",
+      "name": "Radhika Apte",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/wKPybRcSYcbgDiJZwELudrRNf0r.jpg"
+    },
+    {
+      "id": "85666",
+      "name": "Konkona Sen Sharma",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/i538HToMEGR6J2OVmOGX3GfWcQC.jpg"
+    },
+    {
+      "id": "1551045",
+      "name": "Vijay Varma",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/A46ekiPFC3vA1442FJmiIudpxX1.jpg"
+    },
+    {
+      "id": "1708061",
+      "name": "Abhishek Banerjee",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/cfyRkFBFfodBbNKbsTc8eG9YtVj.jpg"
+    },
+    {
+      "id": "492791",
+      "name": "Ali Fazal",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/lLDmx3RDuMXObASvdFXeUh1GOgd.jpg"
+    },
+    {
+      "id": "2103447",
+      "name": "Radhikka Madan",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/xX6h0GMgJ1jLJdA5lHrFwZcjEIz.jpg"
+    },
+    {
+      "id": "88797",
+      "name": "Aditi Rao Hydari",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/iVbsdPXzs4CjlG98qIxG2lsQl31.jpg"
+    },
+    {
+      "id": "108216",
+      "name": "Siddharth",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/9XrTuJp9lnB1rsBPzTaoXdp1ig8.jpg"
+    },
+    {
+      "id": "2555038",
+      "name": "Gurfateh Pirzada",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/gfeOmcTUCPoAJytEjxo5SvkKObb.jpg"
+    },
+    {
+      "id": "5984116",
+      "name": "Sana Thampi",
+      "character": "",
+      "photo": null
+    }
+  ],
+  "seasons": 1,
+  "episodes": 1,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-19T03:08:40.238Z",
+  "createdAt": "2026-09-19T03:08:40.238Z",
+  "updatedAt": "2026-09-19T03:08:40.238Z",
+  "links": []
+}

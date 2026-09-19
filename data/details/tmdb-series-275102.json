@@ -1,0 +1,116 @@
+{
+  "id": "tmdb-series-275102",
+  "canonicalId": "tmdb-series-275102",
+  "externalProvider": "tmdb",
+  "externalId": "275102",
+  "tmdbId": "275102",
+  "imdbId": "tt36347588",
+  "type": "series",
+  "contentType": "series",
+  "title": "The Scandal",
+  "canonicalTitle": "The Scandal",
+  "originalTitle": "스캔들",
+  "overview": "In Joseon, a secret proposal ignites hidden desires in a gifted noblewoman, a famed lover and an unsuspecting lady caught in their dangerous game.",
+  "description": "In Joseon, a secret proposal ignites hidden desires in a gifted noblewoman, a famed lover and an unsuspecting lady caught in their dangerous game.",
+  "shortDescription": "In Joseon, a secret proposal ignites hidden desires in a gifted noblewoman, a famed lover and an unsuspecting lady caugh",
+  "year": 2026,
+  "releaseDate": "2026-09-18",
+  "rating": 6,
+  "votes": "0.0K",
+  "quality": "FHD",
+  "duration": "55m/ep",
+  "genres": [
+    "Drama"
+  ],
+  "categories": [
+    "Drama"
+  ],
+  "language": "Korean",
+  "country": "KR",
+  "director": "Jung Ji-woo",
+  "poster": "https://image.tmdb.org/t/p/w500/pJsIzlTjmx07ilwEkl0cglrMVa1.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/uc1p1PEbEMpdIHqnU9TESNC6Jhp.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/FeISX5E1uJc?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/FeISX5E1uJc?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "86889",
+      "name": "Son Ye-jin",
+      "character": "Lady Cho",
+      "photo": "https://image.tmdb.org/t/p/w185/i6fASFvO3mUceZJvipn4RiLHA44.jpg"
+    },
+    {
+      "id": "1253391",
+      "name": "Ji Chang-wook",
+      "character": "Cho Won",
+      "photo": "https://image.tmdb.org/t/p/w185/sBmHrO5Tn27Ot5hy0yAKniROmNb.jpg"
+    },
+    {
+      "id": "1523043",
+      "name": "Nana",
+      "character": "Ahn Hui-yeon",
+      "photo": "https://image.tmdb.org/t/p/w185/zEjVBD734pLcNQrZESkKTNhKl6z.jpg"
+    },
+    {
+      "id": "1258626",
+      "name": "Han Seon-hwa",
+      "character": "So-ok's Mom",
+      "photo": "https://image.tmdb.org/t/p/w185/daP8g9eByOuJnnKUROrKwAGU1Yp.jpg"
+    },
+    {
+      "id": "4180803",
+      "name": "Shin Youn-ha",
+      "character": "Lee So-ok",
+      "photo": "https://image.tmdb.org/t/p/w185/9F8XXBvdziId1BwW1EwZbY8hOiB.jpg"
+    },
+    {
+      "id": "3286721",
+      "name": "Kang Ji-eun",
+      "character": "Lady Jeonggyeong",
+      "photo": "https://image.tmdb.org/t/p/w185/2godIG1dfY3T1akTDsstvStYPh4.jpg"
+    },
+    {
+      "id": "6009552",
+      "name": "Kwon Do-kyun",
+      "character": "Chil-seong",
+      "photo": "https://image.tmdb.org/t/p/w185/glk5bE5fOixuInd8mgAl2jlojg5.jpg"
+    },
+    {
+      "id": "2064247",
+      "name": "Kang Chan-hee",
+      "character": "Kwon In-ho",
+      "photo": "https://image.tmdb.org/t/p/w185/2vBAQc9BKRAePO0NQcSp90KHMpk.jpg"
+    },
+    {
+      "id": "4001822",
+      "name": "Kang Myung-soo",
+      "character": "Commander of the royal guard",
+      "photo": "https://image.tmdb.org/t/p/w185/nB9agTqlkI4e4eyAnznfGPQzYLS.jpg"
+    },
+    {
+      "id": "139514",
+      "name": "Jeong Gi-seop",
+      "character": "Left State Councillor",
+      "photo": "https://image.tmdb.org/t/p/w185/h9ihe6xJL45lECEQ2i38Xl932vf.jpg"
+    },
+    {
+      "id": "1619436",
+      "name": "Chae Seo-jin",
+      "character": "Mi-ok",
+      "photo": "https://image.tmdb.org/t/p/w185/tsNJXifO5xKwvfyRkpbSGJC1PHR.jpg"
+    },
+    {
+      "id": "3339722",
+      "name": "Shin So-hyeon",
+      "character": "Cho Yoon [Young]",
+      "photo": "https://image.tmdb.org/t/p/w185/iDN2mXBcKqfErbqwGGBE0A0Ev9Z.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 8,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-19T03:08:40.213Z",
+  "createdAt": "2026-09-19T03:08:40.213Z",
+  "updatedAt": "2026-09-19T03:08:40.213Z",
+  "links": []
+}

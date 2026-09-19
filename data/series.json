@@ -1,5 +1,48 @@
 [
   {
+    "id": "tmdb-series-196322",
+    "canonicalId": "tmdb-series-196322",
+    "title": "Dark Matter",
+    "rawTitle": "Dark Matter",
+    "slug": "tmdb-series-196322-dark-matter",
+    "type": "series",
+    "year": 2024,
+    "quality": "FHD",
+    "provider": "tmdb",
+    "rating": 7.8,
+    "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2F2DPmTlv8F0V1TQBPmlsGOVOhtWk.jpg&output=webp",
+    "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FiBc82qaA05ntzSnrVndw8scv4Bn.jpg&output=webp",
+    "imdbId": "tt19231492",
+    "tmdbId": "196322",
+    "categories": [
+      "Sci-Fi & Fantasy",
+      "Drama"
+    ],
+    "status": "PUBLISHED",
+    "publishedAt": "2026-09-19T03:08:40.271Z"
+  },
+  {
+    "id": "tmdb-series-275102",
+    "canonicalId": "tmdb-series-275102",
+    "title": "The Scandal",
+    "rawTitle": "The Scandal",
+    "slug": "tmdb-series-275102-the-scandal",
+    "type": "series",
+    "year": 2026,
+    "quality": "FHD",
+    "provider": "tmdb",
+    "rating": 6,
+    "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FpJsIzlTjmx07ilwEkl0cglrMVa1.jpg&output=webp",
+    "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2Fuc1p1PEbEMpdIHqnU9TESNC6Jhp.jpg&output=webp",
+    "imdbId": "tt36347588",
+    "tmdbId": "275102",
+    "categories": [
+      "Drama"
+    ],
+    "status": "PUBLISHED",
+    "publishedAt": "2026-09-19T03:08:40.213Z"
+  },
+  {
     "id": "tmdb-series-256440",
     "canonicalId": "tmdb-series-256440",
     "title": "Alıkara",
@@ -99,7 +142,7 @@
     "year": 2026,
     "quality": "FHD",
     "provider": "tmdb",
-    "rating": 8,
+    "rating": 7,
     "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2F6HLl3jgLQmUO0mw2TspFf5jIU3M.jpg&output=webp",
     "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FmIjERiWlnDzQWHTcZdtucLmTCeO.jpg&output=webp",
     "imdbId": "tt37884325",
@@ -187,7 +230,7 @@
     "year": 2026,
     "quality": "FHD",
     "provider": "tmdb",
-    "rating": 8.3,
+    "rating": 7.2,
     "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2F57XScX1aYtKi1LvHYFQLPUxVhTG.jpg&output=webp",
     "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F3JVjgaqfX5MhxxHKpGWz05QV7Dz.jpg&output=webp",
     "imdbId": "",
@@ -295,7 +338,7 @@
     "year": 2026,
     "quality": "FHD",
     "provider": "tmdb",
-    "rating": 7.6,
+    "rating": 7.8,
     "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2F1m6CxPAuGv2oHc1ahERrcVWnk2J.jpg&output=webp",
     "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FuYOYLFQ4q7asuhdiKXCqGaeAQUH.jpg&output=webp",
     "imdbId": "tt33539520",
@@ -2577,54 +2620,5 @@
     ],
     "status": "PUBLISHED",
     "publishedAt": "2026-07-12T03:02:11.000Z"
-  },
-  {
-    "id": "28226",
-    "canonicalId": "28226",
-    "title": "Nothing But Thirty",
-    "rawTitle": "Nothing But Thirty",
-    "slug": "nothing-but-thirty",
-    "type": "series",
-    "year": 2026,
-    "quality": "HD",
-    "provider": "dotmobiz",
-    "rating": 8,
-    "poster": "https://storage.hicine.sbs/images/xGxOsXLScVPxBrnDuSy7MdkPUV8.webp",
-    "backdrop": "https://storage.hicine.sbs/images/xGxOsXLScVPxBrnDuSy7MdkPUV8.webp",
-    "categories": [
-      "Hollywood Series",
-      "2020",
-      "720p",
-      "Chinese Series",
-      "Drama",
-      "WEB-DL"
-    ],
-    "status": "PUBLISHED",
-    "publishedAt": "2026-07-11T01:36:47.000Z"
-  },
-  {
-    "id": "28225",
-    "canonicalId": "28225",
-    "title": "Face Me",
-    "rawTitle": "Face Me",
-    "slug": "face-me",
-    "type": "series",
-    "year": 2026,
-    "quality": "FHD",
-    "provider": "dotmobiz",
-    "rating": 8,
-    "poster": "https://storage.hicine.sbs/images/face-me.webp",
-    "backdrop": "https://storage.hicine.sbs/images/face-me.webp",
-    "categories": [
-      "Hollywood Series",
-      "WEB-DL",
-      "1080p",
-      "2024",
-      "720p",
-      "Mystery",
-      "Thriller"
-    ],
-    "status": "PUBLISHED",
-    "publishedAt": "2026-07-11T01:36:47.000Z"
   }
 ]

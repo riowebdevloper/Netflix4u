@@ -1,0 +1,118 @@
+{
+  "id": "tmdb-movie-1228834",
+  "canonicalId": "tmdb-movie-1228834",
+  "externalProvider": "tmdb",
+  "externalId": "1228834",
+  "tmdbId": "1228834",
+  "imdbId": "tt9601292",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "The Fix",
+  "canonicalTitle": "The Fix",
+  "originalTitle": "The Fix",
+  "overview": "Disillusioned by the end of the war in Afghanistan, a group of disgraced, war-torn ex-CIA operatives set out to Tehran to take down a life-changing score.",
+  "description": "Disillusioned by the end of the war in Afghanistan, a group of disgraced, war-torn ex-CIA operatives set out to Tehran to take down a life-changing score.",
+  "shortDescription": "Disillusioned by the end of the war in Afghanistan, a group of disgraced, war-torn ex-CIA operatives set out to Tehran t",
+  "year": 2026,
+  "releaseDate": "2026-09-10",
+  "rating": 8.2,
+  "votes": "0.0K",
+  "quality": "FHD",
+  "duration": "2h 22m",
+  "genres": [
+    "Action",
+    "Thriller"
+  ],
+  "categories": [
+    "Action",
+    "Thriller"
+  ],
+  "language": "Arabic",
+  "country": "US",
+  "director": "Guy Moshe",
+  "poster": "https://image.tmdb.org/t/p/w500/yopXjun3ICFfJci2ukcEzceZjUs.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/dJTWIecL2vxsCRl5G0lRhPsfrhc.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/l5Luvr9TRRc?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/l5Luvr9TRRc?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "69899",
+      "name": "Zachary Levi",
+      "character": "Tucker",
+      "photo": "https://image.tmdb.org/t/p/w185/1W8L3kEMMPF9umT3ZGaNIiCYKfZ.jpg"
+    },
+    {
+      "id": "3896",
+      "name": "Liam Neeson",
+      "character": "Larry",
+      "photo": "https://image.tmdb.org/t/p/w185/sRLev3wJioBgun3ZoeAUFpkLy0D.jpg"
+    },
+    {
+      "id": "51682",
+      "name": "Wes Chatham",
+      "character": "Alex",
+      "photo": "https://image.tmdb.org/t/p/w185/lFoUyX8FZs3XvUWWItCm2ezvAEs.jpg"
+    },
+    {
+      "id": "39389",
+      "name": "Titus Welliver",
+      "character": "James",
+      "photo": "https://image.tmdb.org/t/p/w185/3hTwn7Maktr6ONq1VvfqyRacjiv.jpg"
+    },
+    {
+      "id": "103330",
+      "name": "Navid Negahban",
+      "character": "Qasim",
+      "photo": "https://image.tmdb.org/t/p/w185/pWi5tINf4mDvTYbNKZDJPODYKra.jpg"
+    },
+    {
+      "id": "1257563",
+      "name": "Annet Mahendru",
+      "character": "Sophie",
+      "photo": "https://image.tmdb.org/t/p/w185/kEeokLN5vJsOdKSEFaN36qlzCRa.jpg"
+    },
+    {
+      "id": "1058027",
+      "name": "Grant Harvey",
+      "character": "Matt",
+      "photo": "https://image.tmdb.org/t/p/w185/sThJJbhgjQOZNvCkHVO0g3qy78j.jpg"
+    },
+    {
+      "id": "1456279",
+      "name": "Augusto Aguilera",
+      "character": "Bruce",
+      "photo": "https://image.tmdb.org/t/p/w185/vxW6iEHbuCcC7eFoQWoBAS7SYjM.jpg"
+    },
+    {
+      "id": "35434",
+      "name": "Numan Acar",
+      "character": "Nadir",
+      "photo": "https://image.tmdb.org/t/p/w185/krAYCiFQGreNOOqtTLX3v6TlHk5.jpg"
+    },
+    {
+      "id": "2114526",
+      "name": "Elnaaz Norouzi",
+      "character": "Zara",
+      "photo": "https://image.tmdb.org/t/p/w185/gbiXh5zoIKFH1kEPFtuhjfElY5c.jpg"
+    },
+    {
+      "id": "1395206",
+      "name": "Oliver Trevena",
+      "character": "Colonel Wilkes",
+      "photo": "https://image.tmdb.org/t/p/w185/j0ejU7vdE7lRxYKKrhA5aWw1zCT.jpg"
+    },
+    {
+      "id": "3075864",
+      "name": "Quincy Isaiah",
+      "character": "Clay",
+      "photo": "https://image.tmdb.org/t/p/w185/szlTbGRFRTo0Mx9jtwXGqcGrZhP.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 1,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-19T03:08:40.251Z",
+  "createdAt": "2026-09-19T03:08:40.251Z",
+  "updatedAt": "2026-09-19T03:08:40.251Z",
+  "links": []
+}

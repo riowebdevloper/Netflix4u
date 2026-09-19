@@ -820,6 +820,93 @@
       "publishedAt": "2022-08-28T13:22:56.000Z"
     },
     {
+      "id": "tmdb-movie-1228834",
+      "canonicalId": "tmdb-movie-1228834",
+      "title": "The Fix",
+      "rawTitle": "The Fix",
+      "slug": "tmdb-movie-1228834-the-fix",
+      "type": "movie",
+      "year": 2026,
+      "quality": "FHD",
+      "provider": "tmdb",
+      "rating": 8.2,
+      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FyopXjun3ICFfJci2ukcEzceZjUs.jpg&output=webp",
+      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FdJTWIecL2vxsCRl5G0lRhPsfrhc.jpg&output=webp",
+      "imdbId": "tt9601292",
+      "tmdbId": "1228834",
+      "categories": [
+        "Action",
+        "Thriller"
+      ],
+      "status": "PUBLISHED",
+      "publishedAt": "2026-09-19T03:08:40.251Z"
+    },
+    {
+      "id": "tmdb-movie-1451944",
+      "canonicalId": "tmdb-movie-1451944",
+      "title": "Lust Stories 3",
+      "rawTitle": "Lust Stories 3",
+      "slug": "tmdb-movie-1451944-lust-stories-3",
+      "type": "movie",
+      "year": 2026,
+      "quality": "FHD",
+      "provider": "tmdb",
+      "rating": 7,
+      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2F1GBe4TeCeXa1ENg0rv2JH8cH0ry.jpg&output=webp",
+      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FygMNjFOBuLVoInEoPzqPU2U0pfg.jpg&output=webp",
+      "imdbId": "tt39667834",
+      "tmdbId": "1451944",
+      "categories": [
+        "Romance",
+        "Drama"
+      ],
+      "status": "PUBLISHED",
+      "publishedAt": "2026-09-19T03:08:40.238Z"
+    },
+    {
+      "id": "tmdb-movie-1641629",
+      "canonicalId": "tmdb-movie-1641629",
+      "title": "You+Me – Against the World",
+      "rawTitle": "You+Me – Against the World",
+      "slug": "tmdb-movie-1641629-you-me-against-the-world",
+      "type": "movie",
+      "year": 2026,
+      "quality": "FHD",
+      "provider": "tmdb",
+      "rating": 5.3,
+      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FbAbBNVplg7h79sm94OyHeKk8Phz.jpg&output=webp",
+      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FnkEhDomjmPHJSA4Tx8pxv0NlKEy.jpg&output=webp",
+      "imdbId": "tt43617372",
+      "tmdbId": "1641629",
+      "categories": [
+        "Romance",
+        "Drama"
+      ],
+      "status": "PUBLISHED",
+      "publishedAt": "2026-09-19T03:08:40.227Z"
+    },
+    {
+      "id": "tmdb-series-275102",
+      "canonicalId": "tmdb-series-275102",
+      "title": "The Scandal",
+      "rawTitle": "The Scandal",
+      "slug": "tmdb-series-275102-the-scandal",
+      "type": "series",
+      "year": 2026,
+      "quality": "FHD",
+      "provider": "tmdb",
+      "rating": 6,
+      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FpJsIzlTjmx07ilwEkl0cglrMVa1.jpg&output=webp",
+      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2Fuc1p1PEbEMpdIHqnU9TESNC6Jhp.jpg&output=webp",
+      "imdbId": "tt36347588",
+      "tmdbId": "275102",
+      "categories": [
+        "Drama"
+      ],
+      "status": "PUBLISHED",
+      "publishedAt": "2026-09-19T03:08:40.213Z"
+    },
+    {
       "id": "tmdb-series-256440",
       "canonicalId": "tmdb-series-256440",
       "title": "Alıkara",
@@ -896,7 +983,7 @@
       "year": 2026,
       "quality": "FHD",
       "provider": "tmdb",
-      "rating": 8,
+      "rating": 7,
       "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2F6HLl3jgLQmUO0mw2TspFf5jIU3M.jpg&output=webp",
       "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FmIjERiWlnDzQWHTcZdtucLmTCeO.jpg&output=webp",
       "imdbId": "tt37884325",
@@ -938,7 +1025,7 @@
       "year": 2026,
       "quality": "FHD",
       "provider": "tmdb",
-      "rating": 5,
+      "rating": 5.5,
       "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FwDebpR4NplIM8EteAGfd51Zdisu.jpg&output=webp",
       "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F29XMlo2zt5LTA0YMjA3hubbM942.jpg&output=webp",
       "imdbId": "tt41228546",
@@ -984,7 +1071,7 @@
       "year": 2026,
       "quality": "FHD",
       "provider": "tmdb",
-      "rating": 8.3,
+      "rating": 7.2,
       "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2F57XScX1aYtKi1LvHYFQLPUxVhTG.jpg&output=webp",
       "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F3JVjgaqfX5MhxxHKpGWz05QV7Dz.jpg&output=webp",
       "imdbId": "",
@@ -1060,95 +1147,6 @@
       ],
       "status": "PUBLISHED",
       "publishedAt": "2026-09-17T03:25:48.809Z"
-    },
-    {
-      "id": "tmdb-series-332401",
-      "canonicalId": "tmdb-series-332401",
-      "title": "City of Blood",
-      "rawTitle": "City of Blood",
-      "slug": "tmdb-series-332401-city-of-blood",
-      "type": "series",
-      "year": 2026,
-      "quality": "FHD",
-      "provider": "tmdb",
-      "rating": 10,
-      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FNjr0Rlb4CobAfrGE8NVffYDGqx.jpg&output=webp",
-      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FnAEIr2b9M9ya8SXOTA1bDDMjhCA.jpg&output=webp",
-      "imdbId": "tt32642114",
-      "tmdbId": "332401",
-      "categories": [
-        "Mystery"
-      ],
-      "status": "PUBLISHED",
-      "publishedAt": "2026-09-17T03:25:48.793Z"
-    },
-    {
-      "id": "tmdb-series-273207",
-      "canonicalId": "tmdb-series-273207",
-      "title": "Neagley",
-      "rawTitle": "Neagley",
-      "slug": "tmdb-series-273207-neagley",
-      "type": "series",
-      "year": 2026,
-      "quality": "FHD",
-      "provider": "tmdb",
-      "rating": 7.6,
-      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2F1m6CxPAuGv2oHc1ahERrcVWnk2J.jpg&output=webp",
-      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FuYOYLFQ4q7asuhdiKXCqGaeAQUH.jpg&output=webp",
-      "imdbId": "tt33539520",
-      "tmdbId": "273207",
-      "categories": [
-        "Drama",
-        "Mystery",
-        "Crime"
-      ],
-      "status": "PUBLISHED",
-      "publishedAt": "2026-09-17T03:25:48.743Z"
-    },
-    {
-      "id": "tmdb-movie-1432474",
-      "canonicalId": "tmdb-movie-1432474",
-      "title": "Nimrods",
-      "rawTitle": "Nimrods",
-      "slug": "tmdb-movie-1432474-nimrods",
-      "type": "movie",
-      "year": 2026,
-      "quality": "FHD",
-      "provider": "tmdb",
-      "rating": 7.1,
-      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FaebmSpFu1lUV78PtOpqMUn4d82B.jpg&output=webp",
-      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FnwkfCcHIqzo5H4rsG4ug5AVdGZM.jpg&output=webp",
-      "imdbId": "tt34895535",
-      "tmdbId": "1432474",
-      "categories": [
-        "Comedy",
-        "Music"
-      ],
-      "status": "PUBLISHED",
-      "publishedAt": "2026-09-16T03:20:32.523Z"
-    },
-    {
-      "id": "tmdb-movie-1318467",
-      "canonicalId": "tmdb-movie-1318467",
-      "title": "The Last Kiss",
-      "rawTitle": "The Last Kiss",
-      "slug": "tmdb-movie-1318467-the-last-kiss",
-      "type": "movie",
-      "year": 2026,
-      "quality": "FHD",
-      "provider": "tmdb",
-      "rating": 9,
-      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FcLZ7iFZc25vluSIKt3XtdSTait4.jpg&output=webp",
-      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FA8qiGvOJxFucIJzJfjv73i0egUW.jpg&output=webp",
-      "imdbId": "tt33253206",
-      "tmdbId": "1318467",
-      "categories": [
-        "Horror",
-        "Mystery",
-        "Thriller"
-      ],
-      "status": "PUBLISHED",
-      "publishedAt": "2026-09-16T03:20:32.278Z"
     }
   ],
   "featured": [
@@ -4330,6 +4328,93 @@
       "publishedAt": "2022-08-28T13:22:56.000Z"
     },
     {
+      "id": "tmdb-movie-1228834",
+      "canonicalId": "tmdb-movie-1228834",
+      "title": "The Fix",
+      "rawTitle": "The Fix",
+      "slug": "tmdb-movie-1228834-the-fix",
+      "type": "movie",
+      "year": 2026,
+      "quality": "FHD",
+      "provider": "tmdb",
+      "rating": 8.2,
+      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FyopXjun3ICFfJci2ukcEzceZjUs.jpg&output=webp",
+      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FdJTWIecL2vxsCRl5G0lRhPsfrhc.jpg&output=webp",
+      "imdbId": "tt9601292",
+      "tmdbId": "1228834",
+      "categories": [
+        "Action",
+        "Thriller"
+      ],
+      "status": "PUBLISHED",
+      "publishedAt": "2026-09-19T03:08:40.251Z"
+    },
+    {
+      "id": "tmdb-movie-1451944",
+      "canonicalId": "tmdb-movie-1451944",
+      "title": "Lust Stories 3",
+      "rawTitle": "Lust Stories 3",
+      "slug": "tmdb-movie-1451944-lust-stories-3",
+      "type": "movie",
+      "year": 2026,
+      "quality": "FHD",
+      "provider": "tmdb",
+      "rating": 7,
+      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2F1GBe4TeCeXa1ENg0rv2JH8cH0ry.jpg&output=webp",
+      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FygMNjFOBuLVoInEoPzqPU2U0pfg.jpg&output=webp",
+      "imdbId": "tt39667834",
+      "tmdbId": "1451944",
+      "categories": [
+        "Romance",
+        "Drama"
+      ],
+      "status": "PUBLISHED",
+      "publishedAt": "2026-09-19T03:08:40.238Z"
+    },
+    {
+      "id": "tmdb-movie-1641629",
+      "canonicalId": "tmdb-movie-1641629",
+      "title": "You+Me – Against the World",
+      "rawTitle": "You+Me – Against the World",
+      "slug": "tmdb-movie-1641629-you-me-against-the-world",
+      "type": "movie",
+      "year": 2026,
+      "quality": "FHD",
+      "provider": "tmdb",
+      "rating": 5.3,
+      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FbAbBNVplg7h79sm94OyHeKk8Phz.jpg&output=webp",
+      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FnkEhDomjmPHJSA4Tx8pxv0NlKEy.jpg&output=webp",
+      "imdbId": "tt43617372",
+      "tmdbId": "1641629",
+      "categories": [
+        "Romance",
+        "Drama"
+      ],
+      "status": "PUBLISHED",
+      "publishedAt": "2026-09-19T03:08:40.227Z"
+    },
+    {
+      "id": "tmdb-series-275102",
+      "canonicalId": "tmdb-series-275102",
+      "title": "The Scandal",
+      "rawTitle": "The Scandal",
+      "slug": "tmdb-series-275102-the-scandal",
+      "type": "series",
+      "year": 2026,
+      "quality": "FHD",
+      "provider": "tmdb",
+      "rating": 6,
+      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FpJsIzlTjmx07ilwEkl0cglrMVa1.jpg&output=webp",
+      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2Fuc1p1PEbEMpdIHqnU9TESNC6Jhp.jpg&output=webp",
+      "imdbId": "tt36347588",
+      "tmdbId": "275102",
+      "categories": [
+        "Drama"
+      ],
+      "status": "PUBLISHED",
+      "publishedAt": "2026-09-19T03:08:40.213Z"
+    },
+    {
       "id": "tmdb-series-256440",
       "canonicalId": "tmdb-series-256440",
       "title": "Alıkara",
@@ -4406,7 +4491,7 @@
       "year": 2026,
       "quality": "FHD",
       "provider": "tmdb",
-      "rating": 8,
+      "rating": 7,
       "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2F6HLl3jgLQmUO0mw2TspFf5jIU3M.jpg&output=webp",
       "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FmIjERiWlnDzQWHTcZdtucLmTCeO.jpg&output=webp",
       "imdbId": "tt37884325",
@@ -4448,7 +4533,7 @@
       "year": 2026,
       "quality": "FHD",
       "provider": "tmdb",
-      "rating": 5,
+      "rating": 5.5,
       "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FwDebpR4NplIM8EteAGfd51Zdisu.jpg&output=webp",
       "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F29XMlo2zt5LTA0YMjA3hubbM942.jpg&output=webp",
       "imdbId": "tt41228546",
@@ -4483,94 +4568,7 @@
       ],
       "status": "PUBLISHED",
       "publishedAt": "2026-09-18T03:12:51.440Z"
-    },
-    {
-      "id": "tmdb-series-299939",
-      "canonicalId": "tmdb-series-299939",
-      "title": "Monster: The Lizzie Borden Story",
-      "rawTitle": "Monster: The Lizzie Borden Story",
-      "slug": "tmdb-series-299939-monster-the-lizzie-borden-story",
-      "type": "series",
-      "year": 2026,
-      "quality": "FHD",
-      "provider": "tmdb",
-      "rating": 8.3,
-      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2F57XScX1aYtKi1LvHYFQLPUxVhTG.jpg&output=webp",
-      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F3JVjgaqfX5MhxxHKpGWz05QV7Dz.jpg&output=webp",
-      "imdbId": "",
-      "tmdbId": "299939",
-      "categories": [
-        "Drama",
-        "Crime"
-      ],
-      "status": "PUBLISHED",
-      "publishedAt": "2026-09-18T03:12:51.423Z"
-    },
-    {
-      "id": "tmdb-series-295089",
-      "canonicalId": "tmdb-series-295089",
-      "title": "The Doll",
-      "rawTitle": "The Doll",
-      "slug": "tmdb-series-295089-the-doll",
-      "type": "series",
-      "year": 2026,
-      "quality": "FHD",
-      "provider": "tmdb",
-      "rating": 10,
-      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FzJSceCJMF7C6AtdRycZjNjavCT.jpg&output=webp",
-      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F7Q8H2rxsNzoNHagDEMcTlmAKtfb.jpg&output=webp",
-      "imdbId": "tt37578538",
-      "tmdbId": "295089",
-      "categories": [
-        "Drama"
-      ],
-      "status": "PUBLISHED",
-      "publishedAt": "2026-09-17T03:25:48.844Z"
-    },
-    {
-      "id": "tmdb-series-252105",
-      "canonicalId": "tmdb-series-252105",
-      "title": "Golden Axe",
-      "rawTitle": "Golden Axe",
-      "slug": "tmdb-series-252105-golden-axe",
-      "type": "series",
-      "year": 2026,
-      "quality": "FHD",
-      "provider": "tmdb",
-      "rating": 10,
-      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FtoEwR5VTFzHmxW1pX1HjtTXH6QH.jpg&output=webp",
-      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FzOcEo3oQf9KDPPxZueNhReN6TBr.jpg&output=webp",
-      "imdbId": "tt32149571",
-      "tmdbId": "252105",
-      "categories": [
-        "Animation",
-        "Sci-Fi & Fantasy"
-      ],
-      "status": "PUBLISHED",
-      "publishedAt": "2026-09-17T03:25:48.830Z"
-    },
-    {
-      "id": "tmdb-series-332657",
-      "canonicalId": "tmdb-series-332657",
-      "title": "Route 187",
-      "rawTitle": "Route 187",
-      "slug": "tmdb-series-332657-route-187",
-      "type": "series",
-      "year": 2026,
-      "quality": "FHD",
-      "provider": "tmdb",
-      "rating": 10,
-      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FyfP9A3IaKE00U1ap1y7wAoZRzeC.jpg&output=webp",
-      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FAgx8RmlBBDJrlH9MyUOd5JYYZPS.jpg&output=webp",
-      "imdbId": "tt32132697",
-      "tmdbId": "332657",
-      "categories": [
-        "Crime",
-        "Drama"
-      ],
-      "status": "PUBLISHED",
-      "publishedAt": "2026-09-17T03:25:48.809Z"
     }
   ],
-  "updatedAt": "2026-09-18T03:12:52.212Z"
+  "updatedAt": "2026-09-19T03:08:40.893Z"
 }

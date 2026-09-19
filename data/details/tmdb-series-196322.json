@@ -1,0 +1,88 @@
+{
+  "id": "tmdb-series-196322",
+  "canonicalId": "tmdb-series-196322",
+  "externalProvider": "tmdb",
+  "externalId": "196322",
+  "tmdbId": "196322",
+  "imdbId": "tt19231492",
+  "type": "series",
+  "contentType": "series",
+  "title": "Dark Matter",
+  "canonicalTitle": "Dark Matter",
+  "originalTitle": "Dark Matter",
+  "overview": "Jason Dessen is abducted into an alternate version of his life. To get back to his real family, he embarks on a harrowing journey to save them from the most terrifying foe imaginable: himself.",
+  "description": "Jason Dessen is abducted into an alternate version of his life. To get back to his real family, he embarks on a harrowing journey to save them from the most terrifying foe imaginable: himself.",
+  "shortDescription": "Jason Dessen is abducted into an alternate version of his life. To get back to his real family, he embarks on a harrowin",
+  "year": 2024,
+  "releaseDate": "2024-05-07",
+  "rating": 7.8,
+  "votes": "0.8K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Sci-Fi & Fantasy",
+    "Drama"
+  ],
+  "categories": [
+    "Sci-Fi & Fantasy",
+    "Drama"
+  ],
+  "language": "English",
+  "country": "US",
+  "director": "Director",
+  "poster": "https://image.tmdb.org/t/p/w500/2DPmTlv8F0V1TQBPmlsGOVOhtWk.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/iBc82qaA05ntzSnrVndw8scv4Bn.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/j6ucGt_Xp14?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/j6ucGt_Xp14?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "33192",
+      "name": "Joel Edgerton",
+      "character": "Jason Dessen / Jason2",
+      "photo": "https://image.tmdb.org/t/p/w185/r2TTDZ8cG5wrZqx7Drz1M95S9z3.jpg"
+    },
+    {
+      "id": "6161",
+      "name": "Jennifer Connelly",
+      "character": "Daniela Dessen",
+      "photo": "https://image.tmdb.org/t/p/w185/wdmcJagSRJ65AuJ4IUCzuHAdvgy.jpg"
+    },
+    {
+      "id": "8602",
+      "name": "Alice Braga",
+      "character": "Dr. Amanda Lucas",
+      "photo": "https://image.tmdb.org/t/p/w185/d9JdgvUiqyWuGQLmozNfGZOpIBz.jpg"
+    },
+    {
+      "id": "22125",
+      "name": "Jimmi Simpson",
+      "character": "Ryan Holder",
+      "photo": "https://image.tmdb.org/t/p/w185/gerE8VqXfFyAs3QhbUlwEuZllKq.jpg"
+    },
+    {
+      "id": "1030512",
+      "name": "Dayo Okeniyi",
+      "character": "Oluko / Leighton Vance",
+      "photo": "https://image.tmdb.org/t/p/w185/8m4ZIuzVBDjFbJFLXebc4iwv27o.jpg"
+    },
+    {
+      "id": "1422517",
+      "name": "Oakes Fegley",
+      "character": "Charlie Dessen",
+      "photo": "https://image.tmdb.org/t/p/w185/jDiuzOh12xmrkwtnZWBPEEjpNva.jpg"
+    },
+    {
+      "id": "1232769",
+      "name": "Amanda Brugel",
+      "character": "Butterscotch / Blair Caplan",
+      "photo": "https://image.tmdb.org/t/p/w185/3W1RR8CzP5uk6sFt92i1QyjGLRT.jpg"
+    }
+  ],
+  "seasons": 2,
+  "episodes": 19,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-19T03:08:40.271Z",
+  "createdAt": "2026-09-19T03:08:40.271Z",
+  "updatedAt": "2026-09-19T03:08:40.271Z",
+  "links": []
+}

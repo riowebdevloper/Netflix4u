@@ -1,0 +1,118 @@
+{
+  "id": "tmdb-movie-1641629",
+  "canonicalId": "tmdb-movie-1641629",
+  "externalProvider": "tmdb",
+  "externalId": "1641629",
+  "tmdbId": "1641629",
+  "imdbId": "tt43617372",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "You+Me – Against the World",
+  "canonicalTitle": "You+Me – Against the World",
+  "originalTitle": "Toi+Moi - Seuls contre tous",
+  "overview": "Alma Lancaster, 18, leads a seemingly perfect life in a wealthy family, who believe she is studying law. In secret, she pursues her true dream — cinema. On campus, she meets 20-year-old Vadim Arcadi, a rebellious and magnetic solitaire with a troubled past. Forced to collaborate on a student film, they compete, get closer and start to fall in love – in spite of themselves. But someone is watching them. A mysterious figure begins to send anonymous threats, determined to separate them and expose secrets that could destroy Alma and Vadim.",
+  "description": "Alma Lancaster, 18, leads a seemingly perfect life in a wealthy family, who believe she is studying law. In secret, she pursues her true dream — cinema. On campus, she meets 20-year-old Vadim Arcadi, a rebellious and magnetic solitaire with a troubled past. Forced to collaborate on a student film, they compete, get closer and start to fall in love – in spite of themselves. But someone is watching them. A mysterious figure begins to send anonymous threats, determined to separate them and expose secrets that could destroy Alma and Vadim.",
+  "shortDescription": "Alma Lancaster, 18, leads a seemingly perfect life in a wealthy family, who believe she is studying law. In secret, she ",
+  "year": 2026,
+  "releaseDate": "2026-09-18",
+  "rating": 5.3,
+  "votes": "0.0K",
+  "quality": "FHD",
+  "duration": "1h 33m",
+  "genres": [
+    "Romance",
+    "Drama"
+  ],
+  "categories": [
+    "Romance",
+    "Drama"
+  ],
+  "language": "French",
+  "country": "FR",
+  "director": "Manon Gaurin",
+  "poster": "https://image.tmdb.org/t/p/w500/bAbBNVplg7h79sm94OyHeKk8Phz.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/nkEhDomjmPHJSA4Tx8pxv0NlKEy.jpg",
+  "trailerUrl": null,
+  "trailer": null,
+  "cast": [
+    {
+      "id": "5441073",
+      "name": "Vittoria Di Savoia",
+      "character": "Alma Lancaster",
+      "photo": "https://image.tmdb.org/t/p/w185/uxlRv4jnvzagvnTR18dnIBTvQNJ.jpg"
+    },
+    {
+      "id": "6028736",
+      "name": "Lucas Barski",
+      "character": "Vadim Arcadi",
+      "photo": "https://image.tmdb.org/t/p/w185/bNJj7fynrB2ZMoPpDNfcVd4YBg.jpg"
+    },
+    {
+      "id": "3220450",
+      "name": "Aymeric Fougeron",
+      "character": "Basile Lancaster",
+      "photo": "https://image.tmdb.org/t/p/w185/2GiOfHcnoMqJGwDu7JiU8YMlgph.jpg"
+    },
+    {
+      "id": "2477804",
+      "name": "Zoé Garcia",
+      "character": "Clémentine",
+      "photo": "https://image.tmdb.org/t/p/w185/alBs6QVCSNvnz4zoHXYRXw1GHYq.jpg"
+    },
+    {
+      "id": "236119",
+      "name": "Léo Legrand",
+      "character": "Timothé Vallas",
+      "photo": "https://image.tmdb.org/t/p/w185/yTdqyHFID2EvZil1PvyYEFMlsID.jpg"
+    },
+    {
+      "id": "34259",
+      "name": "Jean-Yves Berteloot",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/x8uFQOAsLSbWcbRMyItUj2nMZuo.jpg"
+    },
+    {
+      "id": "6486088",
+      "name": "Gabrielle Taittinger",
+      "character": "Lily Lancaster",
+      "photo": null
+    },
+    {
+      "id": "984598",
+      "name": "Suliane Brahim",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/dxUO3EA9xPuj23MWXpFd8Sknv36.jpg"
+    },
+    {
+      "id": "2981576",
+      "name": "Bryan Trésor",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/oKtmb7OrNauvgVUYGb7QlWtRIqj.jpg"
+    },
+    {
+      "id": "4973900",
+      "name": "Aboubacar Bidanessy",
+      "character": "",
+      "photo": null
+    },
+    {
+      "id": "3921802",
+      "name": "Sami Nasri",
+      "character": "",
+      "photo": null
+    },
+    {
+      "id": "6169276",
+      "name": "Adam Abdo",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/bRY8dsrQzKPAXtgZieZv04czBr5.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 1,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-19T03:08:40.227Z",
+  "createdAt": "2026-09-19T03:08:40.227Z",
+  "updatedAt": "2026-09-19T03:08:40.227Z",
+  "links": []
+}
