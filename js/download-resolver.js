@@ -25,16 +25,37 @@
     return cur;
   }
 
-  function getActiveTitle() {
-    var titleEl = document.getElementById('modal-title') ||
+  function getActiveTitle(targetEl) {
+    if (targetEl && targetEl.dataset && targetEl.dataset.title) {
+      return targetEl.dataset.title.trim();
+    }
+    if (targetEl) {
+      var cardParent = targetEl.closest('[data-title], [data-modal-title]');
+      if (cardParent && (cardParent.dataset.title || cardParent.dataset.modalTitle)) {
+        return (cardParent.dataset.title || cardParent.dataset.modalTitle).trim();
+      }
+    }
+    var modalTitleEl = document.getElementById('modal-title') ||
+      document.querySelector('#title-modal h2') ||
+      document.querySelector('#title-modal-body h2') ||
       document.querySelector('.title-text') ||
-      document.querySelector('h1') ||
       document.querySelector('#hicine-srv-meta-title');
-    var raw = titleEl ? titleEl.textContent.trim() : '';
-    return raw.replace(/[:\-–—]/g, ' ').replace(/\s+/g, ' ').trim();
+    var raw = modalTitleEl ? modalTitleEl.textContent.trim() : '';
+    if (raw) {
+      return raw.replace(/[:\-–—]/g, ' ').replace(/\s+/g, ' ').trim();
+    }
+    // Strictly do NOT read page h1 if title modal is active
+    var isModalOpen = document.getElementById('title-modal') && !document.getElementById('title-modal').classList.contains('hidden');
+    if (!isModalOpen) {
+      var h1 = document.querySelector('h1');
+      if (h1 && h1.textContent.trim()) {
+        return h1.textContent.trim().replace(/[:\-–—]/g, ' ').replace(/\s+/g, ' ').trim();
+      }
+    }
+    return '';
   }
 
-  window.getFastCloudDownloadHref = function(rawUrl) {
+  window.getFastCloudDownloadHref = function(rawUrl, meta) {
     if (!rawUrl) return '#';
     var isExternal = /nexdrive|hubcloud|dotmobiz|drivehub/i.test(rawUrl);
     if (isExternal) {
@@ -45,8 +66,15 @@
       return rawUrl;
     }
 
-    // Always route cloud & vcloud streams through the safe universal download file handler
-    return '/api/download-file?url=' + encodeURIComponent(rawUrl);
+    var qs = 'url=' + encodeURIComponent(rawUrl);
+    if (meta) {
+      if (meta.title) qs += '&title=' + encodeURIComponent(meta.title);
+      if (meta.tmdbId) qs += '&id=' + encodeURIComponent(meta.tmdbId);
+      if (meta.se) qs += '&se=' + encodeURIComponent(meta.se);
+      if (meta.ep) qs += '&ep=' + encodeURIComponent(meta.ep);
+      if (meta.quality) qs += '&quality=' + encodeURIComponent(meta.quality);
+    }
+    return '/api/download-file?' + qs;
   };
 
   window.handleFastCloudDownload = async function(event, rawUrl, buttonEl) {
@@ -187,8 +215,22 @@
     }
 
     // Direct High-Speed Download Trigger: NEVER redirect to Dotmovies search page!
-    var title = getActiveTitle();
-    var directFallbackUrl = '/api/download-file?title=' + encodeURIComponent(title || 'Video') + '&download=1';
+    var title = getActiveTitle(targetEl);
+    var tmdbId = (targetEl && targetEl.dataset && targetEl.dataset.tmdbid) || '';
+    var se = (targetEl && targetEl.dataset && targetEl.dataset.se) || '';
+    var ep = (targetEl && targetEl.dataset && targetEl.dataset.ep) || '';
+    var quality = (targetEl && targetEl.dataset && targetEl.dataset.quality) || '';
+
+    var queryParts = [];
+    if (cleanVcloud || rawUrl) queryParts.push('url=' + encodeURIComponent(cleanVcloud || rawUrl));
+    if (title) queryParts.push('title=' + encodeURIComponent(title));
+    if (tmdbId) queryParts.push('id=' + encodeURIComponent(tmdbId));
+    if (se) queryParts.push('se=' + encodeURIComponent(se));
+    if (ep) queryParts.push('ep=' + encodeURIComponent(ep));
+    if (quality) queryParts.push('quality=' + encodeURIComponent(quality));
+    queryParts.push('download=1');
+
+    var directFallbackUrl = '/api/download-file?' + queryParts.join('&');
 
     if (window.__showToast) {
       window.__showToast('📥 Starting Direct High-Speed File Download...', '⚡');

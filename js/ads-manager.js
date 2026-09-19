@@ -397,11 +397,21 @@
     }
   };
 
-  // Auto-init when DOM is ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', AdsManager.init);
+  // Auto-init deferred until after initial paint & idle to achieve near-zero Total Blocking Time (TBT)
+  var initAdsSafely = function() {
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(function() {
+        AdsManager.init();
+      }, { timeout: 2500 });
+    } else {
+      setTimeout(AdsManager.init, 1200);
+    }
+  };
+
+  if (document.readyState === 'complete') {
+    initAdsSafely();
   } else {
-    setTimeout(AdsManager.init, 50);
+    window.addEventListener('load', initAdsSafely, { once: true });
   }
 
   window.Netflix4uAds = AdsManager;

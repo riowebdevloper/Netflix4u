@@ -49,12 +49,13 @@
       return u;
     }
 
-    // Proxy external HTTP/HTTPS images through wsrv.nl for fast caching, WebP, and ISP bypass
-    var w = width ? ('&w=' + width) : '&w=400';
-    return 'https://wsrv.nl/?url=' + encodeURIComponent(u) + w + '&output=webp&q=85';
+    // Proxy external HTTP/HTTPS images through wsrv.nl for fast caching, WebP, and compression
+    // Default 260px width matches 143px-200px rendered card dimensions at retina DPR while eliminating oversized image waste
+    var w = width ? ('&w=' + width) : '&w=260';
+    return 'https://wsrv.nl/?url=' + encodeURIComponent(u) + w + '&output=webp&q=75';
   }
-  function unwrapImageUrl(url) {
-    return normalizeImageUrl(url);
+  function unwrapImageUrl(url, width) {
+    return normalizeImageUrl(url, width);
   }
   window.__unwrapImageUrl = unwrapImageUrl;
   window.__normalizeImageUrl = normalizeImageUrl;
@@ -580,11 +581,9 @@
     if (heroDots) {
       heroDots.querySelectorAll('.hero-dot').forEach(function(dot, i) {
         if (i === idx) {
-          dot.classList.remove('bg-white/40', 'w-2');
-          dot.classList.add('bg-white', 'w-5');
+          dot.classList.add('is-active');
         } else {
-          dot.classList.remove('bg-white', 'w-5');
-          dot.classList.add('bg-white/40', 'w-2');
+          dot.classList.remove('is-active');
         }
       });
     }
@@ -594,7 +593,7 @@
     if (!heroDots) return;
     heroDots.innerHTML = heroItems.map(function(_, idx) {
       var isFirst = idx === 0;
-      return '<button type="button" data-hero-dot="' + idx + '" aria-label="Show featured ' + (idx + 1) + '" class="hero-dot-hitbox"><span class="hero-dot ' + (isFirst ? 'w-5 bg-white' : 'w-2 bg-white/40 hover:bg-white/70') + ' h-2 rounded-full transition-all block"></span></button>';
+      return '<button type="button" data-hero-dot="' + idx + '" aria-label="Show featured ' + (idx + 1) + '" class="hero-dot-hitbox"><span class="hero-dot' + (isFirst ? ' is-active' : '') + ' block"></span></button>';
     }).join('');
 
     heroDots.querySelectorAll('[data-hero-dot]').forEach(function(btn) {
@@ -1076,19 +1075,44 @@
     var nextBtn = section.querySelector('[data-rail-next]');
     if (!content) return;
 
+    var cachedMax = 0;
+    var cachedClientWidth = 0;
+    var measure = function() {
+      cachedClientWidth = content.clientWidth || 0;
+      cachedMax = (content.scrollWidth || 0) - cachedClientWidth - 4;
+    };
+
     var ticking = false;
     var updateArrows = function() {
       if (!prevBtn || !nextBtn) return;
       var sl = content.scrollLeft;
-      var max = content.scrollWidth - content.clientWidth - 4;
+      if (cachedMax <= 0) measure();
       if (sl <= 10) prevBtn.classList.add('rail-arrow-hidden');
       else prevBtn.classList.remove('rail-arrow-hidden');
-      if (sl >= max) nextBtn.classList.add('rail-arrow-hidden');
+      if (sl >= cachedMax) nextBtn.classList.add('rail-arrow-hidden');
       else nextBtn.classList.remove('rail-arrow-hidden');
       ticking = false;
     };
 
-    requestAnimationFrame(updateArrows);
+    // Re-measure on window resize
+    window.addEventListener('resize', function() {
+      measure();
+      updateArrows();
+    }, { passive: true });
+
+    // Initial check deferred after paint to prevent layout thrashing during initial card render
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(function() {
+        measure();
+        updateArrows();
+      });
+    } else {
+      setTimeout(function() {
+        measure();
+        updateArrows();
+      }, 120);
+    }
+
     content.addEventListener('scroll', function() {
       if (!ticking) {
         requestAnimationFrame(updateArrows);
@@ -1098,12 +1122,14 @@
 
     if (prevBtn) {
       prevBtn.addEventListener('click', function() {
-        content.scrollBy({ left: -content.clientWidth * 0.75, behavior: 'smooth' });
+        var w = cachedClientWidth || content.clientWidth;
+        content.scrollBy({ left: -w * 0.75, behavior: 'smooth' });
       });
     }
     if (nextBtn) {
       nextBtn.addEventListener('click', function() {
-        content.scrollBy({ left: content.clientWidth * 0.75, behavior: 'smooth' });
+        var w = cachedClientWidth || content.clientWidth;
+        content.scrollBy({ left: w * 0.75, behavior: 'smooth' });
       });
     }
   }

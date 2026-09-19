@@ -78,8 +78,11 @@
   <link rel="dns-prefetch" href="https://image.tmdb.org">
   <link rel="preconnect" href="https://image.tmdb.org" crossorigin>
 
-  <!-- LCP Hero Image Preload (Immediate Discovery & Early Fetch) -->
-  <link rel="preload" as="image" href="https://image.tmdb.org/t/p/original/pF0qkRsrHkdYadPWY9AMeFZfcwk.jpg" fetchpriority="high">
+  <!-- Critical Font Preload (Eliminates Font-Swap Layout Shift) -->
+  <link rel="preload" as="font" type="font/woff2" href="/cf-fonts/v/inter/5.2.8/latin/wght/normal.woff2" crossorigin>
+
+  <!-- LCP Hero Image Preload (Immediate Discovery & High Priority Responsive Fetch) -->
+  <link rel="preload" as="image" href="https://image.tmdb.org/t/p/w1280/pF0qkRsrHkdYadPWY9AMeFZfcwk.jpg" imagesrcset="https://image.tmdb.org/t/p/w780/pF0qkRsrHkdYadPWY9AMeFZfcwk.jpg 780w, https://image.tmdb.org/t/p/w1280/pF0qkRsrHkdYadPWY9AMeFZfcwk.jpg 1280w" imagesizes="100vw" fetchpriority="high">
 
   <!-- JSON-LD Structured Data (Google Branded Search & AEO Optimization) -->
   <script type="application/ld+json">
@@ -165,7 +168,7 @@
       font-weight: 400;
       src: url(/cf-fonts/v/inter/5.2.8/latin/wght/normal.woff2);
       unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
-      font-display: swap;
+      font-display: optional;
     }
     @font-face {
       font-family: 'Inter';
@@ -173,7 +176,7 @@
       font-weight: 600;
       src: url(/cf-fonts/v/inter/5.2.8/latin/wght/normal.woff2);
       unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
-      font-display: swap;
+      font-display: optional;
     }
     @font-face {
       font-family: 'Inter';
@@ -181,7 +184,7 @@
       font-weight: 700;
       src: url(/cf-fonts/v/inter/5.2.8/latin/wght/normal.woff2);
       unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
-      font-display: swap;
+      font-display: optional;
     }
   </style>
 
@@ -304,25 +307,25 @@
 
         <!-- ─── 6-Slide Hero Carousel (Dynamic Live Net27 Sync) ─── -->
         <section id="hero" class="relative hero-container h-[64vh] sm:h-[80vh] min-h-[460px] sm:min-h-[680px] max-h-[940px] overflow-hidden" style="padding-top: calc(env(safe-area-inset-top, 0px) + 95px);"
-          data-hero='[{"tmdbId":108978,"id":"108978","title":"Reacher","year":"2022","backdrop":"https://image.tmdb.org/t/p/original/pF0qkRsrHkdYadPWY9AMeFZfcwk.jpg","overview":"Jack Reacher, a veteran military police investigator, has just recently entered civilian life. Reacher is a drifter, carrying no phone and the barest of essentials as he travels the country and explores the nation he once served.","rating":8.1,"type":"tv"},{"tmdbId":1408162,"id":"1408162","title":"Vishwanath & Sons","year":"2026","backdrop":"https://image.tmdb.org/t/p/original/nfNaAiiILjYRc2CKkId1ZfPTtlh.jpg","overview":"A celebrated Olympian shooter travels to America looking for a donor to help his sick child — but unexpected romance complicates his search.","rating":7.2,"type":"movie"},{"tmdbId":1423191,"id":"1423191","title":"Resident Evil","year":"2026","backdrop":"https://image.tmdb.org/t/p/original/1CIaRYKf3zg2Xyce1CSfCMg2Vfw.jpg","overview":"A hapless medical courier fights for his life amid an outbreak of a deadly mutagenic virus in an isolated mountain town.","rating":7.8,"type":"movie"},{"tmdbId":84105,"id":"84105","title":"Mirzapur","year":"2018","backdrop":"https://image.tmdb.org/t/p/original/3dV7pWAdwIPKR2lMIACMfObXdgK.jpg","overview":"The iron-fisted Akhandanand Tripathi is a millionaire carpet exporter and the mafia don of Mirzapur. His son, Munna, is an unworthy, power-hungry heir who will stop at nothing to inherit his father\u0027s legacy.","rating":8.0,"type":"tv"},{"tmdbId":5920,"id":"5920","title":"The Mentalist","year":"2008","backdrop":"https://image.tmdb.org/t/p/original/rJFqKcmMSttdNP58l0dVzY2NcTA.jpg","overview":"Patrick Jane, a former celebrity psychic medium, uses his razor sharp skills of observation and expertise at \"reading\" people to solve serious crimes with the California Bureau of Investigation.","rating":8.4,"type":"tv"},{"tmdbId":1709391,"id":"1709391","title":"Hanuman Ansh","year":"2026","backdrop":"https://image.tmdb.org/t/p/original/tKYOK8iMxkhJhug3LJ2yvC5QY8M.jpg","overview":"A grieving boy seeks God to meet his departed mother, and in finding the divine, learns to serve humanity with miracles of love, food and silent blessings, becoming Hanuman Ansh, Neem Karoli Baba.","rating":8.6,"type":"movie"}]'>
+          data-hero='[{"tmdbId":108978,"id":"108978","title":"Reacher","year":"2022","backdrop":"https://image.tmdb.org/t/p/w1280/pF0qkRsrHkdYadPWY9AMeFZfcwk.jpg","overview":"Jack Reacher, a veteran military police investigator, has just recently entered civilian life. Reacher is a drifter, carrying no phone and the barest of essentials as he travels the country and explores the nation he once served.","rating":8.1,"type":"tv"},{"tmdbId":1408162,"id":"1408162","title":"Vishwanath & Sons","year":"2026","backdrop":"https://image.tmdb.org/t/p/w1280/nfNaAiiILjYRc2CKkId1ZfPTtlh.jpg","overview":"A celebrated Olympian shooter travels to America looking for a donor to help his sick child — but unexpected romance complicates his search.","rating":7.2,"type":"movie"},{"tmdbId":1423191,"id":"1423191","title":"Resident Evil","year":"2026","backdrop":"https://image.tmdb.org/t/p/w1280/1CIaRYKf3zg2Xyce1CSfCMg2Vfw.jpg","overview":"A hapless medical courier fights for his life amid an outbreak of a deadly mutagenic virus in an isolated mountain town.","rating":7.8,"type":"movie"},{"tmdbId":84105,"id":"84105","title":"Mirzapur","year":"2018","backdrop":"https://image.tmdb.org/t/p/w1280/3dV7pWAdwIPKR2lMIACMfObXdgK.jpg","overview":"The iron-fisted Akhandanand Tripathi is a millionaire carpet exporter and the mafia don of Mirzapur. His son, Munna, is an unworthy, power-hungry heir who will stop at nothing to inherit his father\u0027s legacy.","rating":8.0,"type":"tv"},{"tmdbId":5920,"id":"5920","title":"The Mentalist","year":"2008","backdrop":"https://image.tmdb.org/t/p/w1280/rJFqKcmMSttdNP58l0dVzY2NcTA.jpg","overview":"Patrick Jane, a former celebrity psychic medium, uses his razor sharp skills of observation and expertise at \"reading\" people to solve serious crimes with the California Bureau of Investigation.","rating":8.4,"type":"tv"},{"tmdbId":1709391,"id":"1709391","title":"Hanuman Ansh","year":"2026","backdrop":"https://image.tmdb.org/t/p/w1280/tKYOK8iMxkhJhug3LJ2yvC5QY8M.jpg","overview":"A grieving boy seeks God to meet his departed mother, and in finding the divine, learns to serve humanity with miracles of love, food and silent blessings, becoming Hanuman Ansh, Neem Karoli Baba.","rating":8.6,"type":"movie"}]'>
 
           <!-- Crossfade Backdrops: True LCP Priority Image on Slide 0, Lazy Adjacent on 1-5 -->
           <div class="hero-bg absolute inset-0 transition-opacity duration-[1200ms] overflow-hidden" style="opacity: 1; z-index: 10" data-hero-idx="0">
-            <img src="https://image.tmdb.org/t/p/original/pF0qkRsrHkdYadPWY9AMeFZfcwk.jpg"
-                 srcset="https://image.tmdb.org/t/p/original/pF0qkRsrHkdYadPWY9AMeFZfcwk.jpg 1280w"
+            <img src="https://image.tmdb.org/t/p/w1280/pF0qkRsrHkdYadPWY9AMeFZfcwk.jpg"
+                 srcset="https://image.tmdb.org/t/p/w780/pF0qkRsrHkdYadPWY9AMeFZfcwk.jpg 780w, https://image.tmdb.org/t/p/w1280/pF0qkRsrHkdYadPWY9AMeFZfcwk.jpg 1280w"
                  sizes="100vw"
                  alt="Reacher Featured Backdrop"
                  width="1280" height="720"
                  fetchpriority="high"
                  loading="eager"
-                 decoding="sync"
+                 decoding="async"
                  class="w-full h-full object-cover object-center pointer-events-none" />
           </div>
-          <div class="hero-bg absolute inset-0 bg-cover bg-center transition-opacity duration-[1200ms]" style="opacity: 0; z-index: 9" data-hero-idx="1" data-bg="https://image.tmdb.org/t/p/original/nfNaAiiILjYRc2CKkId1ZfPTtlh.jpg"></div>
-          <div class="hero-bg absolute inset-0 bg-cover bg-center transition-opacity duration-[1200ms]" style="opacity: 0; z-index: 8" data-hero-idx="2" data-bg="https://image.tmdb.org/t/p/original/1CIaRYKf3zg2Xyce1CSfCMg2Vfw.jpg"></div>
-          <div class="hero-bg absolute inset-0 bg-cover bg-center transition-opacity duration-[1200ms]" style="opacity: 0; z-index: 7" data-hero-idx="3" data-bg="https://image.tmdb.org/t/p/original/3dV7pWAdwIPKR2lMIACMfObXdgK.jpg"></div>
-          <div class="hero-bg absolute inset-0 bg-cover bg-center transition-opacity duration-[1200ms]" style="opacity: 0; z-index: 6" data-hero-idx="4" data-bg="https://image.tmdb.org/t/p/original/rJFqKcmMSttdNP58l0dVzY2NcTA.jpg"></div>
-          <div class="hero-bg absolute inset-0 bg-cover bg-center transition-opacity duration-[1200ms]" style="opacity: 0; z-index: 5" data-hero-idx="5" data-bg="https://image.tmdb.org/t/p/original/tKYOK8iMxkhJhug3LJ2yvC5QY8M.jpg"></div>
+          <div class="hero-bg absolute inset-0 bg-cover bg-center transition-opacity duration-[1200ms]" style="opacity: 0; z-index: 9" data-hero-idx="1" data-bg="https://image.tmdb.org/t/p/w1280/nfNaAiiILjYRc2CKkId1ZfPTtlh.jpg"></div>
+          <div class="hero-bg absolute inset-0 bg-cover bg-center transition-opacity duration-[1200ms]" style="opacity: 0; z-index: 8" data-hero-idx="2" data-bg="https://image.tmdb.org/t/p/w1280/1CIaRYKf3zg2Xyce1CSfCMg2Vfw.jpg"></div>
+          <div class="hero-bg absolute inset-0 bg-cover bg-center transition-opacity duration-[1200ms]" style="opacity: 0; z-index: 7" data-hero-idx="3" data-bg="https://image.tmdb.org/t/p/w1280/3dV7pWAdwIPKR2lMIACMfObXdgK.jpg"></div>
+          <div class="hero-bg absolute inset-0 bg-cover bg-center transition-opacity duration-[1200ms]" style="opacity: 0; z-index: 6" data-hero-idx="4" data-bg="https://image.tmdb.org/t/p/w1280/rJFqKcmMSttdNP58l0dVzY2NcTA.jpg"></div>
+          <div class="hero-bg absolute inset-0 bg-cover bg-center transition-opacity duration-[1200ms]" style="opacity: 0; z-index: 5" data-hero-idx="5" data-bg="https://image.tmdb.org/t/p/w1280/tKYOK8iMxkhJhug3LJ2yvC5QY8M.jpg"></div>
 
           <!-- Clickable Hero Backdrop Trigger (Confined to upper backdrop to avoid control overlap) -->
           <button id="hero-click" type="button" data-modal="title" data-tmdbid="108978" data-type="tv" aria-label="More info for Reacher" class="absolute inset-x-0 top-0 h-[65%] z-[15] cursor-pointer bg-transparent border-0"></button>
@@ -959,31 +962,13 @@
   <script defer src="/js/download-resolver.js?v=3.5.0"></script>
   <script defer src="/js/net27-modal.js?v=3.5.0"></script>
 
-  <!-- ─── HILLTOPADS POPUNDER INTEGRATION ─── -->
-  <script async referrerpolicy="no-referrer-when-downgrade" src="https://bony-teaching.com/bM3IV/0.P-3zptvYbYmjVIJ/ZbDJ0/3PNnDTIGxBN/jzI/xPLpTmcK0/MejlEv2/MnjkUx"></script>
+  <!-- ─── SPONSOR & AD MANAGEMENT ─── -->
   <script>
   (function() {
-    var popUrl = "https://bony-teaching.com/bM3IV/0.P-3zptvYbYmjVIJ/ZbDJ0/3PNnDTIGxBN/jzI/xPLpTmcK0/MejlEv2/MnjkUx";
-    var POP_KEY = 'n4u_ht_pop_ts';
-    var COOLDOWN_MS = 20 * 60 * 1000;
-    function triggerPop() {
-      try {
-        var last = Number(sessionStorage.getItem(POP_KEY) || 0);
-        if (Date.now() - last < COOLDOWN_MS) return;
-        sessionStorage.setItem(POP_KEY, String(Date.now()));
-        var win = window.open(popUrl, '_blank');
-        if (win) {
-          try { win.blur(); window.focus(); } catch(e) {}
-        }
-      } catch(e) {}
-    }
+    // Isolated sponsor handler that NEVER disturbs playback, player, modal, or download buttons
     document.addEventListener('click', function(e) {
-      // Strictly exclude video playback and watch buttons from popup disturbance
-      if (e.target.closest('#hero-play, [data-modal="watch"], #hero-click, #watch-modal, #player, .watch-server-item, #watch-autoswitch-toggle-btn')) {
+      if (e.target.closest('#hero-play, [data-modal="watch"], #hero-click, #watch-modal, #player, .watch-server-item, #watch-autoswitch-toggle-btn, .dl-btn, [data-fast-download], .ep-download-trigger, #download-mirrors-section, #dotmovies-download-section')) {
         return;
-      }
-      if (e.target.closest('.dl-btn, .nm-card')) {
-        triggerPop();
       }
     }, { passive: true });
   })();

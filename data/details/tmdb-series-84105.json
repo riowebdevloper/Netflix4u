@@ -1,0 +1,109 @@
+{
+  "id": "tmdb-series-84105",
+  "canonicalId": "tmdb-series-84105",
+  "externalProvider": "tmdb",
+  "externalId": "84105",
+  "tmdbId": "84105",
+  "imdbId": "tt6473300",
+  "type": "series",
+  "contentType": "series",
+  "title": "Mirzapur",
+  "canonicalTitle": "Mirzapur",
+  "originalTitle": "मिर्ज़ापुर",
+  "overview": "The iron-fisted Akhandanand Tripathi is a millionaire carpet exporter and the mafia don of Mirzapur. His son, Munna, is an unworthy, power-hungry heir who will stop at nothing to inherit his father's legacy. An incident at a wedding procession forces him to cross paths with Ramakant Pandit, an upstanding lawyer, and his sons, Guddu and Bablu. It snowballs into a game of ambition, power and greed that threatens the fabric of this lawless city.",
+  "description": "The iron-fisted Akhandanand Tripathi is a millionaire carpet exporter and the mafia don of Mirzapur. His son, Munna, is an unworthy, power-hungry heir who will stop at nothing to inherit his father's legacy. An incident at a wedding procession forces him to cross paths with Ramakant Pandit, an upstanding lawyer, and his sons, Guddu and Bablu. It snowballs into a game of ambition, power and greed that threatens the fabric of this lawless city.",
+  "shortDescription": "The iron-fisted Akhandanand Tripathi is a millionaire carpet exporter and the mafia don of Mirzapur. His son, Munna, is ",
+  "year": 2018,
+  "rating": 8,
+  "votes": "0.2K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Crime",
+    "Action & Adventure",
+    "Drama"
+  ],
+  "categories": [
+    "Crime",
+    "Action & Adventure",
+    "Drama"
+  ],
+  "language": "Hindi",
+  "country": "IN",
+  "poster": "https://image.tmdb.org/t/p/w500/1rxLUFVrtTo82OxhbDXJDiJVkwL.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/3dV7pWAdwIPKR2lMIACMfObXdgK.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/33o3s4Vs4Sw?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/33o3s4Vs4Sw?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "492791",
+      "name": "Ali Fazal",
+      "character": "Govind 'Guddu' Pandit",
+      "photo": "https://image.tmdb.org/t/p/w185/lLDmx3RDuMXObASvdFXeUh1GOgd.jpg"
+    },
+    {
+      "id": "1179460",
+      "name": "Pankaj Tripathi",
+      "character": "Akhandanand 'Kaleen' Tripathi",
+      "photo": "https://image.tmdb.org/t/p/w185/f3Vxz0QB7PHeyPcXrfJX14Xkxnu.jpg"
+    },
+    {
+      "id": "1469936",
+      "name": "Shweta Tripathi Sharma",
+      "character": "Gajgamini 'Golu' Gupta",
+      "photo": "https://image.tmdb.org/t/p/w185/xZ0pk5qKzfK1oB54Mmfo1lUSSEu.jpg"
+    },
+    {
+      "id": "86243",
+      "name": "Rasika Dugal",
+      "character": "Beena Tripathi",
+      "photo": "https://image.tmdb.org/t/p/w185/hDLEHqYoIY6ZGrbmlsUJpwn9nl3.jpg"
+    },
+    {
+      "id": "2176504",
+      "name": "Harshita Gaur",
+      "character": "Dimpy Pandit",
+      "photo": "https://image.tmdb.org/t/p/w185/rYO4VrYRiCWrEq5MgM0fZnlAMwX.jpg"
+    },
+    {
+      "id": "1246564",
+      "name": "Sheeba Chaddha",
+      "character": "Vasudha Pandit",
+      "photo": "https://image.tmdb.org/t/p/w185/yWBQeR47GmnGJn33w4c8QzakkSh.jpg"
+    },
+    {
+      "id": "1197124",
+      "name": "Rajesh Tailang",
+      "character": "Ramakant Pandit",
+      "photo": "https://image.tmdb.org/t/p/w185/ou1zcrNfhXBKcpnPgtKs64SRGXm.jpg"
+    },
+    {
+      "id": "1799153",
+      "name": "Anjum Sharma",
+      "character": "Sharad Shukla",
+      "photo": "https://image.tmdb.org/t/p/w185/75uWNWhYgYxRlXw4Hhrl5R86mpK.jpg"
+    },
+    {
+      "id": "1071562",
+      "name": "Isha Talwar",
+      "character": "Madhuri Tripathi",
+      "photo": "https://image.tmdb.org/t/p/w185/dVRrb9aLf6s1XmtIkpSbzuMl0Uv.jpg"
+    },
+    {
+      "id": "1551045",
+      "name": "Vijay Varma",
+      "character": "Bharat Tyagi",
+      "photo": "https://image.tmdb.org/t/p/w185/A46ekiPFC3vA1442FJmiIudpxX1.jpg"
+    },
+    {
+      "id": "1339563",
+      "name": "Priyanshu Painyuli",
+      "character": "Robin Agarwal",
+      "photo": "https://image.tmdb.org/t/p/w185/r1o22IMlSU9KQfG6qBTb0HUXPFe.jpg"
+    }
+  ],
+  "seasons": 3,
+  "episodes": 29,
+  "status": "PUBLISHED",
+  "links": []
+}

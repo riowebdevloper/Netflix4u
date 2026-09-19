@@ -297,19 +297,29 @@ function findMatchingCatalogLinks(title, year, imdbId, slug) {
       const fByClean = loadDetailFileByFilename(c, title);
       if (fByClean && fByClean.length > 0) return fByClean;
 
-      // Fuzzy prefix/containment match for harvested Dotmovies releases
+      // Safe boundary-aware match for harvested Dotmovies releases (e.g., slug + year or slug + audio suffix)
       for (const [hKey, hVal] of hIndex.entries()) {
-        if (hVal && typeof hKey === 'string' && hKey.length >= 4 && (c.startsWith(hKey) || hKey.startsWith(c))) {
-          const hLinks = extractLinksFromDetail(hVal, title);
-          if (hLinks.length > 0) return hLinks;
+        if (hVal && typeof hKey === 'string' && hKey.length >= 4) {
+          const isExact = (c === hKey);
+          const isSafePrefix = (hKey.startsWith(c + '-') || hKey.startsWith(c + '_') || (year && hKey === (c + year)));
+          const isSafeSuffix = (c.startsWith(hKey + '-') || c.startsWith(hKey + '_') || (year && c === (hKey + year)));
+          if (isExact || isSafePrefix || isSafeSuffix) {
+            const hLinks = extractLinksFromDetail(hVal, title);
+            if (hLinks.length > 0) return hLinks;
+          }
         }
       }
 
-      // Fuzzy prefix/containment match for popular series/movies
+      // Safe boundary-aware match for popular series/movies
       for (const [key, val] of dMap.entries()) {
-        if (val && typeof key === 'string' && key.length >= 4 && (c.startsWith(key) || key.startsWith(c))) {
-          const links = extractLinksFromDetail(val, title);
-          if (links.length > 0) return links;
+        if (val && typeof key === 'string' && key.length >= 4) {
+          const isExact = (c === key);
+          const isSafePrefix = (key.startsWith(c + '-') || key.startsWith(c + '_') || (year && key === (c + year)));
+          const isSafeSuffix = (c.startsWith(key + '-') || c.startsWith(key + '_') || (year && c === (key + year)));
+          if (isExact || isSafePrefix || isSafeSuffix) {
+            const links = extractLinksFromDetail(val, title);
+            if (links.length > 0) return links;
+          }
         }
       }
     }
