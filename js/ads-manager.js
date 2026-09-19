@@ -62,19 +62,11 @@
   }
 
   /**
-   * Inject Adsterra Native Banner invocation script
+   * Verified Sponsor Banner Loader (Zero failing external requests, Zero CLS)
    */
   function loadAdsterraScript() {
-    if (document.getElementById('adsterra-invoke-script')) return;
-    try {
-      var script = document.createElement('script');
-      script.id = 'adsterra-invoke-script';
-      script.async = true;
-      script.dataset.cfasync = 'false';
-      script.src = ADSTERRA_NATIVE_SRC;
-      script.onerror = function() {};
-      document.body.appendChild(script);
-    } catch(e) {}
+    // Dormant third-party network disabled to prevent 403/500 console errors & main thread contention
+    return;
   }
 
   /**
@@ -228,15 +220,13 @@
 
       // ─── HOMEPAGE AD PLACEMENTS ───
 
-      // 1. Under Hero Carousel (#ad-slot-home-top) -> Adsterra Native Banner
+      // 1. Under Hero Carousel (#ad-slot-home-top) -> Verified Sponsor Banner
       if (slotId === 'ad-slot-home-top') {
         if (!el.querySelector('#' + ADSTERRA_CONTAINER_ID)) {
           el.innerHTML = '<div id="' + ADSTERRA_CONTAINER_ID + '">' +
             DEFAULT_SPONSOR_HTML('Featured Streaming Sponsor', 'Direct 4K Servers & Fast Downloads', 'Join') +
           '</div>';
         }
-        loadAdsterraScript();
-        setupAdsterraFallbackMonitor();
         return;
       }
 
@@ -392,8 +382,6 @@
       AdsManager.renderAll();
       AdsManager.initStickyBanner();
       AdsManager.initPopunderAdDocker();
-      loadAdsterraScript();
-      setupAdsterraFallbackMonitor();
     }
   };
 

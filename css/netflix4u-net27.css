@@ -1396,3 +1396,23 @@ body.modal-open {
   }
 }
 
+/* ─── WCAG AAA High Contrast & Accessible Controls ─── */
+.text-white\/40, .text-white\/50 {
+  color: rgba(255, 255, 255, 0.72) !important;
+}
+.text-white\/60 {
+  color: rgba(255, 255, 255, 0.82) !important;
+}
+
+@media (pointer: coarse) {
+  .rail-arrow-btn {
+    min-width: 44px;
+    min-height: 44px;
+  }
+  #search-clear {
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
+
+

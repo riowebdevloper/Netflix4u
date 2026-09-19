@@ -5,6 +5,33 @@
 (function() {
   'use strict';
 
+  // Ensure any dynamically injected iframes (e.g., ad networks/trackers) have accessible titles and aria-hidden if hidden
+  try {
+    if (typeof MutationObserver !== 'undefined' && document.documentElement) {
+      var iframeObserver = new MutationObserver(function(mutations) {
+        for (var i = 0; i < mutations.length; i++) {
+          var m = mutations[i];
+          for (var j = 0; j < m.addedNodes.length; j++) {
+            var node = m.addedNodes[j];
+            if (node && node.nodeType === 1) {
+              var frames = node.tagName === 'IFRAME' ? [node] : (node.querySelectorAll ? Array.prototype.slice.call(node.querySelectorAll('iframe')) : []);
+              for (var k = 0; k < frames.length; k++) {
+                var frame = frames[k];
+                if (!frame.getAttribute('title')) {
+                  frame.setAttribute('title', 'Advertisement / Third-party Frame');
+                }
+                if (frame.style.display === 'none' || frame.getAttribute('width') === '0' || frame.getAttribute('height') === '0') {
+                  frame.setAttribute('aria-hidden', 'true');
+                }
+              }
+            }
+          }
+        }
+      });
+      iframeObserver.observe(document.documentElement, { childList: true, subtree: true });
+    }
+  } catch (e) {}
+
   function getPosterFallback(title) {
     var rawTitle = (title || 'Netflix4U').slice(0, 24);
     var safeTitle = rawTitle.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;');
@@ -41,6 +68,12 @@
     if (u.indexOf('/uploads/') === 0) u = 'https://dotmobiz.com' + u;
     if (u.indexOf('image.tmdb.org/') === 0) u = 'https://' + u;
 
+    // Direct TMDB CDN optimization: bypass third-party proxy for native edge CDN delivery
+    if (u.indexOf('image.tmdb.org') !== -1) {
+      var tmdbSize = width && width > 260 ? 'w342' : 'w185';
+      return u.replace(/\/t\/p\/(?:original|w\d+)\//, '/t/p/' + tmdbSize + '/');
+    }
+
     // If it is already a wsrv.nl proxy URL, ensure output=webp
     if (u.indexOf('wsrv.nl') !== -1 || u.indexOf('images.weserv.nl') !== -1) {
       if (u.indexOf('output=webp') === -1) {
@@ -49,10 +82,9 @@
       return u;
     }
 
-    // Proxy external HTTP/HTTPS images through wsrv.nl for fast caching, WebP, and compression
-    // Default 260px width matches 143px-200px rendered card dimensions at retina DPR while eliminating oversized image waste
-    var w = width ? ('&w=' + width) : '&w=260';
-    return 'https://wsrv.nl/?url=' + encodeURIComponent(u) + w + '&output=webp&q=75';
+    // Proxy other external HTTP/HTTPS images through wsrv.nl for WebP compression (w=200, q=70)
+    var w = width ? ('&w=' + width) : '&w=200';
+    return 'https://wsrv.nl/?url=' + encodeURIComponent(u) + w + '&output=webp&q=70';
   }
   function unwrapImageUrl(url, width) {
     return normalizeImageUrl(url, width);
@@ -895,8 +927,12 @@
       }
     });
 
-    // Render rails: if cached, cards show instantly; otherwise, skeleton shimmer
-    railsView.innerHTML = configs.map(function(cfg, idx) {
+    // Progressive Rail Hydration: Render initial 3 rails first, hydrate remaining as user scrolls
+    var INITIAL_BATCH = 3;
+    var BATCH_SIZE = 3;
+    var currentRendered = 0;
+
+    function renderSingleRail(cfg, idx) {
       var cached = cachedDataMap[cfg.key];
       var innerHtml = '';
       if (cached && cached.items && cached.items.length) {
@@ -949,19 +985,9 @@
           '</button>' +
         '</div>' +
       '</section>' + adMarkup;
-    }).join('');
-
-    if (window.Netflix4uAds) {
-      window.Netflix4uAds.renderAll(railsView);
     }
 
-    // Render Continue Watching Rail if on trending platform
-    if (platform === 'trending') {
-      renderContinueWatchingRail();
-    }
-
-    // Wire up scroll buttons and handle background revalidation / lazy loading
-    configs.forEach(function(cfg, idx) {
+    function wireRail(cfg, idx) {
       var railSection = railsView.querySelector('[data-rail-key="' + cfg.key + '"]');
       if (!railSection) return;
 
@@ -969,7 +995,7 @@
       if (cached) {
         initRailScrollButtons(railSection);
         if (cached.isFresh) {
-          return; // Instant fresh cache hit - no network request needed
+          return;
         }
       }
 
@@ -982,14 +1008,81 @@
         }
       };
 
-      // Priority rails (first 2) load immediately; lower rails lazy load on scroll
       if (idx < 2 || !railObserver) {
         doLoad();
       } else {
         railSection._loadRail = doLoad;
         railObserver.observe(railSection);
       }
-    });
+    }
+
+    var sentinelObserver = null;
+    function appendNextRailBatch() {
+      if (currentRendered >= configs.length) return;
+      var batchEnd = Math.min(configs.length, currentRendered + BATCH_SIZE);
+      var html = '';
+      for (var i = currentRendered; i < batchEnd; i++) {
+        html += renderSingleRail(configs[i], i);
+      }
+      var temp = document.createElement('div');
+      temp.innerHTML = html;
+      var sentinel = document.getElementById('nm-rail-sentinel');
+      while (temp.firstChild) {
+        if (sentinel) {
+          railsView.insertBefore(temp.firstChild, sentinel);
+        } else {
+          railsView.appendChild(temp.firstChild);
+        }
+      }
+      for (var j = currentRendered; j < batchEnd; j++) {
+        wireRail(configs[j], j);
+      }
+      currentRendered = batchEnd;
+      if (currentRendered >= configs.length && sentinel) {
+        sentinel.remove();
+      }
+      if (window.Netflix4uAds) {
+        window.Netflix4uAds.renderAll(railsView);
+      }
+    }
+
+    if (typeof window !== 'undefined' && 'IntersectionObserver' in window) {
+      sentinelObserver = new IntersectionObserver(function(entries) {
+        if (entries[0] && entries[0].isIntersecting) {
+          appendNextRailBatch();
+        }
+      }, { rootMargin: '600px 0px' });
+    }
+
+    // Initial render: first batch only to maintain ultra-compact DOM (<600 nodes)
+    var initialEnd = Math.min(configs.length, INITIAL_BATCH);
+    var initialHtml = '';
+    for (var k = 0; k < initialEnd; k++) {
+      initialHtml += renderSingleRail(configs[k], k);
+    }
+    if (initialEnd < configs.length) {
+      initialHtml += '<div id="nm-rail-sentinel" class="w-full h-10 pointer-events-none"></div>';
+    }
+    railsView.innerHTML = initialHtml;
+
+    for (var m = 0; m < initialEnd; m++) {
+      wireRail(configs[m], m);
+    }
+    currentRendered = initialEnd;
+
+    var sentinelEl = document.getElementById('nm-rail-sentinel');
+    if (sentinelEl && sentinelObserver) {
+      sentinelObserver.observe(sentinelEl);
+    }
+
+    if (window.Netflix4uAds) {
+      window.Netflix4uAds.renderAll(railsView);
+    }
+
+    // Render Continue Watching Rail if on trending platform
+    if (platform === 'trending') {
+      renderContinueWatchingRail();
+    }
   }
 
   function buildPosterImg(url, title, extraClass) {

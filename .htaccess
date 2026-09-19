@@ -48,33 +48,45 @@ DirectoryIndex index.html index.php
 </IfModule>
 
 # ==========================================
-# ⚡ High-Speed Browser Caching & Zero-Stale Guard
+# ⚡ High-Speed Browser Caching & Security Headers
 # ==========================================
 <IfModule mod_headers.c>
+  # Security Headers (Best Practices 100/100)
+  Header set X-Content-Type-Options "nosniff"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+  Header set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+
   # Zero-stale for Service Worker, HTML, and version.json
   <FilesMatch "(version\.json|sw\.js|index\.html)$">
     Header set Cache-Control "no-cache, no-store, must-revalidate, max-age=0"
     Header set Pragma "no-cache"
     Header set Expires "0"
   </FilesMatch>
+
+  # Immutable caching for static assets
+  <FilesMatch "\.(css|js|woff2?|ttf|webp|png|jpg|jpeg|svg|ico)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
 </IfModule>
 
 <IfModule mod_expires.c>
   ExpiresActive On
-  ExpiresByType image/webp "access plus 1 month"
-  ExpiresByType image/jpeg "access plus 1 month"
-  ExpiresByType image/png "access plus 1 month"
-  ExpiresByType image/svg+xml "access plus 1 month"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType image/x-icon "access plus 1 year"
   ExpiresByType font/woff2 "access plus 1 year"
   ExpiresByType font/woff "access plus 1 year"
   ExpiresByType font/ttf "access plus 1 year"
-  ExpiresByType text/css "access plus 1 hour"
-  ExpiresByType application/javascript "access plus 1 hour"
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType text/javascript "access plus 1 year"
 </IfModule>
 
 # ==========================================
 # 📦 Gzip Compression for Ultra-Fast Loads
 # ==========================================
 <IfModule mod_deflate.c>
-  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/javascript application/json
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/javascript text/javascript application/json image/svg+xml
 </IfModule>

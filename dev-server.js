@@ -2,6 +2,7 @@ const http = require('http');
 const https = require('https');
 const fs = require('fs');
 const path = require('path');
+const zlib = require('zlib');
 const { getPlaybackSources } = require('./services/playbackService');
 const { resolveContentId } = require('./services/canonicalResolver');
 const { isPublicRecord, publicOnly } = require('./services/contentValidationService');
@@ -96,6 +97,72 @@ const MIME_TYPES = {
   '.xml': 'application/xml; charset=utf-8',
   '.txt': 'text/plain; charset=utf-8'
 };
+
+const staticGzipCache = new Map();
+
+function serveStaticFile(req, res, filePath, mimeType, customCacheControl) {
+  const ext = path.extname(filePath).toLowerCase();
+  const compressible = ['.html', '.css', '.js', '.json', '.svg', '.xml', '.txt'].includes(ext);
+  const acceptEncoding = req.headers['accept-encoding'] || '';
+  const canGzip = compressible && acceptEncoding.includes('gzip');
+
+  let cacheControl = customCacheControl;
+  if (!cacheControl) {
+    if (['.woff', '.woff2', '.ttf'].includes(ext) || filePath.includes('cf-fonts') || filePath.includes('Layout.CBW6') || filePath.includes('index.P3dZ')) {
+      cacheControl = 'public, max-age=31536000, immutable';
+    } else if (['.css', '.js'].includes(ext)) {
+      cacheControl = 'public, max-age=31536000, immutable';
+    } else if (['.webp', '.png', '.jpg', '.jpeg', '.svg', '.ico'].includes(ext)) {
+      cacheControl = 'public, max-age=2592000';
+    } else {
+      cacheControl = 'public, max-age=3600';
+    }
+  }
+
+  const headers = {
+    'Content-Type': mimeType || 'application/octet-stream',
+    'Cache-Control': cacheControl,
+    'X-Content-Type-Options': 'nosniff',
+    'Referrer-Policy': 'strict-origin-when-cross-origin'
+  };
+
+  if (!canGzip) {
+    res.writeHead(200, headers);
+    fs.createReadStream(filePath).pipe(res);
+    return;
+  }
+
+  let mtime = 0;
+  try { mtime = fs.statSync(filePath).mtimeMs; } catch(e) {}
+  const cached = staticGzipCache.get(filePath);
+  if (cached && cached.mtime === mtime) {
+    headers['Content-Encoding'] = 'gzip';
+    headers['Content-Length'] = cached.buffer.length;
+    res.writeHead(200, headers);
+    res.end(cached.buffer);
+    return;
+  }
+
+  fs.readFile(filePath, (err, rawData) => {
+    if (err) {
+      res.writeHead(404, { 'Content-Type': 'text/plain' });
+      res.end('File not found');
+      return;
+    }
+    zlib.gzip(rawData, (gzErr, gzBuf) => {
+      if (gzErr || !gzBuf) {
+        res.writeHead(200, headers);
+        res.end(rawData);
+        return;
+      }
+      staticGzipCache.set(filePath, { mtime, buffer: gzBuf });
+      headers['Content-Encoding'] = 'gzip';
+      headers['Content-Length'] = gzBuf.length;
+      res.writeHead(200, headers);
+      res.end(gzBuf);
+    });
+  });
+}
 
 // In-Memory Fast Caches
 let catalogSummary = null;
@@ -1506,8 +1573,8 @@ const server = http.createServer(async (req, res) => {
   if (isSafePath(ROOT, reqPath) && path.dirname(filePath) === ROOT && fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
     const ext = path.extname(filePath).toLowerCase();
     const mime = MIME_TYPES[ext] || 'application/octet-stream';
-    res.writeHead(200, { 'Content-Type': mime });
-    fs.createReadStream(filePath).pipe(res);
+    const cache = ext === '.html' ? 'public, max-age=0, must-revalidate' : null;
+    serveStaticFile(req, res, filePath, mime, cache);
     return;
   }
 
@@ -1519,11 +1586,7 @@ const server = http.createServer(async (req, res) => {
     if (isSafePath(ROOT, reqPath) && fs.existsSync(subFilePath) && fs.statSync(subFilePath).isFile()) {
       const ext = path.extname(subFilePath).toLowerCase();
       const mime = MIME_TYPES[ext] || 'application/octet-stream';
-      const cacheControl = ['.css', '.js', '.woff', '.woff2'].includes(ext)
-        ? 'public, max-age=86400'
-        : 'public, max-age=3600';
-      res.writeHead(200, { 'Content-Type': mime, 'Cache-Control': cacheControl });
-      fs.createReadStream(subFilePath).pipe(res);
+      serveStaticFile(req, res, subFilePath, mime);
       return;
     }
   }
@@ -1535,21 +1598,13 @@ const server = http.createServer(async (req, res) => {
 
   if (fs.existsSync(inJs) && fs.statSync(inJs).isFile()) {
     const ext = path.extname(inJs).toLowerCase();
-    res.writeHead(200, {
-      'Content-Type': MIME_TYPES[ext] || 'application/octet-stream',
-      'Cache-Control': 'public, max-age=31536000, immutable'
-    });
-    fs.createReadStream(inJs).pipe(res);
+    serveStaticFile(req, res, inJs, MIME_TYPES[ext] || 'application/octet-stream', 'public, max-age=31536000, immutable');
     return;
   }
 
   if (fs.existsSync(inAssets) && fs.statSync(inAssets).isFile()) {
     const ext = path.extname(inAssets).toLowerCase();
-    res.writeHead(200, {
-      'Content-Type': MIME_TYPES[ext] || 'application/octet-stream',
-      'Cache-Control': 'public, max-age=31536000, immutable'
-    });
-    fs.createReadStream(inAssets).pipe(res);
+    serveStaticFile(req, res, inAssets, MIME_TYPES[ext] || 'application/octet-stream', 'public, max-age=31536000, immutable');
     return;
   }
 

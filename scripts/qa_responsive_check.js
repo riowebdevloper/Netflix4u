@@ -62,14 +62,29 @@ async function main() {
     `http://localhost:${SERVER_PORT}/`
   ]);
 
-  await new Promise(r => setTimeout(r, 2000));
-
   const pages = await new Promise((resolve, reject) => {
-    http.get(`http://localhost:${CDP_PORT}/json/list`, res => {
-      let data = '';
-      res.on('data', c => data += c);
-      res.on('end', () => resolve(JSON.parse(data)));
-    }).on('error', reject);
+    let attempts = 0;
+    const interval = setInterval(() => {
+      attempts++;
+      http.get(`http://127.0.0.1:${CDP_PORT}/json/list`, res => {
+        let data = '';
+        res.on('data', c => data += c);
+        res.on('end', () => {
+          try {
+            const list = JSON.parse(data);
+            if (Array.isArray(list) && list.length > 0) {
+              clearInterval(interval);
+              resolve(list);
+            }
+          } catch(e) {}
+        });
+      }).on('error', () => {
+        if (attempts > 40) {
+          clearInterval(interval);
+          reject(new Error('Chrome CDP failed to start'));
+        }
+      });
+    }, 250);
   });
 
   const page = pages.find(p => p.type === 'page') || pages[0];

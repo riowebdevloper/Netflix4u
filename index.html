@@ -1,18 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-8SPEG4KZ28"></script>
+  <!-- Deferred Google Analytics & AdSense Loader (Zero Render-Blocking) -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+    function loadAnalyticsAndAds() {
+      if (window._thirdPartyLoaded) return;
+      window._thirdPartyLoaded = true;
+      try {
+        var g = document.createElement('script');
+        g.async = true;
+        g.src = 'https://www.googletagmanager.com/gtag/js?id=G-8SPEG4KZ28';
+        document.head.appendChild(g);
+        gtag('js', new Date());
+        gtag('config', 'G-8SPEG4KZ28');
 
-    gtag('config', 'G-8SPEG4KZ28');
+        var a = document.createElement('script');
+        a.async = true;
+        a.crossOrigin = 'anonymous';
+        a.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9082698285506451';
+        document.head.appendChild(a);
+      } catch(e) {}
+    }
+    if ('requestIdleCallback' in window) {
+      window.addEventListener('load', function() {
+        requestIdleCallback(loadAnalyticsAndAds, { timeout: 3500 });
+      });
+    } else {
+      window.addEventListener('load', function() {
+        setTimeout(loadAnalyticsAndAds, 2000);
+      });
+    }
   </script>
-
-  <!-- Google AdSense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9082698285506451" crossorigin="anonymous"></script>
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -82,7 +102,7 @@
   <link rel="preload" as="font" type="font/woff2" href="/cf-fonts/v/inter/5.2.8/latin/wght/normal.woff2" crossorigin>
 
   <!-- LCP Hero Image Preload (Immediate Discovery & High Priority Responsive Fetch) -->
-  <link rel="preload" as="image" href="https://image.tmdb.org/t/p/w1280/pF0qkRsrHkdYadPWY9AMeFZfcwk.jpg" imagesrcset="https://image.tmdb.org/t/p/w780/pF0qkRsrHkdYadPWY9AMeFZfcwk.jpg 780w, https://image.tmdb.org/t/p/w1280/pF0qkRsrHkdYadPWY9AMeFZfcwk.jpg 1280w" imagesizes="100vw" fetchpriority="high">
+  <link rel="preload" as="image" href="https://image.tmdb.org/t/p/w1280/pF0qkRsrHkdYadPWY9AMeFZfcwk.jpg" imagesrcset="https://image.tmdb.org/t/p/w500/pF0qkRsrHkdYadPWY9AMeFZfcwk.jpg 500w, https://image.tmdb.org/t/p/w780/pF0qkRsrHkdYadPWY9AMeFZfcwk.jpg 780w, https://image.tmdb.org/t/p/w1280/pF0qkRsrHkdYadPWY9AMeFZfcwk.jpg 1280w" imagesizes="100vw" fetchpriority="high">
 
   <!-- JSON-LD Structured Data (Google Branded Search & AEO Optimization) -->
   <script type="application/ld+json">
@@ -224,8 +244,8 @@
               <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path>
               </svg>
-              <input id="search-input" type="search" placeholder="Search movies, series, anime, 4K downloads…" class="w-full pl-9 pr-9 py-2 rounded-full bg-white/10 border border-white/10 placeholder:text-white/40 focus:outline-none focus:border-white/30 focus:bg-white/15 transition text-sm">
-              <button id="search-clear" type="button" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-white/40 hover:text-white text-sm w-5 h-5 rounded-full flex items-center justify-center">✕</button>
+              <input id="search-input" type="search" aria-label="Search movies, series, anime, 4K downloads" placeholder="Search movies, series, anime, 4K downloads…" class="w-full pl-9 pr-9 py-2 rounded-full bg-white/10 border border-white/10 placeholder:text-white/40 focus:outline-none focus:border-white/30 focus:bg-white/15 transition text-sm">
+              <button id="search-clear" type="button" aria-label="Clear search query" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-white/40 hover:text-white text-sm w-6 h-6 rounded-full flex items-center justify-center cursor-pointer">✕</button>
             </div>
 
             <!-- Header Quick Actions: Request & Install PWA -->
@@ -312,7 +332,7 @@
           <!-- Crossfade Backdrops: True LCP Priority Image on Slide 0, Lazy Adjacent on 1-5 -->
           <div class="hero-bg absolute inset-0 transition-opacity duration-[1200ms] overflow-hidden" style="opacity: 1; z-index: 10" data-hero-idx="0">
             <img src="https://image.tmdb.org/t/p/w1280/pF0qkRsrHkdYadPWY9AMeFZfcwk.jpg"
-                 srcset="https://image.tmdb.org/t/p/w780/pF0qkRsrHkdYadPWY9AMeFZfcwk.jpg 780w, https://image.tmdb.org/t/p/w1280/pF0qkRsrHkdYadPWY9AMeFZfcwk.jpg 1280w"
+                 srcset="https://image.tmdb.org/t/p/w500/pF0qkRsrHkdYadPWY9AMeFZfcwk.jpg 500w, https://image.tmdb.org/t/p/w780/pF0qkRsrHkdYadPWY9AMeFZfcwk.jpg 780w, https://image.tmdb.org/t/p/w1280/pF0qkRsrHkdYadPWY9AMeFZfcwk.jpg 1280w"
                  sizes="100vw"
                  alt="Reacher Featured Backdrop"
                  width="1280" height="720"
@@ -652,7 +672,7 @@
 
         <!-- External Player Toggle (VLC / MX Player) -->
         <div class="relative hidden sm:block" id="watch-ext-player-wrap">
-          <button id="watch-ext-toggle" type="button" aria-expanded="false" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 active:scale-90 text-white flex items-center justify-center transition cursor-pointer shrink-0" title="Open in External App (VLC / MX Player)">
+          <button id="watch-ext-toggle" type="button" aria-expanded="false" aria-label="Open in External Player" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 active:scale-90 text-white flex items-center justify-center transition cursor-pointer shrink-0" title="Open in External App (VLC / MX Player)">
             <svg class="w-3.5 h-3.5 text-amber-400" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L1 21h22L12 2zm0 3.8L20.2 19H3.8L12 5.8z"/></svg>
           </button>
           <div id="watch-ext-menu" class="hidden absolute right-0 mt-2 w-52 rounded-xl bg-[#14141c]/98 border border-white/15 backdrop-blur-xl shadow-2xl p-1.5 z-[80] space-y-1 text-left">
@@ -682,7 +702,7 @@
         <span class="text-base animate-pulse">📱</span>
         <span>Rotate to <strong>Landscape</strong> for cinema full-screen!</span>
       </div>
-      <button id="watch-portrait-hint-dismiss" type="button" class="w-6 h-6 rounded-full bg-white/10 hover:bg-white/20 text-white/70 hover:text-white flex items-center justify-center text-xs shrink-0 cursor-pointer">✕</button>
+      <button id="watch-portrait-hint-dismiss" type="button" aria-label="Dismiss portrait orientation hint" class="w-6 h-6 rounded-full bg-white/10 hover:bg-white/20 text-white/70 hover:text-white flex items-center justify-center text-xs shrink-0 cursor-pointer">✕</button>
     </div>
 
     <!-- Mobile Floating TV Episode Navigation (Visible on mobile screens for TV series) -->
@@ -735,7 +755,7 @@
             <p id="picker-modal-title" class="text-xs text-white/50 truncate max-w-[220px] xs:max-w-[280px]">Select preferred server</p>
           </div>
         </div>
-        <button id="watch-server-picker-close" type="button" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center text-sm transition cursor-pointer">✕</button>
+        <button id="watch-server-picker-close" type="button" aria-label="Close streaming server picker" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center text-sm transition cursor-pointer">✕</button>
       </div>
 
       <!-- Quick Category Filter Tabs -->
@@ -754,7 +774,7 @@
 
   <!-- ─── TRAILER MODAL ─── -->
   <div id="trailer-modal" class="fixed inset-0 z-[55] hidden items-center justify-center bg-black/95 p-4">
-    <button id="trailer-modal-close" type="button" class="absolute z-10 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white text-xl cursor-pointer" style="top: 24px; right: 24px;">✕</button>
+    <button id="trailer-modal-close" type="button" aria-label="Close trailer video" class="absolute z-10 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white text-xl cursor-pointer" style="top: 24px; right: 24px;">✕</button>
     <div class="w-full max-w-5xl aspect-video">
       <iframe id="trailer-modal-iframe" title="Movie Trailer Preview" class="w-full h-full rounded-lg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
     </div>
@@ -790,7 +810,7 @@
           <span class="w-2 h-5 rounded-full bg-amber-500"></span>
           <h3 class="text-lg font-bold text-white">Request a Movie / Series</h3>
         </div>
-        <button id="request-modal-close" type="button" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center text-sm transition cursor-pointer">✕</button>
+        <button id="request-modal-close" type="button" aria-label="Close movie request modal" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center text-sm transition cursor-pointer">✕</button>
       </div>
       <p class="text-xs text-white/60">Can't find what you're looking for? Enter the title below and our team will add it within 24 hours.</p>
       <form id="request-form" class="space-y-3.5">
@@ -838,7 +858,7 @@
           <svg class="w-4 h-4 text-red-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
           Share Movie / Series
         </h3>
-        <button id="share-modal-close" type="button" class="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center text-xs transition cursor-pointer">✕</button>
+        <button id="share-modal-close" type="button" aria-label="Close share modal" class="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center text-xs transition cursor-pointer">✕</button>
       </div>
       <div id="share-preview-title" class="text-sm font-semibold text-white/90 truncate"></div>
       <div class="grid grid-cols-2 gap-2.5">
@@ -954,13 +974,49 @@
   </div>
   <!-- ─── END AADS AD UNIT 2455136 ─── -->
 
-  <!-- Client Application Scripts (Deferred for Zero Render-Blocking) -->
+  <!-- Client Application Core Scripts (Deferred for Zero Render-Blocking) -->
   <script defer src="/js/version-checker.js?v=3.5.0"></script>
-  <script defer src="/js/player-resolver.js?v=3.5.0"></script>
   <script defer src="/js/ads-manager.js?v=3.5.0"></script>
   <script defer src="/js/net27-core.js?v=3.5.0"></script>
-  <script defer src="/js/download-resolver.js?v=3.5.0"></script>
-  <script defer src="/js/net27-modal.js?v=3.5.0"></script>
+
+  <!-- Modal, Player & Download Feature Modules (Loaded on Idle / User Demand) -->
+  <script>
+    (function() {
+      var loaded = false;
+      function loadFeatureModules() {
+        if (loaded) return;
+        loaded = true;
+        var modules = [
+          '/js/player-resolver.js?v=3.5.0',
+          '/js/download-resolver.js?v=3.5.0',
+          '/js/net27-modal.js?v=3.5.0'
+        ];
+        modules.forEach(function(src) {
+          var s = document.createElement('script');
+          s.src = src;
+          s.async = true;
+          document.body.appendChild(s);
+        });
+      }
+      window.loadNetflix4uModals = loadFeatureModules;
+
+      // Prefetch on idle after load
+      if ('requestIdleCallback' in window) {
+        window.addEventListener('load', function() {
+          requestIdleCallback(loadFeatureModules, { timeout: 2500 });
+        });
+      } else {
+        window.addEventListener('load', function() {
+          setTimeout(loadFeatureModules, 1500);
+        });
+      }
+
+      // Pre-emptively load on first interaction so clicks are instantaneous
+      ['touchstart', 'mouseover', 'focusin', 'click'].forEach(function(evt) {
+        document.addEventListener(evt, loadFeatureModules, { once: true, passive: true });
+      });
+    })();
+  </script>
 
   <!-- ─── SPONSOR & AD MANAGEMENT ─── -->
   <script>
