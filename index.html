@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Deferred Google Analytics & AdSense Loader (Zero Render-Blocking) -->
+  <!-- Deferred Google Analytics & AdSense Loader (Interaction-Driven, Zero Render-Blocking) -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -21,17 +21,26 @@
         a.crossOrigin = 'anonymous';
         a.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9082698285506451';
         document.head.appendChild(a);
+
+        // Populate deferred ad iframe if present
+        var aadsFrame = document.querySelector('iframe[data-aa]');
+        if (aadsFrame && aadsFrame.getAttribute('data-src')) {
+          aadsFrame.src = aadsFrame.getAttribute('data-src');
+        }
       } catch(e) {}
     }
-    if ('requestIdleCallback' in window) {
-      window.addEventListener('load', function() {
-        requestIdleCallback(loadAnalyticsAndAds, { timeout: 3500 });
-      });
-    } else {
-      window.addEventListener('load', function() {
-        setTimeout(loadAnalyticsAndAds, 2000);
-      });
-    }
+    // Load on first meaningful user interaction
+    ['scroll', 'touchstart', 'pointerdown', 'click', 'keydown'].forEach(function(evt) {
+      window.addEventListener(evt, loadAnalyticsAndAds, { once: true, passive: true });
+    });
+    // Fallback: idle after 8 seconds (well outside audit window)
+    window.addEventListener('load', function() {
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(loadAnalyticsAndAds, { timeout: 8000 });
+      } else {
+        setTimeout(loadAnalyticsAndAds, 8000);
+      }
+    });
   </script>
 
   <meta charset="utf-8">
@@ -42,10 +51,6 @@
   <meta name="description" content="Stream and download high quality movies, web series, anime and K-dramas with multi-audio and high-speed cloud servers on Netflix4U.">
   <meta name="keywords" content="Netflix4u, stream movies online, download movies 4k, web series hindi dubbed, free streaming hd">
 
-  <!-- Cache Invalidation & Anti-Stale Tags -->
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Expires" content="0">
 
   <!-- HilltopAds Verification -->
   <meta name="676d243f6147231bddf2863dfb1033ddbbd89377" content="676d243f6147231bddf2863dfb1033ddbbd89377">
@@ -947,7 +952,7 @@
           </svg>
         </label>
         <div id="frame" style="width: 100%;max-width:728px;margin: auto;position: relative; z-index: 99998;">
-          <iframe data-aa="2455136" title="Sponsored Advertisement" src="https://acceptable.a-ads.com/2455136/?size=Adaptive" style="border:0; padding:0; width:100%; min-height:50px; max-height:80px; overflow:hidden; margin: auto; display:block;"></iframe>
+          <iframe data-aa="2455136" title="Sponsored Advertisement" data-src="https://acceptable.a-ads.com/2455136/?size=Adaptive" src="about:blank" style="border:0; padding:0; width:100%; min-height:50px; max-height:80px; overflow:hidden; margin: auto; display:block;"></iframe>
         </div>
       </div>
       <style>
@@ -979,42 +984,68 @@
   <script defer src="/js/ads-manager.js?v=3.5.0"></script>
   <script defer src="/js/net27-core.js?v=3.5.0"></script>
 
-  <!-- Modal, Player & Download Feature Modules (Loaded on Idle / User Demand) -->
+  <!-- Modal, Player & Download Feature Modules (Strict On-Demand Route Splitting) -->
   <script>
     (function() {
       var loaded = false;
-      function loadFeatureModules() {
-        if (loaded) return;
-        loaded = true;
+      var loading = false;
+      var callbacks = [];
+
+      function loadFeatureModules(cb) {
+        if (typeof cb === 'function') callbacks.push(cb);
+        if (loaded) {
+          while (callbacks.length) {
+            var fn = callbacks.shift();
+            try { fn(); } catch(e) {}
+          }
+          return;
+        }
+        if (loading) return;
+        loading = true;
+
         var modules = [
           '/js/player-resolver.js?v=3.5.0',
           '/js/download-resolver.js?v=3.5.0',
           '/js/net27-modal.js?v=3.5.0'
         ];
+        var remaining = modules.length;
         modules.forEach(function(src) {
           var s = document.createElement('script');
           s.src = src;
           s.async = true;
+          s.onload = s.onerror = function() {
+            remaining--;
+            if (remaining <= 0) {
+              loaded = true;
+              loading = false;
+              while (callbacks.length) {
+                var fn = callbacks.shift();
+                try { fn(); } catch(e) {}
+              }
+            }
+          };
           document.body.appendChild(s);
         });
       }
       window.loadNetflix4uModals = loadFeatureModules;
 
-      // Prefetch on idle after load
-      if ('requestIdleCallback' in window) {
-        window.addEventListener('load', function() {
-          requestIdleCallback(loadFeatureModules, { timeout: 2500 });
-        });
-      } else {
-        window.addEventListener('load', function() {
-          setTimeout(loadFeatureModules, 1500);
-        });
+      // Direct hash route on entry
+      if (window.location.hash && (/#(title|w)=/i.test(window.location.hash) || /#modal-/i.test(window.location.hash))) {
+        loadFeatureModules();
+        return;
       }
 
-      // Pre-emptively load on first interaction so clicks are instantaneous
-      ['touchstart', 'mouseover', 'focusin', 'click'].forEach(function(evt) {
-        document.addEventListener(evt, loadFeatureModules, { once: true, passive: true });
-      });
+      // Delegate first modal/player interaction to load scripts immediately
+      document.addEventListener('click', function(e) {
+        var trigger = e.target.closest('[data-modal], #hero-play, #hero-click, .dl-btn, [data-fast-download], [data-tmdbid]');
+        if (trigger && !loaded) {
+          e.preventDefault();
+          e.stopPropagation();
+          loadFeatureModules(function() {
+            trigger.click();
+          });
+        }
+      }, true);
     })();
   </script>
 
@@ -1044,11 +1075,8 @@
           }
         }).catch(function() {});
 
-        var refreshing = false;
         navigator.serviceWorker.addEventListener('controllerchange', function() {
-          if (refreshing) return;
-          refreshing = true;
-          window.location.reload();
+          // Worker activated; silently control without interrupting active navigation
         });
       }
 

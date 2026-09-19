@@ -1,12 +1,3 @@
-// Monetag / PropellerAds Web Push Integration
-self.options = {
-    "domain": "3nbf4.com",
-    "zoneId": 11787564
-};
-self.lary = "";
-try {
-  importScripts('https://3nbf4.com/act/files/service-worker.min.js?r=sw');
-} catch (e) {}
 
 // PWA Shell & Offline Support (Network-First for HTML to guarantee fresh updates)
 var CACHE_NAME = 'n4u-pwa-v8';
