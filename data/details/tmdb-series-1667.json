@@ -1,0 +1,118 @@
+{
+  "id": "tmdb-series-1667",
+  "canonicalId": "tmdb-series-1667",
+  "externalProvider": "tmdb",
+  "externalId": "1667",
+  "tmdbId": "1667",
+  "imdbId": "tt0072562",
+  "type": "series",
+  "contentType": "series",
+  "title": "Saturday Night Live",
+  "canonicalTitle": "Saturday Night Live",
+  "originalTitle": "Saturday Night Live",
+  "overview": "A late-night live television sketch comedy and variety show created by Lorne Michaels. The show's comedy sketches, which parody contemporary culture and politics, are performed by a large and varying cast of repertory and newer cast members. Each episode is hosted by a celebrity guest, who usually delivers an opening monologue and performs in sketches with the cast, and features performances by a musical guest.",
+  "description": "A late-night live television sketch comedy and variety show created by Lorne Michaels. The show's comedy sketches, which parody contemporary culture and politics, are performed by a large and varying cast of repertory and newer cast members. Each episode is hosted by a celebrity guest, who usually delivers an opening monologue and performs in sketches with the cast, and features performances by a musical guest.",
+  "shortDescription": "A late-night live television sketch comedy and variety show created by Lorne Michaels. The show's comedy sketches, which",
+  "year": 1975,
+  "releaseDate": "1975-10-11",
+  "rating": 6.9,
+  "votes": "0.5K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Comedy",
+    "News"
+  ],
+  "categories": [
+    "Comedy",
+    "News"
+  ],
+  "language": "English",
+  "country": "US",
+  "director": "Director",
+  "poster": "https://image.tmdb.org/t/p/w500/s1cZBqbMwAF3w8S3Yo0j5nr2Yuo.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/sSAX59Kf01lBRkBW4UcIL4kIoIm.jpg",
+  "trailerUrl": null,
+  "trailer": null,
+  "cast": [
+    {
+      "id": "1395347",
+      "name": "Michael Che",
+      "character": "Self - Various Characters",
+      "photo": "https://image.tmdb.org/t/p/w185/ruuCNIw6b9aWeZygEg4ZuoXMCFh.jpg"
+    },
+    {
+      "id": "1227482",
+      "name": "Mikey Day",
+      "character": "Self - Various Characters",
+      "photo": "https://image.tmdb.org/t/p/w185/lIievLMSKtlvclOgDIOCf7ynz2e.jpg"
+    },
+    {
+      "id": "2218430",
+      "name": "Andrew Dismukes",
+      "character": "Self - Various Characters",
+      "photo": "https://image.tmdb.org/t/p/w185/9zvaGUyvsqTSov9fkfBYmfoJ57p.jpg"
+    },
+    {
+      "id": "3725495",
+      "name": "Marcello Hernández",
+      "character": "Self - Various Characters",
+      "photo": "https://image.tmdb.org/t/p/w185/1HwInMPGpJ9Ne2eHe1Zirk6IDSN.jpg"
+    },
+    {
+      "id": "1756597",
+      "name": "James Austin Johnson",
+      "character": "Self - Various Characters",
+      "photo": "https://image.tmdb.org/t/p/w185/g9y0aABiKtB1FOIKmklDlgRpDof.jpg"
+    },
+    {
+      "id": "1226277",
+      "name": "Colin Jost",
+      "character": "Self - Various Characters",
+      "photo": "https://image.tmdb.org/t/p/w185/cuNRnDX02digyoqYVyFGkwd78fn.jpg"
+    },
+    {
+      "id": "2426004",
+      "name": "Ashley Padilla",
+      "character": "Self - Various Characters",
+      "photo": "https://image.tmdb.org/t/p/w185/hUCYdfb7Z8s3OBvGfNAXB9z4VK.jpg"
+    },
+    {
+      "id": "2198504",
+      "name": "Sarah Sherman",
+      "character": "Self - Various Characters",
+      "photo": "https://image.tmdb.org/t/p/w185/sPLNz5GGee26tZDFv4eZeyVng6d.jpg"
+    },
+    {
+      "id": "77330",
+      "name": "Kenan Thompson",
+      "character": "Self - Various Characters",
+      "photo": "https://image.tmdb.org/t/p/w185/vHPhDGc1om91TzoIQ4zMscpNmxF.jpg"
+    },
+    {
+      "id": "3797398",
+      "name": "Jane Wickline",
+      "character": "Self - Various Characters",
+      "photo": "https://image.tmdb.org/t/p/w185/jqJCMRHgKbffDQvbf7uPUG3P2uL.jpg"
+    },
+    {
+      "id": "2818310",
+      "name": "Saidah Belo-Osagie",
+      "character": "Self - Various Characters",
+      "photo": "https://image.tmdb.org/t/p/w185/c3Zxb1Nyc5i50E2uCjjmmG63u6Q.jpg"
+    },
+    {
+      "id": "5666865",
+      "name": "Tommy Brennan",
+      "character": "Self - Various Characters",
+      "photo": "https://image.tmdb.org/t/p/w185/AqfazwNamZj7GdPWwLROIUTuMJ5.jpg"
+    }
+  ],
+  "seasons": 52,
+  "episodes": 1018,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-20T03:25:14.273Z",
+  "createdAt": "2026-09-20T03:25:14.273Z",
+  "updatedAt": "2026-09-20T03:25:14.273Z",
+  "links": []
+}

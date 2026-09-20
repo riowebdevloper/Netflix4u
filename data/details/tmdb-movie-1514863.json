@@ -1,0 +1,116 @@
+{
+  "id": "tmdb-movie-1514863",
+  "canonicalId": "tmdb-movie-1514863",
+  "externalProvider": "tmdb",
+  "externalId": "1514863",
+  "tmdbId": "1514863",
+  "imdbId": "tt16478058",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "Best of the Best",
+  "canonicalTitle": "Best of the Best",
+  "originalTitle": "Best of the Best",
+  "overview": "Two best friends at UCLA leap into the competitive and cutthroat world of collegiate Bollywood-fusion dance.",
+  "description": "Two best friends at UCLA leap into the competitive and cutthroat world of collegiate Bollywood-fusion dance.",
+  "shortDescription": "Two best friends at UCLA leap into the competitive and cutthroat world of collegiate Bollywood-fusion dance.",
+  "year": 2026,
+  "releaseDate": "2026-09-18",
+  "rating": 8.7,
+  "votes": "0.0K",
+  "quality": "FHD",
+  "duration": "1h 56m",
+  "genres": [
+    "Comedy"
+  ],
+  "categories": [
+    "Comedy"
+  ],
+  "language": "English",
+  "country": "US",
+  "director": "Lena Khan",
+  "poster": "https://image.tmdb.org/t/p/w500/9soOjsZ91vtMzypK2F3MC378JI5.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/5m1j7Wibh3HnZq5QHm97v8dI3GH.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/PuNATO-6a9U?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/PuNATO-6a9U?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "2602879",
+      "name": "Maitreyi Ramakrishnan",
+      "character": "Maya",
+      "photo": "https://image.tmdb.org/t/p/w185/dkhYjeCU5ByYKxAr2wtXz20vb60.jpg"
+    },
+    {
+      "id": "5065456",
+      "name": "Priyanka Kedia",
+      "character": "Anjali",
+      "photo": "https://image.tmdb.org/t/p/w185/trd4RCbywJ76wW5RoZbhKkt3kiP.jpg"
+    },
+    {
+      "id": "552252",
+      "name": "Hasan Minhaj",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/6vHHhLnbKBCPmYc90qAV2Cde95F.jpg"
+    },
+    {
+      "id": "2223751",
+      "name": "Chaneil Kular",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/b6TmM2wcVntDMJGZWQM3ftshhIi.jpg"
+    },
+    {
+      "id": "2707475",
+      "name": "Ankur Rathee",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/5ZR7jiE4cGhaM6ZqBS6R7N7h5Q7.jpg"
+    },
+    {
+      "id": "3221816",
+      "name": "Shreya Navile",
+      "character": "",
+      "photo": null
+    },
+    {
+      "id": "5650364",
+      "name": "Becky Alex",
+      "character": "",
+      "photo": null
+    },
+    {
+      "id": "4224830",
+      "name": "Nihar Duvvuri",
+      "character": "",
+      "photo": null
+    },
+    {
+      "id": "1720948",
+      "name": "Nico Greetham",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/xiF00qwPVP7FaKWZOAKckQbuSwx.jpg"
+    },
+    {
+      "id": "5391942",
+      "name": "Amryn Khurana",
+      "character": "",
+      "photo": null
+    },
+    {
+      "id": "4533848",
+      "name": "Tanishq Joshi",
+      "character": "",
+      "photo": null
+    },
+    {
+      "id": "1576058",
+      "name": "Lilly Singh",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/5dBOPUqrYIZuKRqpKRsHBdERclp.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 1,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-20T03:25:14.214Z",
+  "createdAt": "2026-09-20T03:25:14.214Z",
+  "updatedAt": "2026-09-20T03:25:14.214Z",
+  "links": []
+}

@@ -1,0 +1,74 @@
+{
+  "id": "tmdb-series-154770",
+  "canonicalId": "tmdb-series-154770",
+  "externalProvider": "tmdb",
+  "externalId": "154770",
+  "tmdbId": "154770",
+  "imdbId": "tt30985733",
+  "type": "series",
+  "contentType": "series",
+  "title": "Hello Saturday",
+  "canonicalTitle": "Hello Saturday",
+  "originalTitle": "你好，星期六",
+  "overview": "\"Hello, Saturday\" is the rebranding of the popular Chinese show \"Happy Camp\", hosted by He Jiong and with a fixed group of regular celebrity members.\n\nThe program showcases the talent of various stars as well as social topics through creative and diverse content and games. It aims to spread positive energy while keeping up with the current trends and leading youth culture.",
+  "description": "\"Hello, Saturday\" is the rebranding of the popular Chinese show \"Happy Camp\", hosted by He Jiong and with a fixed group of regular celebrity members.\n\nThe program showcases the talent of various stars as well as social topics through creative and diverse content and games. It aims to spread positive energy while keeping up with the current trends and leading youth culture.",
+  "shortDescription": "\"Hello, Saturday\" is the rebranding of the popular Chinese show \"Happy Camp\", hosted by He Jiong and with a fixed group ",
+  "year": 2022,
+  "releaseDate": "2022-01-01",
+  "rating": 6.5,
+  "votes": "0.0K",
+  "quality": "FHD",
+  "duration": "90m/ep",
+  "genres": [
+    "Reality"
+  ],
+  "categories": [
+    "Reality"
+  ],
+  "language": "Mandarin",
+  "country": "CN",
+  "director": "付家鹏",
+  "poster": "https://image.tmdb.org/t/p/w500/wsTjWy6NE2s3h0neChr0D92ddwI.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/pvOI0jUuBVigqNTXClGGhIK2dSk.jpg",
+  "trailerUrl": null,
+  "trailer": null,
+  "cast": [
+    {
+      "id": "1031032",
+      "name": "He Jiong",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/3YGNG0neCiXfptovRwuOHktS65f.jpg"
+    },
+    {
+      "id": "2916765",
+      "name": "Li Xueqin",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/7MLQGh5zryfM6CYOSIg2q5Dh5FD.jpg"
+    },
+    {
+      "id": "1427526",
+      "name": "Yang Di",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/t6egz5PUk6xzLuf4J2U2YQBGOmL.jpg"
+    },
+    {
+      "id": "2119283",
+      "name": "Ding Chengxin",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/yy2cNIoThptd3isYditkI7Iie4I.jpg"
+    },
+    {
+      "id": "3943986",
+      "name": "Wu Ze Lin",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/v9wriaP3eFOzmsEvFm5kWQpxKc0.jpg"
+    }
+  ],
+  "seasons": 5,
+  "episodes": 223,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-20T03:25:14.319Z",
+  "createdAt": "2026-09-20T03:25:14.319Z",
+  "updatedAt": "2026-09-20T03:25:14.319Z",
+  "links": []
+}
