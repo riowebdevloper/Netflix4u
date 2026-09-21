@@ -1,0 +1,71 @@
+{
+  "id": "tmdb-series-75780",
+  "canonicalId": "tmdb-series-75780",
+  "externalProvider": "tmdb",
+  "externalId": "75780",
+  "tmdbId": "75780",
+  "imdbId": "",
+  "type": "series",
+  "contentType": "series",
+  "title": "In Sanity, Florida",
+  "canonicalTitle": "In Sanity, Florida",
+  "originalTitle": "In Sanity, Florida",
+  "overview": "The crazy antics of a small coastal village that banned music ninety-two years ago, and its quirky residents are told through the eyes of a young women whose love for her town and caring for her hypochondriac grandmother prevents her from becoming the singer she longs to be.",
+  "description": "The crazy antics of a small coastal village that banned music ninety-two years ago, and its quirky residents are told through the eyes of a young women whose love for her town and caring for her hypochondriac grandmother prevents her from becoming the singer she longs to be.",
+  "shortDescription": "The crazy antics of a small coastal village that banned music ninety-two years ago, and its quirky residents are told th",
+  "year": 2017,
+  "rating": 8,
+  "votes": "1.2K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [],
+  "categories": [],
+  "language": "English",
+  "country": "Global",
+  "poster": "https://image.tmdb.org/t/p/w500/hHrLHOJh52QhKugli02DApKS6XS.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/hHrLHOJh52QhKugli02DApKS6XS.jpg",
+  "trailerUrl": null,
+  "trailer": null,
+  "cast": [
+    {
+      "id": "1979741",
+      "name": "Tommi Rose",
+      "character": "Emma Scott Fitzgerald",
+      "photo": "https://image.tmdb.org/t/p/w185/ffwnOrSD0D35pRaYjpwsAZB2deQ.jpg"
+    },
+    {
+      "id": "1979742",
+      "name": "Noah Schnacky",
+      "character": "Lake McKnight",
+      "photo": "https://image.tmdb.org/t/p/w185/1mHRlfVyoiJVTsn98Rqy87N8DbC.jpg"
+    },
+    {
+      "id": "2457105",
+      "name": "Todd Vittum",
+      "character": "Mayor Angus Fink",
+      "photo": null
+    },
+    {
+      "id": "1199466",
+      "name": "Jessica K. Peterson",
+      "character": "Glenda Keye Fitzgerald (Grandmum)",
+      "photo": null
+    },
+    {
+      "id": "114610",
+      "name": "Avery Sommers",
+      "character": "Rev. Ruby Parks",
+      "photo": "https://image.tmdb.org/t/p/w185/jh1v8tVLWx37qo5Jz4n7ilxqMC.jpg"
+    },
+    {
+      "id": "587087",
+      "name": "Mario Xavier",
+      "character": "Grady Cropper",
+      "photo": null
+    }
+  ],
+  "seasons": 1,
+  "episodes": 9,
+  "status": "PUBLISHED",
+  "links": []
+}

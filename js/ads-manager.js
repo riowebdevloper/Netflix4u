@@ -65,8 +65,17 @@
    * Verified Sponsor Banner Loader (Zero failing external requests, Zero CLS)
    */
   function loadAdsterraScript() {
-    // Dormant third-party network disabled to prevent 403/500 console errors & main thread contention
-    return;
+    var container = document.getElementById(ADSTERRA_CONTAINER_ID);
+    if (!container) return;
+    if (document.querySelector('script[src*="profitableratecpmnetwork.com"]')) return;
+    try {
+      var s = document.createElement('script');
+      s.async = true;
+      s.setAttribute('data-cfasync', 'false');
+      s.src = ADSTERRA_NATIVE_SRC;
+      container.parentNode.insertBefore(s, container);
+      setupAdsterraFallbackMonitor();
+    } catch(e) {}
   }
 
   /**
@@ -220,13 +229,15 @@
 
       // ─── HOMEPAGE AD PLACEMENTS ───
 
-      // 1. Under Hero Carousel (#ad-slot-home-top) -> Verified Sponsor Banner
+      // 1. Under Hero Carousel (#ad-slot-home-top) -> Adsterra Native Banner
       if (slotId === 'ad-slot-home-top') {
-        if (!el.querySelector('#' + ADSTERRA_CONTAINER_ID)) {
+        var container = el.querySelector('#' + ADSTERRA_CONTAINER_ID);
+        if (!container) {
           el.innerHTML = '<div id="' + ADSTERRA_CONTAINER_ID + '">' +
             DEFAULT_SPONSOR_HTML('Featured Streaming Sponsor', 'Direct 4K Servers & Fast Downloads', 'Join') +
           '</div>';
         }
+        loadAdsterraScript();
         return;
       }
 
@@ -311,34 +322,58 @@
       slots.forEach(function(slot) {
         AdsManager.renderSlot(slot);
       });
+      try {
+        var deferredFrames = root.querySelectorAll('iframe[data-aa], iframe[data-src]');
+        deferredFrames.forEach(function(f) {
+          if (f.getAttribute('data-src') && (!f.src || f.src === 'about:blank')) {
+            f.src = f.getAttribute('data-src');
+          }
+        });
+      } catch(e) {}
     },
 
     /**
      * Initialize the dismissible bottom sticky ad banner
      */
     initStickyBanner: function() {
-      var bar = document.getElementById('nm-sticky-ad-bar');
-      var closeBtn = document.getElementById('nm-sticky-ad-close');
-      if (!bar) return;
-
-      try {
-        if (sessionStorage.getItem(STICKY_DISMISSED_KEY) === '1') {
-          bar.classList.add('nm-sticky-hidden');
-          return;
-        }
-      } catch(e) {}
-
-      if (closeBtn) {
-        closeBtn.addEventListener('click', function(e) {
-          e.stopPropagation();
-          bar.classList.add('nm-sticky-hidden');
-          try {
-            sessionStorage.setItem(STICKY_DISMISSED_KEY, '1');
-          } catch(err) {}
-        });
+      // 1. Support #aads-sticky-wrap (index.html)
+      var stickyWrap = document.getElementById('aads-sticky-wrap');
+      if (stickyWrap) {
+        try {
+          if (sessionStorage.getItem('n4u_aads_closed') === '1' || sessionStorage.getItem(STICKY_DISMISSED_KEY) === '1') {
+            stickyWrap.style.display = 'none';
+          } else {
+            var aadsFrame = stickyWrap.querySelector('iframe[data-aa], iframe[data-src]');
+            if (aadsFrame && aadsFrame.getAttribute('data-src') && (!aadsFrame.src || aadsFrame.src === 'about:blank')) {
+              aadsFrame.src = aadsFrame.getAttribute('data-src');
+            }
+          }
+        } catch(e) {}
       }
 
-      AdsManager.renderSlot('ad-slot-sticky-bottom');
+      // 2. Support #nm-sticky-ad-bar
+      var bar = document.getElementById('nm-sticky-ad-bar');
+      var closeBtn = document.getElementById('nm-sticky-ad-close');
+      if (bar) {
+        try {
+          if (sessionStorage.getItem(STICKY_DISMISSED_KEY) === '1') {
+            bar.classList.add('nm-sticky-hidden');
+            return;
+          }
+        } catch(e) {}
+
+        if (closeBtn) {
+          closeBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            bar.classList.add('nm-sticky-hidden');
+            try {
+              sessionStorage.setItem(STICKY_DISMISSED_KEY, '1');
+            } catch(err) {}
+          });
+        }
+
+        AdsManager.renderSlot('ad-slot-sticky-bottom');
+      }
     },
 
     /**
@@ -390,9 +425,9 @@
     if ('requestIdleCallback' in window) {
       requestIdleCallback(function() {
         AdsManager.init();
-      }, { timeout: 2500 });
+      }, { timeout: 2000 });
     } else {
-      setTimeout(AdsManager.init, 1200);
+      setTimeout(AdsManager.init, 800);
     }
   };
 
@@ -400,6 +435,9 @@
     initAdsSafely();
   } else {
     window.addEventListener('load', initAdsSafely, { once: true });
+    ['scroll', 'touchstart', 'click'].forEach(function(evt) {
+      window.addEventListener(evt, initAdsSafely, { once: true, passive: true });
+    });
   }
 
   window.Netflix4uAds = AdsManager;

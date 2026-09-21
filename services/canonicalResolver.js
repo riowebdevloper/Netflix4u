@@ -121,6 +121,21 @@ function getDetailsMap() {
               detailsMapCache.set(clean + v.year, v);
             }
           }
+          // Also index with year in parentheses stripped (e.g. "Toxic (2026)" -> "toxic")
+          const cleanNoYear = v.title.replace(/\(\d{4}\)/g, '').toLowerCase().replace(/[^a-z0-9]/g, '');
+          if (cleanNoYear.length >= 3) {
+            if (!detailsMapCache.has(cleanNoYear)) {
+              detailsMapCache.set(cleanNoYear, v);
+            }
+            if (v.year) {
+              detailsMapCache.set(cleanNoYear + v.year, v);
+            }
+          }
+          // Also index hyphenated slug if not present
+          const titleSlug = v.title.replace(/\(\d{4}\)/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+          if (titleSlug && !detailsMapCache.has(titleSlug)) {
+            detailsMapCache.set(titleSlug, v);
+          }
         }
       }
     } catch(e) {
@@ -131,6 +146,36 @@ function getDetailsMap() {
 }
 
 let detailsDirIndex = null;
+function getDetailsDirIndex() {
+  if (detailsDirIndex) return detailsDirIndex;
+  detailsDirIndex = new Map();
+  if (fs.existsSync(DETAILS_DIR)) {
+    try {
+      const files = fs.readdirSync(DETAILS_DIR);
+      for (const file of files) {
+        if (!file.endsWith('.json')) continue;
+        const base = file.slice(0, -5).toLowerCase();
+        detailsDirIndex.set(base, file);
+        const withoutYear = base.replace(/-\b(19\d{2}|20\d{2})\b$/, '');
+        if (withoutYear && withoutYear !== base && !detailsDirIndex.has(withoutYear)) {
+          detailsDirIndex.set(withoutYear, file);
+        }
+        const noHyphens = base.replace(/[^a-z0-9]/g, '');
+        if (noHyphens && !detailsDirIndex.has(noHyphens)) {
+          detailsDirIndex.set(noHyphens, file);
+        }
+        const noHyphensNoYear = withoutYear.replace(/[^a-z0-9]/g, '');
+        if (noHyphensNoYear && !detailsDirIndex.has(noHyphensNoYear)) {
+          detailsDirIndex.set(noHyphensNoYear, file);
+        }
+      }
+    } catch(e) {
+      console.error('Failed to index DETAILS_DIR:', e.message);
+    }
+  }
+  return detailsDirIndex;
+}
+
 const detailFileCache = new Map();
 
 function normalizeDetailLinks(links, title) {
@@ -148,6 +193,20 @@ function normalizeDetailLinks(links, title) {
     const size = l.size || (rawQual.includes('4K') || rawQual.includes('2160') ? '4.8 GB' : rawQual.includes('1080') ? '2.4 GB' : rawQual.includes('720') ? '1.1 GB' : '550 MB');
     const label = l.label || `${title || 'Stream'} [${rawQual}]`;
 
+    let season = l.season !== undefined && l.season !== null ? Number(l.season) : null;
+    let episode = l.episode !== undefined && l.episode !== null ? Number(l.episode) : null;
+    let isBatch = Boolean(l.isBatch || l.isPack);
+
+    if (season === null) {
+      const sMatch = label.match(/(?:season|s)\s*(\d+)/i);
+      if (sMatch) season = parseInt(sMatch[1], 10);
+    }
+    if (episode === null) {
+      const epMatch = label.match(/(?:episode|ep|e)\s*(\d+)/i);
+      if (epMatch) episode = parseInt(epMatch[1], 10);
+      else if (/complete|pack|zip|batch|full\s*season/i.test(label)) isBatch = true;
+    }
+
     return {
       url,
       quality: rawQual,
@@ -155,7 +214,10 @@ function normalizeDetailLinks(links, title) {
       label,
       source,
       isCloud,
-      isDotmovies
+      isDotmovies,
+      season,
+      episode,
+      isBatch
     };
   }).filter(Boolean);
 }
@@ -194,8 +256,12 @@ function extractLinksFromDetail(detail, title) {
 
 function loadDetailFileByFilename(filename, title) {
   if (!filename) return null;
-  const name = String(filename).trim();
-  const candidate = name.endsWith('.json') ? name : `${name}.json`;
+  const name = String(filename).trim().toLowerCase();
+  const dirIndex = getDetailsDirIndex();
+  let candidate = dirIndex.get(name) || dirIndex.get(name.replace(/\.json$/, '')) || dirIndex.get(name.replace(/[^a-z0-9]/g, ''));
+  if (!candidate) {
+    candidate = name.endsWith('.json') ? name : `${name}.json`;
+  }
   if (detailFileCache.has(candidate)) {
     return detailFileCache.get(candidate);
   }
@@ -253,21 +319,24 @@ function findMatchingCatalogLinks(title, year, imdbId, slug) {
     }
   }
 
-  // 3. Check by normalized alphanumeric title
+  // 3. Check by normalized alphanumeric title and hyphenated slugs
   const clean = String(title || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+  const titleSlug = String(title || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
   const strippedTitle = String(title || '')
     .replace(/\b(?:s\d{1,2}\s*e\d{1,2}|season\s*\d{1,2}|episode\s*\d{1,2}|ep\s*\d{1,2})\b.*/i, '')
     .trim();
   const strippedClean = strippedTitle.toLowerCase().replace(/[^a-z0-9]/g, '');
+  const strippedSlug = strippedTitle.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
   const primaryTitle = String(title || '').split(/[:\-–—]/)[0].trim().toLowerCase().replace(/[^a-z0-9]/g, '');
+  const primarySlug = String(title || '').split(/[:\-–—]/)[0].trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
-  const candidates = [clean];
-  if (strippedClean && strippedClean !== clean && strippedClean.length >= 3) {
-    candidates.push(strippedClean);
-  }
-  if (primaryTitle && primaryTitle !== clean && primaryTitle !== strippedClean && primaryTitle.length >= 3) {
-    candidates.push(primaryTitle);
-  }
+  const candidates = [];
+  if (titleSlug && titleSlug.length >= 3) candidates.push(titleSlug);
+  if (clean && clean.length >= 3 && !candidates.includes(clean)) candidates.push(clean);
+  if (strippedSlug && strippedSlug.length >= 3 && !candidates.includes(strippedSlug)) candidates.push(strippedSlug);
+  if (strippedClean && strippedClean.length >= 3 && !candidates.includes(strippedClean)) candidates.push(strippedClean);
+  if (primarySlug && primarySlug.length >= 3 && !candidates.includes(primarySlug)) candidates.push(primarySlug);
+  if (primaryTitle && primaryTitle.length >= 3 && !candidates.includes(primaryTitle)) candidates.push(primaryTitle);
 
   for (const c of candidates) {
     if (c.length >= 3) {
@@ -279,12 +348,12 @@ function findMatchingCatalogLinks(title, year, imdbId, slug) {
       }
 
       if (year) {
-        const entryYear = dMap.get(c + year);
+        const entryYear = dMap.get(c + year) || dMap.get(c + '-' + year);
         if (entryYear) {
           const links = extractLinksFromDetail(entryYear, title);
           if (links.length > 0) return links;
         }
-        const fByYear = loadDetailFileByFilename(c + year, title);
+        const fByYear = loadDetailFileByFilename(c + '-' + year, title) || loadDetailFileByFilename(c + year, title);
         if (fByYear && fByYear.length > 0) return fByYear;
       }
 

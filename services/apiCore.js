@@ -2305,14 +2305,34 @@ async function resolveCloudDownloadUrl(rawUrl) {
 async function handleDownloadFile(req, res) {
   if (handleCors(req, res)) return;
   const q = getQueryParams(req);
-  const rawUrl = q.get('url') || '';
-  const passedTitle = q.get('title') || '';
-  const quality = q.get('quality') || '1080p';
-  const type = q.get('type') || 'movie';
-  const id = q.get('id') || '';
-  const se = q.get('se') || '';
-  const ep = q.get('ep') || '';
+  let rawUrl = q.get('url') || '';
+  let passedTitle = q.get('title') || '';
+  let quality = q.get('quality') || '1080p';
+  let type = q.get('type') || 'movie';
+  let id = q.get('id') || '';
+  let se = q.get('se') || '';
+  let ep = q.get('ep') || '';
   const isJson = q.get('json') === '1' || q.get('format') === 'json';
+
+  // Unpack nested /api/download-file? query params if present
+  if (rawUrl && rawUrl.includes('/api/download-file')) {
+    try {
+      const innerQs = rawUrl.split('?')[1] || '';
+      const innerParams = new URLSearchParams(innerQs);
+      const innerUrl = innerParams.get('url');
+      if (innerUrl && !innerUrl.includes('/api/download-file')) {
+        rawUrl = innerUrl;
+      } else {
+        rawUrl = '';
+      }
+      if (!passedTitle && innerParams.get('title')) passedTitle = innerParams.get('title');
+      if (!id && innerParams.get('id')) id = innerParams.get('id');
+      if (!se && innerParams.get('se')) se = innerParams.get('se');
+      if (!ep && innerParams.get('ep')) ep = innerParams.get('ep');
+      if (quality === '1080p' && innerParams.get('quality')) quality = innerParams.get('quality');
+      if (type === 'movie' && innerParams.get('type')) type = innerParams.get('type');
+    } catch(e) {}
+  }
 
   if (!rawUrl && !passedTitle && !id) {
     if (isJson) {
@@ -2346,6 +2366,12 @@ async function handleDownloadFile(req, res) {
 
     // 2. Direct Content ID Resolution (Exact TMDB / Catalog Match)
     let contentRec = null;
+    if (!id && titleToUse) {
+      try {
+        const lookedUp = await resolveTmdbId(titleToUse, '', q.get('year'), type);
+        if (lookedUp) id = String(lookedUp);
+      } catch (e) {}
+    }
     if (id && (!resolved || !resolved.directUrl)) {
       try {
         contentRec = await resolveContentId(id);
@@ -2357,9 +2383,10 @@ async function handleDownloadFile(req, res) {
       try {
         let catalogLinks = (contentRec && contentRec.links && contentRec.links.length) ? contentRec.links : [];
         if (!catalogLinks.length) {
-          catalogLinks = findMatchingCatalogLinks(titleToUse, q.get('year'), q.get('imdbId'), id) || [];
+          const imdbId = q.get('imdbId') || (contentRec && contentRec.imdbId);
+          catalogLinks = findMatchingCatalogLinks(titleToUse, q.get('year') || (contentRec && contentRec.year), imdbId, id) || [];
           if (!catalogLinks.length && passedTitle && passedTitle !== titleToUse) {
-            catalogLinks = findMatchingCatalogLinks(passedTitle, q.get('year'), q.get('imdbId'), id) || [];
+            catalogLinks = findMatchingCatalogLinks(passedTitle, q.get('year'), imdbId, id) || [];
           }
         }
 
@@ -2368,12 +2395,11 @@ async function handleDownloadFile(req, res) {
           let matched = null;
           if (se && ep) {
             // STRICT MATCH: Only match when season and episode genuinely match!
-            // CRITICAL FIX: NEVER fall back to catalogLinks[0] for TV episodes (which would download wrong episode/title)!
             matched = catalogLinks.find(l => Number(l.season) === Number(se) && Number(l.episode) === Number(ep) && (l.quality || '').toLowerCase().includes(quality.toLowerCase())) ||
                       catalogLinks.find(l => Number(l.season) === Number(se) && Number(l.episode) === Number(ep));
           } else {
             matched = catalogLinks.find(l => (l.quality || '').toLowerCase().includes(quality.toLowerCase())) ||
-                      catalogLinks.find(l => l.isCloud || (l.url && l.url.includes('vcloud'))) ||
+                      catalogLinks.find(l => l.isCloud || (l.url && (l.url.includes('vcloud') || l.url.includes('workers.dev')))) ||
                       catalogLinks[0];
           }
 
@@ -2431,18 +2457,32 @@ async function handleDownloadFile(req, res) {
       return res.end();
     }
 
-    // RESILIENT DIRECT DOWNLOAD GATEWAY: NEVER redirect to dotmovies search!
+    // RESILIENT DIRECT DOWNLOAD GATEWAY: If not yet on Cloud CDN, return clean status in JSON mode
     if (isJson) {
       return sendJson(res, 200, {
-        ok: true,
-        directUrl: `/api/download-file?title=${encodeURIComponent(titleToUse)}&quality=${quality}&download=1`,
+        ok: false,
+        directUrl: '',
         title: titleToUse,
         filename: downloadFilename,
-        message: 'Direct high-speed download link ready.'
+        message: 'Direct media file not yet on Cloud CDN.'
       });
     }
 
-    // Serve clean, instant direct downloading trigger page
+    // Serve clean, instant direct downloading hub page
+    const cleanId = String(id || '').replace(/^tmdb-(?:movie|series|tv)-/i, '');
+    const isTv = type === 'tv' || type === 'series' || Boolean(se || ep);
+    const watchUrl = `/api/stream-player?id=${encodeURIComponent(cleanId)}&title=${encodeURIComponent(titleToUse)}&type=${encodeURIComponent(type)}&se=${encodeURIComponent(se || '1')}&ep=${encodeURIComponent(ep || '1')}`;
+    const altMirror1 = cleanId
+      ? (isTv
+        ? `https://allmovieland.link/tv/${encodeURIComponent(cleanId)}/${encodeURIComponent(se || '1')}/${encodeURIComponent(ep || '1')}`
+        : `https://allmovieland.link/movie/${encodeURIComponent(cleanId)}`)
+      : `https://allmovieland.link/search/${encodeURIComponent(titleToUse)}`;
+    const altMirror2 = cleanId
+      ? (isTv
+        ? `https://vidsrc.sbs/embed/tv/${encodeURIComponent(cleanId)}/${encodeURIComponent(se || '1')}/${encodeURIComponent(ep || '1')}`
+        : `https://vidsrc.sbs/embed/movie/${encodeURIComponent(cleanId)}`)
+      : `https://vidsrc.sbs/embed/movie/search?q=${encodeURIComponent(titleToUse)}`;
+
     const directDlPage = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -2452,39 +2492,46 @@ async function handleDownloadFile(req, res) {
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-8SPEG4KZ28');
   </script>
-  <!-- Google AdSense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9082698285506451" crossorigin="anonymous"></script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Downloading ${escapeHtml(titleToUse)} | Netflix4U High Speed</title>
+  <title>Download ${escapeHtml(titleToUse)} | Netflix4U High Speed</title>
   <style>
     body { background: #0a0a0f; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; padding: 20px; box-sizing: border-box; }
-    .card { background: #12121a; border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 32px; max-width: 480px; width: 100%; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.6); }
-    .icon { width: 64px; height: 64px; border-radius: 50%; background: rgba(34,197,94,0.15); color: #22c55e; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
+    .card { background: #12121a; border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 28px; max-width: 480px; width: 100%; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.6); }
+    .icon { width: 56px; height: 56px; border-radius: 50%; background: rgba(34,197,94,0.15); color: #22c55e; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
     h1 { font-size: 1.25rem; font-weight: 800; margin: 0 0 8px; color: #fff; }
-    p { font-size: 0.875rem; color: rgba(255,255,255,0.6); margin: 0 0 24px; line-height: 1.5; }
-    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 14px 20px; border-radius: 10px; font-size: 0.9rem; font-weight: 700; text-decoration: none; cursor: pointer; transition: all 0.2s; box-sizing: border-box; border: none; }
-    .btn-primary { background: #e50914; color: #fff; margin-bottom: 12px; }
+    p { font-size: 0.85rem; color: rgba(255,255,255,0.6); margin: 0 0 20px; line-height: 1.5; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 12px 18px; border-radius: 10px; font-size: 0.88rem; font-weight: 700; text-decoration: none; cursor: pointer; transition: all 0.2s; box-sizing: border-box; border: none; margin-bottom: 10px; }
+    .btn-primary { background: #e50914; color: #fff; }
     .btn-primary:hover { background: #f40612; }
-    .btn-secondary { background: rgba(255,255,255,0.08); color: #fff; border: 1px solid rgba(255,255,255,0.15); }
-    .btn-secondary:hover { background: rgba(255,255,255,0.15); }
-    .badge { display: inline-block; padding: 4px 10px; border-radius: 20px; background: rgba(229,9,20,0.15); color: #ff3b47; font-size: 0.75rem; font-weight: 700; margin-bottom: 16px; }
+    .btn-mirror { background: rgba(255,255,255,0.06); color: #38bdf8; border: 1px solid rgba(56,189,248,0.3); }
+    .btn-mirror:hover { background: rgba(56,189,248,0.15); }
+    .btn-secondary { background: rgba(255,255,255,0.05); color: #fff; border: 1px solid rgba(255,255,255,0.15); }
+    .btn-secondary:hover { background: rgba(255,255,255,0.12); }
+    .badge { display: inline-block; padding: 4px 10px; border-radius: 20px; background: rgba(229,9,20,0.15); color: #ff3b47; font-size: 0.75rem; font-weight: 700; margin-bottom: 14px; }
   </style>
 </head>
 <body>
   <div class="card">
     <div class="icon">
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
     </div>
-    <div class="badge">Direct Cloud Mirror</div>
+    <div class="badge">Direct Media Hub</div>
     <h1>${escapeHtml(titleToUse)}</h1>
-    <p>Your high-speed direct download package (${escapeHtml(quality)}) is connecting to the fastest available CDN node.</p>
-    <a href="/api/stream-player?title=${encodeURIComponent(titleToUse)}&type=${encodeURIComponent(type)}" class="btn btn-primary">
+    <p>High-speed stream &amp; direct download mirrors for <strong>${escapeHtml(titleToUse)}</strong> (${escapeHtml(quality)}).</p>
+    <a href="${watchUrl}" class="btn btn-primary">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
       Watch Online (Player)
+    </a>
+    <a href="${altMirror1}" target="_blank" rel="noopener noreferrer" class="btn btn-mirror">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+      Direct Stream Mirror 1 (AllMovieLand)
+    </a>
+    <a href="${altMirror2}" target="_blank" rel="noopener noreferrer" class="btn btn-mirror">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+      Direct Stream Mirror 2 (VidSrc Global)
     </a>
     <a href="https://t.me/netflix4u_website" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"></path></svg>
