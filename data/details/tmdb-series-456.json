@@ -1,0 +1,82 @@
+{
+  "id": "tmdb-series-456",
+  "canonicalId": "tmdb-series-456",
+  "externalProvider": "tmdb",
+  "externalId": "456",
+  "tmdbId": "456",
+  "imdbId": "tt0096697",
+  "type": "series",
+  "contentType": "series",
+  "title": "The Simpsons",
+  "canonicalTitle": "The Simpsons",
+  "originalTitle": "The Simpsons",
+  "overview": "Set in Springfield, the average American town, the show focuses on the antics and everyday adventures of the Simpson family; Homer, Marge, Bart, Lisa and Maggie, as well as a virtual cast of thousands. Since the beginning, the series has been a pop culture icon, attracting hundreds of celebrities to guest star. The show has also made name for itself in its fearless satirical take on politics, media and American life in general.",
+  "description": "Set in Springfield, the average American town, the show focuses on the antics and everyday adventures of the Simpson family; Homer, Marge, Bart, Lisa and Maggie, as well as a virtual cast of thousands. Since the beginning, the series has been a pop culture icon, attracting hundreds of celebrities to guest star. The show has also made name for itself in its fearless satirical take on politics, media and American life in general.",
+  "shortDescription": "Set in Springfield, the average American town, the show focuses on the antics and everyday adventures of the Simpson fam",
+  "year": 1989,
+  "releaseDate": "1989-12-17",
+  "rating": 8,
+  "votes": "11.0K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Animation",
+    "Comedy"
+  ],
+  "categories": [
+    "Animation",
+    "Comedy"
+  ],
+  "language": "English",
+  "country": "US",
+  "director": "Director",
+  "poster": "https://image.tmdb.org/t/p/w500/uWpG7GqfKGQqX4YMAo3nv5OrglV.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/ncQ8D4j8GSuL9CzncLEXnhHDxHy.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/_jgYEYERYFQ?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/_jgYEYERYFQ?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "198",
+      "name": "Dan Castellaneta",
+      "character": "Homer Simpson / Abe Simpson / Barney Gumble / Krusty the Clown / Groundskeeper Willie / Mayor Quimby (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/AmeqWhP4A46AWkM4kVphg6jOTQX.jpg"
+    },
+    {
+      "id": "199",
+      "name": "Julie Kavner",
+      "character": "Marge Simpson / Patty Bouvier / Selma Bouvier / Jacqueline Bouvier (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/87kSPYlWcHvqOVEkhdqxysiAf6w.jpg"
+    },
+    {
+      "id": "200",
+      "name": "Nancy Cartwright",
+      "character": "Bart Simpson / Maggie Simpson / Nelson Muntz / Ralph Wiggum (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/kJQEz3NAwHGdb2sQzAnBf1RmMV4.jpg"
+    },
+    {
+      "id": "5586",
+      "name": "Yeardley Smith",
+      "character": "Lisa Simpson / Maggie Simpson (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/9AjPwbb3uz4GfgOPBYsy2ILvwkB.jpg"
+    },
+    {
+      "id": "5587",
+      "name": "Hank Azaria",
+      "character": "Moe Szyslak / Chief Wiggum / Apu / Comic Book Guy / Carl Carlson / Superintendent Chalmers (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/yFDw4b0jucuFWNnGcBPfpYUtn16.jpg"
+    },
+    {
+      "id": "6008",
+      "name": "Harry Shearer",
+      "character": "Ned Flanders / Mr. Burns / Smithers / Principal Skinner / Lenny Leonard (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/wZpovXxQQqP7kxXPy2yj6QMbM55.jpg"
+    }
+  ],
+  "seasons": 38,
+  "episodes": 803,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-21T03:20:15.032Z",
+  "createdAt": "2026-09-21T03:20:15.032Z",
+  "updatedAt": "2026-09-21T03:20:15.032Z",
+  "links": []
+}

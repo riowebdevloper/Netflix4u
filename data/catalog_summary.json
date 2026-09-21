@@ -1,5 +1,71 @@
 [
   {
+    "id": "tmdb-series-112470",
+    "canonicalId": "tmdb-series-112470",
+    "title": "Ici tout commence",
+    "rawTitle": "Ici tout commence",
+    "slug": "tmdb-series-112470-ici-tout-commence",
+    "type": "series",
+    "year": 2020,
+    "quality": "FHD",
+    "provider": "tmdb",
+    "rating": 6.8,
+    "poster": "https://image.tmdb.org/t/p/w500/v7nXPo2zdaIOfeIaERiOuTEt89N.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/original/vgeDRVpSUa4Hvovg4C6dgm4dfUW.jpg",
+    "imdbId": "tt13392064",
+    "tmdbId": "112470",
+    "categories": [
+      "Soap",
+      "Drama"
+    ],
+    "status": "PUBLISHED",
+    "publishedAt": "2026-09-21T03:20:15.056Z"
+  },
+  {
+    "id": "tmdb-series-456",
+    "canonicalId": "tmdb-series-456",
+    "title": "The Simpsons",
+    "rawTitle": "The Simpsons",
+    "slug": "tmdb-series-456-the-simpsons",
+    "type": "series",
+    "year": 1989,
+    "quality": "FHD",
+    "provider": "tmdb",
+    "rating": 8,
+    "poster": "https://image.tmdb.org/t/p/w500/uWpG7GqfKGQqX4YMAo3nv5OrglV.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/original/ncQ8D4j8GSuL9CzncLEXnhHDxHy.jpg",
+    "imdbId": "tt0096697",
+    "tmdbId": "456",
+    "categories": [
+      "Animation",
+      "Comedy"
+    ],
+    "status": "PUBLISHED",
+    "publishedAt": "2026-09-21T03:20:15.032Z"
+  },
+  {
+    "id": "tmdb-series-239618",
+    "canonicalId": "tmdb-series-239618",
+    "title": "American Hostage",
+    "rawTitle": "American Hostage",
+    "slug": "tmdb-series-239618-american-hostage",
+    "type": "series",
+    "year": 2026,
+    "quality": "FHD",
+    "provider": "tmdb",
+    "rating": 7.8,
+    "poster": "https://image.tmdb.org/t/p/w500/kVXkBIJw4eW9KC8VZvYvoS6Qg0j.jpg",
+    "backdrop": "https://image.tmdb.org/t/p/original/t708JUdkHAoZF83f4RjqcIGrJ99.jpg",
+    "imdbId": "tt30051064",
+    "tmdbId": "239618",
+    "categories": [
+      "Crime",
+      "Drama"
+    ],
+    "status": "PUBLISHED",
+    "publishedAt": "2026-09-21T03:20:15.016Z"
+  },
+  {
     "id": "tmdb-series-154770",
     "canonicalId": "tmdb-series-154770",
     "title": "Hello Saturday",
@@ -52,7 +118,7 @@
     "year": 2026,
     "quality": "FHD",
     "provider": "tmdb",
-    "rating": 8.7,
+    "rating": 6.6,
     "poster": "https://image.tmdb.org/t/p/w500/9soOjsZ91vtMzypK2F3MC378JI5.jpg",
     "backdrop": "https://image.tmdb.org/t/p/original/5m1j7Wibh3HnZq5QHm97v8dI3GH.jpg",
     "imdbId": "tt16478058",
@@ -403,7 +469,7 @@
     "year": 2026,
     "quality": "FHD",
     "provider": "tmdb",
-    "rating": 6.8,
+    "rating": 7.2,
     "poster": "https://image.tmdb.org/t/p/w500/57XScX1aYtKi1LvHYFQLPUxVhTG.jpg",
     "backdrop": "https://image.tmdb.org/t/p/original/3JVjgaqfX5MhxxHKpGWz05QV7Dz.jpg",
     "imdbId": "",
@@ -4959,7 +5025,7 @@
     "year": 2026,
     "quality": "FHD",
     "provider": "dotmobiz",
-    "rating": 7,
+    "rating": 7.9,
     "poster": "https://wsrv.nl/?url=image.tmdb.org/t/p/w500/qnin56Syy5rbG7KCaxWY7SPuy6p.jpg",
     "backdrop": "https://wsrv.nl/?url=image.tmdb.org/t/p/original/6TSxLmwT7j1ugtKi8NyMmdzWAGj.jpg",
     "categories": [
@@ -17015,7 +17081,7 @@
     "year": 2026,
     "quality": "FHD",
     "provider": "dotmobiz",
-    "rating": 8.4,
+    "rating": 6,
     "poster": "https://wsrv.nl/?url=image.tmdb.org/t/p/w500/zlkeH0s7dDxcnuPcHBqAyXFUxqN.jpg",
     "backdrop": "https://wsrv.nl/?url=image.tmdb.org/t/p/w500/zlkeH0s7dDxcnuPcHBqAyXFUxqN.jpg",
     "categories": [

@@ -820,6 +820,28 @@
       "publishedAt": "2022-08-28T13:22:56.000Z"
     },
     {
+      "id": "tmdb-series-239618",
+      "canonicalId": "tmdb-series-239618",
+      "title": "American Hostage",
+      "rawTitle": "American Hostage",
+      "slug": "tmdb-series-239618-american-hostage",
+      "type": "series",
+      "year": 2026,
+      "quality": "FHD",
+      "provider": "tmdb",
+      "rating": 7.8,
+      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FkVXkBIJw4eW9KC8VZvYvoS6Qg0j.jpg&output=webp",
+      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2Ft708JUdkHAoZF83f4RjqcIGrJ99.jpg&output=webp",
+      "imdbId": "tt30051064",
+      "tmdbId": "239618",
+      "categories": [
+        "Crime",
+        "Drama"
+      ],
+      "status": "PUBLISHED",
+      "publishedAt": "2026-09-21T03:20:15.016Z"
+    },
+    {
       "id": "tmdb-movie-1514863",
       "canonicalId": "tmdb-movie-1514863",
       "title": "Best of the Best",
@@ -829,7 +851,7 @@
       "year": 2026,
       "quality": "FHD",
       "provider": "tmdb",
-      "rating": 8.7,
+      "rating": 6.6,
       "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2F9soOjsZ91vtMzypK2F3MC378JI5.jpg&output=webp",
       "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F5m1j7Wibh3HnZq5QHm97v8dI3GH.jpg&output=webp",
       "imdbId": "tt16478058",
@@ -1092,7 +1114,7 @@
       "year": 2026,
       "quality": "FHD",
       "provider": "tmdb",
-      "rating": 6.8,
+      "rating": 7.2,
       "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2F57XScX1aYtKi1LvHYFQLPUxVhTG.jpg&output=webp",
       "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F3JVjgaqfX5MhxxHKpGWz05QV7Dz.jpg&output=webp",
       "imdbId": "",
@@ -1124,28 +1146,6 @@
       ],
       "status": "PUBLISHED",
       "publishedAt": "2026-09-17T03:25:48.844Z"
-    },
-    {
-      "id": "tmdb-series-252105",
-      "canonicalId": "tmdb-series-252105",
-      "title": "Golden Axe",
-      "rawTitle": "Golden Axe",
-      "slug": "tmdb-series-252105-golden-axe",
-      "type": "series",
-      "year": 2026,
-      "quality": "FHD",
-      "provider": "tmdb",
-      "rating": 10,
-      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FtoEwR5VTFzHmxW1pX1HjtTXH6QH.jpg&output=webp",
-      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FzOcEo3oQf9KDPPxZueNhReN6TBr.jpg&output=webp",
-      "imdbId": "tt32149571",
-      "tmdbId": "252105",
-      "categories": [
-        "Animation",
-        "Sci-Fi & Fantasy"
-      ],
-      "status": "PUBLISHED",
-      "publishedAt": "2026-09-17T03:25:48.830Z"
     }
   ],
   "featured": [
@@ -4138,27 +4138,6 @@
       "publishedAt": "2025-05-15T09:00:16.000Z"
     },
     {
-      "id": "tmdb-movie-1514863",
-      "canonicalId": "tmdb-movie-1514863",
-      "title": "Best of the Best",
-      "rawTitle": "Best of the Best",
-      "slug": "tmdb-movie-1514863-best-of-the-best",
-      "type": "movie",
-      "year": 2026,
-      "quality": "FHD",
-      "provider": "tmdb",
-      "rating": 8.7,
-      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2F9soOjsZ91vtMzypK2F3MC378JI5.jpg&output=webp",
-      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F5m1j7Wibh3HnZq5QHm97v8dI3GH.jpg&output=webp",
-      "imdbId": "tt16478058",
-      "tmdbId": "1514863",
-      "categories": [
-        "Comedy"
-      ],
-      "status": "PUBLISHED",
-      "publishedAt": "2026-09-20T03:25:14.214Z"
-    },
-    {
       "id": "12100108",
       "canonicalId": "12100108",
       "title": "The Shawshank Redemption",
@@ -4182,6 +4161,32 @@
       ],
       "status": "PUBLISHED",
       "publishedAt": "2023-03-22T23:21:55.000Z"
+    },
+    {
+      "id": "12097038",
+      "canonicalId": "12097038",
+      "title": "The Godfather",
+      "rawTitle": "The Godfather (1972)",
+      "slug": "the-godfather-1972",
+      "type": "movie",
+      "year": 1972,
+      "quality": "FHD",
+      "provider": "dotmobiz",
+      "rating": 8.7,
+      "poster": "https://storage.hicine.sbs/images/The-Godfather-Hindi.webp",
+      "backdrop": "https://storage.hicine.sbs/images/The-Godfather-Hindi.webp",
+      "categories": [
+        "Hollywood",
+        "1080p",
+        "1972",
+        "480p",
+        "720p",
+        "Crime",
+        "Drama",
+        "Dual Audio Movies"
+      ],
+      "status": "PUBLISHED",
+      "publishedAt": "2020-10-01T12:47:07.000Z"
     }
   ],
   "nowPlaying": [
@@ -4322,6 +4327,28 @@
       "publishedAt": "2022-08-28T13:22:56.000Z"
     },
     {
+      "id": "tmdb-series-239618",
+      "canonicalId": "tmdb-series-239618",
+      "title": "American Hostage",
+      "rawTitle": "American Hostage",
+      "slug": "tmdb-series-239618-american-hostage",
+      "type": "series",
+      "year": 2026,
+      "quality": "FHD",
+      "provider": "tmdb",
+      "rating": 7.8,
+      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FkVXkBIJw4eW9KC8VZvYvoS6Qg0j.jpg&output=webp",
+      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2Ft708JUdkHAoZF83f4RjqcIGrJ99.jpg&output=webp",
+      "imdbId": "tt30051064",
+      "tmdbId": "239618",
+      "categories": [
+        "Crime",
+        "Drama"
+      ],
+      "status": "PUBLISHED",
+      "publishedAt": "2026-09-21T03:20:15.016Z"
+    },
+    {
       "id": "tmdb-movie-1514863",
       "canonicalId": "tmdb-movie-1514863",
       "title": "Best of the Best",
@@ -4331,7 +4358,7 @@
       "year": 2026,
       "quality": "FHD",
       "provider": "tmdb",
-      "rating": 8.7,
+      "rating": 6.6,
       "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2F9soOjsZ91vtMzypK2F3MC378JI5.jpg&output=webp",
       "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F5m1j7Wibh3HnZq5QHm97v8dI3GH.jpg&output=webp",
       "imdbId": "tt16478058",
@@ -4537,29 +4564,7 @@
       ],
       "status": "PUBLISHED",
       "publishedAt": "2026-09-18T03:12:51.487Z"
-    },
-    {
-      "id": "tmdb-movie-1656489",
-      "canonicalId": "tmdb-movie-1656489",
-      "title": "Sultana",
-      "rawTitle": "Sultana",
-      "slug": "tmdb-movie-1656489-sultana",
-      "type": "movie",
-      "year": 2026,
-      "quality": "FHD",
-      "provider": "tmdb",
-      "rating": 5.5,
-      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FwDebpR4NplIM8EteAGfd51Zdisu.jpg&output=webp",
-      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F29XMlo2zt5LTA0YMjA3hubbM942.jpg&output=webp",
-      "imdbId": "tt41228546",
-      "tmdbId": "1656489",
-      "categories": [
-        "Drama",
-        "Music"
-      ],
-      "status": "PUBLISHED",
-      "publishedAt": "2026-09-18T03:12:51.472Z"
     }
   ],
-  "updatedAt": "2026-09-20T03:25:14.866Z"
+  "updatedAt": "2026-09-21T03:20:15.684Z"
 }
