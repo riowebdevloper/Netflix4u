@@ -3,33 +3,41 @@
 
 User-agent: *
 Allow: /
+Disallow: /search
+Disallow: /api/
 Disallow: /data/details_map.json
 Disallow: /data/movies.json
 Disallow: /data/series.json
-Disallow: /api/admin
 Disallow: /private/
 
-# AI Search & Answer Engine Crawlers (Full Allowed)
+# AI Search & Answer Engine Crawlers (Fully Allowed)
 User-agent: Googlebot
 Allow: /
+Disallow: /search
 
 User-agent: Bingbot
 Allow: /
+Disallow: /search
 
 User-agent: PerplexityBot
 Allow: /
+Disallow: /search
 
 User-agent: GPTBot
 Allow: /
+Disallow: /search
 
 User-agent: ChatGPT-User
 Allow: /
+Disallow: /search
 
 User-agent: ClaudeBot
 Allow: /
+Disallow: /search
 
 User-agent: Applebot
 Allow: /
+Disallow: /search
 
 # Sitemap Location
 Sitemap: https://netflix4u.in/sitemap.xml

@@ -7,6 +7,7 @@ const { getPlaybackSources } = require('./services/playbackService');
 const { resolveContentId } = require('./services/canonicalResolver');
 const { isPublicRecord, publicOnly } = require('./services/contentValidationService');
 const { handleDetails, handlePlayback, handleSearch, handleUniversalApi, handleProbeStream, handlePosterResolver } = require('./services/apiCore');
+const seoRenderer = require('./services/seoRenderer');
 
 const PORT = process.env.PORT || 4173;
 const ROOT = path.resolve(__dirname);
@@ -1570,6 +1571,9 @@ const server = http.createServer(async (req, res) => {
 
   // 9. Root file check (Strictly within ROOT, not in subdirectories)
   let filePath = path.join(ROOT, reqPath === '/' ? '/index.html' : reqPath);
+  if (!fs.existsSync(filePath) && fs.existsSync(filePath + '.html')) {
+    filePath = filePath + '.html';
+  }
   if (isSafePath(ROOT, reqPath) && path.dirname(filePath) === ROOT && fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
     const ext = path.extname(filePath).toLowerCase();
     const mime = MIME_TYPES[ext] || 'application/octet-stream';
@@ -1616,59 +1620,80 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
-  // 12. SPA Fallback with Dynamic OpenGraph Pre-Rendering for Social Media Bots
+  // 12. Search Bot Defense: Never index internal search results to avoid duplicate index bloat
+  if (reqPath === '/search' || reqPath.startsWith('/search?')) {
+    res.setHeader('X-Robots-Tag', 'noindex, follow');
+  }
+
+  // 13. SSR Category & Discovery Hub Pages (AEO & AI Search Optimized)
+  const categoryMatch = reqPath.match(/^\/(movies|series|trending|anime|kdrama|bollywood|hollywood)\/?$/i);
+  if (categoryMatch) {
+    const catKey = categoryMatch[1].toLowerCase();
+    const allItems = getCatalogSummary();
+    let catItems = [];
+    if (catKey === 'movies') {
+      catItems = allItems.filter(i => i.type === 'movie' || i.contentType === 'movie');
+    } else if (catKey === 'series') {
+      catItems = allItems.filter(i => i.type === 'series' || i.contentType === 'series');
+    } else if (catKey === 'trending') {
+      catItems = allItems.slice(0, 24);
+    } else if (catKey === 'anime') {
+      catItems = allItems.filter(i => (i.genres && i.genres.includes('Animation')) || i.type === 'anime');
+    } else if (catKey === 'kdrama') {
+      catItems = allItems.filter(i => i.country === 'KR' || (i.language && i.language.toLowerCase().includes('korean')));
+    } else if (catKey === 'bollywood') {
+      catItems = allItems.filter(i => i.country === 'IN' || (i.language && i.language.toLowerCase().includes('hindi')));
+    } else if (catKey === 'hollywood') {
+      catItems = allItems.filter(i => i.country === 'US' || (i.language && i.language.toLowerCase().includes('english')));
+    }
+    if (!catItems.length) catItems = allItems.slice(0, 24);
+    else catItems = catItems.slice(0, 24);
+
+    const canonicalUrl = `https://netflix4u.in/${catKey}`;
+    const html = seoRenderer.renderCategoryPage(catKey, canonicalUrl, catItems);
+    res.writeHead(200, {
+      'Content-Type': 'text/html; charset=utf-8',
+      'Cache-Control': 'public, max-age=3600'
+    });
+    res.end(html);
+    return;
+  }
+
+  // 14. SSR Movie & Web Series Detail Pages (AEO + GEO + LLMO + Schema.org JSON-LD)
+  const movieRouteMatch = reqPath.match(/^\/(movie|series|anime|kdrama)\/([^/]+)/i);
+  if (movieRouteMatch) {
+    const [, rType, rId] = movieRouteMatch;
+    let item = getTitleDetails(rId);
+    if (!item) {
+      try {
+        item = await resolveContentId(rId);
+      } catch (e) {}
+    }
+    if (item && isPublicRecord(item)) {
+      const canonicalUrl = `https://netflix4u.in/${rType}/${rId}`;
+      const allSummary = getCatalogSummary();
+      const itemGenre = (item.genres && item.genres[0]) || '';
+      const relatedItems = allSummary
+        .filter(x => x && x.id !== item.id && (!itemGenre || (x.genres && x.genres.includes(itemGenre))))
+        .slice(0, 6);
+
+      const isTv = rType === 'series' || rType === 'anime' || rType === 'kdrama' || item.type === 'series';
+      const html = isTv
+        ? seoRenderer.renderSeriesPage(item, canonicalUrl, relatedItems)
+        : seoRenderer.renderMoviePage(item, canonicalUrl, relatedItems);
+
+      res.writeHead(200, {
+        'Content-Type': 'text/html; charset=utf-8',
+        'Cache-Control': 'public, max-age=3600'
+      });
+      res.end(html);
+      return;
+    }
+  }
+
+  // 15. SPA Fallback for Root and interactive hash routes
   const indexPath = path.join(ROOT, 'index.html');
   if (fs.existsSync(indexPath)) {
-    const userAgent = (req.headers['user-agent'] || '').toLowerCase();
-    const isBot = /facebookexternalhit|twitterbot|whatsapp|telegrambot|linkedinbot|discordbot|slackbot|pinterest|googlebot|bingbot/i.test(userAgent);
-    const movieRouteMatch = reqPath.match(/^\/(movie|series|anime|kdrama)\/([^/]+)/i);
-
-    if (isBot && movieRouteMatch) {
-      const [, rType, rId] = movieRouteMatch;
-      const item = getTitleDetails(rId);
-      if (item && isPublicRecord(item)) {
-        let indexHtml = fs.readFileSync(indexPath, 'utf8');
-        const title = `${item.title || 'Title'} (${item.year || ''}) | Netflix4U`;
-        const desc = (item.description || 'Discover verified entertainment catalog information.').slice(0, 160);
-        const image = item.backdrop || item.poster || 'https://netflix4u.in/og-image.jpg';
-        const type = (rType === 'series' || rType === 'anime' || rType === 'kdrama') ? 'video.tv_show' : 'video.movie';
-        const canonicalUrl = `https://netflix4u.in/${rType}/${rId}`;
-
-        const escapeOg = str => String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-
-        const dynamicOgTags = `
-    <!-- 🚀 Dynamic Server-Injected OpenGraph Tags for Crawlers -->
-    <title>${escapeOg(title)}</title>
-    <meta name="description" content="${escapeOg(desc)}" />
-    <link rel="canonical" href="${canonicalUrl}" />
-    <meta property="og:type" content="${type}" />
-    <meta property="og:title" content="${escapeOg(title)}" />
-    <meta property="og:description" content="${escapeOg(desc)}" />
-    <meta property="og:image" content="${image}" />
-    <meta property="og:image:width" content="1280" />
-    <meta property="og:image:height" content="720" />
-    <meta property="og:url" content="${canonicalUrl}" />
-    <meta property="og:site_name" content="Netflix4U" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="${escapeOg(title)}" />
-    <meta name="twitter:description" content="${escapeOg(desc)}" />
-    <meta name="twitter:image" content="${image}" />
-        `;
-
-        indexHtml = indexHtml
-          .replace(/<title>.*?<\/title>/i, '')
-          .replace(/<meta\s+name=["']description["'].*?>/i, '')
-          .replace('</head>', `${dynamicOgTags}\n</head>`);
-
-        res.writeHead(200, {
-          'Content-Type': 'text/html; charset=utf-8',
-          'Cache-Control': 'public, max-age=3600'
-        });
-        res.end(indexHtml);
-        return;
-      }
-    }
-
     res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
     fs.createReadStream(indexPath).pipe(res);
     return;

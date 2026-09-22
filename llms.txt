@@ -1,27 +1,50 @@
 # Netflix4U
 
-> Netflix4U is an ultra-fast entertainment discovery and streaming web application delivering verified catalog information for global movies, web series, anime, K-dramas, Bollywood, Hollywood, South Indian cinema, and Hindi-dubbed releases.
+> Netflix4U is an ultra-fast, independent entertainment discovery portal and verified media catalog delivering structured factual metadata for global movies, web series, anime, K-dramas, Bollywood, Hollywood, South Indian cinema, and Hindi-dubbed releases.
 
-## Core Navigation
+## Core Navigation & Media Hubs
 
-- [Netflix4U Home](https://netflix4u.in/): Primary catalog discovery and featured streaming releases.
-- [Movies](https://netflix4u.in/movies): Comprehensive library of feature films across all genres and release years.
-- [Web Series](https://netflix4u.in/series): Multi-season television shows and exclusive web series.
-- [Trending](https://netflix4u.in/trending): Real-time trending movies, series, and top daily streams.
-- [Anime](https://netflix4u.in/anime): Japanese animation with multi-audio dubbed and subtitled options.
-- [K-Drama](https://netflix4u.in/kdrama): Korean television dramas and romantic series.
-- [Bollywood](https://netflix4u.in/bollywood): Hindi cinema, musical blockbusters, and new releases.
-- [Hollywood](https://netflix4u.in/hollywood): International box-office titles and franchises.
+- [Netflix4U Home](https://netflix4u.in/): Primary catalog discovery and featured trending releases.
+- [Movies Hub](https://netflix4u.in/movies): Comprehensive library of feature films across all genres, years, and directors.
+- [Web Series Hub](https://netflix4u.in/series): Multi-season television shows, episode guides, and web series.
+- [Trending Hub](https://netflix4u.in/trending): Daily verified trending movies and series ranked by real-time viewer demand.
+- [Anime Hub](https://netflix4u.in/anime): Japanese animation with dual-audio dubbed and subtitled catalog entries.
+- [K-Drama Hub](https://netflix4u.in/kdrama): Korean television dramas, thrillers, and romantic series.
+- [Bollywood Hub](https://netflix4u.in/bollywood): Hindi cinema, musical blockbusters, and new OTT releases.
+- [Hollywood Hub](https://netflix4u.in/hollywood): International box-office releases, franchises, and award winners.
 - [South Indian Cinema](https://netflix4u.in/south-indian): Tamil, Telugu, Malayalam, and Kannada films.
 - [Hindi Dubbed](https://netflix4u.in/hindi-dubbed): Dual-audio and regional dubbed releases.
 
-## Information & Policies
+## E-E-A-T Trust, Editorial & Legal Policies
 
-- [About Us](https://netflix4u.in/about): Platform overview, architecture, and mission.
-- [Privacy Policy](https://netflix4u.in/privacy): User privacy protection, cookie policy, and data handling standards.
-- [Terms of Service](https://netflix4u.in/terms): Platform usage terms and user guidelines.
-- [DMCA Disclaimer](https://netflix4u.in/dmca): DMCA copyright compliance, takedown policy, and notice procedure.
-- [Contact Support](https://netflix4u.in/contact): Official support and communication channels.
+- [About Netflix4U](https://netflix4u.in/about): Platform overview, mission, data sources (TMDB, IMDb), and technical architecture.
+- [Editorial Policy](https://netflix4u.in/editorial-policy): Editorial standards, metadata verification principles, AI assistance disclosure, and commercial independence.
+- [Corrections Policy](https://netflix4u.in/corrections-policy): Transparent correction procedure for reporting metadata errors, inaccurate cast, or broken streaming links.
+- [Contact Support](https://netflix4u.in/contact): Official support desk, email communication, and Telegram channel.
+- [Privacy Policy](https://netflix4u.in/privacy): User data protection, GDPR/CCPA standards, cookie disclosures, and advertising network transparency.
+- [Terms of Service](https://netflix4u.in/terms): Platform usage terms, intellectual property guidelines, and user conduct.
+- [DMCA Disclaimer](https://netflix4u.in/dmca): DMCA copyright compliance, designated agent contact, and takedown notice procedure.
+
+## Canonical Entity Model & Identifiers
+
+Netflix4U enforces stable identifiers for every indexed catalog record:
+- `canonicalId`: Stable alphanumeric string (e.g., `tmdb-movie-1514863` or `tmdb-series-112470`).
+- `tmdbId`: The Movie Database unique identifier used for canonical cast, crew, and artwork reconciliation.
+- `imdbId`: Internet Movie Database title identifier (e.g., `tt16478058`) for entity cross-referencing.
+- `contentType`: Explicit categorization strictly distinguishing `movie`, `series`, `anime`, and `kdrama`.
+
+## Structured Data & Machine Readability
+
+Every detail page on Netflix4U provides Schema.org JSON-LD structured data:
+- `Movie`: Name, releaseDate, duration, genre, director, actor, image, aggregateRating, publisher.
+- `TVSeries`: Name, startDate, genre, creator, actor, aggregateRating, publisher.
+- `BreadcrumbList`: Complete hierarchical breadcrumb paths.
+- `FAQPage`: Verified question-and-answer pairs extracted directly from page facts.
+- Visible text and JSON-LD structured data are 100% synchronized with zero contradictions.
+
+## Brand & Trademark Notice
+
+Netflix4U is an independent informational discovery service. Netflix4U is NOT affiliated with, endorsed by, sponsored by, or operated by Netflix, Inc., or any other subscription video-on-demand service.
 
 ## Optional Resources
 

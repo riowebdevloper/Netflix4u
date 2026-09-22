@@ -58,6 +58,13 @@ const ROOT_FILES = [
   'manifest.json',
   'sw.js',
   'llms.txt',
+  'about.html',
+  'contact.html',
+  'privacy.html',
+  'terms.html',
+  'dmca.html',
+  'editorial-policy.html',
+  'corrections-policy.html',
   'CPANEL_DEPLOYMENT_GUIDE.md'
 ];
 
