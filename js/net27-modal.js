@@ -2936,8 +2936,8 @@
     var policyLink = e.target.closest('[data-policy-link]');
     if (policyLink) {
       e.preventDefault();
-      var tab = policyLink.dataset.policyLink;
-      openPolicyModal(tab);
+      var tab = policyLink.dataset.policyLink || 'about';
+      window.location.href = '/' + tab;
       return;
     }
   });

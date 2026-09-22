@@ -65,6 +65,15 @@ const ROOT_FILES = [
   'dmca.html',
   'editorial-policy.html',
   'corrections-policy.html',
+  'movies.html',
+  'series.html',
+  'trending.html',
+  'anime.html',
+  'kdrama.html',
+  'bollywood.html',
+  'hollywood.html',
+  'south-indian.html',
+  'hindi-dubbed.html',
   'CPANEL_DEPLOYMENT_GUIDE.md'
 ];
 

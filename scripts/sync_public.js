@@ -51,7 +51,23 @@ const rootFilesToSync = [
   '863dfb1033ddbbd89377.txt',
   '676d243f6147231bddf2.txt',
   '676d243f6147231bddf2.html',
-  'llms.txt'
+  'llms.txt',
+  'about.html',
+  'contact.html',
+  'privacy.html',
+  'terms.html',
+  'dmca.html',
+  'editorial-policy.html',
+  'corrections-policy.html',
+  'movies.html',
+  'series.html',
+  'trending.html',
+  'anime.html',
+  'kdrama.html',
+  'bollywood.html',
+  'hollywood.html',
+  'south-indian.html',
+  'hindi-dubbed.html'
 ];
 
 for (const f of rootFilesToSync) {

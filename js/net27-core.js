@@ -1456,15 +1456,12 @@
       }, 400);
     }
 
-    // 2. Policy / Legal Modal Pages (/about, /privacy, /terms, /dmca, /contact)
-    var policyMatch = path.match(/^\/(about|privacy|terms|dmca|contact)(?:\.html)?$/i);
+    // 2. Policy & Dedicated Content Routing (/about, /privacy, /terms, /dmca, /contact, /editorial-policy, /corrections-policy)
+    var policyMatch = path.match(/^\/(about|privacy|terms|dmca|contact|editorial-policy|corrections-policy)$/i);
     if (policyMatch) {
-      var tabKey = policyMatch[1].toLowerCase();
-      setTimeout(function() {
-        if (window.Netflix4uModal && window.Netflix4uModal.openPolicy) {
-          window.Netflix4uModal.openPolicy(tabKey);
-        }
-      }, 300);
+      var pageSlug = policyMatch[1].toLowerCase();
+      window.location.replace('/' + pageSlug + '.html');
+      return;
     }
 
     // 3. Hash Watch & Title links (e.g. #w=1339713-movie-1-1 or #title=1339713-movie)

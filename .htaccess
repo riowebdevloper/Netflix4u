@@ -29,7 +29,7 @@ DirectoryIndex index.html index.php
   RewriteRule ^api/trailer/?$ api/trailer.php [QSA,L]
   RewriteRule ^api/tmdb/(.*)$ api/tmdb.php?endpoint=$1 [QSA,L]
 
-  # 2b. 🛡️ Clean URLs for E-E-A-T Trust & Policy Pages
+  # 2b. 🛡️ Clean URLs for E-E-A-T Trust & Policy Pages & Media Hubs
   RewriteRule ^about/?$ about.html [L]
   RewriteRule ^contact/?$ contact.html [L]
   RewriteRule ^privacy/?$ privacy.html [L]
@@ -37,6 +37,16 @@ DirectoryIndex index.html index.php
   RewriteRule ^dmca/?$ dmca.html [L]
   RewriteRule ^editorial-policy/?$ editorial-policy.html [L]
   RewriteRule ^corrections-policy/?$ corrections-policy.html [L]
+  RewriteRule ^movies/?$ movies.html [L]
+  RewriteRule ^series/?$ series.html [L]
+  RewriteRule ^trending/?$ trending.html [L]
+  RewriteRule ^anime/?$ anime.html [L]
+  RewriteRule ^kdrama/?$ kdrama.html [L]
+  RewriteRule ^bollywood/?$ bollywood.html [L]
+  RewriteRule ^hollywood/?$ hollywood.html [L]
+  RewriteRule ^south-indian/?$ south-indian.html [L]
+  RewriteRule ^south/?$ south-indian.html [L]
+  RewriteRule ^hindi-dubbed/?$ hindi-dubbed.html [L]
 
   # 3. 🛑 Terminal Guard: Stop processing if request is already for index.html
   RewriteRule ^index\.html$ - [L]

@@ -314,7 +314,8 @@ function renderMoviePage(item, canonicalUrl, relatedItems = []) {
   <link rel="preload" as="font" type="font/woff2" href="/cf-fonts/v/inter/5.2.8/latin/wght/normal.woff2" crossorigin>
   <link rel="preload" as="image" href="${escapeHtml(poster)}" fetchpriority="high">
 
-  <link rel="stylesheet" href="/css/tailwind.css">
+  <link rel="stylesheet" href="/css/Layout.CBW6-iGy.css">
+  <link rel="stylesheet" href="/css/netflix4u-net27.css">
   <style>
     body { background-color: #0a0a0f; color: #e2e8f0; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
     .hero-backdrop { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0.18; filter: blur(8px); }
@@ -677,7 +678,8 @@ function renderSeriesPage(item, canonicalUrl, relatedItems = []) {
   <link rel="preload" as="font" type="font/woff2" href="/cf-fonts/v/inter/5.2.8/latin/wght/normal.woff2" crossorigin>
   <link rel="preload" as="image" href="${escapeHtml(poster)}" fetchpriority="high">
 
-  <link rel="stylesheet" href="/css/tailwind.css">
+  <link rel="stylesheet" href="/css/Layout.CBW6-iGy.css">
+  <link rel="stylesheet" href="/css/netflix4u-net27.css">
   <style>
     body { background-color: #0a0a0f; color: #e2e8f0; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
     .hero-backdrop { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0.18; filter: blur(8px); }
@@ -945,7 +947,8 @@ function renderCategoryPage(categoryKey, canonicalUrl, items = []) {
 
   <script type="application/ld+json">${JSON.stringify(jsonLd)}</script>
   <link rel="preload" as="font" type="font/woff2" href="/cf-fonts/v/inter/5.2.8/latin/wght/normal.woff2" crossorigin>
-  <link rel="stylesheet" href="/css/tailwind.css">
+  <link rel="stylesheet" href="/css/Layout.CBW6-iGy.css">
+  <link rel="stylesheet" href="/css/netflix4u-net27.css">
   <style>
     body { background-color: #0a0a0f; color: #e2e8f0; font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
     .badge { display: inline-flex; align-items: center; gap: 0.25rem; padding: 0.2rem 0.6rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 600; }

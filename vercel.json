@@ -1,5 +1,6 @@
 {
   "version": 2,
+  "cleanUrls": true,
   "rewrites": [
     { "source": "/api/embed-tmdb/:match*", "destination": "/api/embed-tmdb?id=:match*" },
     { "source": "/api/embed-tmdb", "destination": "/api/embed-tmdb" },
@@ -22,7 +23,23 @@
     { "source": "/api/details/:id", "destination": "/api/details?id=:id" },
     { "source": "/api/playback/:id", "destination": "/api/playback?id=:id" },
     { "source": "/api/cron/sync", "destination": "/api/cron/sync" },
-    { "source": "/api/version", "destination": "/api/version" },
+    { "source": "/about", "destination": "/about.html" },
+    { "source": "/contact", "destination": "/contact.html" },
+    { "source": "/privacy", "destination": "/privacy.html" },
+    { "source": "/terms", "destination": "/terms.html" },
+    { "source": "/dmca", "destination": "/dmca.html" },
+    { "source": "/editorial-policy", "destination": "/editorial-policy.html" },
+    { "source": "/corrections-policy", "destination": "/corrections-policy.html" },
+    { "source": "/movies", "destination": "/movies.html" },
+    { "source": "/series", "destination": "/series.html" },
+    { "source": "/trending", "destination": "/trending.html" },
+    { "source": "/anime", "destination": "/anime.html" },
+    { "source": "/kdrama", "destination": "/kdrama.html" },
+    { "source": "/bollywood", "destination": "/bollywood.html" },
+    { "source": "/hollywood", "destination": "/hollywood.html" },
+    { "source": "/south-indian", "destination": "/south-indian.html" },
+    { "source": "/south", "destination": "/south-indian.html" },
+    { "source": "/hindi-dubbed", "destination": "/hindi-dubbed.html" },
     { "source": "/movie/:match*", "destination": "/index.html" },
     { "source": "/series/:match*", "destination": "/index.html" },
     { "source": "/anime/:match*", "destination": "/index.html" },
@@ -36,12 +53,7 @@
     { "source": "/genres/:match*", "destination": "/index.html" },
     { "source": "/search/:match*", "destination": "/index.html" },
     { "source": "/watchlist/:match*", "destination": "/index.html" },
-    { "source": "/category/:match*", "destination": "/index.html" },
-    { "source": "/about", "destination": "/index.html" },
-    { "source": "/contact", "destination": "/index.html" },
-    { "source": "/privacy", "destination": "/index.html" },
-    { "source": "/terms", "destination": "/index.html" },
-    { "source": "/dmca", "destination": "/index.html" }
+    { "source": "/category/:match*", "destination": "/index.html" }
   ],
   "crons": [
     {
