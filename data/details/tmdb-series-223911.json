@@ -1,0 +1,90 @@
+{
+  "id": "tmdb-series-223911",
+  "canonicalId": "tmdb-series-223911",
+  "externalProvider": "tmdb",
+  "externalId": "223911",
+  "tmdbId": "223911",
+  "imdbId": "tt27432264",
+  "type": "series",
+  "contentType": "series",
+  "title": "Renegade Immortal",
+  "canonicalTitle": "Renegade Immortal",
+  "originalTitle": "仙逆",
+  "overview": "It tells the story of Wang Lin, an ordinary young man in the countryside, who is moved by his heart and cultivates against immortality. His pursuit is not only for longevity, but also for getting rid of the ants behind it. He firmly believed in human beings and entered the path of cultivation with mediocre qualifications. After experiencing ups and downs, with his wise mind, he gradually reached the pinnacle and became famous in the cultivation world with his own strength.",
+  "description": "It tells the story of Wang Lin, an ordinary young man in the countryside, who is moved by his heart and cultivates against immortality. His pursuit is not only for longevity, but also for getting rid of the ants behind it. He firmly believed in human beings and entered the path of cultivation with mediocre qualifications. After experiencing ups and downs, with his wise mind, he gradually reached the pinnacle and became famous in the cultivation world with his own strength.",
+  "shortDescription": "It tells the story of Wang Lin, an ordinary young man in the countryside, who is moved by his heart and cultivates again",
+  "year": 2023,
+  "releaseDate": "2023-09-25",
+  "rating": 8.3,
+  "votes": "0.0K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Animation",
+    "Drama",
+    "Action & Adventure"
+  ],
+  "categories": [
+    "Animation",
+    "Drama",
+    "Action & Adventure"
+  ],
+  "language": "Mandarin",
+  "country": "CN",
+  "director": "TouXiong Shi",
+  "poster": "https://image.tmdb.org/t/p/w500/mCt5qgkOYEvuHSiSwNByMv6LMoB.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/crn53sSGWRZ8wAtEGso52nepEkz.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/CbcJ_0XG_Sc?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/CbcJ_0XG_Sc?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "3837521",
+      "name": "Shi Zekun",
+      "character": "王林 (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/1O3W2fPIfMTMo6cFpUnxvhivJje.jpg"
+    },
+    {
+      "id": "4335054",
+      "name": "Zhang Huilin",
+      "character": "李慕婉 (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/7zB8NhqoZzMoEQpQDOAJIfdgVYV.jpg"
+    },
+    {
+      "id": "4376425",
+      "name": "Chang Wentao",
+      "character": "司徒南 (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/s9jQXrUzbtMXA6d5iZkgQ6nGJ5N.jpg"
+    },
+    {
+      "id": "3091091",
+      "name": "Liu Sicen",
+      "character": "许立国 (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/8AKjKsjULYhCw0zkaVNQHa1V65X.jpg"
+    },
+    {
+      "id": "2866415",
+      "name": "Bai Xuecen",
+      "character": "凤栾 (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/hU7V64dz0qruxptwUeLQnkJiMcD.jpg"
+    },
+    {
+      "id": "3945460",
+      "name": "Wang Jinger",
+      "character": "柳眉(voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/rjF80jyrr7p3TTztafwDrSdAzKQ.jpg"
+    },
+    {
+      "id": "3850987",
+      "name": "Qiao Su",
+      "character": "周茹(voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/joz3baiQTwIMy9nqbeG59CkiT2L.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 200,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-22T03:19:38.285Z",
+  "createdAt": "2026-09-22T03:19:38.285Z",
+  "updatedAt": "2026-09-22T03:19:38.285Z",
+  "links": []
+}

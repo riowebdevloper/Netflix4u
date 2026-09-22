@@ -1,0 +1,64 @@
+{
+  "id": "tmdb-movie-1263337",
+  "canonicalId": "tmdb-movie-1263337",
+  "externalProvider": "tmdb",
+  "externalId": "1263337",
+  "tmdbId": "1263337",
+  "imdbId": "tt7526136",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "Heart of the Beast",
+  "canonicalTitle": "Heart of the Beast",
+  "originalTitle": "Heart of the Beast",
+  "overview": "After a harrowing plane crash, Special Forces officer James Belmont and his combat dog, Odin, find themselves stranded deep in the Alaskan wilderness. Together, they are forced into a brutal fight for survival against the elements.",
+  "description": "After a harrowing plane crash, Special Forces officer James Belmont and his combat dog, Odin, find themselves stranded deep in the Alaskan wilderness. Together, they are forced into a brutal fight for survival against the elements.",
+  "shortDescription": "After a harrowing plane crash, Special Forces officer James Belmont and his combat dog, Odin, find themselves stranded d",
+  "year": 2026,
+  "releaseDate": "2026-09-19",
+  "rating": 7.8,
+  "votes": "0.0K",
+  "quality": "FHD",
+  "duration": "1h 41m",
+  "genres": [
+    "Adventure",
+    "Thriller"
+  ],
+  "categories": [
+    "Adventure",
+    "Thriller"
+  ],
+  "language": "English",
+  "country": "US",
+  "director": "David Ayer",
+  "poster": "https://image.tmdb.org/t/p/w500/1ApfSA8JTqeha3GTFEY8syV4auq.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/bicMU6xVD5deVyKP2azpyx7xkmH.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/UkMuGKqAux4?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/UkMuGKqAux4?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "287",
+      "name": "Brad Pitt",
+      "character": "James Belmont",
+      "photo": "https://image.tmdb.org/t/p/w185/ajNaPmXVVMJFg9GWmu6MJzTaXdV.jpg"
+    },
+    {
+      "id": "18999",
+      "name": "J.K. Simmons",
+      "character": "Walter Boone",
+      "photo": "https://image.tmdb.org/t/p/w185/ScmKoJ9eiSUOthAt1PDNLi8Fkw.jpg"
+    },
+    {
+      "id": "2307481",
+      "name": "Anna Lambe",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/cKm5ZnAOVc6nD8KAgSDMJdZclYH.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 1,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-22T03:19:37.991Z",
+  "createdAt": "2026-09-22T03:19:37.991Z",
+  "updatedAt": "2026-09-22T03:19:37.991Z",
+  "links": []
+}

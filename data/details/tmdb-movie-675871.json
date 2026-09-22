@@ -1,0 +1,120 @@
+{
+  "id": "tmdb-movie-675871",
+  "canonicalId": "tmdb-movie-675871",
+  "externalProvider": "tmdb",
+  "externalId": "675871",
+  "tmdbId": "675871",
+  "imdbId": "tt8820258",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "Super Troopers 3",
+  "canonicalTitle": "Super Troopers 3",
+  "originalTitle": "Super Troopers 3",
+  "overview": "When Farva's over-the-top Indian engagement to Thorny's sister spirals into chaos, the Super Troopers must navigate Thorny's schemes to break up the relationship, all while trying to bring down a pernicious new drug ring.",
+  "description": "When Farva's over-the-top Indian engagement to Thorny's sister spirals into chaos, the Super Troopers must navigate Thorny's schemes to break up the relationship, all while trying to bring down a pernicious new drug ring.",
+  "shortDescription": "When Farva's over-the-top Indian engagement to Thorny's sister spirals into chaos, the Super Troopers must navigate Thor",
+  "year": 2026,
+  "releaseDate": "2026-08-06",
+  "rating": 6.3,
+  "votes": "0.0K",
+  "quality": "FHD",
+  "duration": "1h 40m",
+  "genres": [
+    "Comedy",
+    "Crime",
+    "Mystery"
+  ],
+  "categories": [
+    "Comedy",
+    "Crime",
+    "Mystery"
+  ],
+  "language": "English",
+  "country": "US",
+  "director": "Jay Chandrasekhar",
+  "poster": "https://image.tmdb.org/t/p/w500/VVU42nqsEmUtFpH1d9MHj5BIpF.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/oU2H07DQVjGMp2vUgrYzso36v15.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/cYFevn5frf0?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/cYFevn5frf0?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "52049",
+      "name": "Jay Chandrasekhar",
+      "character": "Thorny",
+      "photo": "https://image.tmdb.org/t/p/w185/kPBrBwm6BzUZhYPzdYcRwMPkgPf.jpg"
+    },
+    {
+      "id": "56251",
+      "name": "Kevin Heffernan",
+      "character": "Farva",
+      "photo": "https://image.tmdb.org/t/p/w185/2FgG3oPF1A7d6W4KaNNZV7kJ83g.jpg"
+    },
+    {
+      "id": "52051",
+      "name": "Steve Lemme",
+      "character": "Mac",
+      "photo": "https://image.tmdb.org/t/p/w185/iQnIsjeUA34B2w4EuM8mR1TglJZ.jpg"
+    },
+    {
+      "id": "56253",
+      "name": "Paul Soter",
+      "character": "Foster",
+      "photo": "https://image.tmdb.org/t/p/w185/avsOygcEmFUB5INWGoexgaTJ2u0.jpg"
+    },
+    {
+      "id": "56252",
+      "name": "Erik Stolhanske",
+      "character": "Rabbit",
+      "photo": "https://image.tmdb.org/t/p/w185/eVMov7majKwNO8eOMcwweaAnBJj.jpg"
+    },
+    {
+      "id": "1181326",
+      "name": "Hannah Simone",
+      "character": "Sarita",
+      "photo": "https://image.tmdb.org/t/p/w185/vF2K5xd73ZvRhBjFuIfiSTLMNYB.jpg"
+    },
+    {
+      "id": "56595",
+      "name": "Marisa Coughlan",
+      "character": "Ursula",
+      "photo": "https://image.tmdb.org/t/p/w185/m6bzAs1IRRqWZjlVI01JeBUDL9u.jpg"
+    },
+    {
+      "id": "105648",
+      "name": "Nat Faxon",
+      "character": "Captain Markowski",
+      "photo": "https://image.tmdb.org/t/p/w185/i7bsT8ewAjCr7zByWOyCnbrT0x9.jpg"
+    },
+    {
+      "id": "60899",
+      "name": "Chace Crawford",
+      "character": "Baker",
+      "photo": "https://image.tmdb.org/t/p/w185/wz7s1JT3bYi2vd4fWwmLT809cnT.jpg"
+    },
+    {
+      "id": "2218430",
+      "name": "Andrew Dismukes",
+      "character": "Coy",
+      "photo": "https://image.tmdb.org/t/p/w185/9zvaGUyvsqTSov9fkfBYmfoJ57p.jpg"
+    },
+    {
+      "id": "1714925",
+      "name": "Jon Rudnitsky",
+      "character": "Steve",
+      "photo": "https://image.tmdb.org/t/p/w185/54FaWVPJUyLQ85Bw3uiY9bBLsBb.jpg"
+    },
+    {
+      "id": "2655972",
+      "name": "Lisa Gilroy",
+      "character": "Bettie",
+      "photo": "https://image.tmdb.org/t/p/w185/zEv5PRAKeQo7a3yCGhm2DJwf20B.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 1,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-22T03:19:38.171Z",
+  "createdAt": "2026-09-22T03:19:38.171Z",
+  "updatedAt": "2026-09-22T03:19:38.171Z",
+  "links": []
+}

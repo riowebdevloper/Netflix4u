@@ -1,0 +1,116 @@
+{
+  "id": "tmdb-movie-1341138",
+  "canonicalId": "tmdb-movie-1341138",
+  "externalProvider": "tmdb",
+  "externalId": "1341138",
+  "tmdbId": "1341138",
+  "imdbId": "tt33305867",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "Spa Weekend",
+  "canonicalTitle": "Spa Weekend",
+  "originalTitle": "Spa Weekend",
+  "overview": "Four lifelong friends realize that somewhere between careers, relationships, families, and everyday responsibilities, they’ve forgotten how to take care of themselves and each other. Burned out and overdue for a break, the women escape to a luxury spa retreat for an unforgettable weekend dedicated to fun, laughter, and a lot of really bad decisions.",
+  "description": "Four lifelong friends realize that somewhere between careers, relationships, families, and everyday responsibilities, they’ve forgotten how to take care of themselves and each other. Burned out and overdue for a break, the women escape to a luxury spa retreat for an unforgettable weekend dedicated to fun, laughter, and a lot of really bad decisions.",
+  "shortDescription": "Four lifelong friends realize that somewhere between careers, relationships, families, and everyday responsibilities, th",
+  "year": 2026,
+  "releaseDate": "2026-08-20",
+  "rating": 6.6,
+  "votes": "0.0K",
+  "quality": "FHD",
+  "duration": "1h 37m",
+  "genres": [
+    "Comedy"
+  ],
+  "categories": [
+    "Comedy"
+  ],
+  "language": "English",
+  "country": "US",
+  "director": "Jon Lucas",
+  "poster": "https://image.tmdb.org/t/p/w500/zMmHkDi2PqudAsHlhtmkkshZ5XX.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/8EMwicuj1TrkclMOvslFCQyRg6I.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/AhsA9ZqRAXQ?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/AhsA9ZqRAXQ?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "41087",
+      "name": "Leslie Mann",
+      "character": "Jane",
+      "photo": "https://image.tmdb.org/t/p/w185/gUOCQBjjjGnWkxjMOc1LmrC0U1k.jpg"
+    },
+    {
+      "id": "1475128",
+      "name": "Michelle Buteau",
+      "character": "Coco",
+      "photo": "https://image.tmdb.org/t/p/w185/mgAH1JsATQXsQPwquuNJpqux4TO.jpg"
+    },
+    {
+      "id": "1772",
+      "name": "Anna Faris",
+      "character": "Sophie",
+      "photo": "https://image.tmdb.org/t/p/w185/tptTb0BQwCpKWETNqzkZzzf5qSZ.jpg"
+    },
+    {
+      "id": "52848",
+      "name": "Isla Fisher",
+      "character": "Mel",
+      "photo": "https://image.tmdb.org/t/p/w185/vVeKcMyFMPcIDLYNAnGSGnQrJ3k.jpg"
+    },
+    {
+      "id": "1992160",
+      "name": "Adam Demos",
+      "character": "Kai",
+      "photo": "https://image.tmdb.org/t/p/w185/cfeDhsrviNLG30e7cZOABqoKIQc.jpg"
+    },
+    {
+      "id": "2300222",
+      "name": "Dominic Ona-Ariki",
+      "character": "Roger",
+      "photo": "https://image.tmdb.org/t/p/w185/xGdtiWh06fVMAuVOUONcFVva2n9.jpg"
+    },
+    {
+      "id": "61779",
+      "name": "Erika Heynatz",
+      "character": "Shanti",
+      "photo": "https://image.tmdb.org/t/p/w185/gfzEzRE2ScFSSOaNrSwrjHSQVnV.jpg"
+    },
+    {
+      "id": "4414182",
+      "name": "Courtney Clarke",
+      "character": "Ayurveda",
+      "photo": "https://image.tmdb.org/t/p/w185/zAerkipyeHkUwkR1mSL3iL35epr.jpg"
+    },
+    {
+      "id": "3472982",
+      "name": "Quinn Aune",
+      "character": "Young Mel",
+      "photo": "https://image.tmdb.org/t/p/w185/hQcg9uijh53xs4YmNeE60K8JRML.jpg"
+    },
+    {
+      "id": "3129167",
+      "name": "Sierra Rose",
+      "character": "Young Coco",
+      "photo": "https://image.tmdb.org/t/p/w185/fqFA0nrvDD7MRtSitZJSpGIzUXj.jpg"
+    },
+    {
+      "id": "6199845",
+      "name": "Juliet Sargent",
+      "character": "Young Sophie",
+      "photo": "https://image.tmdb.org/t/p/w185/2LWnvKbd73byld91Pz43zb107E2.jpg"
+    },
+    {
+      "id": "6376030",
+      "name": "Everly Graves",
+      "character": "Young Jane",
+      "photo": "https://image.tmdb.org/t/p/w185/igSTeCGuXGwrEnbdwedabg2KBZ2.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 1,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-22T03:19:38.115Z",
+  "createdAt": "2026-09-22T03:19:38.115Z",
+  "updatedAt": "2026-09-22T03:19:38.115Z",
+  "links": []
+}

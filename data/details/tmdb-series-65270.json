@@ -1,0 +1,68 @@
+{
+  "id": "tmdb-series-65270",
+  "canonicalId": "tmdb-series-65270",
+  "externalProvider": "tmdb",
+  "externalId": "65270",
+  "tmdbId": "65270",
+  "imdbId": "tt6283624",
+  "type": "series",
+  "contentType": "series",
+  "title": "Radio Star",
+  "canonicalTitle": "Radio Star",
+  "originalTitle": "라디오스타",
+  "overview": "“Radio Star” is a South Korean music talk show where the guests and hosts talk openly and intimately about their lives, their pasts and their work. It is part of Munhwa Broadcasting Corporation's \"Golden Fishery\" programming block.",
+  "description": "“Radio Star” is a South Korean music talk show where the guests and hosts talk openly and intimately about their lives, their pasts and their work. It is part of Munhwa Broadcasting Corporation's \"Golden Fishery\" programming block.",
+  "shortDescription": "“Radio Star” is a South Korean music talk show where the guests and hosts talk openly and intimately about their lives, ",
+  "year": 2007,
+  "releaseDate": "2007-05-30",
+  "rating": 5.5,
+  "votes": "0.0K",
+  "quality": "FHD",
+  "duration": "80m/ep",
+  "genres": [
+    "Talk"
+  ],
+  "categories": [
+    "Talk"
+  ],
+  "language": "Korean",
+  "country": "KR",
+  "director": "Director",
+  "poster": "https://image.tmdb.org/t/p/w500/uRUZDsvUfIP3JUEgOC8ReBlQQUU.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/kCd0rmnNwCd3sgupO9DqSi9aHa0.jpg",
+  "trailerUrl": null,
+  "trailer": null,
+  "cast": [
+    {
+      "id": "1628212",
+      "name": "Kim Gu-ra",
+      "character": "Self",
+      "photo": "https://image.tmdb.org/t/p/w185/eYj0vwQ99Pzfb91TX6CBgnV7Ne.jpg"
+    },
+    {
+      "id": "2205888",
+      "name": "Kim Guk-jin",
+      "character": "Self",
+      "photo": "https://image.tmdb.org/t/p/w185/aQuLoFCQ7XU6ovPtdrVykDS3Jxv.jpg"
+    },
+    {
+      "id": "1594569",
+      "name": "Yoo Se-yoon",
+      "character": "Self",
+      "photo": "https://image.tmdb.org/t/p/w185/5pP9ttOJnsCI9wrFC6mdiFsis7O.jpg"
+    },
+    {
+      "id": "1703372",
+      "name": "Jang Do-yeon",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/jf5izJkEzXrBhoC6QxwTjH1uOlG.jpg"
+    }
+  ],
+  "seasons": 2,
+  "episodes": 970,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-22T03:19:38.227Z",
+  "createdAt": "2026-09-22T03:19:38.227Z",
+  "updatedAt": "2026-09-22T03:19:38.227Z",
+  "links": []
+}
