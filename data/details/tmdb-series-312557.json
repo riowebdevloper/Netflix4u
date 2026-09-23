@@ -1,0 +1,118 @@
+{
+  "id": "tmdb-series-312557",
+  "canonicalId": "tmdb-series-312557",
+  "externalProvider": "tmdb",
+  "externalId": "312557",
+  "tmdbId": "312557",
+  "imdbId": "tt28765828",
+  "type": "series",
+  "contentType": "series",
+  "title": "Minerva Academy",
+  "canonicalTitle": "Minerva Academy",
+  "originalTitle": "Minerva - La scuola",
+  "overview": "At Minerva Military High School, teens navigate discipline, rivalry and family pressure as a young cadet searches for answers about his missing friend.",
+  "description": "At Minerva Military High School, teens navigate discipline, rivalry and family pressure as a young cadet searches for answers about his missing friend.",
+  "shortDescription": "At Minerva Military High School, teens navigate discipline, rivalry and family pressure as a young cadet searches for an",
+  "year": 2026,
+  "releaseDate": "2026-09-22",
+  "rating": 7.7,
+  "votes": "0.0K",
+  "quality": "FHD",
+  "duration": "46m/ep",
+  "genres": [
+    "Drama",
+    "Mystery"
+  ],
+  "categories": [
+    "Drama",
+    "Mystery"
+  ],
+  "language": "Italian",
+  "country": "IT",
+  "director": "Director",
+  "poster": "https://image.tmdb.org/t/p/w500/mVXUJjlOSiYMpApFoPyWTnqBhUm.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/zynoUI9kwDQKkGW5KqvxQp8Kj1Q.jpg",
+  "trailerUrl": null,
+  "trailer": null,
+  "cast": [
+    {
+      "id": "5108556",
+      "name": "Ciro Minopoli",
+      "character": "Salvo",
+      "photo": "https://image.tmdb.org/t/p/w185/vp06rGTK0lVtpabzA1dQ6G5yo31.jpg"
+    },
+    {
+      "id": "6363808",
+      "name": "Nicole Malaj",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/4jk6G1Y6Vop2Fzc2rLZkxy43bmT.jpg"
+    },
+    {
+      "id": "6363809",
+      "name": "Gaia Garavaglia",
+      "character": "Benny",
+      "photo": "https://image.tmdb.org/t/p/w185/8WYS9VtQrUKuk5YwhyeiORdYW2V.jpg"
+    },
+    {
+      "id": "2242726",
+      "name": "Michele Rosiello",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/qfUTAhrVVAFIGz7qDzLCqaTwfkq.jpg"
+    },
+    {
+      "id": "78533",
+      "name": "Cristiana Capotondi",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/AaBpxxInx9u0eItSRyDDec6sh0S.jpg"
+    },
+    {
+      "id": "1916673",
+      "name": "Irene Maiorino",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/8WmjhMAOgx7dP9T3BZpnRxA6viZ.jpg"
+    },
+    {
+      "id": "124624",
+      "name": "Massimiliano Gallo",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/stBoRhASHWEMCjG2EeC6PMlJGab.jpg"
+    },
+    {
+      "id": "2649928",
+      "name": "Giulio Brizzi",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/gibZXGc7yhtQpHhidfg15KY4axQ.jpg"
+    },
+    {
+      "id": "4324906",
+      "name": "Biagio Venditti",
+      "character": "Vincenzo",
+      "photo": "https://image.tmdb.org/t/p/w185/B0tJLv3OLSetxM34omNKor3Gs8.jpg"
+    },
+    {
+      "id": "2569934",
+      "name": "Andrea Giannini",
+      "character": "Padre Vincenzo",
+      "photo": "https://image.tmdb.org/t/p/w185/9WJmrOAWcb1Cyeg94Hl8JbYpqCr.jpg"
+    },
+    {
+      "id": "6363811",
+      "name": "Zeno Luigi",
+      "character": "Leonardo",
+      "photo": "https://image.tmdb.org/t/p/w185/91MJHJkMd67jPNRbUj9PYMq9Zr.jpg"
+    },
+    {
+      "id": "233181",
+      "name": "Raiz",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/m342sFPnKQKl9GONzvXvPEIuXBi.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 8,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-23T03:20:14.854Z",
+  "createdAt": "2026-09-23T03:20:14.854Z",
+  "updatedAt": "2026-09-23T03:20:14.854Z",
+  "links": []
+}

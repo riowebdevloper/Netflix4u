@@ -1,5 +1,49 @@
 [
   {
+    "id": "tmdb-series-321958",
+    "canonicalId": "tmdb-series-321958",
+    "title": "Line of Fire",
+    "rawTitle": "Line of Fire",
+    "slug": "tmdb-series-321958-line-of-fire",
+    "type": "series",
+    "year": 2026,
+    "quality": "FHD",
+    "provider": "tmdb",
+    "rating": 9.2,
+    "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FsodRW36uEDHjv8l1WhYUNDvnIK6.jpg&output=webp",
+    "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F8U4dW5E24Eqs06OJko5ChjcufHb.jpg&output=webp",
+    "imdbId": "tt39365612",
+    "tmdbId": "321958",
+    "categories": [
+      "Drama",
+      "Crime"
+    ],
+    "status": "PUBLISHED",
+    "publishedAt": "2026-09-23T03:20:14.886Z"
+  },
+  {
+    "id": "tmdb-series-312557",
+    "canonicalId": "tmdb-series-312557",
+    "title": "Minerva Academy",
+    "rawTitle": "Minerva Academy",
+    "slug": "tmdb-series-312557-minerva-academy",
+    "type": "series",
+    "year": 2026,
+    "quality": "FHD",
+    "provider": "tmdb",
+    "rating": 7.7,
+    "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FmVXUJjlOSiYMpApFoPyWTnqBhUm.jpg&output=webp",
+    "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FzynoUI9kwDQKkGW5KqvxQp8Kj1Q.jpg&output=webp",
+    "imdbId": "tt28765828",
+    "tmdbId": "312557",
+    "categories": [
+      "Drama",
+      "Mystery"
+    ],
+    "status": "PUBLISHED",
+    "publishedAt": "2026-09-23T03:20:14.854Z"
+  },
+  {
     "id": "tmdb-series-223911",
     "canonicalId": "tmdb-series-223911",
     "title": "Renegade Immortal",
@@ -534,7 +578,7 @@
     "year": 2026,
     "quality": "FHD",
     "provider": "tmdb",
-    "rating": 7.8,
+    "rating": 8,
     "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2F1m6CxPAuGv2oHc1ahERrcVWnk2J.jpg&output=webp",
     "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FuYOYLFQ4q7asuhdiKXCqGaeAQUH.jpg&output=webp",
     "imdbId": "tt33539520",
@@ -2504,61 +2548,5 @@
     ],
     "status": "PUBLISHED",
     "publishedAt": "2026-07-22T14:09:40.000Z"
-  },
-  {
-    "id": "28237",
-    "canonicalId": "28237",
-    "title": "Long Vacation",
-    "rawTitle": "Long Vacation",
-    "slug": "long-vacation",
-    "type": "series",
-    "year": 2026,
-    "quality": "FHD",
-    "provider": "dotmobiz",
-    "rating": 8,
-    "poster": "https://storage.hicine.sbs/images/ndedCYBqSOt2LNnrH7MsvHcCeYz.webp",
-    "backdrop": "https://storage.hicine.sbs/images/ndedCYBqSOt2LNnrH7MsvHcCeYz.webp",
-    "categories": [
-      "Hollywood Series",
-      "Dual Audio",
-      "1080p",
-      "1996",
-      "480p",
-      "720p",
-      "Drama",
-      "Dual Audio Series",
-      "Music",
-      "WEB-DL"
-    ],
-    "status": "PUBLISHED",
-    "publishedAt": "2026-07-21T01:37:14.000Z"
-  },
-  {
-    "id": "28236",
-    "canonicalId": "28236",
-    "title": "The Map of Longing",
-    "rawTitle": "The Map of Longing (2026)",
-    "slug": "the-map-of-longing-2026",
-    "type": "series",
-    "year": 2026,
-    "quality": "FHD",
-    "provider": "dotmobiz",
-    "rating": 8,
-    "poster": "https://storage.hicine.sbs/images/The-Map-of-Longing.webp",
-    "backdrop": "https://storage.hicine.sbs/images/The-Map-of-Longing.webp",
-    "categories": [
-      "Hollywood Series",
-      "Dual Audio Series",
-      "1080p",
-      "2026",
-      "480p",
-      "720p",
-      "Drama",
-      "Netflix",
-      "Romance",
-      "WEB-DL"
-    ],
-    "status": "PUBLISHED",
-    "publishedAt": "2026-07-18T02:04:17.000Z"
   }
 ]

@@ -1,0 +1,82 @@
+{
+  "id": "tmdb-series-321958",
+  "canonicalId": "tmdb-series-321958",
+  "externalProvider": "tmdb",
+  "externalId": "321958",
+  "tmdbId": "321958",
+  "imdbId": "tt39365612",
+  "type": "series",
+  "contentType": "series",
+  "title": "Line of Fire",
+  "canonicalTitle": "Line of Fire",
+  "originalTitle": "Line of Fire",
+  "overview": "A family of law enforcement agents bridges personal differences and crosses professional boundaries as they tackle cases for the FBI, US Marshals, Secret Service and Department of Justice. After a seemingly cut-and-dry case turns into a deadly conspiracy, they must use the expertise from a lifetime of protecting civilians and politicians to protect one another and bring the killer to justice … even if it means betraying their sworn code.",
+  "description": "A family of law enforcement agents bridges personal differences and crosses professional boundaries as they tackle cases for the FBI, US Marshals, Secret Service and Department of Justice. After a seemingly cut-and-dry case turns into a deadly conspiracy, they must use the expertise from a lifetime of protecting civilians and politicians to protect one another and bring the killer to justice … even if it means betraying their sworn code.",
+  "shortDescription": "A family of law enforcement agents bridges personal differences and crosses professional boundaries as they tackle cases",
+  "year": 2026,
+  "releaseDate": "2026-09-21",
+  "rating": 9.2,
+  "votes": "0.0K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Drama",
+    "Crime"
+  ],
+  "categories": [
+    "Drama",
+    "Crime"
+  ],
+  "language": "English",
+  "country": "US",
+  "director": "Director",
+  "poster": "https://image.tmdb.org/t/p/w500/sodRW36uEDHjv8l1WhYUNDvnIK6.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/8U4dW5E24Eqs06OJko5ChjcufHb.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/gp4bgJ3N0fw?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/gp4bgJ3N0fw?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "23119",
+      "name": "Peter Krause",
+      "character": "Mike Hollingsworth",
+      "photo": "https://image.tmdb.org/t/p/w185/4p42emuJrU8fFxbBuOhYFFdzmN6.jpg"
+    },
+    {
+      "id": "15250",
+      "name": "Hope Davis",
+      "character": "Jane Hollingsworth",
+      "photo": "https://image.tmdb.org/t/p/w185/t2cuZK3D4x2j2DaDbD5lu0SM2Lv.jpg"
+    },
+    {
+      "id": "2126621",
+      "name": "Kat Cunning",
+      "character": "Clare Hollingsworth",
+      "photo": "https://image.tmdb.org/t/p/w185/tfTaNeBphmjvZuTrpHRvh7XsIM7.jpg"
+    },
+    {
+      "id": "1974047",
+      "name": "Tommy O'Brien",
+      "character": "Mike \"Micah\" Hollingsworth Jr",
+      "photo": "https://image.tmdb.org/t/p/w185/sQJ8kyO1avOryeXQ676QsNa2MMz.jpg"
+    },
+    {
+      "id": "3057377",
+      "name": "Taylor Bloom",
+      "character": "Russ Hollingsworth",
+      "photo": "https://image.tmdb.org/t/p/w185/acrUsbjiWaA6m7Ky3PeB5QIav8o.jpg"
+    },
+    {
+      "id": "987035",
+      "name": "Charlie Barnett",
+      "character": "Jack Hollingsworth",
+      "photo": "https://image.tmdb.org/t/p/w185/hqAk1RLLXzPjo5GK0tQPe91ldRG.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 3,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-23T03:20:14.886Z",
+  "createdAt": "2026-09-23T03:20:14.886Z",
+  "updatedAt": "2026-09-23T03:20:14.886Z",
+  "links": []
+}

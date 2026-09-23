@@ -1,0 +1,118 @@
+{
+  "id": "tmdb-movie-1607127",
+  "canonicalId": "tmdb-movie-1607127",
+  "externalProvider": "tmdb",
+  "externalId": "1607127",
+  "tmdbId": "1607127",
+  "imdbId": "tt37971717",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "One Last Shot",
+  "canonicalTitle": "One Last Shot",
+  "originalTitle": "One Last Shot",
+  "overview": "Navy Seal Jake Harris must stop a team of mercenaries, led by his disillusioned former comrade, from disabling the US missile defense network.",
+  "description": "Navy Seal Jake Harris must stop a team of mercenaries, led by his disillusioned former comrade, from disabling the US missile defense network.",
+  "shortDescription": "Navy Seal Jake Harris must stop a team of mercenaries, led by his disillusioned former comrade, from disabling the US mi",
+  "year": 2026,
+  "releaseDate": "2026-09-22",
+  "rating": 8.4,
+  "votes": "0.0K",
+  "quality": "FHD",
+  "duration": "1h 37m",
+  "genres": [
+    "Action",
+    "Thriller"
+  ],
+  "categories": [
+    "Action",
+    "Thriller"
+  ],
+  "language": "English",
+  "country": "US",
+  "director": "James Nunn",
+  "poster": "https://image.tmdb.org/t/p/w500/niQ4NBh2jqAf1hDZP5m6ReWFAb7.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/8giIQcHpxgsPVP6c7aQtHl3txuh.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/8PAy3i9uU0A?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/8PAy3i9uU0A?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "78110",
+      "name": "Scott Adkins",
+      "character": "Jake Harris",
+      "photo": "https://image.tmdb.org/t/p/w185/9NRr2a1riIn5CWn5McZLJlk4vxR.jpg"
+    },
+    {
+      "id": "1102427",
+      "name": "Steven Cree",
+      "character": "Elliot Carter",
+      "photo": "https://image.tmdb.org/t/p/w185/oH9uSQMJPdFHeVggqvMwheW7nZl.jpg"
+    },
+    {
+      "id": "577478",
+      "name": "Hannah Ware",
+      "character": "Elena Torres",
+      "photo": "https://image.tmdb.org/t/p/w185/vQqZkQsGZnikCk0QfJFW7OBuQ07.jpg"
+    },
+    {
+      "id": "16644",
+      "name": "Dolph Lundgren",
+      "character": "Admiral Mulholland",
+      "photo": "https://image.tmdb.org/t/p/w185/fB1tOws6Gav0xE8LYlELEb82hJt.jpg"
+    },
+    {
+      "id": "65198",
+      "name": "Kane Kosugi",
+      "character": "Lee",
+      "photo": "https://image.tmdb.org/t/p/w185/wqMaPmNgrtqwZDktG0WFeKcqzJx.jpg"
+    },
+    {
+      "id": "583816",
+      "name": "Neil Linpow",
+      "character": "Long",
+      "photo": "https://image.tmdb.org/t/p/w185/1be5xAB1L4gCdo6cd01pYfSZMc0.jpg"
+    },
+    {
+      "id": "56650",
+      "name": "Ray Fearon",
+      "character": "Robinson",
+      "photo": "https://image.tmdb.org/t/p/w185/ou2cqhqdhfQoKVEBpIh0P3sKZti.jpg"
+    },
+    {
+      "id": "5367087",
+      "name": "Tom Dunne",
+      "character": "Greene",
+      "photo": "https://image.tmdb.org/t/p/w185/uxjZmYJ231RwfZsFQI2cksvz2jJ.jpg"
+    },
+    {
+      "id": "2242777",
+      "name": "Michel Curiel",
+      "character": "Perez",
+      "photo": "https://image.tmdb.org/t/p/w185/ml4NqwB24Vr0PpRXiKjelUAWab5.jpg"
+    },
+    {
+      "id": "4674281",
+      "name": "Tom Leigh",
+      "character": "Jericho",
+      "photo": "https://image.tmdb.org/t/p/w185/z54gxrnWeFTDrxIfEkkU1RQLmTV.jpg"
+    },
+    {
+      "id": "3498314",
+      "name": "Jack Trueman",
+      "character": "Phillips",
+      "photo": "https://image.tmdb.org/t/p/w185/97FIP23vtxyazLplDmJFg4CLZe9.jpg"
+    },
+    {
+      "id": "3229249",
+      "name": "Sofian Francis",
+      "character": "Flynn",
+      "photo": "https://image.tmdb.org/t/p/w185/iWFEG28z0hiFRPQHfeVWs54aVVp.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 1,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-23T03:20:14.820Z",
+  "createdAt": "2026-09-23T03:20:14.820Z",
+  "updatedAt": "2026-09-23T03:20:14.820Z",
+  "links": []
+}

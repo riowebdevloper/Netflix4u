@@ -1,0 +1,116 @@
+{
+  "id": "tmdb-movie-1248832",
+  "canonicalId": "tmdb-movie-1248832",
+  "externalProvider": "tmdb",
+  "externalId": "1248832",
+  "tmdbId": "1248832",
+  "imdbId": "tt31450459",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "Digger",
+  "canonicalTitle": "Digger",
+  "originalTitle": "Digger",
+  "overview": "The most powerful man in the world embarks on a frantic mission to prove he is humanity's savior before the disaster he's unleashed destroys everything.",
+  "description": "The most powerful man in the world embarks on a frantic mission to prove he is humanity's savior before the disaster he's unleashed destroys everything.",
+  "shortDescription": "The most powerful man in the world embarks on a frantic mission to prove he is humanity's savior before the disaster he'",
+  "year": 2026,
+  "releaseDate": "2026-09-30",
+  "rating": 8,
+  "votes": "1.2K",
+  "quality": "FHD",
+  "duration": "2h 9m",
+  "genres": [
+    "Comedy"
+  ],
+  "categories": [
+    "Comedy"
+  ],
+  "language": "English",
+  "country": "US",
+  "director": "Alejandro G. Iñárritu",
+  "poster": "https://image.tmdb.org/t/p/w500/1ATXKrIPJyKNwnJ6lcG088Sa6zi.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/b7PtCwsuMw84REQq15nmQgT9UXN.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/job8V254NAE?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/job8V254NAE?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "500",
+      "name": "Tom Cruise",
+      "character": "Digger Rockwell",
+      "photo": "https://image.tmdb.org/t/p/w185/maf8PhSvDCdEwjEMbYfGpojR5RP.jpg"
+    },
+    {
+      "id": "53240",
+      "name": "Riz Ahmed",
+      "character": "Ganesh",
+      "photo": "https://image.tmdb.org/t/p/w185/1uP9RaX7BGVx7XGTEmwObBJJzsC.jpg"
+    },
+    {
+      "id": "1230",
+      "name": "John Goodman",
+      "character": "President Compson",
+      "photo": "https://image.tmdb.org/t/p/w185/yyYqoyKHO7hE1zpgEV2XlqYWcNV.jpg"
+    },
+    {
+      "id": "7152",
+      "name": "Sandra Hüller",
+      "character": "Emma",
+      "photo": "https://image.tmdb.org/t/p/w185/jQfKXVCPTH9KEnzHHU4QemCnlMe.jpg"
+    },
+    {
+      "id": "72873",
+      "name": "Michael Stuhlbarg",
+      "character": "Vice President",
+      "photo": "https://image.tmdb.org/t/p/w185/aYB3SQm3h6ZyAdlbGyiNfakjx56.jpg"
+    },
+    {
+      "id": "88124",
+      "name": "Jesse Plemons",
+      "character": "Kenny",
+      "photo": "https://image.tmdb.org/t/p/w185/og4I51GsuwohdPgoELOHVMMqMre.jpg"
+    },
+    {
+      "id": "31512",
+      "name": "Robert John Burke",
+      "character": "Fitzgerald",
+      "photo": "https://image.tmdb.org/t/p/w185/uWEaY5gypb6cp1bdUYG4uCKw4sK.jpg"
+    },
+    {
+      "id": "2121005",
+      "name": "Emma D'Arcy",
+      "character": "Lena",
+      "photo": "https://image.tmdb.org/t/p/w185/9Zlmb7VmtVCxkLq5yqFFRRxCaED.jpg"
+    },
+    {
+      "id": "39659",
+      "name": "Burn Gorman",
+      "character": "Amos",
+      "photo": "https://image.tmdb.org/t/p/w185/udgACYWqCSuu6nvtrSjmyU28B0V.jpg"
+    },
+    {
+      "id": "3115932",
+      "name": "Sophie Wilde",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/fMZvMsvTv9MYSC6LTNdIUaMGjIv.jpg"
+    },
+    {
+      "id": "36666",
+      "name": "Pip Torrens",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/1n7pzFfT6jDHe8kc6I0AEfRryhz.jpg"
+    },
+    {
+      "id": "1486120",
+      "name": "Mercedes Hernández",
+      "character": "Digger's Housekeeper",
+      "photo": "https://image.tmdb.org/t/p/w185/2pC5Lv1eiItvAxeEe8KTbRlM1wY.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 1,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-23T03:20:14.872Z",
+  "createdAt": "2026-09-23T03:20:14.872Z",
+  "updatedAt": "2026-09-23T03:20:14.872Z",
+  "links": []
+}

@@ -820,6 +820,115 @@
       "publishedAt": "2022-08-28T13:22:56.000Z"
     },
     {
+      "id": "tmdb-series-321958",
+      "canonicalId": "tmdb-series-321958",
+      "title": "Line of Fire",
+      "rawTitle": "Line of Fire",
+      "slug": "tmdb-series-321958-line-of-fire",
+      "type": "series",
+      "year": 2026,
+      "quality": "FHD",
+      "provider": "tmdb",
+      "rating": 9.2,
+      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FsodRW36uEDHjv8l1WhYUNDvnIK6.jpg&output=webp",
+      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F8U4dW5E24Eqs06OJko5ChjcufHb.jpg&output=webp",
+      "imdbId": "tt39365612",
+      "tmdbId": "321958",
+      "categories": [
+        "Drama",
+        "Crime"
+      ],
+      "status": "PUBLISHED",
+      "publishedAt": "2026-09-23T03:20:14.886Z"
+    },
+    {
+      "id": "tmdb-movie-1248832",
+      "canonicalId": "tmdb-movie-1248832",
+      "title": "Digger",
+      "rawTitle": "Digger",
+      "slug": "tmdb-movie-1248832-digger",
+      "type": "movie",
+      "year": 2026,
+      "quality": "FHD",
+      "provider": "tmdb",
+      "rating": 8,
+      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2F1ATXKrIPJyKNwnJ6lcG088Sa6zi.jpg&output=webp",
+      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2Fb7PtCwsuMw84REQq15nmQgT9UXN.jpg&output=webp",
+      "imdbId": "tt31450459",
+      "tmdbId": "1248832",
+      "categories": [
+        "Comedy"
+      ],
+      "status": "PUBLISHED",
+      "publishedAt": "2026-09-23T03:20:14.872Z"
+    },
+    {
+      "id": "tmdb-series-312557",
+      "canonicalId": "tmdb-series-312557",
+      "title": "Minerva Academy",
+      "rawTitle": "Minerva Academy",
+      "slug": "tmdb-series-312557-minerva-academy",
+      "type": "series",
+      "year": 2026,
+      "quality": "FHD",
+      "provider": "tmdb",
+      "rating": 7.7,
+      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FmVXUJjlOSiYMpApFoPyWTnqBhUm.jpg&output=webp",
+      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FzynoUI9kwDQKkGW5KqvxQp8Kj1Q.jpg&output=webp",
+      "imdbId": "tt28765828",
+      "tmdbId": "312557",
+      "categories": [
+        "Drama",
+        "Mystery"
+      ],
+      "status": "PUBLISHED",
+      "publishedAt": "2026-09-23T03:20:14.854Z"
+    },
+    {
+      "id": "tmdb-movie-445466",
+      "canonicalId": "tmdb-movie-445466",
+      "title": "Idiots",
+      "rawTitle": "Idiots",
+      "slug": "tmdb-movie-445466-idiots",
+      "type": "movie",
+      "year": 2026,
+      "quality": "FHD",
+      "provider": "tmdb",
+      "rating": 6.8,
+      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2Fl1JFNC1SdgyXVr7BaD5ehaYBvOC.jpg&output=webp",
+      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2Flneqlgbg3XUjNaeGYk8arhgzczo.jpg&output=webp",
+      "imdbId": "tt6628920",
+      "tmdbId": "445466",
+      "categories": [
+        "Comedy",
+        "Crime"
+      ],
+      "status": "PUBLISHED",
+      "publishedAt": "2026-09-23T03:20:14.838Z"
+    },
+    {
+      "id": "tmdb-movie-1607127",
+      "canonicalId": "tmdb-movie-1607127",
+      "title": "One Last Shot",
+      "rawTitle": "One Last Shot",
+      "slug": "tmdb-movie-1607127-one-last-shot",
+      "type": "movie",
+      "year": 2026,
+      "quality": "FHD",
+      "provider": "tmdb",
+      "rating": 8.4,
+      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FniQ4NBh2jqAf1hDZP5m6ReWFAb7.jpg&output=webp",
+      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F8giIQcHpxgsPVP6c7aQtHl3txuh.jpg&output=webp",
+      "imdbId": "tt37971717",
+      "tmdbId": "1607127",
+      "categories": [
+        "Action",
+        "Thriller"
+      ],
+      "status": "PUBLISHED",
+      "publishedAt": "2026-09-23T03:20:14.820Z"
+    },
+    {
       "id": "tmdb-movie-675871",
       "canonicalId": "tmdb-movie-675871",
       "title": "Super Troopers 3",
@@ -829,7 +938,7 @@
       "year": 2026,
       "quality": "FHD",
       "provider": "tmdb",
-      "rating": 6.3,
+      "rating": 7,
       "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FVVU42nqsEmUtFpH1d9MHj5BIpF.jpg&output=webp",
       "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FoU2H07DQVjGMp2vUgrYzso36v15.jpg&output=webp",
       "imdbId": "tt8820258",
@@ -917,7 +1026,7 @@
       "year": 2026,
       "quality": "FHD",
       "provider": "tmdb",
-      "rating": 7.9,
+      "rating": 7.4,
       "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FLr0Ng7Gg02RW1AyfYEL6P0WUvd.jpg&output=webp",
       "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F2o9FzuBzCqrDTdlHRuEVnGD2d5h.jpg&output=webp",
       "imdbId": "tt36583977",
@@ -1040,115 +1149,6 @@
       ],
       "status": "PUBLISHED",
       "publishedAt": "2026-09-19T03:08:40.227Z"
-    },
-    {
-      "id": "tmdb-series-275102",
-      "canonicalId": "tmdb-series-275102",
-      "title": "The Scandal",
-      "rawTitle": "The Scandal",
-      "slug": "tmdb-series-275102-the-scandal",
-      "type": "series",
-      "year": 2026,
-      "quality": "FHD",
-      "provider": "tmdb",
-      "rating": 6.3,
-      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FpJsIzlTjmx07ilwEkl0cglrMVa1.jpg&output=webp",
-      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2Fuc1p1PEbEMpdIHqnU9TESNC6Jhp.jpg&output=webp",
-      "imdbId": "tt36347588",
-      "tmdbId": "275102",
-      "categories": [
-        "Drama"
-      ],
-      "status": "PUBLISHED",
-      "publishedAt": "2026-09-19T03:08:40.213Z"
-    },
-    {
-      "id": "tmdb-series-256440",
-      "canonicalId": "tmdb-series-256440",
-      "title": "Alıkara",
-      "rawTitle": "Alıkara",
-      "slug": "tmdb-series-256440-al-kara",
-      "type": "series",
-      "year": 2026,
-      "quality": "FHD",
-      "provider": "tmdb",
-      "rating": 8,
-      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2F3Vp8LSlyJY34q8jnGTNs0FHgnXP.jpg&output=webp",
-      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F7leJka0INkfFgZ3RpAKfDShyCTq.jpg&output=webp",
-      "imdbId": "tt45382417",
-      "tmdbId": "256440",
-      "categories": [
-        "Crime",
-        "Drama"
-      ],
-      "status": "PUBLISHED",
-      "publishedAt": "2026-09-18T03:12:51.583Z"
-    },
-    {
-      "id": "tmdb-series-312663",
-      "canonicalId": "tmdb-series-312663",
-      "title": "The Fixers",
-      "rawTitle": "The Fixers",
-      "slug": "tmdb-series-312663-the-fixers",
-      "type": "series",
-      "year": 2026,
-      "quality": "FHD",
-      "provider": "tmdb",
-      "rating": 8,
-      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FhwEfhJNLii8oUfuiRBPk11DDv8y.jpg&output=webp",
-      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FiyHgIyMJ6Vd5w79dLeGOTOkqDS5.jpg&output=webp",
-      "imdbId": "tt39495239",
-      "tmdbId": "312663",
-      "categories": [
-        "Action & Adventure",
-        "Comedy",
-        "Crime"
-      ],
-      "status": "PUBLISHED",
-      "publishedAt": "2026-09-18T03:12:51.542Z"
-    },
-    {
-      "id": "tmdb-series-294990",
-      "canonicalId": "tmdb-series-294990",
-      "title": "Spring of the Blade",
-      "rawTitle": "Spring of the Blade",
-      "slug": "tmdb-series-294990-spring-of-the-blade",
-      "type": "series",
-      "year": 2026,
-      "quality": "FHD",
-      "provider": "tmdb",
-      "rating": 9,
-      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FuRWqHI4R4nOSPpRnbr8JjnpCmgx.jpg&output=webp",
-      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FqLZQnTiQxkBOid9tVLWC1CmoOcu.jpg&output=webp",
-      "imdbId": "tt45956347",
-      "tmdbId": "294990",
-      "categories": [
-        "Drama",
-        "Family"
-      ],
-      "status": "PUBLISHED",
-      "publishedAt": "2026-09-18T03:12:51.526Z"
-    },
-    {
-      "id": "tmdb-series-298008",
-      "canonicalId": "tmdb-series-298008",
-      "title": "Plastic Beauty",
-      "rawTitle": "Plastic Beauty",
-      "slug": "tmdb-series-298008-plastic-beauty",
-      "type": "series",
-      "year": 2026,
-      "quality": "FHD",
-      "provider": "tmdb",
-      "rating": 7,
-      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2F6HLl3jgLQmUO0mw2TspFf5jIU3M.jpg&output=webp",
-      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FmIjERiWlnDzQWHTcZdtucLmTCeO.jpg&output=webp",
-      "imdbId": "tt37884325",
-      "tmdbId": "298008",
-      "categories": [
-        "Drama"
-      ],
-      "status": "PUBLISHED",
-      "publishedAt": "2026-09-18T03:12:51.504Z"
     }
   ],
   "featured": [
@@ -3775,6 +3775,28 @@
       "publishedAt": "2026-06-08T05:00:26.000Z"
     },
     {
+      "id": "tmdb-series-321958",
+      "canonicalId": "tmdb-series-321958",
+      "title": "Line of Fire",
+      "rawTitle": "Line of Fire",
+      "slug": "tmdb-series-321958-line-of-fire",
+      "type": "series",
+      "year": 2026,
+      "quality": "FHD",
+      "provider": "tmdb",
+      "rating": 9.2,
+      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FsodRW36uEDHjv8l1WhYUNDvnIK6.jpg&output=webp",
+      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F8U4dW5E24Eqs06OJko5ChjcufHb.jpg&output=webp",
+      "imdbId": "tt39365612",
+      "tmdbId": "321958",
+      "categories": [
+        "Drama",
+        "Crime"
+      ],
+      "status": "PUBLISHED",
+      "publishedAt": "2026-09-23T03:20:14.886Z"
+    },
+    {
       "id": "12113365",
       "canonicalId": "12113365",
       "title": "Batman: Knightfall – Part 1: Knightfall",
@@ -4164,32 +4186,6 @@
       ],
       "status": "PUBLISHED",
       "publishedAt": "2023-03-22T23:21:55.000Z"
-    },
-    {
-      "id": "12097038",
-      "canonicalId": "12097038",
-      "title": "The Godfather",
-      "rawTitle": "The Godfather (1972)",
-      "slug": "the-godfather-1972",
-      "type": "movie",
-      "year": 1972,
-      "quality": "FHD",
-      "provider": "dotmobiz",
-      "rating": 8.7,
-      "poster": "https://storage.hicine.sbs/images/The-Godfather-Hindi.webp",
-      "backdrop": "https://storage.hicine.sbs/images/The-Godfather-Hindi.webp",
-      "categories": [
-        "Hollywood",
-        "1080p",
-        "1972",
-        "480p",
-        "720p",
-        "Crime",
-        "Drama",
-        "Dual Audio Movies"
-      ],
-      "status": "PUBLISHED",
-      "publishedAt": "2020-10-01T12:47:07.000Z"
     }
   ],
   "nowPlaying": [
@@ -4330,6 +4326,115 @@
       "publishedAt": "2022-08-28T13:22:56.000Z"
     },
     {
+      "id": "tmdb-series-321958",
+      "canonicalId": "tmdb-series-321958",
+      "title": "Line of Fire",
+      "rawTitle": "Line of Fire",
+      "slug": "tmdb-series-321958-line-of-fire",
+      "type": "series",
+      "year": 2026,
+      "quality": "FHD",
+      "provider": "tmdb",
+      "rating": 9.2,
+      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FsodRW36uEDHjv8l1WhYUNDvnIK6.jpg&output=webp",
+      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F8U4dW5E24Eqs06OJko5ChjcufHb.jpg&output=webp",
+      "imdbId": "tt39365612",
+      "tmdbId": "321958",
+      "categories": [
+        "Drama",
+        "Crime"
+      ],
+      "status": "PUBLISHED",
+      "publishedAt": "2026-09-23T03:20:14.886Z"
+    },
+    {
+      "id": "tmdb-movie-1248832",
+      "canonicalId": "tmdb-movie-1248832",
+      "title": "Digger",
+      "rawTitle": "Digger",
+      "slug": "tmdb-movie-1248832-digger",
+      "type": "movie",
+      "year": 2026,
+      "quality": "FHD",
+      "provider": "tmdb",
+      "rating": 8,
+      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2F1ATXKrIPJyKNwnJ6lcG088Sa6zi.jpg&output=webp",
+      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2Fb7PtCwsuMw84REQq15nmQgT9UXN.jpg&output=webp",
+      "imdbId": "tt31450459",
+      "tmdbId": "1248832",
+      "categories": [
+        "Comedy"
+      ],
+      "status": "PUBLISHED",
+      "publishedAt": "2026-09-23T03:20:14.872Z"
+    },
+    {
+      "id": "tmdb-series-312557",
+      "canonicalId": "tmdb-series-312557",
+      "title": "Minerva Academy",
+      "rawTitle": "Minerva Academy",
+      "slug": "tmdb-series-312557-minerva-academy",
+      "type": "series",
+      "year": 2026,
+      "quality": "FHD",
+      "provider": "tmdb",
+      "rating": 7.7,
+      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FmVXUJjlOSiYMpApFoPyWTnqBhUm.jpg&output=webp",
+      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FzynoUI9kwDQKkGW5KqvxQp8Kj1Q.jpg&output=webp",
+      "imdbId": "tt28765828",
+      "tmdbId": "312557",
+      "categories": [
+        "Drama",
+        "Mystery"
+      ],
+      "status": "PUBLISHED",
+      "publishedAt": "2026-09-23T03:20:14.854Z"
+    },
+    {
+      "id": "tmdb-movie-445466",
+      "canonicalId": "tmdb-movie-445466",
+      "title": "Idiots",
+      "rawTitle": "Idiots",
+      "slug": "tmdb-movie-445466-idiots",
+      "type": "movie",
+      "year": 2026,
+      "quality": "FHD",
+      "provider": "tmdb",
+      "rating": 6.8,
+      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2Fl1JFNC1SdgyXVr7BaD5ehaYBvOC.jpg&output=webp",
+      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2Flneqlgbg3XUjNaeGYk8arhgzczo.jpg&output=webp",
+      "imdbId": "tt6628920",
+      "tmdbId": "445466",
+      "categories": [
+        "Comedy",
+        "Crime"
+      ],
+      "status": "PUBLISHED",
+      "publishedAt": "2026-09-23T03:20:14.838Z"
+    },
+    {
+      "id": "tmdb-movie-1607127",
+      "canonicalId": "tmdb-movie-1607127",
+      "title": "One Last Shot",
+      "rawTitle": "One Last Shot",
+      "slug": "tmdb-movie-1607127-one-last-shot",
+      "type": "movie",
+      "year": 2026,
+      "quality": "FHD",
+      "provider": "tmdb",
+      "rating": 8.4,
+      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FniQ4NBh2jqAf1hDZP5m6ReWFAb7.jpg&output=webp",
+      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F8giIQcHpxgsPVP6c7aQtHl3txuh.jpg&output=webp",
+      "imdbId": "tt37971717",
+      "tmdbId": "1607127",
+      "categories": [
+        "Action",
+        "Thriller"
+      ],
+      "status": "PUBLISHED",
+      "publishedAt": "2026-09-23T03:20:14.820Z"
+    },
+    {
       "id": "tmdb-movie-675871",
       "canonicalId": "tmdb-movie-675871",
       "title": "Super Troopers 3",
@@ -4339,7 +4444,7 @@
       "year": 2026,
       "quality": "FHD",
       "provider": "tmdb",
-      "rating": 6.3,
+      "rating": 7,
       "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FVVU42nqsEmUtFpH1d9MHj5BIpF.jpg&output=webp",
       "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FoU2H07DQVjGMp2vUgrYzso36v15.jpg&output=webp",
       "imdbId": "tt8820258",
@@ -4427,7 +4532,7 @@
       "year": 2026,
       "quality": "FHD",
       "provider": "tmdb",
-      "rating": 7.9,
+      "rating": 7.4,
       "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FLr0Ng7Gg02RW1AyfYEL6P0WUvd.jpg&output=webp",
       "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F2o9FzuBzCqrDTdlHRuEVnGD2d5h.jpg&output=webp",
       "imdbId": "tt36583977",
@@ -4463,115 +4568,7 @@
       ],
       "status": "PUBLISHED",
       "publishedAt": "2026-09-21T03:20:15.016Z"
-    },
-    {
-      "id": "tmdb-movie-1514863",
-      "canonicalId": "tmdb-movie-1514863",
-      "title": "Best of the Best",
-      "rawTitle": "Best of the Best",
-      "slug": "tmdb-movie-1514863-best-of-the-best",
-      "type": "movie",
-      "year": 2026,
-      "quality": "FHD",
-      "provider": "tmdb",
-      "rating": 4.8,
-      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2F9soOjsZ91vtMzypK2F3MC378JI5.jpg&output=webp",
-      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F5m1j7Wibh3HnZq5QHm97v8dI3GH.jpg&output=webp",
-      "imdbId": "tt16478058",
-      "tmdbId": "1514863",
-      "categories": [
-        "Comedy"
-      ],
-      "status": "PUBLISHED",
-      "publishedAt": "2026-09-20T03:25:14.214Z"
-    },
-    {
-      "id": "tmdb-movie-1228834",
-      "canonicalId": "tmdb-movie-1228834",
-      "title": "The Fix",
-      "rawTitle": "The Fix",
-      "slug": "tmdb-movie-1228834-the-fix",
-      "type": "movie",
-      "year": 2026,
-      "quality": "FHD",
-      "provider": "tmdb",
-      "rating": 7.3,
-      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FyopXjun3ICFfJci2ukcEzceZjUs.jpg&output=webp",
-      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FdJTWIecL2vxsCRl5G0lRhPsfrhc.jpg&output=webp",
-      "imdbId": "tt9601292",
-      "tmdbId": "1228834",
-      "categories": [
-        "Action",
-        "Thriller"
-      ],
-      "status": "PUBLISHED",
-      "publishedAt": "2026-09-19T03:08:40.251Z"
-    },
-    {
-      "id": "tmdb-movie-1451944",
-      "canonicalId": "tmdb-movie-1451944",
-      "title": "Lust Stories 3",
-      "rawTitle": "Lust Stories 3",
-      "slug": "tmdb-movie-1451944-lust-stories-3",
-      "type": "movie",
-      "year": 2026,
-      "quality": "FHD",
-      "provider": "tmdb",
-      "rating": 8.5,
-      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2F1GBe4TeCeXa1ENg0rv2JH8cH0ry.jpg&output=webp",
-      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FygMNjFOBuLVoInEoPzqPU2U0pfg.jpg&output=webp",
-      "imdbId": "tt39667834",
-      "tmdbId": "1451944",
-      "categories": [
-        "Romance",
-        "Drama"
-      ],
-      "status": "PUBLISHED",
-      "publishedAt": "2026-09-19T03:08:40.238Z"
-    },
-    {
-      "id": "tmdb-movie-1641629",
-      "canonicalId": "tmdb-movie-1641629",
-      "title": "You+Me – Against the World",
-      "rawTitle": "You+Me – Against the World",
-      "slug": "tmdb-movie-1641629-you-me-against-the-world",
-      "type": "movie",
-      "year": 2026,
-      "quality": "FHD",
-      "provider": "tmdb",
-      "rating": 5.8,
-      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FbAbBNVplg7h79sm94OyHeKk8Phz.jpg&output=webp",
-      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FnkEhDomjmPHJSA4Tx8pxv0NlKEy.jpg&output=webp",
-      "imdbId": "tt43617372",
-      "tmdbId": "1641629",
-      "categories": [
-        "Romance",
-        "Drama"
-      ],
-      "status": "PUBLISHED",
-      "publishedAt": "2026-09-19T03:08:40.227Z"
-    },
-    {
-      "id": "tmdb-series-275102",
-      "canonicalId": "tmdb-series-275102",
-      "title": "The Scandal",
-      "rawTitle": "The Scandal",
-      "slug": "tmdb-series-275102-the-scandal",
-      "type": "series",
-      "year": 2026,
-      "quality": "FHD",
-      "provider": "tmdb",
-      "rating": 6.3,
-      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FpJsIzlTjmx07ilwEkl0cglrMVa1.jpg&output=webp",
-      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2Fuc1p1PEbEMpdIHqnU9TESNC6Jhp.jpg&output=webp",
-      "imdbId": "tt36347588",
-      "tmdbId": "275102",
-      "categories": [
-        "Drama"
-      ],
-      "status": "PUBLISHED",
-      "publishedAt": "2026-09-19T03:08:40.213Z"
     }
   ],
-  "updatedAt": "2026-09-22T03:19:38.988Z"
+  "updatedAt": "2026-09-23T03:20:15.514Z"
 }
