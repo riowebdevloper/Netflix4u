@@ -73,6 +73,18 @@ const CATEGORY_META = {
     description: 'Stream international Hollywood blockbusters, action franchises, and Oscar winners in 4K & 1080p Full HD on Netflix4U.',
     h1: 'Hollywood Blockbusters & Franchises',
     intro: 'Watch world-renowned Hollywood box office hits, sci-fi sagas, and cinematic universes with verified subtitles and high-definition video streams.'
+  },
+  'south-indian': {
+    title: 'Watch South Indian Movies in Hindi Dubbed & Regional Audio | Netflix4U',
+    description: 'Stream and download high-octane South Indian blockbusters in Hindi Dubbed, Tamil, Telugu, Malayalam, and Kannada with verified multi-audio servers on Netflix4U.',
+    h1: 'South Indian Cinema & Hindi Dubbed Blockbusters',
+    intro: 'Explore the very best of South Indian cinema across Tollywood, Kollywood, Mollywood, and Sandalwood. Featuring massive spectacles, emotional dramas, and explosive action in Hindi dub and original regional master audio.'
+  },
+  'hindi-dubbed': {
+    title: 'Watch Dual Audio & Hindi Dubbed Movies Online in Full HD | Netflix4U',
+    description: 'Watch Hollywood and international blockbusters with official Hindi dubbed multi-audio tracks and verified fast cloud streaming on Netflix4U.',
+    h1: 'Dual Audio & Hindi Dubbed Cinema',
+    intro: 'Enjoy international cinema, Hollywood action sagas, and world releases with crystal clear Hindi dubbed and original multi-audio tracks.'
   }
 };
 

@@ -1089,13 +1089,21 @@ async function handleCatalogDiscover(req, res) {
 
   const providerMap = {
     'Netflix': '8',
-    'PrimeVideo': '119',
-    'Prime': '119',
-    'JioHotstar': '122',
-    'Hotstar': '122',
+    'netflix': '8',
+    'PrimeVideo': '119|10',
+    'primevideo': '119|10',
+    'Prime': '119|10',
+    'prime': '119|10',
+    'JioHotstar': '2336|390|220',
+    'jiohotstar': '2336|390|220',
+    'Hotstar': '2336|390|220',
+    'hotstar': '2336|390|220',
     'SonyLIV': '237',
+    'sonyliv': '237',
     'Crunchyroll': '283',
-    'MX': '515'
+    'crunchyroll': '283',
+    'MX': '515|1898',
+    'mx': '515|1898'
   };
 
   if (platform && providerMap[platform]) {
@@ -1123,7 +1131,7 @@ async function handleCatalogDiscover(req, res) {
 
   try {
     const raw = await fetchTmdbCatalogJson(`/discover/${mediaType}?${params.toString()}`);
-    const items = (raw?.results || []).map(r => ({
+    let items = (raw?.results || []).map(r => ({
       tmdbId: r.id,
       title: r.title || r.name,
       year: String(r.release_date || r.first_air_date || '').slice(0, 4),
@@ -1133,20 +1141,38 @@ async function handleCatalogDiscover(req, res) {
       type: mediaType,
       overview: r.overview || ''
     }));
+
+    // If TMDB returns empty, fall back to matching platform curated feed items (no generic catalog fallback)
+    if (!items.length && platform) {
+      const curFile = path.join(DATA_DIR, `curated_${platform.toLowerCase().replace(/[^a-z0-9]/g, '')}.json`);
+      if (fs.existsSync(curFile)) {
+        try {
+          const curData = JSON.parse(fs.readFileSync(curFile, 'utf8'));
+          const curItems = [];
+          (curData.rails || []).forEach(r => (r.items || []).forEach(it => {
+            if (!curItems.find(x => x.tmdbId === it.tmdbId)) curItems.push(it);
+          }));
+          if (curItems.length) items = curItems.slice(0, 20);
+        } catch(e) {}
+      }
+    }
+
     sendJson(res, 200, { ok: true, items }, { 'Cache-Control': 'public, max-age=3600' });
   } catch (err) {
-    const catalog = getCatalogSummary().slice(0, 16);
-    const items = catalog.map(c => ({
-      tmdbId: c.tmdbId || c.id,
-      title: c.title,
-      year: String(c.year || ''),
-      poster: c.poster,
-      backdrop: c.backdrop,
-      rating: typeof c.rating === 'number' ? c.rating : 8.0,
-      type: c.type === 'series' ? 'tv' : 'movie',
-      overview: c.description || ''
-    }));
-    sendJson(res, 200, { ok: true, items });
+    // Verified fallback: check curated file for this specific platform, otherwise empty list (never generic catalog)
+    let fallbackItems = [];
+    if (platform) {
+      const curFile = path.join(DATA_DIR, `curated_${platform.toLowerCase().replace(/[^a-z0-9]/g, '')}.json`);
+      if (fs.existsSync(curFile)) {
+        try {
+          const curData = JSON.parse(fs.readFileSync(curFile, 'utf8'));
+          (curData.rails || []).forEach(r => (r.items || []).forEach(it => {
+            if (!fallbackItems.find(x => x.tmdbId === it.tmdbId)) fallbackItems.push(it);
+          }));
+        } catch(e) {}
+      }
+    }
+    sendJson(res, 200, { ok: true, items: fallbackItems.slice(0, 20) });
   }
 }
 
@@ -1829,16 +1855,18 @@ async function handleCatalogCurated(req, res) {
     }
   } catch (e) { }
 
-  // Fallback to trending
-  const fallbackPath = path.join(DATA_DIR, 'curated_trending.json');
-  if (fs.existsSync(fallbackPath)) {
-    try {
-      const raw = JSON.parse(fs.readFileSync(fallbackPath, 'utf8'));
-      return sendJson(res, 200, raw, { 'Cache-Control': 'public, max-age=1800' });
-    } catch (e) { }
+  // Fallback ONLY for trending tab (never silently serve trending for providers)
+  if (tab === 'trending') {
+    const fallbackPath = path.join(DATA_DIR, 'curated_trending.json');
+    if (fs.existsSync(fallbackPath)) {
+      try {
+        const raw = JSON.parse(fs.readFileSync(fallbackPath, 'utf8'));
+        return sendJson(res, 200, raw, { 'Cache-Control': 'public, max-age=1800' });
+      } catch (e) { }
+    }
   }
 
-  sendJson(res, 404, { ok: false, error: 'Curated feed not found for tab: ' + tab });
+  sendJson(res, 404, { ok: false, error: 'Curated feed not found for tab: ' + tab, rails: [], items: [] });
 }
 
 async function handleCatalogApi(req, res) {
@@ -2597,8 +2625,29 @@ async function handleStreamPlayer(req, res) {
   }
   if (!type) type = (q.get('se') || q.get('season')) ? 'tv' : 'movie';
   const isMovie = (type === 'movie');
-  const actualSe = isMovie ? '' : se;
-  const actualEp = isMovie ? '' : ep;
+  const actualSe = isMovie ? 1 : se;
+  const actualEp = isMovie ? 1 : ep;
+
+  // Resolve Series Seasons for dynamic OTT episode navigation
+  let seriesSeasons = [];
+  const cleanId = String(id || '').replace(/^(?:dotmobiz|tmdb(?:-movie|-series|-tv)?)-/, '');
+  if (!isMovie && cleanId && /^\d+$/.test(cleanId)) {
+    try {
+      const tmdbTv = await fetchTmdbCatalogJson(`/tv/${cleanId}`);
+      if (tmdbTv && Array.isArray(tmdbTv.seasons)) {
+        seriesSeasons = tmdbTv.seasons
+          .filter(s => s && s.season_number > 0)
+          .map(s => ({
+            season_number: s.season_number,
+            episode_count: s.episode_count || 10,
+            name: s.name || `Season ${s.season_number}`
+          }));
+      }
+    } catch(e) {}
+  }
+  if (!isMovie && !seriesSeasons.length) {
+    seriesSeasons = [{ season_number: 1, episode_count: Math.max(actualEp, 10), name: 'Season 1' }];
+  }
 
   if (rawCloudUrl) {
     try {
@@ -2614,27 +2663,27 @@ async function handleStreamPlayer(req, res) {
   }
 
   // 2. Multi-Server Stream Providers (VidSrc Global direct TMDB, Peachify Ad-Free HD, VidLink Global Multi)
-  const cleanId = String(id || '').replace(/^(?:dotmobiz|tmdb(?:-movie|-series|-tv)?)-/, '');
   const vidsrcUrl = isMovie
     ? `https://vidsrc.pm/embed/movie/${cleanId}`
-    : `https://vidsrc.pm/embed/tv/${cleanId}/${se}/${ep}`;
+    : `https://vidsrc.pm/embed/tv/${cleanId}/${actualSe}/${actualEp}`;
   const peachifyDub = (lang === 'hi') ? 'Hindi' : (lang === 'ta' ? 'Tamil' : (lang === 'te' ? 'Telugu' : 'English'));
   const peachifyUrl = isMovie
     ? `https://peachify.pro/embed/movie/${cleanId}?accent=E50914&autoPlay=true${peachifyDub ? '&dub=' + encodeURIComponent(peachifyDub) : ''}`
-    : `https://peachify.pro/embed/tv/${cleanId}/${se}/${ep}?accent=E50914&autoPlay=true&autoNext=true&showNextBtn=true${peachifyDub ? '&dub=' + encodeURIComponent(peachifyDub) : ''}`;
+    : `https://peachify.pro/embed/tv/${cleanId}/${actualSe}/${actualEp}?accent=E50914&autoPlay=true&autoNext=true&showNextBtn=true${peachifyDub ? '&dub=' + encodeURIComponent(peachifyDub) : ''}`;
   const vidlinkUrl = isMovie
     ? `https://vidlink.pro/movie/${cleanId}?multiLang=true${lang ? '&lang=' + lang : ''}`
-    : `https://vidlink.pro/tv/${cleanId}/${se}/${ep}?multiLang=true${lang ? '&lang=' + lang : ''}`;
+    : `https://vidlink.pro/tv/${cleanId}/${actualSe}/${actualEp}?multiLang=true${lang ? '&lang=' + lang : ''}`;
   const allMovieLandUrl = isMovie
     ? `https://slast430did.com/play/${cleanId}`
-    : `https://slast430did.com/play/${cleanId}?s=${se}&e=${ep}`;
+    : `https://slast430did.com/play/${cleanId}?s=${actualSe}&e=${actualEp}`;
 
-  const displayTitle = (title || 'Stream') + (isMovie ? '' : ` • S${se} E${ep}`);
+  const displayTitle = (title || 'Stream') + (isMovie ? '' : ` • S${actualSe} E${actualEp}`);
   const directDlHref = rawCloudUrl ? `/api/download-file?url=${encodeURIComponent(rawCloudUrl)}` : (cloudStream?.url ? `/api/download-file?url=${encodeURIComponent(cloudStream.url)}` : '');
 
   // Default initial server: Fast Cloud (if available) or Peachify (for Hindi/regional dub) or VidSrc (for English original)
   const isDubLang = (lang === 'hi' || lang === 'ta' || lang === 'te');
   const initialServer = cloudStream ? 'cloud' : (isDubLang ? 'peachify' : 'vidsrc');
+  const currentSeasonMeta = seriesSeasons.find(s => s.season_number === actualSe) || seriesSeasons[0] || { episode_count: 10 };
 
   const playerHtml = `<!DOCTYPE html>
 <html lang="en">
@@ -2657,53 +2706,107 @@ async function handleStreamPlayer(req, res) {
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body {
-      width: 100vw; height: 100vh; overflow: hidden; background: #000;
-      color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      user-select: none;
+      width: 100%; min-height: 100%; margin: 0; padding: 0;
+      background: #000; color: #fff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      user-select: none; overflow-x: hidden;
     }
-    #player-root { position: relative; width: 100%; height: 100%; display: flex; flex-direction: column; }
     
-    /* Sleek, Minimal Top Bar */
+    /* Clean Player Shell & 16:9 Aspect Ratio Frame (Zero Letterbox Void in Mobile Portrait) */
+    .player-shell {
+      position: relative; width: 100%; display: flex; flex-direction: column; background: #000;
+    }
+    
+    .player-frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      max-height: calc(100vh - 120px);
+      background: #000;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .layer-view {
+      position: absolute; inset: 0; width: 100%; height: 100%; border: none; display: none; background: #000;
+    }
+    .layer-view.visible { display: block; }
+    #artplayer-layer { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+    /* Clean Isolated Fullscreen Mode */
+    .player-shell.is-fullscreen,
+    :fullscreen .player-shell,
+    .player-frame:fullscreen {
+      position: fixed !important; inset: 0 !important; width: 100vw !important; height: 100dvh !important;
+      max-height: none !important; z-index: 99999 !important; background: #000 !important;
+    }
+    .player-shell.is-fullscreen .player-frame,
+    :fullscreen .player-frame {
+      width: 100vw !important; height: 100dvh !important; max-height: none !important; aspect-ratio: auto !important;
+    }
+
+    /* Top Floating Header & Controls Overlay */
     #top-bar {
       position: absolute; top: 0; left: 0; right: 0; z-index: 60;
       display: flex; align-items: center; justify-content: space-between;
       padding: 8px 12px;
       background: linear-gradient(180deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 70%, transparent 100%);
       transition: opacity 0.3s ease, transform 0.3s ease;
-      gap: 8px;
+      gap: 8px; flex-wrap: wrap;
     }
     .top-bar-hidden { opacity: 0; pointer-events: none; transform: translateY(-6px); }
 
     .title-area { display: flex; align-items: center; gap: 6px; min-width: 0; flex-wrap: wrap; }
     .title-text { font-size: 12px; font-weight: 700; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px; }
-    .badge-ep { background: #e50914; color: #fff; font-size: 9px; font-weight: 800; padding: 2px 5px; border-radius: 4px; }
+    .badge-ep { background: #e50914; color: #fff; font-size: 9px; font-weight: 800; padding: 2px 6px; border-radius: 4px; text-transform: uppercase; }
     
     .controls-group { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; }
     .pill {
-      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15);
-      color: rgba(255,255,255,0.85); font-size: 11px; font-weight: 600;
-      padding: 3px 8px; border-radius: 12px; cursor: pointer;
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.18);
+      color: rgba(255,255,255,0.9); font-size: 11px; font-weight: 600;
+      padding: 4px 8px; border-radius: 12px; cursor: pointer;
       display: inline-flex; align-items: center; gap: 4px; transition: all 0.2s;
+      outline: none; -webkit-appearance: none;
     }
-    .pill:hover { background: rgba(255,255,255,0.2); color: #fff; }
+    .pill:hover { background: rgba(255,255,255,0.22); color: #fff; }
     .pill.active { background: #e50914; border-color: #e50914; color: #fff; box-shadow: 0 0 8px rgba(229,9,20,0.4); }
+
+    select.pill {
+      background-color: rgba(18,20,28,0.95);
+      color: #fff; padding-right: 18px;
+    }
+    select.pill option {
+      background-color: #12141c; color: #fff;
+    }
 
     .server-pill {
       background: rgba(20,24,32,0.85); border: 1px solid rgba(255,255,255,0.15);
-      color: #bbb; font-size: 10px; font-weight: 600; padding: 3px 8px; border-radius: 6px; cursor: pointer; transition: all 0.2s;
+      color: #bbb; font-size: 10px; font-weight: 600; padding: 4px 8px; border-radius: 6px; cursor: pointer; transition: all 0.2s;
     }
     .server-pill:hover { background: rgba(255,255,255,0.2); color: #fff; }
     .server-pill.active { background: #2563eb; border-color: #3b82f6; color: #fff; font-weight: 700; }
 
     .dl-btn {
       background: #16a34a; border: 1px solid #22c55e; color: #fff; font-size: 10px; font-weight: 700;
-      padding: 3px 8px; border-radius: 6px; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 3px;
+      padding: 4px 8px; border-radius: 6px; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 3px;
     }
 
-    /* Video Frame Container */
-    #media-view { width: 100%; height: 100%; position: relative; flex: 1; background: #000; }
-    .layer-view { width: 100%; height: 100%; border: none; display: none; position: absolute; inset: 0; }
-    .layer-view.visible { display: block; }
+    /* Below-Player Attached Info Section in Mobile Portrait */
+    .player-details-bar {
+      padding: 10px 14px;
+      background: #0d0f17;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .details-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
 
     #shield-toast {
       position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%);
@@ -2716,41 +2819,37 @@ async function handleStreamPlayer(req, res) {
   <script src="https://cdn.jsdelivr.net/npm/artplayer/dist/artplayer.min.js"></script>
 </head>
 <body>
-  <div id="player-root">
-    <div id="top-bar">
-      <div class="title-area">
-        <span class="badge-ep">${isMovie ? 'MOVIE' : 'S' + actualSe + ' E' + actualEp}</span>
-        <span class="title-text">${escapeHtml(displayTitle)}</span>
-        ${!isMovie ? `
-        <div class="ep-nav-group" style="display:inline-flex;align-items:center;gap:4px;margin-left:6px;">
-          <button type="button" id="player-prev-ep" class="pill" ${ep <= 1 ? 'disabled style="opacity:0.4;pointer-events:none;"' : ''} onclick="navigateEpisode(-1)" title="Previous Episode">⏮️ Prev Ep</button>
-          <button type="button" id="player-next-ep" class="pill" onclick="navigateEpisode(1)" title="Next Episode">Next Ep ⏭️</button>
-        </div>` : ''}
+  <div id="player-root" class="player-shell">
+    <!-- 16:9 Video Frame Stage -->
+    <div class="player-frame">
+      <div id="top-bar">
+        <div class="title-area">
+          <span class="badge-ep">${isMovie ? 'MOVIE' : 'S' + actualSe + ' E' + actualEp}</span>
+          <span class="title-text">${escapeHtml(displayTitle)}</span>
+          ${!isMovie ? `
+          <div class="ep-nav-group" style="display:inline-flex;align-items:center;gap:4px;margin-left:4px;">
+            <button type="button" id="player-prev-ep" class="pill" ${actualEp <= 1 && actualSe <= 1 ? 'disabled style="opacity:0.35;"' : ''} onclick="stepEpisode(-1)" title="Previous Episode">⏮️</button>
+            <select id="season-selector" class="pill" onchange="onSeasonChange(this.value)">
+              ${seriesSeasons.map(s => `<option value="${s.season_number}" ${s.season_number === actualSe ? 'selected' : ''}>${escapeHtml(s.name)}</option>`).join('')}
+            </select>
+            <select id="episode-selector" class="pill" onchange="onEpisodeChange(this.value)">
+              ${Array.from({ length: currentSeasonMeta.episode_count || 10 }, (_, i) => i + 1).map(eNum => `<option value="${eNum}" ${eNum === actualEp ? 'selected' : ''}>Ep ${eNum}</option>`).join('')}
+            </select>
+            <button type="button" id="player-next-ep" class="pill" onclick="stepEpisode(1)" title="Next Episode">⏭️</button>
+          </div>` : ''}
+          <button type="button" class="pill" onclick="toggleFullscreen()" title="Fullscreen" style="margin-left:auto;">⛶ Fullscreen</button>
+        </div>
+
+        <!-- Language Selectors -->
+        <div class="controls-group">
+          <button type="button" class="pill ${lang === 'hi' ? 'active' : ''}" onclick="switchLanguage('hi')">🇮🇳 Hindi Dub</button>
+          <button type="button" class="pill ${lang === 'en' ? 'active' : ''}" onclick="switchLanguage('en')">🌐 English</button>
+          <button type="button" class="pill ${lang === 'ta' ? 'active' : ''}" onclick="switchLanguage('ta')">Tamil</button>
+          <button type="button" class="pill ${lang === 'te' ? 'active' : ''}" onclick="switchLanguage('te')">Telugu</button>
+        </div>
       </div>
 
-      <!-- Language Selectors -->
-      <div class="controls-group">
-        <button type="button" class="pill ${lang === 'hi' ? 'active' : ''}" onclick="switchLanguage('hi')">🇮🇳 Hindi Dub</button>
-        <button type="button" class="pill ${lang === 'en' ? 'active' : ''}" onclick="switchLanguage('en')">🌐 English</button>
-        <button type="button" class="pill ${lang === 'ta' ? 'active' : ''}" onclick="switchLanguage('ta')">Tamil</button>
-        <button type="button" class="pill ${lang === 'te' ? 'active' : ''}" onclick="switchLanguage('te')">Telugu</button>
-      </div>
-
-      <!-- Server Selectors -->
-      <div class="controls-group">
-        <button type="button" id="btn-srv-vidsrc" class="server-pill ${initialServer === 'vidsrc' ? 'active' : ''}" onclick="activateServer(&quot;vidsrc&quot;)">📺 VidSrc (Direct TMDB • Global)</button>
-        <button type="button" id="btn-srv-peachify" class="server-pill ${initialServer === 'peachify' ? 'active' : ''}" onclick="activateServer(&quot;peachify&quot;)">🍑 Peachify (Ad-Free HD)</button>
-        <button type="button" id="btn-srv-allmovieland" class="server-pill ${initialServer === 'allmovieland' ? 'active' : ''}" onclick="activateServer(&quot;allmovieland&quot;)">🎬 AllMovieLand (Ultra HD)</button>
-        <button type="button" id="btn-srv-vidlink" class="server-pill ${initialServer === 'vidlink' ? 'active' : ''}" onclick="activateServer(&quot;vidlink&quot;)">🚀 VidLink Multi</button>
-        ${cloudStream ? '<button type="button" id="btn-srv-cloud" class="server-pill ' + (initialServer === 'cloud' ? 'active' : '') + '" onclick="activateServer(&quot;cloud&quot;)">⚡ Fast Cloud (Hindi Dual)</button>' : ''}
-        ${cloudStream ? '<a href="intent:' + cloudStream.url + '#Intent;action=android.intent.action.VIEW;type=video/*;package=com.mxtech.videoplayer.ad;end" class="dl-btn" style="background:#0284c7;border-color:#38bdf8;" title="Play Hindi Dub in MX Player">📱 MX Player</a>' : ''}
-        ${cloudStream ? '<a href="vlc://' + cloudStream.url.replace(/^https?:\/\//i, '') + '" class="dl-btn" style="background:#ea580c;border-color:#f97316;" title="Play Hindi Dub in VLC Player">🚀 VLC</a>' : ''}
-        ${directDlHref ? '<a href="' + directDlHref + '" class="dl-btn" target="_blank" rel="noopener">📥 Direct Download</a>' : ''}
-      </div>
-    </div>
-
-    <!-- Media Players View Area -->
-    <div id="media-view">
+      <!-- Video Layers -->
       <iframe id="iframe-vidsrc" class="layer-view ${initialServer === 'vidsrc' ? 'visible' : ''}" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
       <iframe id="iframe-peachify" class="layer-view ${initialServer === 'peachify' ? 'visible' : ''}" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
       <iframe id="iframe-allmovieland" class="layer-view ${initialServer === 'allmovieland' ? 'visible' : ''}" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
@@ -2758,10 +2857,34 @@ async function handleStreamPlayer(req, res) {
       <div id="artplayer-layer" class="layer-view ${initialServer === 'cloud' ? 'visible' : ''}"></div>
     </div>
 
+    <!-- Below-Video Controls & Server Selection Attached Directly (Zero Void in Portrait) -->
+    <div class="player-details-bar">
+      <div class="details-row">
+        <div style="font-size:12px;font-weight:700;color:rgba(255,255,255,0.9);">
+          Streaming Servers:
+        </div>
+        <div class="controls-group">
+          <button type="button" id="btn-srv-vidsrc" class="server-pill ${initialServer === 'vidsrc' ? 'active' : ''}" onclick="activateServer(&quot;vidsrc&quot;)">📺 VidSrc (TMDB)</button>
+          <button type="button" id="btn-srv-peachify" class="server-pill ${initialServer === 'peachify' ? 'active' : ''}" onclick="activateServer(&quot;peachify&quot;)">🍑 Peachify HD</button>
+          <button type="button" id="btn-srv-allmovieland" class="server-pill ${initialServer === 'allmovieland' ? 'active' : ''}" onclick="activateServer(&quot;allmovieland&quot;)">🎬 AllMovieLand</button>
+          <button type="button" id="btn-srv-vidlink" class="server-pill ${initialServer === 'vidlink' ? 'active' : ''}" onclick="activateServer(&quot;vidlink&quot;)">🚀 VidLink Multi</button>
+          ${cloudStream ? '<button type="button" id="btn-srv-cloud" class="server-pill ' + (initialServer === 'cloud' ? 'active' : '') + '" onclick="activateServer(&quot;cloud&quot;)">⚡ Fast Cloud</button>' : ''}
+          ${cloudStream ? '<a href="intent:' + cloudStream.url + '#Intent;action=android.intent.action.VIEW;type=video/*;package=com.mxtech.videoplayer.ad;end" class="dl-btn" style="background:#0284c7;border-color:#38bdf8;" title="Play Hindi Dub in MX Player">📱 MX</a>' : ''}
+          ${cloudStream ? '<a href="vlc://' + cloudStream.url.replace(/^https?:\/\//i, '') + '" class="dl-btn" style="background:#ea580c;border-color:#f97316;" title="Play Hindi Dub in VLC Player">🚀 VLC</a>' : ''}
+          ${directDlHref ? '<a href="' + directDlHref + '" class="dl-btn" target="_blank" rel="noopener">📥 Download</a>' : ''}
+        </div>
+      </div>
+    </div>
+
     <div id="shield-toast"></div>
   </div>
 
   <script>
+    var cleanId = ${JSON.stringify(cleanId)};
+    var isMovie = ${Boolean(isMovie)};
+    var currentSe = ${actualSe};
+    var currentEp = ${actualEp};
+    var seasonsData = ${JSON.stringify(seriesSeasons)};
     var vidsrcUrl = ${JSON.stringify(vidsrcUrl)};
     var peachifyUrl = ${JSON.stringify(peachifyUrl)};
     var allMovieLandUrl = ${JSON.stringify(allMovieLandUrl)};
@@ -2796,25 +2919,27 @@ async function handleStreamPlayer(req, res) {
 
       if (srv === 'vidsrc') {
         var frame = document.getElementById('iframe-vidsrc');
-        if (!frame.src || frame.src === 'about:blank') {
+        if (!frame.src || frame.src === 'about:blank' || frame.src !== vidsrcUrl) {
           frame.src = vidsrcUrl;
         }
         frame.classList.add('visible');
       } else if (srv === 'peachify') {
         var frame = document.getElementById('iframe-peachify');
-        if (!frame.src || frame.src === 'about:blank') {
+        if (!frame.src || frame.src === 'about:blank' || frame.src !== peachifyUrl) {
           frame.src = peachifyUrl;
         }
         frame.classList.add('visible');
       } else if (srv === 'allmovieland') {
         var frame = document.getElementById('iframe-allmovieland');
-        if (!frame.src || frame.src === 'about:blank') {
+        if (!frame.src || frame.src === 'about:blank' || frame.src !== allMovieLandUrl) {
           frame.src = allMovieLandUrl;
         }
         frame.classList.add('visible');
       } else if (srv === 'vidlink') {
         var frame = document.getElementById('iframe-vidlink');
-        if (!frame.src || frame.src === 'about:blank') frame.src = vidlinkUrl;
+        if (!frame.src || frame.src === 'about:blank' || frame.src !== vidlinkUrl) {
+          frame.src = vidlinkUrl;
+        }
         frame.classList.add('visible');
       } else if (srv === 'cloud' && cloudUrl) {
         var mount = document.getElementById('artplayer-layer');
@@ -2824,6 +2949,122 @@ async function handleStreamPlayer(req, res) {
         } else {
           art.switchUrl(cloudUrl);
         }
+      }
+    }
+
+    function getSeasonMeta(sNum) {
+      return seasonsData.find(function(s) { return Number(s.season_number) === Number(sNum); }) || { season_number: sNum, episode_count: 10 };
+    }
+
+    function updateEpDropdown(sNum, selectedEp) {
+      var epSel = document.getElementById('episode-selector');
+      if (!epSel) return;
+      var meta = getSeasonMeta(sNum);
+      var count = meta.episode_count || 10;
+      var opts = '';
+      for (var i = 1; i <= count; i++) {
+        opts += '<option value="' + i + '"' + (i === Number(selectedEp) ? ' selected' : '') + '>Ep ' + i + '</option>';
+      }
+      epSel.innerHTML = opts;
+    }
+
+    function updateNavBounds() {
+      var prevBtn = document.getElementById('player-prev-ep');
+      var nextBtn = document.getElementById('player-next-ep');
+      if (prevBtn) {
+        var isFirst = (currentSe <= 1 && currentEp <= 1);
+        prevBtn.disabled = isFirst;
+        prevBtn.style.opacity = isFirst ? '0.35' : '1';
+      }
+      if (nextBtn) {
+        var lastSeason = seasonsData[seasonsData.length - 1] || { season_number: 1, episode_count: 10 };
+        var isLast = (currentSe >= lastSeason.season_number && currentEp >= lastSeason.episode_count);
+        nextBtn.disabled = isLast;
+        nextBtn.style.opacity = isLast ? '0.35' : '1';
+      }
+      var badge = document.querySelector('.badge-ep');
+      if (badge) badge.textContent = isMovie ? 'MOVIE' : ('S' + currentSe + ' E' + currentEp);
+      var seSel = document.getElementById('season-selector');
+      if (seSel) seSel.value = String(currentSe);
+      var epSel = document.getElementById('episode-selector');
+      if (epSel) epSel.value = String(currentEp);
+    }
+
+    function switchEpisode(newSe, newEp) {
+      currentSe = Number(newSe) || 1;
+      currentEp = Number(newEp) || 1;
+
+      // Update URL query state without full page reload
+      var sp = new URLSearchParams(window.location.search);
+      sp.set('se', String(currentSe));
+      sp.set('ep', String(currentEp));
+      window.history.replaceState({}, '', window.location.pathname + '?' + sp.toString());
+
+      // Cleanly stop any active Artplayer instance
+      if (art) {
+        try { art.destroy(false); art = null; } catch(e) {}
+      }
+
+      // Rebuild streaming server URLs
+      vidsrcUrl = 'https://vidsrc.pm/embed/tv/' + cleanId + '/' + currentSe + '/' + currentEp;
+      var pDub = ${JSON.stringify(peachifyDub)};
+      peachifyUrl = 'https://peachify.pro/embed/tv/' + cleanId + '/' + currentSe + '/' + currentEp + '?accent=E50914&autoPlay=true&autoNext=true&showNextBtn=true' + (pDub ? '&dub=' + encodeURIComponent(pDub) : '');
+      var currentLang = ${JSON.stringify(lang)};
+      vidlinkUrl = 'https://vidlink.pro/tv/' + cleanId + '/' + currentSe + '/' + currentEp + '?multiLang=true' + (currentLang ? '&lang=' + currentLang : '');
+      allMovieLandUrl = 'https://slast430did.com/play/' + cleanId + '?s=' + currentSe + '&e=' + currentEp;
+
+      // Blank frames to prevent audio ghosting
+      document.querySelectorAll('.layer-view').forEach(function(el) {
+        if (el.tagName === 'IFRAME') el.src = 'about:blank';
+      });
+
+      // Re-activate active streaming server
+      setTimeout(function() {
+        activateServer(currentServer);
+      }, 30);
+
+      updateEpDropdown(currentSe, currentEp);
+      updateNavBounds();
+      showShieldToast('Switched to Season ' + currentSe + ' Episode ' + currentEp);
+    }
+
+    function onSeasonChange(newSe) {
+      switchEpisode(newSe, 1);
+    }
+
+    function onEpisodeChange(newEp) {
+      switchEpisode(currentSe, newEp);
+    }
+
+    function stepEpisode(delta) {
+      var meta = getSeasonMeta(currentSe);
+      var targetEp = currentEp + delta;
+      if (targetEp >= 1 && targetEp <= meta.episode_count) {
+        switchEpisode(currentSe, targetEp);
+      } else if (targetEp > meta.episode_count) {
+        var nextSeNum = currentSe + 1;
+        var nextMeta = seasonsData.find(function(s) { return s.season_number === nextSeNum; });
+        if (nextMeta) switchEpisode(nextSeNum, 1);
+      } else if (targetEp < 1 && currentSe > 1) {
+        var prevSeNum = currentSe - 1;
+        var prevMeta = seasonsData.find(function(s) { return s.season_number === prevSeNum; });
+        if (prevMeta) switchEpisode(prevSeNum, prevMeta.episode_count || 1);
+      }
+    }
+
+    function toggleFullscreen() {
+      var root = document.getElementById('player-root');
+      if (!document.fullscreenElement) {
+        if (root.requestFullscreen) {
+          root.requestFullscreen().catch(function() {
+            root.classList.toggle('is-fullscreen');
+          });
+        } else {
+          root.classList.toggle('is-fullscreen');
+        }
+      } else {
+        if (document.exitFullscreen) document.exitFullscreen();
+        root.classList.remove('is-fullscreen');
       }
     }
 
@@ -2847,39 +3088,22 @@ async function handleStreamPlayer(req, res) {
         fullscreenWeb: true,
         autoSize: false,
         theme: '#e50914',
-        moreVideoAttr: {
-          crossOrigin: 'anonymous',
-          playsInline: true
-        },
+        moreVideoAttr: { crossOrigin: 'anonymous', playsInline: true },
         icons: {
-          loading: '<div style="color:#e50914;font-size:12px;font-weight:bold;">Connecting Hindi Dual-Audio Stream...</div>'
+          loading: '<div style="color:#e50914;font-size:12px;font-weight:bold;">Connecting Stream...</div>'
         },
         customType: {
           mkv: function(video, targetUrl) { video.src = targetUrl; }
         }
       });
 
-      art.on('error', function(err) {
-        triggerAutoBypass('Direct cloud stream error');
-      });
-      art.on('video:error', function(err) {
-        triggerAutoBypass('Video decoding error');
-      });
+      art.on('error', function() { triggerAutoBypass('Direct cloud stream error'); });
+      art.on('video:error', function() { triggerAutoBypass('Video decoding error'); });
     }
 
     function switchLanguage(targetLang) {
       var currentParams = new URLSearchParams(window.location.search);
       currentParams.set('lang', targetLang);
-      window.location.search = currentParams.toString();
-    }
-
-    function navigateEpisode(delta) {
-      var currentParams = new URLSearchParams(window.location.search);
-      var currentEp = parseInt(currentParams.get('ep') || currentParams.get('episode') || '1', 10) || 1;
-      var newEp = currentEp + delta;
-      if (newEp < 1) newEp = 1;
-      currentParams.set('ep', String(newEp));
-      currentParams.set('episode', String(newEp));
       window.location.search = currentParams.toString();
     }
 
@@ -2898,8 +3122,8 @@ async function handleStreamPlayer(req, res) {
         if (playerEvt === 'play' || playerEvt === 'playing' || playerEvt === 'timeupdate') {
           showShieldToast('Playing on Peachify Ad-Free HD Stream');
         }
-        if (playerEvt === 'ended' && !${isMovie}) {
-          navigateEpisode(1);
+        if (playerEvt === 'ended' && !isMovie) {
+          stepEpisode(1);
         }
       }
     });
@@ -2912,7 +3136,7 @@ async function handleStreamPlayer(req, res) {
       clearTimeout(hideTimeout);
       hideTimeout = setTimeout(function() {
         topBar.classList.add('top-bar-hidden');
-      }, 3000);
+      }, 3500);
     }
     window.addEventListener('mousemove', resetTopBarTimer);
     window.addEventListener('touchstart', resetTopBarTimer);
@@ -2920,6 +3144,7 @@ async function handleStreamPlayer(req, res) {
 
     // Start initial player
     activateServer(currentServer);
+    updateNavBounds();
   </script>
 </body>
 </html>`;
@@ -3007,6 +3232,7 @@ module.exports = {
   handleTmdbLookup,
   handleRecommendations,
   handleCatalogApi,
+  handleCatalogCurated,
   handleCatalogTitle,
   handleCatalogDiscover,
   handleCatalogTrending,

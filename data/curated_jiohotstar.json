@@ -1,6 +1,750 @@
 {
   "ok": true,
   "tab": "JioHotstar",
-  "hero": [],
-  "rails": []
+  "hero": [
+    {
+      "tmdbId": 299534,
+      "canonicalId": "tmdb-movie-299534",
+      "type": "movie",
+      "title": "Avengers: Endgame",
+      "year": "2019",
+      "poster": "https://image.tmdb.org/t/p/w342/ulzhLuWrPK07P1YkdWQLZnQh1JL.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/w780/7RyHsO4yDXtBv1zUU3mTpHeQ0d5.jpg",
+      "rating": 8.2,
+      "overview": "After the devastating events of Avengers: Infinity War, the universe is in ruins due to the efforts of the Mad Titan, Thanos. With the help of remaining allies, the Avengers must assemble once more in order to undo Thanos' actions and restore order to the universe once and for all, no matter what consequences may be in store."
+    },
+    {
+      "tmdbId": 1224993,
+      "canonicalId": "tmdb-movie-1224993",
+      "type": "movie",
+      "title": "Dark Nuns",
+      "year": "2025",
+      "poster": "https://image.tmdb.org/t/p/w342/2Abt2GgscAGtGAXTrhH44qPhugI.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/w780/bQdYYutvomoxfLQK8gTV8Z3qsmv.jpg",
+      "rating": 6.1,
+      "overview": "Desperation drives two nuns to perform an exorcism no nun should attempt. With a possessed child at the mercy of evil and the opposition of the Catholic Church, they take on the dangerous forbidden rituals themselves, putting their immortal souls in grave danger. They must confront the terrifying cost of their sacrilegious actions, but one goal remains: the boy must be saved at all costs."
+    },
+    {
+      "tmdbId": 299536,
+      "canonicalId": "tmdb-movie-299536",
+      "type": "movie",
+      "title": "Avengers: Infinity War",
+      "year": "2018",
+      "poster": "https://image.tmdb.org/t/p/w342/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/w780/mDfJG3LC3Dqb67AZ52x3Z0jU0uB.jpg",
+      "rating": 8.2,
+      "overview": "As the Avengers and their allies have continued to protect the world from threats too large for any one hero to handle, a new danger has emerged from the cosmic shadows: Thanos. A despot of intergalactic infamy, his goal is to collect all six Infinity Stones, artifacts of unimaginable power, and use them to inflict his twisted will on all of reality. Everything the Avengers have fought for has led up to this moment - the fate of Earth and existence itself has never been more uncertain."
+    },
+    {
+      "tmdbId": 549,
+      "canonicalId": "tmdb-tv-549",
+      "type": "tv",
+      "title": "Law & Order",
+      "year": "1990",
+      "poster": "https://image.tmdb.org/t/p/w342/haJ9eHytVO3H3JooMJG1DiWwDNm.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/w780/tc7canPSAn2X14hYi6Rl3gZm1o4.jpg",
+      "rating": 7.3,
+      "overview": "In cases ripped from the headlines, police investigate serious and often deadly crimes, weighing the evidence and questioning the suspects until someone is taken into custody. The district attorney's office then builds a case to convict the perpetrator by proving the person guilty beyond a reasonable doubt. Working together, these expert teams navigate all sides of the complex criminal justice system to make New York a safer place."
+    },
+    {
+      "tmdbId": 2734,
+      "canonicalId": "tmdb-tv-2734",
+      "type": "tv",
+      "title": "Law & Order: Special Victims Unit",
+      "year": "1999",
+      "poster": "https://image.tmdb.org/t/p/w342/iofokHZoUB4Qhik4PflvJl8TT6a.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/w780/obtdxPgmfykYwVnvuYXC5f2xKlQ.jpg",
+      "rating": 8,
+      "overview": "In the criminal justice system, sexually-based offenses are considered especially heinous. In New York City, the dedicated detectives who investigate these vicious felonies are members of an elite squad known as the Special Victims Unit. These are their stories."
+    }
+  ],
+  "rails": [
+    {
+      "key": "jiohotstar-top-movies",
+      "title": "Top Movies on JioHotstar",
+      "ranked": true,
+      "logo": "/images/platforms/JmxIsKiiiFkm.jpg",
+      "auto": null,
+      "items": [
+        {
+          "tmdbId": 299534,
+          "canonicalId": "tmdb-movie-299534",
+          "type": "movie",
+          "title": "Avengers: Endgame",
+          "year": "2019",
+          "poster": "https://image.tmdb.org/t/p/w342/ulzhLuWrPK07P1YkdWQLZnQh1JL.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/7RyHsO4yDXtBv1zUU3mTpHeQ0d5.jpg",
+          "rating": 8.2,
+          "overview": "After the devastating events of Avengers: Infinity War, the universe is in ruins due to the efforts of the Mad Titan, Thanos. With the help of remaining allies, the Avengers must assemble once more in order to undo Thanos' actions and restore order to the universe once and for all, no matter what consequences may be in store."
+        },
+        {
+          "tmdbId": 1224993,
+          "canonicalId": "tmdb-movie-1224993",
+          "type": "movie",
+          "title": "Dark Nuns",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/2Abt2GgscAGtGAXTrhH44qPhugI.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/bQdYYutvomoxfLQK8gTV8Z3qsmv.jpg",
+          "rating": 6.1,
+          "overview": "Desperation drives two nuns to perform an exorcism no nun should attempt. With a possessed child at the mercy of evil and the opposition of the Catholic Church, they take on the dangerous forbidden rituals themselves, putting their immortal souls in grave danger. They must confront the terrifying cost of their sacrilegious actions, but one goal remains: the boy must be saved at all costs."
+        },
+        {
+          "tmdbId": 299536,
+          "canonicalId": "tmdb-movie-299536",
+          "type": "movie",
+          "title": "Avengers: Infinity War",
+          "year": "2018",
+          "poster": "https://image.tmdb.org/t/p/w342/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/mDfJG3LC3Dqb67AZ52x3Z0jU0uB.jpg",
+          "rating": 8.2,
+          "overview": "As the Avengers and their allies have continued to protect the world from threats too large for any one hero to handle, a new danger has emerged from the cosmic shadows: Thanos. A despot of intergalactic infamy, his goal is to collect all six Infinity Stones, artifacts of unimaginable power, and use them to inflict his twisted will on all of reality. Everything the Avengers have fought for has led up to this moment - the fate of Earth and existence itself has never been more uncertain."
+        },
+        {
+          "tmdbId": 1084242,
+          "canonicalId": "tmdb-movie-1084242",
+          "type": "movie",
+          "title": "Zootopia 2",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/oJ7g2CifqpStmoYQyaLQgEU32qO.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/lgotja3xMoJZbynwHfcQcJAEMWH.jpg",
+          "rating": 7.7,
+          "overview": "After cracking the biggest case in Zootopia's history, rookie cops Judy Hopps and Nick Wilde find themselves on the twisting trail of a great mystery when Gary De'Snake arrives and turns the animal metropolis upside down. To crack the case, Judy and Nick must go undercover to unexpected new parts of town, where their growing partnership is tested like never before."
+        },
+        {
+          "tmdbId": 83533,
+          "canonicalId": "tmdb-movie-83533",
+          "type": "movie",
+          "title": "Avatar: Fire and Ash",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/bRBeSHfGHwkEpImlhxPmOcUsaeg.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/iN41Ccw4DctL8npfmYg1j5Tr1eb.jpg",
+          "rating": 7.6,
+          "overview": "In the wake of the devastating war against the RDA and the loss of their eldest son, Jake Sully and Neytiri face a new threat on Pandora: the Ash People, a violent and power-hungry Na'vi tribe led by the ruthless Varang. Jake's family must fight for their survival and the future of Pandora in a conflict that pushes them to their emotional and physical limits."
+        },
+        {
+          "tmdbId": 157336,
+          "canonicalId": "tmdb-movie-157336",
+          "type": "movie",
+          "title": "Interstellar",
+          "year": "2014",
+          "poster": "https://image.tmdb.org/t/p/w342/yQvGrMoipbRoddT0ZR8tPoR7NfX.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/8sNiAPPYU14PUepFNeSNGUTiHW.jpg",
+          "rating": 8.5,
+          "overview": "The adventures of a group of explorers who make use of a newly discovered wormhole to surpass the limitations on human space travel and conquer the vast distances involved in an interstellar voyage."
+        },
+        {
+          "tmdbId": 238,
+          "canonicalId": "tmdb-movie-238",
+          "type": "movie",
+          "title": "The Godfather",
+          "year": "1972",
+          "poster": "https://image.tmdb.org/t/p/w342/3bhkrj58Vtu7enYsRolD1fZdja1.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/tSPT36ZKlP2WVHJLM4cQPLSzv3b.jpg",
+          "rating": 8.7,
+          "overview": "Spanning the years 1945 to 1955, a chronicle of the fictional Italian-American Corleone crime family. When organized crime family patriarch, Vito Corleone barely survives an attempt on his life, his youngest son, Michael steps in to take care of the would-be killers, launching a campaign of bloody revenge."
+        },
+        {
+          "tmdbId": 155,
+          "canonicalId": "tmdb-movie-155",
+          "type": "movie",
+          "title": "The Dark Knight",
+          "year": "2008",
+          "poster": "https://image.tmdb.org/t/p/w342/qJ2tW6WMUDux911r6m7haRef0WH.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/9FE5eD92WfVCiivM9Pq9GVSrlWk.jpg",
+          "rating": 8.5,
+          "overview": "Batman raises the stakes in his war on crime. With the help of Lt. Jim Gordon and District Attorney Harvey Dent, Batman sets out to dismantle the remaining criminal organizations that plague the streets. The partnership proves to be effective, but they soon find themselves prey to a reign of chaos unleashed by a rising criminal mastermind known to the terrified citizens of Gotham as the Joker."
+        },
+        {
+          "tmdbId": 634649,
+          "canonicalId": "tmdb-movie-634649",
+          "type": "movie",
+          "title": "Spider-Man: No Way Home",
+          "year": "2021",
+          "poster": "https://image.tmdb.org/t/p/w342/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/iQFcwSGbZXMkeyKrxbPnwnRo5fl.jpg",
+          "rating": 7.9,
+          "overview": "Peter Parker is unmasked and no longer able to separate his normal life from the high-stakes of being a super-hero. When he asks for help from Doctor Strange the stakes become even more dangerous, forcing him to discover what it truly means to be Spider-Man."
+        },
+        {
+          "tmdbId": 24428,
+          "canonicalId": "tmdb-movie-24428",
+          "type": "movie",
+          "title": "The Avengers",
+          "year": "2012",
+          "poster": "https://image.tmdb.org/t/p/w342/RYMX2wcKCBAr24UyPD7xwmjaTn.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/9BBTo63ANSmhC4e6r62OJFuK2GL.jpg",
+          "rating": 8.1,
+          "overview": "When an unexpected enemy emerges and threatens global safety and security, Nick Fury, director of the international peacekeeping agency known as S.H.I.E.L.D., finds himself in need of a team to pull the world back from the brink of disaster. Spanning the globe, a daring recruitment effort begins!"
+        },
+        {
+          "tmdbId": 76341,
+          "canonicalId": "tmdb-movie-76341",
+          "type": "movie",
+          "title": "Mad Max: Fury Road",
+          "year": "2015",
+          "poster": "https://image.tmdb.org/t/p/w342/ulcAi4dKpAjHwYGS08vNyx9H6I9.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/gqrnQA6Xppdl8vIb2eJc58VC1tW.jpg",
+          "rating": 7.6,
+          "overview": "An apocalyptic story set in the furthest reaches of our planet, in a stark desert landscape where humanity is broken, and most everyone is crazed fighting for the necessities of life. Within this world exist two rebels on the run who just might be able to restore order."
+        },
+        {
+          "tmdbId": 1184918,
+          "canonicalId": "tmdb-movie-1184918",
+          "type": "movie",
+          "title": "The Wild Robot",
+          "year": "2024",
+          "poster": "https://image.tmdb.org/t/p/w342/wTnV3PCVW5O92JMrFvvrRcV39RU.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/1pmXyN3sKeYoUhu5VBZiDU4BX21.jpg",
+          "rating": 8.3,
+          "overview": "After a shipwreck, an intelligent robot called Roz is stranded on an uninhabited island. To survive the harsh environment, Roz bonds with the island's animals and cares for an orphaned baby goose."
+        },
+        {
+          "tmdbId": 1226863,
+          "canonicalId": "tmdb-movie-1226863",
+          "type": "movie",
+          "title": "The Super Mario Galaxy Movie",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/eJGWx219ZcEMVQJhAgMiqo8tYY.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/kxQiIJ4gVcD3K6o14MJ72p5yRcE.jpg",
+          "rating": 8.2,
+          "overview": "Having thwarted Bowser's previous plot to marry Princess Peach, Mario and Luigi now face a fresh threat in Bowser Jr., who is determined to liberate his father from captivity and restore the family legacy. Alongside companions new and old, the brothers travel across the stars to stop the young heir's crusade."
+        },
+        {
+          "tmdbId": 27205,
+          "canonicalId": "tmdb-movie-27205",
+          "type": "movie",
+          "title": "Inception",
+          "year": "2010",
+          "poster": "https://image.tmdb.org/t/p/w342/xlaY2zyzMfkhk0HSC5VUwzoZPU1.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/8ZTVqvKDQ8emSGUEMjsS4yHAwrp.jpg",
+          "rating": 8.4,
+          "overview": "Cobb, a skilled thief who commits corporate espionage by infiltrating the subconscious of his targets is offered a chance to regain his old life as payment for a task considered to be impossible: \"inception\", the implantation of another person's idea into a target's subconscious."
+        },
+        {
+          "tmdbId": 533535,
+          "canonicalId": "tmdb-movie-533535",
+          "type": "movie",
+          "title": "Deadpool & Wolverine",
+          "year": "2024",
+          "poster": "https://image.tmdb.org/t/p/w342/8cdWjvZQUExUUTzyp4t6EDMubfO.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/by8z9Fe8y7p4jo2YlW2SZDnptyT.jpg",
+          "rating": 7.6,
+          "overview": "A listless Wade Wilson toils away in civilian life with his days as the morally flexible mercenary, Deadpool, behind him. But when his homeworld faces an existential threat, Wade must reluctantly suit-up again with an even more reluctant Wolverine."
+        },
+        {
+          "tmdbId": 122,
+          "canonicalId": "tmdb-movie-122",
+          "type": "movie",
+          "title": "The Lord of the Rings: The Return of the King",
+          "year": "2003",
+          "poster": "https://image.tmdb.org/t/p/w342/rCzpDGLbOoPwLjy3OAm5NUPOTrC.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/ctiw6FZK4N36LmkjSklWEbuvlq9.jpg",
+          "rating": 8.5,
+          "overview": "As armies mass for a final battle that will decide the fate of the world--and powerful, ancient forces of Light and Dark compete to determine the outcome--one member of the Fellowship of the Ring is revealed as the noble heir to the throne of the Kings of Men. Yet, the sole hope for triumph over evil lies with a brave hobbit, Frodo, who, accompanied by his loyal friend Sam and the hideous, wretched Gollum, ventures deep into the very dark heart of Mordor on his seemingly impossible quest to destroy the Ring of Power.​"
+        },
+        {
+          "tmdbId": 936075,
+          "canonicalId": "tmdb-movie-936075",
+          "type": "movie",
+          "title": "Michael",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/dueFqKLvjftnELZaGYwY7xinfaI.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/ufSwlnECLoUbBjPrFqEQcWBzHwc.jpg",
+          "rating": 8.6,
+          "overview": "The story of Michael Jackson, one of the most influential artists the world has ever known, and his life beyond the music. His journey from the discovery of his extraordinary talent as the lead of the Jackson Five, to the visionary artist whose creative ambition fueled a relentless pursuit to become the biggest entertainer in the world, highlighting both his life off-stage and some of the most iconic performances from his early solo career."
+        },
+        {
+          "tmdbId": 335984,
+          "canonicalId": "tmdb-movie-335984",
+          "type": "movie",
+          "title": "Blade Runner 2049",
+          "year": "2017",
+          "poster": "https://image.tmdb.org/t/p/w342/gajva2L0rPYkEWjzgFlBXCAVBE5.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/gNdLJU9TxrpGx4dkZidjys3fyy0.jpg",
+          "rating": 7.6,
+          "overview": "Thirty years after the events of the first film, a new blade runner, LAPD Officer K, unearths a long-buried secret that has the potential to plunge what's left of society into chaos. K's discovery leads him on a quest to find Rick Deckard, a former LAPD blade runner who has been missing for 30 years."
+        },
+        {
+          "tmdbId": 872585,
+          "canonicalId": "tmdb-movie-872585",
+          "type": "movie",
+          "title": "Oppenheimer",
+          "year": "2023",
+          "poster": "https://image.tmdb.org/t/p/w342/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/neeNHeXjMF5fXoCJRsOmkNGC7q.jpg",
+          "rating": 8,
+          "overview": "The story of J. Robert Oppenheimer's role in the development of the atomic bomb during World War II."
+        },
+        {
+          "tmdbId": 671,
+          "canonicalId": "tmdb-movie-671",
+          "type": "movie",
+          "title": "Harry Potter and the Philosopher's Stone",
+          "year": "2001",
+          "poster": "https://image.tmdb.org/t/p/w342/wuMc08IPKEatf9rnMNXvIDxqP4W.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/lvOLivVeX3DVVcwfVkxKf0R22D8.jpg",
+          "rating": 7.9,
+          "overview": "Harry Potter has lived under the stairs at his aunt and uncle's house his whole life. But on his 11th birthday, he learns he's a powerful wizard—with a place waiting for him at the Hogwarts School of Witchcraft and Wizardry. As he learns to harness his newfound powers with the help of the school's kindly headmaster, Harry uncovers the truth about his parents' deaths—and about the villain who's to blame."
+        }
+      ]
+    },
+    {
+      "key": "jiohotstar-popular-series",
+      "title": "Binge-Worthy Series on JioHotstar",
+      "ranked": false,
+      "logo": "/images/platforms/JmxIsKiiiFkm.jpg",
+      "auto": null,
+      "items": [
+        {
+          "tmdbId": 549,
+          "canonicalId": "tmdb-tv-549",
+          "type": "tv",
+          "title": "Law & Order",
+          "year": "1990",
+          "poster": "https://image.tmdb.org/t/p/w342/haJ9eHytVO3H3JooMJG1DiWwDNm.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/tc7canPSAn2X14hYi6Rl3gZm1o4.jpg",
+          "rating": 7.3,
+          "overview": "In cases ripped from the headlines, police investigate serious and often deadly crimes, weighing the evidence and questioning the suspects until someone is taken into custody. The district attorney's office then builds a case to convict the perpetrator by proving the person guilty beyond a reasonable doubt. Working together, these expert teams navigate all sides of the complex criminal justice system to make New York a safer place."
+        },
+        {
+          "tmdbId": 2734,
+          "canonicalId": "tmdb-tv-2734",
+          "type": "tv",
+          "title": "Law & Order: Special Victims Unit",
+          "year": "1999",
+          "poster": "https://image.tmdb.org/t/p/w342/iofokHZoUB4Qhik4PflvJl8TT6a.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/obtdxPgmfykYwVnvuYXC5f2xKlQ.jpg",
+          "rating": 8,
+          "overview": "In the criminal justice system, sexually-based offenses are considered especially heinous. In New York City, the dedicated detectives who investigate these vicious felonies are members of an elite squad known as the Special Victims Unit. These are their stories."
+        },
+        {
+          "tmdbId": 1434,
+          "canonicalId": "tmdb-tv-1434",
+          "type": "tv",
+          "title": "Family Guy",
+          "year": "1999",
+          "poster": "https://image.tmdb.org/t/p/w342/3PFsEuAiyLkWsP4GG6dIV37Q6gu.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/l7wShoIdIUwaDIbsHno9pO5MZXT.jpg",
+          "rating": 7.4,
+          "overview": "Sick, twisted, politically incorrect and Freakin' Sweet animated series featuring the adventures of the dysfunctional Griffin family. Bumbling Peter and long-suffering Lois have three kids. Stewie (a brilliant but sadistic baby bent on killing his mother and taking over the world), Meg (the oldest, and is the most unpopular girl in town) and Chris (the middle kid, he's not very bright but has a passion for movies). The final member of the family is Brian - a talking dog and much more than a pet, he keeps Stewie in check whilst sipping Martinis and sorting through his own life issues."
+        },
+        {
+          "tmdbId": 1416,
+          "canonicalId": "tmdb-tv-1416",
+          "type": "tv",
+          "title": "Grey's Anatomy",
+          "year": "2005",
+          "poster": "https://image.tmdb.org/t/p/w342/hjJkrLXhWvGHpLeLBDFznpBTY1S.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/jP0Rhj9OTPDAwQlHQwOLFDdeE8t.jpg",
+          "rating": 8.2,
+          "overview": "Follows the personal and professional lives of a group of doctors at Seattle's Grey Sloan Memorial Hospital."
+        },
+        {
+          "tmdbId": 1622,
+          "canonicalId": "tmdb-tv-1622",
+          "type": "tv",
+          "title": "Supernatural",
+          "year": "2005",
+          "poster": "https://image.tmdb.org/t/p/w342/8iixmfGx5EIFPdpNvB2JvI3VIqX.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/ro0tlgnsco4SwbdAgmscLkSlMSL.jpg",
+          "rating": 8.3,
+          "overview": "When they were boys, Sam and Dean Winchester lost their mother to a mysterious and demonic supernatural force. Subsequently, their father raised them to be soldiers. He taught them about the paranormal evil that lives in the dark corners and on the back roads of America ... and he taught them how to kill it. Now, the Winchester brothers crisscross the country in their '67 Chevy Impala, battling every kind of supernatural threat they encounter along the way. "
+        },
+        {
+          "tmdbId": 95350,
+          "canonicalId": "tmdb-tv-95350",
+          "type": "tv",
+          "title": "Lanterns",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/gpC7h43xPMEV3goYMQShfJbTtLq.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/wJjnJbVUwPz0GADAgpFt9nWtzUu.jpg",
+          "rating": 8.2,
+          "overview": "Two intergalactic cops, new recruit John Stewart and Lantern legend Hal Jordan, are drawn into a dark, Earth-based mystery as they investigate a murder in the American heartland."
+        },
+        {
+          "tmdbId": 94664,
+          "canonicalId": "tmdb-tv-94664",
+          "type": "tv",
+          "title": "Mushoku Tensei: Jobless Reincarnation",
+          "year": "2021",
+          "poster": "https://image.tmdb.org/t/p/w342/1mFnzilCyj9Coa9jbN8vFYLEZdW.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/j9fRIimor0AMFJR9kjZubXcABzZ.jpg",
+          "rating": 8.4,
+          "overview": "When a 34-year-old underachiever gets run over by a truck, his story doesn't end there. Reincarnated in a new world as an infant, Rudy will seize every opportunity to live the life he's always wanted. Armed with new friends, some freshly acquired magical abilities, and the courage to do the things he's always dreamed of, he's embarking on an epic adventure—with all of his past experience intact!"
+        },
+        {
+          "tmdbId": 247718,
+          "canonicalId": "tmdb-tv-247718",
+          "type": "tv",
+          "title": "MobLand",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/5Xc7WpWsgflfgEMoBlf9TmWhfbH.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/h0OC7ouop8YLwbAVfS3UUE2Lw4T.jpg",
+          "rating": 8.4,
+          "overview": "Two mob families clash in a war that threatens to topple empires and lives."
+        },
+        {
+          "tmdbId": 2316,
+          "canonicalId": "tmdb-tv-2316",
+          "type": "tv",
+          "title": "The Office",
+          "year": "2005",
+          "poster": "https://image.tmdb.org/t/p/w342/7DJKHzAi83BmQrWLrYYOqcoKfhR.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/mLyW3UTgi2lsMdtueYODcfAB9Ku.jpg",
+          "rating": 8.6,
+          "overview": "The everyday lives of office employees in the Scranton, Pennsylvania branch of the fictional Dunder Mifflin Paper Company."
+        },
+        {
+          "tmdbId": 1911,
+          "canonicalId": "tmdb-tv-1911",
+          "type": "tv",
+          "title": "Bones",
+          "year": "2005",
+          "poster": "https://image.tmdb.org/t/p/w342/eyTu5c8LniVciRZIOSHTvvkkgJa.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/aSye04zKzWtUP3U6Cl4bOXc5Ih9.jpg",
+          "rating": 8.2,
+          "overview": "Dr. Temperance Brennan and her colleagues at the Jeffersonian's Medico-Legal Lab assist Special Agent Seeley Booth with murder investigations when the remains are so badly decomposed, burned or destroyed that the standard identification methods are useless."
+        },
+        {
+          "tmdbId": 1408,
+          "canonicalId": "tmdb-tv-1408",
+          "type": "tv",
+          "title": "House",
+          "year": "2004",
+          "poster": "https://image.tmdb.org/t/p/w342/3Cz7ySOQJmqiuTdrc6CY0r65yDI.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/r0Q6eeN9L1ORL9QsV0Sg8ZV3vnv.jpg",
+          "rating": 8.6,
+          "overview": "Dr. Gregory House, a drug-addicted, unconventional, misanthropic medical genius, leads a team of diagnosticians at the fictional Princeton–Plainsboro Teaching Hospital in New Jersey."
+        },
+        {
+          "tmdbId": 1399,
+          "canonicalId": "tmdb-tv-1399",
+          "type": "tv",
+          "title": "Game of Thrones",
+          "year": "2011",
+          "poster": "https://image.tmdb.org/t/p/w342/1XS1oqL89opfnbLl8WnZY1O1uJx.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/zZqpAXxVSBtxV9qPBcscfXBcL2w.jpg",
+          "rating": 8.5,
+          "overview": "Seven noble families fight for control of the mythical land of Westeros. Friction between the houses leads to full-scale war. All while a very ancient evil awakens in the farthest north. Amidst the war, a neglected military order of misfits, the Night's Watch, is all that stands between the realms of men and icy horrors beyond."
+        },
+        {
+          "tmdbId": 4601,
+          "canonicalId": "tmdb-tv-4601",
+          "type": "tv",
+          "title": "Law & Order: Criminal Intent",
+          "year": "2001",
+          "poster": "https://image.tmdb.org/t/p/w342/zwqeNcgITL8ixEVVhe1dCnMQksq.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/qLYumObEHeRHFMC6N3SfCrnBFjp.jpg",
+          "rating": 7.6,
+          "overview": "The third installment of the “Law & Order” franchise takes viewers deep into the minds of its criminals while following the intense psychological approaches the Major Case Squad uses to solve its crimes."
+        },
+        {
+          "tmdbId": 1412,
+          "canonicalId": "tmdb-tv-1412",
+          "type": "tv",
+          "title": "Arrow",
+          "year": "2012",
+          "poster": "https://image.tmdb.org/t/p/w342/u8ZHFj1jC384JEkTt3vNg1DfWEb.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/wAFuDJfZJrnh6a1wf1Vt7PqYBvR.jpg",
+          "rating": 6.8,
+          "overview": "Spoiled billionaire playboy Oliver Queen is missing and presumed dead when his yacht is lost at sea. He returns five years later a changed man, determined to clean up the city as a hooded vigilante armed with a bow."
+        },
+        {
+          "tmdbId": 1421,
+          "canonicalId": "tmdb-tv-1421",
+          "type": "tv",
+          "title": "Modern Family",
+          "year": "2009",
+          "poster": "https://image.tmdb.org/t/p/w342/k5Qg5rgPoKdh3yTJJrLtyoyYGwC.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/nO7EzksrBzlNpAg5rgv8HzaBIkx.jpg",
+          "rating": 7.9,
+          "overview": "The Pritchett-Dunphy-Tucker clan is a wonderfully large and blended family. They give us an honest and often hilarious look into the sometimes warm, sometimes twisted, embrace of the modern family."
+        },
+        {
+          "tmdbId": 60735,
+          "canonicalId": "tmdb-tv-60735",
+          "type": "tv",
+          "title": "The Flash",
+          "year": "2014",
+          "poster": "https://image.tmdb.org/t/p/w342/yZevl2vHQgmosfwUdVNzviIfaWS.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/gFkHcIh7iE5G0oVOgpmY8ONQjhl.jpg",
+          "rating": 7.7,
+          "overview": "After being struck by lightning, CSI investigator Barry Allen awakens from a nine-month coma to discover he has been  granted the gift of super speed.  Teaming up with S.T.A.R. Labs, Barry takes on the persona of The Flash, the Fastest  Man Alive, to protect his city."
+        },
+        {
+          "tmdbId": 32798,
+          "canonicalId": "tmdb-tv-32798",
+          "type": "tv",
+          "title": "Hawaii Five-0",
+          "year": "2010",
+          "poster": "https://image.tmdb.org/t/p/w342/sIdCKlmM2nU4akIvFQaAIiU8YES.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/tLccUh3uazZ9TkLhe53UwprJhI4.jpg",
+          "rating": 7.7,
+          "overview": "Steve McGarrett returns home to Oahu, in order to find his father's killer. The governor offers him the chance to run his own task force (Five-0). Steve's team is joined by Chin Ho Kelly, Danny \"Danno\" Williams, and Kono Kalakaua."
+        },
+        {
+          "tmdbId": 44006,
+          "canonicalId": "tmdb-tv-44006",
+          "type": "tv",
+          "title": "Chicago Fire",
+          "year": "2012",
+          "poster": "https://image.tmdb.org/t/p/w342/r915sk2JpthZSjHEgZKifWxgo6L.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/14LzHqJrFcHk7ruMNCXpEkB0Thg.jpg",
+          "rating": 8.4,
+          "overview": "An edge-of-your-seat view into the lives of everyday heroes committed to one of America's noblest professions. For the firefighters, rescue squad and paramedics of Chicago Firehouse 51, no occupation is more stressful or dangerous, yet so rewarding and exhilarating. These courageous men and women are among the elite who forge headfirst into danger when everyone else is running the other way and whose actions make the difference between life and death."
+        },
+        {
+          "tmdbId": 18165,
+          "canonicalId": "tmdb-tv-18165",
+          "type": "tv",
+          "title": "The Vampire Diaries",
+          "year": "2009",
+          "poster": "https://image.tmdb.org/t/p/w342/b3vl6wV1W8PBezFfntKTrhrehCY.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/cJYLon9ejKJV7ua03ab8Tj9u067.jpg",
+          "rating": 8.3,
+          "overview": "The story of two vampire brothers obsessed with the same girl, who bears a striking resemblance to the beautiful but ruthless vampire they knew and loved in 1864."
+        },
+        {
+          "tmdbId": 1668,
+          "canonicalId": "tmdb-tv-1668",
+          "type": "tv",
+          "title": "Friends",
+          "year": "1994",
+          "poster": "https://image.tmdb.org/t/p/w342/kuqCom4s0htI5POztRTxxYrswqt.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/l0qVZIpXtIo7km9u5Yqh0nKPOr5.jpg",
+          "rating": 8.4,
+          "overview": "Six young people from New York City, on their own and struggling to survive in the real world, find the companionship, comfort and support they get from each other to be the perfect antidote to the pressures of life."
+        }
+      ]
+    },
+    {
+      "key": "jiohotstar-hindi-hits",
+      "title": "Hotstar Hindi Blockbusters",
+      "ranked": false,
+      "logo": "/images/platforms/JmxIsKiiiFkm.jpg",
+      "auto": null,
+      "items": [
+        {
+          "tmdbId": 1291608,
+          "canonicalId": "tmdb-movie-1291608",
+          "type": "movie",
+          "title": "Dhurandhar",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/8FHOtUpNIk5ZPEay2N2EY5lrxkv.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/snYOXem8pUGOffnLbbGq4aB1pg4.jpg",
+          "rating": 7.3,
+          "overview": "In the early 2000s, an undercover operative infiltrates Karachi's underworld, breaking into its inner circle to dismantle a violent nexus from within."
+        },
+        {
+          "tmdbId": 1582770,
+          "canonicalId": "tmdb-movie-1582770",
+          "type": "movie",
+          "title": "Dhurandhar: The Revenge",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/ov8vrRLZGoXHpYjSY9Vpv1tHJX7.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/br4Ra4dRpvR0R7a1zPPkOwGkcky.jpg",
+          "rating": 7.3,
+          "overview": "As rival gangs, corrupt officials and a ruthless Major Iqbal close in, Hamza's mission for his country spirals into a bloody personal war where the line between patriot and monster disappears in the streets of Lyari."
+        },
+        {
+          "tmdbId": 1160018,
+          "canonicalId": "tmdb-movie-1160018",
+          "type": "movie",
+          "title": "KILL",
+          "year": "2024",
+          "poster": "https://image.tmdb.org/t/p/w342/m2zXTuNPkywdYLyWlVyJZW2QOJH.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/u060S4drIWntmLeMDGe7mD0V6Jh.jpg",
+          "rating": 7.2,
+          "overview": "When an army commando finds out his true love is engaged against her will, he boards a New Dehli-bound train in a daring quest to derail the arranged marriage. But when a gang of knife-wielding thieves begin to terrorize innocent passengers on his train, the commando takes them on, one by one."
+        },
+        {
+          "tmdbId": 360814,
+          "canonicalId": "tmdb-movie-360814",
+          "type": "movie",
+          "title": "Dangal",
+          "year": "2016",
+          "poster": "https://image.tmdb.org/t/p/w342/cJRPOLEexI7qp2DKtFfCh7YaaUG.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/l0fNAHLOFReQJsxCOmGWvJDnimn.jpg",
+          "rating": 7.9,
+          "overview": "Dangal is an extraordinary true story based on the life of Mahavir Singh and his two daughters, Geeta and Babita Phogat. The film traces the inspirational journey of a father who trains his daughters to become world class wrestlers."
+        },
+        {
+          "tmdbId": 1169516,
+          "canonicalId": "tmdb-movie-1169516",
+          "type": "movie",
+          "title": "Welcome To The Jungle",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/1JlfUuvvX5xLP2LIDah4JhWUtTx.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/96chPcURxg5thGyLqxO6otyxHFR.jpg",
+          "rating": 5.1,
+          "overview": "A group of quirky characters gets stuck in a dangerous jungle during a chaotic mission. Filled with confusion, criminals, and hilarious situations, they must work together to survive and find their way out."
+        },
+        {
+          "tmdbId": 1163258,
+          "canonicalId": "tmdb-movie-1163258",
+          "type": "movie",
+          "title": "12th Fail",
+          "year": "2023",
+          "poster": "https://image.tmdb.org/t/p/w342/eebUPRI4Z5e1Z7Hev4JZAwMIFkX.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/6RV2o8PBCEyw9ylOWViV1CtULIF.jpg",
+          "rating": 7.9,
+          "overview": "Based on the true story of IPS officer Manoj Kumar Sharma, 12th Fail sheds limelight on fearlessly embracing the idea of restarting the academic journey despite the setbacks and challenges and reclaiming one's destiny at a place where millions of students attempt the world's toughest competitive exam: UPSC."
+        },
+        {
+          "tmdbId": 180853,
+          "canonicalId": "tmdb-movie-180853",
+          "type": "movie",
+          "title": "Chashme Baddoor",
+          "year": "2013",
+          "poster": "https://image.tmdb.org/t/p/w342/aqTXvi4Jp1BuhJhQ9fyxzgvizFM.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/xMG2SUpHfcNtfzbWGEyH1YL9n3S.jpg",
+          "rating": 4.7,
+          "overview": "Seema rejects six marriage proposals set by her father and leaves for Goa. After Jai and Omi fail to impress her, they come up with a cruel plan when they realise that their friend Sid is dating her."
+        },
+        {
+          "tmdbId": 1763900,
+          "canonicalId": "tmdb-movie-1763900",
+          "type": "movie",
+          "title": "Cocaine",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/zHFZkkes8BpHt4p3IRLUSjRVvrW.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/5mLEsUbjY6nO6kDD2m54i2gB6wG.jpg",
+          "rating": 8,
+          "overview": "\"Cocaine\" is a gripping crime thriller that delves deep into the murky intersection of law enforcement and criminality. Set against the vibrant yet perilous backdrop of Mumbai, the story revolves around a powerful drug cartel that wields significant control over the cocaine trade with the connivance of corrupt police officials and politicians. Abhimanyu Singh stars as Jalal, a diligent police inspector who finds himself entangled in the cartel's sinister web. Despite his best efforts to stay above board, Jalal must go to extreme lengths to protect his own brother, who is targeted by the ruthless cartel. As Jalal navigates the perilous dualities of upholding the law while safeguarding his family, he becomes ensnared in a dangerous game of survival."
+        },
+        {
+          "tmdbId": 1682974,
+          "canonicalId": "tmdb-movie-1682974",
+          "type": "movie",
+          "title": "The India Story",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/ocasYrRgkfKBdabKNPl8ttZuu7x.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/4TtfVgg7GHiYFtlIiEjZ3JHTz4S.jpg",
+          "rating": 8,
+          "overview": "A community confronts the devastating impact of pesticide contamination as industrial negligence threatens public health. The fight for accountability exposes systemic failures in regulatory oversight and corporate responsibility."
+        },
+        {
+          "tmdbId": 191714,
+          "canonicalId": "tmdb-movie-191714",
+          "type": "movie",
+          "title": "The Lunchbox",
+          "year": "2013",
+          "poster": "https://image.tmdb.org/t/p/w342/jSOiz1h97i3qwjZJXY8SeLvjPsl.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/uwj3rzni98tEYqJae4Cy2k78Xmm.jpg",
+          "rating": 7.4,
+          "overview": "A mistaken delivery in Mumbai's famously efficient lunchbox delivery system (Mumbai's Dabbawallahs) connects a young housewife to a stranger in the dusk of his life. They build a fantasy world together through notes in the lunchbox. Gradually, this fantasy threatens to overwhelm their reality."
+        },
+        {
+          "tmdbId": 496331,
+          "canonicalId": "tmdb-movie-496331",
+          "type": "movie",
+          "title": "Brahmāstra Part One: Shiva",
+          "year": "2022",
+          "poster": "https://image.tmdb.org/t/p/w342/x61qdvHIsr9U53FwoLVDQqAGur0.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/9oAqll65ytlOBLzZwUwkmo5RwIK.jpg",
+          "rating": 6.3,
+          "overview": "The story of Shiva – a young man on the brink of an epic love, with a girl named Isha. But their world is turned upside down when Shiva learns that he has a mysterious connection to the Brahmāstra... and a great power within him that he doesn’t understand just yet - the power of Fire."
+        },
+        {
+          "tmdbId": 534780,
+          "canonicalId": "tmdb-movie-534780",
+          "type": "movie",
+          "title": "Andhadhun",
+          "year": "2018",
+          "poster": "https://image.tmdb.org/t/p/w342/dy3K6hNvwE05siGgiLJcEiwgpdO.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/73aKTjdQ46jpv3InqNVnV76Nl0K.jpg",
+          "rating": 7.6,
+          "overview": "A series of mysterious events changes the life of a blind pianist who now must report a crime that was actually never witnessed by him."
+        },
+        {
+          "tmdbId": 7913,
+          "canonicalId": "tmdb-movie-7913",
+          "type": "movie",
+          "title": "Rang De Basanti",
+          "year": "2006",
+          "poster": "https://image.tmdb.org/t/p/w342/f1bF8CHzEu621bPSIg6XiUNAabh.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/fgRhyGbMAolDsQ65VRBRBtVQZNn.jpg",
+          "rating": 7.1,
+          "overview": "After a group of friends graduate from Delhi University, they listlessly haunt their old campus, until a British filmmaker casts them in a film she's making about freedom fighters under British rule. Although the group is largely apolitical, the tragic death of a friend owing to local government corruption awakens their patriotism. Inspired by the freedom fighters they represent in the film, the friends collectively decide to avenge the killing."
+        },
+        {
+          "tmdbId": 806516,
+          "canonicalId": "tmdb-movie-806516",
+          "type": "movie",
+          "title": "1232 KMs",
+          "year": "2021",
+          "poster": "https://image.tmdb.org/t/p/w342/k0msMiSf0Rs8uR2E99ILDKV8ocz.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/lb0z5nFtRYcnk37JPWG3dZYKRlY.jpg",
+          "rating": 8.8,
+          "overview": "Weeks after the nationwide COVID-19 lockdown, seven migrant labourers, on the verge of starvation, decided to go to their village just like millions of others."
+        },
+        {
+          "tmdbId": 444000,
+          "canonicalId": "tmdb-movie-444000",
+          "type": "movie",
+          "title": "Love Sonia",
+          "year": "2018",
+          "poster": "https://image.tmdb.org/t/p/w342/qiCMgBHncFnH9IGn5KPWRz0hEDv.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/eSW8frBUo3cuEtHQIojQLRaxg8z.jpg",
+          "rating": 7.2,
+          "overview": "Inspired by a real story of young girl's journey escape from the world of international sex trafficking."
+        },
+        {
+          "tmdbId": 15975,
+          "canonicalId": "tmdb-movie-15975",
+          "type": "movie",
+          "title": "Oye Lucky! Lucky Oye!",
+          "year": "2008",
+          "poster": "https://image.tmdb.org/t/p/w342/rtuw7H9ACOfs9BtRGF9okrr8yJH.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/6fBDH7IRAQ95lupqZxjYA3nifiu.jpg",
+          "rating": 7,
+          "overview": "Lovinder Singh, a thief now in custody and facing trial, reflects on his life of crime while the press reflect on how he managed to get away with so much before being arrested."
+        },
+        {
+          "tmdbId": 213565,
+          "canonicalId": "tmdb-movie-213565",
+          "type": "movie",
+          "title": "Arjun Pandit",
+          "year": "1999",
+          "poster": "https://image.tmdb.org/t/p/w342/qUbfKDqTKlNlVAZXjxMOl6CUO87.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/lECgwcGh6VuZl1xfM0L8iUThDqd.jpg",
+          "rating": 5.8,
+          "overview": "An unexpected betrayal transforms a meek college professor into a cold-blooded gangster who wants to marry a woman against her wishes."
+        },
+        {
+          "tmdbId": 353879,
+          "canonicalId": "tmdb-movie-353879",
+          "type": "movie",
+          "title": "Phantom",
+          "year": "2015",
+          "poster": "https://image.tmdb.org/t/p/w342/en6nlTMR7ZUqLvzZhEEDQU5IJxC.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/hyTS695IKdbZi49qcDLORSbXZcf.jpg",
+          "rating": 5.6,
+          "overview": "Daniyal, whose journey to seek justice takes him from India to Europe, America and the volatile Middle East. However, he finds out that in a mission like this, there is always a price to pay, in this case, a very personal price."
+        },
+        {
+          "tmdbId": 190940,
+          "canonicalId": "tmdb-movie-190940",
+          "type": "movie",
+          "title": "Bombay Talkies",
+          "year": "2013",
+          "poster": "https://image.tmdb.org/t/p/w342/jToHRUGY86MVkloVFgKVD090j90.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/g9ROWD3h20sztOKcNNt0hzSB5OP.jpg",
+          "rating": 6.3,
+          "overview": "One hundred years of Hindi cinema is celebrated in four short stories showcasing the power of film."
+        },
+        {
+          "tmdbId": 39347,
+          "canonicalId": "tmdb-movie-39347",
+          "type": "movie",
+          "title": "Hello Brother",
+          "year": "1999",
+          "poster": "https://image.tmdb.org/t/p/w342/edwYmD9YUs6gMPEkNOA78f28pwM.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/8ereTTWeyH1JH4IZOUS8qJ4M5W6.jpg",
+          "rating": 5.6,
+          "overview": "A ghost seeking revenge for his death haunts the man who received his heart in a transplant."
+        }
+      ]
+    }
+  ]
 }

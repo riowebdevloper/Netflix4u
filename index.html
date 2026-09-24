@@ -654,12 +654,14 @@
         </div>
 
         <!-- TV Show Episode Navigation Buttons (Desktop/Tablet Header View) -->
-        <div id="watch-ep-nav" class="hidden sm:flex items-center gap-1 shrink-0 ml-1">
-          <button id="watch-prev-ep-btn" type="button" aria-label="Previous Episode" title="Previous Episode" class="inline-flex items-center gap-1 px-2 sm:px-2.5 py-1 rounded-full bg-white/10 hover:bg-white/20 active:scale-95 disabled:opacity-40 disabled:pointer-events-none text-white text-[11px] sm:text-xs font-bold border border-white/15 backdrop-blur-md transition cursor-pointer">
+        <div id="watch-ep-nav" class="hidden sm:flex items-center gap-1.5 shrink-0 ml-1">
+          <button id="watch-prev-ep-btn" type="button" aria-label="Previous Episode" title="Previous Episode" class="inline-flex items-center gap-1 px-2 sm:px-2.5 py-1 rounded-full bg-white/10 hover:bg-white/20 active:scale-95 disabled:opacity-30 disabled:pointer-events-none text-white text-[11px] sm:text-xs font-bold border border-white/15 backdrop-blur-md transition cursor-pointer">
             <span>⏮️</span><span class="hidden md:inline">Prev</span>
           </button>
-          <span id="watch-ep-indicator" class="px-2 py-0.5 rounded bg-red-600/90 text-white text-[10px] sm:text-xs font-black tracking-wide shrink-0">S1:E1</span>
-          <button id="watch-next-ep-btn" type="button" aria-label="Next Episode" title="Next Episode" class="inline-flex items-center gap-1 px-2 sm:px-2.5 py-1 rounded-full bg-white/10 hover:bg-white/20 active:scale-95 disabled:opacity-40 disabled:pointer-events-none text-white text-[11px] sm:text-xs font-bold border border-white/15 backdrop-blur-md transition cursor-pointer">
+          <select id="watch-season-select" aria-label="Select Season" class="bg-black/80 hover:bg-black/95 border border-white/20 text-white text-xs font-bold rounded-lg px-2 py-1 outline-none transition cursor-pointer"></select>
+          <select id="watch-episode-select" aria-label="Select Episode" class="bg-black/80 hover:bg-black/95 border border-white/20 text-white text-xs font-bold rounded-lg px-2 py-1 outline-none transition cursor-pointer"></select>
+          <span id="watch-ep-indicator" class="hidden px-2 py-0.5 rounded bg-red-600/90 text-white text-[10px] sm:text-xs font-black tracking-wide shrink-0">S1:E1</span>
+          <button id="watch-next-ep-btn" type="button" aria-label="Next Episode" title="Next Episode" class="inline-flex items-center gap-1 px-2 sm:px-2.5 py-1 rounded-full bg-white/10 hover:bg-white/20 active:scale-95 disabled:opacity-30 disabled:pointer-events-none text-white text-[11px] sm:text-xs font-bold border border-white/15 backdrop-blur-md transition cursor-pointer">
             <span class="hidden md:inline">Next</span><span>⏭️</span>
           </button>
         </div>
@@ -757,10 +759,12 @@
 
     <!-- Mobile Floating TV Episode Navigation (Visible on mobile screens for TV series) -->
     <div id="watch-mobile-ep-bar" class="hidden sm:hidden absolute bottom-4 inset-x-0 z-[75] flex items-center justify-center pointer-events-none transition-all duration-300">
-      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/85 border border-white/20 backdrop-blur-xl shadow-2xl pointer-events-auto">
-        <button id="watch-mobile-prev-ep" type="button" class="px-2.5 py-1 rounded-full bg-white/10 hover:bg-white/20 active:scale-95 disabled:opacity-30 disabled:pointer-events-none text-white text-xs font-bold transition cursor-pointer">⏮️ Prev</button>
-        <span id="watch-mobile-ep-indicator" class="px-2.5 py-1 rounded-full bg-red-600 text-white text-[11px] font-black tracking-wider">S1:E1</span>
-        <button id="watch-mobile-next-ep" type="button" class="px-2.5 py-1 rounded-full bg-white/10 hover:bg-white/20 active:scale-95 disabled:opacity-30 disabled:pointer-events-none text-white text-xs font-bold transition cursor-pointer">Next ⏭️</button>
+      <div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/85 border border-white/20 backdrop-blur-xl shadow-2xl pointer-events-auto">
+        <button id="watch-mobile-prev-ep" type="button" aria-label="Previous Episode" class="px-2 py-1 rounded-full bg-white/10 hover:bg-white/20 active:scale-95 disabled:opacity-30 disabled:pointer-events-none text-white text-xs font-bold transition cursor-pointer">⏮️</button>
+        <select id="watch-mobile-season-select" aria-label="Season" class="bg-black/70 border border-white/20 text-white text-[11px] font-bold rounded-lg px-1.5 py-0.5 outline-none"></select>
+        <select id="watch-mobile-episode-select" aria-label="Episode" class="bg-black/70 border border-white/20 text-white text-[11px] font-bold rounded-lg px-1.5 py-0.5 outline-none"></select>
+        <span id="watch-mobile-ep-indicator" class="hidden px-2.5 py-1 rounded-full bg-red-600 text-white text-[11px] font-black tracking-wider">S1:E1</span>
+        <button id="watch-mobile-next-ep" type="button" aria-label="Next Episode" class="px-2 py-1 rounded-full bg-white/10 hover:bg-white/20 active:scale-95 disabled:opacity-30 disabled:pointer-events-none text-white text-xs font-bold transition cursor-pointer">⏭️</button>
       </div>
     </div>
 

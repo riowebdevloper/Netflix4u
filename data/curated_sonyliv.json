@@ -1,6 +1,750 @@
 {
   "ok": true,
   "tab": "SonyLIV",
-  "hero": [],
-  "rails": []
+  "hero": [
+    {
+      "tmdbId": 15226,
+      "canonicalId": "tmdb-tv-15226",
+      "type": "tv",
+      "title": "C.I.D.",
+      "year": "1998",
+      "poster": "https://image.tmdb.org/t/p/w342/3UymnlLfLMKxG8OcFhSnAlnhQfZ.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/w780/1gZrOa2E9DOohEvSLLBJqus2zGu.jpg",
+      "rating": 5.7,
+      "overview": "A team of dedicated men and women in the Crime Investigation Department will risk everything to solve Mumbai's toughest, most complicated crimes."
+    },
+    {
+      "tmdbId": 66465,
+      "canonicalId": "tmdb-tv-66465",
+      "type": "tv",
+      "title": "The Kapil Sharma Show",
+      "year": "2016",
+      "poster": "https://image.tmdb.org/t/p/w342/fBPNBNFmcwhYXUpkW2Kb6jbeJOR.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/w780/xV0JOheZzmemwdpq1fahTnfAUoU.jpg",
+      "rating": 7,
+      "overview": "Kapil Sharma is back with his gang - Bindu, Chandan and 'mohalle ki dhoban' Gudiya. In tow is a new character, Maski, along with Goli, Roopmati and more! Enjoy guaranteed laughter with Kapil and his antics as different celebrities join in."
+    },
+    {
+      "tmdbId": 30984,
+      "canonicalId": "tmdb-tv-30984",
+      "type": "tv",
+      "title": "Bleach",
+      "year": "2004",
+      "poster": "https://image.tmdb.org/t/p/w342/2EewmxXe72ogD0EaWM8gqa0ccIw.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/w780/o0NsbcIvsllg6CJX0FBFY8wWbsn.jpg",
+      "rating": 8.3,
+      "overview": "For as long as he can remember, Ichigo Kurosaki has been able to see ghosts. But when he meets Rukia, a Soul Reaper who battles evil spirits known as Hollows, he finds his life is changed forever. Now, with a newfound wealth of spiritual energy, Ichigo discovers his true calling: to protect the living and the dead from evil."
+    },
+    {
+      "tmdbId": 1083381,
+      "canonicalId": "tmdb-movie-1083381",
+      "type": "movie",
+      "title": "Backrooms",
+      "year": "2026",
+      "poster": "https://image.tmdb.org/t/p/w342/rhGx6E3qRNMgj3i5su2oukNHwIQ.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/w780/dqmMWNWfLnExDRpMtIMqI97GQFR.jpg",
+      "rating": 7,
+      "overview": "A strange doorway appears in the basement of a furniture showroom."
+    },
+    {
+      "tmdbId": 634649,
+      "canonicalId": "tmdb-movie-634649",
+      "type": "movie",
+      "title": "Spider-Man: No Way Home",
+      "year": "2021",
+      "poster": "https://image.tmdb.org/t/p/w342/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/w780/iQFcwSGbZXMkeyKrxbPnwnRo5fl.jpg",
+      "rating": 7.9,
+      "overview": "Peter Parker is unmasked and no longer able to separate his normal life from the high-stakes of being a super-hero. When he asks for help from Doctor Strange the stakes become even more dangerous, forcing him to discover what it truly means to be Spider-Man."
+    }
+  ],
+  "rails": [
+    {
+      "key": "sonyliv-top-series",
+      "title": "Top SonyLIV Originals & Series",
+      "ranked": true,
+      "logo": "/images/platforms/IQHvNlAlUHxi.jpg",
+      "auto": null,
+      "items": [
+        {
+          "tmdbId": 15226,
+          "canonicalId": "tmdb-tv-15226",
+          "type": "tv",
+          "title": "C.I.D.",
+          "year": "1998",
+          "poster": "https://image.tmdb.org/t/p/w342/3UymnlLfLMKxG8OcFhSnAlnhQfZ.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/1gZrOa2E9DOohEvSLLBJqus2zGu.jpg",
+          "rating": 5.7,
+          "overview": "A team of dedicated men and women in the Crime Investigation Department will risk everything to solve Mumbai's toughest, most complicated crimes."
+        },
+        {
+          "tmdbId": 66465,
+          "canonicalId": "tmdb-tv-66465",
+          "type": "tv",
+          "title": "The Kapil Sharma Show",
+          "year": "2016",
+          "poster": "https://image.tmdb.org/t/p/w342/fBPNBNFmcwhYXUpkW2Kb6jbeJOR.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/xV0JOheZzmemwdpq1fahTnfAUoU.jpg",
+          "rating": 7,
+          "overview": "Kapil Sharma is back with his gang - Bindu, Chandan and 'mohalle ki dhoban' Gudiya. In tow is a new character, Maski, along with Goli, Roopmati and more! Enjoy guaranteed laughter with Kapil and his antics as different celebrities join in."
+        },
+        {
+          "tmdbId": 30984,
+          "canonicalId": "tmdb-tv-30984",
+          "type": "tv",
+          "title": "Bleach",
+          "year": "2004",
+          "poster": "https://image.tmdb.org/t/p/w342/2EewmxXe72ogD0EaWM8gqa0ccIw.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/o0NsbcIvsllg6CJX0FBFY8wWbsn.jpg",
+          "rating": 8.3,
+          "overview": "For as long as he can remember, Ichigo Kurosaki has been able to see ghosts. But when he meets Rukia, a Soul Reaper who battles evil spirits known as Hollows, he finds his life is changed forever. Now, with a newfound wealth of spiritual energy, Ichigo discovers his true calling: to protect the living and the dead from evil."
+        },
+        {
+          "tmdbId": 65942,
+          "canonicalId": "tmdb-tv-65942",
+          "type": "tv",
+          "title": "Re:ZERO -Starting Life in Another World-",
+          "year": "2016",
+          "poster": "https://image.tmdb.org/t/p/w342/oHqYrPAsIiTD5m4DuxumV4er8BU.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/7ZruEnSnHD6Jx5mF0hBt1E306Vt.jpg",
+          "rating": 8.1,
+          "overview": "Natsuki Subaru, an ordinary high school  student, is on his way home from the convenience store when he finds  himself transported to another world. As he's lost and confused in a new  world where he doesn't even know left from right, the only person to  reach out to him was a beautiful girl with silver hair. Determined to  repay her somehow for saving him from his own despair, Subaru agrees to  help the girl find something she's looking for."
+        },
+        {
+          "tmdbId": 95479,
+          "canonicalId": "tmdb-tv-95479",
+          "type": "tv",
+          "title": "JUJUTSU KAISEN",
+          "year": "2020",
+          "poster": "https://image.tmdb.org/t/p/w342/6qQzMJG27XOJsyAEEIisoJB45j2.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/qpin8cASXEVtwhzNsprHYFiOAGk.jpg",
+          "rating": 8.6,
+          "overview": "Yuji Itadori is a boy with tremendous physical strength, though he lives a completely ordinary high school life. One day, to save a classmate who has been attacked by curses, he eats the finger of Ryomen Sukuna, taking the curse into his own soul. From then on, he shares one body with Ryomen Sukuna. Guided by the most powerful of sorcerers, Satoru Gojo, Itadori is admitted to Tokyo Jujutsu High School, an organization that fights the curses... and thus begins the heroic tale of a boy who became a curse to exorcise a curse, a life from which he could never turn back."
+        },
+        {
+          "tmdbId": 209867,
+          "canonicalId": "tmdb-tv-209867",
+          "type": "tv",
+          "title": "Frieren: Beyond Journey's End",
+          "year": "2023",
+          "poster": "https://image.tmdb.org/t/p/w342/dqZENchTd7lp5zht7BdlqM7RBhD.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/rBOnrVlck7BIlGeWVlzYiZeg4l2.jpg",
+          "rating": 8.8,
+          "overview": "After the party of heroes defeated the Demon King, they restored peace to the land and returned to lives of solitude. Generations pass, and the elven mage Frieren comes face to face with humanity's mortality. She takes on a new apprentice and promises to fulfill old friends' dying wishes. Can an elven mind make peace with the nature of life and death? Frieren embarks on her quest to find out."
+        },
+        {
+          "tmdbId": 46260,
+          "canonicalId": "tmdb-tv-46260",
+          "type": "tv",
+          "title": "Naruto",
+          "year": "2002",
+          "poster": "https://image.tmdb.org/t/p/w342/xppeysfvDKVx775MFuH8Z9BlpMk.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/5F0HVEgkgP99fEWDjPyikGt9jQi.jpg",
+          "rating": 8.4,
+          "overview": "Naruto Uzumaki, a mischievous adolescent ninja, struggles as he searches for recognition and dreams of becoming the Hokage, the village's leader and strongest ninja."
+        },
+        {
+          "tmdbId": 45790,
+          "canonicalId": "tmdb-tv-45790",
+          "type": "tv",
+          "title": "JoJo's Bizarre Adventure",
+          "year": "2012",
+          "poster": "https://image.tmdb.org/t/p/w342/ogAWwbh3frWtiTyyXrZaVFtqCgp.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/5mUYDoFjDlPmDvnUWSknhYjGBBh.jpg",
+          "rating": 8.6,
+          "overview": "Follow the intergenerational feud between the Joestar Family and various forces of evil, the most prominent of which is Dio Brando and his followers."
+        },
+        {
+          "tmdbId": 203769,
+          "canonicalId": "tmdb-tv-203769",
+          "type": "tv",
+          "title": "Pushpa Impossible",
+          "year": "2022",
+          "poster": "https://image.tmdb.org/t/p/w342/jInpgPiN2KnTFAu2mtIbFJtFp7A.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/4vw2auyqSnxlXRb0NP1Z3nZ59TP.jpg",
+          "rating": 7,
+          "overview": "Pushpa Impossible is the story about a feisty middle-aged woman having studied until grade 9 in a Gujarati medium school and going back to school at the age of 44! She is boisterous, uncouth, impulsive, hardworking and an endearingly loveable mother of three children. She is Pushpa Patel hailing from a small town Patan in Gujarat and now residing at Bapodra Chawl in Mumbai. The show is a peek into her day-to-day struggles, her small victories, her Juggad, her shortcomings, and her constant pursuit of living a good life while struggling as a full-time mother and part-time businesswoman. The show is an autobiography of a mother, who decides to go back to school and change her life by impacting many lives!"
+        },
+        {
+          "tmdbId": 46298,
+          "canonicalId": "tmdb-tv-46298",
+          "type": "tv",
+          "title": "Hunter x Hunter",
+          "year": "2011",
+          "poster": "https://image.tmdb.org/t/p/w342/i2EEr2uBvRlAwJ8d8zTG2Y19mIa.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/bFKKyCI89Xq98Gul8cGox8K3sZa.jpg",
+          "rating": 8.7,
+          "overview": "Gon, a young boy who lives on Whale Island, dreams of becoming a Hunter like his father, who left when Gon was still young."
+        },
+        {
+          "tmdbId": 31910,
+          "canonicalId": "tmdb-tv-31910",
+          "type": "tv",
+          "title": "Naruto Shippūden",
+          "year": "2007",
+          "poster": "https://image.tmdb.org/t/p/w342/kV27j3Nz4d5z8u6mN3EJw9RiLg2.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/z0YhJvomqedHF85bplUJEotkN5l.jpg",
+          "rating": 8.5,
+          "overview": "After 2 and a half years Naruto finally returns to his village of Konoha, and sets about putting his ambitions to work. It will not be easy though as he has amassed a few more dangerous enemies, in the likes of the shinobi organization; Akatsuki."
+        },
+        {
+          "tmdbId": 37854,
+          "canonicalId": "tmdb-tv-37854",
+          "type": "tv",
+          "title": "One Piece",
+          "year": "1999",
+          "poster": "https://image.tmdb.org/t/p/w342/dB4EDhre2dsC2kxYDavyKWqLQwi.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/2rmK7mnchw9Xr3XdiTFSxTTLXqv.jpg",
+          "rating": 8.7,
+          "overview": "Years ago, the fearsome Pirate King, Gol D. Roger was executed leaving a huge pile of treasure and the famous \"One Piece\" behind. Whoever claims the \"One Piece\" will be named the new King of the Pirates.\n\nMonkey D. Luffy, a boy who consumed a \"Devil Fruit,\" decides to follow in the footsteps of his idol, the pirate Shanks, and find the One Piece. It helps, of course, that his body has the properties of rubber and that he's surrounded by a bevy of skilled fighters and thieves to help him along the way.\n\nLuffy will do anything to get the One Piece and become King of the Pirates!"
+        },
+        {
+          "tmdbId": 120089,
+          "canonicalId": "tmdb-tv-120089",
+          "type": "tv",
+          "title": "SPY x FAMILY",
+          "year": "2022",
+          "poster": "https://image.tmdb.org/t/p/w342/7NAvPYPAu7MeHwP8E9sn81PqsRh.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/lysUnU6V0VfcthDbviuVlIqgHOR.jpg",
+          "rating": 8.5,
+          "overview": "A spy, an assassin and a telepath come together to pose as a family, each for their own reasons, while hiding their true identities from each other."
+        },
+        {
+          "tmdbId": 31911,
+          "canonicalId": "tmdb-tv-31911",
+          "type": "tv",
+          "title": "Fullmetal Alchemist: Brotherhood",
+          "year": "2009",
+          "poster": "https://image.tmdb.org/t/p/w342/5ZFUEOULaVml7pQuXxhpR2SmVUw.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/A6tMQAo6t6eRFCPhsrShmxZLqFB.jpg",
+          "rating": 8.7,
+          "overview": "Disregard for alchemy’s laws ripped half of Edward Elric’s limbs from his body and left his brother Alphonse’s soul clinging to a suit of armor. To restore what was lost, the brothers seek the Philosopher’s Stone. Enemies and allies – the corrupt military, the Homunculi, and foreign alchemists – will alter the Elric brothers course, but their purpose will remain unchanged and their bond unbreakable."
+        },
+        {
+          "tmdbId": 277665,
+          "canonicalId": "tmdb-tv-277665",
+          "type": "tv",
+          "title": "Anne Shirley",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/ttSQg44aZMwcwotm4cBAzsh5KcB.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/wu36nyFmJVZOHjV2MNhFMmmA8ja.jpg",
+          "rating": 7.9,
+          "overview": "Anne Shirley, a redheaded eleven-year-old girl, moves from an orphanage to Green Gables, home of the elderly Cuthbert siblings Mathew and Marilla. Her abundant imagination, cheer, and earnest heart begin to change the people around her."
+        },
+        {
+          "tmdbId": 65336,
+          "canonicalId": "tmdb-tv-65336",
+          "type": "tv",
+          "title": "March Comes In Like a Lion",
+          "year": "2016",
+          "poster": "https://image.tmdb.org/t/p/w342/sokReNdjEwG2TkdUzJcVnD6sChT.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/mLzJpP9YRexGbvgiqunirAM5HAA.jpg",
+          "rating": 8,
+          "overview": "This is a gentle tale about people trying to regain something. And it is a tale of battle. Rei Kiriyama had lost his family in an accident when he was young. Now he is a 17-year-old pro shogi player who is burdened with deep loneliness. Rei lives alone in an old town in Tokyo, but after becoming acquainted with three sisters, Akari, Hinata and Momo, he begins to change little by little..."
+        },
+        {
+          "tmdbId": 220542,
+          "canonicalId": "tmdb-tv-220542",
+          "type": "tv",
+          "title": "The Apothecary Diaries",
+          "year": "2023",
+          "poster": "https://image.tmdb.org/t/p/w342/e3ojpANrFnmJCyeBNTinYwyBCIN.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/gffVOVZ2Y9cmVIZ26Gt9ByMGCYH.jpg",
+          "rating": 8.6,
+          "overview": "Maomao lived a peaceful life with her apothecary father. Until one day, she's sold as a lowly servant to the emperor's palace. But she wasn't meant for a compliant life among royalty. So when imperial heirs fall ill, she decides to step in and find a cure! This catches the eye of Jinshi, a handsome palace official who promotes her. Now, she's making a name for herself solving medical mysteries!"
+        },
+        {
+          "tmdbId": 45782,
+          "canonicalId": "tmdb-tv-45782",
+          "type": "tv",
+          "title": "Sword Art Online",
+          "year": "2012",
+          "poster": "https://image.tmdb.org/t/p/w342/9m8bFIXPg26taNrFSXGwEORVACD.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/pr78HhmOYlA0fwaoYNcH1FstqBH.jpg",
+          "rating": 8.1,
+          "overview": "In the near future, a Virtual Reality Massive Multiplayer Online Role-Playing Game (VRMMORPG) called Sword Art Online has been released where players control their avatars with their bodies using a piece of technology called Nerve Gear. One day, players discover they cannot log out, as the game creator is holding them captive unless they reach the 100th floor of the game's tower and defeat the final boss. However, if they die in the game, they die in real life. Their struggle for survival starts now..."
+        },
+        {
+          "tmdbId": 60863,
+          "canonicalId": "tmdb-tv-60863",
+          "type": "tv",
+          "title": "Haikyu!!",
+          "year": "2014",
+          "poster": "https://image.tmdb.org/t/p/w342/8WEr48swcqe89Zsy5sdrGCASlIg.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/zr1MDQCPVB5uJEHxiO6Tukn4OjH.jpg",
+          "rating": 8.6,
+          "overview": "Inspired by a small-statured pro volleyball player, Hinata creates a volleyball team in his last year of middle school. Unfortunately the team is matched up against the \"King of the Court\" Tobio Kageyama’s team in their first tournament and inevitably lose. After the crushing defeat, Hinata vows to surpass Kageyama After entering high school, Hinata joins the volleyball team only to find that Tobio has also joined."
+        },
+        {
+          "tmdbId": 80671,
+          "canonicalId": "tmdb-tv-80671",
+          "type": "tv",
+          "title": "Cells at Work!",
+          "year": "2018",
+          "poster": "https://image.tmdb.org/t/p/w342/sgwwEGvNy7vCJN8IVnl44tuVlMZ.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/aOQL8UYduNxDePbynZROLZ1nfsf.jpg",
+          "rating": 8,
+          "overview": "This is a story about you. A tale about the inside of your body... According to a new study, the human body consists of approximately 37 trillion cells. These cells are hard at work every day within a world that is your body. From the oxygen-carrying red blood cells to the bacteria-fighting white blood cells, get to know the unsung heroes and the drama that unfolds inside of you! It's the oddly relatable and interesting story that is the life of cells!"
+        }
+      ]
+    },
+    {
+      "key": "sonyliv-popular-movies",
+      "title": "Popular Movies on SonyLIV",
+      "ranked": false,
+      "logo": "/images/platforms/IQHvNlAlUHxi.jpg",
+      "auto": null,
+      "items": [
+        {
+          "tmdbId": 1083381,
+          "canonicalId": "tmdb-movie-1083381",
+          "type": "movie",
+          "title": "Backrooms",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/rhGx6E3qRNMgj3i5su2oukNHwIQ.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/dqmMWNWfLnExDRpMtIMqI97GQFR.jpg",
+          "rating": 7,
+          "overview": "A strange doorway appears in the basement of a furniture showroom."
+        },
+        {
+          "tmdbId": 634649,
+          "canonicalId": "tmdb-movie-634649",
+          "type": "movie",
+          "title": "Spider-Man: No Way Home",
+          "year": "2021",
+          "poster": "https://image.tmdb.org/t/p/w342/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/iQFcwSGbZXMkeyKrxbPnwnRo5fl.jpg",
+          "rating": 7.9,
+          "overview": "Peter Parker is unmasked and no longer able to separate his normal life from the high-stakes of being a super-hero. When he asks for help from Doctor Strange the stakes become even more dangerous, forcing him to discover what it truly means to be Spider-Man."
+        },
+        {
+          "tmdbId": 335984,
+          "canonicalId": "tmdb-movie-335984",
+          "type": "movie",
+          "title": "Blade Runner 2049",
+          "year": "2017",
+          "poster": "https://image.tmdb.org/t/p/w342/gajva2L0rPYkEWjzgFlBXCAVBE5.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/gNdLJU9TxrpGx4dkZidjys3fyy0.jpg",
+          "rating": 7.6,
+          "overview": "Thirty years after the events of the first film, a new blade runner, LAPD Officer K, unearths a long-buried secret that has the potential to plunge what's left of society into chaos. K's discovery leads him on a quest to find Rick Deckard, a former LAPD blade runner who has been missing for 30 years."
+        },
+        {
+          "tmdbId": 557,
+          "canonicalId": "tmdb-movie-557",
+          "type": "movie",
+          "title": "Spider-Man",
+          "year": "2002",
+          "poster": "https://image.tmdb.org/t/p/w342/or6XJBVpcEbIkma0V9zshnbEtx4.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/zQ8AxTPiCiS5nnwXpwTBPBHSaa5.jpg",
+          "rating": 7.4,
+          "overview": "After being bitten by a genetically altered spider at Oscorp, nerdy but endearing high school student Peter Parker is endowed with amazing powers to become the superhero known as Spider-Man."
+        },
+        {
+          "tmdbId": 324857,
+          "canonicalId": "tmdb-movie-324857",
+          "type": "movie",
+          "title": "Spider-Man: Into the Spider-Verse",
+          "year": "2018",
+          "poster": "https://image.tmdb.org/t/p/w342/iiZZdoQBEYBv6id8su7ImL0oCbD.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/1ntePsIqeklfmrQJqZPncCydsqY.jpg",
+          "rating": 8.4,
+          "overview": "Struggling to find his place in the world while juggling school and family, Brooklyn teenager Miles Morales is unexpectedly bitten by a radioactive spider and develops unfathomable powers just like the one and only Spider-Man. While wrestling with the implications of his new abilities, Miles discovers a super collider created by the madman Wilson \"Kingpin\" Fisk, causing others from across the Spider-Verse to be inadvertently transported to his dimension."
+        },
+        {
+          "tmdbId": 466272,
+          "canonicalId": "tmdb-movie-466272",
+          "type": "movie",
+          "title": "Once Upon a Time... in Hollywood",
+          "year": "2019",
+          "poster": "https://image.tmdb.org/t/p/w342/8j58iEBw9pOXFD2L0nt0ZXeHviB.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/kKTPv9LKKs5L3oO1y5FNObxAPWI.jpg",
+          "rating": 7.4,
+          "overview": "Los Angeles, 1969. TV star Rick Dalton, a struggling actor specializing in westerns, and stuntman Cliff Booth, his best friend, try to survive in a constantly changing movie industry. Dalton is the neighbor of the young and promising actress and model Sharon Tate, who has just married the prestigious Polish director Roman Polanski…"
+        },
+        {
+          "tmdbId": 559,
+          "canonicalId": "tmdb-movie-559",
+          "type": "movie",
+          "title": "Spider-Man 3",
+          "year": "2007",
+          "poster": "https://image.tmdb.org/t/p/w342/qFmwhVUoUSXjkKRmca5yGDEXBIj.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/FfAU0PUs8AJkMU2VbkVNFtRXR4.jpg",
+          "rating": 6.5,
+          "overview": "The seemingly invincible Spider-Man goes up against an all-new crop of villains—including the shape-shifting Sandman. While Spider-Man’s superpowers are altered by an alien organism, his alter ego, Peter Parker, deals with nemesis Eddie Brock and also gets caught up in a love triangle."
+        },
+        {
+          "tmdbId": 1930,
+          "canonicalId": "tmdb-movie-1930",
+          "type": "movie",
+          "title": "The Amazing Spider-Man",
+          "year": "2012",
+          "poster": "https://image.tmdb.org/t/p/w342/jexoNYnPd6vVrmygwF6QZmWPFdu.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/HVcza6tJtWFrLriuh3Ano4Vt46.jpg",
+          "rating": 6.8,
+          "overview": "A teenage Peter Parker grapples with both high school and amazing super-human crises as his alter-ego Spider-Man."
+        },
+        {
+          "tmdbId": 429617,
+          "canonicalId": "tmdb-movie-429617",
+          "type": "movie",
+          "title": "Spider-Man: Far From Home",
+          "year": "2019",
+          "poster": "https://image.tmdb.org/t/p/w342/4q2NNj4S5dG2RLF9CpXsej7yXl.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/vamhMTvh9m9zFHDoR0v1nRtf6T4.jpg",
+          "rating": 7.4,
+          "overview": "Peter Parker and his friends go on a summer trip to Europe. However, they will hardly be able to rest - Peter will have to agree to help Nick Fury uncover the mystery of creatures that cause natural disasters and destruction throughout the continent."
+        },
+        {
+          "tmdbId": 545611,
+          "canonicalId": "tmdb-movie-545611",
+          "type": "movie",
+          "title": "Everything Everywhere All at Once",
+          "year": "2022",
+          "poster": "https://image.tmdb.org/t/p/w342/u68AjlvlutfEIcpmbYpKcdi09ut.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/fIwiFha3WPu5nHkBeMQ4GzEk0Hv.jpg",
+          "rating": 7.7,
+          "overview": "An aging Chinese immigrant is swept up in an insane adventure, where she alone can save what's important to her by connecting with the lives she could have led in other universes."
+        },
+        {
+          "tmdbId": 1218925,
+          "canonicalId": "tmdb-movie-1218925",
+          "type": "movie",
+          "title": "Chainsaw Man - The Movie: Reze Arc",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/pHyxb2RV5wLlboAwm9ZJ9qTVEDw.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/gqTz24ZRsCP6AKjARmEivY7m0cK.jpg",
+          "rating": 8.6,
+          "overview": "In a brutal war between devils, hunters, and secret enemies, a mysterious girl named Reze has stepped into Denji's world, and he faces his deadliest battle yet, fueled by love in a world where survival knows no rules."
+        },
+        {
+          "tmdbId": 102382,
+          "canonicalId": "tmdb-movie-102382",
+          "type": "movie",
+          "title": "The Amazing Spider-Man 2",
+          "year": "2014",
+          "poster": "https://image.tmdb.org/t/p/w342/bU7nTmvmy0h3VUP01v1T2imgH6N.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/k0hlAzTryCYX1O1LyC6P8tAa8s0.jpg",
+          "rating": 6.6,
+          "overview": "For Peter Parker, life is busy. Between taking out the bad guys as Spider-Man and spending time with the person he loves, Gwen Stacy, high school graduation cannot come quickly enough. Peter has not forgotten about the promise he made to Gwen’s father to protect her by staying away, but that is a promise he cannot keep. Things will change for Peter when a new villain, Electro, emerges, an old friend, Harry Osborn, returns, and Peter uncovers new clues about his past."
+        },
+        {
+          "tmdbId": 372058,
+          "canonicalId": "tmdb-movie-372058",
+          "type": "movie",
+          "title": "Your Name.",
+          "year": "2016",
+          "poster": "https://image.tmdb.org/t/p/w342/vfJFJPepRKapMd5G2ro7klIRysq.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/mMtUybQ6hL24FXo0F3Z4j2KG7kZ.jpg",
+          "rating": 8.5,
+          "overview": "High schoolers Mitsuha and Taki are complete strangers living separate lives. But one night, they suddenly switch places. Mitsuha wakes up in Taki’s body, and he in hers. This bizarre occurrence continues to happen randomly, and the two must adjust their lives around each other."
+        },
+        {
+          "tmdbId": 718930,
+          "canonicalId": "tmdb-movie-718930",
+          "type": "movie",
+          "title": "Bullet Train",
+          "year": "2022",
+          "poster": "https://image.tmdb.org/t/p/w342/j8szC8OgrejDQjjMKSVXyaAjw3V.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/y2Ca1neKke2mGPMaHzlCNDVZqsK.jpg",
+          "rating": 7.4,
+          "overview": "Unlucky assassin Ladybug is determined to do his job peacefully after one too many gigs gone off the rails. Fate, however, may have other plans, as Ladybug's latest mission puts him on a collision course with lethal adversaries from around the globe—all with connected, yet conflicting, objectives—on the world's fastest train."
+        },
+        {
+          "tmdbId": 855,
+          "canonicalId": "tmdb-movie-855",
+          "type": "movie",
+          "title": "Black Hawk Down",
+          "year": "2001",
+          "poster": "https://image.tmdb.org/t/p/w342/7fU5dSqKRL4XHeEUz62rCKBfYok.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/7jaNOECZG8uS1tlq69HsY5xY8P9.jpg",
+          "rating": 7.4,
+          "overview": "When U.S. Rangers and an elite Delta Force team attempt to kidnap two underlings of a Somali warlord, their Black Hawk helicopters are shot down, and the Americans suffer heavy casualties, facing intense fighting from the militia on the ground."
+        },
+        {
+          "tmdbId": 591,
+          "canonicalId": "tmdb-movie-591",
+          "type": "movie",
+          "title": "The Da Vinci Code",
+          "year": "2006",
+          "poster": "https://image.tmdb.org/t/p/w342/9ejKfNk0LBhSI9AahH4f9NJNZNM.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/4NsQl44oXVMiuIM9t7ZsVgYzOkv.jpg",
+          "rating": 6.7,
+          "overview": "A murder in Paris’ Louvre Museum and cryptic clues in some of Leonardo da Vinci’s most famous paintings lead to the discovery of a religious mystery. For 2,000 years a secret society closely guards information that — should it come to light — could rock the very foundations of Christianity."
+        },
+        {
+          "tmdbId": 335983,
+          "canonicalId": "tmdb-movie-335983",
+          "type": "movie",
+          "title": "Venom",
+          "year": "2018",
+          "poster": "https://image.tmdb.org/t/p/w342/2uNW4WbgBXL25BAbXGLnLqX71Sw.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/VuukZLgaCrho2Ar8Scl9HtV3yD.jpg",
+          "rating": 6.8,
+          "overview": "Investigative journalist Eddie Brock attempts a comeback following a scandal, but accidentally becomes the host of Venom, a violent, super powerful alien symbiote. Soon, he must rely on his newfound powers to protect the world from a shadowy organization looking for a symbiote of their own."
+        },
+        {
+          "tmdbId": 425909,
+          "canonicalId": "tmdb-movie-425909",
+          "type": "movie",
+          "title": "Ghostbusters: Afterlife",
+          "year": "2021",
+          "poster": "https://image.tmdb.org/t/p/w342/sg4xJaufDiQl7caFEskBtQXfD4x.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/EnDlndEvw6Ptpp8HIwmRcSSNKQ.jpg",
+          "rating": 7.3,
+          "overview": "When single mom Callie and her two kids Trevor and Phoebe arrive in a small Oklahoma town, they begin to discover their connection to the original Ghostbusters and the secret legacy their grandfather left behind."
+        },
+        {
+          "tmdbId": 580489,
+          "canonicalId": "tmdb-movie-580489",
+          "type": "movie",
+          "title": "Venom: Let There Be Carnage",
+          "year": "2021",
+          "poster": "https://image.tmdb.org/t/p/w342/pzKsRuKLFmYrW5Q0q8E8G78Tcgo.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/eENEf62tMXbhyVvdcXlnQz2wcuT.jpg",
+          "rating": 6.7,
+          "overview": "After finding a host body in investigative reporter Eddie Brock, the alien symbiote must face a new enemy, Carnage, the alter ego of serial killer Cletus Kasady."
+        },
+        {
+          "tmdbId": 257344,
+          "canonicalId": "tmdb-movie-257344",
+          "type": "movie",
+          "title": "Pixels",
+          "year": "2015",
+          "poster": "https://image.tmdb.org/t/p/w342/d26S5EfVXLNxRXqyFy1yyl3qRq3.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/6UFnKzVzFqKDjs4iCVLJdneK3ch.jpg",
+          "rating": 5.8,
+          "overview": "Video game experts are recruited by the military to fight 1980s-era video game characters who've attacked New York."
+        }
+      ]
+    },
+    {
+      "key": "sonyliv-crime-thrillers",
+      "title": "SonyLIV Crime & Thrillers",
+      "ranked": false,
+      "logo": "/images/platforms/IQHvNlAlUHxi.jpg",
+      "auto": null,
+      "items": [
+        {
+          "tmdbId": 15226,
+          "canonicalId": "tmdb-tv-15226",
+          "type": "tv",
+          "title": "C.I.D.",
+          "year": "1998",
+          "poster": "https://image.tmdb.org/t/p/w342/3UymnlLfLMKxG8OcFhSnAlnhQfZ.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/1gZrOa2E9DOohEvSLLBJqus2zGu.jpg",
+          "rating": 5.7,
+          "overview": "A team of dedicated men and women in the Crime Investigation Department will risk everything to solve Mumbai's toughest, most complicated crimes."
+        },
+        {
+          "tmdbId": 105009,
+          "canonicalId": "tmdb-tv-105009",
+          "type": "tv",
+          "title": "Tokyo Revengers",
+          "year": "2021",
+          "poster": "https://image.tmdb.org/t/p/w342/arB3L9pZZBSzUPSC8BEv8c3X0bF.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/a4MW4DzvP2eRizrx4OzOoIHu7Eg.jpg",
+          "rating": 8.4,
+          "overview": "Takemichi Hanagaki is a freelancer that’s reached the absolute pits of despair in his life. He finds out that the only girlfriend he ever had, in middle school, Hinata Tachibana, had been killed by the ruthless Tokyo Manji Gang. The day after hearing about her death, he’s standing on the station platform and ends up being pushed over onto the tracks by a herd of people. He closes his eyes thinking he’s about to die, but when he opens his eyes back up, he somehow had gone back in time 12 years. Now that he’s back living the best days of his life, Takemichi decides to get revenge on his life."
+        },
+        {
+          "tmdbId": 34522,
+          "canonicalId": "tmdb-tv-34522",
+          "type": "tv",
+          "title": "Adaalat",
+          "year": "2010",
+          "poster": "https://image.tmdb.org/t/p/w342/m2G5WVHX4n2ETdBpAUHGK71C0J7.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/fZPWqLYlbEu8fRdEj4AI2moDPIO.jpg",
+          "rating": 7.5,
+          "overview": "K.D Pathak is a suave, sophisticated, witty and yet unconventional defence lawyer with an impeccable track record. He stands not for his client, but for Justice."
+        },
+        {
+          "tmdbId": 42410,
+          "canonicalId": "tmdb-tv-42410",
+          "type": "tv",
+          "title": "Durarara!!",
+          "year": "2010",
+          "poster": "https://image.tmdb.org/t/p/w342/rOVSpNPFr62tFKeFuHgPdOXQx3E.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/kH9iK6krt0VBwAv5xbsYyhn8AW5.jpg",
+          "rating": 7.6,
+          "overview": "Mikado Ryugamine moves to Ikebukuro at his friend’s invitation and quickly becomes entangled in the city’s dangerous underworld. After witnessing the legendary Headless Rider, he finds himself caught up in escalating violence and gang conflict that begin to throw Ikebukuro into chaos."
+        },
+        {
+          "tmdbId": 202097,
+          "canonicalId": "tmdb-tv-202097",
+          "type": "tv",
+          "title": "Accused",
+          "year": "2023",
+          "poster": "https://image.tmdb.org/t/p/w342/w0zeTmejqPqVw07jVDkeQqJvxqq.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/daVf1WxVes9ZaC6jToZgq9ulqEz.jpg",
+          "rating": 6.9,
+          "overview": "In this crime anthology series, viewers discover how an ordinary person got caught up in an extraordinary situation, ultimately revealing how one wrong turn leads to another, until it’s too late to turn back. Told from the defendant’s point of view, each episode opens in a courtroom on the accused without knowing their crime or how they ended up on trial."
+        },
+        {
+          "tmdbId": 66103,
+          "canonicalId": "tmdb-tv-66103",
+          "type": "tv",
+          "title": "Ace Attorney",
+          "year": "2016",
+          "poster": "https://image.tmdb.org/t/p/w342/6Rfcx9QxZqvsEl1Kh7yFhPpzb9R.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/h4ubSg0Ipr8Nggo2SH83c3wuJI0.jpg",
+          "rating": 6.9,
+          "overview": "A rookie lawyer Ryuuichi Naruhodou stands up to save his defendants by proving their innocence from unusual cases! Is the defendant guilty or innocent...? Believing his client's innocence Naruhodou stands in court and battles his rival judges. With the word of \"OBJECTION!\" and limited evidence, Naruhodou makes a comeback when all odds are against him and seems like there is nothing more he can do. Don't miss out on the comical episodes between him and his mentor Chihiro Ayasato, assistant Mayoi Ayasato, rival prosecutor Reiji Mitsurugi, and numerous unique characters! The anime also depicts the childhood relationship between Naruhodou and his friends. With the skills inherited from his mentor Naruho reveals the truth!"
+        },
+        {
+          "tmdbId": 202308,
+          "canonicalId": "tmdb-tv-202308",
+          "type": "tv",
+          "title": "Alert: Missing Persons Unit",
+          "year": "2023",
+          "poster": "https://image.tmdb.org/t/p/w342/lLRC3GSYiFVHsxgc9tvmR6WjcOu.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/wge5FrHo6GLb4RpP9Ud1VvjEQap.jpg",
+          "rating": 7.5,
+          "overview": "When police officer Nikki Batista’s son goes missing, she joins the Philadelphia Police Department's Missing Person’s Unit (MPU) to help other people find their loved ones, even as she searches for her own. Six years later, her world is turned upside-down when her ex-husband, Jason Grant, a former police officer, shows up with a proof-of-life photo of their missing boy. Or is it?"
+        },
+        {
+          "tmdbId": 247704,
+          "canonicalId": "tmdb-tv-247704",
+          "type": "tv",
+          "title": "Red Eye",
+          "year": "2024",
+          "poster": "https://image.tmdb.org/t/p/w342/hmNbB68i1zQ7xq7MY82eBujziYF.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/zQUMl21oCbFQ9FxodA5JbOndMXQ.jpg",
+          "rating": 7.1,
+          "overview": "London police officer DC Hana Li is escorting Dr Matthew Nolan back to Beijing where he has been accused of a crime. However, on board flight 357, she finds herself embroiled in an escalating conspiracy and a growing number of murders."
+        },
+        {
+          "tmdbId": 244628,
+          "canonicalId": "tmdb-tv-244628",
+          "type": "tv",
+          "title": "Long Bright River",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/tQHOmmDXtDSsmXn55GcdtSOLMAc.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/xXgFEvZL0k7ac3hu8xsvaCJlU8D.jpg",
+          "rating": 7,
+          "overview": "A police officer patrols a Philadelphia neighborhood hard-hit by the opioid crisis. When a series of murders begins in the neighborhood, Mickey realizes that her personal history might be related to the case."
+        },
+        {
+          "tmdbId": 130766,
+          "canonicalId": "tmdb-tv-130766",
+          "type": "tv",
+          "title": "Magpie Murders",
+          "year": "2022",
+          "poster": "https://image.tmdb.org/t/p/w342/79L8AHJdoDtxtwyBNqNM1HRJ8q5.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/ppL1z45EO6jgUX83WTeQ598Myku.jpg",
+          "rating": 7,
+          "overview": "An editor gets drawn into a web of intrigue and murder when she receives an unfinished manuscript."
+        },
+        {
+          "tmdbId": 255570,
+          "canonicalId": "tmdb-tv-255570",
+          "type": "tv",
+          "title": "This City Is Ours",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/fQpJFVWX8MCdOkwoutDw7tjhvgp.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/vfe1cSviBFnNcgk76jwgdb5Wyek.jpg",
+          "rating": 7.4,
+          "overview": "Notorious gang boss Ronnie (Sean Bean) steps back from his criminal empire, triggering a violent power struggle between his volatile son Jamie (Jack McMullen) and trusted lieutenant Michael (James Nelson Joyce), who sees his chance to seize control. As rivalries ignite and loyalties fracture, the family behind the city’s cocaine trade descends into open war."
+        },
+        {
+          "tmdbId": 105759,
+          "canonicalId": "tmdb-tv-105759",
+          "type": "tv",
+          "title": "Undekhi",
+          "year": "2020",
+          "poster": "https://image.tmdb.org/t/p/w342/mzm5gUiv1oRkpLy7f3aFkDIFbbP.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/8Oe8yZqR20AThApCxWvTsRwIa9d.jpg",
+          "rating": 8,
+          "overview": "Show depicts the two aspects of the society - the power-drunk influential people who think they can get away with anything and the oppressed, subjected to years of torture, who finally decide to bring themselves to justice"
+        },
+        {
+          "tmdbId": 205505,
+          "canonicalId": "tmdb-tv-205505",
+          "type": "tv",
+          "title": "TamilRockerz",
+          "year": "2022",
+          "poster": "https://image.tmdb.org/t/p/w342/hV2qjOlqVOS0gcnU2trrF6hatgu.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/wlQTky8pIAUqDJs9QQ74WkLZERa.jpg",
+          "rating": 6.1,
+          "overview": "Tamil Rockerz, an anonymous cyber pirates are threatening to release a highly anticipated film featuring a massively popular star. It's up to the cop Rudra to find the lawbreakers and bring them to justice."
+        },
+        {
+          "tmdbId": 111188,
+          "canonicalId": "tmdb-tv-111188",
+          "type": "tv",
+          "title": "Scam 1992: The Harshad Mehta Story",
+          "year": "2020",
+          "poster": "https://image.tmdb.org/t/p/w342/fiimZ9Xt5cPTPHNrbS4QautBXpU.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/tTYP1npvBU90NthceezScfXGiOl.jpg",
+          "rating": 8.3,
+          "overview": "Set in 1980's & 90's Bombay, Scam 1992 follows the life of Harshad Mehta - a stockbroker who single-handedly took the stock market to dizzying heights & his catastrophic downfall. Being directed by National Award-winning filmmaker Hansal Mehta, the series is based on journalist Debashis Basu & Sucheta Dalal's book \"The Scam\"."
+        },
+        {
+          "tmdbId": 204074,
+          "canonicalId": "tmdb-tv-204074",
+          "type": "tv",
+          "title": "Tanaav",
+          "year": "2022",
+          "poster": "https://image.tmdb.org/t/p/w342/4KUdFm3J41uptF1r6ki53VppKW9.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/qztzwu6fWbxjbVH2hXVtLMBhY6L.jpg",
+          "rating": 4.7,
+          "overview": "Kabir, a special task force veteran, is brought out of retirement to hunt down an enemy, Umar Riaz, he thought he had neutralised but is still alive. He, along with a reassembled special task force, decides to infiltrate Umar's brother's wedding after learning that Umar would be in attendance. However, when things do not go as planned, Kabir and his team must give their all to ensure the dangerous man is caught."
+        },
+        {
+          "tmdbId": 231340,
+          "canonicalId": "tmdb-tv-231340",
+          "type": "tv",
+          "title": "The Killing Kind",
+          "year": "2023",
+          "poster": "https://image.tmdb.org/t/p/w342/5imNWXMYXmBZBc34BqPE3lkoIl9.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/sEKwdnrnO3I1DE98zYG7HLA2wEI.jpg",
+          "rating": 6.3,
+          "overview": "Barrister Ingrid Lewis defends John Webster against stalking charges, only for Webster to turn on her."
+        },
+        {
+          "tmdbId": 281153,
+          "canonicalId": "tmdb-tv-281153",
+          "type": "tv",
+          "title": "Crime Patrol Dial 100",
+          "year": "2015",
+          "poster": "https://image.tmdb.org/t/p/w342/1Tc6xtx2R0XBR37kkLsZRfMiNpU.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/zB0jm6tinFPAfqVY5W9GVTIzaFt.jpg",
+          "rating": 10,
+          "overview": "Fictional representation of real life crime cases in India. The host dissects some of the most gruesome crimes encountered by police forces across India while re-enactments display the situations faced by the victims."
+        },
+        {
+          "tmdbId": 229403,
+          "canonicalId": "tmdb-tv-229403",
+          "type": "tv",
+          "title": "Scam 2003: The Telgi Story",
+          "year": "2023",
+          "poster": "https://image.tmdb.org/t/p/w342/wsTVqPNNOOvUXKRJv0DstHUDIw8.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/cpt1ag1Oy4yOch8qd4TUPHIwCsX.jpg",
+          "rating": 8.1,
+          "overview": "It will follow the life of Telgi, born in Khanapur in the state of Karnataka, as he became the mastermind behind one of India’s most ingenious scams, which spread across 18 states and shook the entire country"
+        },
+        {
+          "tmdbId": 228782,
+          "canonicalId": "tmdb-tv-228782",
+          "type": "tv",
+          "title": "Charlie Chopra & the Mystery of Solang Valley",
+          "year": "2023",
+          "poster": "https://image.tmdb.org/t/p/w342/54ahlAyNX4nix1baLekCzutkXn7.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/7EXSyYrEm5BWId7GfGvXfuoACEl.jpg",
+          "rating": 6.1,
+          "overview": "Amateur detective Charlie Chopra investigates a murder at her fiancé's family home in the mountains of Himachal Pradesh, uncovering secrets and facing danger."
+        },
+        {
+          "tmdbId": 270667,
+          "canonicalId": "tmdb-tv-270667",
+          "type": "tv",
+          "title": "Manvat Murders",
+          "year": "2024",
+          "poster": "https://image.tmdb.org/t/p/w342/nuxlCzA7PZLjhfoju7QF5BaTFwE.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/piQbONSQz6RVLjnDDLsbWJUVth.jpg",
+          "rating": 8,
+          "overview": "Seven murders; Unsolved for over one & half year. Will the ace cop from Mumbai, Ramakant Kulkarni be able to bring Justice?"
+        }
+      ]
+    }
+  ]
 }

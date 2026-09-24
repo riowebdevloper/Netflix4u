@@ -8,6 +8,7 @@ const { resolveContentId } = require('./services/canonicalResolver');
 const { isPublicRecord, publicOnly } = require('./services/contentValidationService');
 const { handleDetails, handlePlayback, handleSearch, handleUniversalApi, handleProbeStream, handlePosterResolver } = require('./services/apiCore');
 const seoRenderer = require('./services/seoRenderer');
+const { filterCatalogByCategory } = require('./services/categoryFilters');
 
 const PORT = process.env.PORT || 4173;
 const ROOT = path.resolve(__dirname);
@@ -1626,28 +1627,11 @@ const server = http.createServer(async (req, res) => {
   }
 
   // 13. SSR Category & Discovery Hub Pages (AEO & AI Search Optimized)
-  const categoryMatch = reqPath.match(/^\/(movies|series|trending|anime|kdrama|bollywood|hollywood)\/?$/i);
+  const categoryMatch = reqPath.match(/^\/(movies|series|trending|anime|kdrama|bollywood|hollywood|south-indian|hindi-dubbed)\/?$/i);
   if (categoryMatch) {
     const catKey = categoryMatch[1].toLowerCase();
     const allItems = getCatalogSummary();
-    let catItems = [];
-    if (catKey === 'movies') {
-      catItems = allItems.filter(i => i.type === 'movie' || i.contentType === 'movie');
-    } else if (catKey === 'series') {
-      catItems = allItems.filter(i => i.type === 'series' || i.contentType === 'series');
-    } else if (catKey === 'trending') {
-      catItems = allItems.slice(0, 24);
-    } else if (catKey === 'anime') {
-      catItems = allItems.filter(i => (i.genres && i.genres.includes('Animation')) || i.type === 'anime');
-    } else if (catKey === 'kdrama') {
-      catItems = allItems.filter(i => i.country === 'KR' || (i.language && i.language.toLowerCase().includes('korean')));
-    } else if (catKey === 'bollywood') {
-      catItems = allItems.filter(i => i.country === 'IN' || (i.language && i.language.toLowerCase().includes('hindi')));
-    } else if (catKey === 'hollywood') {
-      catItems = allItems.filter(i => i.country === 'US' || (i.language && i.language.toLowerCase().includes('english')));
-    }
-    if (!catItems.length) catItems = allItems.slice(0, 24);
-    else catItems = catItems.slice(0, 24);
+    const catItems = filterCatalogByCategory(allItems, catKey).slice(0, 36);
 
     const canonicalUrl = `https://netflix4u.in/${catKey}`;
     const html = seoRenderer.renderCategoryPage(catKey, canonicalUrl, catItems);

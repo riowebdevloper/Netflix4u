@@ -1,6 +1,750 @@
 {
   "ok": true,
   "tab": "LatestRelease",
-  "hero": [],
-  "rails": []
+  "hero": [
+    {
+      "tmdbId": 1375441,
+      "canonicalId": "tmdb-movie-1375441",
+      "type": "movie",
+      "title": "Primetime",
+      "year": "2026",
+      "poster": "https://image.tmdb.org/t/p/w342/51VDtNQFuD2I86hrT4ekytg9Dq3.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/w780/4E5RVsSUG1A4Adwbqupu5w6kofZ.jpg",
+      "rating": 6.4,
+      "overview": "In 2006, To Catch a Predator host Chris Hansen sets out to make television history, turning an undercover investigation into one of the most controversial cultural phenomena of the decade."
+    },
+    {
+      "tmdbId": 1032863,
+      "canonicalId": "tmdb-movie-1032863",
+      "type": "movie",
+      "title": "The Love Hypothesis",
+      "year": "2026",
+      "poster": "https://image.tmdb.org/t/p/w342/vfZxVHextAGC70zrNhS8lsROqP1.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/w780/c8hvRzN5nijvp1VcSs8nqHly1bK.jpg",
+      "rating": 8.3,
+      "overview": "Olive Smith, a biology PhD candidate, and Dr. Adam Carlsen, a hotshot professor and well-known tyrant, enter into a fake relationship, seeing each of their carefully calculated theories on love get thrown into chaos."
+    },
+    {
+      "tmdbId": 1607127,
+      "canonicalId": "tmdb-movie-1607127",
+      "type": "movie",
+      "title": "One Last Shot",
+      "year": "2026",
+      "poster": "https://image.tmdb.org/t/p/w342/niQ4NBh2jqAf1hDZP5m6ReWFAb7.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/w780/8giIQcHpxgsPVP6c7aQtHl3txuh.jpg",
+      "rating": 7.4,
+      "overview": "Seasoned Navy SEAL Jake Harris is called back into action when the world is threatened by a former comrade. To track down and prevent the mastermind from extracting the nuclear codes, Harris must lead his team into enemy territory against a brutal barrage of mercenaries, deadly traps, and a reckoning with his own checkered past."
+    },
+    {
+      "tmdbId": 275102,
+      "canonicalId": "tmdb-tv-275102",
+      "type": "tv",
+      "title": "The Scandal",
+      "year": "2026",
+      "poster": "https://image.tmdb.org/t/p/w342/4TU0PcHBIl0wPW5B6aVRGExOnHE.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/w780/uc1p1PEbEMpdIHqnU9TESNC6Jhp.jpg",
+      "rating": 6.6,
+      "overview": "In Joseon, a secret proposal ignites hidden desires in a gifted noblewoman, a famed lover and an unsuspecting lady caught in their dangerous game."
+    },
+    {
+      "tmdbId": 320760,
+      "canonicalId": "tmdb-tv-320760",
+      "type": "tv",
+      "title": "Not a Stranger",
+      "year": "2026",
+      "poster": "https://image.tmdb.org/t/p/w342/pxXO2VE0vMnzXhUw9GQRAUFFPN6.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/w780/RUkgsqD4YbEKKq77eFgJjeH89n.jpg",
+      "rating": 7,
+      "overview": "After giving birth, painter Funda put her career on hold to focus on her child. Ready to return to painting, she finally finds the nanny she has been searching for: Nazlı. But the mysterious and increasingly unsettling woman soon begins to disrupt the seemingly peaceful lives of Funda and her husband İlker. What begins as a simple employment arrangement develops into a dangerous psychological game in which desire, secrets and loyalty are put to the test."
+    }
+  ],
+  "rails": [
+    {
+      "key": "lr-2026-movies",
+      "title": "Brand New 2026 Releases",
+      "ranked": true,
+      "logo": "",
+      "auto": null,
+      "items": [
+        {
+          "tmdbId": 1375441,
+          "canonicalId": "tmdb-movie-1375441",
+          "type": "movie",
+          "title": "Primetime",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/51VDtNQFuD2I86hrT4ekytg9Dq3.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/4E5RVsSUG1A4Adwbqupu5w6kofZ.jpg",
+          "rating": 6.4,
+          "overview": "In 2006, To Catch a Predator host Chris Hansen sets out to make television history, turning an undercover investigation into one of the most controversial cultural phenomena of the decade."
+        },
+        {
+          "tmdbId": 1032863,
+          "canonicalId": "tmdb-movie-1032863",
+          "type": "movie",
+          "title": "The Love Hypothesis",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/vfZxVHextAGC70zrNhS8lsROqP1.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/c8hvRzN5nijvp1VcSs8nqHly1bK.jpg",
+          "rating": 8.3,
+          "overview": "Olive Smith, a biology PhD candidate, and Dr. Adam Carlsen, a hotshot professor and well-known tyrant, enter into a fake relationship, seeing each of their carefully calculated theories on love get thrown into chaos."
+        },
+        {
+          "tmdbId": 1607127,
+          "canonicalId": "tmdb-movie-1607127",
+          "type": "movie",
+          "title": "One Last Shot",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/niQ4NBh2jqAf1hDZP5m6ReWFAb7.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/8giIQcHpxgsPVP6c7aQtHl3txuh.jpg",
+          "rating": 7.4,
+          "overview": "Seasoned Navy SEAL Jake Harris is called back into action when the world is threatened by a former comrade. To track down and prevent the mastermind from extracting the nuclear codes, Harris must lead his team into enemy territory against a brutal barrage of mercenaries, deadly traps, and a reckoning with his own checkered past."
+        },
+        {
+          "tmdbId": 1263337,
+          "canonicalId": "tmdb-movie-1263337",
+          "type": "movie",
+          "title": "Heart of the Beast",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/1ApfSA8JTqeha3GTFEY8syV4auq.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/bicMU6xVD5deVyKP2azpyx7xkmH.jpg",
+          "rating": 7.7,
+          "overview": "After a harrowing plane crash, Special Forces officer James Belmont and his combat dog, Odin, find themselves stranded deep in the Alaskan wilderness. Together, they are forced into a brutal fight for survival against the elements."
+        },
+        {
+          "tmdbId": 1641629,
+          "canonicalId": "tmdb-movie-1641629",
+          "type": "movie",
+          "title": "You+Me - Against the World",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/bAbBNVplg7h79sm94OyHeKk8Phz.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/nkEhDomjmPHJSA4Tx8pxv0NlKEy.jpg",
+          "rating": 5.7,
+          "overview": "Alma Lancaster, 18, appears to lead a perfect life within a wealthy family who believes she is studying law. In secret, she pursues her true dream: filmmaking. On campus, she meets Vadim Arcadi, 20, a magnetic and solitary rebel with a troubled past. Forced to collaborate on a student film, they clash, grow closer and fall in love — despite themselves. But someone is watching them, determined to tear them apart and expose secrets that could destroy both Alma and Vadim."
+        },
+        {
+          "tmdbId": 1514863,
+          "canonicalId": "tmdb-movie-1514863",
+          "type": "movie",
+          "title": "Best of the Best",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/dbP661svmn7XZq3TdSmSUI5UKQJ.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/5m1j7Wibh3HnZq5QHm97v8dI3GH.jpg",
+          "rating": 4.9,
+          "overview": "Two childhood besties join UCLA's competitive Bollywood-fusion dance team, only to find the road to the US championships is fiercer than they imagined."
+        },
+        {
+          "tmdbId": 1451944,
+          "canonicalId": "tmdb-movie-1451944",
+          "type": "movie",
+          "title": "Lust Stories 3",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/cLA83DD1qMEBwbRIYXf29RKjMja.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/jRtR4aTq4vmxRg9ah60R5i1kkQ7.jpg",
+          "rating": 6.5,
+          "overview": "Through four bite-sized yet emotionally resonant films, the anthology once again explores lust, love, relationships, and repressed desire, offering fresh perspectives on intimacy, longing, and human connection in all their complexity."
+        },
+        {
+          "tmdbId": 1764166,
+          "canonicalId": "tmdb-movie-1764166",
+          "type": "movie",
+          "title": "Thomas & Friends: Really Helpful Engines",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/kUZTIpouA957XGN44a83VGdOHZ6.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/kTH0lBNzU8Jnhusr019VIUwL3KL.jpg",
+          "rating": 7.8,
+          "overview": "Thomas is on a mission to prove he’s the most helpful engine on Sodor! When Thomas finds out that Percy and Gordon all have a mission for their day, Thomas goes on a mission to find a big important job to do!"
+        },
+        {
+          "tmdbId": 1723662,
+          "canonicalId": "tmdb-movie-1723662",
+          "type": "movie",
+          "title": "Dov’è la fiesta?",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/gtTw3Pbf0jj69Xq1nnHDXRztpEb.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/ehzfjmfO5BD0ZOsTJ8p8qCLdul.jpg",
+          "rating": 4.9,
+          "overview": "Leo and Irene have been dating for three months, ever since they fell in love at first sight on the beltway. But they haven’t yet faced that moment—the one when you ask yourself, “What are we to each other?” Just on the evening when they finally meet to talk about it, his new car is stolen right outside her house. The party’s over. The theft will plunge them into a frantic, crazy week filled with police stations, insurance companies, DMV offices, roommates, security guards, thieves, fathers, and nuns. The week they lost a car but—perhaps—found love."
+        },
+        {
+          "tmdbId": 1477104,
+          "canonicalId": "tmdb-movie-1477104",
+          "type": "movie",
+          "title": "Shaun the Sheep: The Beast of Mossy Bottom",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/mMOptSPBVGUA9GHgnpsC35GzZ7e.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/izLG3cxbG89nK75OHyd1zvjR7n8.jpg",
+          "rating": 6.6,
+          "overview": "On Halloween Eve at Mossy Bottom Farm, excitement turns to dismay when the clumsy Farmer ruins the pumpkin patch. Shaun tries fixing it with science experiments, but things go wrong when a wild beast appears in the woods."
+        },
+        {
+          "tmdbId": 1466670,
+          "canonicalId": "tmdb-movie-1466670",
+          "type": "movie",
+          "title": "Think Good",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/5ta2QFexeUsZ9AncKkgiWwpJDq.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/8VjONCVHYgS3PPDuIuzXZBDhFov.jpg",
+          "rating": 7.1,
+          "overview": "When Gil meets Jacques, their love seems irresistible. And when she unexpectedly falls pregnant, he convinces her to start a family. However, their hasty marriage reveals that she is not as deeply rooted into the Jewish faith as he is. Jacques reassures her: \"Think good and it will be good\". Little by little, Gil realizes the insidious control he exerts over her life..."
+        },
+        {
+          "tmdbId": 1433583,
+          "canonicalId": "tmdb-movie-1433583",
+          "type": "movie",
+          "title": "The Weight",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/8i5iZV50CoEtmDCFM7RSxCkpE8h.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/zLeq2fbHU6UdA7mhsYnIULORTgq.jpg",
+          "rating": 6.6,
+          "overview": "When Samuel is torn from his daughter and sent to a brutal prison, Warden Clancy offers him a high-stakes proposition: smuggle gold out of a remote mine with a dangerous crew of prisoners and he’ll win his freedom."
+        },
+        {
+          "tmdbId": 1423191,
+          "canonicalId": "tmdb-movie-1423191",
+          "type": "movie",
+          "title": "Resident Evil",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/i7UyjfPio0VFHB9rBUZSFyhOoM8.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/3icyRAqgakNcQn6aDVz9libFmBA.jpg",
+          "rating": 7.3,
+          "overview": "Medical courier Bryan unwittingly finds himself fighting for survival as one fateful, horrifying night collapses around him in chaos."
+        },
+        {
+          "tmdbId": 1191818,
+          "canonicalId": "tmdb-movie-1191818",
+          "type": "movie",
+          "title": "The Birthday Party",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/7prAuNDsQPUlHKyXiYNkuofyi0G.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/3vt3M9IrUvuH4E93ZlZpWvtxX3V.jpg",
+          "rating": 6.6,
+          "overview": "Thomas, Nora and their teenage daughter Ida live on remote marshland. Social contact is limited, as they only have one neighbour, Cristina, an Italian painter. As the two households plan a surprise birthday party for Nora, strange disturbances begin to occur and unease rolls over the marsh."
+        },
+        {
+          "tmdbId": 1751701,
+          "canonicalId": "tmdb-movie-1751701",
+          "type": "movie",
+          "title": "After Impact",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/yzDuAQCY2n6zzOlBkn6JzhLhY3k.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/k22XyPbce7zvzzf5OnT4uaY8ZD1.jpg",
+          "rating": 5.1,
+          "overview": "After losing his father, Ethan Nichols inherits one of the largest greenhouses in the country, just as the world faces a devastating threat from an approaching asteroid. As society begins to unravel, Ethan grapples with personal betrayal, overwhelming loneliness, and the growing fear that survival may come at the cost of his humanity. Seeking refuge in his family’s bunker, Ethan endures the harsh aftermath of the impact, wrestling with physical injury and emotional despair. When a faint voice crackles over his radio, Ethan discovers he's not as alone as he believed."
+        },
+        {
+          "tmdbId": 1643135,
+          "canonicalId": "tmdb-movie-1643135",
+          "type": "movie",
+          "title": "Run Hide Fight: Infidels",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/gkVq1Pd46NF7AP5XQZfRHjQfCXX.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/5LINHN9KrzfYZxogKlTCcvR1Gki.jpg",
+          "rating": 5.9,
+          "overview": "When radical Islamic terrorists hijack a liberal college's pro-Palestine encampment, a ragtag band of red-blooded students, a security guard, and a Delta Force vet must arm up to save their clueless peers."
+        },
+        {
+          "tmdbId": 1318467,
+          "canonicalId": "tmdb-movie-1318467",
+          "type": "movie",
+          "title": "The Last Kiss",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/cLZ7iFZc25vluSIKt3XtdSTait4.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/ifAdNCn67jW5y7hcDOUozjRBLU0.jpg",
+          "rating": 6.4,
+          "overview": "Laurel always imagined her first kiss would be a fairy tale. Instead, that fantasy turns frightening when she's cursed with an ability to see the death of anyone she kisses. After a vision reveals her crush is doomed to die in a strange murder spree targeting her closest friends, she races to unmask the killer before the mystery becomes a massacre."
+        },
+        {
+          "tmdbId": 487802,
+          "canonicalId": "tmdb-movie-487802",
+          "type": "movie",
+          "title": "The Last Photograph",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/to8YnDGzKvkxKweUI4v8iw6RMCs.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/594Plg7GC1RFPRx6KEwqCftZGUh.jpg",
+          "rating": 5.9,
+          "overview": "An ex-DEA operative must return to the mountains of South America in an effort to find his missing niece and nephew, following the brutal murders of their diplomat parents. Enlisting the help of a washed-up junkie war photographer, the only person to have seen the face of the killers, he sets out, determined to find the children and the truth, but soon learns he must also face the ghosts of his past."
+        },
+        {
+          "tmdbId": 1701141,
+          "canonicalId": "tmdb-movie-1701141",
+          "type": "movie",
+          "title": "Gator Face",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/tUkIHTfiMIa5ipTvgYZW86fIoQX.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/qLPLBWEyjlpCaNOt3NHiM8dmLAB.jpg",
+          "rating": 4.7,
+          "overview": "A Florida vacation becomes a blood-soaked fight for survival when a group of friends are hunted through the swamps by a savage cult that feeds its victims to ravenous alligators in the name of an ancient reptilian god."
+        },
+        {
+          "tmdbId": 1597199,
+          "canonicalId": "tmdb-movie-1597199",
+          "type": "movie",
+          "title": "Back to Buenos Aires",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/2iX5Mf2xRLpL7X5ywYhEPmkzztV.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/dvmsh2jUR1SkyLNWCaoQOI2y6uG.jpg",
+          "rating": 7,
+          "overview": "It follows Mariano Guerra as he returns to Argentina to testify against soldiers who tortured him during the dictatorship, focusing not on revenge but on his inner struggle with guilt, trauma, and the lasting psychological impact of violence kept largely off-screen."
+        }
+      ]
+    },
+    {
+      "key": "lr-2025-movies",
+      "title": "Latest Blockbusters (2025)",
+      "ranked": false,
+      "logo": "",
+      "auto": null,
+      "items": [
+        {
+          "tmdbId": 1308618,
+          "canonicalId": "tmdb-movie-1308618",
+          "type": "movie",
+          "title": "The Wonderers",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/huHLA5j9hd0cOSsTBQo8ti8FLQ.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/eNwmIX59vlDZS94xWgFRsbcGud6.jpg",
+          "rating": 6.6,
+          "overview": "Set against the backdrop of a summer on the French Riviera, the Roussier family navigates the severe disability of the youngest daughter, 13-year-old Bertille, while her older sister, 17-year-old Marion, seeks refuge in a relationship with an older boy."
+        },
+        {
+          "tmdbId": 1193128,
+          "canonicalId": "tmdb-movie-1193128",
+          "type": "movie",
+          "title": "I Was a Stranger",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/RBIrEveMOIy5Kxg2WzgMnCIhaN.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/yTYbKHC3f32iCNvdfvGblnPvJ6U.jpg",
+          "rating": 6.7,
+          "overview": "A Syrian doctor and her daughter flee Aleppo, setting off a chain of events that binds five strangers together. A smuggler, a soldier, a poet, and a coast guard captain collide in a crisis that tests their courage, their choices, and their humanity."
+        },
+        {
+          "tmdbId": 650524,
+          "canonicalId": "tmdb-movie-650524",
+          "type": "movie",
+          "title": "Back to the Past",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/m3YY0im3Y59VmiicgS0mfKVCdmb.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/gpJr8wRED8BpBVaxM0eODQEBNwC.jpg",
+          "rating": 6,
+          "overview": "In the Qin Dynasty, time-traveller Hong Siu-lung has lived in seclusion with his family for twenty years. Yet every step he takes remains under the watchful eye of his former disciple, now the Qin Emperor. On the brink of ultimate power after conquering the six warring states, the emperor is suddenly ambushed by a mysterious team wielding advanced weapons clearly originating from Hong’s time. Drawn together by fate again, Hong and Qin Emperor are forced to confront the long-buried conflict between them, because the future now depends on how they settle their past."
+        },
+        {
+          "tmdbId": 1591516,
+          "canonicalId": "tmdb-movie-1591516",
+          "type": "movie",
+          "title": "Evil Influencer: The Jodi Hildebrandt Story",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/xCawp08whOaJS434IDlBytX7sSm.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/5lZXIkRpOJICbWYJgImdbZ1vWx6.jpg",
+          "rating": 6.2,
+          "overview": "Unravel the case of Utah therapist Jodi Hildebrandt, whose child abuse arrest with parenting YouTuber Ruby Franke exposed a twisted tale of manipulation."
+        },
+        {
+          "tmdbId": 1312150,
+          "canonicalId": "tmdb-movie-1312150",
+          "type": "movie",
+          "title": "Ricky Gervais: Mortality",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/u54OhdSaaLBh02Y4Nf5cETkh8Ku.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/ggzUa7gPXs7mnLhJEcwP9r10Z9e.jpg",
+          "rating": 7,
+          "overview": "Ricky Gervais tackles life, death and the state of the world in a brutally honest special that spares no topic, even his own mortality."
+        },
+        {
+          "tmdbId": 1340110,
+          "canonicalId": "tmdb-movie-1340110",
+          "type": "movie",
+          "title": "Redux Redux",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/9u7sUTYPPTxGCXbkcw8FTq50PnO.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/nBTUocp7lHmyrTmD8mTBOYem4ok.jpg",
+          "rating": 6.7,
+          "overview": "In an attempt to avenge her daughter’s death, Irene Kelly travels through parallel universes, killing her daughter’s murderer again and again. As she becomes consumed by vengeance, her humanity begins to slip away—until the cycle is disrupted when she rescues Mia, a sharp-witted teenager already marked by the killer."
+        },
+        {
+          "tmdbId": 1600028,
+          "canonicalId": "tmdb-movie-1600028",
+          "type": "movie",
+          "title": "A Father's Miracle",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/heC13pt4SV7y3HF5lWNzf0u729j.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/fIuuYkIjF9Q7W26YbIeKX5OWwiL.jpg",
+          "rating": 8,
+          "overview": "After being falsely accused of a terrible crime, Hector, a man with a neurological disability, goes to a secret prison. His goodness conquers the prisoners, who plan to prove their innocence."
+        },
+        {
+          "tmdbId": 1473354,
+          "canonicalId": "tmdb-movie-1473354",
+          "type": "movie",
+          "title": "Sarvam Maya",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/mgLY1aQayVX6dQ2DiylLAhjEG8w.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/6Zn4PaLwLHFJ2bw7s6B10fHiuAD.jpg",
+          "rating": 7.9,
+          "overview": "An atheist priest's life is upended after performing an exorcism, bonding with a charming spirit who helps him pursue music and heal his past."
+        },
+        {
+          "tmdbId": 1472638,
+          "canonicalId": "tmdb-movie-1472638",
+          "type": "movie",
+          "title": "Buen Camino",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/gYvlK73gKsJAaGjndyyiaZerEFb.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/7Whk4F7xQYF5eUwJp50Oa8GvpVd.jpg",
+          "rating": 6.3,
+          "overview": "Checco's life is a comfortable and luxurious one, and it couldn't be otherwise, considering he's the only son of Eugenio Zalone, a wealthy sofa manufacturer. Stranded by the pool in his luxurious villas, with an unspecified number of Filipinos serving him, a very young Mexican model as a girlfriend, and vacationing on his yacht with friends who share his passion for not wanting to work; it seems like a truly enviable life, considering he lacks nothing, absolutely nothing. Actually, no. Something is missing. It's his underage daughter, Cristal, named after the famous French sparkling wine, who has suddenly disappeared without a trace. Urgently summoned to Rome by his ex-wife, Linda, he finds himself facing the responsibilities of fatherhood for the first time, trying to find the girl—a very complicated task, considering he knows absolutely nothing about Cristal and her life."
+        },
+        {
+          "tmdbId": 1401281,
+          "canonicalId": "tmdb-movie-1401281",
+          "type": "movie",
+          "title": "The Testament of Ann Lee",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/hBGg3IGRM7LM6ydMmDrl8mEx33Y.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/jZNR5onRZijwyGr5iWbs3J9QcYr.jpg",
+          "rating": 6.3,
+          "overview": "The extraordinary true legend of Ann Lee, founder of the devotional sect known as the Shakers, who preached gender and social equality and was revered by her followers as the female Christ."
+        },
+        {
+          "tmdbId": 1219548,
+          "canonicalId": "tmdb-movie-1219548",
+          "type": "movie",
+          "title": "The Physician II",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/yU6ybmt1CSdkVBTJJsRYz5xnB4q.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/bSZniMQ6vWVLnCGEEHr99rQOTAj.jpg",
+          "rating": 6.6,
+          "overview": "1050 AD: Robert Cole returns to England to bring the medical light of the Orient to his countrymen. But he fails because of the intrigues of the established London doctors, who feel threatened by the new knowledge. And it is not only the human body that is full of seemingly impenetrable secrets, the soul also holds its own mysteries."
+        },
+        {
+          "tmdbId": 1466115,
+          "canonicalId": "tmdb-movie-1466115",
+          "type": "movie",
+          "title": "Even If This Love Disappears Tonight",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/5eNN8KLDPUXDqIkTdCbmn1gx5P7.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/iL5eGI9ctHdUOV4yG6dyGKctSEX.jpg",
+          "rating": 8.5,
+          "overview": "A high school girl wakes up each day with no memory of yesterday. When she agrees to date a shy classmate, can their love grow with every new beginning?"
+        },
+        {
+          "tmdbId": 1370814,
+          "canonicalId": "tmdb-movie-1370814",
+          "type": "movie",
+          "title": "The Plague",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/b0RWuqzgvyfiIYU4QfgJHhmxZF4.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/kHyN3PejjlYWYz1Eah3jS64oV0g.jpg",
+          "rating": 6.4,
+          "overview": "A socially awkward tween endures the ruthless hierarchy at a water polo camp, his anxiety spiraling into psychological turmoil over the summer."
+        },
+        {
+          "tmdbId": 1234731,
+          "canonicalId": "tmdb-movie-1234731",
+          "type": "movie",
+          "title": "Anaconda",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/hBxN6dwrANN1ic3a4G9x6JZcR3C.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/swxhEJsAWms6X1fDZ4HdbvYBSf9.jpg",
+          "rating": 5.8,
+          "overview": "A group of friends facing mid-life crises head to the rainforest with the intention of remaking their favorite movie from their youth, only to find themselves in a fight for their lives against natural disasters, giant snakes and violent criminals."
+        },
+        {
+          "tmdbId": 1601195,
+          "canonicalId": "tmdb-movie-1601195",
+          "type": "movie",
+          "title": "Dave Chappelle: The Unstoppable...",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/534y0Pt72VEAUTV3THKpMxzCoB3.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/smbIQ9Fzx9LaWtTDm8x7GAaDvCe.jpg",
+          "rating": 6.5,
+          "overview": "Facing a world gone sideways, comedy icon Dave Chappelle delivers bold truths and potent punchlines in this no-holds-barred special."
+        },
+        {
+          "tmdbId": 1516391,
+          "canonicalId": "tmdb-movie-1516391",
+          "type": "movie",
+          "title": "Cover-Up",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/3kVAkwPrNNw3kxe2yJVatj86QKo.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/e0z1lFuOLuQibEKtodWbUdI9jL5.jpg",
+          "rating": 7,
+          "overview": "He's devoted his career to uncovering stories the powerful want buried. From My Lai to Abu Ghraib, dig into the life's work of journalist Seymour Hersh."
+        },
+        {
+          "tmdbId": 1317288,
+          "canonicalId": "tmdb-movie-1317288",
+          "type": "movie",
+          "title": "Marty Supreme",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/lYWEXbQgRTR4ZQleSXAgRbxAjvq.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/6h7w8R4BA7vubEmEEW5vYEjuoz6.jpg",
+          "rating": 7.4,
+          "overview": "Marty Mauser, a young man with a dream no one respects, goes to hell and back in pursuit of greatness."
+        },
+        {
+          "tmdbId": 1140498,
+          "canonicalId": "tmdb-movie-1140498",
+          "type": "movie",
+          "title": "Is This Thing On?",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/YD6QzcokTMe3EViM0hLbNCxf4y.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/argJlxQHbXAzyH8fKnjLfoEyDcd.jpg",
+          "rating": 6.6,
+          "overview": "As their marriage quietly unravels, Alex faces middle age and an impending divorce, seeking new purpose in the New York comedy scene while Tess confronts the sacrifices she made for their family—forcing them to navigate co-parenting, identity, and whether love can take a new form."
+        },
+        {
+          "tmdbId": 1589891,
+          "canonicalId": "tmdb-movie-1589891",
+          "type": "movie",
+          "title": "A Time for Bravery",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/qKKG22O5pFxqglG0oMjWTjQWCNl.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/gtuXARxjGdfsGFqEwggBB8zUJza.jpg",
+          "rating": 7.6,
+          "overview": "A psychoanalyst on community service aids an agent shattered by infidelity; together, they will confront danger and discover second chances."
+        },
+        {
+          "tmdbId": 1584125,
+          "canonicalId": "tmdb-movie-1584125",
+          "type": "movie",
+          "title": "Breakdown: 1975",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/6LirpQnBmBpAOa5Me1lBCBBy90e.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/lHSLTzz1rW3XcfJYTyCSdaPmosr.jpg",
+          "rating": 6.9,
+          "overview": "In 1975, as America faced social and political upheaval, filmmakers turned chaos into art."
+        }
+      ]
+    },
+    {
+      "key": "lr-new-series",
+      "title": "New Web Series (2025-2026)",
+      "ranked": false,
+      "logo": "",
+      "auto": null,
+      "items": [
+        {
+          "tmdbId": 275102,
+          "canonicalId": "tmdb-tv-275102",
+          "type": "tv",
+          "title": "The Scandal",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/4TU0PcHBIl0wPW5B6aVRGExOnHE.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/uc1p1PEbEMpdIHqnU9TESNC6Jhp.jpg",
+          "rating": 6.6,
+          "overview": "In Joseon, a secret proposal ignites hidden desires in a gifted noblewoman, a famed lover and an unsuspecting lady caught in their dangerous game."
+        },
+        {
+          "tmdbId": 320760,
+          "canonicalId": "tmdb-tv-320760",
+          "type": "tv",
+          "title": "Not a Stranger",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/pxXO2VE0vMnzXhUw9GQRAUFFPN6.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/RUkgsqD4YbEKKq77eFgJjeH89n.jpg",
+          "rating": 7,
+          "overview": "After giving birth, painter Funda put her career on hold to focus on her child. Ready to return to painting, she finally finds the nanny she has been searching for: Nazlı. But the mysterious and increasingly unsettling woman soon begins to disrupt the seemingly peaceful lives of Funda and her husband İlker. What begins as a simple employment arrangement develops into a dangerous psychological game in which desire, secrets and loyalty are put to the test."
+        },
+        {
+          "tmdbId": 299939,
+          "canonicalId": "tmdb-tv-299939",
+          "type": "tv",
+          "title": "Monster: The Lizzie Borden Story",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/57XScX1aYtKi1LvHYFQLPUxVhTG.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/gaew60NXUxok3Vmls7gkAT7lYW0.jpg",
+          "rating": 6.9,
+          "overview": "Trapped in a cruel Victorian-era household, Lizzie Borden kills her parents in a gory ax murder that shocks the nation."
+        },
+        {
+          "tmdbId": 332657,
+          "canonicalId": "tmdb-tv-332657",
+          "type": "tv",
+          "title": "Route 187",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/yfP9A3IaKE00U1ap1y7wAoZRzeC.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/Agx8RmlBBDJrlH9MyUOd5JYYZPS.jpg",
+          "rating": 7,
+          "overview": "Citizens combat urban violence until a bus driver and student's murders by thugs spark outrage, leading authorities to hunt the culprits captured on video."
+        },
+        {
+          "tmdbId": 332401,
+          "canonicalId": "tmdb-tv-332401",
+          "type": "tv",
+          "title": "City of Blood",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/Njr0Rlb4CobAfrGE8NVffYDGqx.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/icPBB9V5IX1hggtNs1fvskP2lsi.jpg",
+          "rating": 6.4,
+          "overview": "Berlin — a city-state on the brink. While a privileged few live beneath a climate-controlled dome, those outside struggle to survive in a world ravaged by heat, corruption, and crime. After years apart, sisters Bea and Phoebe are reunited and uncover a dark secret: Vampires are determined to seize political power — and blood has become the city's new currency."
+        },
+        {
+          "tmdbId": 332282,
+          "canonicalId": "tmdb-tv-332282",
+          "type": "tv",
+          "title": "Physical 100: Mexico",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/vPsjiq0O8PCX9vdMCmXbbvVQmlC.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/u1D8LJejEZA0HqoPYKg9MAgHfYc.jpg",
+          "rating": 8.9,
+          "overview": "Reality competition show based on the original Korean format."
+        },
+        {
+          "tmdbId": 295089,
+          "canonicalId": "tmdb-tv-295089",
+          "type": "tv",
+          "title": "The Doll",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/zJSceCJMF7C6AtdRycZjNjavCT.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/7Q8H2rxsNzoNHagDEMcTlmAKtfb.jpg",
+          "rating": 4.5,
+          "overview": "When Stanisław falls in love with the aristocratic Izabela, he dedicates his entire life to winning her over."
+        },
+        {
+          "tmdbId": 273207,
+          "canonicalId": "tmdb-tv-273207",
+          "type": "tv",
+          "title": "Neagley",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/tEPDFIa21VK0Q2YLuzhTt2xrw5W.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/uYOYLFQ4q7asuhdiKXCqGaeAQUH.jpg",
+          "rating": 8.1,
+          "overview": "Frances Neagley is a private investigator in Chicago and former military colleague of Jack Reacher in the Army's 110th Special Investigations Unit. When she learns that a beloved friend from her past has been killed in a suspicious accident, she becomes hell-bent on justice."
+        },
+        {
+          "tmdbId": 260249,
+          "canonicalId": "tmdb-tv-260249",
+          "type": "tv",
+          "title": "The Trial",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/3k5HpocqX4grgmqCecT2OdYMyT0.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/bLcF9mcinphgFlXEfk7RkCSfqCv.jpg",
+          "rating": 9.2,
+          "overview": "A teenager and her father struggle for justice after she is sexually assaulted by the scion of a successful businessman. Not only will the father and daughter have to navigate a failed judicial system, but they must also contend with a wealthy adversary bent on using all his power to protect his son."
+        },
+        {
+          "tmdbId": 325755,
+          "canonicalId": "tmdb-tv-325755",
+          "type": "tv",
+          "title": "The Perfect Lie",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/a8qjbVX7lo1v7m5Awzhx7Ptk8gO.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/vYO9OkYHSNfYuqz6VMS4aCCfRb8.jpg",
+          "rating": 6.2,
+          "overview": "When one of their own is killed in a house fire, four picture-perfect couples are forced to question everything they thought they knew about each other."
+        },
+        {
+          "tmdbId": 300507,
+          "canonicalId": "tmdb-tv-300507",
+          "type": "tv",
+          "title": "Crew Girl",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/jkPZW1iHNvlI6077NxSxwITa1tj.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/lmtTtOjsIBxwKD7LsAD5eeyhq1g.jpg",
+          "rating": 8.2,
+          "overview": "After a family scandal, teen rower Teagan Tao moves to a small town and joins an elite prep school's all-boys crew, sparking rivalry and attraction."
+        },
+        {
+          "tmdbId": 258230,
+          "canonicalId": "tmdb-tv-258230",
+          "type": "tv",
+          "title": "Last Seen",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/vozJZjHv0Yyv4PjoOxF5tVMUGFI.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/kgaQnDdDaPqvGN7i8LLz1aWJdjP.jpg",
+          "rating": 8.2,
+          "overview": "When emergency dispatcher Ian Ridley receives a frantic call from a teenager he believes could be his long-missing daughter, he stops at nothing to find her."
+        },
+        {
+          "tmdbId": 314478,
+          "canonicalId": "tmdb-tv-314478",
+          "type": "tv",
+          "title": "Dang!",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/wSDM4tIC5praLH9GxZisiIBIkz.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/xcjvlbVkVvGodPdfv3c6NzknMIB.jpg",
+          "rating": 5.6,
+          "overview": "After their sister Ruthie blows up her perfect life, Andrew and Eunice show her the fun in being flawed as she helps them adult."
+        },
+        {
+          "tmdbId": 304842,
+          "canonicalId": "tmdb-tv-304842",
+          "type": "tv",
+          "title": "The Drop: A Snowfall Saga",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/naCJhAWRtxBWBfMYdFpM5sPwczI.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/ycLQYTgWfBq53fIkws0qIQOp62g.jpg",
+          "rating": 7.3,
+          "overview": "In 1990s Los Angeles, Wanda and Leon fight to take West Coast rap mainstream while gang wars erupt and record labels move to exploit hip hop culture for their own gain."
+        },
+        {
+          "tmdbId": 301626,
+          "canonicalId": "tmdb-tv-301626",
+          "type": "tv",
+          "title": "A Tale of Two Cities",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/ht3OVVRBTrTeVtUVQiKSekjIFVH.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/1erQOjm3PZP6PNVRIuxdNmesCBu.jpg",
+          "rating": 8.2,
+          "overview": "A pair of lookalikes, one a former French aristocrat and the other an alcoholic English lawyer, fall in love with the same woman amidst the turmoil of the French Revolution."
+        },
+        {
+          "tmdbId": 329471,
+          "canonicalId": "tmdb-tv-329471",
+          "type": "tv",
+          "title": "The Grand Tour",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/kq6XB6xmD86txW4UR32tT2JUiN9.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/40Dx3P1mllQq1jhgN3K8dlti6CS.jpg",
+          "rating": 8.5,
+          "overview": "Welcome to The Grand Tour. The world's greatest motoring show reboots with new presenters - Thomas Holland, James Engelsman and Francis Bourgeois - and its trademark blend of global adventure, incredible vehicles, epic stunts and strong opinions."
+        },
+        {
+          "tmdbId": 290234,
+          "canonicalId": "tmdb-tv-290234",
+          "type": "tv",
+          "title": "Lovesick",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/91s80WxRqIirFSpGVtiXJoS1GA5.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/avfnPYtyKXjgnhqtKAt1PZO2h5I.jpg",
+          "rating": 7.5,
+          "overview": "Set during the Mexican Revolution, follow Emilia Sauri, a woman torn between two passionate loves while navigating a world dominated by violence and revolution."
+        },
+        {
+          "tmdbId": 306630,
+          "canonicalId": "tmdb-tv-306630",
+          "type": "tv",
+          "title": "You Maniac",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/gTvfipRjEdRzbn09CbI7XRj6cmg.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/hYBtbqNGijJRRmoSxLhp6rq44bC.jpg",
+          "rating": 10,
+          "overview": "When a carefree playboy meets the one man who refuses to fall for his charm, his competitive ego turns into an obsession he can't resist."
+        },
+        {
+          "tmdbId": 305644,
+          "canonicalId": "tmdb-tv-305644",
+          "type": "tv",
+          "title": "Four Hands, Two Sonatas",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/a7p6htiJKx68USDAcilJ5rzKAWB.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/fYL4I6cezb06BHhQlrNjNhy7jhf.jpg",
+          "rating": 9.4,
+          "overview": "When two young pianists from completely different worlds meet at an elite music high school, the melodies of their lives become intimately intertwined."
+        },
+        {
+          "tmdbId": 333096,
+          "canonicalId": "tmdb-tv-333096",
+          "type": "tv",
+          "title": "Hotel Todo Incluido",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/r7CJuUXoIl8lgISfTwt5zzGWeQG.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/4QoTm66DR8vRyDWTXs2IBWNy3WH.jpg",
+          "rating": 6.8,
+          "overview": ""
+        }
+      ]
+    }
+  ]
 }

@@ -336,6 +336,7 @@
     var episodesSectionHtml = '';
     if (isTv) {
       var seasons = data.seasons || [];
+      seriesSeasonsCache[tmdbId] = seasons;
       var currentSeason = data.initialSeason || 1;
       var seasonOptions = seasons.map(function(s) {
         return '<option value="' + s.season_number + '"' + (s.season_number === currentSeason ? ' selected' : '') + '>' +
@@ -1322,11 +1323,24 @@
   var watchPrevEpBtn = document.getElementById('watch-prev-ep-btn');
   var watchNextEpBtn = document.getElementById('watch-next-ep-btn');
   var watchEpIndicator = document.getElementById('watch-ep-indicator');
+  var watchSeasonSelect = document.getElementById('watch-season-select');
+  var watchEpisodeSelect = document.getElementById('watch-episode-select');
 
   var watchMobileEpBar = document.getElementById('watch-mobile-ep-bar');
   var watchMobilePrevEp = document.getElementById('watch-mobile-prev-ep');
   var watchMobileNextEp = document.getElementById('watch-mobile-next-ep');
   var watchMobileEpIndicator = document.getElementById('watch-mobile-ep-indicator');
+  var watchMobileSeasonSelect = document.getElementById('watch-mobile-season-select');
+  var watchMobileEpisodeSelect = document.getElementById('watch-mobile-episode-select');
+
+  var seriesSeasonsCache = {};
+
+  function getSeriesSeasons(tId) {
+    if (seriesSeasonsCache[tId] && seriesSeasonsCache[tId].length) {
+      return seriesSeasonsCache[tId];
+    }
+    return [{ season_number: 1, episode_count: 10, name: 'Season 1' }];
+  }
 
   function updateEpisodeNavUi() {
     if (!activeWatchParams) {
@@ -1346,18 +1360,82 @@
 
     var curEp = parseInt(activeWatchParams.episode || 1, 10) || 1;
     var curSe = parseInt(activeWatchParams.season || 1, 10) || 1;
-    var epLabel = 'S' + curSe + ':E' + curEp;
+    var tId = activeWatchParams.tmdbId;
 
+    var seasons = getSeriesSeasons(tId);
+    var curSeasonMeta = seasons.find(function(s) { return Number(s.season_number) === Number(curSe); }) || seasons[0] || { season_number: curSe, episode_count: 10 };
+    var totalEps = curSeasonMeta.episode_count || 10;
+
+    // Populate Season Dropdowns
+    var seOptions = seasons.map(function(s) {
+      return '<option value="' + s.season_number + '"' + (s.season_number === curSe ? ' selected' : '') + '>' +
+        escapeHtml(s.name || ('Season ' + s.season_number)) + '</option>';
+    }).join('');
+
+    if (watchSeasonSelect && watchSeasonSelect.innerHTML !== seOptions) {
+      watchSeasonSelect.innerHTML = seOptions;
+    }
+    if (watchSeasonSelect) watchSeasonSelect.value = String(curSe);
+
+    if (watchMobileSeasonSelect && watchMobileSeasonSelect.innerHTML !== seOptions) {
+      watchMobileSeasonSelect.innerHTML = seOptions;
+    }
+    if (watchMobileSeasonSelect) watchMobileSeasonSelect.value = String(curSe);
+
+    // Populate Episode Dropdowns
+    var epOptions = '';
+    for (var i = 1; i <= totalEps; i++) {
+      epOptions += '<option value="' + i + '"' + (i === curEp ? ' selected' : '') + '>Ep ' + i + '</option>';
+    }
+
+    if (watchEpisodeSelect) {
+      watchEpisodeSelect.innerHTML = epOptions;
+      watchEpisodeSelect.value = String(curEp);
+    }
+    if (watchMobileEpisodeSelect) {
+      watchMobileEpisodeSelect.innerHTML = epOptions;
+      watchMobileEpisodeSelect.value = String(curEp);
+    }
+
+    var epLabel = 'S' + curSe + ':E' + curEp;
     if (watchEpIndicator) watchEpIndicator.textContent = epLabel;
     if (watchMobileEpIndicator) watchMobileEpIndicator.textContent = epLabel;
     if (watchMetaType) watchMetaType.textContent = 'S' + curSe + ' E' + curEp;
 
-    if (watchPrevEpBtn) watchPrevEpBtn.disabled = (curEp <= 1);
-    if (watchMobilePrevEp) watchMobilePrevEp.disabled = (curEp <= 1);
+    // Bounded prev/next controls
+    var isFirst = (curSe <= 1 && curEp <= 1);
+    var lastSeason = seasons[seasons.length - 1] || { season_number: 1, episode_count: 10 };
+    var isLast = (curSe >= lastSeason.season_number && curEp >= lastSeason.episode_count);
+
+    if (watchPrevEpBtn) {
+      watchPrevEpBtn.disabled = isFirst;
+      watchPrevEpBtn.style.opacity = isFirst ? '0.35' : '1';
+    }
+    if (watchMobilePrevEp) {
+      watchMobilePrevEp.disabled = isFirst;
+      watchMobilePrevEp.style.opacity = isFirst ? '0.35' : '1';
+    }
+
+    if (watchNextEpBtn) {
+      watchNextEpBtn.disabled = isLast;
+      watchNextEpBtn.style.opacity = isLast ? '0.35' : '1';
+    }
+    if (watchMobileNextEp) {
+      watchMobileNextEp.disabled = isLast;
+      watchMobileNextEp.style.opacity = isLast ? '0.35' : '1';
+    }
   }
 
-  function navigateToEpisode(targetEp) {
-    if (!activeWatchParams || targetEp < 1) return;
+  function navigateToEpisode(targetSe, targetEp) {
+    if (!activeWatchParams) return;
+    if (arguments.length === 1) {
+      targetEp = targetSe;
+      targetSe = parseInt(activeWatchParams.season || 1, 10) || 1;
+    }
+    targetSe = parseInt(targetSe || 1, 10) || 1;
+    targetEp = parseInt(targetEp || 1, 10) || 1;
+
+    activeWatchParams.season = targetSe;
     activeWatchParams.episode = targetEp;
     updateEpisodeNavUi();
 
@@ -1368,7 +1446,7 @@
       });
     } else {
       var sTid = String(activeWatchParams.tmdbId || '').replace(/^(?:dotmobiz|tmdb(?:-movie|-series|-tv)?)-/, '');
-      activeWatchServers.vidsrc_sbs = 'https://vidsrc.pm/embed/tv/' + sTid + '/' + (activeWatchParams.season || 1) + '/' + targetEp;
+      activeWatchServers.vidsrc_sbs = 'https://vidsrc.pm/embed/tv/' + sTid + '/' + targetSe + '/' + targetEp;
       activeWatchServers.peachify = buildPeachifyUrl(activeWatchParams, currentWatchLang);
       activeWatchServers.allmovieland = buildAllMovieLandUrl(activeWatchParams);
       activeWatchServers.s3 = buildVidlinkMultiAudioUrl(activeWatchParams, currentWatchLang);
@@ -1380,63 +1458,99 @@
     var targetUrl = activeWatchServers[srv] || activeWatchServers.vidsrc_sbs || activeWatchServers.peachify || activeWatchServers.s3;
     if (watchModalIframe && targetUrl) {
       watchModalIframe.src = 'about:blank';
-      watchModalIframe.title = (activeWatchParams.title || 'Series') + ' Season ' + (activeWatchParams.season || 1) + ' Episode ' + targetEp + ' player';
+      watchModalIframe.title = (activeWatchParams.title || 'Series') + ' Season ' + targetSe + ' Episode ' + targetEp + ' player';
       setTimeout(function() {
         if (watchModalIframe) watchModalIframe.src = targetUrl;
       }, 30);
     }
 
-    var se = activeWatchParams.season || 1;
-    setWatchStatus('Episode ' + targetEp + ' Loaded', 'Playing Season ' + se + ' Episode ' + targetEp);
+    setWatchStatus('Episode ' + targetEp + ' Loaded', 'Playing Season ' + targetSe + ' Episode ' + targetEp);
     if (window.__showToast) {
-      window.__showToast('Playing Episode ' + targetEp, '⏭️');
+      window.__showToast('Playing S' + targetSe + ' E' + targetEp, '⏭️');
     }
 
     // Update history URL hash
     try {
       var tmdbId = activeWatchParams.tmdbId;
-      var newHash = '#w=' + tmdbId + '-tv-' + se + '-' + targetEp;
-      history.replaceState({ modal: 'watch', tmdbId: tmdbId, type: 'tv', se: se, ep: targetEp }, '', newHash);
+      var newHash = '#w=' + tmdbId + '-tv-' + targetSe + '-' + targetEp;
+      history.replaceState({ modal: 'watch', tmdbId: tmdbId, type: 'tv', se: targetSe, ep: targetEp }, '', newHash);
     } catch(e) {}
+  }
+
+  // Hook up Season & Episode select listeners
+  if (watchSeasonSelect) {
+    watchSeasonSelect.addEventListener('change', function(e) {
+      e.stopPropagation();
+      navigateToEpisode(parseInt(this.value, 10) || 1, 1);
+    });
+  }
+  if (watchEpisodeSelect) {
+    watchEpisodeSelect.addEventListener('change', function(e) {
+      e.stopPropagation();
+      var se = parseInt(activeWatchParams.season || 1, 10) || 1;
+      navigateToEpisode(se, parseInt(this.value, 10) || 1);
+    });
+  }
+  if (watchMobileSeasonSelect) {
+    watchMobileSeasonSelect.addEventListener('change', function(e) {
+      e.stopPropagation();
+      navigateToEpisode(parseInt(this.value, 10) || 1, 1);
+    });
+  }
+  if (watchMobileEpisodeSelect) {
+    watchMobileEpisodeSelect.addEventListener('change', function(e) {
+      e.stopPropagation();
+      var se = parseInt(activeWatchParams.season || 1, 10) || 1;
+      navigateToEpisode(se, parseInt(this.value, 10) || 1);
+    });
+  }
+
+  function stepEpisodeNav(delta) {
+    if (!activeWatchParams) return;
+    var curEp = parseInt(activeWatchParams.episode || 1, 10) || 1;
+    var curSe = parseInt(activeWatchParams.season || 1, 10) || 1;
+    var seasons = getSeriesSeasons(activeWatchParams.tmdbId);
+    var curSeasonMeta = seasons.find(function(s) { return Number(s.season_number) === Number(curSe); }) || { season_number: curSe, episode_count: 10 };
+
+    var targetEp = curEp + delta;
+    if (targetEp >= 1 && targetEp <= curSeasonMeta.episode_count) {
+      navigateToEpisode(curSe, targetEp);
+    } else if (targetEp > curSeasonMeta.episode_count) {
+      var nextSeNum = curSe + 1;
+      var nextMeta = seasons.find(function(s) { return s.season_number === nextSeNum; });
+      if (nextMeta) navigateToEpisode(nextSeNum, 1);
+    } else if (targetEp < 1 && curSe > 1) {
+      var prevSeNum = curSe - 1;
+      var prevMeta = seasons.find(function(s) { return s.season_number === prevSeNum; });
+      if (prevMeta) navigateToEpisode(prevSeNum, prevMeta.episode_count || 1);
+    }
   }
 
   if (watchPrevEpBtn) {
     watchPrevEpBtn.addEventListener('click', function(e) {
       e.stopPropagation();
-      if (!activeWatchParams) return;
-      var curEp = parseInt(activeWatchParams.episode || 1, 10) || 1;
-      if (curEp > 1) {
-        navigateToEpisode(curEp - 1);
-      }
+      stepEpisodeNav(-1);
     });
   }
 
   if (watchNextEpBtn) {
     watchNextEpBtn.addEventListener('click', function(e) {
       e.stopPropagation();
-      if (!activeWatchParams) return;
-      var curEp = parseInt(activeWatchParams.episode || 1, 10) || 1;
-      navigateToEpisode(curEp + 1);
+      stepEpisodeNav(1);
     });
   }
 
   if (watchMobilePrevEp) {
     watchMobilePrevEp.addEventListener('click', function(e) {
       e.stopPropagation();
-      if (!activeWatchParams) return;
-      var curEp = parseInt(activeWatchParams.episode || 1, 10) || 1;
-      if (curEp > 1) {
-        navigateToEpisode(curEp - 1);
-      }
+      stepEpisodeNav(-1);
     });
   }
 
   if (watchMobileNextEp) {
     watchMobileNextEp.addEventListener('click', function(e) {
       e.stopPropagation();
-      if (!activeWatchParams) return;
-      var curEp = parseInt(activeWatchParams.episode || 1, 10) || 1;
-      navigateToEpisode(curEp + 1);
+      stepEpisodeNav(1);
     });
   }
 
@@ -2118,6 +2232,17 @@
                   }
                 }).catch(function() {});
             }
+          }
+        }).catch(function() {});
+    }
+
+    if (isTv && (!seriesSeasonsCache[tmdbId] || !seriesSeasonsCache[tmdbId].length)) {
+      fetch('/api/details?id=' + encodeURIComponent(canonicalId || tmdbId))
+        .then(function(r) { return r.json(); })
+        .then(function(d) {
+          if (d && Array.isArray(d.seasons) && d.seasons.length) {
+            seriesSeasonsCache[tmdbId] = d.seasons;
+            updateEpisodeNavUi();
           }
         }).catch(function() {});
     }

@@ -575,11 +575,52 @@ body {
   background: #000;
 }
 
+/* Mobile Portrait: Enforce strict 16:9 aspect-ratio to eliminate giant vertical black void */
 @media (max-width: 768px) and (orientation: portrait) {
+  #watch-modal {
+    height: 100dvh !important;
+    height: 100vh !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+  }
+  .watch-player-stage {
+    width: 100% !important;
+    aspect-ratio: 16 / 9 !important;
+    height: auto !important;
+    max-height: 56.25vw !important;
+    flex: 0 0 auto !important;
+    position: relative !important;
+    background: #000 !important;
+  }
+  .watch-player-stage iframe,
   #watch-modal-iframe {
+    position: absolute !important;
+    inset: 0 !important;
     width: 100% !important;
     height: 100% !important;
     object-fit: contain !important;
+    border: 0 !important;
+  }
+}
+
+/* Isolated Cinema Fullscreen & Landscape */
+#watch-modal.is-fullscreen .watch-player-stage,
+:fullscreen .watch-player-stage,
+.watch-player-stage:fullscreen,
+@media (orientation: landscape) {
+  .watch-player-stage {
+    width: 100vw !important;
+    height: 100dvh !important;
+    max-height: none !important;
+    flex: 1 1 100% !important;
+  }
+  .watch-player-stage iframe,
+  #watch-modal-iframe {
+    width: 100% !important;
+    height: 100% !important;
   }
 }
 

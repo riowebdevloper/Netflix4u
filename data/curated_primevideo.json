@@ -3,40 +3,59 @@
   "tab": "PrimeVideo",
   "hero": [
     {
-      "tmdbId": 801688,
-      "type": "movie",
-      "title": "Kalki 2898-AD",
-      "year": "2024",
-      "backdrop": "https://image.tmdb.org/t/p/original/o8XSR1SONnjcsv84NRu6Mwsl5io.jpg",
-      "rating": 6.388,
-      "overview": ""
-    },
-    {
-      "tmdbId": 76479,
+      "tmdbId": 108978,
+      "canonicalId": "tmdb-tv-108978",
       "type": "tv",
-      "title": "The Boys",
-      "year": "2019",
-      "backdrop": "https://image.tmdb.org/t/p/original/bq28ajZaoMyzEIm6REelqyqtEDZ.jpg",
-      "rating": 8.462,
-      "overview": ""
+      "title": "Reacher",
+      "year": "2022",
+      "poster": "https://image.tmdb.org/t/p/w342/f1VCQIG2iCyOookdgOzwtUpwWC0.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/w780/pF0qkRsrHkdYadPWY9AMeFZfcwk.jpg",
+      "rating": 8.1,
+      "overview": "Jack Reacher, a veteran military police investigator, has just recently entered civilian life. Reacher is a drifter, carrying no phone and the barest of essentials as he travels the country and explores the nation he once served."
     },
     {
-      "tmdbId": 533535,
-      "type": "movie",
-      "title": "Deadpool & Wolverine",
-      "year": "2024",
-      "backdrop": "https://image.tmdb.org/t/p/original/ufpeVEM64uZHPpzzeiDNIAdaeOD.jpg",
-      "rating": 7.565,
-      "overview": ""
+      "tmdbId": 113962,
+      "canonicalId": "tmdb-tv-113962",
+      "type": "tv",
+      "title": "Lioness",
+      "year": "2023",
+      "poster": "https://image.tmdb.org/t/p/w342/rzpHPSEgPTpRs8EHbygwsOw7jC0.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/w780/mU7l9UaEItxHbg2YBNs0sHjoFVY.jpg",
+      "rating": 8.2,
+      "overview": "Cruz Manuelos, a rough-around-the-edges but passionate young Marine, is recruited to join the CIA's Lioness Engagement Team to help bring down a terrorist organization from within. Joe, the station chief of the Lioness program, is tasked with training, managing and leading her female undercover operatives."
     },
     {
-      "tmdbId": 857598,
+      "tmdbId": 2734,
+      "canonicalId": "tmdb-tv-2734",
+      "type": "tv",
+      "title": "Law & Order: Special Victims Unit",
+      "year": "1999",
+      "poster": "https://image.tmdb.org/t/p/w342/iofokHZoUB4Qhik4PflvJl8TT6a.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/w780/obtdxPgmfykYwVnvuYXC5f2xKlQ.jpg",
+      "rating": 8,
+      "overview": "In the criminal justice system, sexually-based offenses are considered especially heinous. In New York City, the dedicated detectives who investigate these vicious felonies are members of an elite squad known as the Special Victims Unit. These are their stories."
+    },
+    {
+      "tmdbId": 1440098,
+      "canonicalId": "tmdb-movie-1440098",
       "type": "movie",
-      "title": "Pushpa 2 - The Rule",
-      "year": "2024",
-      "backdrop": "https://image.tmdb.org/t/p/original/keC82cQ8q0ZHthrbvzWq04kGnbv.jpg",
-      "rating": 6.285,
-      "overview": ""
+      "title": "Drawn Together",
+      "year": "2026",
+      "poster": "https://image.tmdb.org/t/p/w342/6rpvddXbaQPOi0fB2HKWbZ3uUSg.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/w780/i65y7cMae36K0giN0GRaMjAHUru.jpg",
+      "rating": 6.7,
+      "overview": "Marfil, daughter of a powerful Spanish businessman, sees her life in New York turned upside down when she is kidnapped and released without explanation. Her father hires Sebastian Moore as bodyguard and, forced to spend every minute together, an inevitable attraction ignites in a world where nothing is as it seems."
+    },
+    {
+      "tmdbId": 1386315,
+      "canonicalId": "tmdb-movie-1386315",
+      "type": "movie",
+      "title": "The Runner",
+      "year": "2026",
+      "poster": "https://image.tmdb.org/t/p/w342/uxCaBoYXsDC4A0SqTm3SISj0OwK.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/w780/jzBWExXacS33rMQ2zLBrqIVweyG.jpg",
+      "rating": 6.8,
+      "overview": "Maia Marten, a brilliant London lawyer, has her life shattered by a single call on her morning run: her son has been taken. To get him back, she must keep running, obey every ruthless command, and trust no one-each second a test of how far a mother will go to save her child."
     }
   ],
   "rails": [
@@ -44,287 +63,686 @@
       "key": "prime-top-series",
       "title": "Top Series on Prime Video",
       "ranked": true,
-      "logo": "",
+      "logo": "/images/platforms/teMwgjoxOg9u.jpg",
       "auto": null,
       "items": [
         {
-          "tmdbId": 76479,
+          "tmdbId": 108978,
+          "canonicalId": "tmdb-tv-108978",
           "type": "tv",
-          "title": "The Boys",
-          "year": "2019",
-          "poster": "https://image.tmdb.org/t/p/w342/in1R2dDc421JxsoRWaIIAqVI2KE.jpg",
-          "backdrop": "",
-          "rating": 8.462
-        },
-        {
-          "tmdbId": 84773,
-          "type": "tv",
-          "title": "The Lord of the Rings: The Rings of Power",
+          "title": "Reacher",
           "year": "2022",
-          "poster": "https://image.tmdb.org/t/p/w342/mYLOqiStMxDK3fYZFirgrMt8z5d.jpg",
-          "backdrop": "",
-          "rating": 7
+          "poster": "https://image.tmdb.org/t/p/w342/f1VCQIG2iCyOookdgOzwtUpwWC0.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/pF0qkRsrHkdYadPWY9AMeFZfcwk.jpg",
+          "rating": 8.1,
+          "overview": "Jack Reacher, a veteran military police investigator, has just recently entered civilian life. Reacher is a drifter, carrying no phone and the barest of essentials as he travels the country and explores the nation he once served."
         },
         {
-          "tmdbId": 82856,
+          "tmdbId": 113962,
+          "canonicalId": "tmdb-tv-113962",
           "type": "tv",
-          "title": "The Mandalorian",
-          "year": "2019",
-          "poster": "https://image.tmdb.org/t/p/w342/sWgBv7LV2PRoQgkxwlibdGXKz1S.jpg",
-          "backdrop": "",
-          "rating": 8.407
-        },
-        {
-          "tmdbId": 85552,
-          "type": "tv",
-          "title": "Euphoria",
-          "year": "2019",
-          "poster": "https://image.tmdb.org/t/p/w342/aJrG7OkoTMPWG5c8opz8a93AZPY.jpg",
-          "backdrop": "",
-          "rating": 8.29
-        }
-      ]
-    },
-    {
-      "key": "prime-2025-releases",
-      "title": "Latest Releases (2025)",
-      "ranked": false,
-      "logo": "",
-      "auto": null,
-      "items": [
-        {
-          "tmdbId": 1291608,
-          "type": "movie",
-          "title": "Dhurandhar",
-          "year": "2025",
-          "poster": "https://image.tmdb.org/t/p/w342/8FHOtUpNIk5ZPEay2N2EY5lrxkv.jpg",
-          "backdrop": "https://image.tmdb.org/t/p/w780/snYOXem8pUGOffnLbbGq4aB1pg4.jpg",
-          "rating": 7.117
-        },
-        {
-          "tmdbId": 83533,
-          "type": "movie",
-          "title": "Avatar: Fire and Ash",
-          "year": "2025",
-          "poster": "https://image.tmdb.org/t/p/w342/aabwWZWx6z1aYP4PX2ADvbDKktd.jpg",
-          "backdrop": "https://image.tmdb.org/t/p/w780/iN41Ccw4DctL8npfmYg1j5Tr1eb.jpg",
-          "rating": 7.498
-        },
-        {
-          "tmdbId": 575265,
-          "type": "movie",
-          "title": "Mission: Impossible - The Final Reckoning",
-          "year": "2025",
-          "poster": "https://image.tmdb.org/t/p/w342/z53D72EAOxGRqdr7KXXWp9dJiDe.jpg",
-          "backdrop": "https://image.tmdb.org/t/p/w780/538U9snNc2fpnOmYXAPUh3zn31H.jpg",
-          "rating": 7.159
-        },
-        {
-          "tmdbId": 822119,
-          "type": "movie",
-          "title": "Captain America: Brave New World",
-          "year": "2025",
-          "poster": "https://image.tmdb.org/t/p/w342/pzIddUEMWhWzfvLI3TwxUG2wGoi.jpg",
-          "backdrop": "https://image.tmdb.org/t/p/w780/ce3prrjh9ZehEl5JinNqr4jIeaB.jpg",
-          "rating": 5.979
-        },
-        {
-          "tmdbId": 1234821,
-          "type": "movie",
-          "title": "Jurassic World Rebirth",
-          "year": "2025",
-          "poster": "https://image.tmdb.org/t/p/w342/1RICxzeoNCAO5NpcRMIgg1XT6fm.jpg",
-          "backdrop": "https://image.tmdb.org/t/p/w780/zNriRTr0kWwyaXPzdg1EIxf0BWk.jpg",
-          "rating": 6.3
-        }
-      ]
-    },
-    {
-      "key": "prime-2024-blockbusters",
-      "title": "2024 Blockbusters",
-      "ranked": false,
-      "logo": "",
-      "auto": null,
-      "items": [
-        {
-          "tmdbId": 533535,
-          "type": "movie",
-          "title": "Deadpool & Wolverine",
-          "year": "2024",
-          "poster": "https://image.tmdb.org/t/p/w342/8cdWjvZQUExUUTzyp4t6EDMubfO.jpg",
-          "backdrop": "https://image.tmdb.org/t/p/w780/by8z9Fe8y7p4jo2YlW2SZDnptyT.jpg",
-          "rating": 7.565
-        },
-        {
-          "tmdbId": 1022789,
-          "type": "movie",
-          "title": "Inside Out 2",
-          "year": "2024",
-          "poster": "https://image.tmdb.org/t/p/w342/vpnVM9B6NMmQpWeZvzLvDESb2QY.jpg",
-          "backdrop": "https://image.tmdb.org/t/p/w780/p5ozvmdgsmbWe0H8Xk7Rc8SCwAB.jpg",
-          "rating": 7.546
-        },
-        {
-          "tmdbId": 402431,
-          "type": "movie",
-          "title": "Wicked",
-          "year": "2024",
-          "poster": "https://image.tmdb.org/t/p/w342/xDGbZ0JJ3mYaGKy4Nzd9Kph6M9L.jpg",
-          "backdrop": "https://image.tmdb.org/t/p/w780/w22GVYotTIVC1dUd58mRhwPqiS.jpg",
-          "rating": 6.909
-        },
-        {
-          "tmdbId": 558449,
-          "type": "movie",
-          "title": "Gladiator II",
-          "year": "2024",
-          "poster": "https://image.tmdb.org/t/p/w342/2cxhvwyEwRlysAmRH4iodkvo0z5.jpg",
-          "backdrop": "https://image.tmdb.org/t/p/w780/tOqIwliWMovSIZ9DyvHcHI7p2im.jpg",
-          "rating": 6.614
-        },
-        {
-          "tmdbId": 786892,
-          "type": "movie",
-          "title": "Furiosa: A Mad Max Saga",
-          "year": "2024",
-          "poster": "https://image.tmdb.org/t/p/w342/iADOJ8Zymht2JPMoy3R7xceZprc.jpg",
-          "backdrop": "https://image.tmdb.org/t/p/w780/raph7qjAGTMXaIjVxt6ZDSXRzUr.jpg",
-          "rating": 7.454
-        },
-        {
-          "tmdbId": 929590,
-          "type": "movie",
-          "title": "Civil War",
-          "year": "2024",
-          "poster": "https://image.tmdb.org/t/p/w342/sh7Rg8Er3tFcN9BpKIPOMvALgZd.jpg",
-          "backdrop": "https://image.tmdb.org/t/p/w780/t2SXZ7KLriaLyf5QT8Iar6fSOGp.jpg",
-          "rating": 6.86
-        },
-        {
-          "tmdbId": 718821,
-          "type": "movie",
-          "title": "Twisters",
-          "year": "2024",
-          "poster": "https://image.tmdb.org/t/p/w342/pjnD08FlMAIXsfOLKQbvmO0f0MD.jpg",
-          "backdrop": "https://image.tmdb.org/t/p/w780/58D6ZAvOKxlHjyX9S8qNKSBE9Y.jpg",
-          "rating": 6.782
-        },
-        {
-          "tmdbId": 872585,
-          "type": "movie",
-          "title": "Oppenheimer",
+          "title": "Lioness",
           "year": "2023",
-          "poster": "https://image.tmdb.org/t/p/w342/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg",
-          "backdrop": "https://image.tmdb.org/t/p/w780/7CENyUim29IEsaJhUxIGymCRvPu.jpg",
-          "rating": 8.032
+          "poster": "https://image.tmdb.org/t/p/w342/rzpHPSEgPTpRs8EHbygwsOw7jC0.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/mU7l9UaEItxHbg2YBNs0sHjoFVY.jpg",
+          "rating": 8.2,
+          "overview": "Cruz Manuelos, a rough-around-the-edges but passionate young Marine, is recruited to join the CIA's Lioness Engagement Team to help bring down a terrorist organization from within. Joe, the station chief of the Lioness program, is tasked with training, managing and leading her female undercover operatives."
+        },
+        {
+          "tmdbId": 2734,
+          "canonicalId": "tmdb-tv-2734",
+          "type": "tv",
+          "title": "Law & Order: Special Victims Unit",
+          "year": "1999",
+          "poster": "https://image.tmdb.org/t/p/w342/iofokHZoUB4Qhik4PflvJl8TT6a.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/obtdxPgmfykYwVnvuYXC5f2xKlQ.jpg",
+          "rating": 8,
+          "overview": "In the criminal justice system, sexually-based offenses are considered especially heinous. In New York City, the dedicated detectives who investigate these vicious felonies are members of an elite squad known as the Special Victims Unit. These are their stories."
+        },
+        {
+          "tmdbId": 5920,
+          "canonicalId": "tmdb-tv-5920",
+          "type": "tv",
+          "title": "The Mentalist",
+          "year": "2008",
+          "poster": "https://image.tmdb.org/t/p/w342/acYXu4KaDj1NIkMgObnhe4C4a0T.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/rJFqKcmMSttdNP58l0dVzY2NcTA.jpg",
+          "rating": 8.4,
+          "overview": "Patrick Jane, a former celebrity psychic medium, uses his razor sharp skills of observation and expertise at \"reading\" people to solve serious crimes with the California Bureau of Investigation."
+        },
+        {
+          "tmdbId": 4614,
+          "canonicalId": "tmdb-tv-4614",
+          "type": "tv",
+          "title": "NCIS",
+          "year": "2003",
+          "poster": "https://image.tmdb.org/t/p/w342/mBcu8d6x6zB1el3MPNl7cZQEQ31.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/c1aBrG5s5xFa6Tbnihu2Hhj4t2q.jpg",
+          "rating": 7.6,
+          "overview": "From murder and espionage to terrorism and stolen submarines, a team of special agents investigates any crime that has any connection to Navy and Marine Corps personnel, regardless of rank or position."
+        },
+        {
+          "tmdbId": 1622,
+          "canonicalId": "tmdb-tv-1622",
+          "type": "tv",
+          "title": "Supernatural",
+          "year": "2005",
+          "poster": "https://image.tmdb.org/t/p/w342/8iixmfGx5EIFPdpNvB2JvI3VIqX.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/ro0tlgnsco4SwbdAgmscLkSlMSL.jpg",
+          "rating": 8.3,
+          "overview": "When they were boys, Sam and Dean Winchester lost their mother to a mysterious and demonic supernatural force. Subsequently, their father raised them to be soldiers. He taught them about the paranormal evil that lives in the dark corners and on the back roads of America ... and he taught them how to kill it. Now, the Winchester brothers crisscross the country in their '67 Chevy Impala, battling every kind of supernatural threat they encounter along the way. "
+        },
+        {
+          "tmdbId": 94664,
+          "canonicalId": "tmdb-tv-94664",
+          "type": "tv",
+          "title": "Mushoku Tensei: Jobless Reincarnation",
+          "year": "2021",
+          "poster": "https://image.tmdb.org/t/p/w342/1mFnzilCyj9Coa9jbN8vFYLEZdW.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/j9fRIimor0AMFJR9kjZubXcABzZ.jpg",
+          "rating": 8.4,
+          "overview": "When a 34-year-old underachiever gets run over by a truck, his story doesn't end there. Reincarnated in a new world as an infant, Rudy will seize every opportunity to live the life he's always wanted. Armed with new friends, some freshly acquired magical abilities, and the courage to do the things he's always dreamed of, he's embarking on an epic adventure—with all of his past experience intact!"
+        },
+        {
+          "tmdbId": 2316,
+          "canonicalId": "tmdb-tv-2316",
+          "type": "tv",
+          "title": "The Office",
+          "year": "2005",
+          "poster": "https://image.tmdb.org/t/p/w342/7DJKHzAi83BmQrWLrYYOqcoKfhR.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/mLyW3UTgi2lsMdtueYODcfAB9Ku.jpg",
+          "rating": 8.6,
+          "overview": "The everyday lives of office employees in the Scranton, Pennsylvania branch of the fictional Dunder Mifflin Paper Company."
+        },
+        {
+          "tmdbId": 1412,
+          "canonicalId": "tmdb-tv-1412",
+          "type": "tv",
+          "title": "Arrow",
+          "year": "2012",
+          "poster": "https://image.tmdb.org/t/p/w342/u8ZHFj1jC384JEkTt3vNg1DfWEb.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/wAFuDJfZJrnh6a1wf1Vt7PqYBvR.jpg",
+          "rating": 6.8,
+          "overview": "Spoiled billionaire playboy Oliver Queen is missing and presumed dead when his yacht is lost at sea. He returns five years later a changed man, determined to clean up the city as a hooded vigilante armed with a bow."
+        },
+        {
+          "tmdbId": 60735,
+          "canonicalId": "tmdb-tv-60735",
+          "type": "tv",
+          "title": "The Flash",
+          "year": "2014",
+          "poster": "https://image.tmdb.org/t/p/w342/yZevl2vHQgmosfwUdVNzviIfaWS.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/gFkHcIh7iE5G0oVOgpmY8ONQjhl.jpg",
+          "rating": 7.7,
+          "overview": "After being struck by lightning, CSI investigator Barry Allen awakens from a nine-month coma to discover he has been  granted the gift of super speed.  Teaming up with S.T.A.R. Labs, Barry takes on the persona of The Flash, the Fastest  Man Alive, to protect his city."
+        },
+        {
+          "tmdbId": 34307,
+          "canonicalId": "tmdb-tv-34307",
+          "type": "tv",
+          "title": "Shameless",
+          "year": "2011",
+          "poster": "https://image.tmdb.org/t/p/w342/ifo31fMWLmyOVpdak9K0kY4jldQ.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/5s9XHTB9SLPdg3mNU6BlSLnZ9Qq.jpg",
+          "rating": 8.2,
+          "overview": "Chicagoan Frank Gallagher is the proud single dad of six smart, industrious, independent kids, who without him would be... perhaps better off. When Frank's not at the bar spending what little money they have, he's passed out on the floor. But the kids have found ways to grow up in spite of him. They may not be like any family you know, but they make no apologies for being exactly who they are."
+        },
+        {
+          "tmdbId": 4604,
+          "canonicalId": "tmdb-tv-4604",
+          "type": "tv",
+          "title": "Smallville",
+          "year": "2001",
+          "poster": "https://image.tmdb.org/t/p/w342/mHZSq8LA5Dt48JjaOZ5tcPXQRVN.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/4wVq9ICc4MI2XcssrumpCOhKLpI.jpg",
+          "rating": 8.2,
+          "overview": "The origins of the world’s greatest hero–from Krypton refugee Kal-el’s arrival on Earth through his tumultuous teen years to Clark Kent’s final steps toward embracing his destiny as the Man of Steel."
+        },
+        {
+          "tmdbId": 44006,
+          "canonicalId": "tmdb-tv-44006",
+          "type": "tv",
+          "title": "Chicago Fire",
+          "year": "2012",
+          "poster": "https://image.tmdb.org/t/p/w342/r915sk2JpthZSjHEgZKifWxgo6L.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/14LzHqJrFcHk7ruMNCXpEkB0Thg.jpg",
+          "rating": 8.4,
+          "overview": "An edge-of-your-seat view into the lives of everyday heroes committed to one of America's noblest professions. For the firefighters, rescue squad and paramedics of Chicago Firehouse 51, no occupation is more stressful or dangerous, yet so rewarding and exhilarating. These courageous men and women are among the elite who forge headfirst into danger when everyone else is running the other way and whose actions make the difference between life and death."
+        },
+        {
+          "tmdbId": 18165,
+          "canonicalId": "tmdb-tv-18165",
+          "type": "tv",
+          "title": "The Vampire Diaries",
+          "year": "2009",
+          "poster": "https://image.tmdb.org/t/p/w342/b3vl6wV1W8PBezFfntKTrhrehCY.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/cJYLon9ejKJV7ua03ab8Tj9u067.jpg",
+          "rating": 8.3,
+          "overview": "The story of two vampire brothers obsessed with the same girl, who bears a striking resemblance to the beautiful but ruthless vampire they knew and loved in 1864."
+        },
+        {
+          "tmdbId": 273207,
+          "canonicalId": "tmdb-tv-273207",
+          "type": "tv",
+          "title": "Neagley",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/tEPDFIa21VK0Q2YLuzhTt2xrw5W.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/uYOYLFQ4q7asuhdiKXCqGaeAQUH.jpg",
+          "rating": 8.1,
+          "overview": "Frances Neagley is a private investigator in Chicago and former military colleague of Jack Reacher in the Army's 110th Special Investigations Unit. When she learns that a beloved friend from her past has been killed in a suspicious accident, she becomes hell-bent on justice."
+        },
+        {
+          "tmdbId": 58841,
+          "canonicalId": "tmdb-tv-58841",
+          "type": "tv",
+          "title": "Chicago P.D.",
+          "year": "2014",
+          "poster": "https://image.tmdb.org/t/p/w342/bez40PgT36RUu4gstD2A6GSM0tP.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/rhp8vYG1sIFtqH3ETmHJuI5Z3Cb.jpg",
+          "rating": 8.4,
+          "overview": "A riveting police drama about the men and women of the Chicago Police Department's District 21 who put it all on the line to serve and protect their community. District 21 is made up of two distinctly different groups: the uniformed cops who patrol the beat and go head-to-head with the city's street crimes and the Intelligence Unit that combats the city's major offenses - organized crime, drug trafficking, high profile murders and beyond."
+        },
+        {
+          "tmdbId": 65942,
+          "canonicalId": "tmdb-tv-65942",
+          "type": "tv",
+          "title": "Re:ZERO -Starting Life in Another World-",
+          "year": "2016",
+          "poster": "https://image.tmdb.org/t/p/w342/oHqYrPAsIiTD5m4DuxumV4er8BU.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/7ZruEnSnHD6Jx5mF0hBt1E306Vt.jpg",
+          "rating": 8.1,
+          "overview": "Natsuki Subaru, an ordinary high school  student, is on his way home from the convenience store when he finds  himself transported to another world. As he's lost and confused in a new  world where he doesn't even know left from right, the only person to  reach out to him was a beautiful girl with silver hair. Determined to  repay her somehow for saving him from his own despair, Subaru agrees to  help the girl find something she's looking for."
+        },
+        {
+          "tmdbId": 1405,
+          "canonicalId": "tmdb-tv-1405",
+          "type": "tv",
+          "title": "Dexter",
+          "year": "2006",
+          "poster": "https://image.tmdb.org/t/p/w342/q8dWfc4JwQuv3HayIZeO84jAXED.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/nS5ZSmrX92lu1GYAlXZye1mkDfd.jpg",
+          "rating": 8.2,
+          "overview": "Dexter Morgan, a blood spatter pattern analyst for the Miami Metro Police also leads a secret life as a serial killer, hunting down criminals who have slipped through the cracks of justice."
+        },
+        {
+          "tmdbId": 71790,
+          "canonicalId": "tmdb-tv-71790",
+          "type": "tv",
+          "title": "S.W.A.T.",
+          "year": "2017",
+          "poster": "https://image.tmdb.org/t/p/w342/1l7vsAIkqOzrqiPwjO27Cb5QdfJ.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/7j4ug9B6JXVeh5HhQjjPScrdj4Z.jpg",
+          "rating": 8,
+          "overview": "A Los Angeles S.W.A.T. sergeant is assigned to lead a highly skilled unit in the community where he grew up. Torn between loyalty to the streets, where the cops are sometimes the enemy, and allegiance to his brothers in blue, he strategically straddles the two worlds."
+        },
+        {
+          "tmdbId": 4586,
+          "canonicalId": "tmdb-tv-4586",
+          "type": "tv",
+          "title": "Gilmore Girls",
+          "year": "2000",
+          "poster": "https://image.tmdb.org/t/p/w342/gwtzCwU2wdLLf8oejQu2TINiWfQ.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/8U2ndZrneigI2zkvGuTJtt1ZsxK.jpg",
+          "rating": 7.9,
+          "overview": "Set in the charming town of Stars Hollow, Connecticut, the series follows the captivating lives of Lorelai and Rory Gilmore, a mother/daughter pair who have a relationship most people only dream of."
+        }
+      ]
+    },
+    {
+      "key": "prime-popular-movies",
+      "title": "Popular Movies on Prime Video",
+      "ranked": false,
+      "logo": "/images/platforms/teMwgjoxOg9u.jpg",
+      "auto": null,
+      "items": [
+        {
+          "tmdbId": 1440098,
+          "canonicalId": "tmdb-movie-1440098",
+          "type": "movie",
+          "title": "Drawn Together",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/6rpvddXbaQPOi0fB2HKWbZ3uUSg.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/i65y7cMae36K0giN0GRaMjAHUru.jpg",
+          "rating": 6.7,
+          "overview": "Marfil, daughter of a powerful Spanish businessman, sees her life in New York turned upside down when she is kidnapped and released without explanation. Her father hires Sebastian Moore as bodyguard and, forced to spend every minute together, an inevitable attraction ignites in a world where nothing is as it seems."
+        },
+        {
+          "tmdbId": 1386315,
+          "canonicalId": "tmdb-movie-1386315",
+          "type": "movie",
+          "title": "The Runner",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/uxCaBoYXsDC4A0SqTm3SISj0OwK.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/jzBWExXacS33rMQ2zLBrqIVweyG.jpg",
+          "rating": 6.8,
+          "overview": "Maia Marten, a brilliant London lawyer, has her life shattered by a single call on her morning run: her son has been taken. To get him back, she must keep running, obey every ruthless command, and trust no one-each second a test of how far a mother will go to save her child."
+        },
+        {
+          "tmdbId": 687163,
+          "canonicalId": "tmdb-movie-687163",
+          "type": "movie",
+          "title": "Project Hail Mary",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/yihdXomYb5kTeSivtFndMy5iDmf.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/8Tfys3mDZVp4tNoH2ktm06a0Tau.jpg",
+          "rating": 8.6,
+          "overview": "Science teacher Ryland Grace wakes up on a spaceship light years from home with no recollection of who he is or how he got there. As his memory returns, he begins to uncover his mission: solve the riddle of the mysterious substance causing the sun to die out. He must call on his scientific knowledge and unorthodox ideas to save everything on Earth from extinction."
+        },
+        {
+          "tmdbId": 1516698,
+          "canonicalId": "tmdb-movie-1516698",
+          "type": "movie",
+          "title": "The Last Sunrise",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/3PWJqDfygN0YNNjWsDUOXclCp3h.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/zFCWfU2ViMIm38G1W8UsnSpqmWn.jpg",
+          "rating": 6.8,
+          "overview": "Ry, a college student with a chronic illness, escapes to Mallorca for the summer with her mother, where she unexpectedly falls for a local and begins to embrace living in the moment. But as her condition worsens and long-hidden family secrets come to light, everything she has found before summer's end is threatened."
+        },
+        {
+          "tmdbId": 1641629,
+          "canonicalId": "tmdb-movie-1641629",
+          "type": "movie",
+          "title": "You+Me - Against the World",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/bAbBNVplg7h79sm94OyHeKk8Phz.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/nkEhDomjmPHJSA4Tx8pxv0NlKEy.jpg",
+          "rating": 5.7,
+          "overview": "Alma Lancaster, 18, appears to lead a perfect life within a wealthy family who believes she is studying law. In secret, she pursues her true dream: filmmaking. On campus, she meets Vadim Arcadi, 20, a magnetic and solitary rebel with a troubled past. Forced to collaborate on a student film, they clash, grow closer and fall in love — despite themselves. But someone is watching them, determined to tear them apart and expose secrets that could destroy both Alma and Vadim."
+        },
+        {
+          "tmdbId": 755898,
+          "canonicalId": "tmdb-movie-755898",
+          "type": "movie",
+          "title": "War of the Worlds",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/yvirUYrva23IudARHn3mMGVxWqM.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/iZLqwEwUViJdSkGVjePGhxYzbDb.jpg",
+          "rating": 4,
+          "overview": "Will Radford is a top analyst for Homeland Security who tracks potential threats through a mass surveillance program, until one day an attack by an unknown entity leads him to question whether the government is hiding something from him... and from the rest of the world."
+        },
+        {
+          "tmdbId": 980431,
+          "canonicalId": "tmdb-movie-980431",
+          "type": "movie",
+          "title": "Avatar Aang: The Last Airbender",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/3sgnSfNT27Bx5O5ukr7B26mhEQq.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/ezbrL1dMymKQZw7mDEWa2ZTzN7d.jpg",
+          "rating": 9.2,
+          "overview": "Avatar Aang, the world's last Airbender, learns of an ancient power that could save his culture from extinction. With the help of his friends, he embarks on a global quest to find it before it falls into the wrong hands and threatens to upend the peace they sacrificed everything to achieve."
+        },
+        {
+          "tmdbId": 157336,
+          "canonicalId": "tmdb-movie-157336",
+          "type": "movie",
+          "title": "Interstellar",
+          "year": "2014",
+          "poster": "https://image.tmdb.org/t/p/w342/yQvGrMoipbRoddT0ZR8tPoR7NfX.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/8sNiAPPYU14PUepFNeSNGUTiHW.jpg",
+          "rating": 8.5,
+          "overview": "The adventures of a group of explorers who make use of a newly discovered wormhole to surpass the limitations on human space travel and conquer the vast distances involved in an interstellar voyage."
+        },
+        {
+          "tmdbId": 155,
+          "canonicalId": "tmdb-movie-155",
+          "type": "movie",
+          "title": "The Dark Knight",
+          "year": "2008",
+          "poster": "https://image.tmdb.org/t/p/w342/qJ2tW6WMUDux911r6m7haRef0WH.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/9FE5eD92WfVCiivM9Pq9GVSrlWk.jpg",
+          "rating": 8.5,
+          "overview": "Batman raises the stakes in his war on crime. With the help of Lt. Jim Gordon and District Attorney Harvey Dent, Batman sets out to dismantle the remaining criminal organizations that plague the streets. The partnership proves to be effective, but they soon find themselves prey to a reign of chaos unleashed by a rising criminal mastermind known to the terrified citizens of Gotham as the Joker."
+        },
+        {
+          "tmdbId": 1273221,
+          "canonicalId": "tmdb-movie-1273221",
+          "type": "movie",
+          "title": "Scary Movie",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/znHT8peERZRWG1ME3r0Db0EV8k8.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/xWBiXclrRmTggQHMRsIn84YHavs.jpg",
+          "rating": 6.4,
+          "overview": "Twenty-six years after outrunning a suspiciously familiar masked killer, the Core Four are back in the killer's crosshairs and no horror movie IP is safe."
+        },
+        {
+          "tmdbId": 76341,
+          "canonicalId": "tmdb-movie-76341",
+          "type": "movie",
+          "title": "Mad Max: Fury Road",
+          "year": "2015",
+          "poster": "https://image.tmdb.org/t/p/w342/ulcAi4dKpAjHwYGS08vNyx9H6I9.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/gqrnQA6Xppdl8vIb2eJc58VC1tW.jpg",
+          "rating": 7.6,
+          "overview": "An apocalyptic story set in the furthest reaches of our planet, in a stark desert landscape where humanity is broken, and most everyone is crazed fighting for the necessities of life. Within this world exist two rebels on the run who just might be able to restore order."
+        },
+        {
+          "tmdbId": 27205,
+          "canonicalId": "tmdb-movie-27205",
+          "type": "movie",
+          "title": "Inception",
+          "year": "2010",
+          "poster": "https://image.tmdb.org/t/p/w342/xlaY2zyzMfkhk0HSC5VUwzoZPU1.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/8ZTVqvKDQ8emSGUEMjsS4yHAwrp.jpg",
+          "rating": 8.4,
+          "overview": "Cobb, a skilled thief who commits corporate espionage by infiltrating the subconscious of his targets is offered a chance to regain his old life as payment for a task considered to be impossible: \"inception\", the implantation of another person's idea into a target's subconscious."
+        },
+        {
+          "tmdbId": 335984,
+          "canonicalId": "tmdb-movie-335984",
+          "type": "movie",
+          "title": "Blade Runner 2049",
+          "year": "2017",
+          "poster": "https://image.tmdb.org/t/p/w342/gajva2L0rPYkEWjzgFlBXCAVBE5.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/gNdLJU9TxrpGx4dkZidjys3fyy0.jpg",
+          "rating": 7.6,
+          "overview": "Thirty years after the events of the first film, a new blade runner, LAPD Officer K, unearths a long-buried secret that has the potential to plunge what's left of society into chaos. K's discovery leads him on a quest to find Rick Deckard, a former LAPD blade runner who has been missing for 30 years."
+        },
+        {
+          "tmdbId": 1656489,
+          "canonicalId": "tmdb-movie-1656489",
+          "type": "movie",
+          "title": "Sultana",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/wDebpR4NplIM8EteAGfd51Zdisu.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/lDHfyYkTIWCWWdbHkLZwRXQx3Ul.jpg",
+          "rating": 6,
+          "overview": "Sultana is a drama set in Istanbul's one and only strip club, telling a story of a women, power, rivalry and solidarity. A new Turkish story where women are not victims in a fairy tale, but warriors learning that the 'handsome prince' is often the real monster- and their only salvation is each other. Meral the long reigning queen of the one and only strip club of Istanbul which is Sultana, takes a talented new Belarusian dancer named Anna under her wing. But she soon realizes she has created a rival powerful enough to replace her, and a ruthless power struggle erupts between the two women."
+        },
+        {
+          "tmdbId": 1301421,
+          "canonicalId": "tmdb-movie-1301421",
+          "type": "movie",
+          "title": "The Sheep Detectives",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/iKy5460GdsoknM8ppmGlJbKxAKa.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/a8uQvrplTkhGJQog6GZ6CqF8An6.jpg",
+          "rating": 7.9,
+          "overview": "George Hardy is a shepherd who reads detective novels to his beloved sheep every night, assuming they can't possibly understand. But when a mysterious incident disrupts life on the farm, the sheep realize they must become the detectives. As they follow the clues and investigate human suspects, they prove that even sheep can be brilliant crime-solvers."
+        },
+        {
+          "tmdbId": 454639,
+          "canonicalId": "tmdb-movie-454639",
+          "type": "movie",
+          "title": "Masters of the Universe",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/oRuyGUHdoaQxWP3SDfafGkStxTC.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/5MUMB3aPEPEQPCIAaygXFUTWE9Y.jpg",
+          "rating": 7.1,
+          "overview": "After being separated for 15 years, the Sword of Power leads Prince Adam back to Eternia, where he discovers his home shattered under the fiendish rule of Skeletor. To save his family and his world, Adam must join forces with his closest allies, Teela and Duncan/Man-At-Arms, and embrace his true destiny as He-Man — the most powerful man in the universe."
+        },
+        {
+          "tmdbId": 603,
+          "canonicalId": "tmdb-movie-603",
+          "type": "movie",
+          "title": "The Matrix",
+          "year": "1999",
+          "poster": "https://image.tmdb.org/t/p/w342/dXNAPwY7VrqMAo51EKhhCJfaGb5.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/lrtSb1skJayPydZk0OSMAKjBOVe.jpg",
+          "rating": 8.3,
+          "overview": "Set in the 22nd century, The Matrix tells the story of a computer hacker who joins a group of underground insurgents fighting the vast and powerful computers who now rule the earth."
+        },
+        {
+          "tmdbId": 1368166,
+          "canonicalId": "tmdb-movie-1368166",
+          "type": "movie",
+          "title": "The Housemaid",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/cWsBscZzwu5brg9YjNkGewRUvJX.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/zTnAnYIn0Iv3cn0ZHlzLhou3ybm.jpg",
+          "rating": 7.3,
+          "overview": "Trying to escape her past, Millie Calloway accepts a job as a live-in housemaid for the wealthy Nina and Andrew Winchester. But what begins as a dream job quickly unravels into something far more dangerous—a sexy, seductive game of secrets, scandal, and power."
         },
         {
           "tmdbId": 361743,
+          "canonicalId": "tmdb-movie-361743",
           "type": "movie",
           "title": "Top Gun: Maverick",
           "year": "2022",
           "poster": "https://image.tmdb.org/t/p/w342/n0YuM4f5lvGAP6MAW2kBIzugXnc.jpg",
           "backdrop": "https://image.tmdb.org/t/p/w780/AaV1YIdWKnjAIAOe8UUKBFm327v.jpg",
-          "rating": 8.158
+          "rating": 8.2,
+          "overview": "After more than thirty years of service as one of the Navy’s top aviators, and dodging the advancement in rank that would ground him, Pete “Maverick” Mitchell finds himself training a detachment of TOP GUN graduates for a specialized mission the likes of which no living pilot has ever seen."
         },
         {
-          "tmdbId": 438631,
+          "tmdbId": 557,
+          "canonicalId": "tmdb-movie-557",
           "type": "movie",
-          "title": "Dune",
-          "year": "2021",
-          "poster": "https://image.tmdb.org/t/p/w342/gDzOcq0pfeCeqMBwKIJlSmQpjkZ.jpg",
-          "backdrop": "https://image.tmdb.org/t/p/w780/zRKQW58MBEY078AxkHxEJzUskCl.jpg",
-          "rating": 7.781
+          "title": "Spider-Man",
+          "year": "2002",
+          "poster": "https://image.tmdb.org/t/p/w342/or6XJBVpcEbIkma0V9zshnbEtx4.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/zQ8AxTPiCiS5nnwXpwTBPBHSaa5.jpg",
+          "rating": 7.4,
+          "overview": "After being bitten by a genetically altered spider at Oscorp, nerdy but endearing high school student Peter Parker is endowed with amazing powers to become the superhero known as Spider-Man."
         }
       ]
     },
     {
-      "key": "prime-indian",
-      "title": "Latest Indian Films (2024-25)",
+      "key": "prime-originals",
+      "title": "Amazon Originals & Exclusives",
       "ranked": false,
-      "logo": "",
+      "logo": "/images/platforms/teMwgjoxOg9u.jpg",
       "auto": null,
       "items": [
         {
-          "tmdbId": 1291608,
-          "type": "movie",
-          "title": "Dhurandhar",
-          "year": "2025",
-          "poster": "https://image.tmdb.org/t/p/w342/8FHOtUpNIk5ZPEay2N2EY5lrxkv.jpg",
-          "backdrop": "https://image.tmdb.org/t/p/w780/snYOXem8pUGOffnLbbGq4aB1pg4.jpg",
-          "rating": 7.117
-        },
-        {
-          "tmdbId": 801688,
-          "type": "movie",
-          "title": "Kalki 2898-AD",
-          "year": "2024",
-          "poster": "https://image.tmdb.org/t/p/w342/rstcAnBeCkxNQjNp3YXrF6IP1tW.jpg",
-          "backdrop": "https://image.tmdb.org/t/p/w780/o8XSR1SONnjcsv84NRu6Mwsl5io.jpg",
-          "rating": 6.388
-        },
-        {
-          "tmdbId": 857598,
-          "type": "movie",
-          "title": "Pushpa 2 - The Rule",
-          "year": "2024",
-          "poster": "https://image.tmdb.org/t/p/w342/bhxZj3y59cK7JtGdV285dhDRaMe.jpg",
-          "backdrop": "https://image.tmdb.org/t/p/w780/7jGItf7idJsBm9QTNoTNTU3KiGe.jpg",
-          "rating": 6.285
-        },
-        {
-          "tmdbId": 1112426,
-          "type": "movie",
-          "title": "Stree 2",
-          "year": "2024",
-          "poster": "https://image.tmdb.org/t/p/w342/iwEJp4WBM8b3AjCeNcgvv86FEFr.jpg",
-          "backdrop": "https://image.tmdb.org/t/p/w780/fVV0A67kDjTTQ4CvUn8LoletRmI.jpg",
-          "rating": 6.6
-        },
-        {
-          "tmdbId": 1014214,
-          "type": "movie",
-          "title": "Singham Again",
-          "year": "2024",
-          "poster": "https://image.tmdb.org/t/p/w342/2JbNkHg8m7LaBy61LyrnnlenaxY.jpg",
-          "backdrop": "https://image.tmdb.org/t/p/w780/lexEx0B4WDOXGfqPTj4R8FCrE7H.jpg",
-          "rating": 5
-        },
-        {
-          "tmdbId": 811941,
-          "type": "movie",
-          "title": "Devara: Part 1",
-          "year": "2024",
-          "poster": "https://image.tmdb.org/t/p/w342/lQfuaXjANoTsdx5iS0gCXlK9D2L.jpg",
-          "backdrop": "https://image.tmdb.org/t/p/w780/hAQnXxOwCjgYcKRgTdYPRC8neqL.jpg",
-          "rating": 6.921
-        },
-        {
-          "tmdbId": 781732,
-          "type": "movie",
-          "title": "Animal",
-          "year": "2023",
-          "poster": "https://image.tmdb.org/t/p/w342/hr9rjR3J0xBBKmlJ4n3gHId9ccx.jpg",
-          "backdrop": "https://image.tmdb.org/t/p/w780/lprsAHkwMxk2iC6VZxNmV0H7g1t.jpg",
-          "rating": 6.12
-        },
-        {
-          "tmdbId": 872906,
-          "type": "movie",
-          "title": "Jawan",
-          "year": "2023",
-          "poster": "https://image.tmdb.org/t/p/w342/jFt1gS4BGHlK8xt76Y81Alp4dbt.jpg",
-          "backdrop": "https://image.tmdb.org/t/p/w780/5LtSjMNw6j3LkG29Oa4O0iY5U8.jpg",
-          "rating": 7.074
-        },
-        {
-          "tmdbId": 579974,
-          "type": "movie",
-          "title": "RRR",
+          "tmdbId": 108978,
+          "canonicalId": "tmdb-tv-108978",
+          "type": "tv",
+          "title": "Reacher",
           "year": "2022",
-          "poster": "https://image.tmdb.org/t/p/w342/u0XUBNQWlOvrh0Gd97ARGpIkL0.jpg",
-          "backdrop": "https://image.tmdb.org/t/p/w780/i0Y0wP8H6SRgjr6QmuwbtQbS24D.jpg",
-          "rating": 7.711
+          "poster": "https://image.tmdb.org/t/p/w342/f1VCQIG2iCyOookdgOzwtUpwWC0.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/pF0qkRsrHkdYadPWY9AMeFZfcwk.jpg",
+          "rating": 8.1,
+          "overview": "Jack Reacher, a veteran military police investigator, has just recently entered civilian life. Reacher is a drifter, carrying no phone and the barest of essentials as he travels the country and explores the nation he once served."
+        },
+        {
+          "tmdbId": 273207,
+          "canonicalId": "tmdb-tv-273207",
+          "type": "tv",
+          "title": "Neagley",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/tEPDFIa21VK0Q2YLuzhTt2xrw5W.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/uYOYLFQ4q7asuhdiKXCqGaeAQUH.jpg",
+          "rating": 8.1,
+          "overview": "Frances Neagley is a private investigator in Chicago and former military colleague of Jack Reacher in the Army's 110th Special Investigations Unit. When she learns that a beloved friend from her past has been killed in a suspicious accident, she becomes hell-bent on justice."
+        },
+        {
+          "tmdbId": 76479,
+          "canonicalId": "tmdb-tv-76479",
+          "type": "tv",
+          "title": "The Boys",
+          "year": "2019",
+          "poster": "https://image.tmdb.org/t/p/w342/in1R2dDc421JxsoRWaIIAqVI2KE.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/bq28ajZaoMyzEIm6REelqyqtEDZ.jpg",
+          "rating": 8.4,
+          "overview": "A group of vigilantes known informally as “The Boys” set out to take down corrupt superheroes with no more than blue-collar grit and a willingness to fight dirty."
+        },
+        {
+          "tmdbId": 44217,
+          "canonicalId": "tmdb-tv-44217",
+          "type": "tv",
+          "title": "Vikings",
+          "year": "2013",
+          "poster": "https://image.tmdb.org/t/p/w342/bQLrHIRNEkE3PdIWQrZHynQZazu.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/13kblIK8DnxMurcRDkeyy2sGR7v.jpg",
+          "rating": 8.1,
+          "overview": "The adventures of Ragnar Lothbrok, the greatest hero of his age. The series tells the sagas of Ragnar's band of Viking brothers and his family, as he rises to become King of the Viking tribes. As well as being a fearless warrior, Ragnar embodies the Norse traditions of devotion to the gods. Legend has it that he was a direct descendant of Odin, the god of war and warriors."
+        },
+        {
+          "tmdbId": 84773,
+          "canonicalId": "tmdb-tv-84773",
+          "type": "tv",
+          "title": "The Lord of the Rings: The Rings of Power",
+          "year": "2022",
+          "poster": "https://image.tmdb.org/t/p/w342/kf5Hz70tjNAHg4swGDzOr9BfoZ1.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/o2wg8QiSCQrhj91tBfxunE3O5Ba.jpg",
+          "rating": 7.2,
+          "overview": "Beginning in a time of relative peace, we follow an ensemble cast of characters as they confront the re-emergence of evil to Middle-earth. From the darkest depths of the Misty Mountains, to the majestic forests of Lindon, to the breathtaking island kingdom of Númenor, to the furthest reaches of the map, these kingdoms and characters will carve out legacies that live on long after they are gone."
+        },
+        {
+          "tmdbId": 85077,
+          "canonicalId": "tmdb-tv-85077",
+          "type": "tv",
+          "title": "The Chosen",
+          "year": "2019",
+          "poster": "https://image.tmdb.org/t/p/w342/dqVUFuNrMFWt7uGNWlpo91VKYOI.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/3siv3RaQrdr2tQiv9jHq71sLlzo.jpg",
+          "rating": 8.8,
+          "overview": "The life of Christ through the eyes of those who encountered him."
+        },
+        {
+          "tmdbId": 95557,
+          "canonicalId": "tmdb-tv-95557",
+          "type": "tv",
+          "title": "INVINCIBLE",
+          "year": "2021",
+          "poster": "https://image.tmdb.org/t/p/w342/4tblBrslcKSifMVZ3TmtT2ukMor.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/9qrroces8C6R9aKr08hACNPVXdZ.jpg",
+          "rating": 8.6,
+          "overview": "Mark Grayson is a normal teenager except for the fact that his father is the most powerful superhero on the planet. Shortly after his seventeenth birthday, Mark begins to develop powers of his own and enters into his father's tutelage."
+        },
+        {
+          "tmdbId": 63639,
+          "canonicalId": "tmdb-tv-63639",
+          "type": "tv",
+          "title": "The Expanse",
+          "year": "2015",
+          "poster": "https://image.tmdb.org/t/p/w342/5vQlVWkIMPhZ88OWchJsgwGEK9.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/eVwD4s4dBOK5Jn7CzOLBTo0vXNH.jpg",
+          "rating": 8.1,
+          "overview": "A thriller set two hundred years in the future following the case of a missing young woman who brings a hardened detective and a rogue ship's captain together in a race across the solar system to expose the greatest conspiracy in human history."
+        },
+        {
+          "tmdbId": 273240,
+          "canonicalId": "tmdb-tv-273240",
+          "type": "tv",
+          "title": "Off Campus",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/tcPc5ZMBO4y2BtCJMe3o2nwZb2B.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/3ANXZWhhcqPAh0q6nRZ979TIwxC.jpg",
+          "rating": 8.9,
+          "overview": "Hannah Wells tutors hockey captain Garrett Graham to win over her crush. Their deal becomes real connection as they face their pasts. Friends Logan, Dean, Tucker, and Allie navigate college life and love."
+        },
+        {
+          "tmdbId": 60585,
+          "canonicalId": "tmdb-tv-60585",
+          "type": "tv",
+          "title": "Bosch",
+          "year": "2015",
+          "poster": "https://image.tmdb.org/t/p/w342/vtacLvdLgW3BNUj8DrC76X39Lfi.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/23S5oKZjlXehjNLEhMQuxjwbyuA.jpg",
+          "rating": 7.9,
+          "overview": "Harry Bosch, an LAPD homicide detective, stands trial for the fatal shooting of a serial murder suspect. A cold case involving the remains of a missing boy forces Bosch to confront his past. As daring recruit Julia Brasher catches his eye and departmental politics heat up, Bosch will pursue justice at all costs."
+        },
+        {
+          "tmdbId": 258842,
+          "canonicalId": "tmdb-tv-258842",
+          "type": "tv",
+          "title": "Naughty Business",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/4fccegkh4fJYCNxCzzLtTsTiIkX.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/pGhq2AODZEB1y0aAYYF6DqiJMj7.jpg",
+          "rating": 7.1,
+          "overview": "When her husband falls into a coma, Nines, a traditional housewife, transforms the family business into the first adult video store in Valladolid."
+        },
+        {
+          "tmdbId": 12513,
+          "canonicalId": "tmdb-tv-12513",
+          "type": "tv",
+          "title": "Operación triunfo",
+          "year": "2001",
+          "poster": "https://image.tmdb.org/t/p/w342/8Qfq22zP5PeUKJfN5bFPFJtJz5i.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/3oZgE4220UrqaaiZXxz5MtNCVxJ.jpg",
+          "rating": 6.7,
+          "overview": "Reality-show talent contest aimed to find the country's next solo singing sensation, putting a selection of hopefuls through their paces by getting them to sing a variety of cover versions of popular songs, with tutoring from various professionals."
+        },
+        {
+          "tmdbId": 73375,
+          "canonicalId": "tmdb-tv-73375",
+          "type": "tv",
+          "title": "Tom Clancy's Jack Ryan",
+          "year": "2018",
+          "poster": "https://image.tmdb.org/t/p/w342/cO4py3L3q5GNPrA0qr1wVDrosK1.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/2y2TbzeKZHYqTN5gb4nBv9dKk1f.jpg",
+          "rating": 7.7,
+          "overview": "When CIA analyst Jack Ryan stumbles upon a suspicious series of bank transfers his search for answers pulls him from the safety of his desk job and catapults him into a deadly game of cat and mouse throughout Europe and the Middle East, with a rising terrorist figurehead preparing for a massive attack against the US and her allies."
+        },
+        {
+          "tmdbId": 71932,
+          "canonicalId": "tmdb-tv-71932",
+          "type": "tv",
+          "title": "AVN Awards",
+          "year": "",
+          "poster": "https://image.tmdb.org/t/p/w342/7f6wnV0tkxn5sif7LqjyzN6eLk6.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/7ZCKtw7hBV1Rcv6HP4aJ5KyL3os.jpg",
+          "rating": 5.9,
+          "overview": "The AVN Awards are movie awards sponsored and presented by the American adult video industry trade magazine AVN (Adult Video News) to honor exceptional performance in various aspects of the creation and marketing of American pornographic movies. The \"Oscars of porn\"."
+        },
+        {
+          "tmdbId": 194766,
+          "canonicalId": "tmdb-tv-194766",
+          "type": "tv",
+          "title": "The Summer I Turned Pretty",
+          "year": "2022",
+          "poster": "https://image.tmdb.org/t/p/w342/xBIz53wYWsKfFpN0TaizVAjKJ0z.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/jCQV3rHNbgHKo3N4G6CARbVEjPV.jpg",
+          "rating": 8.1,
+          "overview": "Every summer, Belly and her family head to the Fishers’ beach house in Cousins. Every summer is the same ... until Belly turns sixteen. Relationships will be tested, painful truths will be revealed, and Belly will be forever changed. It’s a summer of first love, first heartbreak and growing up — it's the summer she turns pretty."
+        },
+        {
+          "tmdbId": 260249,
+          "canonicalId": "tmdb-tv-260249",
+          "type": "tv",
+          "title": "The Trial",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/3k5HpocqX4grgmqCecT2OdYMyT0.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/bLcF9mcinphgFlXEfk7RkCSfqCv.jpg",
+          "rating": 9.2,
+          "overview": "A teenager and her father struggle for justice after she is sexually assaulted by the scion of a successful businessman. Not only will the father and daughter have to navigate a failed judicial system, but they must also contend with a wealthy adversary bent on using all his power to protect his son."
+        },
+        {
+          "tmdbId": 219760,
+          "canonicalId": "tmdb-tv-219760",
+          "type": "tv",
+          "title": "The Terminal List: Dark Wolf",
+          "year": "2025",
+          "poster": "https://image.tmdb.org/t/p/w342/9mYeRoWguq5etbwJRdF8BXFKiF.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/yQw23xxmVBFVHPCF6V68TAIIfno.jpg",
+          "rating": 7.7,
+          "overview": "Before The Terminal List, Navy SEAL Ben Edwards finds himself entangled in the black operations side of the CIA. The deeper Ben goes into the 'gray', the harder it will become to not give himself over to his darker impulses. Every man has two wolves inside him – light and dark – fighting for control. Which wolf will Ben Edwards feed?"
+        },
+        {
+          "tmdbId": 106379,
+          "canonicalId": "tmdb-tv-106379",
+          "type": "tv",
+          "title": "Fallout",
+          "year": "2024",
+          "poster": "https://image.tmdb.org/t/p/w342/c15BtJxCXMrISLVmysdsnZUPQft.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/coaPCIqQBPUZsOnJcWZxhaORcDT.jpg",
+          "rating": 8.1,
+          "overview": "The story of haves and have-nots in a world in which there's almost nothing left to have. 200 years after the apocalypse, the gentle denizens of luxury fallout shelters are forced to return to the irradiated hellscape their ancestors left behind — and are shocked to discover an incredibly complex, gleefully weird, and highly violent universe waiting for them."
+        },
+        {
+          "tmdbId": 71914,
+          "canonicalId": "tmdb-tv-71914",
+          "type": "tv",
+          "title": "The Wheel of Time",
+          "year": "2021",
+          "poster": "https://image.tmdb.org/t/p/w342/ihBi24EIr5kwAeY2PqmsgAcCj4n.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/1P3QtW1IkivqDrKbbwuR0zCYIf8.jpg",
+          "rating": 7.6,
+          "overview": "The lives of five young villagers change forever when a strange and powerful woman arrives, claiming one of them is the child of an ancient prophecy with the power to tip the balance between Light and Dark forever. They must choose whether to trust this stranger – and each other – with the fate of the world before the Dark One breaks out of His prison, and the Last Battle begins."
+        },
+        {
+          "tmdbId": 120911,
+          "canonicalId": "tmdb-tv-120911",
+          "type": "tv",
+          "title": "The Terminal List",
+          "year": "2022",
+          "poster": "https://image.tmdb.org/t/p/w342/kIiFRP7MblxsBioEVPHCCYAJ4n5.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/eqLwFXX0R7U0crdgQcj0Rxjb9uc.jpg",
+          "rating": 8,
+          "overview": "Navy SEAL Commander James Reece turns to vengeance as he investigates the mysterious forces behind the murder of his entire platoon. Free from the military's command structure, Reece applies the lessons he's learned from nearly two decades of warfare to hunt down the people responsible."
         }
       ]
     }

@@ -363,7 +363,7 @@ const fetchBollywood = async (s = 1) => {
       return HICINE_DATA.bollywood.slice(start, start + pageSize).map(t => mapHicineItem(t, t.type || "movie"));
     }
   } catch(e) {}
-  return [];
+  const v=await Ht("/discover/movie",{page:s,sort_by:"popularity.desc",with_original_language:"hi",region:"IN"});return v?v?.results?v.results.map(z=>Pt(z,"movie")):[]:[]; 
 };
 
 const fetchHollywood = async (s = 1) => {
@@ -375,7 +375,7 @@ const fetchHollywood = async (s = 1) => {
       return HICINE_DATA.hollywood.slice(start, start + pageSize).map(t => mapHicineItem(t, t.type || "movie"));
     }
   } catch(e) {}
-  return [];
+  const v=await Ht("/discover/movie",{page:s,sort_by:"popularity.desc",with_original_language:"en"});return v?v?.results?v.results.map(z=>Pt(z,"movie")):[]:[]; 
 };
 
 const fetchSouthIndian = async (s = 1) => {
@@ -387,7 +387,7 @@ const fetchSouthIndian = async (s = 1) => {
       return HICINE_DATA.southIndian.slice(start, start + pageSize).map(t => mapHicineItem(t, t.type || "movie"));
     }
   } catch(e) {}
-  return [];
+  const langs=["ta","te","ml","kn"];const lang=langs[((s-1)%langs.length)];const v=await Ht("/discover/movie",{page:Math.ceil(s/langs.length)||1,sort_by:"popularity.desc",with_original_language:lang,region:"IN"});return v?v?.results?v.results.map(z=>Pt(z,"movie")):[]:[]; 
 };
 
 const fetchHindiDubbed = async (s = 1) => {

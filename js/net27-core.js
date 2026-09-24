@@ -658,35 +658,114 @@
     var buttons = document.querySelectorAll('.platform-btn');
     var themeWash = document.getElementById('theme-wash');
 
+    function activateTab(btn, updateUrl) {
+      if (!btn) return;
+      var platform = btn.dataset.platform;
+      var color = btn.dataset.color || '#e50914';
+
+      buttons.forEach(function(b) {
+        b.classList.remove('is-active', 'text-white');
+        b.classList.add('text-white/80');
+      });
+      btn.classList.add('is-active', 'text-white');
+      btn.classList.remove('text-white/80');
+
+      // Touch-friendly auto-scroll active chip into view on mobile
+      try {
+        btn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      } catch(e) {}
+
+      document.documentElement.style.setProperty('--accent', color);
+      if (themeWash) {
+        themeWash.style.background = 'radial-gradient(ellipse at top, ' + color + ' 0%, transparent 65%)';
+      }
+
+      // Sync URL State for shareable URLs, refresh persistence, and back/forward
+      if (updateUrl !== false) {
+        try {
+          var curUrl = new URL(window.location.href);
+          if (platform === 'trending') {
+            curUrl.searchParams.delete('feed');
+            curUrl.searchParams.delete('provider');
+          } else if (platform === 'LatestRelease') {
+            curUrl.searchParams.delete('provider');
+            curUrl.searchParams.set('feed', 'latest');
+          } else if (platform === 'mylist') {
+            curUrl.searchParams.delete('provider');
+            curUrl.searchParams.set('feed', 'mylist');
+          } else if (platform === 'Kids') {
+            curUrl.searchParams.delete('provider');
+            curUrl.searchParams.set('feed', 'kids');
+          } else {
+            curUrl.searchParams.delete('feed');
+            curUrl.searchParams.set('provider', platform.toLowerCase());
+          }
+          var newUrlStr = curUrl.toString();
+          if (newUrlStr !== window.location.href) {
+            history.pushState({ platform: platform }, '', newUrlStr);
+          }
+        } catch(e) {}
+      }
+
+      // Reset search if active
+      if (searchInput && searchInput.value) {
+        searchInput.value = '';
+        if (searchClear) searchClear.classList.add('hidden');
+      }
+      if (gridView) gridView.classList.add('hidden');
+      if (railsView) railsView.classList.remove('hidden');
+
+      loadPlatformRails(platform);
+    }
+
     buttons.forEach(function(btn) {
       btn.addEventListener('click', function() {
-        var platform = btn.dataset.platform;
-        var color = btn.dataset.color || '#e50914';
-
-        buttons.forEach(function(b) {
-          b.classList.remove('is-active', 'text-white');
-          b.classList.add('text-white/80');
-        });
-        btn.classList.add('is-active', 'text-white');
-        btn.classList.remove('text-white/80');
-
-        document.documentElement.style.setProperty('--accent', color);
-        if (themeWash) {
-          themeWash.style.background = 'radial-gradient(ellipse at top, ' + color + ' 0%, transparent 65%)';
-        }
-
-        // Reset search if active
-        if (searchInput && searchInput.value) {
-          searchInput.value = '';
-          if (searchClear) searchClear.classList.add('hidden');
-        }
-        if (gridView) gridView.classList.add('hidden');
-        if (railsView) railsView.classList.remove('hidden');
-
         window.scrollTo({ top: 0, behavior: 'smooth' });
-        loadPlatformRails(platform);
+        activateTab(btn, true);
       });
     });
+
+    // Handle browser back / forward navigation
+    window.addEventListener('popstate', function() {
+      var params = new URLSearchParams(window.location.search);
+      var prov = params.get('provider');
+      var feed = params.get('feed');
+      var targetPlatform = 'trending';
+      if (prov) {
+        var found = Array.from(buttons).find(function(b) {
+          return b.dataset.platform.toLowerCase() === prov.toLowerCase();
+        });
+        if (found) targetPlatform = found.dataset.platform;
+      } else if (feed) {
+        if (feed === 'latest') targetPlatform = 'LatestRelease';
+        else if (feed === 'mylist') targetPlatform = 'mylist';
+        else if (feed === 'kids') targetPlatform = 'Kids';
+      }
+      var targetBtn = document.querySelector('[data-platform="' + targetPlatform + '"]');
+      if (targetBtn) activateTab(targetBtn, false);
+    });
+
+    // Auto-select platform from URL on initial load if query params present
+    var initParams = new URLSearchParams(window.location.search);
+    var initProv = initParams.get('provider');
+    var initFeed = initParams.get('feed');
+    if (initProv || initFeed) {
+      var initialPlatform = 'trending';
+      if (initProv) {
+        var matchBtn = Array.from(buttons).find(function(b) {
+          return b.dataset.platform.toLowerCase() === initProv.toLowerCase();
+        });
+        if (matchBtn) initialPlatform = matchBtn.dataset.platform;
+      } else if (initFeed) {
+        if (initFeed === 'latest') initialPlatform = 'LatestRelease';
+        else if (initFeed === 'mylist') initialPlatform = 'mylist';
+        else if (initFeed === 'kids') initialPlatform = 'Kids';
+      }
+      var initBtn = document.querySelector('[data-platform="' + initialPlatform + '"]');
+      if (initBtn && initialPlatform !== 'trending') {
+        activateTab(initBtn, false);
+      }
+    }
   }
 
   // ─── Multi-Rail Engine ───
@@ -850,7 +929,10 @@
     return [];
   }
 
+  var currentPlatformLoadToken = 0;
+
   async function loadPlatformRails(platform) {
+    var thisLoadToken = ++currentPlatformLoadToken;
     currentPlatform = platform;
 
     // Handle "My List" Tab
@@ -896,24 +978,45 @@
       });
     }
 
-    // Check for platform curated bundle (Trending, Netflix, Prime, etc.)
-    var curData = curatedFeedCache[platform];
+    // Check for platform curated bundle with isolated cache key (e.g., 'netflix', 'primevideo', 'jiohotstar')
+    var curKey = platform.toLowerCase();
+    var curData = curatedFeedCache[curKey];
     if (!curData) {
       try {
         var curRes = await fetch('/api/catalog/curated/' + encodeURIComponent(platform)).catch(function() {});
         if (curRes && curRes.ok) {
           curData = await curRes.json().catch(function() {});
         }
-        if (!curData || !curData.rails) {
-          var localCur = await fetch('/data/curated_' + encodeURIComponent(platform) + '.json').catch(function() {});
+        if (!curData || !curData.rails || !curData.rails.length) {
+          var localCur = await fetch('/data/curated_' + encodeURIComponent(curKey) + '.json').catch(function() {});
           if (localCur && localCur.ok) {
             curData = await localCur.json().catch(function() {});
           }
         }
         if (curData && curData.rails && curData.rails.length) {
-          curatedFeedCache[platform] = curData;
+          curatedFeedCache[curKey] = curData;
         }
       } catch(e) {}
+    }
+
+    // Guard against race conditions: if user rapidly switched tabs, ignore older response
+    if (thisLoadToken !== currentPlatformLoadToken) return;
+
+    // Update Hero Slider dynamically to match selected platform
+    if (curData && curData.hero && curData.hero.length && heroSection) {
+      heroItems = curData.hero;
+      currentHeroIdx = 0;
+      var bgLayers = heroSection.querySelectorAll('.hero-bg');
+      heroItems.forEach(function(item, i) {
+        if (bgLayers[i]) {
+          bgLayers[i].dataset.bg = item.backdrop;
+          if (i === 0) bgLayers[i].style.backgroundImage = 'url("' + item.backdrop + '")';
+          else bgLayers[i].style.backgroundImage = '';
+        }
+      });
+      renderHeroDots();
+      showHeroSlide(0);
+      startHeroTimer();
     }
 
     if (curData && curData.rails && curData.rails.length) {
@@ -928,6 +1031,23 @@
           items: items
         };
       });
+    }
+
+    // No Silent Global Fallback: if zero rails found, show explicit clean message
+    if (!configs.length) {
+      var displayName = platform;
+      var activeBtn = document.querySelector('[data-platform="' + platform + '"]');
+      if (activeBtn) displayName = (activeBtn.querySelector('span:last-child') && activeBtn.querySelector('span:last-child').textContent) || platform;
+      railsView.innerHTML =
+        '<section class="py-16 text-center max-w-md mx-auto px-4">' +
+          '<div class="w-16 h-16 rounded-full bg-white/10 text-white/40 flex items-center justify-center mx-auto mb-4">' +
+            '<svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>' +
+          '</div>' +
+          '<h3 class="text-xl font-bold text-white mb-2">No ' + escapeHtml(displayName) + ' titles available right now.</h3>' +
+          '<p class="text-sm text-white/60 mb-6 leading-relaxed">Check back soon as our catalog is updated daily.</p>' +
+          '<button type="button" onclick="document.querySelector(\'[data-platform=trending]\').click()" class="px-6 py-2.5 rounded-full bg-red-600 hover:bg-red-700 text-white font-bold text-sm transition shadow-lg cursor-pointer">Explore Trending Titles</button>' +
+        '</section>';
+      return;
     }
 
     // Fast SWR Check: Pre-read cached rails for instant rendering (<50ms)

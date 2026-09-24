@@ -3,49 +3,59 @@
   "tab": "Netflix",
   "hero": [
     {
-      "tmdbId": 66732,
+      "tmdbId": 275102,
+      "canonicalId": "tmdb-tv-275102",
       "type": "tv",
-      "title": "Stranger Things",
-      "year": "2016",
-      "backdrop": "https://image.tmdb.org/t/p/original/56v2KjBlU4XaOv9rVYEQypROD7P.jpg",
-      "rating": 8.567,
-      "overview": ""
+      "title": "The Scandal",
+      "year": "2026",
+      "poster": "https://image.tmdb.org/t/p/w342/4TU0PcHBIl0wPW5B6aVRGExOnHE.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/w780/uc1p1PEbEMpdIHqnU9TESNC6Jhp.jpg",
+      "rating": 6.6,
+      "overview": "In Joseon, a secret proposal ignites hidden desires in a gifted noblewoman, a famed lover and an unsuspecting lady caught in their dangerous game."
     },
     {
-      "tmdbId": 93405,
+      "tmdbId": 2734,
+      "canonicalId": "tmdb-tv-2734",
       "type": "tv",
-      "title": "Squid Game",
-      "year": "2021",
-      "backdrop": "https://image.tmdb.org/t/p/original/2meX1nMdScFOoV4370rqHWKmXhY.jpg",
-      "rating": 7.856,
-      "overview": ""
+      "title": "Law & Order: Special Victims Unit",
+      "year": "1999",
+      "poster": "https://image.tmdb.org/t/p/w342/iofokHZoUB4Qhik4PflvJl8TT6a.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/w780/obtdxPgmfykYwVnvuYXC5f2xKlQ.jpg",
+      "rating": 8,
+      "overview": "In the criminal justice system, sexually-based offenses are considered especially heinous. In New York City, the dedicated detectives who investigate these vicious felonies are members of an elite squad known as the Special Victims Unit. These are their stories."
     },
     {
-      "tmdbId": 119051,
+      "tmdbId": 5920,
+      "canonicalId": "tmdb-tv-5920",
       "type": "tv",
-      "title": "Wednesday",
-      "year": "2022",
-      "backdrop": "https://image.tmdb.org/t/p/original/iHSwvRVsRyxpX7FE7GbviaDvgGZ.jpg",
-      "rating": 8.348,
-      "overview": ""
+      "title": "The Mentalist",
+      "year": "2008",
+      "poster": "https://image.tmdb.org/t/p/w342/acYXu4KaDj1NIkMgObnhe4C4a0T.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/w780/rJFqKcmMSttdNP58l0dVzY2NcTA.jpg",
+      "rating": 8.4,
+      "overview": "Patrick Jane, a former celebrity psychic medium, uses his razor sharp skills of observation and expertise at \"reading\" people to solve serious crimes with the California Bureau of Investigation."
     },
     {
-      "tmdbId": 1022789,
+      "tmdbId": 1621552,
+      "canonicalId": "tmdb-movie-1621552",
       "type": "movie",
-      "title": "Inside Out 2",
-      "year": "2024",
-      "backdrop": "https://image.tmdb.org/t/p/original/p5ozvmdgsmbWe0H8Xk7Rc8SCwAB.jpg",
-      "rating": 7.546,
-      "overview": ""
+      "title": "Facing El Chapo",
+      "year": "2026",
+      "poster": "https://image.tmdb.org/t/p/w342/alpf5v4UqSFawPmG9RX03Or4BDk.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/w780/c4U96GrPRfnNrS01mBtqnocvlLJ.jpg",
+      "rating": 8.8,
+      "overview": "Two Mexican officers must survive the final hours of their shift after crossing a ruthless cartel boss."
     },
     {
-      "tmdbId": 929590,
+      "tmdbId": 1408162,
+      "canonicalId": "tmdb-movie-1408162",
       "type": "movie",
-      "title": "Civil War",
-      "year": "2024",
-      "backdrop": "https://image.tmdb.org/t/p/original/en3GU5uGkKaYmSyetHV4csHHiH3.jpg",
-      "rating": 6.86,
-      "overview": ""
+      "title": "Vishwanath & Sons",
+      "year": "2026",
+      "poster": "https://image.tmdb.org/t/p/w342/adDZVEQZnMJ380zPOmVj6vBWHgk.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/w780/nfNaAiiILjYRc2CKkId1ZfPTtlh.jpg",
+      "rating": 7.3,
+      "overview": "A celebrated Olympian shooter travels to America looking for a donor to help his sick child — but unexpected romance complicates his search."
     }
   ],
   "rails": [
@@ -53,377 +63,686 @@
       "key": "netflix-top-series",
       "title": "Top Series on Netflix",
       "ranked": true,
-      "logo": "",
+      "logo": "/images/platforms/FjWTYs9RfCsT.jpg",
       "auto": null,
       "items": [
         {
-          "tmdbId": 66732,
+          "tmdbId": 275102,
+          "canonicalId": "tmdb-tv-275102",
           "type": "tv",
-          "title": "Stranger Things",
-          "year": "2016",
-          "poster": "https://image.tmdb.org/t/p/w342/uOOtwVbSr4QDjAGIifLDwpb2Pdl.jpg",
-          "backdrop": "https://image.tmdb.org/t/p/w780/56v2KjBlU4XaOv9rVYEQypROD7P.jpg",
-          "rating": 8.567
+          "title": "The Scandal",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/4TU0PcHBIl0wPW5B6aVRGExOnHE.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/uc1p1PEbEMpdIHqnU9TESNC6Jhp.jpg",
+          "rating": 6.6,
+          "overview": "In Joseon, a secret proposal ignites hidden desires in a gifted noblewoman, a famed lover and an unsuspecting lady caught in their dangerous game."
         },
         {
-          "tmdbId": 93405,
+          "tmdbId": 2734,
+          "canonicalId": "tmdb-tv-2734",
           "type": "tv",
-          "title": "Squid Game",
+          "title": "Law & Order: Special Victims Unit",
+          "year": "1999",
+          "poster": "https://image.tmdb.org/t/p/w342/iofokHZoUB4Qhik4PflvJl8TT6a.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/obtdxPgmfykYwVnvuYXC5f2xKlQ.jpg",
+          "rating": 8,
+          "overview": "In the criminal justice system, sexually-based offenses are considered especially heinous. In New York City, the dedicated detectives who investigate these vicious felonies are members of an elite squad known as the Special Victims Unit. These are their stories."
+        },
+        {
+          "tmdbId": 5920,
+          "canonicalId": "tmdb-tv-5920",
+          "type": "tv",
+          "title": "The Mentalist",
+          "year": "2008",
+          "poster": "https://image.tmdb.org/t/p/w342/acYXu4KaDj1NIkMgObnhe4C4a0T.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/rJFqKcmMSttdNP58l0dVzY2NcTA.jpg",
+          "rating": 8.4,
+          "overview": "Patrick Jane, a former celebrity psychic medium, uses his razor sharp skills of observation and expertise at \"reading\" people to solve serious crimes with the California Bureau of Investigation."
+        },
+        {
+          "tmdbId": 94664,
+          "canonicalId": "tmdb-tv-94664",
+          "type": "tv",
+          "title": "Mushoku Tensei: Jobless Reincarnation",
           "year": "2021",
-          "poster": "https://image.tmdb.org/t/p/w342/1QdXdRYfktUSONkl1oD5gc6Be0s.jpg",
-          "backdrop": "https://image.tmdb.org/t/p/w780/2meX1nMdScFOoV4370rqHWKmXhY.jpg",
-          "rating": 7.856
+          "poster": "https://image.tmdb.org/t/p/w342/1mFnzilCyj9Coa9jbN8vFYLEZdW.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/j9fRIimor0AMFJR9kjZubXcABzZ.jpg",
+          "rating": 8.4,
+          "overview": "When a 34-year-old underachiever gets run over by a truck, his story doesn't end there. Reincarnated in a new world as an infant, Rudy will seize every opportunity to live the life he's always wanted. Armed with new friends, some freshly acquired magical abilities, and the courage to do the things he's always dreamed of, he's embarking on an epic adventure—with all of his past experience intact!"
         },
         {
-          "tmdbId": 119051,
+          "tmdbId": 4656,
+          "canonicalId": "tmdb-tv-4656",
           "type": "tv",
-          "title": "Wednesday",
-          "year": "2022",
-          "poster": "https://image.tmdb.org/t/p/w342/36xXlhEpQqVVPuiZhfoQuaY4OlA.jpg",
-          "backdrop": "https://image.tmdb.org/t/p/w780/iHSwvRVsRyxpX7FE7GbviaDvgGZ.jpg",
-          "rating": 8.348
+          "title": "Raw",
+          "year": "1993",
+          "poster": "https://image.tmdb.org/t/p/w342/fstEe6RsyNyPUnMwNcL20iNl0nE.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/gjRnFAQk4EVg1P1s5512FT1Lq9c.jpg",
+          "rating": 6.8,
+          "overview": "A regularly scheduled, live, year-round program featuring some of the biggest WWE Superstars."
         },
         {
-          "tmdbId": 71912,
+          "tmdbId": 15226,
+          "canonicalId": "tmdb-tv-15226",
           "type": "tv",
-          "title": "The Witcher",
-          "year": "2019",
-          "poster": "https://image.tmdb.org/t/p/w342/AoGsDM02UVt0npBA8OvpDcZbaMi.jpg",
-          "backdrop": "https://image.tmdb.org/t/p/w780/foGkPxpw9h8zln81j63mix5B7m8.jpg",
-          "rating": 7.921
+          "title": "C.I.D.",
+          "year": "1998",
+          "poster": "https://image.tmdb.org/t/p/w342/3UymnlLfLMKxG8OcFhSnAlnhQfZ.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/1gZrOa2E9DOohEvSLLBJqus2zGu.jpg",
+          "rating": 5.7,
+          "overview": "A team of dedicated men and women in the Crime Investigation Department will risk everything to solve Mumbai's toughest, most complicated crimes."
         },
         {
-          "tmdbId": 71446,
+          "tmdbId": 79744,
+          "canonicalId": "tmdb-tv-79744",
           "type": "tv",
-          "title": "Money Heist",
-          "year": "2017",
-          "poster": "https://image.tmdb.org/t/p/w342/reEMJA1uzscCbkpeRJeTT2bjqUp.jpg",
-          "backdrop": "https://image.tmdb.org/t/p/w780/gFZriCkpJYsApPZEF3jhxL4yLzG.jpg",
-          "rating": 8.232
+          "title": "The Rookie",
+          "year": "2018",
+          "poster": "https://image.tmdb.org/t/p/w342/70kTz0OmjjZe7zHvIDrq2iKW7PJ.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/6iNWfGVCEfASDdlNb05TP5nG0ll.jpg",
+          "rating": 8.5,
+          "overview": "Starting over isn't easy, especially for small-town guy John Nolan who, after a life-altering incident, is pursuing his dream of being an LAPD officer. As the force's oldest rookie, he's met with skepticism from some higher-ups who see him as just a walking midlife crisis."
         },
         {
-          "tmdbId": 94796,
+          "tmdbId": 2316,
+          "canonicalId": "tmdb-tv-2316",
           "type": "tv",
-          "title": "Crash Landing on You",
-          "year": "2019",
-          "poster": "https://image.tmdb.org/t/p/w342/fgBNLPr6mC8pxuR79ENAJY4nBmj.jpg",
-          "backdrop": "",
-          "rating": 8.538
+          "title": "The Office",
+          "year": "2005",
+          "poster": "https://image.tmdb.org/t/p/w342/7DJKHzAi83BmQrWLrYYOqcoKfhR.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/mLyW3UTgi2lsMdtueYODcfAB9Ku.jpg",
+          "rating": 8.6,
+          "overview": "The everyday lives of office employees in the Scranton, Pennsylvania branch of the fictional Dunder Mifflin Paper Company."
         },
         {
-          "tmdbId": 99966,
+          "tmdbId": 1396,
+          "canonicalId": "tmdb-tv-1396",
           "type": "tv",
-          "title": "All of Us Are Dead",
-          "year": "2022",
-          "poster": "https://image.tmdb.org/t/p/w342/pTEFqAjLd5YTsMD6NSUxV6Dq7A6.jpg",
-          "backdrop": "https://image.tmdb.org/t/p/w780/8hp2CuGnw1iP5dLBVMAPUv23swx.jpg",
-          "rating": 8.278
+          "title": "Breaking Bad",
+          "year": "2008",
+          "poster": "https://image.tmdb.org/t/p/w342/anFx9aTOOYqgS3v7x3R84Kz67ly.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/tsRy63Mu5cu8etL1X7ZLyf7UP1M.jpg",
+          "rating": 9,
+          "overview": "Walter White, a New Mexico chemistry teacher, is diagnosed with Stage III cancer and given a prognosis of only two years left to live. He becomes filled with a sense of fearlessness and an unrelenting desire to secure his family's financial future at any cost as he enters the dangerous world of drugs and crime."
         },
         {
-          "tmdbId": 106651,
+          "tmdbId": 1408,
+          "canonicalId": "tmdb-tv-1408",
           "type": "tv",
-          "title": "Hellbound",
-          "year": "2021",
-          "poster": "https://image.tmdb.org/t/p/w342/5NYdSAnDVIXePrSG2dznHdiibMk.jpg",
-          "backdrop": "https://image.tmdb.org/t/p/w780/ikN8ABD9pXHuW4JFqTEHr3ae8rd.jpg",
-          "rating": 7.324
+          "title": "House",
+          "year": "2004",
+          "poster": "https://image.tmdb.org/t/p/w342/3Cz7ySOQJmqiuTdrc6CY0r65yDI.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/r0Q6eeN9L1ORL9QsV0Sg8ZV3vnv.jpg",
+          "rating": 8.6,
+          "overview": "Dr. Gregory House, a drug-addicted, unconventional, misanthropic medical genius, leads a team of diagnosticians at the fictional Princeton–Plainsboro Teaching Hospital in New Jersey."
+        },
+        {
+          "tmdbId": 30984,
+          "canonicalId": "tmdb-tv-30984",
+          "type": "tv",
+          "title": "Bleach",
+          "year": "2004",
+          "poster": "https://image.tmdb.org/t/p/w342/2EewmxXe72ogD0EaWM8gqa0ccIw.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/o0NsbcIvsllg6CJX0FBFY8wWbsn.jpg",
+          "rating": 8.3,
+          "overview": "For as long as he can remember, Ichigo Kurosaki has been able to see ghosts. But when he meets Rukia, a Soul Reaper who battles evil spirits known as Hollows, he finds his life is changed forever. Now, with a newfound wealth of spiritual energy, Ichigo discovers his true calling: to protect the living and the dead from evil."
+        },
+        {
+          "tmdbId": 46952,
+          "canonicalId": "tmdb-tv-46952",
+          "type": "tv",
+          "title": "The Blacklist",
+          "year": "2013",
+          "poster": "https://image.tmdb.org/t/p/w342/4HTfd1PhgFUenJxVuBDNdLmdr0c.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/2eIlCirgcvEwmCSYh2wDfz5Sxvz.jpg",
+          "rating": 7.6,
+          "overview": "Raymond \"Red\" Reddington, one of the FBI's most wanted fugitives, surrenders in person at FBI Headquarters in Washington, D.C. He claims that he and the FBI have the same interests: bringing down dangerous criminals and terrorists. In the last two decades, he's made a list of criminals and terrorists that matter the most but the FBI cannot find because it does not know they exist. Reddington calls this \"The Blacklist\". Reddington will co-operate, but insists that he will speak only to Elizabeth Keen, a rookie FBI profiler."
+        },
+        {
+          "tmdbId": 60625,
+          "canonicalId": "tmdb-tv-60625",
+          "type": "tv",
+          "title": "Rick and Morty",
+          "year": "2013",
+          "poster": "https://image.tmdb.org/t/p/w342/owhkU6KRqdXoUQpjV8uyZGPtX58.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/5BDNWWHweQL0q1fmTv7gmRXfnl4.jpg",
+          "rating": 8.7,
+          "overview": "Follows a sociopathic genius scientist who drags his inherently timid grandson on adventures across the universe."
+        },
+        {
+          "tmdbId": 34307,
+          "canonicalId": "tmdb-tv-34307",
+          "type": "tv",
+          "title": "Shameless",
+          "year": "2011",
+          "poster": "https://image.tmdb.org/t/p/w342/ifo31fMWLmyOVpdak9K0kY4jldQ.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/5s9XHTB9SLPdg3mNU6BlSLnZ9Qq.jpg",
+          "rating": 8.2,
+          "overview": "Chicagoan Frank Gallagher is the proud single dad of six smart, industrious, independent kids, who without him would be... perhaps better off. When Frank's not at the bar spending what little money they have, he's passed out on the floor. But the kids have found ways to grow up in spite of him. They may not be like any family you know, but they make no apologies for being exactly who they are."
+        },
+        {
+          "tmdbId": 32798,
+          "canonicalId": "tmdb-tv-32798",
+          "type": "tv",
+          "title": "Hawaii Five-0",
+          "year": "2010",
+          "poster": "https://image.tmdb.org/t/p/w342/sIdCKlmM2nU4akIvFQaAIiU8YES.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/tLccUh3uazZ9TkLhe53UwprJhI4.jpg",
+          "rating": 7.7,
+          "overview": "Steve McGarrett returns home to Oahu, in order to find his father's killer. The governor offers him the chance to run his own task force (Five-0). Steve's team is joined by Chin Ho Kelly, Danny \"Danno\" Williams, and Kono Kalakaua."
+        },
+        {
+          "tmdbId": 58841,
+          "canonicalId": "tmdb-tv-58841",
+          "type": "tv",
+          "title": "Chicago P.D.",
+          "year": "2014",
+          "poster": "https://image.tmdb.org/t/p/w342/bez40PgT36RUu4gstD2A6GSM0tP.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/rhp8vYG1sIFtqH3ETmHJuI5Z3Cb.jpg",
+          "rating": 8.4,
+          "overview": "A riveting police drama about the men and women of the Chicago Police Department's District 21 who put it all on the line to serve and protect their community. District 21 is made up of two distinctly different groups: the uniformed cops who patrol the beat and go head-to-head with the city's street crimes and the Intelligence Unit that combats the city's major offenses - organized crime, drug trafficking, high profile murders and beyond."
+        },
+        {
+          "tmdbId": 4604,
+          "canonicalId": "tmdb-tv-4604",
+          "type": "tv",
+          "title": "Smallville",
+          "year": "2001",
+          "poster": "https://image.tmdb.org/t/p/w342/mHZSq8LA5Dt48JjaOZ5tcPXQRVN.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/4wVq9ICc4MI2XcssrumpCOhKLpI.jpg",
+          "rating": 8.2,
+          "overview": "The origins of the world’s greatest hero–from Krypton refugee Kal-el’s arrival on Earth through his tumultuous teen years to Clark Kent’s final steps toward embracing his destiny as the Man of Steel."
+        },
+        {
+          "tmdbId": 18165,
+          "canonicalId": "tmdb-tv-18165",
+          "type": "tv",
+          "title": "The Vampire Diaries",
+          "year": "2009",
+          "poster": "https://image.tmdb.org/t/p/w342/b3vl6wV1W8PBezFfntKTrhrehCY.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/cJYLon9ejKJV7ua03ab8Tj9u067.jpg",
+          "rating": 8.3,
+          "overview": "The story of two vampire brothers obsessed with the same girl, who bears a striking resemblance to the beautiful but ruthless vampire they knew and loved in 1864."
+        },
+        {
+          "tmdbId": 1668,
+          "canonicalId": "tmdb-tv-1668",
+          "type": "tv",
+          "title": "Friends",
+          "year": "1994",
+          "poster": "https://image.tmdb.org/t/p/w342/kuqCom4s0htI5POztRTxxYrswqt.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/l0qVZIpXtIo7km9u5Yqh0nKPOr5.jpg",
+          "rating": 8.4,
+          "overview": "Six young people from New York City, on their own and struggling to survive in the real world, find the companionship, comfort and support they get from each other to be the perfect antidote to the pressures of life."
+        },
+        {
+          "tmdbId": 299939,
+          "canonicalId": "tmdb-tv-299939",
+          "type": "tv",
+          "title": "Monster: The Lizzie Borden Story",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/57XScX1aYtKi1LvHYFQLPUxVhTG.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/gaew60NXUxok3Vmls7gkAT7lYW0.jpg",
+          "rating": 6.8,
+          "overview": "Trapped in a cruel Victorian-era household, Lizzie Borden kills her parents in a gory ax murder that shocks the nation."
         }
       ]
     },
     {
-      "key": "netflix-popular-now",
-      "title": "Popular on Netflix",
+      "key": "netflix-popular-movies",
+      "title": "Popular Movies on Netflix",
       "ranked": false,
-      "logo": "",
+      "logo": "/images/platforms/FjWTYs9RfCsT.jpg",
       "auto": null,
       "items": [
         {
-          "tmdbId": 66732,
-          "type": "tv",
-          "title": "Stranger Things",
-          "year": "2016",
-          "poster": "https://image.tmdb.org/t/p/w342/uOOtwVbSr4QDjAGIifLDwpb2Pdl.jpg",
-          "backdrop": "https://image.tmdb.org/t/p/w780/56v2KjBlU4XaOv9rVYEQypROD7P.jpg",
-          "rating": 8.567
-        },
-        {
-          "tmdbId": 93405,
-          "type": "tv",
-          "title": "Squid Game",
-          "year": "2021",
-          "poster": "https://image.tmdb.org/t/p/w342/1QdXdRYfktUSONkl1oD5gc6Be0s.jpg",
-          "backdrop": "https://image.tmdb.org/t/p/w780/2meX1nMdScFOoV4370rqHWKmXhY.jpg",
-          "rating": 7.856
-        },
-        {
-          "tmdbId": 119051,
-          "type": "tv",
-          "title": "Wednesday",
-          "year": "2022",
-          "poster": "https://image.tmdb.org/t/p/w342/36xXlhEpQqVVPuiZhfoQuaY4OlA.jpg",
-          "backdrop": "https://image.tmdb.org/t/p/w780/iHSwvRVsRyxpX7FE7GbviaDvgGZ.jpg",
-          "rating": 8.348
-        },
-        {
-          "tmdbId": 71912,
-          "type": "tv",
-          "title": "The Witcher",
-          "year": "2019",
-          "poster": "https://image.tmdb.org/t/p/w342/AoGsDM02UVt0npBA8OvpDcZbaMi.jpg",
-          "backdrop": "https://image.tmdb.org/t/p/w780/foGkPxpw9h8zln81j63mix5B7m8.jpg",
-          "rating": 7.921
-        },
-        {
-          "tmdbId": 71446,
-          "type": "tv",
-          "title": "Money Heist",
-          "year": "2017",
-          "poster": "https://image.tmdb.org/t/p/w342/reEMJA1uzscCbkpeRJeTT2bjqUp.jpg",
-          "backdrop": "https://image.tmdb.org/t/p/w780/gFZriCkpJYsApPZEF3jhxL4yLzG.jpg",
-          "rating": 8.232
-        },
-        {
-          "tmdbId": 117376,
-          "type": "tv",
-          "title": "Vincenzo",
-          "year": "2021",
-          "poster": "https://image.tmdb.org/t/p/w342/qbkSS1cTjT4DzIwD44bdhTuYgdT.jpg",
-          "backdrop": "https://image.tmdb.org/t/p/w780/sf7NCqyVUNoyjYuwW5oJke1T1lH.jpg",
-          "rating": 8.509
-        },
-        {
-          "tmdbId": 96648,
-          "type": "tv",
-          "title": "Sweet Home",
-          "year": "2020",
-          "poster": "https://image.tmdb.org/t/p/w342/7rNWciOcHOH97XIeS1KFuMmjyky.jpg",
-          "backdrop": "https://image.tmdb.org/t/p/w780/mceCXNTny6a5F3rQgShLoyARw4l.jpg",
-          "rating": 8.229
-        },
-        {
-          "tmdbId": 110534,
-          "type": "tv",
-          "title": "D.P.",
-          "year": "2021",
-          "poster": "https://image.tmdb.org/t/p/w342/akvPsqe1u1NpIQ8Ln2Vt06uhOv9.jpg",
-          "backdrop": "https://image.tmdb.org/t/p/w780/kTf8vPcZVONrBHB35hEg1lG2Bk.jpg",
-          "rating": 8
-        },
-        {
-          "tmdbId": 96162,
-          "type": "tv",
-          "title": "Itaewon Class",
-          "year": "2020",
-          "poster": "https://image.tmdb.org/t/p/w342/qg7q0piY0fTt2enlIRHwKKRwNjS.jpg",
-          "backdrop": "https://image.tmdb.org/t/p/w780/rtYQCa2NzX8RspbOmwfAla6BemO.jpg",
-          "rating": 8.383
-        }
-      ]
-    },
-    {
-      "key": "netflix-thrillers",
-      "title": "Thrillers on Netflix",
-      "ranked": false,
-      "logo": "",
-      "auto": null,
-      "items": [
-        {
-          "tmdbId": 93405,
-          "type": "tv",
-          "title": "Squid Game",
-          "year": "2021",
-          "poster": "https://image.tmdb.org/t/p/w342/1QdXdRYfktUSONkl1oD5gc6Be0s.jpg",
-          "backdrop": "https://image.tmdb.org/t/p/w780/2meX1nMdScFOoV4370rqHWKmXhY.jpg",
-          "rating": 7.856
-        },
-        {
-          "tmdbId": 99966,
-          "type": "tv",
-          "title": "All of Us Are Dead",
-          "year": "2022",
-          "poster": "https://image.tmdb.org/t/p/w342/pTEFqAjLd5YTsMD6NSUxV6Dq7A6.jpg",
-          "backdrop": "https://image.tmdb.org/t/p/w780/8hp2CuGnw1iP5dLBVMAPUv23swx.jpg",
-          "rating": 8.278
-        },
-        {
-          "tmdbId": 96648,
-          "type": "tv",
-          "title": "Sweet Home",
-          "year": "2020",
-          "poster": "https://image.tmdb.org/t/p/w342/7rNWciOcHOH97XIeS1KFuMmjyky.jpg",
-          "backdrop": "https://image.tmdb.org/t/p/w780/mceCXNTny6a5F3rQgShLoyARw4l.jpg",
-          "rating": 8.229
-        },
-        {
-          "tmdbId": 106651,
-          "type": "tv",
-          "title": "Hellbound",
-          "year": "2021",
-          "poster": "https://image.tmdb.org/t/p/w342/5NYdSAnDVIXePrSG2dznHdiibMk.jpg",
-          "backdrop": "https://image.tmdb.org/t/p/w780/ikN8ABD9pXHuW4JFqTEHr3ae8rd.jpg",
-          "rating": 7.324
-        },
-        {
-          "tmdbId": 110534,
-          "type": "tv",
-          "title": "D.P.",
-          "year": "2021",
-          "poster": "https://image.tmdb.org/t/p/w342/akvPsqe1u1NpIQ8Ln2Vt06uhOv9.jpg",
-          "backdrop": "https://image.tmdb.org/t/p/w780/kTf8vPcZVONrBHB35hEg1lG2Bk.jpg",
-          "rating": 8
-        }
-      ]
-    },
-    {
-      "key": "netflix-bollywood",
-      "title": "Latest Bollywood (2024-25)",
-      "ranked": false,
-      "logo": "",
-      "auto": null,
-      "items": [
-        {
-          "tmdbId": 1291608,
+          "tmdbId": 1621552,
+          "canonicalId": "tmdb-movie-1621552",
           "type": "movie",
-          "title": "Dhurandhar",
+          "title": "Facing El Chapo",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/alpf5v4UqSFawPmG9RX03Or4BDk.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/c4U96GrPRfnNrS01mBtqnocvlLJ.jpg",
+          "rating": 8.8,
+          "overview": "Two Mexican officers must survive the final hours of their shift after crossing a ruthless cartel boss."
+        },
+        {
+          "tmdbId": 1408162,
+          "canonicalId": "tmdb-movie-1408162",
+          "type": "movie",
+          "title": "Vishwanath & Sons",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/adDZVEQZnMJ380zPOmVj6vBWHgk.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/nfNaAiiILjYRc2CKkId1ZfPTtlh.jpg",
+          "rating": 7.3,
+          "overview": "A celebrated Olympian shooter travels to America looking for a donor to help his sick child — but unexpected romance complicates his search."
+        },
+        {
+          "tmdbId": 1685882,
+          "canonicalId": "tmdb-movie-1685882",
+          "type": "movie",
+          "title": "Modha Rathri",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/lZiTSLDLIkW9YS6CWo8uaXZMcO6.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/8Lq3f68f4WZpQrihDooNink8xJ7.jpg",
+          "rating": 7.2,
+          "overview": "Two strangers are brought together at an unusual wedding where, in one night, too many surprises unfold and several lies are told, spiraling into chaos that changes everything."
+        },
+        {
+          "tmdbId": 860508,
+          "canonicalId": "tmdb-movie-860508",
+          "type": "movie",
+          "title": "The Whisper Man",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/ndRs5lADYm0PeVjuOxaMcInY0o2.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/uauoVKKCkNA9iWjgJCL8TdSfLf5.jpg",
+          "rating": 6.9,
+          "overview": "When his young son vanishes, a widower enlists help from his estranged father, a retired detective who put away the serial killer now linked to the case."
+        },
+        {
+          "tmdbId": 6435,
+          "canonicalId": "tmdb-movie-6435",
+          "type": "movie",
+          "title": "Practical Magic",
+          "year": "1998",
+          "poster": "https://image.tmdb.org/t/p/w342/AwmToSgf2IL3aHv0QRVsR5KvChv.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/4kbkq887XNT85d6nJonCnmXDWor.jpg",
+          "rating": 6.8,
+          "overview": "Sally and Gillian Owens, born into a magical family, have mostly avoided witchcraft themselves. But when Gillian's vicious boyfriend, Jimmy Angelov, dies unexpectedly, the Owens sisters give themselves a crash course in hard magic. With policeman Gary Hallet growing suspicious, the girls struggle to resurrect Angelov -- and unwittingly inject his corpse with an evil spirit that threatens to end their family line."
+        },
+        {
+          "tmdbId": 122,
+          "canonicalId": "tmdb-movie-122",
+          "type": "movie",
+          "title": "The Lord of the Rings: The Return of the King",
+          "year": "2003",
+          "poster": "https://image.tmdb.org/t/p/w342/rCzpDGLbOoPwLjy3OAm5NUPOTrC.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/ctiw6FZK4N36LmkjSklWEbuvlq9.jpg",
+          "rating": 8.5,
+          "overview": "As armies mass for a final battle that will decide the fate of the world--and powerful, ancient forces of Light and Dark compete to determine the outcome--one member of the Fellowship of the Ring is revealed as the noble heir to the throne of the Kings of Men. Yet, the sole hope for triumph over evil lies with a brave hobbit, Frodo, who, accompanied by his loyal friend Sam and the hideous, wretched Gollum, ventures deep into the very dark heart of Mordor on his seemingly impossible quest to destroy the Ring of Power.​"
+        },
+        {
+          "tmdbId": 1514863,
+          "canonicalId": "tmdb-movie-1514863",
+          "type": "movie",
+          "title": "Best of the Best",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/dbP661svmn7XZq3TdSmSUI5UKQJ.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/5m1j7Wibh3HnZq5QHm97v8dI3GH.jpg",
+          "rating": 4.9,
+          "overview": "Two childhood besties join UCLA's competitive Bollywood-fusion dance team, only to find the road to the US championships is fiercer than they imagined."
+        },
+        {
+          "tmdbId": 569094,
+          "canonicalId": "tmdb-movie-569094",
+          "type": "movie",
+          "title": "Spider-Man: Across the Spider-Verse",
+          "year": "2023",
+          "poster": "https://image.tmdb.org/t/p/w342/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/kVd3a9YeLGkoeR50jGEXM6EqseS.jpg",
+          "rating": 8.3,
+          "overview": "After reuniting with Gwen Stacy, Brooklyn’s full-time, friendly neighborhood Spider-Man is catapulted across the Multiverse, where he encounters the Spider Society, a team of Spider-People charged with protecting the Multiverse's very existence. But when the heroes clash on how to handle a new threat, Miles finds himself pitted against the other Spiders and must set out on his own to save those he loves most."
+        },
+        {
+          "tmdbId": 693134,
+          "canonicalId": "tmdb-movie-693134",
+          "type": "movie",
+          "title": "Dune: Part Two",
+          "year": "2024",
+          "poster": "https://image.tmdb.org/t/p/w342/6izwz7rsy95ARzTR3poZ8H6c5pp.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/eZ239CUp1d6OryZEBPnO2n87gMG.jpg",
+          "rating": 8.1,
+          "overview": "Follow the mythic journey of Paul Atreides as he unites with Chani and the Fremen while on a path of revenge against the conspirators who destroyed his family. Facing a choice between the love of his life and the fate of the known universe, Paul endeavors to prevent a terrible future only he can foresee."
+        },
+        {
+          "tmdbId": 120,
+          "canonicalId": "tmdb-movie-120",
+          "type": "movie",
+          "title": "The Lord of the Rings: The Fellowship of the Ring",
+          "year": "2001",
+          "poster": "https://image.tmdb.org/t/p/w342/6oom5QYQ2yQTMJIbnvbkBL9cHo6.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/oiwc338EoBgS4sEI2ixAny4KQKg.jpg",
+          "rating": 8.4,
+          "overview": "Young hobbit Frodo Baggins, after inheriting a mysterious ring from his uncle Bilbo, must leave his home in order to keep it from falling into the hands of its evil creator. Along the way, a fellowship is formed to protect the ringbearer and make sure that the ring arrives at its final destination: Mt. Doom, the only place where it can be destroyed."
+        },
+        {
+          "tmdbId": 1451944,
+          "canonicalId": "tmdb-movie-1451944",
+          "type": "movie",
+          "title": "Lust Stories 3",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/cLA83DD1qMEBwbRIYXf29RKjMja.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/jRtR4aTq4vmxRg9ah60R5i1kkQ7.jpg",
+          "rating": 6.5,
+          "overview": "Through four bite-sized yet emotionally resonant films, the anthology once again explores lust, love, relationships, and repressed desire, offering fresh perspectives on intimacy, longing, and human connection in all their complexity."
+        },
+        {
+          "tmdbId": 414906,
+          "canonicalId": "tmdb-movie-414906",
+          "type": "movie",
+          "title": "The Batman",
+          "year": "2022",
+          "poster": "https://image.tmdb.org/t/p/w342/74xTEgt7R36Fpooo50r9T25onhq.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/rvtdN5XkWAfGX6xDuPL6yYS2seK.jpg",
+          "rating": 7.7,
+          "overview": "In his second year of fighting crime, Batman uncovers corruption in Gotham City that connects to his own family while facing a serial killer known as the Riddler."
+        },
+        {
+          "tmdbId": 1441228,
+          "canonicalId": "tmdb-movie-1441228",
+          "type": "movie",
+          "title": "Irumudi",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/sPePQmJRKkB14sGjB7zBkLJkaTW.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/578jrGVEN4a5rxJGtkt9sMI2w6c.jpg",
+          "rating": 6.6,
+          "overview": "An alcoholic with a violent past—living peacefully with his daughter beside a waterfall—decides to take Ayyappa Deeksha (a 41-day spiritual vow and period of intense austerity) at her request."
+        },
+        {
+          "tmdbId": 550,
+          "canonicalId": "tmdb-movie-550",
+          "type": "movie",
+          "title": "Fight Club",
+          "year": "1999",
+          "poster": "https://image.tmdb.org/t/p/w342/jSziioSwPVrOy9Yow3XhWIBDjq1.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/c6OLXfKAk5BKeR6broC8pYiCquX.jpg",
+          "rating": 8.4,
+          "overview": "A ticking-time-bomb insomniac and a slippery soap salesman channel primal male aggression into a shocking new form of therapy. Their concept catches on, with underground \"fight clubs\" forming in every town, until an eccentric gets in the way and ignites an out-of-control spiral toward oblivion."
+        },
+        {
+          "tmdbId": 1007757,
+          "canonicalId": "tmdb-movie-1007757",
+          "type": "movie",
+          "title": "Swapped",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/tHhxWxge06goXU6ZQH1hj7vK8Hd.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/zMwhWailP1WY7sb6AoE6b8ugoy.jpg",
+          "rating": 8.9,
+          "overview": "A small woodland creature and a majestic bird, two natural sworn enemies of the Valley, magically trade places and set off on an adventure of a lifetime to switch back. Their journey soon uncovers a greater threat—one that could endanger not only their species, but the entire valley they call home."
+        },
+        {
+          "tmdbId": 4935,
+          "canonicalId": "tmdb-movie-4935",
+          "type": "movie",
+          "title": "Howl's Moving Castle",
+          "year": "2004",
+          "poster": "https://image.tmdb.org/t/p/w342/13kOl2v0nD2OLbVSHnHk8GUFEhO.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/nv5wwZou159v5OC61i4ElR7OqyY.jpg",
+          "rating": 8.4,
+          "overview": "Sophie, a young milliner, is turned into an elderly woman by a witch who enters her shop and curses her. She encounters a wizard named Howl and gets caught up in his resistance to fighting for the king."
+        },
+        {
+          "tmdbId": 1265609,
+          "canonicalId": "tmdb-movie-1265609",
+          "type": "movie",
+          "title": "War Machine",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/ril8yx5SOmj0KjNlftsdfIp00fr.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/6yeVcxFR0j08vlv2OlL6zbewm4D.jpg",
+          "rating": 7.5,
+          "overview": "On one last grueling mission during Army Ranger training, a combat engineer must lead his unit in a fight against a giant otherworldly killing machine."
+        },
+        {
+          "tmdbId": 438631,
+          "canonicalId": "tmdb-movie-438631",
+          "type": "movie",
+          "title": "Dune",
+          "year": "2021",
+          "poster": "https://image.tmdb.org/t/p/w342/v1tRXZ4JtD2Iv6fjkPvT4GiwslV.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/zRKQW58MBEY078AxkHxEJzUskCl.jpg",
+          "rating": 7.8,
+          "overview": "Paul Atreides, a brilliant and gifted young man born into a great destiny beyond his understanding, must travel to the most dangerous planet in the universe to ensure the future of his family and his people. As malevolent forces explode into conflict over the planet's exclusive supply of the most precious resource in existence - a commodity capable of unlocking humanity's greatest potential - only those who can conquer their fear will survive."
+        },
+        {
+          "tmdbId": 315635,
+          "canonicalId": "tmdb-movie-315635",
+          "type": "movie",
+          "title": "Spider-Man: Homecoming",
+          "year": "2017",
+          "poster": "https://image.tmdb.org/t/p/w342/c24sv2weTHPsmDa7jEMN0m2P3RT.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/fn4n6uOYcB6Uh89nbNPoU2w80RV.jpg",
+          "rating": 7.3,
+          "overview": "Following the events of Captain America: Civil War, Peter Parker, with the help of his mentor Tony Stark, tries to balance his life as an ordinary high school student in Queens, New York City, with fighting crime as his superhero alter ego Spider-Man as a new threat, the Vulture, emerges."
+        },
+        {
+          "tmdbId": 121,
+          "canonicalId": "tmdb-movie-121",
+          "type": "movie",
+          "title": "The Lord of the Rings: The Two Towers",
+          "year": "2002",
+          "poster": "https://image.tmdb.org/t/p/w342/5VTN0pR8gcqV3EPUHHfMGnJYN9L.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/6G73mNyooWAEQTpckPSnFxFoNmc.jpg",
+          "rating": 8.4,
+          "overview": "Frodo Baggins and the other members of the Fellowship continue on their sacred quest to destroy the One Ring--but on separate paths. Their destinies lie at two towers--Orthanc Tower in Isengard, where the corrupt wizard Saruman awaits, and Sauron's fortress at Barad-dur, deep within the dark lands of Mordor."
+        }
+      ]
+    },
+    {
+      "key": "netflix-originals",
+      "title": "Netflix Global Originals",
+      "ranked": false,
+      "logo": "/images/platforms/FjWTYs9RfCsT.jpg",
+      "auto": null,
+      "items": [
+        {
+          "tmdbId": 275102,
+          "canonicalId": "tmdb-tv-275102",
+          "type": "tv",
+          "title": "The Scandal",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/4TU0PcHBIl0wPW5B6aVRGExOnHE.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/uc1p1PEbEMpdIHqnU9TESNC6Jhp.jpg",
+          "rating": 6.6,
+          "overview": "In Joseon, a secret proposal ignites hidden desires in a gifted noblewoman, a famed lover and an unsuspecting lady caught in their dangerous game."
+        },
+        {
+          "tmdbId": 4656,
+          "canonicalId": "tmdb-tv-4656",
+          "type": "tv",
+          "title": "Raw",
+          "year": "1993",
+          "poster": "https://image.tmdb.org/t/p/w342/fstEe6RsyNyPUnMwNcL20iNl0nE.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/gjRnFAQk4EVg1P1s5512FT1Lq9c.jpg",
+          "rating": 6.8,
+          "overview": "A regularly scheduled, live, year-round program featuring some of the biggest WWE Superstars."
+        },
+        {
+          "tmdbId": 15226,
+          "canonicalId": "tmdb-tv-15226",
+          "type": "tv",
+          "title": "C.I.D.",
+          "year": "1998",
+          "poster": "https://image.tmdb.org/t/p/w342/3UymnlLfLMKxG8OcFhSnAlnhQfZ.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/1gZrOa2E9DOohEvSLLBJqus2zGu.jpg",
+          "rating": 5.7,
+          "overview": "A team of dedicated men and women in the Crime Investigation Department will risk everything to solve Mumbai's toughest, most complicated crimes."
+        },
+        {
+          "tmdbId": 299939,
+          "canonicalId": "tmdb-tv-299939",
+          "type": "tv",
+          "title": "Monster: The Lizzie Borden Story",
+          "year": "2026",
+          "poster": "https://image.tmdb.org/t/p/w342/57XScX1aYtKi1LvHYFQLPUxVhTG.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/gaew60NXUxok3Vmls7gkAT7lYW0.jpg",
+          "rating": 6.8,
+          "overview": "Trapped in a cruel Victorian-era household, Lizzie Borden kills her parents in a gory ax murder that shocks the nation."
+        },
+        {
+          "tmdbId": 502,
+          "canonicalId": "tmdb-tv-502",
+          "type": "tv",
+          "title": "Sesame Street",
+          "year": "1969",
+          "poster": "https://image.tmdb.org/t/p/w342/14k9BfZ2p4rQBMeJ5crKTfUZVwD.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/tNi2aJPdCKfielGYzIi3IKxStz9.jpg",
+          "rating": 7.1,
+          "overview": "On a special inner city street, the inhabitants—human and muppet—teach preschoolers basic educational and social concepts using comedy, cartoons, games, and songs."
+        },
+        {
+          "tmdbId": 65701,
+          "canonicalId": "tmdb-tv-65701",
+          "type": "tv",
+          "title": "Good Mythical Morning",
+          "year": "2012",
+          "poster": "https://image.tmdb.org/t/p/w342/jMpBQr2aNOFAI6wsC47zsOG6qOh.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/hvFCS0dMeC3ffiF4uYTKzUAkvYL.jpg",
+          "rating": 6.9,
+          "overview": "Two \"Internetainers\" (Rhett & Link) go far out and do the weirdest things, giving you a daily dose of casual comedy every Monday-Friday."
+        },
+        {
+          "tmdbId": 236235,
+          "canonicalId": "tmdb-tv-236235",
+          "type": "tv",
+          "title": "The Gentlemen",
+          "year": "2024",
+          "poster": "https://image.tmdb.org/t/p/w342/tw3tzfXaSpmUZIB8ZNqNEGzMBCy.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/yG1wltFmkX5c5ocACKfpX0tp3SY.jpg",
+          "rating": 7.9,
+          "overview": "When aristocratic Eddie inherits the family estate, he discovers that it's home to an enormous weed empire — and its proprietors aren't going anywhere."
+        },
+        {
+          "tmdbId": 66732,
+          "canonicalId": "tmdb-tv-66732",
+          "type": "tv",
+          "title": "Stranger Things",
+          "year": "2016",
+          "poster": "https://image.tmdb.org/t/p/w342/uOOtwVbSr4QDjAGIifLDwpb2Pdl.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/9P4IIMYY3HifqeruZq0ZZ9g7YUi.jpg",
+          "rating": 8.6,
+          "overview": "When a young boy vanishes, a small town uncovers a mystery involving secret experiments, terrifying supernatural forces, and one strange little girl."
+        },
+        {
+          "tmdbId": 63174,
+          "canonicalId": "tmdb-tv-63174",
+          "type": "tv",
+          "title": "Lucifer",
+          "year": "2016",
+          "poster": "https://image.tmdb.org/t/p/w342/ekZobS8isE6mA53RAiGDG93hBxL.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/ta5oblpMlEcIPIS2YGcq9XEkWK2.jpg",
+          "rating": 8.4,
+          "overview": "Bored and unhappy as the Lord of Hell, Lucifer Morningstar abandoned his throne and retired to Los Angeles, where he has teamed up with LAPD detective Chloe Decker to take down criminals. But the longer he's away from the underworld, the greater the threat that the worst of humanity could escape."
+        },
+        {
+          "tmdbId": 45790,
+          "canonicalId": "tmdb-tv-45790",
+          "type": "tv",
+          "title": "JoJo's Bizarre Adventure",
+          "year": "2012",
+          "poster": "https://image.tmdb.org/t/p/w342/ogAWwbh3frWtiTyyXrZaVFtqCgp.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/5mUYDoFjDlPmDvnUWSknhYjGBBh.jpg",
+          "rating": 8.6,
+          "overview": "Follow the intergenerational feud between the Joestar Family and various forces of evil, the most prominent of which is Dio Brando and his followers."
+        },
+        {
+          "tmdbId": 286801,
+          "canonicalId": "tmdb-tv-286801",
+          "type": "tv",
+          "title": "Monster: The Ed Gein Story",
           "year": "2025",
-          "poster": "https://image.tmdb.org/t/p/w342/8FHOtUpNIk5ZPEay2N2EY5lrxkv.jpg",
-          "backdrop": "https://image.tmdb.org/t/p/w780/snYOXem8pUGOffnLbbGq4aB1pg4.jpg",
-          "rating": 7.117
+          "poster": "https://image.tmdb.org/t/p/w342/iDHzRALtZCzHVmx7uyjTTKvMAPB.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/cm2oUAPiTE1ERoYYOzzgloQw4YZ.jpg",
+          "rating": 7.3,
+          "overview": "The shocking true-life tale of Ed Gein, the infamous murderer and grave robber who inspired many of Hollywood's most iconic on-screen killers."
         },
         {
-          "tmdbId": 1112426,
-          "type": "movie",
-          "title": "Stree 2",
-          "year": "2024",
-          "poster": "https://image.tmdb.org/t/p/w342/iwEJp4WBM8b3AjCeNcgvv86FEFr.jpg",
-          "backdrop": "https://image.tmdb.org/t/p/w780/fVV0A67kDjTTQ4CvUn8LoletRmI.jpg",
-          "rating": 6.6
+          "tmdbId": 4194,
+          "canonicalId": "tmdb-tv-4194",
+          "type": "tv",
+          "title": "Star Wars: The Clone Wars",
+          "year": "2008",
+          "poster": "https://image.tmdb.org/t/p/w342/e1nWfnnCVqxS2LeTO3dwGyAsG2V.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/m6eRgkR1KC6Mr6gKx6gKCzSn6vD.jpg",
+          "rating": 8.5,
+          "overview": "Yoda, Obi-Wan Kenobi, Anakin Skywalker, Mace Windu and other Jedi Knights lead the Grand Army of the Republic against the droid army of the Separatists."
         },
         {
-          "tmdbId": 1014214,
-          "type": "movie",
-          "title": "Singham Again",
-          "year": "2024",
-          "poster": "https://image.tmdb.org/t/p/w342/2JbNkHg8m7LaBy61LyrnnlenaxY.jpg",
-          "backdrop": "https://image.tmdb.org/t/p/w780/lexEx0B4WDOXGfqPTj4R8FCrE7H.jpg",
-          "rating": 5
+          "tmdbId": 42009,
+          "canonicalId": "tmdb-tv-42009",
+          "type": "tv",
+          "title": "Black Mirror",
+          "year": "2011",
+          "poster": "https://image.tmdb.org/t/p/w342/seN6rRfN0I6n8iDXjlSMk1QjNcq.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/dg3OindVAGZBjlT3xYKqIAdukPL.jpg",
+          "rating": 8.3,
+          "overview": "Twisted tales run wild in this mind-bending anthology series that reveals humanity's worst traits, greatest innovations and more."
         },
         {
-          "tmdbId": 984101,
-          "type": "movie",
-          "title": "Bad Newz",
-          "year": "2024",
-          "poster": "https://image.tmdb.org/t/p/w342/qDlqxGATpYBWqGciPB4tmQm3bFT.jpg",
-          "backdrop": "https://image.tmdb.org/t/p/w780/dRot2ng1pN6uJpLPikxDrbkngmu.jpg",
-          "rating": 5
-        },
-        {
-          "tmdbId": 1233531,
-          "type": "movie",
-          "title": "Article 370",
-          "year": "2024",
-          "poster": "https://image.tmdb.org/t/p/w342/9VTemjHMpyxzfC3JsG2aFy8Bf9Y.jpg",
-          "backdrop": "https://image.tmdb.org/t/p/w780/qYXnMDuwaApMRtV8JunFmieZo8R.jpg",
-          "rating": 6.939
-        },
-        {
-          "tmdbId": 872906,
-          "type": "movie",
-          "title": "Jawan",
+          "tmdbId": 212989,
+          "canonicalId": "tmdb-tv-212989",
+          "type": "tv",
+          "title": "LEGO Ninjago: Dragons Rising",
           "year": "2023",
-          "poster": "https://image.tmdb.org/t/p/w342/jFt1gS4BGHlK8xt76Y81Alp4dbt.jpg",
-          "backdrop": "https://image.tmdb.org/t/p/w780/5LtSjMNw6j3LkG29Oa4O0iY5U8.jpg",
-          "rating": 7.074
+          "poster": "https://image.tmdb.org/t/p/w342/5q3tfPVAcL9AlFcb8HXsOdHEtJR.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/4vubgrPvqDKNFP1kNvHpd3do9hd.jpg",
+          "rating": 8,
+          "overview": "A phenomenon known as the Merge has caused many legendary realms to suddenly combine into one, but their union is unstable. A Spinjitzu Ninja Master must train a new generation of heroes to help find Elemental Dragons who can save the planet before the forces of evil use the same dragon energy to destroy this new world."
         },
         {
-          "tmdbId": 864692,
-          "type": "movie",
-          "title": "Pathaan",
-          "year": "2023",
-          "poster": "https://image.tmdb.org/t/p/w342/arf00BkwvXo0CFKbaD9OpqdE4Nu.jpg",
-          "backdrop": "https://image.tmdb.org/t/p/w780/9wRAIQeOv2qzcgpfvA4dYZKeezl.jpg",
-          "rating": 6.414
+          "tmdbId": 71912,
+          "canonicalId": "tmdb-tv-71912",
+          "type": "tv",
+          "title": "The Witcher",
+          "year": "2019",
+          "poster": "https://image.tmdb.org/t/p/w342/AoGsDM02UVt0npBA8OvpDcZbaMi.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/foGkPxpw9h8zln81j63mix5B7m8.jpg",
+          "rating": 7.9,
+          "overview": "Geralt of Rivia, a mutated monster-hunter for hire, journeys toward his destiny in a turbulent world where people often prove more wicked than beasts."
         },
         {
-          "tmdbId": 1163258,
-          "type": "movie",
-          "title": "12th Fail",
-          "year": "2023",
-          "poster": "https://image.tmdb.org/t/p/w342/eebUPRI4Z5e1Z7Hev4JZAwMIFkX.jpg",
-          "backdrop": "https://image.tmdb.org/t/p/w780/6RV2o8PBCEyw9ylOWViV1CtULIF.jpg",
-          "rating": 7.907
-        }
-      ]
-    },
-    {
-      "key": "netflix-2024-hits",
-      "title": "Hot 2024 Hits",
-      "ranked": false,
-      "logo": "",
-      "auto": null,
-      "items": [
-        {
-          "tmdbId": 533535,
-          "type": "movie",
-          "title": "Deadpool & Wolverine",
+          "tmdbId": 82452,
+          "canonicalId": "tmdb-tv-82452",
+          "type": "tv",
+          "title": "Avatar: The Last Airbender",
           "year": "2024",
-          "poster": "https://image.tmdb.org/t/p/w342/8cdWjvZQUExUUTzyp4t6EDMubfO.jpg",
-          "backdrop": "https://image.tmdb.org/t/p/w780/by8z9Fe8y7p4jo2YlW2SZDnptyT.jpg",
-          "rating": 7.565
+          "poster": "https://image.tmdb.org/t/p/w342/lzZpWEaqzP0qVA5nkCc5ASbNcSy.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/aVvRQJ2Ckhlym4uh0YGc166CUoP.jpg",
+          "rating": 7.8,
+          "overview": "A young boy known as the Avatar must master the four elemental powers to save a world at war — and fight a ruthless enemy bent on stopping him."
         },
         {
-          "tmdbId": 1022789,
-          "type": "movie",
-          "title": "Inside Out 2",
-          "year": "2024",
-          "poster": "https://image.tmdb.org/t/p/w342/vpnVM9B6NMmQpWeZvzLvDESb2QY.jpg",
-          "backdrop": "https://image.tmdb.org/t/p/w780/p5ozvmdgsmbWe0H8Xk7Rc8SCwAB.jpg",
-          "rating": 7.546
+          "tmdbId": 1424,
+          "canonicalId": "tmdb-tv-1424",
+          "type": "tv",
+          "title": "Orange Is the New Black",
+          "year": "2013",
+          "poster": "https://image.tmdb.org/t/p/w342/ekaa7YjGPTkFLcPhwWXTnARuCEU.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/zJiWhsEYCy5BkFCBONoMnUunyZQ.jpg",
+          "rating": 7.6,
+          "overview": "A crime she committed in her youthful past sends Piper Chapman to a women's prison, where she trades her comfortable New York life for one of unexpected camaraderie and conflict in an eccentric group of fellow inmates."
         },
         {
-          "tmdbId": 402431,
-          "type": "movie",
-          "title": "Wicked",
-          "year": "2024",
-          "poster": "https://image.tmdb.org/t/p/w342/xDGbZ0JJ3mYaGKy4Nzd9Kph6M9L.jpg",
-          "backdrop": "https://image.tmdb.org/t/p/w780/w22GVYotTIVC1dUd58mRhwPqiS.jpg",
-          "rating": 6.909
+          "tmdbId": 93405,
+          "canonicalId": "tmdb-tv-93405",
+          "type": "tv",
+          "title": "Squid Game",
+          "year": "2021",
+          "poster": "https://image.tmdb.org/t/p/w342/1QdXdRYfktUSONkl1oD5gc6Be0s.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/2meX1nMdScFOoV4370rqHWKmXhY.jpg",
+          "rating": 7.9,
+          "overview": "Hundreds of cash-strapped players accept a strange invitation to compete in children's games. Inside, a tempting prize awaits — with deadly high stakes."
         },
         {
-          "tmdbId": 558449,
-          "type": "movie",
-          "title": "Gladiator II",
-          "year": "2024",
-          "poster": "https://image.tmdb.org/t/p/w342/2cxhvwyEwRlysAmRH4iodkvo0z5.jpg",
-          "backdrop": "https://image.tmdb.org/t/p/w780/tOqIwliWMovSIZ9DyvHcHI7p2im.jpg",
-          "rating": 6.614
+          "tmdbId": 100757,
+          "canonicalId": "tmdb-tv-100757",
+          "type": "tv",
+          "title": "Outer Banks",
+          "year": "2020",
+          "poster": "https://image.tmdb.org/t/p/w342/ovDgO2LPfwdVRfvScAqo9aMiIW.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/fGk5GVPP7qfEHr8b9pzS6AWsOmV.jpg",
+          "rating": 8.2,
+          "overview": "On a North Carolina island of haves and have-nots, John B and his tight-knit crew of friends find mystery and adventure while hunting for lost treasure."
         },
         {
-          "tmdbId": 929590,
-          "type": "movie",
-          "title": "Civil War",
-          "year": "2024",
-          "poster": "https://image.tmdb.org/t/p/w342/sh7Rg8Er3tFcN9BpKIPOMvALgZd.jpg",
-          "backdrop": "https://image.tmdb.org/t/p/w780/t2SXZ7KLriaLyf5QT8Iar6fSOGp.jpg",
-          "rating": 6.86
-        },
-        {
-          "tmdbId": 718821,
-          "type": "movie",
-          "title": "Twisters",
-          "year": "2024",
-          "poster": "https://image.tmdb.org/t/p/w342/pjnD08FlMAIXsfOLKQbvmO0f0MD.jpg",
-          "backdrop": "https://image.tmdb.org/t/p/w780/58D6ZAvOKxlHjyX9S8qNKSBE9Y.jpg",
-          "rating": 6.782
-        },
-        {
-          "tmdbId": 786892,
-          "type": "movie",
-          "title": "Furiosa: A Mad Max Saga",
-          "year": "2024",
-          "poster": "https://image.tmdb.org/t/p/w342/iADOJ8Zymht2JPMoy3R7xceZprc.jpg",
-          "backdrop": "https://image.tmdb.org/t/p/w780/raph7qjAGTMXaIjVxt6ZDSXRzUr.jpg",
-          "rating": 7.454
+          "tmdbId": 61222,
+          "canonicalId": "tmdb-tv-61222",
+          "type": "tv",
+          "title": "BoJack Horseman",
+          "year": "2014",
+          "poster": "https://image.tmdb.org/t/p/w342/6JFWzlChcGgLiIUo2COgNlWGFKy.jpg",
+          "backdrop": "https://image.tmdb.org/t/p/w780/81BCTObfPk0EvarJpUgnGXHvM9x.jpg",
+          "rating": 8.5,
+          "overview": "Meet the most beloved sitcom horse of the '90s , 20 years later. He's a curmudgeon with a heart of...not quite gold...but something like gold. Copper?"
         }
       ]
     }
