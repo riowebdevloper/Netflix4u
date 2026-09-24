@@ -1,0 +1,98 @@
+{
+  "id": "tmdb-series-308963",
+  "canonicalId": "tmdb-series-308963",
+  "externalProvider": "tmdb",
+  "externalId": "308963",
+  "tmdbId": "308963",
+  "imdbId": "tt39369819",
+  "type": "series",
+  "contentType": "series",
+  "title": "Habeas Corpus",
+  "canonicalTitle": "Habeas Corpus",
+  "originalTitle": "Habeas Corpus",
+  "overview": "A renowned law professor and a team of students attempt to prove the innocence of a convicted man, but the brightest student is secretly connected to his past.",
+  "description": "A renowned law professor and a team of students attempt to prove the innocence of a convicted man, but the brightest student is secretly connected to his past.",
+  "shortDescription": "A renowned law professor and a team of students attempt to prove the innocence of a convicted man, but the brightest stu",
+  "year": 2026,
+  "releaseDate": "2026-09-23",
+  "rating": 10,
+  "votes": "0.0K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Drama"
+  ],
+  "categories": [
+    "Drama"
+  ],
+  "language": "Portuguese",
+  "country": "BR",
+  "director": "Director",
+  "poster": "https://image.tmdb.org/t/p/w500/cojcROwZe8681XzroVIOE9VK4zV.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/ssglI1XmPx5ks84jq1uGDwVZqD5.jpg",
+  "trailerUrl": null,
+  "trailer": null,
+  "cast": [
+    {
+      "id": "973901",
+      "name": "Marjorie Estiano",
+      "character": "Inez",
+      "photo": "https://image.tmdb.org/t/p/w185/3affZ1HBujLZkIzLgs8kgdsPV8v.jpg"
+    },
+    {
+      "id": "2204626",
+      "name": "Any Gabrielly",
+      "character": "Marina",
+      "photo": "https://image.tmdb.org/t/p/w185/vjZ7FvjI1wf3BKUbRrym5N3wPjb.jpg"
+    },
+    {
+      "id": "213619",
+      "name": "Vladimir Brichta",
+      "character": "Murilo Villar",
+      "photo": "https://image.tmdb.org/t/p/w185/xjCVvDv7ntDqPLyvh6AKznwxOkx.jpg"
+    },
+    {
+      "id": "3411047",
+      "name": "Hipólyto",
+      "character": "Jonathan",
+      "photo": "https://image.tmdb.org/t/p/w185/cdNowvNZz7fW6WxW3kGkpCKhRQT.jpg"
+    },
+    {
+      "id": "95149",
+      "name": "Danton Mello",
+      "character": "Pedro Borrmann",
+      "photo": "https://image.tmdb.org/t/p/w185/i0AIfi8y7hh1OV0OPLv7VEk9LPX.jpg"
+    },
+    {
+      "id": "1272190",
+      "name": "Naruna Costa",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/wPkIbXgvLWxgRy4d7vjSSYujsaX.jpg"
+    },
+    {
+      "id": "55826",
+      "name": "Natália Lage",
+      "character": "Ana Hueda",
+      "photo": "https://image.tmdb.org/t/p/w185/yfzh26XZEVGQlIwDMkXQVXVwAQZ.jpg"
+    },
+    {
+      "id": "139300",
+      "name": "Marisa Orth",
+      "character": "Delegada Tina",
+      "photo": "https://image.tmdb.org/t/p/w185/oUynlrNIUHhYXOBe8wFofUlcgXW.jpg"
+    },
+    {
+      "id": "4669147",
+      "name": "Nicolas Lee",
+      "character": "Kim",
+      "photo": "https://image.tmdb.org/t/p/w185/c19vXuz7uj60Rb6ftfxN3TkgkMl.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 8,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-24T03:09:43.982Z",
+  "createdAt": "2026-09-24T03:09:43.982Z",
+  "updatedAt": "2026-09-24T03:09:43.982Z",
+  "links": []
+}

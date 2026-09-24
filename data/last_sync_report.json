@@ -1,15 +1,15 @@
 {
   "status": "SUCCESS",
   "metrics": {
-    "discovered": 93,
-    "added": 5,
-    "updated": 4,
+    "discovered": 94,
+    "added": 4,
+    "updated": 6,
     "skipped": 84,
-    "published": 5,
+    "published": 4,
     "poster_pending": 0,
     "failed": 0,
-    "durationMs": 1255
+    "durationMs": 1379
   },
-  "duration": "1.26",
-  "timestamp": "2026-09-23T03:20:15.608Z"
+  "duration": "1.38",
+  "timestamp": "2026-09-24T03:09:44.733Z"
 }

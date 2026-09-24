@@ -1,5 +1,47 @@
 [
   {
+    "id": "tmdb-series-308963",
+    "canonicalId": "tmdb-series-308963",
+    "title": "Habeas Corpus",
+    "rawTitle": "Habeas Corpus",
+    "slug": "tmdb-series-308963-habeas-corpus",
+    "type": "series",
+    "year": 2026,
+    "quality": "FHD",
+    "provider": "tmdb",
+    "rating": 10,
+    "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FcojcROwZe8681XzroVIOE9VK4zV.jpg&output=webp",
+    "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FssglI1XmPx5ks84jq1uGDwVZqD5.jpg&output=webp",
+    "imdbId": "tt39369819",
+    "tmdbId": "308963",
+    "categories": [
+      "Drama"
+    ],
+    "status": "PUBLISHED",
+    "publishedAt": "2026-09-24T03:09:43.982Z"
+  },
+  {
+    "id": "tmdb-series-250203",
+    "canonicalId": "tmdb-series-250203",
+    "title": "Brothers",
+    "rawTitle": "Brothers",
+    "slug": "tmdb-series-250203-brothers",
+    "type": "series",
+    "year": 2026,
+    "quality": "FHD",
+    "provider": "tmdb",
+    "rating": 10,
+    "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FjD7ZQpDEZzAVReJzkOtmuFoIl2m.jpg&output=webp",
+    "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FaLE7R8QZPpTiWZS48PS22i2OWbl.jpg&output=webp",
+    "imdbId": "tt6773088",
+    "tmdbId": "250203",
+    "categories": [
+      "Comedy"
+    ],
+    "status": "PUBLISHED",
+    "publishedAt": "2026-09-24T03:09:43.958Z"
+  },
+  {
     "id": "tmdb-series-321958",
     "canonicalId": "tmdb-series-321958",
     "title": "Line of Fire",
@@ -470,7 +512,7 @@
     "year": 2026,
     "quality": "FHD",
     "provider": "tmdb",
-    "rating": 7.2,
+    "rating": 6.8,
     "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2F57XScX1aYtKi1LvHYFQLPUxVhTG.jpg&output=webp",
     "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F3JVjgaqfX5MhxxHKpGWz05QV7Dz.jpg&output=webp",
     "imdbId": "",
@@ -2494,59 +2536,5 @@
     ],
     "status": "PUBLISHED",
     "publishedAt": "2026-07-24T15:13:55.000Z"
-  },
-  {
-    "id": "28239",
-    "canonicalId": "28239",
-    "title": "My Daughter’s Father",
-    "rawTitle": "My Daughter’s Father (2026)",
-    "slug": "my-daughter-s-father-2026",
-    "type": "series",
-    "year": 2026,
-    "quality": "FHD",
-    "provider": "dotmobiz",
-    "rating": 8,
-    "poster": "https://storage.hicine.sbs/images/My-Daughters-Father-2026-Season-1.webp",
-    "backdrop": "https://storage.hicine.sbs/images/My-Daughters-Father-2026-Season-1.webp",
-    "categories": [
-      "Hollywood Series",
-      "Dual Audio Series",
-      "1080p",
-      "2026",
-      "480p",
-      "720p",
-      "Drama",
-      "Netflix",
-      "WEB-DL"
-    ],
-    "status": "PUBLISHED",
-    "publishedAt": "2026-07-22T16:49:42.000Z"
-  },
-  {
-    "id": "28238",
-    "canonicalId": "28238",
-    "title": "GIGN",
-    "rawTitle": "GIGN (2026)",
-    "slug": "gign-2026",
-    "type": "series",
-    "year": 2026,
-    "quality": "FHD",
-    "provider": "dotmobiz",
-    "rating": 8,
-    "poster": "https://storage.hicine.sbs/images/Elite-Force.webp",
-    "backdrop": "https://storage.hicine.sbs/images/Elite-Force.webp",
-    "categories": [
-      "Hollywood Series",
-      "Dual Audio Series",
-      "1080p",
-      "2026",
-      "480p",
-      "720p",
-      "Action",
-      "Netflix",
-      "WEB-DL"
-    ],
-    "status": "PUBLISHED",
-    "publishedAt": "2026-07-22T14:09:40.000Z"
   }
 ]
