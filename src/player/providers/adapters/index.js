@@ -16,26 +16,27 @@ const LH_PARAMS = 'nextEpisode=true&autoplayNextEpisode=true&episodeSelector=tru
 const vidsrcPm = createAdapter({
   id: 'vidsrc_sbs',
   name: 'VidSrc Global',
-  label: 'Server 1 (VidSrc Global)',
+  label: 'Server 2 (VidSrc Global)',
   baseUrl: 'https://vidsrc.pm/embed',
-  priority: 1,
+  priority: 2,
   enabled: true,
   providerGroup: 'vidsrc_cluster',
   requiredIdentifier: 'tmdb',
   notes: 'Canonical TMDB-ID Primary Stream (Global unblocked mirror)'
 });
 
-// Server 2: Peachify Pro (Ad-Free HD • Multi-Audio Hindi Dub)
+// Server: Peachify Pro (Ad-Free HD • Multi-Audio Hindi Dub)
+// Status: DISABLED - Endpoint protected by Cloudflare Turnstile (403 on cross-origin iframe embed)
 const peachify = createAdapter({
   id: 'peachify',
   name: 'Peachify Pro',
-  label: 'Server 2 (Peachify Pro)',
+  label: 'Peachify Pro (Unavailable)',
   baseUrl: 'https://peachify.pro/embed',
-  priority: 2,
-  enabled: true,
+  priority: 50,
+  enabled: false,
   providerGroup: 'peachify_cluster',
   requiredIdentifier: 'either',
-  notes: 'Ad-Free HD with Synchronized Multi-Audio & Dubbing Support',
+  notes: 'DISABLED: Cross-origin iframe blocked by Cloudflare 403 challenge',
   customMovieBuilder(baseUrl, input, options = {}) {
     const mediaId = cleanTmdbId(input.tmdbId) || cleanImdbId(input.imdbId);
     let url = `${baseUrl}/movie/${encodeURIComponent(mediaId)}?accent=E50914&autoPlay=true`;
@@ -85,13 +86,13 @@ const allmovieland = createAdapter({
   }
 });
 
-// Server 4: VidLink Pro (Multi-Audio Global)
+// Server 3: VidLink Pro (Multi-Audio Global)
 const vidlink = createAdapter({
   id: 'vidlink',
   name: 'VidLink Pro',
-  label: 'Server 4 (VidLink Pro)',
+  label: 'Server 3 (VidLink Pro Multi)',
   baseUrl: 'https://vidlink.pro',
-  priority: 4,
+  priority: 3,
   enabled: true,
   providerGroup: 'vidlink_cluster',
   requiredIdentifier: 'tmdb',
@@ -112,13 +113,13 @@ const vidlink = createAdapter({
   }
 });
 
-// Server 5: PvrPlay / ReelsDownload (Native Multi-Audio & Hindi Dubbed HD)
+// Server 1: PvrPlay / ReelsDownload (Native Multi-Audio & Hindi Dubbed HD)
 const reelsdownload = createAdapter({
   id: 'reelsdownload',
   name: 'PvrPlay (Hindi Dub)',
-  label: 'Server 5 (PvrPlay Hindi Dub)',
+  label: 'Server 1 (PvrPlay Hindi Dub)',
   baseUrl: 'https://embed.reelsdownload.online/player',
-  priority: 2,
+  priority: 1,
   enabled: true,
   providerGroup: 'pvrplay_cluster',
   requiredIdentifier: 'tmdb',
@@ -212,26 +213,26 @@ const videasy = createAdapter({
   }
 });
 
-// Vid (#6 in ZIP)
+// Vid (#6 in ZIP) - DISABLED: Cloudflare 403 Challenge
 const wplay = createAdapter({
   id: 'wplay',
   name: 'Vid',
   label: 'Vid (WPlay)',
   baseUrl: 'https://embed.wplay.me/embed',
   priority: 15,
-  enabled: true,
+  enabled: false,
   providerGroup: 'wplay_cluster',
   requiredIdentifier: 'tmdb'
 });
 
-// Mist (#7 in ZIP)
+// Mist (#7 in ZIP) - DISABLED: Cloudflare 403 Challenge
 const xpass = createAdapter({
   id: 'xpass',
   name: 'Mist',
   label: 'Mist (XPass)',
   baseUrl: 'https://play.xpass.top/e',
   priority: 16,
-  enabled: true,
+  enabled: false,
   providerGroup: 'xpass_cluster',
   requiredIdentifier: 'tmdb'
 });
@@ -294,14 +295,14 @@ const zxcstream = createAdapter({
   }
 });
 
-// Asia (#13 in ZIP)
+// Asia (#13 in ZIP) - DISABLED: Request Timeout / Server Offline
 const oneembed = createAdapter({
   id: 'oneembed',
   name: 'Asia',
   label: 'Asia (1Embed)',
   baseUrl: 'https://1embed.cc/embed',
   priority: 21,
-  enabled: true,
+  enabled: false,
   providerGroup: 'oneembed_cluster',
   requiredIdentifier: 'tmdb'
 });
@@ -342,14 +343,14 @@ const vsembed = createAdapter({
   requiredIdentifier: 'tmdb'
 });
 
-// Italian (#17 in ZIP)
+// Italian (#17 in ZIP) - DISABLED: Cloudflare 403 Challenge
 const vixsrc = createAdapter({
   id: 'vixsrc',
   name: 'Italian',
   label: 'Italian (VixSrc)',
   baseUrl: 'https://vixsrc.to',
   priority: 25,
-  enabled: true,
+  enabled: false,
   providerGroup: 'vixsrc_cluster',
   requiredIdentifier: 'tmdb',
   customMovieBuilder(baseUrl, input) {
@@ -422,26 +423,26 @@ const vidflix = createAdapter({
   requiredIdentifier: 'tmdb'
 });
 
-// Astra (#27 in ZIP)
+// Astra (#27 in ZIP) - DISABLED: Request Timeout
 const vidsrcSu = createAdapter({
   id: 'vidsrc_su',
   name: 'Astra',
   label: 'Astra (VidSrc SU)',
   baseUrl: 'https://vidsrc.su/embed',
   priority: 30,
-  enabled: true,
+  enabled: false,
   providerGroup: 'vidsrc_cluster',
   requiredIdentifier: 'tmdb'
 });
 
-// Hindi (#29 in ZIP)
+// Hindi (#29 in ZIP) - DISABLED: HTTP 308 Redirect Loop
 const viduki = createAdapter({
   id: 'viduki',
   name: 'Hindi',
   label: 'Hindi (Viduki)',
   baseUrl: 'https://www.viduki.net/1',
   priority: 31,
-  enabled: true,
+  enabled: false,
   providerGroup: 'viduki_cluster',
   requiredIdentifier: 'tmdb',
   customMovieBuilder(baseUrl, input) {
@@ -520,26 +521,26 @@ const moviesapi = createAdapter({
   }
 });
 
-// Sage (#35 in ZIP)
+// Sage (#35 in ZIP) - DISABLED: Domain offline / DNS failure
 const movies111 = createAdapter({
   id: 'movies111',
   name: 'Sage',
   label: 'Sage (111Movies)',
   baseUrl: 'https://111movies.com',
   priority: 36,
-  enabled: true,
+  enabled: false,
   providerGroup: 'movies111_cluster',
   requiredIdentifier: 'tmdb'
 });
 
-// Portuguese (#38 in ZIP)
+// Portuguese (#38 in ZIP) - DISABLED: Cloudflare 403 Challenge
 const superflix = createAdapter({
   id: 'superflix',
   name: 'Portuguese',
   label: 'Portuguese (Superflix)',
   baseUrl: 'https://superflixapi.beer',
   priority: 37,
-  enabled: true,
+  enabled: false,
   providerGroup: 'superflix_cluster',
   requiredIdentifier: 'tmdb',
   customMovieBuilder(baseUrl, input) {
