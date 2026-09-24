@@ -1,7 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script>window.__nmStartTime = Date.now();</script>
+  <script>
+    window.__nmStartTime = Date.now();
+    try {
+      var tc = document.createElement('meta');
+      tc.name = 'theme-color';
+      tc.content = '#0a0a0f';
+      document.head.appendChild(tc);
+    } catch(e) {}
+  </script>
   <!-- Deferred Google Analytics & AdSense Loader (Interaction-Driven, Zero Render-Blocking) -->
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -48,7 +56,6 @@
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#0a0a0f">
   <meta name="color-scheme" content="dark">
   <meta name="referrer" content="no-referrer-when-downgrade">
   <meta name="description" content="Stream and download high quality movies, web series, anime and K-dramas with multi-audio and high-speed cloud servers on Netflix4U.">
@@ -110,7 +117,7 @@
   <link rel="preload" as="font" type="font/woff2" href="/cf-fonts/v/inter/5.2.8/latin/wght/normal.woff2" crossorigin>
 
   <!-- LCP Hero Image Preload (Immediate Discovery & High Priority Responsive Fetch) -->
-  <link rel="preload" as="image" href="https://image.tmdb.org/t/p/w1280/pF0qkRsrHkdYadPWY9AMeFZfcwk.jpg" imagesrcset="https://image.tmdb.org/t/p/w500/pF0qkRsrHkdYadPWY9AMeFZfcwk.jpg 500w, https://image.tmdb.org/t/p/w780/pF0qkRsrHkdYadPWY9AMeFZfcwk.jpg 780w, https://image.tmdb.org/t/p/w1280/pF0qkRsrHkdYadPWY9AMeFZfcwk.jpg 1280w" imagesizes="100vw" fetchpriority="high">
+  <link rel="preload" as="image" href="https://image.tmdb.org/t/p/w1280/pF0qkRsrHkdYadPWY9AMeFZfcwk.jpg" imagesrcset="https://image.tmdb.org/t/p/w500/pF0qkRsrHkdYadPWY9AMeFZfcwk.jpg 500w, https://image.tmdb.org/t/p/w780/pF0qkRsrHkdYadPWY9AMeFZfcwk.jpg 780w, https://image.tmdb.org/t/p/w1280/pF0qkRsrHkdYadPWY9AMeFZfcwk.jpg 1280w" imagesizes="100vw">
 
   <!-- JSON-LD Structured Data (Google Branded Search & AEO Optimization) -->
   <script type="application/ld+json">
@@ -378,7 +385,6 @@
                  sizes="100vw"
                  alt="Reacher Featured Backdrop"
                  width="1280" height="720"
-                 fetchpriority="high"
                  loading="eager"
                  decoding="async"
                  class="w-full h-full object-cover object-center pointer-events-none" />
