@@ -151,9 +151,12 @@
 
   // 5. Service Worker controller change & message handling
   if ('serviceWorker' in navigator) {
+    let isControlledOnLoad = !!navigator.serviceWorker.controller;
+
     navigator.serviceWorker.addEventListener('message', function(event) {
       if (event.data && (event.data.type === 'SW_UPDATED' || event.data.type === 'NEW_VERSION')) {
         console.log('[Netflix4U] Service Worker updated broadcast received.');
+        if (!isControlledOnLoad) return; // Do not reload on very first install
         if (!isUserWatchingVideo()) {
           executeReload();
         } else {
@@ -164,6 +167,11 @@
 
     navigator.serviceWorker.addEventListener('controllerchange', function() {
       console.log('[Netflix4U] Service Worker controller changed.');
+      if (!isControlledOnLoad) {
+        // This is the first time the SW claimed this client (initial visit)
+        isControlledOnLoad = true;
+        return;
+      }
       if (!isUserWatchingVideo()) {
         executeReload();
       } else {
