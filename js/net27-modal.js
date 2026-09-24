@@ -292,45 +292,17 @@
       return '<button type="button" class="nm-lang-tab shrink-0' + (idx === 0 ? ' nm-lang-active' : '') + '">' + escapeHtml(lang) + '</button>';
     }).join('');
 
-    // Download links partition: Dotmovies Direct Downloads vs Fast Cloud CDN
-    var downloadLinks = data.downloadLinks || data.links || [];
+    // Authorized Hicine Download links only
+    var rawDownloadLinks = data.downloadLinks || data.links || [];
 
-    var dotmoviesLinks = downloadLinks.filter(function(l) {
+    var hicineLinks = rawDownloadLinks.filter(function(l) {
       if (!l || !l.url) return false;
       var u = String(l.url || '').toLowerCase();
       var s = String(l.source || '').toLowerCase();
-      return Boolean(l.isDotmovies || s.includes('dotmovies') || s.includes('dotmobiz') || s.includes('direct ultra hd') || u.includes('nexdrive') || u.includes('dotmobiz'));
+      return Boolean(l.isCloud || s.includes('fast cloud') || s.includes('hicine') || u.includes('vcloud') || u.includes('workers.dev') || u.includes('r2.dev') || u.includes('hicine.sbs'));
     });
 
-    var cloudLinks = downloadLinks.filter(function(l) {
-      if (!l || !l.url) return false;
-      var u = String(l.url || '').toLowerCase();
-      var s = String(l.source || '').toLowerCase();
-      return Boolean(l.isCloud || s.includes('fast cloud') || s.includes('hicine') || u.includes('vcloud') || u.includes('workers.dev') || u.includes('r2.dev'));
-    });
-
-    // Guaranteed visibility: If either partition is empty, share/synthesize from the other
-    if (!dotmoviesLinks.length && downloadLinks.length) {
-      dotmoviesLinks = downloadLinks.map(function(l) {
-        return Object.assign({}, l, {
-          isDotmovies: true,
-          source: 'Direct Ultra HD (Dotmovies)',
-          label: (l.label || data.title).replace(/fast cloud|hicine/gi, 'Direct Ultra HD')
-        });
-      });
-    }
-    if (!cloudLinks.length && downloadLinks.length) {
-      cloudLinks = downloadLinks.map(function(l) {
-        return Object.assign({}, l, {
-          isCloud: true,
-          source: 'Fast Cloud CDN',
-          label: (l.label || data.title).replace(/direct ultra hd|dotmobiz|dotmovies/gi, 'Fast Cloud CDN')
-        });
-      });
-    }
-
-    var dotmoviesSectionHtml = renderDotmoviesSection(dotmoviesLinks, data.title, isTv, data.slug, data.canonicalId, tmdbId);
-    var cloudSectionHtml = renderCloudSection(cloudLinks, data.title, isTv, tmdbId);
+    var cloudSectionHtml = renderCloudSection(hicineLinks, data.title, isTv, tmdbId);
 
     // Episodes for TV Series
     var episodesSectionHtml = '';
@@ -477,14 +449,11 @@
           '</div>' +
         '</div>' +
 
-        '<!-- In-Modal Dedicated Ad Section 2: Pre-Dotmovies Sponsor -->' +
-        '<div class="nm-ad-container !my-3" data-ad-container="ad-slot-modal-dotmovies">' +
-          '<div class="nm-ad-label">Sponsored Downloads</div>' +
-          '<div id="ad-slot-modal-dotmovies" class="nm-ad-slot nm-ad-modal"></div>' +
+        '<!-- In-Modal Dedicated Ad Section: Cloud Server Sponsor -->' +
+        '<div class="nm-ad-container !my-3" data-ad-container="ad-slot-modal-cloud">' +
+          '<div class="nm-ad-label">Sponsored Server</div>' +
+          '<div id="ad-slot-modal-cloud" class="nm-ad-slot nm-ad-modal"></div>' +
         '</div>' +
-
-        '<!-- SEPARATE DOWNLOAD SECTIONS -->' +
-        dotmoviesSectionHtml +
 
         '<!-- In-Modal Dedicated Ad Section 3: Cloud Server Sponsor -->' +
         '<div class="nm-ad-container !my-3" data-ad-container="ad-slot-modal-cloud">' +
@@ -553,7 +522,7 @@
     var scrollBtn = document.getElementById('scroll-to-downloads-btn');
     if (scrollBtn) {
       scrollBtn.addEventListener('click', function() {
-        var dlSection = document.getElementById('dotmovies-download-section') || document.getElementById('download-mirrors-section');
+        var dlSection = document.getElementById('download-mirrors-section');
         if (dlSection) dlSection.scrollIntoView({ behavior: 'smooth' });
       });
     }
@@ -638,7 +607,7 @@
 
   // Smooth scroll and highlight episode in download list
   function handleEpisodeDownloadClick(sNum, eNum) {
-    var dlSection = document.getElementById('dotmovies-download-section') || document.getElementById('download-mirrors-section');
+    var dlSection = document.getElementById('download-mirrors-section');
     if (!dlSection) return;
 
     var accBtn = dlSection.querySelector('[data-season="' + sNum + '"]');
@@ -708,8 +677,8 @@
   function renderDownloadMirrors(links, title, isTv, tmdbId) {
     if (!links || !links.length) {
       return '<div class="p-5 rounded-xl bg-white/[0.03] border border-white/10 text-center space-y-2">' +
-        '<div class="text-sm text-white/80 font-medium">Direct download links being updated for this title.</div>' +
-        '<div class="text-xs text-white/40">You can stream this title instantly using the "Watch Now" button above.</div>' +
+        '<div class="text-sm text-white/80 font-medium">Download currently unavailable.</div>' +
+        '<div class="text-xs text-white/40">Verified high-speed Hicine downloads are not available for this title yet. You can stream it using the "Watch Now" button above.</div>' +
       '</div>';
     }
 
@@ -874,11 +843,11 @@
       '<div class="flex items-center justify-between mb-3.5">' +
         '<div class="flex items-center gap-2.5">' +
           '<div class="w-1.5 h-5 rounded-full bg-red-600"></div>' +
-          '<h3 class="text-lg sm:text-xl font-bold tracking-tight text-white">Fast Cloud CDN Downloads</h3>' +
+          '<h3 class="text-lg sm:text-xl font-bold tracking-tight text-white">Hicine Fast Downloads</h3>' +
         '</div>' +
         '<span class="text-xs text-green-400 font-semibold flex items-center gap-1">' +
           '<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>' +
-          'High-Speed CDN Active' +
+          'Verified CDN Active' +
         '</span>' +
       '</div>' +
       '<div id="modal-download-links" class="space-y-2.5">' +
@@ -966,193 +935,8 @@
     if (window.__showToast) window.__showToast('Opening stream in MX Player…', '🎬');
   }
 
-  function renderDotmoviesSection(links, title, isTv, slug, canonicalId, tmdbId) {
-    var headerHtml =
-      '<div class="flex items-center justify-between mb-3.5">' +
-        '<div class="flex items-center gap-2.5">' +
-          '<span class="px-2.5 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/40 text-[10px] font-black tracking-wider uppercase">DIRECT ULTRA HD</span>' +
-          '<h3 class="text-lg sm:text-xl font-bold tracking-tight text-white flex items-center gap-2">' +
-            'Direct Ultra HD Downloads' +
-          '</h3>' +
-        '</div>' +
-        '<span class="text-xs text-amber-400 font-semibold flex items-center gap-1">' +
-          '<svg class="w-3.5 h-3.5 text-amber-400" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>' +
-          'High-Speed Direct Mirrors' +
-        '</span>' +
-      '</div>';
-
-    if (!links || !links.length) {
-      if (isTv) {
-        links = [
-          { quality: '1080p FHD', size: '7.5 GB', isBatch: true, season: 1, label: (title || 'Series') + ' Season 1 Complete Direct Ultra HD Zip', url: '/api/download-file?title=' + encodeURIComponent(title || 'Series') + '+Season+1&id=' + encodeURIComponent(tmdbId || '') + '&quality=1080p&type=series&download=1', isDotmovies: true },
-          { quality: '720p HD', size: '4.2 GB', isBatch: true, season: 1, label: (title || 'Series') + ' Season 1 Complete Direct Ultra HD Zip (720p)', url: '/api/download-file?title=' + encodeURIComponent(title || 'Series') + '+Season+1&id=' + encodeURIComponent(tmdbId || '') + '&quality=720p&type=series&download=1', isDotmovies: true },
-          { quality: '1080p', size: '750 MB', episode: 1, season: 1, label: (title || 'Series') + ' S01E01 (Direct Ultra HD 1080p)', url: '/api/download-file?title=' + encodeURIComponent(title || 'Series') + '+S01E01&id=' + encodeURIComponent(tmdbId || '') + '&quality=1080p&type=series&download=1', isDotmovies: true },
-          { quality: '720p', size: '420 MB', episode: 1, season: 1, label: (title || 'Series') + ' S01E01 (Direct Ultra HD 720p)', url: '/api/download-file?title=' + encodeURIComponent(title || 'Series') + '+S01E01&id=' + encodeURIComponent(tmdbId || '') + '&quality=720p&type=series&download=1', isDotmovies: true }
-        ];
-      } else {
-        links = [
-          { quality: '4K', size: '4.8 GB', label: (title || 'Movie') + ' 4K Ultra HD Dual Audio [Direct Ultra HD]', url: '/api/download-file?title=' + encodeURIComponent(title || 'Movie') + '&id=' + encodeURIComponent(tmdbId || '') + '&quality=4K&type=movie&download=1', isDotmovies: true },
-          { quality: '1080p', size: '2.4 GB', label: (title || 'Movie') + ' 1080p FHD Dual Audio [Direct Ultra HD]', url: '/api/download-file?title=' + encodeURIComponent(title || 'Movie') + '&id=' + encodeURIComponent(tmdbId || '') + '&quality=1080p&type=movie&download=1', isDotmovies: true },
-          { quality: '720p', size: '1.1 GB', label: (title || 'Movie') + ' 720p HD Dual Audio [Direct Ultra HD]', url: '/api/download-file?title=' + encodeURIComponent(title || 'Movie') + '&id=' + encodeURIComponent(tmdbId || '') + '&quality=720p&type=movie&download=1', isDotmovies: true },
-          { quality: '480p', size: '520 MB', label: (title || 'Movie') + ' 480p SD Dual Audio [Direct Ultra HD]', url: '/api/download-file?title=' + encodeURIComponent(title || 'Movie') + '&id=' + encodeURIComponent(tmdbId || '') + '&quality=480p&type=movie&download=1', isDotmovies: true }
-        ];
-      }
-    }
-
-    var hasSeriesStructure = isTv || links.some(function(l) { return l.season || l.episode; });
-    var linksContent = '';
-
-    if (hasSeriesStructure) {
-      var seasonMap = {};
-      var batchMap = {};
-      links.forEach(function(l) {
-        var sNum = Number(l.season) || 1;
-        var isBatchLink = Boolean(l.isBatch || l.episode === null || typeof l.episode === 'undefined');
-        if (isBatchLink) {
-          if (!batchMap[sNum]) batchMap[sNum] = [];
-          batchMap[sNum].push(l);
-        } else {
-          var eNum = Number(l.episode) || 1;
-          if (!seasonMap[sNum]) seasonMap[sNum] = {};
-          if (!seasonMap[sNum][eNum]) seasonMap[sNum][eNum] = [];
-          seasonMap[sNum][eNum].push(l);
-        }
-      });
-
-      var allSeasonKeys = Object.keys(seasonMap).concat(Object.keys(batchMap));
-      var seasons = Array.from(new Set(allSeasonKeys.map(Number))).sort(function(a, b) { return a - b; });
-      if (!seasons.length) seasons = [1];
-
-      linksContent = '<div class="dl-accordion">' +
-        seasons.map(function(sNum, sIdx) {
-          var epMap = seasonMap[sNum] || {};
-          var epNums = Object.keys(epMap).map(Number).sort(function(a, b) { return a - b; });
-          var batches = batchMap[sNum] || [];
-          var isOpen = sIdx === 0 ? ' is-open' : '';
-
-          var batchHtml = '';
-          if (batches.length) {
-            var batchPills = batches.map(function(link) {
-              var q = String(link.quality || 'Full Season Zip').toUpperCase();
-              var rawUrl = link.url || '#';
-              return '<a href="' + rawUrl + '" data-fast-download="' + encodeURIComponent(rawUrl) + '" data-title="' + escapeHtml(title) + ' Season ' + sNum + ' Full Pack" data-tmdbid="' + escapeHtml(tmdbId || '') + '" data-se="' + sNum + '" data-quality="' + escapeHtml(q) + '" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-400 active:scale-95 text-black font-bold text-xs flex items-center gap-1.5 transition cursor-pointer shadow-md">' +
-                '<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 3v12m0 0l-4-4m4 4l4-4"/><path d="M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>' +
-                '<span>' + escapeHtml(q) + '</span>' +
-                (link.size ? '<span class="text-black/70 text-[10px]">(' + escapeHtml(link.size) + ')</span>' : '') +
-              '</a>';
-            }).join('');
-
-            batchHtml =
-              '<div class="p-3.5 rounded-xl bg-gradient-to-r from-amber-950/40 via-amber-900/20 to-black/60 border border-amber-500/30 mb-3 shadow-lg">' +
-                '<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">' +
-                  '<div class="flex items-center gap-2.5">' +
-                    '<div class="w-8 h-8 rounded-lg bg-amber-500/25 text-amber-400 border border-amber-500/40 flex items-center justify-center shrink-0">' +
-                      '<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>' +
-                    '</div>' +
-                    '<div>' +
-                      '<div class="text-xs sm:text-sm font-bold text-white flex items-center gap-2">' +
-                        '<span>Season ' + sNum + ' Complete Direct Ultra HD Zip</span>' +
-                        '<span class="px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/40 text-[9px] font-black uppercase tracking-wider">ALL EPISODES</span>' +
-                      '</div>' +
-                      '<div class="text-[11px] text-white/60">One-click high-speed direct download for entire Season ' + sNum + '</div>' +
-                    '</div>' +
-                  '</div>' +
-                  '<div class="flex flex-wrap items-center gap-2 shrink-0">' +
-                    batchPills +
-                  '</div>' +
-                '</div>' +
-              '</div>';
-          }
-
-          var epRowsHtml = epNums.map(function(eNum) {
-            var epLinks = epMap[eNum] || [];
-            var epQualityPills = epLinks.map(function(link) {
-              var q = String(link.quality || 'HD').toUpperCase();
-              var rawUrl = link.url || '#';
-              var cleanUrl = (window.getFastCloudDownloadHref && window.getFastCloudDownloadHref(rawUrl, { title: title, tmdbId: tmdbId, se: sNum, ep: eNum, quality: q })) || rawUrl;
-              return '<a href="' + cleanUrl + '" data-fast-download="' + encodeURIComponent(rawUrl) + '" data-title="' + escapeHtml(title) + '" data-tmdbid="' + escapeHtml(tmdbId || '') + '" data-se="' + sNum + '" data-ep="' + eNum + '" data-quality="' + escapeHtml(q) + '" class="px-2.5 py-1 rounded bg-amber-500/20 hover:bg-amber-500 hover:text-black active:scale-95 text-amber-300 font-bold text-xs flex items-center gap-1 transition cursor-pointer border border-amber-500/30">' +
-                '<svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 3v12m0 0l-4-4m4 4l4-4"/><path d="M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>' +
-                '<span>' + escapeHtml(q) + '</span>' +
-                (link.size ? '<span class="text-white/60 text-[10px]">(' + escapeHtml(link.size) + ')</span>' : '') +
-              '</a>';
-            }).join('');
-
-            return '<div id="dl-dot-ep-row-' + sNum + '-' + eNum + '" class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 p-2.5 rounded-lg bg-amber-500/[0.03] border border-amber-500/10 hover:bg-amber-500/[0.06] transition">' +
-              '<div class="flex items-center gap-2">' +
-                '<span class="w-8 text-center text-xs font-bold text-amber-400 bg-amber-500/10 rounded py-0.5 border border-amber-500/20">E' + eNum + '</span>' +
-                '<span class="text-xs font-semibold text-white/90">Episode ' + eNum + '</span>' +
-              '</div>' +
-              '<div class="flex flex-wrap items-center gap-1.5">' +
-                epQualityPills +
-              '</div>' +
-            '</div>';
-          }).join('');
-
-          return '<div class="dl-accordion-item' + isOpen + '" data-accordion-item>' +
-            '<button type="button" class="dl-accordion-header" data-accordion-toggle data-season="' + sNum + '">' +
-              '<span class="flex items-center gap-2">' +
-                '<svg class="w-4 h-4 text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg>' +
-                'Season ' + sNum + ' <span class="text-white/40 text-xs font-normal">(' + epNums.length + ' Episodes + Full Season Pack)</span>' +
-              '</span>' +
-              '<svg class="dl-accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>' +
-            '</button>' +
-            '<div class="dl-accordion-body space-y-2">' +
-              batchHtml +
-              epRowsHtml +
-            '</div>' +
-          '</div>';
-        }).join('') +
-      '</div>';
-    } else {
-      var qualWeight = function(q) {
-        q = String(q || '').toUpperCase();
-        if (q.includes('4K') || q.includes('2160')) return 4;
-        if (q.includes('1440')) return 3;
-        if (q.includes('1080')) return 2;
-        if (q.includes('720')) return 1;
-        return 0;
-      };
-
-      var sortedLinks = links.slice().sort(function(a, b) {
-        return qualWeight(b.quality) - qualWeight(a.quality);
-      });
-
-      linksContent = sortedLinks.map(function(link) {
-        var rawQual = String(link.quality || 'HD').toUpperCase();
-        var sizeText = link.size || (rawQual.includes('4K') ? '4.8 GB' : rawQual.includes('1080') ? '2.4 GB' : rawQual.includes('720') ? '1.1 GB' : '550 MB');
-        var audioText = (link.audio || 'Hindi Multi-Audio [Direct Fast Cloud]').replace(/dotmovies/gi, 'Direct').replace(/nexdrive/gi, 'Ultra HD');
-        var rawUrl = link.url || '#';
-        var cleanUrl = (window.getFastCloudDownloadHref && window.getFastCloudDownloadHref(rawUrl, { title: title, tmdbId: tmdbId, quality: rawQual })) || rawUrl;
-        var rawLabel = (link.label || link.title || title).replace(/dotmovies/gi, 'Netflix4U').replace(/dotmobiz/gi, 'Direct').replace(/nexdrive/gi, 'Ultra HD');
-
-        return '<div class="dl-card dl-dotmovies-card">' +
-          '<div class="flex items-center gap-3 min-w-0">' +
-            '<span class="dl-quality-badge dl-dotmovies-badge">' + escapeHtml(rawQual) + '</span>' +
-            '<div class="min-w-0">' +
-              '<div class="text-xs sm:text-sm font-bold text-white/95 truncate">' + escapeHtml(rawLabel) + '</div>' +
-              '<div class="flex items-center gap-2 text-[11px] text-white/50 mt-0.5">' +
-                '<span class="font-bold text-amber-400">' + escapeHtml(sizeText) + '</span>' +
-                '<span>•</span>' +
-                '<span class="truncate text-white/70">' + escapeHtml(audioText) + '</span>' +
-              '</div>' +
-            '</div>' +
-          '</div>' +
-          '<div class="shrink-0">' +
-            '<a href="' + cleanUrl + '" data-fast-download="' + encodeURIComponent(rawUrl) + '" data-title="' + escapeHtml(title) + '" data-tmdbid="' + escapeHtml(tmdbId || '') + '" data-quality="' + escapeHtml(rawQual) + '" class="dl-btn dl-dotmovies-btn cursor-pointer">' +
-              '<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 3v12m0 0l-4-4m4 4l4-4"/><path d="M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>' +
-              '<span>Download (' + escapeHtml(rawQual) + ')</span>' +
-            '</a>' +
-          '</div>' +
-        '</div>';
-      }).join('');
-    }
-
-    return '<section id="dotmovies-download-section" class="dl-section dl-dotmovies-section mb-6">' +
-      headerHtml +
-      '<div id="modal-dotmovies-links" class="space-y-2.5">' +
-        linksContent +
-      '</div>' +
-    '</section>';
+  function renderDotmoviesSection() {
+    return '';
   }
 
   function renderEpisodeList(episodes, tmdbId, seasonNum, fallbackBackdrop, downloadLinks, parentTitle, parentYear, parentImdbId) {

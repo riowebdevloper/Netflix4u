@@ -55,16 +55,17 @@ const peachify = createAdapter({
 });
 
 // Server 3: AllMovieLand (Ultra HD Indian & Global Stream)
+// Status: DISABLED / INCOMPATIBLE - Endpoints offline (404 on slast430did.com, 403 on allmovieland.link)
 const allmovieland = createAdapter({
   id: 'allmovieland',
   name: 'AllMovieLand',
   label: 'Server 3 (AllMovieLand)',
   baseUrl: 'https://slast430did.com/play',
   priority: 3,
-  enabled: true,
+  enabled: false,
   providerGroup: 'allmovieland_cluster',
   requiredIdentifier: 'either',
-  notes: 'High-speed Ultra HD Indian & Global Stream',
+  notes: 'DISABLED / INCOMPATIBLE: Provider endpoints offline (404 on slast430did.com, 403 Cloudflare challenge on allmovieland.link)',
   customMovieBuilder(baseUrl, input) {
     const mediaId = cleanImdbId(input.imdbId) || cleanTmdbId(input.tmdbId);
     return `${baseUrl}/${encodeURIComponent(mediaId)}`;
@@ -74,6 +75,13 @@ const allmovieland = createAdapter({
     const s = parseInt(input.season, 10);
     const e = parseInt(input.episode, 10);
     return `${baseUrl}/${encodeURIComponent(mediaId)}?s=${s}&e=${e}`;
+  },
+  getCacheKey(input) {
+    const mediaId = cleanImdbId(input.imdbId) || cleanTmdbId(input.tmdbId);
+    if (input.type === 'tv' || input.season || input.episode) {
+      return `allmovieland:tv:${mediaId}:s${input.season || 1}:e${input.episode || 1}`;
+    }
+    return `allmovieland:movie:${mediaId}`;
   }
 });
 

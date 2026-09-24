@@ -1176,243 +1176,33 @@ async function handleCatalogDiscover(req, res) {
   }
 }
 
-function generateSeriesDownloadLinks(title, year, seasons, canonicalId) {
-  const links = [];
-  const safeTitle = (title || 'Series').replace(/[:\-–—]/g, ' ').replace(/\s+/g, ' ').trim();
-  const cleanId = String(canonicalId || 'n4u').replace(/[^a-zA-Z0-9_-]/g, '');
-
-  const validSeasons = (seasons || []).filter(s => s && s.season_number > 0);
-  if (!validSeasons.length) {
-    validSeasons.push({ season_number: 1, episode_count: 10, name: 'Season 1' });
+/**
+ * Strict Security & Authorization Validator for Hicine Downloads (Section A1, A6, D)
+ * Ensures only authorized Hicine HTTPS endpoints are exposed and resolved.
+ */
+function isHicineDownloadUrl(url) {
+  if (!url || typeof url !== 'string') return false;
+  if (!url.startsWith('https://') && !url.startsWith('/api/download-file')) return false;
+  try {
+    if (url.startsWith('/api/download-file')) {
+      const parsedParams = new URLSearchParams(url.split('?')[1] || '');
+      const innerUrl = parsedParams.get('url');
+      if (innerUrl) return isHicineDownloadUrl(innerUrl);
+      return false;
+    }
+    const parsed = new URL(url);
+    const host = parsed.hostname.toLowerCase();
+    return (
+      host === 'vcloud.fit' ||
+      host.endsWith('.vcloud.fit') ||
+      host.endsWith('.workers.dev') ||
+      host === 'hicine.sbs' ||
+      host.endsWith('.hicine.sbs') ||
+      host.endsWith('.r2.dev')
+    );
+  } catch (e) {
+    return false;
   }
-
-  validSeasons.forEach(s => {
-    const sNum = s.season_number || 1;
-    const epCount = s.episode_count || 10;
-    const sPrefix = sNum < 10 ? '0' + sNum : sNum;
-
-    // 1. Direct Ultra HD (Fast Direct) Season Batch Packs
-    links.push({
-      label: `${safeTitle} Season ${sNum} Complete Direct Ultra HD Zip [All Episodes]`,
-      season: sNum,
-      episode: null,
-      isBatch: true,
-      quality: '1080p FHD',
-      size: `${(epCount * 0.75).toFixed(1)} GB`,
-      audio: 'Hindi + English [Dual Audio 5.1]',
-      source: 'Direct Ultra HD',
-      isDotmovies: true,
-      isCloud: false,
-      url: `/api/download-file?title=${encodeURIComponent(safeTitle)}+Season+${sNum}&quality=1080p&type=series&id=${cleanId}&download=1`
-    });
-
-    links.push({
-      label: `${safeTitle} Season ${sNum} Complete Direct Ultra HD Zip (720p HD)`,
-      season: sNum,
-      episode: null,
-      isBatch: true,
-      quality: '720p HD',
-      size: `${(epCount * 0.42).toFixed(1)} GB`,
-      audio: 'Hindi + English [Dual Audio]',
-      source: 'Direct Ultra HD',
-      isDotmovies: true,
-      isCloud: false,
-      url: `/api/download-file?title=${encodeURIComponent(safeTitle)}+Season+${sNum}&quality=720p&type=series&id=${cleanId}&download=1`
-    });
-
-    // 2. Fast Cloud CDN Season Batch Packs
-    links.push({
-      label: `${safeTitle} Season ${sNum} Complete (Fast Cloud CDN Pack)`,
-      season: sNum,
-      episode: null,
-      isBatch: true,
-      quality: '1080p FHD',
-      size: `${(epCount * 0.75).toFixed(1)} GB`,
-      audio: 'Hindi + English [Multi-Audio Dual Track]',
-      source: 'Fast Cloud CDN',
-      isCloud: true,
-      isDotmovies: false,
-      url: `/api/download-file?title=${encodeURIComponent(safeTitle)}+Season+${sNum}&quality=1080p&type=series`
-    });
-
-    links.push({
-      label: `${safeTitle} Season ${sNum} Complete (720p HD Fast Cloud Pack)`,
-      season: sNum,
-      episode: null,
-      isBatch: true,
-      quality: '720p HD',
-      size: `${(epCount * 0.42).toFixed(1)} GB`,
-      audio: 'Hindi + English [Multi-Audio Dual Track]',
-      source: 'Fast Cloud CDN',
-      isCloud: true,
-      isDotmovies: false,
-      url: `/api/download-file?title=${encodeURIComponent(safeTitle)}+Season+${sNum}&quality=720p&type=series`
-    });
-
-    // 3. Individual Episode Links for every episode (1 to epCount)
-    for (let ep = 1; ep <= epCount; ep++) {
-      const epLabel = `E${ep < 10 ? '0' + ep : ep}`;
-
-      // Direct Ultra HD Episode Mirrors
-      links.push({
-        label: `${safeTitle} S${sPrefix}${epLabel} (Direct Ultra HD 1080p)`,
-        season: sNum,
-        episode: ep,
-        quality: '1080p',
-        size: '750 MB',
-        audio: 'Hindi + English [Dual Audio 5.1]',
-        source: 'Direct Ultra HD',
-        isDotmovies: true,
-        isCloud: false,
-        url: `/api/download-file?title=${encodeURIComponent(safeTitle)}&quality=1080p&type=series&id=${cleanId}&se=${sNum}&ep=${ep}&download=1`
-      });
-
-      links.push({
-        label: `${safeTitle} S${sPrefix}${epLabel} (Direct Ultra HD 720p)`,
-        season: sNum,
-        episode: ep,
-        quality: '720p',
-        size: '420 MB',
-        audio: 'Hindi + English [Dual Audio]',
-        source: 'Direct Ultra HD',
-        isDotmovies: true,
-        isCloud: false,
-        url: `/api/download-file?title=${encodeURIComponent(safeTitle)}&quality=720p&type=series&id=${cleanId}&se=${sNum}&ep=${ep}&download=1`
-      });
-
-      // Fast Cloud CDN Episode Mirrors
-      links.push({
-        label: `${safeTitle} S${sPrefix}${epLabel} (1080p FHD Fast Cloud)`,
-        season: sNum,
-        episode: ep,
-        quality: '1080p',
-        size: '750 MB',
-        audio: 'Hindi + English [Multi-Audio]',
-        source: 'Fast Cloud CDN',
-        isCloud: true,
-        isDotmovies: false,
-        url: `/api/download-file?title=${encodeURIComponent(safeTitle)}&quality=1080p&type=series&id=${cleanId}&se=${sNum}&ep=${ep}&download=1`
-      });
-
-      links.push({
-        label: `${safeTitle} S${sPrefix}${epLabel} (720p HD Fast Cloud)`,
-        season: sNum,
-        episode: ep,
-        quality: '720p',
-        size: '420 MB',
-        audio: 'Hindi + English [Multi-Audio]',
-        source: 'Fast Cloud CDN',
-        isCloud: true,
-        isDotmovies: false,
-        url: `/api/download-file?title=${encodeURIComponent(safeTitle)}&quality=720p&type=series&id=${cleanId}&se=${sNum}&ep=${ep}&download=1`
-      });
-
-      links.push({
-        label: `${safeTitle} S${sPrefix}${epLabel} (480p SD Fast Cloud)`,
-        season: sNum,
-        episode: ep,
-        quality: '480p',
-        size: '180 MB',
-        audio: 'Hindi + English [Multi-Audio]',
-        source: 'Fast Cloud CDN',
-        isCloud: true,
-        isDotmovies: false,
-        url: `/api/download-file?title=${encodeURIComponent(safeTitle)}&quality=480p&type=series&id=${cleanId}&se=${sNum}&ep=${ep}&download=1`
-      });
-    }
-  });
-
-  return links;
-}
-
-function generateMovieDownloadLinks(title, year, canonicalId) {
-  const safeTitle = (title || 'Movie').replace(/[:\-–—]/g, ' ').replace(/\s+/g, ' ').trim();
-  const cleanId = String(canonicalId || 'n4u').replace(/[^a-zA-Z0-9_-]/g, '');
-
-  return [
-    // Direct Ultra HD Mirrors
-    {
-      label: `${safeTitle} (${year || '2026'}) 4K Ultra HD Dual Audio [Direct Download]`,
-      quality: '4K',
-      size: '4.8 GB',
-      audio: 'Hindi + English [Dual Audio DTS-HD]',
-      source: 'Direct Ultra HD',
-      isDotmovies: true,
-      isCloud: false,
-      url: `/api/download-file?title=${encodeURIComponent(safeTitle)}&quality=4K&type=movie&id=${cleanId}&download=1`
-    },
-    {
-      label: `${safeTitle} (${year || '2026'}) 1080p FHD Dual Audio [Direct Download]`,
-      quality: '1080p',
-      size: '2.4 GB',
-      audio: 'Hindi + English [Dual Audio 5.1]',
-      source: 'Direct Ultra HD',
-      isDotmovies: true,
-      isCloud: false,
-      url: `/api/download-file?title=${encodeURIComponent(safeTitle)}&quality=1080p&type=movie&id=${cleanId}&download=1`
-    },
-    {
-      label: `${safeTitle} (${year || '2026'}) 720p HD Dual Audio [Direct Download]`,
-      quality: '720p',
-      size: '1.1 GB',
-      audio: 'Hindi + English [Dual Audio]',
-      source: 'Direct Ultra HD',
-      isDotmovies: true,
-      isCloud: false,
-      url: `/api/download-file?title=${encodeURIComponent(safeTitle)}&quality=720p&type=movie&id=${cleanId}&download=1`
-    },
-    {
-      label: `${safeTitle} (${year || '2026'}) 480p SD Dual Audio [Direct Download]`,
-      quality: '480p',
-      size: '520 MB',
-      audio: 'Hindi + English [Dual Audio]',
-      source: 'Direct Ultra HD',
-      isDotmovies: true,
-      isCloud: false,
-      url: `/api/download-file?title=${encodeURIComponent(safeTitle)}&quality=480p&type=movie&id=${cleanId}&download=1`
-    },
-    // Fast Cloud CDN Mirrors
-    {
-      label: `${safeTitle} (${year || '2026'}) 4K Ultra HD Dual Audio [Fast Cloud]`,
-      quality: '4K',
-      size: '4.8 GB',
-      audio: 'Hindi + English [Multi-Audio DTS-HD]',
-      source: 'Fast Cloud CDN',
-      isCloud: true,
-      isDotmovies: false,
-      url: `/api/download-file?title=${encodeURIComponent(safeTitle)}&quality=4k&type=movie`
-    },
-    {
-      label: `${safeTitle} (${year || '2026'}) 1080p FHD Dual Audio [Fast Cloud]`,
-      quality: '1080p',
-      size: '2.4 GB',
-      audio: 'Hindi + English [Multi-Audio 5.1]',
-      source: 'Fast Cloud CDN',
-      isCloud: true,
-      isDotmovies: false,
-      url: `/api/download-file?title=${encodeURIComponent(safeTitle)}&quality=1080p&type=movie`
-    },
-    {
-      label: `${safeTitle} (${year || '2026'}) 720p HD Dual Audio [Fast Cloud]`,
-      quality: '720p',
-      size: '1.1 GB',
-      audio: 'Hindi + English [Multi-Audio]',
-      source: 'Fast Cloud CDN',
-      isCloud: true,
-      isDotmovies: false,
-      url: `/api/download-file?title=${encodeURIComponent(safeTitle)}&quality=720p&type=movie`
-    },
-    {
-      label: `${safeTitle} (${year || '2026'}) 480p SD Dual Audio [Fast Cloud]`,
-      quality: '480p',
-      size: '520 MB',
-      audio: 'Hindi + English [Multi-Audio]',
-      source: 'Fast Cloud CDN',
-      isCloud: true,
-      isDotmovies: false,
-      url: `/api/download-file?title=${encodeURIComponent(safeTitle)}&quality=480p&type=movie`
-    }
-  ];
 }
 
 async function handleCatalogTitle(req, res) {
@@ -1470,9 +1260,9 @@ async function handleCatalogTitle(req, res) {
   const year = String(raw?.release_date || raw?.first_air_date || localItem?.year || queryYear || '').slice(0, 4);
   const resolvedImdbId = raw?.imdb_id || raw?.external_ids?.imdb_id || localItem?.imdbId || null;
 
-  // Authenticate and fetch direct download links
+  // Authenticate and fetch verified Hicine direct download links ONLY (Section A1, A6, C)
   let downloadLinks = [];
-  const targetCanonicalId = localItem?.canonicalId || (id.startsWith('tmdb-') || id.startsWith('dotmobiz-') ? id : (tmdbId ? `tmdb-${type}-${tmdbId}` : id));
+  const targetCanonicalId = localItem?.canonicalId || (id.startsWith('tmdb-') ? id : (tmdbId ? `tmdb-${type}-${tmdbId}` : id));
   try {
     const canonical = await resolveContentId(id);
     if (canonical && Array.isArray(canonical.links) && canonical.links.length > 0) {
@@ -1492,85 +1282,13 @@ async function handleCatalogTitle(req, res) {
     downloadLinks = normalizeRawLinks(localItem.links || localItem.download_links, targetCanonicalId, type === 'tv');
   }
 
-  // Ensure Complete Web Series & TV Show Download Links across ALL Seasons and Episodes
-  if (type === 'tv') {
-    const validSeasons = (raw?.seasons || []).filter(s => s && s.season_number > 0);
-    const seriesSeasons = validSeasons.length ? validSeasons : [{ season_number: 1, episode_count: 10, name: 'Season 1' }];
-    const generatedLinks = generateSeriesDownloadLinks(title, year, seriesSeasons, targetCanonicalId);
-
-    if (downloadLinks.length > 0) {
-      // Retain authentic local/dotmovies links and backfill missing episodes/seasons
-      const existingKeySet = new Set(
-        downloadLinks
-          .filter(l => l.season && l.episode)
-          .map(l => `${l.season}:${l.episode}:${String(l.quality || '').toLowerCase()}`)
-      );
-      generatedLinks.forEach(gl => {
-        const key = `${gl.season}:${gl.episode}:${String(gl.quality || '').toLowerCase()}`;
-        if (!existingKeySet.has(key)) {
-          downloadLinks.push(gl);
-        }
-      });
-      // Ensure batch pack links exist
-      if (!downloadLinks.some(l => l.isBatch)) {
-        generatedLinks.filter(gl => gl.isBatch).forEach(bl => downloadLinks.push(bl));
-      }
-    } else {
-      downloadLinks = generatedLinks;
-    }
-
-    // Ensure TV series has both Dotmovies and Fast Cloud representations
-    const hasTvDot = downloadLinks.some(l => l.isDotmovies || (l.source && /ultra\s*hd|dotmovies|dotmobiz/i.test(l.source)));
-    const hasTvCloud = downloadLinks.some(l => l.isCloud || (l.source && /fast\s*cloud|hicine/i.test(l.source)));
-    if (!hasTvDot) {
-      const dotMirrors = downloadLinks.map(l => ({
-        ...l,
-        label: (l.label || title).replace(/fast cloud|hicine/gi, 'Direct Ultra HD'),
-        source: 'Direct Ultra HD (Dotmovies)',
-        isDotmovies: true,
-        isCloud: false
-      }));
-      downloadLinks = dotMirrors.concat(downloadLinks);
-    }
-    if (!hasTvCloud) {
-      const cloudMirrors = downloadLinks.filter(l => l.isDotmovies).map(l => ({
-        ...l,
-        label: (l.label || title).replace(/direct ultra hd|dotmobiz|dotmovies/gi, 'Fast Cloud CDN'),
-        source: 'Fast Cloud CDN',
-        isCloud: true,
-        isDotmovies: false
-      }));
-      downloadLinks = downloadLinks.concat(cloudMirrors);
-    }
-  } else {
-    // Movies: ensure 4K, 1080p, 720p, 480p tiers for both Direct Ultra HD (Dotmovies) and Fast Cloud
-    if (!downloadLinks.length) {
-      downloadLinks = generateMovieDownloadLinks(title, year, targetCanonicalId);
-    } else {
-      const hasMovieDot = downloadLinks.some(l => l.isDotmovies || (l.source && /ultra\s*hd|dotmovies|dotmobiz/i.test(l.source)));
-      const hasMovieCloud = downloadLinks.some(l => l.isCloud || (l.source && /fast\s*cloud|hicine/i.test(l.source)));
-      if (!hasMovieDot) {
-        const dotMirrors = downloadLinks.map(l => ({
-          ...l,
-          label: (l.label || title).replace(/fast cloud|hicine/gi, 'Direct Ultra HD'),
-          source: 'Direct Ultra HD (Dotmovies)',
-          isDotmovies: true,
-          isCloud: false
-        }));
-        downloadLinks = dotMirrors.concat(downloadLinks);
-      }
-      if (!hasMovieCloud) {
-        const cloudMirrors = downloadLinks.filter(l => l.isDotmovies).map(l => ({
-          ...l,
-          label: (l.label || title).replace(/direct ultra hd|dotmobiz|dotmovies/gi, 'Fast Cloud CDN'),
-          source: 'Fast Cloud CDN',
-          isCloud: true,
-          isDotmovies: false
-        }));
-        downloadLinks = downloadLinks.concat(cloudMirrors);
-      }
-    }
-  }
+  // Filter STRICTLY to verified Hicine cloud downloads (removes all unverified third-party hosts)
+  downloadLinks = downloadLinks.filter(l => l && l.url && isHicineDownloadUrl(l.url)).map(l => ({
+    ...l,
+    source: 'Hicine Fast Cloud',
+    isCloud: true,
+    isDotmovies: false
+  }));
 
   // Initial episodes for TV
   let initialEpisodes = [];
@@ -2389,7 +2107,11 @@ async function handleDownloadFile(req, res) {
 
     // 1. Direct Cloud URL provided
     if (rawUrl) {
-      resolved = await resolveCloudDownloadUrl(rawUrl);
+      if (isHicineDownloadUrl(rawUrl)) {
+        resolved = await resolveCloudDownloadUrl(rawUrl);
+      } else {
+        resolved = null;
+      }
     }
 
     // 2. Direct Content ID Resolution (Exact TMDB / Catalog Match)
@@ -2406,7 +2128,7 @@ async function handleDownloadFile(req, res) {
       } catch (e) {}
     }
 
-    // 3. Fallback: Search Catalog for title / ID to find authentic direct streams
+    // 3. Fallback: Search Catalog for title / ID to find authentic Hicine direct streams
     if (!resolved || !resolved.directUrl) {
       try {
         let catalogLinks = (contentRec && contentRec.links && contentRec.links.length) ? contentRec.links : [];
@@ -2418,35 +2140,30 @@ async function handleDownloadFile(req, res) {
           }
         }
 
-        if (catalogLinks.length > 0) {
+        // Strictly filter to authorized Hicine links only
+        const hicineCatalogLinks = (catalogLinks || []).filter(l => l && l.url && isHicineDownloadUrl(l.url));
+
+        if (hicineCatalogLinks.length > 0) {
           // Prefer link matching requested quality or episode
           let matched = null;
           if (se && ep) {
             // STRICT MATCH: Only match when season and episode genuinely match!
-            matched = catalogLinks.find(l => Number(l.season) === Number(se) && Number(l.episode) === Number(ep) && (l.quality || '').toLowerCase().includes(quality.toLowerCase())) ||
-                      catalogLinks.find(l => Number(l.season) === Number(se) && Number(l.episode) === Number(ep));
+            matched = hicineCatalogLinks.find(l => Number(l.season) === Number(se) && Number(l.episode) === Number(ep) && (l.quality || '').toLowerCase().includes(quality.toLowerCase())) ||
+                      hicineCatalogLinks.find(l => Number(l.season) === Number(se) && Number(l.episode) === Number(ep));
           } else {
-            matched = catalogLinks.find(l => (l.quality || '').toLowerCase().includes(quality.toLowerCase())) ||
-                      catalogLinks.find(l => l.isCloud || (l.url && (l.url.includes('vcloud') || l.url.includes('workers.dev')))) ||
-                      catalogLinks[0];
+            matched = hicineCatalogLinks.find(l => (l.quality || '').toLowerCase().includes(quality.toLowerCase())) ||
+                      hicineCatalogLinks.find(l => l.isCloud || (l.url && (l.url.includes('vcloud') || l.url.includes('workers.dev')))) ||
+                      hicineCatalogLinks[0];
           }
 
           if (matched && matched.url) {
             resolved = await resolveCloudDownloadUrl(matched.url);
             if (!resolved || !resolved.directUrl) {
-              resolved = { ok: true, directUrl: matched.url, title: matched.label || titleToUse, size: matched.size || '' };
+              if (isHicineDownloadUrl(matched.url)) {
+                resolved = { ok: true, directUrl: matched.url, title: matched.label || titleToUse, size: matched.size || '' };
+              }
             }
           }
-        }
-      } catch (e) {}
-    }
-
-    // 4. Fallback: Try NetMirror stream if available
-    if (!resolved || !resolved.directUrl) {
-      try {
-        const nmItem = await resolveNetmirrorItem(id, titleToUse, type, 'hi');
-        if (nmItem && nmItem.trailer && nmItem.trailer.endsWith('.mp4')) {
-          resolved = { ok: true, directUrl: nmItem.trailer, title: titleToUse, size: '' };
         }
       } catch (e) {}
     }
@@ -2454,7 +2171,6 @@ async function handleDownloadFile(req, res) {
     // If resolved to direct media URL
     if (resolved && resolved.ok && resolved.directUrl) {
       const targetUrl = resolved.directUrl;
-      const isExternalMirror = /nexdrive|hubcloud|pixeldrain|drivehub/i.test(targetUrl);
 
       if (isJson) {
         return sendJson(res, 200, {
@@ -2464,15 +2180,6 @@ async function handleDownloadFile(req, res) {
           filename: downloadFilename,
           size: resolved.size || ''
         });
-      }
-
-      if (isExternalMirror) {
-        res.writeHead(302, {
-          'Location': targetUrl,
-          'Cache-Control': 'no-cache, no-store, must-revalidate',
-          'Access-Control-Allow-Origin': '*'
-        });
-        return res.end();
       }
 
       // 302 Found redirect directly with Content-Disposition Attachment headers
@@ -2485,85 +2192,55 @@ async function handleDownloadFile(req, res) {
       return res.end();
     }
 
-    // RESILIENT DIRECT DOWNLOAD GATEWAY: If not yet on Cloud CDN, return clean status in JSON mode
+    // If Hicine download link is unavailable: clean controlled unavailable response
     if (isJson) {
       return sendJson(res, 200, {
         ok: false,
         directUrl: '',
         title: titleToUse,
         filename: downloadFilename,
-        message: 'Direct media file not yet on Cloud CDN.'
+        message: 'Download currently unavailable.'
       });
     }
 
-    // Serve clean, instant direct downloading hub page
     const cleanId = String(id || '').replace(/^tmdb-(?:movie|series|tv)-/i, '');
     const isTv = type === 'tv' || type === 'series' || Boolean(se || ep);
     const watchUrl = `/api/stream-player?id=${encodeURIComponent(cleanId)}&title=${encodeURIComponent(titleToUse)}&type=${encodeURIComponent(type)}&se=${encodeURIComponent(se || '1')}&ep=${encodeURIComponent(ep || '1')}`;
-    const altMirror1 = cleanId
-      ? (isTv
-        ? `https://allmovieland.link/tv/${encodeURIComponent(cleanId)}/${encodeURIComponent(se || '1')}/${encodeURIComponent(ep || '1')}`
-        : `https://allmovieland.link/movie/${encodeURIComponent(cleanId)}`)
-      : `https://allmovieland.link/search/${encodeURIComponent(titleToUse)}`;
-    const altMirror2 = cleanId
-      ? (isTv
-        ? `https://vidsrc.sbs/embed/tv/${encodeURIComponent(cleanId)}/${encodeURIComponent(se || '1')}/${encodeURIComponent(ep || '1')}`
-        : `https://vidsrc.sbs/embed/movie/${encodeURIComponent(cleanId)}`)
-      : `https://vidsrc.sbs/embed/movie/search?q=${encodeURIComponent(titleToUse)}`;
 
     const directDlPage = `<!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-8SPEG4KZ28"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-8SPEG4KZ28');
-  </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Download ${escapeHtml(titleToUse)} | Netflix4U High Speed</title>
+  <title>Download Unavailable | Netflix4U</title>
   <style>
     body { background: #0a0a0f; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; padding: 20px; box-sizing: border-box; }
     .card { background: #12121a; border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 28px; max-width: 480px; width: 100%; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.6); }
-    .icon { width: 56px; height: 56px; border-radius: 50%; background: rgba(34,197,94,0.15); color: #22c55e; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
+    .icon { width: 56px; height: 56px; border-radius: 50%; background: rgba(239,68,68,0.15); color: #ef4444; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
     h1 { font-size: 1.25rem; font-weight: 800; margin: 0 0 8px; color: #fff; }
     p { font-size: 0.85rem; color: rgba(255,255,255,0.6); margin: 0 0 20px; line-height: 1.5; }
     .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 12px 18px; border-radius: 10px; font-size: 0.88rem; font-weight: 700; text-decoration: none; cursor: pointer; transition: all 0.2s; box-sizing: border-box; border: none; margin-bottom: 10px; }
     .btn-primary { background: #e50914; color: #fff; }
     .btn-primary:hover { background: #f40612; }
-    .btn-mirror { background: rgba(255,255,255,0.06); color: #38bdf8; border: 1px solid rgba(56,189,248,0.3); }
-    .btn-mirror:hover { background: rgba(56,189,248,0.15); }
     .btn-secondary { background: rgba(255,255,255,0.05); color: #fff; border: 1px solid rgba(255,255,255,0.15); }
     .btn-secondary:hover { background: rgba(255,255,255,0.12); }
-    .badge { display: inline-block; padding: 4px 10px; border-radius: 20px; background: rgba(229,9,20,0.15); color: #ff3b47; font-size: 0.75rem; font-weight: 700; margin-bottom: 14px; }
+    .badge { display: inline-block; padding: 4px 10px; border-radius: 20px; background: rgba(239,68,68,0.15); color: #f87171; font-size: 0.75rem; font-weight: 700; margin-bottom: 14px; }
   </style>
 </head>
 <body>
   <div class="card">
     <div class="icon">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
     </div>
-    <div class="badge">Direct Media Hub</div>
-    <h1>${escapeHtml(titleToUse)}</h1>
-    <p>High-speed stream &amp; direct download mirrors for <strong>${escapeHtml(titleToUse)}</strong> (${escapeHtml(quality)}).</p>
+    <div class="badge">Download Status</div>
+    <h1>Download Currently Unavailable</h1>
+    <p>A verified high-speed Hicine direct download is currently unavailable for <strong>${escapeHtml(titleToUse)}</strong>${se && ep ? ` (Season ${escapeHtml(se)} Episode ${escapeHtml(ep)})` : ''}. You can stream this title instantly using our web player.</p>
     <a href="${watchUrl}" class="btn btn-primary">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
       Watch Online (Player)
     </a>
-    <a href="${altMirror1}" target="_blank" rel="noopener noreferrer" class="btn btn-mirror">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-      Direct Stream Mirror 1 (AllMovieLand)
-    </a>
-    <a href="${altMirror2}" target="_blank" rel="noopener noreferrer" class="btn btn-mirror">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-      Direct Stream Mirror 2 (VidSrc Global)
-    </a>
-    <a href="https://t.me/netflix4u_website" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"></path></svg>
-      Get Direct File on Telegram (Fast)
+    <a href="/" class="btn btn-secondary">
+      Back to Home
     </a>
   </div>
 </body>
@@ -2852,7 +2529,17 @@ async function handleStreamPlayer(req, res) {
       <!-- Video Layers -->
       <iframe id="iframe-vidsrc" class="layer-view ${initialServer === 'vidsrc' ? 'visible' : ''}" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
       <iframe id="iframe-peachify" class="layer-view ${initialServer === 'peachify' ? 'visible' : ''}" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
-      <iframe id="iframe-allmovieland" class="layer-view ${initialServer === 'allmovieland' ? 'visible' : ''}" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+      <!-- AllMovieLand Controlled Unavailable Layer (Controlled Netflix4U UX replacing raw 404 / 403 iframe) -->
+      <div id="layer-allmovieland" class="layer-view ${initialServer === 'allmovieland' ? 'visible' : ''}" style="${initialServer === 'allmovieland' ? 'display:flex;' : 'display:none;'}flex-direction:column;align-items:center;justify-content:center;background:#0d0f17;color:#fff;text-align:center;padding:24px;width:100%;height:100%;box-sizing:border-box;">
+        <div style="font-size:36px;margin-bottom:12px;">⚠️</div>
+        <h3 style="font-size:1.15rem;font-weight:700;margin:0 0 8px;color:#f87171;">Streaming source unavailable on this server</h3>
+        <p style="font-size:0.85rem;color:rgba(255,255,255,0.7);max-width:440px;margin:0 0 20px;line-height:1.5;">AllMovieLand returned &quot;File Not Found&quot; (HTTP 404 / 403 Cross-Origin Protection). Please choose an active streaming server below.</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;">
+          <button type="button" class="pill active" onclick="activateServer('vidsrc')" style="padding:8px 16px;">📺 Switch to VidSrc</button>
+          <button type="button" class="pill" onclick="activateServer('peachify')" style="padding:8px 16px;">🍑 Switch to Peachify</button>
+          <button type="button" class="pill" onclick="activateServer('vidlink')" style="padding:8px 16px;">🚀 Switch to VidLink</button>
+        </div>
+      </div>
       <iframe id="iframe-vidlink" class="layer-view ${initialServer === 'vidlink' ? 'visible' : ''}" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
       <div id="artplayer-layer" class="layer-view ${initialServer === 'cloud' ? 'visible' : ''}"></div>
     </div>
@@ -2866,8 +2553,8 @@ async function handleStreamPlayer(req, res) {
         <div class="controls-group">
           <button type="button" id="btn-srv-vidsrc" class="server-pill ${initialServer === 'vidsrc' ? 'active' : ''}" onclick="activateServer(&quot;vidsrc&quot;)">📺 VidSrc (TMDB)</button>
           <button type="button" id="btn-srv-peachify" class="server-pill ${initialServer === 'peachify' ? 'active' : ''}" onclick="activateServer(&quot;peachify&quot;)">🍑 Peachify HD</button>
-          <button type="button" id="btn-srv-allmovieland" class="server-pill ${initialServer === 'allmovieland' ? 'active' : ''}" onclick="activateServer(&quot;allmovieland&quot;)">🎬 AllMovieLand</button>
           <button type="button" id="btn-srv-vidlink" class="server-pill ${initialServer === 'vidlink' ? 'active' : ''}" onclick="activateServer(&quot;vidlink&quot;)">🚀 VidLink Multi</button>
+          <button type="button" id="btn-srv-allmovieland" class="server-pill ${initialServer === 'allmovieland' ? 'active' : ''}" onclick="activateServer(&quot;allmovieland&quot;)" style="opacity:0.75;" title="AllMovieLand (Unavailable)">⚠️ AllMovieLand (Unavailable)</button>
           ${cloudStream ? '<button type="button" id="btn-srv-cloud" class="server-pill ' + (initialServer === 'cloud' ? 'active' : '') + '" onclick="activateServer(&quot;cloud&quot;)">⚡ Fast Cloud</button>' : ''}
           ${cloudStream ? '<a href="intent:' + cloudStream.url + '#Intent;action=android.intent.action.VIEW;type=video/*;package=com.mxtech.videoplayer.ad;end" class="dl-btn" style="background:#0284c7;border-color:#38bdf8;" title="Play Hindi Dub in MX Player">📱 MX</a>' : ''}
           ${cloudStream ? '<a href="vlc://' + cloudStream.url.replace(/^https?:\/\//i, '') + '" class="dl-btn" style="background:#ea580c;border-color:#f97316;" title="Play Hindi Dub in VLC Player">🚀 VLC</a>' : ''}
@@ -2890,10 +2577,10 @@ async function handleStreamPlayer(req, res) {
     var allMovieLandUrl = ${JSON.stringify(allMovieLandUrl)};
     var cloudUrl = ${JSON.stringify(cloudStream ? cloudStream.url : '')};
     var vidlinkUrl = ${JSON.stringify(vidlinkUrl)};
-    var currentServer = ${JSON.stringify(initialServer)};
+    var currentServer = ${JSON.stringify(initialServer === 'allmovieland' ? 'vidsrc' : initialServer)};
     var art = null;
     var failoverIndex = 0;
-    var serverSequence = ['vidsrc', 'peachify', 'allmovieland', 'vidlink', 'cloud'].filter(function(s) {
+    var serverSequence = ['vidsrc', 'peachify', 'vidlink', 'cloud'].filter(function(s) {
       if (s === 'cloud' && !cloudUrl) return false;
       return true;
     });
@@ -2908,6 +2595,8 @@ async function handleStreamPlayer(req, res) {
 
     function hideAllLayers() {
       document.querySelectorAll('.layer-view').forEach(function(el) { el.classList.remove('visible'); });
+      var amLayer = document.getElementById('layer-allmovieland');
+      if (amLayer) amLayer.style.display = 'none';
       document.querySelectorAll('.server-pill').forEach(function(el) { el.classList.remove('active'); });
     }
 
@@ -2930,11 +2619,11 @@ async function handleStreamPlayer(req, res) {
         }
         frame.classList.add('visible');
       } else if (srv === 'allmovieland') {
-        var frame = document.getElementById('iframe-allmovieland');
-        if (!frame.src || frame.src === 'about:blank' || frame.src !== allMovieLandUrl) {
-          frame.src = allMovieLandUrl;
+        var amLayer = document.getElementById('layer-allmovieland');
+        if (amLayer) {
+          amLayer.style.display = 'flex';
+          amLayer.classList.add('visible');
         }
-        frame.classList.add('visible');
       } else if (srv === 'vidlink') {
         var frame = document.getElementById('iframe-vidlink');
         if (!frame.src || frame.src === 'about:blank' || frame.src !== vidlinkUrl) {
@@ -3241,5 +2930,6 @@ module.exports = {
   invalidateCatalogCache,
   getQueryParams,
   sendJson,
-  handleCors
+  handleCors,
+  isHicineDownloadUrl
 };

@@ -261,10 +261,11 @@ function enrichItemMetadataAndLinks(item) {
     item.backdrop = authenticCover;
   }
 
-  // 2. Tag existing links
-  item.links = (item.links || []).map(l => {
+  // 2. Tag existing links - keep only verified Hicine downloads
+  item.links = (item.links || []).filter(l => {
+    return l && l.url && (l.url.includes('vcloud') || l.url.includes('workers.dev') || l.url.includes('hicine') || l.url.includes('r2.dev'));
+  }).map(l => {
     const isVcloud = l.url && (l.url.includes('vcloud') || l.url.includes('workers.dev') || l.url.includes('hicine'));
-    const isNexdrive = l.url && (l.url.includes('nexdrive') || l.url.includes('dotmobiz') || l.url.includes('dotmovies'));
     const quality = l.quality || 'HD';
     let finalUrl = l.url;
     if (isVcloud && !l.url.startsWith('/api/download/hicine')) {
@@ -273,26 +274,10 @@ function enrichItemMetadataAndLinks(item) {
     return {
       ...l,
       url: finalUrl,
-      source: isVcloud ? 'hicine' : (isNexdrive ? 'dotmobiz' : (l.source || (item.provider === 'dotmobiz' ? 'dotmobiz' : 'hicine'))),
-      isCloud: isVcloud
+      source: 'hicine',
+      isCloud: true
     };
   });
-
-  // 3. If harvested match has downloads, add Dotmovies downloads if not present
-  if (harvestEntry && harvestEntry.downloads && Array.isArray(harvestEntry.downloads)) {
-    for (const dl of harvestEntry.downloads) {
-      if (dl.url && !item.links.some(l => l.url === dl.url)) {
-        item.links.push({
-          url: dl.url,
-          quality: dl.quality || 'HD',
-          size: dl.size || '',
-          label: dl.label || `Dotmovies Download [${dl.quality}]`,
-          source: 'dotmobiz',
-          isCloud: false
-        });
-      }
-    }
-  }
 
   // 4. If dotmobiz title, check if matching Hicine detail exists to add Fast Cloud links
   if (item.provider === 'dotmobiz' || idStr.startsWith('dotmobiz-')) {

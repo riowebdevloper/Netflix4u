@@ -77,26 +77,16 @@
                 <div class="hicine-downloads-container" id="hicine-cloud-downloads-list"></div>
               </div>
 
-              <!-- DOTMOVIES EXCLUSIVE DOWNLOADS SECTION -->
-              <div>
-                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
-                  <span style="font-size: 0.8rem; font-weight: 800; color: #10b981; text-transform: uppercase; letter-spacing: 0.05em; display: inline-flex; align-items: center; gap: 6px;">
-                    📥 DotMovies Direct Links (NexDrive / Multi-Audio)
-                  </span>
-                  <span style="font-size: 0.75rem; background: rgba(16,185,129,0.15); color: #34d399; border: 1px solid rgba(16,185,129,0.3); padding: 2px 8px; border-radius: 6px; font-weight: 700;">DotMovies</span>
-                </div>
-                <div class="hicine-downloads-container" id="hicine-dotmovies-downloads-list"></div>
-              </div>
             </div>
 
             <!-- TAB 2: STREAMING PLAYER -->
             <div id="hicine-tab-panel-stream" class="hicine-tab-content" style="display: none;">
-              <div class="hicine-player-tab-wrapper">
                 <div class="hicine-player-servers-row" id="hicine-stream-servers">
-                  <button class="hicine-stream-server-btn active" data-src="server1">AllMovieLand (Hindi Audio)</button>
-                  <button class="hicine-stream-server-btn" data-src="server2">Fast Cloud</button>
-                  <button class="hicine-stream-server-btn" data-src="server3">VidLink Multi-Lang</button>
-                  <button class="hicine-stream-server-btn" data-src="server4">VidSrc Pro</button>
+                  <button class="hicine-stream-server-btn active" data-src="vidsrc_sbs">VidSrc Global</button>
+                  <button class="hicine-stream-server-btn" data-src="braflix">Braflix HD</button>
+                  <button class="hicine-stream-server-btn" data-src="videasy">4K Videasy</button>
+                  <button class="hicine-stream-server-btn" data-src="vidlink">VidLink Multi</button>
+                  <button class="hicine-stream-server-btn" data-src="peachify">Peachify Dub</button>
                 </div>
                 <div class="hicine-iframe-container">
                   <iframe id="hicine-stream-iframe" src="" allowfullscreen allow="autoplay; fullscreen; encrypted-media"></iframe>
@@ -325,26 +315,21 @@
     if (!iframe) return;
 
     let url = '';
-    const targetId = imdbId || tmdbId || (currentTitleData ? currentTitleData.id : '');
+    const cleanTmdb = String(tmdbId || (currentTitleData ? currentTitleData.id : '')).replace(/^(?:dotmobiz|tmdb(?:-movie|-series|-tv)?)-/, '');
+    const req = {
+      type: isSeries ? 'tv' : 'movie',
+      tmdbId: cleanTmdb,
+      imdbId: imdbId,
+      season: 1,
+      episode: 1
+    };
 
-    if (server === 'server1') {
-      // AllMovieLand (Dotmobiz authentic Hindi stream)
-      if (imdbId) {
-        url = `https://slast430did.com/play/${imdbId}`;
-      } else {
-        url = `https://vidlink.pro/${isSeries ? 'tv' : 'movie'}/${targetId}?multiLang=true`;
-      }
-    } else if (server === 'server2') {
-      // Fast Cloud / VidLink
-      url = `https://vidlink.pro/${isSeries ? 'tv' : 'movie'}/${targetId}?multiLang=true`;
-    } else if (server === 'server3') {
-      // VidLink
-      url = `https://vidlink.pro/${isSeries ? 'tv' : 'movie'}/${targetId}`;
-    } else {
-      // VidSrc
-      url = imdbId
-        ? `https://vidsrc.me/embed/${isSeries ? 'tv' : 'movie'}?imdb=${imdbId}`
-        : `https://vidsrc.me/embed/${isSeries ? 'tv' : 'movie'}?tmdb=${tmdbId}`;
+    if (window.Netflix4uPlayerResolver) {
+      url = window.Netflix4uPlayerResolver.resolvePlayerUrl(req, server || 'vidsrc_sbs');
+    }
+
+    if (!url) {
+      url = isSeries ? `https://vidsrc.pm/embed/tv/${cleanTmdb}/1/1` : `https://vidsrc.pm/embed/movie/${cleanTmdb}`;
     }
 
     iframe.src = url;
@@ -420,34 +405,24 @@
     // Filter Hicine / Fast Cloud links
     const hicineLinks = rawLinks.filter(l => l && (l.source === 'hicine' || l.isCloud || (l.url && (l.url.includes('vcloud') || l.url.includes('workers.dev')))));
 
-    // Fallback if no specific hicine links: create standard quality tiers
     const cleanName = (data.title || 'Movie').replace(/\(\d{4}\)/g, '').trim();
     const year = data.year || '2026';
 
-    const effectiveHicine = hicineLinks.length > 0 ? hicineLinks : [
-      {
-        quality: '480p',
-        size: '800MB',
-        label: `${cleanName} (${year}) Hindi-AAC2.0 HDTC 480p x264 [800MB]`,
-        url: `/api/download-file?title=${encodeURIComponent(cleanName)}&quality=480p`
-      },
-      {
-        quality: '720p',
-        size: '2GB',
-        label: `${cleanName} (${year}) Hindi-AAC2.0 HDTC 720p x264 [2GB]`,
-        url: `/api/download-file?title=${encodeURIComponent(cleanName)}&quality=720p`
-      },
-      {
-        quality: '1080p',
-        size: '3.8GB',
-        label: `${cleanName} (${year}) Hindi-AAC2.0 HDTC 1080p x264 [3.8GB]`,
-        url: `/api/download-file?title=${encodeURIComponent(cleanName)}&quality=1080p`
+    if (!hicineLinks.length) {
+      if (cloudContainer) {
+        cloudContainer.innerHTML = `
+          <div style="padding: 20px; text-align: center; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; color: rgba(255,255,255,0.7); font-size: 0.85rem;">
+            <div style="font-weight: 700; color: #fff; margin-bottom: 4px;">Download currently unavailable.</div>
+            <div>Verified Hicine links are being updated for this title. Please use the Stream Player tab above.</div>
+          </div>
+        `;
       }
-    ];
+      return;
+    }
 
-    effectiveHicine.forEach(item => {
+    hicineLinks.forEach(item => {
       const q = (item.quality || '1080p').toUpperCase();
-      const sz = item.size || '2GB';
+      const sz = item.size || 'HD';
       const fileInfo = item.label || `${cleanName} (${year}) Hindi-AAC2.0 HDTC ${q} x264 [${sz}]`;
 
       const card = document.createElement('div');
@@ -481,49 +456,6 @@
       });
 
       cloudContainer.appendChild(card);
-    });
-
-    // RENDER DOTMOVIES EXCLUSIVE DOWNLOADS
-    const dotLinks = rawOptions.length > 0 ? rawOptions : rawLinks.filter(l => l && (l.source === 'dotmobiz' || (!l.isCloud && l.url && l.url.includes('nexdrive'))));
-
-    const effectiveDot = dotLinks.length > 0 ? dotLinks : [
-      { quality: '480p', size: '630MB', label: 'Click Here To Download [630MB]', url: `/api/download-file?title=${encodeURIComponent(cleanName)}&quality=480p&download=1` },
-      { quality: '720p x264', size: '1.5GB', label: 'Click Here To Download [1.5GB]', url: `/api/download-file?title=${encodeURIComponent(cleanName)}&quality=720p&download=1` },
-      { quality: '1080p x264', size: '3.6GB', label: 'Click Here To Download [3.6GB]', url: `/api/download-file?title=${encodeURIComponent(cleanName)}&quality=1080p&download=1` },
-      { quality: '1080p HQ', size: '19GB', label: 'Click Here To Download [19GB]', url: `/api/download-file?title=${encodeURIComponent(cleanName)}&quality=1080pHQ&download=1` }
-    ];
-
-    effectiveDot.forEach(opt => {
-      const q = opt.quality || 'HD';
-      const sz = opt.size || '';
-      const rawDlUrl = opt.url || '';
-      const finalUrl = (rawDlUrl && !rawDlUrl.endsWith('nexdrive.love/') && !rawDlUrl.includes('dotmobiz.com'))
-        ? rawDlUrl
-        : `/api/download-file?title=${encodeURIComponent(cleanName)}&quality=${encodeURIComponent(q)}&download=1`;
-      const dotCard = document.createElement('div');
-      dotCard.className = 'hicine-dl-card';
-      dotCard.style.borderColor = 'rgba(16, 185, 129, 0.18)';
-      dotCard.innerHTML = `
-        <div class="hicine-dl-file-info">
-          <strong style="color: #34d399;">Direct Ultra HD Download:</strong>
-          ${cleanName} (${year}) Hindi Dual Audio [${q}] ${sz}
-        </div>
-        <div class="hicine-dl-row">
-          <div class="hicine-dl-meta-group">
-            <span class="hicine-quality-pill" style="border-color: rgba(16,185,129,0.35); color: #34d399; background: rgba(16,185,129,0.1);">${q}</span>
-            <span class="hicine-dl-size-label">${q} ${sz ? `<span>|</span> ${sz}` : ''}</span>
-          </div>
-          <a href="${finalUrl}" target="_blank" rel="noopener noreferrer" class="hicine-dl-btn" style="background: #10b981; box-shadow: 0 4px 14px rgba(16,185,129,0.35);">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-              <polyline points="7 10 12 15 17 10"></polyline>
-              <line x1="12" y1="15" x2="12" y2="3"></line>
-            </svg>
-            Download File
-          </a>
-        </div>
-      `;
-      dotContainer.appendChild(dotCard);
     });
 
     // Populate Cloud Tab

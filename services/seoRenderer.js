@@ -468,12 +468,12 @@ function renderMoviePage(item, canonicalUrl, relatedItems = []) {
             </div>
             <p class="text-xs text-slate-400">Multi-Audio &bull; Fast Cloud Stream &bull; Zero Ads</p>
           </a>
-          <a href="https://allmovieland.link/movie/${encodeURIComponent(tmdbId)}" target="_blank" rel="noopener noreferrer" class="p-4 rounded-xl bg-white/[0.05] hover:bg-white/[0.09] border border-white/10 flex flex-col justify-between transition">
+          <a href="/api/stream-player?type=movie&id=${encodeURIComponent(tmdbId)}&title=${encodeURIComponent(cleanTitle)}" class="p-4 rounded-xl bg-white/[0.05] hover:bg-white/[0.09] border border-white/10 flex flex-col justify-between transition">
             <div class="flex items-center gap-2 mb-2">
               <span class="text-blue-400 font-bold">⚡</span>
               <span class="text-sm font-bold text-white">Stream Mirror 2</span>
             </div>
-            <p class="text-xs text-slate-400">AllMovieLand Server &bull; Full HD 1080p</p>
+            <p class="text-xs text-slate-400">Web Player &bull; Full HD 1080p</p>
           </a>
           <a href="/api/download-file?title=${encodeURIComponent(cleanTitle)}&id=${encodeURIComponent(tmdbId)}&quality=1080p" class="p-4 rounded-xl bg-white/[0.05] hover:bg-white/[0.09] border border-white/10 flex flex-col justify-between transition">
             <div class="flex items-center gap-2 mb-2">
@@ -823,10 +823,10 @@ function renderSeriesPage(item, canonicalUrl, relatedItems = []) {
             </div>
             <p class="text-xs text-slate-400">Continuous Episode Playback &bull; Zero Lag</p>
           </a>
-          <a href="https://allmovieland.link/tv/${encodeURIComponent(tmdbId)}/1/1" target="_blank" rel="noopener noreferrer" class="p-4 rounded-xl bg-white/[0.05] hover:bg-white/[0.09] border border-white/10 flex flex-col justify-between transition">
+          <a href="/api/stream-player?type=tv&id=${encodeURIComponent(tmdbId)}&title=${encodeURIComponent(cleanTitle)}&se=1&ep=1" class="p-4 rounded-xl bg-white/[0.05] hover:bg-white/[0.09] border border-white/10 flex flex-col justify-between transition">
             <div class="flex items-center gap-2 mb-2">
               <span class="text-blue-400 font-bold">⚡</span>
-              <span class="text-sm font-bold text-white">AllMovieLand Mirror</span>
+              <span class="text-sm font-bold text-white">HD Web Player Mirror</span>
             </div>
             <p class="text-xs text-slate-400">TV Stream &bull; Full HD 1080p</p>
           </a>

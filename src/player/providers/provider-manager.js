@@ -36,7 +36,10 @@ class ProviderManager {
 
     const targetId = providerIdOrName || this.defaultProviderId;
     const provider = getProvider(targetId);
-    if (!provider || !provider.enabled) {
+    if (!provider) {
+      return null;
+    }
+    if (!provider.enabled && !providerIdOrName && !options.allowDisabled) {
       return null;
     }
 

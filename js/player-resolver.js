@@ -96,7 +96,7 @@
     var isTv = (rawType === 'tv' || rawType === 'series' || rawType === 'anime' || rawType === 'kdrama');
     var canonicalType = isTv ? 'tv' : 'movie';
 
-    var tmdbId = cleanTmdbId(req.tmdbId);
+    var tmdbId = cleanTmdbId(req.tmdbId || req.id);
     if (!tmdbId) {
       return {
         valid: false,
@@ -156,6 +156,22 @@
       return 'player:movie:tmdb:' + s.tmdbId;
     }
     return 'player:tv:tmdb:' + s.tmdbId + ':s' + s.season + ':e' + s.episode;
+  }
+
+  /**
+   * Generates isolated cache key for AllMovieLand provider (Section B11).
+   */
+  function getAllmovielandCacheKey(req, opt) {
+    var validation = validatePlaybackRequest(req);
+    if (!validation.valid || !validation.sanitized) {
+      return null;
+    }
+    var s = validation.sanitized;
+    var extId = (opt && opt.imdbId && String(opt.imdbId).startsWith('tt')) ? opt.imdbId : s.tmdbId;
+    if (s.type === 'movie') {
+      return 'allmovieland:movie:' + extId;
+    }
+    return 'allmovieland:tv:' + extId + ':s' + s.season + ':e' + s.episode;
   }
 
   // ─── VIDSRC.WIN REVERSE-ENGINEERED PROVIDERS ADAPTER SUITE ───
@@ -495,6 +511,7 @@
     cleanTmdbId: cleanTmdbId,
     validatePlaybackRequest: validatePlaybackRequest,
     getCanonicalCacheKey: getCanonicalCacheKey,
+    getAllmovielandCacheKey: getAllmovielandCacheKey,
     resolvePlayerUrl: resolvePlayerUrl,
     isAllowedOrigin: isAllowedOrigin,
     ALLOWED_ORIGINS: ALLOWED_ORIGINS,

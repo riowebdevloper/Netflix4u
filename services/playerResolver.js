@@ -12,6 +12,7 @@ module.exports = {
   cleanTmdbId: playerResolver.cleanTmdbId,
   validatePlaybackRequest: playerResolver.validatePlaybackRequest,
   getCanonicalCacheKey: playerResolver.getCanonicalCacheKey,
+  getAllmovielandCacheKey: playerResolver.getAllmovielandCacheKey,
   resolvePlayerUrl: playerResolver.resolvePlayerUrl,
   isAllowedOrigin: playerResolver.isAllowedOrigin,
   ALLOWED_ORIGINS: playerResolver.ALLOWED_ORIGINS,

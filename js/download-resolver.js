@@ -57,10 +57,6 @@
 
   window.getFastCloudDownloadHref = function(rawUrl, meta) {
     if (!rawUrl) return '#';
-    var isExternal = /nexdrive|hubcloud|dotmobiz|drivehub/i.test(rawUrl);
-    if (isExternal) {
-      return rawUrl;
-    }
 
     if (rawUrl.indexOf('/api/download-file') === 0) {
       return rawUrl;
@@ -109,17 +105,6 @@
     };
 
     var cleanVcloud = extractVcloudUrl(rawUrl);
-    var isExternal = /nexdrive|hubcloud|dotmobiz|drivehub/i.test(cleanVcloud) || /nexdrive|hubcloud|dotmobiz|drivehub/i.test(rawUrl);
-
-    // If external mirror (Dotmovies, Nexdrive, Hubcloud), open directly in new tab
-    if (isExternal) {
-      if (window.__showToast) {
-        window.__showToast('🚀 Opening high-speed direct download mirror...', '⚡');
-      }
-      window.open(cleanVcloud || rawUrl, '_blank', 'noopener,noreferrer');
-      restore();
-      return;
-    }
 
     // Extract metadata from element and unpack nested /api/download-file? URLs
     var title = getActiveTitle(targetEl);
