@@ -11,5 +11,33 @@
     "durationMs": 1255
   },
   "duration": "1.26",
-  "timestamp": "2026-09-23T03:20:15.608Z"
+  "timestamp": "2026-09-23T03:20:15.608Z",
+  "newItems": [
+    {
+      "id": "tmdb-movie-533535",
+      "title": "Deadpool & Wolverine",
+      "year": 2024,
+      "type": "movie",
+      "rating": 8,
+      "genres": [
+        "Action",
+        "Comedy"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/by8z9Fe8y7p4jo2YlW2SZDnptyT.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/original/yDHYTjA3R0neIXmsEl4w81bhUmH.jpg"
+    },
+    {
+      "id": "tmdb-series-108978",
+      "title": "Reacher",
+      "year": 2022,
+      "type": "series",
+      "rating": 8.1,
+      "genres": [
+        "Action",
+        "Crime"
+      ],
+      "poster": "https://image.tmdb.org/t/p/w500/j73mYvFEjRGoDq25IRHG7YEG3iR.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/original/pF0qkRsrHkdYadPWY9AMeFZfcwk.jpg"
+    }
+  ]
 }

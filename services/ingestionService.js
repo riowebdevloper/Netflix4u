@@ -403,7 +403,7 @@ async function runIngestionPipeline(options = {}) {
     // Record Audit Log
     recordAuditLog(metrics);
 
-    return { status: 'SUCCESS', metrics };
+    return { status: 'SUCCESS', metrics, newItems: newPublishedItems };
   } catch (err) {
     console.error('[IngestionPipeline] Fatal failure in ingestion:', err);
     return { status: 'ERROR', error: err.message };

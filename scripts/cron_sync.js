@@ -57,7 +57,8 @@ async function main() {
   try {
     console.log('[CLI] Dispatching Discord notification...');
     const { sendDiscordNotification } = require('./notify_discord');
-    await sendDiscordNotification({ event: 'catalog' });
+    const onlyIfNew = args.includes('--only-if-new');
+    await sendDiscordNotification({ event: 'catalog', onlyIfNew });
     console.log('[CLI] Discord notification dispatched.');
   } catch (e) {
     console.error('[CLI] Failed to send Discord notification:', e.message);
