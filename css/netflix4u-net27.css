@@ -671,7 +671,13 @@ body {
 /* Isolated Cinema Fullscreen & Landscape */
 #watch-modal.is-fullscreen .watch-player-stage,
 :fullscreen .watch-player-stage,
-.watch-player-stage:fullscreen,
+.watch-player-stage:fullscreen {
+  width: 100vw !important;
+  height: 100dvh !important;
+  max-height: none !important;
+  flex: 1 1 100% !important;
+}
+
 @media (orientation: landscape) {
   .watch-player-stage {
     width: 100vw !important;
