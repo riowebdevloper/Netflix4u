@@ -339,7 +339,7 @@
     } catch (e) {}
   }
 
-  // ─── Honeycomb Loader (Fast Dismissal & DOM Clean-Up) ───
+  // ─── Honeycomb Loader (Authentic Net27 Smooth Opening Experience) ───
   function initHoneycombLoader() {
     var loader = document.getElementById('nm-loader');
     if (!loader) return;
@@ -367,15 +367,24 @@
       setTimeout(function() {
         loader.style.display = 'none';
         try { loader.remove(); } catch(e) {}
-      }, 180);
+      }, 450);
     }
     window.__nmHideLoader = hideLoader;
-    setTimeout(hideLoader, 280);
-    if (document.readyState === 'complete' || document.readyState === 'interactive') {
-      setTimeout(hideLoader, 50);
+
+    var minDisplayTime = 800;
+    var startTime = window.__nmStartTime || Date.now();
+    var elapsed = Date.now() - startTime;
+    var remaining = Math.max(0, minDisplayTime - elapsed);
+
+    if (document.readyState === 'complete') {
+      setTimeout(hideLoader, remaining);
     } else {
-      document.addEventListener('DOMContentLoaded', function() { setTimeout(hideLoader, 50); });
-      window.addEventListener('load', function() { setTimeout(hideLoader, 50); });
+      window.addEventListener('load', function() {
+        var curElapsed = Date.now() - startTime;
+        setTimeout(hideLoader, Math.max(0, minDisplayTime - curElapsed));
+      });
+      // Safety fallback guarantee
+      setTimeout(hideLoader, Math.max(remaining, 1600));
     }
   }
 

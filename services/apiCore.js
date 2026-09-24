@@ -2353,13 +2353,16 @@ async function handleStreamPlayer(req, res) {
   const allMovieLandUrl = isMovie
     ? `https://slast430did.com/play/${cleanId}`
     : `https://slast430did.com/play/${cleanId}?s=${actualSe}&e=${actualEp}`;
+  const reelsdownloadUrl = isMovie
+    ? `https://embed.reelsdownload.online/player/${cleanId}?key=k_bf0ab0853bce46e3d90b256b`
+    : `https://embed.reelsdownload.online/player/${cleanId}/${actualSe}/${actualEp}?key=k_bf0ab0853bce46e3d90b256b`;
 
   const displayTitle = (title || 'Stream') + (isMovie ? '' : ` • S${actualSe} E${actualEp}`);
   const directDlHref = rawCloudUrl ? `/api/download-file?url=${encodeURIComponent(rawCloudUrl)}` : (cloudStream?.url ? `/api/download-file?url=${encodeURIComponent(cloudStream.url)}` : '');
 
-  // Default initial server: Fast Cloud (if available) or Peachify (for Hindi/regional dub) or VidSrc (for English original)
+  // Default initial server: Fast Cloud (if available) or PvrPlay Hindi Dub (for Hindi/regional dub) or VidSrc (for English original)
   const isDubLang = (lang === 'hi' || lang === 'ta' || lang === 'te');
-  const initialServer = cloudStream ? 'cloud' : (isDubLang ? 'peachify' : 'vidsrc');
+  const initialServer = cloudStream ? 'cloud' : (isDubLang ? 'reelsdownload' : 'vidsrc');
   const currentSeasonMeta = seriesSeasons.find(s => s.season_number === actualSe) || seriesSeasons[0] || { episode_count: 10 };
 
   const playerHtml = `<!DOCTYPE html>
@@ -2528,6 +2531,7 @@ async function handleStreamPlayer(req, res) {
 
       <!-- Video Layers -->
       <iframe id="iframe-vidsrc" class="layer-view ${initialServer === 'vidsrc' ? 'visible' : ''}" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+      <iframe id="iframe-reelsdownload" class="layer-view ${initialServer === 'reelsdownload' ? 'visible' : ''}" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
       <iframe id="iframe-peachify" class="layer-view ${initialServer === 'peachify' ? 'visible' : ''}" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
       <!-- AllMovieLand Controlled Unavailable Layer (Controlled Netflix4U UX replacing raw 404 / 403 iframe) -->
       <div id="layer-allmovieland" class="layer-view ${initialServer === 'allmovieland' ? 'visible' : ''}" style="${initialServer === 'allmovieland' ? 'display:flex;' : 'display:none;'}flex-direction:column;align-items:center;justify-content:center;background:#0d0f17;color:#fff;text-align:center;padding:24px;width:100%;height:100%;box-sizing:border-box;">
@@ -2536,6 +2540,7 @@ async function handleStreamPlayer(req, res) {
         <p style="font-size:0.85rem;color:rgba(255,255,255,0.7);max-width:440px;margin:0 0 20px;line-height:1.5;">AllMovieLand returned &quot;File Not Found&quot; (HTTP 404 / 403 Cross-Origin Protection). Please choose an active streaming server below.</p>
         <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;">
           <button type="button" class="pill active" onclick="activateServer('vidsrc')" style="padding:8px 16px;">📺 Switch to VidSrc</button>
+          <button type="button" class="pill" onclick="activateServer('reelsdownload')" style="padding:8px 16px;">🎬 Switch to PvrPlay</button>
           <button type="button" class="pill" onclick="activateServer('peachify')" style="padding:8px 16px;">🍑 Switch to Peachify</button>
           <button type="button" class="pill" onclick="activateServer('vidlink')" style="padding:8px 16px;">🚀 Switch to VidLink</button>
         </div>
@@ -2552,6 +2557,7 @@ async function handleStreamPlayer(req, res) {
         </div>
         <div class="controls-group">
           <button type="button" id="btn-srv-vidsrc" class="server-pill ${initialServer === 'vidsrc' ? 'active' : ''}" onclick="activateServer(&quot;vidsrc&quot;)">📺 VidSrc (TMDB)</button>
+          <button type="button" id="btn-srv-reelsdownload" class="server-pill ${initialServer === 'reelsdownload' ? 'active' : ''}" onclick="activateServer(&quot;reelsdownload&quot;)">🎬 PvrPlay (Hindi Dub)</button>
           <button type="button" id="btn-srv-peachify" class="server-pill ${initialServer === 'peachify' ? 'active' : ''}" onclick="activateServer(&quot;peachify&quot;)">🍑 Peachify HD</button>
           <button type="button" id="btn-srv-vidlink" class="server-pill ${initialServer === 'vidlink' ? 'active' : ''}" onclick="activateServer(&quot;vidlink&quot;)">🚀 VidLink Multi</button>
           <button type="button" id="btn-srv-allmovieland" class="server-pill ${initialServer === 'allmovieland' ? 'active' : ''}" onclick="activateServer(&quot;allmovieland&quot;)" style="opacity:0.75;" title="AllMovieLand (Unavailable)">⚠️ AllMovieLand (Unavailable)</button>
@@ -2573,6 +2579,7 @@ async function handleStreamPlayer(req, res) {
     var currentEp = ${actualEp};
     var seasonsData = ${JSON.stringify(seriesSeasons)};
     var vidsrcUrl = ${JSON.stringify(vidsrcUrl)};
+    var reelsdownloadUrl = ${JSON.stringify(reelsdownloadUrl)};
     var peachifyUrl = ${JSON.stringify(peachifyUrl)};
     var allMovieLandUrl = ${JSON.stringify(allMovieLandUrl)};
     var cloudUrl = ${JSON.stringify(cloudStream ? cloudStream.url : '')};
@@ -2580,7 +2587,7 @@ async function handleStreamPlayer(req, res) {
     var currentServer = ${JSON.stringify(initialServer === 'allmovieland' ? 'vidsrc' : initialServer)};
     var art = null;
     var failoverIndex = 0;
-    var serverSequence = ['vidsrc', 'peachify', 'vidlink', 'cloud'].filter(function(s) {
+    var serverSequence = ['vidsrc', 'reelsdownload', 'peachify', 'vidlink', 'cloud'].filter(function(s) {
       if (s === 'cloud' && !cloudUrl) return false;
       return true;
     });
@@ -2610,6 +2617,12 @@ async function handleStreamPlayer(req, res) {
         var frame = document.getElementById('iframe-vidsrc');
         if (!frame.src || frame.src === 'about:blank' || frame.src !== vidsrcUrl) {
           frame.src = vidsrcUrl;
+        }
+        frame.classList.add('visible');
+      } else if (srv === 'reelsdownload') {
+        var frame = document.getElementById('iframe-reelsdownload');
+        if (!frame.src || frame.src === 'about:blank' || frame.src !== reelsdownloadUrl) {
+          frame.src = reelsdownloadUrl;
         }
         frame.classList.add('visible');
       } else if (srv === 'peachify') {
@@ -2696,6 +2709,7 @@ async function handleStreamPlayer(req, res) {
 
       // Rebuild streaming server URLs
       vidsrcUrl = 'https://vidsrc.pm/embed/tv/' + cleanId + '/' + currentSe + '/' + currentEp;
+      reelsdownloadUrl = 'https://embed.reelsdownload.online/player/' + cleanId + '/' + currentSe + '/' + currentEp + '?key=k_bf0ab0853bce46e3d90b256b';
       var pDub = ${JSON.stringify(peachifyDub)};
       peachifyUrl = 'https://peachify.pro/embed/tv/' + cleanId + '/' + currentSe + '/' + currentEp + '?accent=E50914&autoPlay=true&autoNext=true&showNextBtn=true' + (pDub ? '&dub=' + encodeURIComponent(pDub) : '');
       var currentLang = ${JSON.stringify(lang)};

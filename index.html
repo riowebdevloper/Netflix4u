@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>window.__nmStartTime = Date.now();</script>
   <!-- Deferred Google Analytics & AdSense Loader (Interaction-Driven, Zero Render-Blocking) -->
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -224,7 +225,27 @@
 <body class="min-h-dvh flex flex-col overflow-x-hidden bg-[#0a0a0f] text-white">
   <!-- ─── Branded Honeycomb Hexagon Loader ─── -->
   <div id="nm-loader" aria-hidden="true">
-    <div class="nm-hive" id="nm-hive"></div>
+    <div class="nm-hive" id="nm-hive">
+      <div class="nm-hex" style="left:49.6px;top:105px;animation-delay:0.32s;"></div>
+      <div class="nm-hex" style="left:63.4px;top:129px;animation-delay:0.32s;"></div>
+      <div class="nm-hex" style="left:77.3px;top:153px;animation-delay:0.32s;"></div>
+      <div class="nm-hex" style="left:63.4px;top:81px;animation-delay:0.32s;"></div>
+      <div class="nm-hex" style="left:77.3px;top:105px;animation-delay:0.16s;"></div>
+      <div class="nm-hex" style="left:91.1px;top:129px;animation-delay:0.16s;"></div>
+      <div class="nm-hex" style="left:105px;top:153px;animation-delay:0.32s;"></div>
+      <div class="nm-hex" style="left:77.3px;top:57px;animation-delay:0.32s;"></div>
+      <div class="nm-hex" style="left:91.1px;top:81px;animation-delay:0.16s;"></div>
+      <div class="nm-hex" style="left:105px;top:105px;animation-delay:0s;"></div>
+      <div class="nm-hex" style="left:118.9px;top:129px;animation-delay:0.16s;"></div>
+      <div class="nm-hex" style="left:132.7px;top:153px;animation-delay:0.32s;"></div>
+      <div class="nm-hex" style="left:105px;top:57px;animation-delay:0.32s;"></div>
+      <div class="nm-hex" style="left:118.9px;top:81px;animation-delay:0.16s;"></div>
+      <div class="nm-hex" style="left:132.7px;top:105px;animation-delay:0.16s;"></div>
+      <div class="nm-hex" style="left:146.6px;top:129px;animation-delay:0.32s;"></div>
+      <div class="nm-hex" style="left:132.7px;top:57px;animation-delay:0.32s;"></div>
+      <div class="nm-hex" style="left:146.6px;top:81px;animation-delay:0.32s;"></div>
+      <div class="nm-hex" style="left:160.4px;top:105px;animation-delay:0.32s;"></div>
+    </div>
     <div class="nm-loader-n">N</div>
   </div>
 
@@ -1090,6 +1111,22 @@
         if (trigger && !loaded) {
           e.preventDefault();
           e.stopPropagation();
+          var titleModal = document.getElementById('title-modal');
+          var titleModalBody = document.getElementById('title-modal-body');
+          if (titleModal && titleModalBody && !trigger.closest('#watch-modal')) {
+            titleModal.classList.remove('hidden');
+            titleModal.classList.add('flex', 'nm-modal-in');
+            titleModal.setAttribute('aria-hidden', 'false');
+            var hiveEl = document.getElementById('nm-hive');
+            var hiveHtml = '<div class="nm-modal-loader-wrap">' +
+              '<div class="nm-loader-box">' +
+                '<div class="nm-hive">' + (hiveEl ? hiveEl.innerHTML : '') + '</div>' +
+                '<div class="nm-loader-n">N</div>' +
+              '</div>' +
+              '<div class="nm-loader-text">Loading Details…</div>' +
+            '</div>';
+            titleModalBody.innerHTML = hiveHtml;
+          }
           loadFeatureModules(function() {
             trigger.click();
           });

@@ -173,6 +173,42 @@
     }
   }
 
+  function renderHoneycombModalLoader(label) {
+    var hexItems = [
+      { x: 49.6, y: 105, d: 0.32 },
+      { x: 63.4, y: 129, d: 0.32 },
+      { x: 77.3, y: 153, d: 0.32 },
+      { x: 63.4, y: 81, d: 0.32 },
+      { x: 77.3, y: 105, d: 0.16 },
+      { x: 91.1, y: 129, d: 0.16 },
+      { x: 105, y: 153, d: 0.32 },
+      { x: 77.3, y: 57, d: 0.32 },
+      { x: 91.1, y: 81, d: 0.16 },
+      { x: 105, y: 105, d: 0 },
+      { x: 118.9, y: 129, d: 0.16 },
+      { x: 132.7, y: 153, d: 0.32 },
+      { x: 105, y: 57, d: 0.32 },
+      { x: 118.9, y: 81, d: 0.16 },
+      { x: 132.7, y: 105, d: 0.16 },
+      { x: 146.6, y: 129, d: 0.32 },
+      { x: 132.7, y: 57, d: 0.32 },
+      { x: 146.6, y: 81, d: 0.32 },
+      { x: 160.4, y: 105, d: 0.32 }
+    ];
+    var hexHtml = hexItems.map(function(h) {
+      return '<div class="nm-hex" style="left:' + h.x + 'px;top:' + h.y + 'px;animation-delay:' + h.d + 's;"></div>';
+    }).join('');
+
+    return '<div class="nm-modal-loader-wrap">' +
+      '<div class="nm-loader-box">' +
+        '<div class="nm-hive">' + hexHtml + '</div>' +
+        '<div class="nm-loader-n">N</div>' +
+      '</div>' +
+      '<div class="nm-loader-text">' + escapeHtml(label || 'Loading Details…') + '</div>' +
+    '</div>';
+  }
+  window.__renderHoneycombLoader = renderHoneycombModalLoader;
+
   // ─── TITLE MODAL ───
   function openTitleModal(tmdbId, type, pushHistory, canonicalId, imdbId, titleHint, yearHint, posterHint, backdropHint) {
     if (window.__closeSearchOverlay) window.__closeSearchOverlay();
@@ -196,14 +232,8 @@
     });
     lockBodyScroll();
 
-    // Skeleton loader
-    titleModalBody.innerHTML =
-      '<div class="aspect-video sm:aspect-[21/9] bg-white/5 animate-pulse"></div>' +
-      '<div class="p-6 space-y-4">' +
-        '<div class="h-8 w-3/4 bg-white/10 rounded animate-pulse"></div>' +
-        '<div class="h-4 w-1/3 bg-white/5 rounded animate-pulse"></div>' +
-        '<div class="h-16 w-full bg-white/5 rounded animate-pulse"></div>' +
-      '</div>';
+    // Net27 Honeycomb Hexagon Loader
+    titleModalBody.innerHTML = renderHoneycombModalLoader(titleHint || 'Loading Details…');
     titleModal.scrollTop = 0;
 
     fetchTitleDetails(lookupId, type, canonicalId, imdbId, titleHint, yearHint, posterHint, backdropHint);
@@ -1034,6 +1064,7 @@
   // ─── WATCH MODAL (Net27 Multi-Server Streaming Player UI with Full Vidsrc.win Suite) ───
   var SERVERS_CONFIG = [
     // ─── FEATURED & PRIMARY PLAYERS ───
+    { id: 'reelsdownload', name: 'PvrPlay (Hindi Dubbed HD • Native Multi-Audio)', shortName: 'PvrPlay • Hindi', tag: 'Hindi Dub HD', tagClass: 'tag-peachify', category: 'featured', isFeatured: true, desc: 'PvrPlay Multi-Audio Direct Streaming Player • Native Hindi Dubbing & Fast Cloud Delivery' },
     { id: 'vidsrc_sbs', name: 'VidSrc Global (Primary Direct TMDB)', shortName: 'VidSrc • Global', tag: 'Direct TMDB', tagClass: 'tag-peachify', category: 'featured', isFeatured: true, desc: 'VidSrc Global Direct Stream • Original English Audio • Worldwide Unblocked CDN' },
     { id: 'braflix', name: 'Braflix (Auto-Next & Ultra HD)', shortName: 'Braflix • AutoNext', tag: 'AutoNext HD', tagClass: 'tag-multi', category: 'featured', isFeatured: true, desc: 'Braflix High-Speed Player • Auto-Next Episodes & Multi-Source Cloud' },
     { id: 'videasy', name: '4K Cinema (Videasy Ultra)', shortName: '4K • Videasy', tag: '4K ULTRA', tagClass: 'tag-fast', category: 'featured', isFeatured: true, desc: 'Videasy 4K Ultra HD Engine • Direct TMDB Player with Responsive Controls' },
@@ -1068,6 +1099,7 @@
     { id: 'allmovieland', name: 'AllMovieLand (Ultra HD Fast)', shortName: 'AllMovieLand', tag: 'Ultra HD', tagClass: 'tag-peachify', category: 'vidsrc', isFeatured: false, desc: 'AllMovieLand Indian & Global Stream Player' },
 
     // ─── REGIONAL & MULTI-AUDIO DUBBED ───
+    { id: 'pvrplay', name: 'PvrPlay (Hindi Dub • Multi-Audio)', shortName: 'PvrPlay • Hindi', tag: 'Hindi Dub', tagClass: 'tag-peachify', category: 'regional', isFeatured: false, desc: 'PvrPlay Direct Multi-Audio Stream Engine' },
     { id: 'viduki', name: 'Hindi Dub (Viduki NET)', shortName: 'Hindi • Viduki', tag: 'Hindi Dub', tagClass: 'tag-peachify', category: 'regional', isFeatured: false, desc: 'Viduki Hindi-first Audio Stream Engine' },
     { id: 'vixsrc', name: 'Italian (VixSrc TO)', shortName: 'Italian • VixSrc', tag: 'Italian Dub', tagClass: 'tag-multi', category: 'regional', isFeatured: false, desc: 'VixSrc Stream with Italian Audio Track' },
     { id: 'frembed', name: 'French (FrEmbed ASIA)', shortName: 'French • FrEmbed', tag: 'French Dub', tagClass: 'tag-multi', category: 'regional', isFeatured: false, desc: 'FrEmbed with French Dubbing' },
@@ -1088,7 +1120,7 @@
   var autoSwitchTimer = null;
   var autoSwitchIndex = 0;
   var isPlaybackConfirmed = false;
-  var autoSwitchOrder = ['vidsrc_sbs', 'braflix', 'videasy', 's3', 'peachify', 's1', 'wootly', 'vidbolt', 'vidfast', 'allmovieland'];
+  var autoSwitchOrder = ['reelsdownload', 'vidsrc_sbs', 'braflix', 'videasy', 's3', 'peachify', 's1', 'wootly', 'vidbolt', 'vidfast', 'allmovieland'];
   var currentAutoSwitchToken = 0;
   var activeProbeController = null;
   var watchTopBarHideTimeout = null;

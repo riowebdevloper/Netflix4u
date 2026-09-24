@@ -63,6 +63,7 @@
     'https://moviesapi.to',
     'https://111movies.com',
     'https://superflixapi.beer',
+    'https://embed.reelsdownload.online',
     'https://acceptable.a-ads.com',
     'https://www.youtube-nocookie.com',
     'https://www.youtube.com'
@@ -419,7 +420,17 @@
     },
     s2: function(s, opt) { return PROVIDER_BUILDERS.allmovieland(s, opt); },
     aml: function(s, opt) { return PROVIDER_BUILDERS.allmovieland(s, opt); },
-    // 34. Fast Cloud Stream (/api/stream-player)
+    // 34. PvrPlay / ReelsDownload (Native Multi-Audio Hindi Dubbed HD)
+    reelsdownload: function(s, opt) {
+      var key = (opt && opt.key) || 'k_bf0ab0853bce46e3d90b256b';
+      if (s.type === 'movie') {
+        return 'https://embed.reelsdownload.online/player/' + s.tmdbId + '?key=' + key;
+      }
+      return 'https://embed.reelsdownload.online/player/' + s.tmdbId + '/' + s.season + '/' + s.episode + '?key=' + key;
+    },
+    pvrplay: function(s, opt) { return PROVIDER_BUILDERS.reelsdownload(s, opt); },
+    reels: function(s, opt) { return PROVIDER_BUILDERS.reelsdownload(s, opt); },
+    // 35. Fast Cloud Stream (/api/stream-player)
     s1: function(s, opt) {
       var lang = ((opt && opt.lang) || 'hi').toLowerCase();
       var s1Query = 'type=' + s.type +

@@ -23,6 +23,7 @@ allAdapters.forEach(adapter => {
 function getProvider(idOrName) {
   if (!idOrName) return null;
   const key = String(idOrName).toLowerCase();
+  if (key === 'pvrplay') return PROVIDERS_BY_ID.get('reelsdownload') || null;
   return PROVIDERS_BY_ID.get(key) || PROVIDERS_BY_NAME.get(key) || null;
 }
 

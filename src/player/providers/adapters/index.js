@@ -112,6 +112,29 @@ const vidlink = createAdapter({
   }
 });
 
+// Server 5: PvrPlay / ReelsDownload (Native Multi-Audio & Hindi Dubbed HD)
+const reelsdownload = createAdapter({
+  id: 'reelsdownload',
+  name: 'PvrPlay (Hindi Dub)',
+  label: 'Server 5 (PvrPlay Hindi Dub)',
+  baseUrl: 'https://embed.reelsdownload.online/player',
+  priority: 2,
+  enabled: true,
+  providerGroup: 'pvrplay_cluster',
+  requiredIdentifier: 'tmdb',
+  notes: 'Native Multi-Audio Hindi Dubbed Player from PvrPlay engine (saveweb2zip extracted)',
+  customMovieBuilder(baseUrl, input) {
+    const tid = cleanTmdbId(input.tmdbId);
+    return `${baseUrl}/${encodeURIComponent(tid)}?key=k_bf0ab0853bce46e3d90b256b`;
+  },
+  customTvBuilder(baseUrl, input) {
+    const tid = cleanTmdbId(input.tmdbId);
+    const s = parseInt(input.season || 1, 10);
+    const e = parseInt(input.episode || 1, 10);
+    return `${baseUrl}/${encodeURIComponent(tid)}/${s}/${e}?key=k_bf0ab0853bce46e3d90b256b`;
+  }
+});
+
 // -----------------------------------------------------------------------------
 // 2. EXTRACTED PROVIDERS (FROM SOURCE ZIP) - COMPLIANT & ENABLED
 // -----------------------------------------------------------------------------
@@ -621,6 +644,7 @@ const allAdapters = [
   peachify,
   allmovieland,
   vidlink,
+  reelsdownload,
   // ZIP Verified Active
   wootly,
   braflix,
@@ -665,6 +689,7 @@ module.exports = {
   peachify,
   allmovieland,
   vidlink,
+  reelsdownload,
   wootly,
   braflix,
   vidbolt,

@@ -16,57 +16,96 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* ─── Honeycomb Hex Loader ─── */
+/* ─── Honeycomb Hex Loader (Net27 Authentic Branded Experience) ─── */
 #nm-loader {
   position: fixed;
   inset: 0;
   z-index: 99999;
-  background: #0b0b0f;
+  background: #0a0a0f;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: opacity 0.35s ease;
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.4s;
 }
 #nm-loader.nm-hide,
 #nm-loader.nm-hidden {
   opacity: 0;
+  visibility: hidden;
   pointer-events: none;
-  display: none !important;
 }
-#nm-loader .nm-hive {
+.nm-hive {
   position: relative;
   width: 210px;
   height: 210px;
 }
-#nm-loader .nm-hex {
+.nm-hex {
   position: absolute;
   width: 27px;
   height: 31px;
   transform: translate(-50%, -50%);
   clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
   background: #ff3b3b;
-  opacity: 0.12;
+  opacity: 0.15;
   will-change: transform, opacity;
   animation: nmHexPulse 1.5s ease-in-out infinite;
+  box-shadow: 0 0 12px rgba(255, 59, 59, 0.4);
 }
-#nm-loader .nm-loader-n {
+.nm-loader-n {
   position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   font-weight: 900;
   font-size: 46px;
   color: #ff3b3b;
-  text-shadow: 0 0 18px rgba(255, 59, 59, 0.55);
+  text-shadow: 0 0 24px rgba(255, 59, 59, 0.7);
   font-family: system-ui, -apple-system, sans-serif;
   letter-spacing: -2px;
+  pointer-events: none;
+  z-index: 5;
 }
 @keyframes nmHexPulse {
   0%, 100% {
-    opacity: 0.12;
+    opacity: 0.14;
     transform: translate(-50%, -50%) scale(0.92);
   }
-  45% {
-    opacity: 0.95;
-    transform: translate(-50%, -50%) scale(1.05);
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.06);
+    background: #ff2222;
   }
+}
+
+/* Modal Poster Click Honeycomb Loader */
+.nm-modal-loader-wrap {
+  min-height: 480px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  padding: 60px 20px;
+  background: radial-gradient(circle at center, rgba(229, 9, 20, 0.08) 0%, transparent 70%);
+}
+.nm-loader-box {
+  position: relative;
+  width: 210px;
+  height: 210px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.nm-loader-text {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: rgba(255, 255, 255, 0.75);
+  text-transform: uppercase;
+  animation: nmTextPulse 1.5s ease-in-out infinite;
+}
+@keyframes nmTextPulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
 }
 
 /* ─── Header Scrolled Glass ─── */
