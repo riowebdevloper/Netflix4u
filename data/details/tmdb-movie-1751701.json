@@ -1,0 +1,120 @@
+{
+  "id": "tmdb-movie-1751701",
+  "canonicalId": "tmdb-movie-1751701",
+  "externalProvider": "tmdb",
+  "externalId": "1751701",
+  "tmdbId": "1751701",
+  "imdbId": "tt36809539",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "After Impact",
+  "canonicalTitle": "After Impact",
+  "originalTitle": "After Impact",
+  "overview": "After losing his father, Ethan Nichols inherits one of the largest greenhouses in the country, just as the world faces a devastating threat from an approaching asteroid. As society begins to unravel, Ethan grapples with personal betrayal, overwhelming loneliness, and the growing fear that survival may come at the cost of his humanity. Seeking refuge in his family’s bunker, Ethan endures the harsh aftermath of the impact, wrestling with physical injury and emotional despair. When a faint voice crackles over his radio, Ethan discovers he's not as alone as he believed.",
+  "description": "After losing his father, Ethan Nichols inherits one of the largest greenhouses in the country, just as the world faces a devastating threat from an approaching asteroid. As society begins to unravel, Ethan grapples with personal betrayal, overwhelming loneliness, and the growing fear that survival may come at the cost of his humanity. Seeking refuge in his family’s bunker, Ethan endures the harsh aftermath of the impact, wrestling with physical injury and emotional despair. When a faint voice crackles over his radio, Ethan discovers he's not as alone as he believed.",
+  "shortDescription": "After losing his father, Ethan Nichols inherits one of the largest greenhouses in the country, just as the world faces a",
+  "year": 2026,
+  "releaseDate": "2026-09-15",
+  "rating": 5.1,
+  "votes": "0.0K",
+  "quality": "FHD",
+  "duration": "1h 35m",
+  "genres": [
+    "Science Fiction",
+    "Drama",
+    "Thriller"
+  ],
+  "categories": [
+    "Science Fiction",
+    "Drama",
+    "Thriller"
+  ],
+  "language": "English",
+  "country": "US",
+  "director": "Michiel Rensen",
+  "poster": "https://image.tmdb.org/t/p/w500/yzDuAQCY2n6zzOlBkn6JzhLhY3k.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/k22XyPbce7zvzzf5OnT4uaY8ZD1.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/Af8D6sRDyxo?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/Af8D6sRDyxo?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "4470046",
+      "name": "Michiel Rensen",
+      "character": "Ethan",
+      "photo": "https://image.tmdb.org/t/p/w185/jkIHfyr0t9jGc3GRt9IInVvU1Bo.jpg"
+    },
+    {
+      "id": "4470041",
+      "name": "Maxie Li",
+      "character": "Jessie",
+      "photo": null
+    },
+    {
+      "id": "6419648",
+      "name": "Riki Antonievich",
+      "character": "Jack",
+      "photo": null
+    },
+    {
+      "id": "6419649",
+      "name": "Will Clague",
+      "character": "Connor",
+      "photo": null
+    },
+    {
+      "id": "6419650",
+      "name": "Stephanie Ramlose",
+      "character": "Elle",
+      "photo": null
+    },
+    {
+      "id": "5394732",
+      "name": "Lee-Ann Dirks",
+      "character": "Sophie",
+      "photo": null
+    },
+    {
+      "id": "1290158",
+      "name": "James Crompton",
+      "character": "Religious Member",
+      "photo": "https://image.tmdb.org/t/p/w185/o9ByykxXcYjHGg60hB07zi8MYtL.jpg"
+    },
+    {
+      "id": "6419651",
+      "name": "Moehau Hodges-Tai",
+      "character": "Desmond",
+      "photo": null
+    },
+    {
+      "id": "1472897",
+      "name": "Lisa Zhang",
+      "character": "Madeline",
+      "photo": "https://image.tmdb.org/t/p/w185/9HXBAZK1ktbzkEQgL0HHd33Tmym.jpg"
+    },
+    {
+      "id": "1778684",
+      "name": "Karlton Laing",
+      "character": "Phillip",
+      "photo": "https://image.tmdb.org/t/p/w185/venyMNccSODFjBYPouUQIYDwx5U.jpg"
+    },
+    {
+      "id": "6117129",
+      "name": "David Tiko",
+      "character": "John",
+      "photo": "https://image.tmdb.org/t/p/w185/yYm5ECmpNWpUhPwb1b3fotmvqIQ.jpg"
+    },
+    {
+      "id": "6317946",
+      "name": "Carolyn Deng",
+      "character": "Brie Harrison",
+      "photo": null
+    }
+  ],
+  "seasons": 1,
+  "episodes": 1,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-24T03:09:44.004Z",
+  "createdAt": "2026-09-24T03:09:44.004Z",
+  "updatedAt": "2026-09-24T03:09:44.004Z",
+  "links": []
+}
