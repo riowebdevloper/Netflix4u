@@ -25,6 +25,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  pointer-events: none;
   transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.4s;
 }
 #nm-loader.nm-hide,
@@ -32,6 +33,7 @@ body {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
+  display: none !important;
 }
 .nm-hive {
   position: relative;

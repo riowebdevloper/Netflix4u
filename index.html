@@ -219,7 +219,7 @@
   <!-- Net27 Exact Layout & Styles -->
   <link rel="stylesheet" href="/css/Layout.CBW6-iGy.css">
   <link rel="stylesheet" href="/css/index.P3dZcbru.css">
-  <link rel="stylesheet" href="/css/netflix4u-net27.css?v=2.9.3">
+  <link rel="stylesheet" href="/css/netflix4u-net27.css?v=3.5.0">
 </head>
 
 <body class="min-h-dvh flex flex-col overflow-x-hidden bg-[#0a0a0f] text-white">
@@ -248,6 +248,20 @@
     </div>
     <div class="nm-loader-n">N</div>
   </div>
+  <script>
+    (function() {
+      var l = document.getElementById('nm-loader');
+      if (!l) return;
+      var dismiss = function() {
+        if (!l || l._hidden) return;
+        l._hidden = true;
+        l.classList.add('nm-hide');
+        setTimeout(function() { l.style.display = 'none'; try { l.remove(); } catch(e){} }, 400);
+      };
+      setTimeout(dismiss, 900);
+      document.addEventListener('DOMContentLoaded', function() { setTimeout(dismiss, 500); });
+    })();
+  </script>
 
   <main class="flex-1">
     <div class="min-h-dvh bg-[#0a0a0f] text-white relative">
@@ -1049,90 +1063,20 @@
   </div>
   <!-- ─── END AADS AD UNIT 2455136 ─── -->
 
-  <!-- Client Application Core Scripts (Deferred for Zero Render-Blocking) -->
+  <!-- Client Application Core Scripts (Deferred for Fast, Non-Blocking Parallel Load) -->
   <script defer src="/js/version-checker.js?v=3.5.0"></script>
   <script defer src="/js/ads-manager.js?v=3.5.0"></script>
+  <script defer src="/js/player-resolver.js?v=3.5.0"></script>
+  <script defer src="/js/download-resolver.js?v=3.5.0"></script>
+  <script defer src="/js/net27-modal.js?v=3.5.0"></script>
   <script defer src="/js/net27-core.js?v=3.5.0"></script>
 
-  <!-- Modal, Player & Download Feature Modules (Strict On-Demand Route Splitting) -->
   <script>
-    (function() {
-      var loaded = false;
-      var loading = false;
-      var callbacks = [];
-
-      function loadFeatureModules(cb) {
-        if (typeof cb === 'function') callbacks.push(cb);
-        if (loaded) {
-          while (callbacks.length) {
-            var fn = callbacks.shift();
-            try { fn(); } catch(e) {}
-          }
-          return;
-        }
-        if (loading) return;
-        loading = true;
-
-        var modules = [
-          '/js/player-resolver.js?v=3.5.0',
-          '/js/download-resolver.js?v=3.5.0',
-          '/js/net27-modal.js?v=3.5.0'
-        ];
-        var remaining = modules.length;
-        modules.forEach(function(src) {
-          var s = document.createElement('script');
-          s.src = src;
-          s.async = true;
-          s.onload = s.onerror = function() {
-            remaining--;
-            if (remaining <= 0) {
-              loaded = true;
-              loading = false;
-              while (callbacks.length) {
-                var fn = callbacks.shift();
-                try { fn(); } catch(e) {}
-              }
-            }
-          };
-          document.body.appendChild(s);
-        });
+    window.loadNetflix4uModals = function(cb) {
+      if (typeof cb === 'function') {
+        try { cb(); } catch(e) {}
       }
-      window.loadNetflix4uModals = loadFeatureModules;
-
-      // Direct hash route on entry
-      if (window.location.hash && (/#(title|w)=/i.test(window.location.hash) || /#modal-/i.test(window.location.hash))) {
-        loadFeatureModules();
-        return;
-      }
-
-      // Delegate first modal/player interaction to load scripts immediately
-      document.addEventListener('click', function(e) {
-        var trigger = e.target.closest('[data-modal], #hero-play, #hero-click, .dl-btn, [data-fast-download], [data-tmdbid]');
-        if (trigger && !loaded) {
-          e.preventDefault();
-          e.stopPropagation();
-          var titleModal = document.getElementById('title-modal');
-          var titleModalBody = document.getElementById('title-modal-body');
-          if (titleModal && titleModalBody && !trigger.closest('#watch-modal')) {
-            titleModal.classList.remove('hidden');
-            titleModal.classList.add('flex', 'nm-modal-in');
-            titleModal.setAttribute('aria-hidden', 'false');
-            var hiveEl = document.getElementById('nm-hive');
-            var hiveHtml = '<div class="nm-modal-loader-wrap">' +
-              '<div class="nm-loader-box">' +
-                '<div class="nm-hive">' + (hiveEl ? hiveEl.innerHTML : '') + '</div>' +
-                '<div class="nm-loader-n">N</div>' +
-              '</div>' +
-              '<div class="nm-loader-text">Loading Details…</div>' +
-            '</div>';
-            titleModalBody.innerHTML = hiveHtml;
-          }
-          loadFeatureModules(function() {
-            trigger.click();
-          });
-        }
-      }, true);
-    })();
+    };
   </script>
 
   <!-- ─── SPONSOR & AD MANAGEMENT ─── -->

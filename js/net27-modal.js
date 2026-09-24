@@ -324,6 +324,7 @@
 
     // Authorized Hicine Download links only
     var rawDownloadLinks = data.downloadLinks || data.links || [];
+    var downloadLinks = rawDownloadLinks;
 
     var hicineLinks = rawDownloadLinks.filter(function(l) {
       if (!l || !l.url) return false;

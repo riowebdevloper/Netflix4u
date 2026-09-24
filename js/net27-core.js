@@ -371,20 +371,23 @@
     }
     window.__nmHideLoader = hideLoader;
 
-    var minDisplayTime = 800;
+    var minDisplayTime = 600;
     var startTime = window.__nmStartTime || Date.now();
     var elapsed = Date.now() - startTime;
     var remaining = Math.max(0, minDisplayTime - elapsed);
 
-    if (document.readyState === 'complete') {
+    if (document.readyState === 'complete' || document.readyState === 'interactive') {
       setTimeout(hideLoader, remaining);
     } else {
-      window.addEventListener('load', function() {
+      document.addEventListener('DOMContentLoaded', function() {
         var curElapsed = Date.now() - startTime;
         setTimeout(hideLoader, Math.max(0, minDisplayTime - curElapsed));
       });
+      window.addEventListener('load', function() {
+        hideLoader();
+      });
       // Safety fallback guarantee
-      setTimeout(hideLoader, Math.max(remaining, 1600));
+      setTimeout(hideLoader, 900);
     }
   }
 
