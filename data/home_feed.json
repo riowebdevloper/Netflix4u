@@ -820,6 +820,93 @@
       "publishedAt": "2022-08-28T13:22:56.000Z"
     },
     {
+      "id": "tmdb-series-289078",
+      "canonicalId": "tmdb-series-289078",
+      "title": "A Prophet",
+      "rawTitle": "A Prophet",
+      "slug": "tmdb-series-289078-a-prophet",
+      "type": "series",
+      "year": 2026,
+      "quality": "FHD",
+      "provider": "tmdb",
+      "rating": 8,
+      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FgiSXBUuCfCXV9ALQAmcZd659J0r.jpg&output=webp",
+      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2Fe6KzyAR2xCmss9fnnPteDHkDIvd.jpg&output=webp",
+      "imdbId": "tt36758489",
+      "tmdbId": "289078",
+      "categories": [
+        "Drama",
+        "Mystery"
+      ],
+      "status": "PUBLISHED",
+      "publishedAt": "2026-09-25T03:26:44.419Z"
+    },
+    {
+      "id": "tmdb-movie-1375441",
+      "canonicalId": "tmdb-movie-1375441",
+      "title": "Primetime",
+      "rawTitle": "Primetime",
+      "slug": "tmdb-movie-1375441-primetime",
+      "type": "movie",
+      "year": 2026,
+      "quality": "FHD",
+      "provider": "tmdb",
+      "rating": 6.7,
+      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2F51VDtNQFuD2I86hrT4ekytg9Dq3.jpg&output=webp",
+      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F4E5RVsSUG1A4Adwbqupu5w6kofZ.jpg&output=webp",
+      "imdbId": "tt34206385",
+      "tmdbId": "1375441",
+      "categories": [
+        "Drama",
+        "Thriller"
+      ],
+      "status": "PUBLISHED",
+      "publishedAt": "2026-09-25T03:26:44.355Z"
+    },
+    {
+      "id": "tmdb-series-310290",
+      "canonicalId": "tmdb-series-310290",
+      "title": "My Sad Dead",
+      "rawTitle": "My Sad Dead",
+      "slug": "tmdb-series-310290-my-sad-dead",
+      "type": "series",
+      "year": 2026,
+      "quality": "FHD",
+      "provider": "tmdb",
+      "rating": 3,
+      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FojtRXQj7MvVw7oPkJwf0FPp61He.jpg&output=webp",
+      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2Fy3q1LeVYBU00ASSyjFSX9KerLzz.jpg&output=webp",
+      "imdbId": "tt37158600",
+      "tmdbId": "310290",
+      "categories": [
+        "Drama"
+      ],
+      "status": "PUBLISHED",
+      "publishedAt": "2026-09-25T03:26:44.331Z"
+    },
+    {
+      "id": "tmdb-series-305357",
+      "canonicalId": "tmdb-series-305357",
+      "title": "A Different World",
+      "rawTitle": "A Different World",
+      "slug": "tmdb-series-305357-a-different-world",
+      "type": "series",
+      "year": 2026,
+      "quality": "FHD",
+      "provider": "tmdb",
+      "rating": 9.5,
+      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FmmE4RNbsPOwwRo5rnVRd1IXzgcZ.jpg&output=webp",
+      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F1lVbKPOVjTV02FtLqiPk9F9z1Fh.jpg&output=webp",
+      "imdbId": "tt33081352",
+      "tmdbId": "305357",
+      "categories": [
+        "Comedy",
+        "Drama"
+      ],
+      "status": "PUBLISHED",
+      "publishedAt": "2026-09-25T03:26:44.319Z"
+    },
+    {
       "id": "tmdb-movie-1751701",
       "canonicalId": "tmdb-movie-1751701",
       "title": "After Impact",
@@ -873,7 +960,7 @@
       "year": 2026,
       "quality": "FHD",
       "provider": "tmdb",
-      "rating": 10,
+      "rating": 9.5,
       "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FjD7ZQpDEZzAVReJzkOtmuFoIl2m.jpg&output=webp",
       "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FaLE7R8QZPpTiWZS48PS22i2OWbl.jpg&output=webp",
       "imdbId": "tt6773088",
@@ -894,7 +981,7 @@
       "year": 2026,
       "quality": "FHD",
       "provider": "tmdb",
-      "rating": 8.4,
+      "rating": 8.1,
       "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FvfZxVHextAGC70zrNhS8lsROqP1.jpg&output=webp",
       "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2Fc8hvRzN5nijvp1VcSs8nqHly1bK.jpg&output=webp",
       "imdbId": "tt22526100",
@@ -981,7 +1068,7 @@
       "year": 2026,
       "quality": "FHD",
       "provider": "tmdb",
-      "rating": 7.3,
+      "rating": 7,
       "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2Fl1JFNC1SdgyXVr7BaD5ehaYBvOC.jpg&output=webp",
       "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2Flneqlgbg3XUjNaeGYk8arhgzczo.jpg&output=webp",
       "imdbId": "tt6628920",
@@ -1003,7 +1090,7 @@
       "year": 2026,
       "quality": "FHD",
       "provider": "tmdb",
-      "rating": 7.4,
+      "rating": 7.7,
       "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FniQ4NBh2jqAf1hDZP5m6ReWFAb7.jpg&output=webp",
       "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F8giIQcHpxgsPVP6c7aQtHl3txuh.jpg&output=webp",
       "imdbId": "tt37971717",
@@ -1058,97 +1145,6 @@
       ],
       "status": "PUBLISHED",
       "publishedAt": "2026-09-22T03:19:38.115Z"
-    },
-    {
-      "id": "tmdb-series-285418",
-      "canonicalId": "tmdb-series-285418",
-      "title": "Youth",
-      "rawTitle": "Youth",
-      "slug": "tmdb-series-285418-youth",
-      "type": "series",
-      "year": 2026,
-      "quality": "FHD",
-      "provider": "tmdb",
-      "rating": 7.2,
-      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2Fbk1zbzbu0xaYQuIANv4Pe8HHyAY.jpg&output=webp",
-      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F7pwybpJ2VSqqWgxZHTYqzRz01qH.jpg&output=webp",
-      "imdbId": "tt35949226",
-      "tmdbId": "285418",
-      "categories": [
-        "Comedy",
-        "Drama"
-      ],
-      "status": "PUBLISHED",
-      "publishedAt": "2026-09-22T03:19:38.057Z"
-    },
-    {
-      "id": "tmdb-movie-1263337",
-      "canonicalId": "tmdb-movie-1263337",
-      "title": "Heart of the Beast",
-      "rawTitle": "Heart of the Beast",
-      "slug": "tmdb-movie-1263337-heart-of-the-beast",
-      "type": "movie",
-      "year": 2026,
-      "quality": "FHD",
-      "provider": "tmdb",
-      "rating": 7.8,
-      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2F1ApfSA8JTqeha3GTFEY8syV4auq.jpg&output=webp",
-      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FbicMU6xVD5deVyKP2azpyx7xkmH.jpg&output=webp",
-      "imdbId": "tt7526136",
-      "tmdbId": "1263337",
-      "categories": [
-        "Adventure",
-        "Thriller"
-      ],
-      "status": "PUBLISHED",
-      "publishedAt": "2026-09-22T03:19:37.991Z"
-    },
-    {
-      "id": "tmdb-movie-1465063",
-      "canonicalId": "tmdb-movie-1465063",
-      "title": "Forgotten Island",
-      "rawTitle": "Forgotten Island",
-      "slug": "tmdb-movie-1465063-forgotten-island",
-      "type": "movie",
-      "year": 2026,
-      "quality": "FHD",
-      "provider": "tmdb",
-      "rating": 7.4,
-      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FLr0Ng7Gg02RW1AyfYEL6P0WUvd.jpg&output=webp",
-      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F2o9FzuBzCqrDTdlHRuEVnGD2d5h.jpg&output=webp",
-      "imdbId": "tt36583977",
-      "tmdbId": "1465063",
-      "categories": [
-        "Animation",
-        "Adventure",
-        "Fantasy",
-        "Comedy",
-        "Family"
-      ],
-      "status": "PUBLISHED",
-      "publishedAt": "2026-09-22T03:19:37.932Z"
-    },
-    {
-      "id": "tmdb-series-239618",
-      "canonicalId": "tmdb-series-239618",
-      "title": "American Hostage",
-      "rawTitle": "American Hostage",
-      "slug": "tmdb-series-239618-american-hostage",
-      "type": "series",
-      "year": 2026,
-      "quality": "FHD",
-      "provider": "tmdb",
-      "rating": 7.8,
-      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FkVXkBIJw4eW9KC8VZvYvoS6Qg0j.jpg&output=webp",
-      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2Ft708JUdkHAoZF83f4RjqcIGrJ99.jpg&output=webp",
-      "imdbId": "tt30051064",
-      "tmdbId": "239618",
-      "categories": [
-        "Crime",
-        "Drama"
-      ],
-      "status": "PUBLISHED",
-      "publishedAt": "2026-09-21T03:20:15.016Z"
     }
   ],
   "featured": [
@@ -3681,27 +3677,6 @@
       "publishedAt": "2026-09-24T03:09:43.982Z"
     },
     {
-      "id": "tmdb-series-250203",
-      "canonicalId": "tmdb-series-250203",
-      "title": "Brothers",
-      "rawTitle": "Brothers",
-      "slug": "tmdb-series-250203-brothers",
-      "type": "series",
-      "year": 2026,
-      "quality": "FHD",
-      "provider": "tmdb",
-      "rating": 10,
-      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FjD7ZQpDEZzAVReJzkOtmuFoIl2m.jpg&output=webp",
-      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FaLE7R8QZPpTiWZS48PS22i2OWbl.jpg&output=webp",
-      "imdbId": "tt6773088",
-      "tmdbId": "250203",
-      "categories": [
-        "Comedy"
-      ],
-      "status": "PUBLISHED",
-      "publishedAt": "2026-09-24T03:09:43.958Z"
-    },
-    {
       "id": "tmdb-series-295089",
       "canonicalId": "tmdb-series-295089",
       "title": "The Doll",
@@ -3786,6 +3761,49 @@
       ],
       "status": "PUBLISHED",
       "publishedAt": "2026-09-17T03:25:48.793Z"
+    },
+    {
+      "id": "tmdb-series-305357",
+      "canonicalId": "tmdb-series-305357",
+      "title": "A Different World",
+      "rawTitle": "A Different World",
+      "slug": "tmdb-series-305357-a-different-world",
+      "type": "series",
+      "year": 2026,
+      "quality": "FHD",
+      "provider": "tmdb",
+      "rating": 9.5,
+      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FmmE4RNbsPOwwRo5rnVRd1IXzgcZ.jpg&output=webp",
+      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F1lVbKPOVjTV02FtLqiPk9F9z1Fh.jpg&output=webp",
+      "imdbId": "tt33081352",
+      "tmdbId": "305357",
+      "categories": [
+        "Comedy",
+        "Drama"
+      ],
+      "status": "PUBLISHED",
+      "publishedAt": "2026-09-25T03:26:44.319Z"
+    },
+    {
+      "id": "tmdb-series-250203",
+      "canonicalId": "tmdb-series-250203",
+      "title": "Brothers",
+      "rawTitle": "Brothers",
+      "slug": "tmdb-series-250203-brothers",
+      "type": "series",
+      "year": 2026,
+      "quality": "FHD",
+      "provider": "tmdb",
+      "rating": 9.5,
+      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FjD7ZQpDEZzAVReJzkOtmuFoIl2m.jpg&output=webp",
+      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FaLE7R8QZPpTiWZS48PS22i2OWbl.jpg&output=webp",
+      "imdbId": "tt6773088",
+      "tmdbId": "250203",
+      "categories": [
+        "Comedy"
+      ],
+      "status": "PUBLISHED",
+      "publishedAt": "2026-09-24T03:09:43.958Z"
     },
     {
       "id": "28185",
@@ -4022,6 +4040,28 @@
       "publishedAt": "2026-09-16T03:20:32.278Z"
     },
     {
+      "id": "tmdb-series-214999",
+      "canonicalId": "tmdb-series-214999",
+      "title": "The Good Bad Mother",
+      "rawTitle": "The Good Bad Mother",
+      "slug": "tmdb-series-214999-the-good-bad-mother",
+      "type": "series",
+      "year": 2023,
+      "quality": "FHD",
+      "provider": "tmdb",
+      "rating": 8.9,
+      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FvtDLhvpTk1xcaBCKubSH0if575G.jpg&output=webp",
+      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FzOZqdv7UTc2sP2Tu5Cxj8j1M2r8.jpg&output=webp",
+      "imdbId": "tt27042206",
+      "tmdbId": "214999",
+      "categories": [
+        "Drama",
+        "Comedy"
+      ],
+      "status": "PUBLISHED",
+      "publishedAt": "2026-09-25T03:26:44.450Z"
+    },
+    {
       "id": "12112907",
       "canonicalId": "12112907",
       "title": "Swapped",
@@ -4106,66 +4146,6 @@
       ],
       "status": "PUBLISHED",
       "publishedAt": "2026-06-03T12:40:26.000Z"
-    },
-    {
-      "id": "28069",
-      "canonicalId": "28069",
-      "title": "The WONDERfools",
-      "rawTitle": "The WONDERfools (2026)",
-      "slug": "the-wonderfools-2026",
-      "type": "series",
-      "year": 2026,
-      "quality": "FHD",
-      "provider": "dotmobiz",
-      "rating": 8.9,
-      "poster": "https://storage.hicine.sbs/images/jj7AYkz2OLRDL1wfJmjTXyWQ5I4.webp",
-      "backdrop": "https://storage.hicine.sbs/images/jj7AYkz2OLRDL1wfJmjTXyWQ5I4.webp",
-      "categories": [
-        "Hollywood Series",
-        "Dual Audio Series",
-        "1080p",
-        "2026",
-        "480p",
-        "720p",
-        "Action",
-        "Adventure",
-        "Comedy",
-        "Fantasy",
-        "Netflix",
-        "Sci-Fi",
-        "WEB-DL"
-      ],
-      "status": "PUBLISHED",
-      "publishedAt": "2026-05-20T23:26:59.000Z"
-    },
-    {
-      "id": "12113347",
-      "canonicalId": "12113347",
-      "title": "Facing El Chapo",
-      "rawTitle": "Facing El Chapo (2026)",
-      "slug": "facing-el-chapo-2026",
-      "type": "movie",
-      "year": 2026,
-      "quality": "FHD",
-      "provider": "dotmobiz",
-      "rating": 8.8,
-      "poster": "https://storage.hicine.sbs/images/alpf5v4UqSFawPmG9RX03Or4BDk.webp",
-      "backdrop": "https://storage.hicine.sbs/images/alpf5v4UqSFawPmG9RX03Or4BDk.webp",
-      "categories": [
-        "Hollywood",
-        "Dual Audio Movies",
-        "1080p",
-        "2026",
-        "480p",
-        "720p",
-        "Action",
-        "Crime",
-        "Featured",
-        "Netflix",
-        "WEB-DL"
-      ],
-      "status": "PUBLISHED",
-      "publishedAt": "2026-08-22T14:34:29.000Z"
     }
   ],
   "nowPlaying": [
@@ -4306,6 +4286,93 @@
       "publishedAt": "2022-08-28T13:22:56.000Z"
     },
     {
+      "id": "tmdb-series-289078",
+      "canonicalId": "tmdb-series-289078",
+      "title": "A Prophet",
+      "rawTitle": "A Prophet",
+      "slug": "tmdb-series-289078-a-prophet",
+      "type": "series",
+      "year": 2026,
+      "quality": "FHD",
+      "provider": "tmdb",
+      "rating": 8,
+      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FgiSXBUuCfCXV9ALQAmcZd659J0r.jpg&output=webp",
+      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2Fe6KzyAR2xCmss9fnnPteDHkDIvd.jpg&output=webp",
+      "imdbId": "tt36758489",
+      "tmdbId": "289078",
+      "categories": [
+        "Drama",
+        "Mystery"
+      ],
+      "status": "PUBLISHED",
+      "publishedAt": "2026-09-25T03:26:44.419Z"
+    },
+    {
+      "id": "tmdb-movie-1375441",
+      "canonicalId": "tmdb-movie-1375441",
+      "title": "Primetime",
+      "rawTitle": "Primetime",
+      "slug": "tmdb-movie-1375441-primetime",
+      "type": "movie",
+      "year": 2026,
+      "quality": "FHD",
+      "provider": "tmdb",
+      "rating": 6.7,
+      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2F51VDtNQFuD2I86hrT4ekytg9Dq3.jpg&output=webp",
+      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F4E5RVsSUG1A4Adwbqupu5w6kofZ.jpg&output=webp",
+      "imdbId": "tt34206385",
+      "tmdbId": "1375441",
+      "categories": [
+        "Drama",
+        "Thriller"
+      ],
+      "status": "PUBLISHED",
+      "publishedAt": "2026-09-25T03:26:44.355Z"
+    },
+    {
+      "id": "tmdb-series-310290",
+      "canonicalId": "tmdb-series-310290",
+      "title": "My Sad Dead",
+      "rawTitle": "My Sad Dead",
+      "slug": "tmdb-series-310290-my-sad-dead",
+      "type": "series",
+      "year": 2026,
+      "quality": "FHD",
+      "provider": "tmdb",
+      "rating": 3,
+      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FojtRXQj7MvVw7oPkJwf0FPp61He.jpg&output=webp",
+      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2Fy3q1LeVYBU00ASSyjFSX9KerLzz.jpg&output=webp",
+      "imdbId": "tt37158600",
+      "tmdbId": "310290",
+      "categories": [
+        "Drama"
+      ],
+      "status": "PUBLISHED",
+      "publishedAt": "2026-09-25T03:26:44.331Z"
+    },
+    {
+      "id": "tmdb-series-305357",
+      "canonicalId": "tmdb-series-305357",
+      "title": "A Different World",
+      "rawTitle": "A Different World",
+      "slug": "tmdb-series-305357-a-different-world",
+      "type": "series",
+      "year": 2026,
+      "quality": "FHD",
+      "provider": "tmdb",
+      "rating": 9.5,
+      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FmmE4RNbsPOwwRo5rnVRd1IXzgcZ.jpg&output=webp",
+      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F1lVbKPOVjTV02FtLqiPk9F9z1Fh.jpg&output=webp",
+      "imdbId": "tt33081352",
+      "tmdbId": "305357",
+      "categories": [
+        "Comedy",
+        "Drama"
+      ],
+      "status": "PUBLISHED",
+      "publishedAt": "2026-09-25T03:26:44.319Z"
+    },
+    {
       "id": "tmdb-movie-1751701",
       "canonicalId": "tmdb-movie-1751701",
       "title": "After Impact",
@@ -4359,7 +4426,7 @@
       "year": 2026,
       "quality": "FHD",
       "provider": "tmdb",
-      "rating": 10,
+      "rating": 9.5,
       "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FjD7ZQpDEZzAVReJzkOtmuFoIl2m.jpg&output=webp",
       "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FaLE7R8QZPpTiWZS48PS22i2OWbl.jpg&output=webp",
       "imdbId": "tt6773088",
@@ -4380,7 +4447,7 @@
       "year": 2026,
       "quality": "FHD",
       "provider": "tmdb",
-      "rating": 8.4,
+      "rating": 8.1,
       "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FvfZxVHextAGC70zrNhS8lsROqP1.jpg&output=webp",
       "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2Fc8hvRzN5nijvp1VcSs8nqHly1bK.jpg&output=webp",
       "imdbId": "tt22526100",
@@ -4456,95 +4523,7 @@
       ],
       "status": "PUBLISHED",
       "publishedAt": "2026-09-23T03:20:14.854Z"
-    },
-    {
-      "id": "tmdb-movie-445466",
-      "canonicalId": "tmdb-movie-445466",
-      "title": "Idiots",
-      "rawTitle": "Idiots",
-      "slug": "tmdb-movie-445466-idiots",
-      "type": "movie",
-      "year": 2026,
-      "quality": "FHD",
-      "provider": "tmdb",
-      "rating": 7.3,
-      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2Fl1JFNC1SdgyXVr7BaD5ehaYBvOC.jpg&output=webp",
-      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2Flneqlgbg3XUjNaeGYk8arhgzczo.jpg&output=webp",
-      "imdbId": "tt6628920",
-      "tmdbId": "445466",
-      "categories": [
-        "Comedy",
-        "Crime"
-      ],
-      "status": "PUBLISHED",
-      "publishedAt": "2026-09-23T03:20:14.838Z"
-    },
-    {
-      "id": "tmdb-movie-1607127",
-      "canonicalId": "tmdb-movie-1607127",
-      "title": "One Last Shot",
-      "rawTitle": "One Last Shot",
-      "slug": "tmdb-movie-1607127-one-last-shot",
-      "type": "movie",
-      "year": 2026,
-      "quality": "FHD",
-      "provider": "tmdb",
-      "rating": 7.4,
-      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FniQ4NBh2jqAf1hDZP5m6ReWFAb7.jpg&output=webp",
-      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F8giIQcHpxgsPVP6c7aQtHl3txuh.jpg&output=webp",
-      "imdbId": "tt37971717",
-      "tmdbId": "1607127",
-      "categories": [
-        "Action",
-        "Thriller"
-      ],
-      "status": "PUBLISHED",
-      "publishedAt": "2026-09-23T03:20:14.820Z"
-    },
-    {
-      "id": "tmdb-movie-675871",
-      "canonicalId": "tmdb-movie-675871",
-      "title": "Super Troopers 3",
-      "rawTitle": "Super Troopers 3",
-      "slug": "tmdb-movie-675871-super-troopers-3",
-      "type": "movie",
-      "year": 2026,
-      "quality": "FHD",
-      "provider": "tmdb",
-      "rating": 7,
-      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FVVU42nqsEmUtFpH1d9MHj5BIpF.jpg&output=webp",
-      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FoU2H07DQVjGMp2vUgrYzso36v15.jpg&output=webp",
-      "imdbId": "tt8820258",
-      "tmdbId": "675871",
-      "categories": [
-        "Comedy",
-        "Crime",
-        "Mystery"
-      ],
-      "status": "PUBLISHED",
-      "publishedAt": "2026-09-22T03:19:38.171Z"
-    },
-    {
-      "id": "tmdb-movie-1341138",
-      "canonicalId": "tmdb-movie-1341138",
-      "title": "Spa Weekend",
-      "rawTitle": "Spa Weekend",
-      "slug": "tmdb-movie-1341138-spa-weekend",
-      "type": "movie",
-      "year": 2026,
-      "quality": "FHD",
-      "provider": "tmdb",
-      "rating": 6.6,
-      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FzMmHkDi2PqudAsHlhtmkkshZ5XX.jpg&output=webp",
-      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F8EMwicuj1TrkclMOvslFCQyRg6I.jpg&output=webp",
-      "imdbId": "tt33305867",
-      "tmdbId": "1341138",
-      "categories": [
-        "Comedy"
-      ],
-      "status": "PUBLISHED",
-      "publishedAt": "2026-09-22T03:19:38.115Z"
     }
   ],
-  "updatedAt": "2026-09-24T03:09:44.641Z"
+  "updatedAt": "2026-09-25T03:26:45.089Z"
 }

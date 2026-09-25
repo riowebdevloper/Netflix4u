@@ -1,0 +1,102 @@
+{
+  "id": "tmdb-series-1413",
+  "canonicalId": "tmdb-series-1413",
+  "externalProvider": "tmdb",
+  "externalId": "1413",
+  "tmdbId": "1413",
+  "imdbId": "tt1844624",
+  "type": "series",
+  "contentType": "series",
+  "title": "American Horror Story",
+  "canonicalTitle": "American Horror Story",
+  "originalTitle": "American Horror Story",
+  "overview": "An anthology horror drama series centering on different characters and locations, including a house with a murderous past, an asylum, a witch coven, a freak show, a hotel, a farmhouse in Roanoke, a cult, the apocalypse and a summer camp.",
+  "description": "An anthology horror drama series centering on different characters and locations, including a house with a murderous past, an asylum, a witch coven, a freak show, a hotel, a farmhouse in Roanoke, a cult, the apocalypse and a summer camp.",
+  "shortDescription": "An anthology horror drama series centering on different characters and locations, including a house with a murderous pas",
+  "year": 2011,
+  "releaseDate": "2011-10-05",
+  "rating": 8.1,
+  "votes": "6.2K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Drama",
+    "Mystery",
+    "Sci-Fi & Fantasy"
+  ],
+  "categories": [
+    "Drama",
+    "Mystery",
+    "Sci-Fi & Fantasy"
+  ],
+  "language": "English",
+  "country": "US",
+  "director": "Director",
+  "poster": "https://image.tmdb.org/t/p/w500/yCkPLQ10qKIUgRBXmQVVMF1h96d.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/6TSJRc77dDOesKzcNqkz0KeXdLz.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/nLJR2twdK00?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/nLJR2twdK00?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "34490",
+      "name": "Sarah Paulson",
+      "character": "Cordelia Goode / Sally McKenna / Ms. Wilhemina Venable / Tuberculosis Karen / Mamie Eisenhower",
+      "photo": "https://image.tmdb.org/t/p/w185/tJnhBV516yrekR3hTDUw15UMbxS.jpg"
+    },
+    {
+      "id": "55089",
+      "name": "Evan Peters",
+      "character": "Tate Langdon / James Patrick March / Kai Anderson",
+      "photo": "https://image.tmdb.org/t/p/w185/m9okq20ca2Md38i2ekJeKs3vTwa.jpg"
+    },
+    {
+      "id": "1212123",
+      "name": "Leslie Grossman",
+      "character": "Coco St. Pierre Vanderbilt",
+      "photo": "https://image.tmdb.org/t/p/w185/zvFXKr0U6hFrOEkV7ZFVNhJ9m9X.jpg"
+    },
+    {
+      "id": "34847",
+      "name": "Emma Roberts",
+      "character": "Madison Montgomery",
+      "photo": "https://image.tmdb.org/t/p/w185/rUK616pPe8VGvAK0qmKOEbA3iIx.jpg"
+    },
+    {
+      "id": "8534",
+      "name": "Kathy Bates",
+      "character": "Delphine LaLaurie",
+      "photo": "https://image.tmdb.org/t/p/w185/qZRTzTjV4OC1Ii9a0n8QBS9zMOd.jpg"
+    },
+    {
+      "id": "109560",
+      "name": "Gabourey Sidibe",
+      "character": "Queenie",
+      "photo": "https://image.tmdb.org/t/p/w185/d0p0MGqM1GrrnBw4b3V9uM6HCl2.jpg"
+    },
+    {
+      "id": "9780",
+      "name": "Angela Bassett",
+      "character": "Marie Laveau",
+      "photo": "https://image.tmdb.org/t/p/w185/tKnuviliyeKNGlo26IU5gIrJAtd.jpg"
+    },
+    {
+      "id": "1399531",
+      "name": "Billie Lourd",
+      "character": "Mallory / Winter Anderson",
+      "photo": "https://image.tmdb.org/t/p/w185/1u8bZL6ZXu5iDbPO3Z0Spetyt34.jpg"
+    },
+    {
+      "id": "4431",
+      "name": "Jessica Lange",
+      "character": "Constance Langdon / Sister Jude Martin / Fiona Goode / Elsa Mars",
+      "photo": "https://image.tmdb.org/t/p/w185/aWcO6trggSWsglUOdTVzjG4LSh3.jpg"
+    }
+  ],
+  "seasons": 13,
+  "episodes": 145,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-25T03:26:44.342Z",
+  "createdAt": "2026-09-25T03:26:44.342Z",
+  "updatedAt": "2026-09-25T03:26:44.342Z",
+  "links": []
+}

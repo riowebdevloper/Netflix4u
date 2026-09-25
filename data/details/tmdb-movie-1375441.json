@@ -1,0 +1,118 @@
+{
+  "id": "tmdb-movie-1375441",
+  "canonicalId": "tmdb-movie-1375441",
+  "externalProvider": "tmdb",
+  "externalId": "1375441",
+  "tmdbId": "1375441",
+  "imdbId": "tt34206385",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "Primetime",
+  "canonicalTitle": "Primetime",
+  "originalTitle": "Primetime",
+  "overview": "In 2006, To Catch a Predator host Chris Hansen sets out to make television history, turning an undercover investigation into one of the most controversial cultural phenomena of the decade.",
+  "description": "In 2006, To Catch a Predator host Chris Hansen sets out to make television history, turning an undercover investigation into one of the most controversial cultural phenomena of the decade.",
+  "shortDescription": "In 2006, To Catch a Predator host Chris Hansen sets out to make television history, turning an undercover investigation ",
+  "year": 2026,
+  "releaseDate": "2026-09-23",
+  "rating": 6.7,
+  "votes": "0.0K",
+  "quality": "FHD",
+  "duration": "1h 49m",
+  "genres": [
+    "Drama",
+    "Thriller"
+  ],
+  "categories": [
+    "Drama",
+    "Thriller"
+  ],
+  "language": "English",
+  "country": "US",
+  "director": "Lance Oppenheim",
+  "poster": "https://image.tmdb.org/t/p/w500/51VDtNQFuD2I86hrT4ekytg9Dq3.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/4E5RVsSUG1A4Adwbqupu5w6kofZ.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/C0NZa01qTRU?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/C0NZa01qTRU?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "11288",
+      "name": "Robert Pattinson",
+      "character": "Chris Hansen",
+      "photo": "https://image.tmdb.org/t/p/w185/3qZ09UE7lN6AtorfXFRYpEtSY93.jpg"
+    },
+    {
+      "id": "28044",
+      "name": "Merritt Wever",
+      "character": "Andie Bender",
+      "photo": "https://image.tmdb.org/t/p/w185/ldd1WntzQ72DVuNLoko8yMFHH7j.jpg"
+    },
+    {
+      "id": "61263",
+      "name": "Skyler Gisondo",
+      "character": "Dan Plumb",
+      "photo": "https://image.tmdb.org/t/p/w185/vyalCuJUUP7Ht1vMWZQzhOrscXV.jpg"
+    },
+    {
+      "id": "2344346",
+      "name": "Phoebe Bridgers",
+      "character": "Del",
+      "photo": "https://image.tmdb.org/t/p/w185/9dbTNTH0fBYE1aDAHdhwDSPureF.jpg"
+    },
+    {
+      "id": "1232599",
+      "name": "Matthew Maher",
+      "character": "Xavier Von Erck",
+      "photo": "https://image.tmdb.org/t/p/w185/3RPEUaliXJ9lcoL5R5IbcAOwd5D.jpg"
+    },
+    {
+      "id": "71913",
+      "name": "Bokeem Woodbine",
+      "character": "Cortland Gunn",
+      "photo": "https://image.tmdb.org/t/p/w185/pnPyA5pJn94zUzuLWTNkGBNZxza.jpg"
+    },
+    {
+      "id": "6400465",
+      "name": "Michael Chachere",
+      "character": "Michael Chachere",
+      "photo": "https://image.tmdb.org/t/p/w185/z3GdHd9fJni93zvqpIyLJvKKH99.jpg"
+    },
+    {
+      "id": "18355",
+      "name": "Alex Winter",
+      "character": "Bill Conradt",
+      "photo": "https://image.tmdb.org/t/p/w185/2GM34tP0VZegydEXgCj541udTP9.jpg"
+    },
+    {
+      "id": "1291350",
+      "name": "Tony Revolori",
+      "character": "MarriedAndLookingForFun31313",
+      "photo": "https://image.tmdb.org/t/p/w185/tSF6XmXDikrKZbFUeoDnafXxKjT.jpg"
+    },
+    {
+      "id": "144582",
+      "name": "Bob Ari",
+      "character": "RedBd",
+      "photo": "https://image.tmdb.org/t/p/w185/r3nwKEVVH7kDgklIx1Wg8CqJ3Fh.jpg"
+    },
+    {
+      "id": "67778",
+      "name": "Jonathan Lipnicki",
+      "character": "Crazyfrog73",
+      "photo": "https://image.tmdb.org/t/p/w185/sCFCCqFNm5Xyl2eyhzoHH1L8zxF.jpg"
+    },
+    {
+      "id": "1740218",
+      "name": "Matt Smith",
+      "character": "WrestlingDudeEastTX",
+      "photo": "https://image.tmdb.org/t/p/w185/fKUYro4v4mX8CF46bURyM83wJo3.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 1,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-25T03:26:44.355Z",
+  "createdAt": "2026-09-25T03:26:44.355Z",
+  "updatedAt": "2026-09-25T03:26:44.355Z",
+  "links": []
+}

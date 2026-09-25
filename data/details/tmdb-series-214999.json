@@ -1,0 +1,118 @@
+{
+  "id": "tmdb-series-214999",
+  "canonicalId": "tmdb-series-214999",
+  "externalProvider": "tmdb",
+  "externalId": "214999",
+  "tmdbId": "214999",
+  "imdbId": "tt27042206",
+  "type": "series",
+  "contentType": "series",
+  "title": "The Good Bad Mother",
+  "canonicalTitle": "The Good Bad Mother",
+  "originalTitle": "나쁜 엄마",
+  "overview": "A tragic accident leaves an ambitious prosecutor with the mind of a child – forcing him and his mother to embark on a journey to heal their relationship.",
+  "description": "A tragic accident leaves an ambitious prosecutor with the mind of a child – forcing him and his mother to embark on a journey to heal their relationship.",
+  "shortDescription": "A tragic accident leaves an ambitious prosecutor with the mind of a child – forcing him and his mother to embark on a jo",
+  "year": 2023,
+  "releaseDate": "2023-04-26",
+  "rating": 8.9,
+  "votes": "0.2K",
+  "quality": "FHD",
+  "duration": "68m/ep",
+  "genres": [
+    "Drama",
+    "Comedy"
+  ],
+  "categories": [
+    "Drama",
+    "Comedy"
+  ],
+  "language": "Korean",
+  "country": "KR",
+  "director": "Director",
+  "poster": "https://image.tmdb.org/t/p/w500/vtDLhvpTk1xcaBCKubSH0if575G.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/zOZqdv7UTc2sP2Tu5Cxj8j1M2r8.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/wyk2FtMAXfY?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/wyk2FtMAXfY?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "980225",
+      "name": "Ra Mi-ran",
+      "character": "Jin Young-soon",
+      "photo": "https://image.tmdb.org/t/p/w185/45jkWK6vQpQo32FsbGMSDrZig62.jpg"
+    },
+    {
+      "id": "2341408",
+      "name": "Lee Do-hyun",
+      "character": "Choi Kang-ho",
+      "photo": "https://image.tmdb.org/t/p/w185/8LhhJWLGCoOPt5ygpDlrmfr1VOm.jpg"
+    },
+    {
+      "id": "1875711",
+      "name": "Ahn Eun-jin",
+      "character": "Lee Mi-joo",
+      "photo": "https://image.tmdb.org/t/p/w185/cZDp8Qim5tmUN9gQxPkBOE5MS8w.jpg"
+    },
+    {
+      "id": "2402531",
+      "name": "Yoo In-soo",
+      "character": "Bang Sam-sik",
+      "photo": "https://image.tmdb.org/t/p/w185/9acPcttWXPT2UwTjlxv5lHVscU3.jpg"
+    },
+    {
+      "id": "240081",
+      "name": "Choi Mu-sung",
+      "character": "Song Woo-byeok",
+      "photo": "https://image.tmdb.org/t/p/w185/gMhYRcJ9HMVcGUWwOGRTAcbDo9y.jpg"
+    },
+    {
+      "id": "112785",
+      "name": "Jung Woong-in",
+      "character": "Oh Tae-soo",
+      "photo": "https://image.tmdb.org/t/p/w185/8chD5NkFYH5glIqBt6zyevoQRhK.jpg"
+    },
+    {
+      "id": "3965535",
+      "name": "Hong Bi-ra",
+      "character": "Oh Ha-young",
+      "photo": "https://image.tmdb.org/t/p/w185/nTFrq9CGv1xF7Ldn1X6PioOVZVX.jpg"
+    },
+    {
+      "id": "1353857",
+      "name": "Seo Yi-sook",
+      "character": "Park Sung-ae",
+      "photo": "https://image.tmdb.org/t/p/w185/wVUF4VOOP2Dbvj4eYBq6cQPEKUu.jpg"
+    },
+    {
+      "id": "1180419",
+      "name": "Jang Won-young",
+      "character": "Mr. Bang",
+      "photo": "https://image.tmdb.org/t/p/w185/78GuW9mYHgABTjsr89exqhjtWE7.jpg"
+    },
+    {
+      "id": "2256730",
+      "name": "Kang Mal-geum",
+      "character": "Jung Gum-ja",
+      "photo": "https://image.tmdb.org/t/p/w185/aQcgxtVnbHnWwjR3yUtnbvwARSR.jpg"
+    },
+    {
+      "id": "1278160",
+      "name": "Kim Won-hae",
+      "character": "Son Yong-rak",
+      "photo": "https://image.tmdb.org/t/p/w185/nWZGktRe2Ele7fLxZt8e492oRir.jpg"
+    },
+    {
+      "id": "3555452",
+      "name": "Park Bo-kyung",
+      "character": "Yong-rak's Wife",
+      "photo": "https://image.tmdb.org/t/p/w185/mHM4Zf1Knw6MdPrTsyfzrCckyaV.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 14,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-25T03:26:44.450Z",
+  "createdAt": "2026-09-25T03:26:44.450Z",
+  "updatedAt": "2026-09-25T03:26:44.450Z",
+  "links": []
+}

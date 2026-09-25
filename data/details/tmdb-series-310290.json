@@ -1,0 +1,86 @@
+{
+  "id": "tmdb-series-310290",
+  "canonicalId": "tmdb-series-310290",
+  "externalProvider": "tmdb",
+  "externalId": "310290",
+  "tmdbId": "310290",
+  "imdbId": "tt37158600",
+  "type": "series",
+  "contentType": "series",
+  "title": "My Sad Dead",
+  "canonicalTitle": "My Sad Dead",
+  "originalTitle": "Mis muertos tristes",
+  "overview": "Emma can see the dead. But when her niece arrives, thousands of lives are shaken.",
+  "description": "Emma can see the dead. But when her niece arrives, thousands of lives are shaken.",
+  "shortDescription": "Emma can see the dead. But when her niece arrives, thousands of lives are shaken.",
+  "year": 2026,
+  "releaseDate": "2026-09-24",
+  "rating": 3,
+  "votes": "0.0K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Drama"
+  ],
+  "categories": [
+    "Drama"
+  ],
+  "language": "Spanish",
+  "country": "AR",
+  "director": "Director",
+  "poster": "https://image.tmdb.org/t/p/w500/ojtRXQj7MvVw7oPkJwf0FPp61He.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/y3q1LeVYBU00ASSyjFSX9KerLzz.jpg",
+  "trailerUrl": null,
+  "trailer": null,
+  "cast": [
+    {
+      "id": "18499",
+      "name": "Mercedes Morán",
+      "character": "Ema",
+      "photo": "https://image.tmdb.org/t/p/w185/2r5QQeumzXWoSma6RQrLjiNhHdu.jpg"
+    },
+    {
+      "id": "74909",
+      "name": "Dolores Fonzi",
+      "character": "Julie",
+      "photo": "https://image.tmdb.org/t/p/w185/4axi3Dz8zKK0b1kk54tPOeywb84.jpg"
+    },
+    {
+      "id": "239252",
+      "name": "Alejandra Flechner",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/d6ocIFKYdauO6sxL3SDBHKLc1O4.jpg"
+    },
+    {
+      "id": "141571",
+      "name": "Carlos Portaluppi",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/eCxnS3mUQoHtBKaMpD5tNXPJfTk.jpg"
+    },
+    {
+      "id": "50928",
+      "name": "Germán de Silva",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/h8VzQUosN3LCPd6vkk7GQOrlapC.jpg"
+    },
+    {
+      "id": "141627",
+      "name": "Luz Jiménez",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/hW7qD1FMsg4fkUBuSnG8hLV9icC.jpg"
+    },
+    {
+      "id": "5924591",
+      "name": "Carolina Sánchez Álvarez",
+      "character": "",
+      "photo": null
+    }
+  ],
+  "seasons": 1,
+  "episodes": 4,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-25T03:26:44.331Z",
+  "createdAt": "2026-09-25T03:26:44.331Z",
+  "updatedAt": "2026-09-25T03:26:44.331Z",
+  "links": []
+}

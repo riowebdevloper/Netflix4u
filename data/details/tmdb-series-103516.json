@@ -1,0 +1,100 @@
+{
+  "id": "tmdb-series-103516",
+  "canonicalId": "tmdb-series-103516",
+  "externalProvider": "tmdb",
+  "externalId": "103516",
+  "tmdbId": "103516",
+  "imdbId": "tt12327578",
+  "type": "series",
+  "contentType": "series",
+  "title": "Star Trek: Strange New Worlds",
+  "canonicalTitle": "Star Trek: Strange New Worlds",
+  "originalTitle": "Star Trek: Strange New Worlds",
+  "overview": "Follow Captain Christopher Pike, Science Officer Spock and Number One in the years before Captain Kirk boarded the U.S.S. Enterprise, as they explore new worlds around the galaxy.",
+  "description": "Follow Captain Christopher Pike, Science Officer Spock and Number One in the years before Captain Kirk boarded the U.S.S. Enterprise, as they explore new worlds around the galaxy.",
+  "shortDescription": "Follow Captain Christopher Pike, Science Officer Spock and Number One in the years before Captain Kirk boarded the U.S.S",
+  "year": 2022,
+  "releaseDate": "2022-05-05",
+  "rating": 7.9,
+  "votes": "0.9K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Sci-Fi & Fantasy",
+    "Drama"
+  ],
+  "categories": [
+    "Sci-Fi & Fantasy",
+    "Drama"
+  ],
+  "language": "English",
+  "country": "US",
+  "director": "Director",
+  "poster": "https://image.tmdb.org/t/p/w500/97TTJuqiSMfU0DuXx1B4NG5QNP7.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/fZJs6xgU9dqIg9phIXjZAZOInzy.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/2KJz0JRcNE8?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/2KJz0JRcNE8?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "56675",
+      "name": "Anson Mount",
+      "character": "Captain Christopher Pike",
+      "photo": "https://image.tmdb.org/t/p/w185/A4YBdwnzJKRcZXfodjT4UalHOK9.jpg"
+    },
+    {
+      "id": "119586",
+      "name": "Ethan Peck",
+      "character": "Spock",
+      "photo": "https://image.tmdb.org/t/p/w185/9KaxSgpbx9Zj827xXLML3bWknNV.jpg"
+    },
+    {
+      "id": "2180274",
+      "name": "Jess Bush",
+      "character": "Christine Chapel",
+      "photo": "https://image.tmdb.org/t/p/w185/qAsdLipL5Gd54IHd813lN5HQFwn.jpg"
+    },
+    {
+      "id": "472632",
+      "name": "Christina Chong",
+      "character": "La'An Noonien-Singh",
+      "photo": "https://image.tmdb.org/t/p/w185/h2uyfyfLVShJpW7rUCtethhZcT1.jpg"
+    },
+    {
+      "id": "2892801",
+      "name": "Celia Rose Gooding",
+      "character": "Nyota Uhura",
+      "photo": "https://image.tmdb.org/t/p/w185/vIk0g2FnDGmBGEAX7veFCOg0hM1.jpg"
+    },
+    {
+      "id": "1333690",
+      "name": "Melissa Navia",
+      "character": "Erica Ortegas",
+      "photo": "https://image.tmdb.org/t/p/w185/b8qF20FtJby02fGAeWSp9XJDHbw.jpg"
+    },
+    {
+      "id": "205923",
+      "name": "Babs Olusanmokun",
+      "character": "Dr. Joseph M'Benga",
+      "photo": "https://image.tmdb.org/t/p/w185/bqycmpUrpISeLzQniiYwAZ5X1RN.jpg"
+    },
+    {
+      "id": "11008",
+      "name": "Rebecca Romijn",
+      "character": "Una Chin-Riley",
+      "photo": "https://image.tmdb.org/t/p/w185/doqFBHNbNhoLF9RX9SYPqwu1mvd.jpg"
+    },
+    {
+      "id": "1251624",
+      "name": "Martin Quinn",
+      "character": "Montgomery Scott",
+      "photo": "https://image.tmdb.org/t/p/w185/pkLdyDbcPpWuFWaWB5lniFw9zx6.jpg"
+    }
+  ],
+  "seasons": 4,
+  "episodes": 40,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-25T03:26:44.367Z",
+  "createdAt": "2026-09-25T03:26:44.367Z",
+  "updatedAt": "2026-09-25T03:26:44.367Z",
+  "links": []
+}

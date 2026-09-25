@@ -1,0 +1,82 @@
+{
+  "id": "tmdb-series-305357",
+  "canonicalId": "tmdb-series-305357",
+  "externalProvider": "tmdb",
+  "externalId": "305357",
+  "tmdbId": "305357",
+  "imdbId": "tt33081352",
+  "type": "series",
+  "contentType": "series",
+  "title": "A Different World",
+  "canonicalTitle": "A Different World",
+  "originalTitle": "A Different World",
+  "overview": "Deborah Wayne enters her freshman year at her parents' HBCU alma mater and finds their shadow difficult to escape. She sets out to build her own legacy – while having the time of her life – alongside a whole new generation of Hillman’s best and brightest.",
+  "description": "Deborah Wayne enters her freshman year at her parents' HBCU alma mater and finds their shadow difficult to escape. She sets out to build her own legacy – while having the time of her life – alongside a whole new generation of Hillman’s best and brightest.",
+  "shortDescription": "Deborah Wayne enters her freshman year at her parents' HBCU alma mater and finds their shadow difficult to escape. She s",
+  "year": 2026,
+  "releaseDate": "2026-09-24",
+  "rating": 9.5,
+  "votes": "0.0K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Comedy",
+    "Drama"
+  ],
+  "categories": [
+    "Comedy",
+    "Drama"
+  ],
+  "language": "English",
+  "country": "US",
+  "director": "Director",
+  "poster": "https://image.tmdb.org/t/p/w500/mmE4RNbsPOwwRo5rnVRd1IXzgcZ.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/1lVbKPOVjTV02FtLqiPk9F9z1Fh.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/W8jMEXwErvk?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/W8jMEXwErvk?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "4956600",
+      "name": "Maleah Joi Moon",
+      "character": "Deborah Wayne",
+      "photo": "https://image.tmdb.org/t/p/w185/kNk8SbGl6kNE1CSBqrlU32qAweQ.jpg"
+    },
+    {
+      "id": "3742434",
+      "name": "Alijah Kai",
+      "character": "Rashida",
+      "photo": "https://image.tmdb.org/t/p/w185/4Zm8bN7rL1JGRcoQQ1JY0eZdWX7.jpg"
+    },
+    {
+      "id": "2403981",
+      "name": "Chibuikem Uche",
+      "character": "Kojo",
+      "photo": "https://image.tmdb.org/t/p/w185/mnFbtkw3CahJez70swDCkq0IcUl.jpg"
+    },
+    {
+      "id": "5808915",
+      "name": "Cornell Young IV",
+      "character": "Shaquille",
+      "photo": null
+    },
+    {
+      "id": "2712164",
+      "name": "Jordan Aaron Hall",
+      "character": "Amir",
+      "photo": "https://image.tmdb.org/t/p/w185/70wXromowEycW1SN88xzzwuzwk7.jpg"
+    },
+    {
+      "id": "5808917",
+      "name": "Kennedi Reece",
+      "character": "Hazel",
+      "photo": "https://image.tmdb.org/t/p/w185/jiOuoB4eyft4He88kTgpzKsFiaX.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 10,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-25T03:26:44.319Z",
+  "createdAt": "2026-09-25T03:26:44.319Z",
+  "updatedAt": "2026-09-25T03:26:44.319Z",
+  "links": []
+}

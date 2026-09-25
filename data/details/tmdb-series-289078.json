@@ -1,0 +1,112 @@
+{
+  "id": "tmdb-series-289078",
+  "canonicalId": "tmdb-series-289078",
+  "externalProvider": "tmdb",
+  "externalId": "289078",
+  "tmdbId": "289078",
+  "imdbId": "tt36758489",
+  "type": "series",
+  "contentType": "series",
+  "title": "A Prophet",
+  "canonicalTitle": "A Prophet",
+  "originalTitle": "我不是大师",
+  "overview": "After his family is wiped out by the Tianxiang Sect, Shangguan Chengming goes undercover to take revenge. With the help of Jiang Feiyan, they use a series of scams to expose corruption and fight for justice.",
+  "description": "After his family is wiped out by the Tianxiang Sect, Shangguan Chengming goes undercover to take revenge. With the help of Jiang Feiyan, they use a series of scams to expose corruption and fight for justice.",
+  "shortDescription": "After his family is wiped out by the Tianxiang Sect, Shangguan Chengming goes undercover to take revenge. With the help ",
+  "year": 2026,
+  "releaseDate": "2026-09-24",
+  "rating": 8,
+  "votes": "1.2K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Drama",
+    "Mystery"
+  ],
+  "categories": [
+    "Drama",
+    "Mystery"
+  ],
+  "language": "Mandarin",
+  "country": "CN",
+  "director": "Yang Lei",
+  "poster": "https://image.tmdb.org/t/p/w500/giSXBUuCfCXV9ALQAmcZd659J0r.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/e6KzyAR2xCmss9fnnPteDHkDIvd.jpg",
+  "trailerUrl": null,
+  "trailer": null,
+  "cast": [
+    {
+      "id": "1384277",
+      "name": "Li Xian",
+      "character": "Shangguan Chengming",
+      "photo": "https://image.tmdb.org/t/p/w185/z8cD7qVR2hyXNpgGr0Yhrj0LjL7.jpg"
+    },
+    {
+      "id": "1736257",
+      "name": "Li Yitong",
+      "character": "Jiang Feiyan",
+      "photo": "https://image.tmdb.org/t/p/w185/jfostFmHde0D1Wj9F57GWHEVzmO.jpg"
+    },
+    {
+      "id": "1086844",
+      "name": "Wu Gang",
+      "character": "Jin Buhuan",
+      "photo": "https://image.tmdb.org/t/p/w185/eUDye599p1edb2rY3UTY88fJO4Y.jpg"
+    },
+    {
+      "id": "2178031",
+      "name": "Liu Guanlin",
+      "character": "Sha Liang",
+      "photo": "https://image.tmdb.org/t/p/w185/9V1bgjKnp83ptaFNK17ba6MW4Cf.jpg"
+    },
+    {
+      "id": "1079118",
+      "name": "Guo Jinglin",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/uCgfEQDI33P9KaWs6eLCLeoeFZX.jpg"
+    },
+    {
+      "id": "1624914",
+      "name": "Hai Yitian",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/dPBXfd0l0fVwkuKWc871ZTZHtGc.jpg"
+    },
+    {
+      "id": "1172006",
+      "name": "Liang Tian",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/6voROaggSjRaqoXiaGgWuaPA9uR.jpg"
+    },
+    {
+      "id": "2965311",
+      "name": "Yue Yang",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/1K4LokoVKTaCGt0BiDa8y8goC8g.jpg"
+    },
+    {
+      "id": "1892421",
+      "name": "Yang Yiwei",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/7G3bIFwuiiD8ZrJQbkEeM0LdM7u.jpg"
+    },
+    {
+      "id": "2997895",
+      "name": "Zhang Jingwei",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/kW7EyUHD90GBykTOEm5lXbrgD5C.jpg"
+    },
+    {
+      "id": "1940720",
+      "name": "Zhang Xiaoqian",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/2QlErB0wRnFriN9aydV4EdCfvEI.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 24,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-25T03:26:44.419Z",
+  "createdAt": "2026-09-25T03:26:44.419Z",
+  "updatedAt": "2026-09-25T03:26:44.419Z",
+  "links": []
+}
