@@ -567,7 +567,7 @@ body {
 }
 
 /* ─── Net27 Minimal Floating Watch Player Top Bar ─── */
-#watch-modal {
+#watch-modal:not(.hidden) {
   height: 100vh;
   height: 100dvh;
   touch-action: manipulation;
@@ -649,9 +649,38 @@ body {
   background: #000;
 }
 
-/* ─── Mobile Portrait: Compact Inline Layout ─── */
+/* ─── Modal Strict Visibility & Isolation (Zero Leakage into Homepage) ─── */
+#watch-modal.hidden,
+#watch-modal[hidden],
+#title-modal.hidden,
+#title-modal[hidden],
+#trailer-modal.hidden,
+#trailer-modal[hidden],
+#policy-modal.hidden,
+#policy-modal[hidden],
+#watch-server-picker-modal.hidden,
+#watch-server-picker-modal[hidden],
+#request-modal.hidden,
+#request-modal[hidden],
+#search-overlay.hidden,
+#search-overlay[hidden],
+.modal-overlay.hidden,
+.hidden {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  opacity: 0 !important;
+}
+
+/* ─── Net27 Watch Modal (Desktop & Inline Base) ─── */
+#watch-modal:not(.hidden) {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+/* ─── Mobile Portrait: Compact Inline Layout (ONLY WHEN ACTIVE / NOT HIDDEN) ─── */
 @media (max-width: 768px) and (orientation: portrait) {
-  #watch-modal {
+  #watch-modal:not(.hidden) {
     height: 100dvh !important;
     height: 100vh !important;
     display: flex !important;
@@ -675,8 +704,8 @@ body {
 }
 
 /* ─── Fullscreen Mode strictly separated (PART 10) ─── */
-#watch-modal.is-fullscreen,
-:fullscreen #watch-modal {
+#watch-modal:not(.hidden).is-fullscreen,
+:fullscreen #watch-modal:not(.hidden) {
   position: fixed !important;
   inset: 0 !important;
   width: 100vw !important;
@@ -685,18 +714,18 @@ body {
   background: #000 !important;
 }
 
-#watch-modal.is-fullscreen .player-shell,
-:fullscreen .player-shell {
+#watch-modal:not(.hidden).is-fullscreen .player-shell,
+:fullscreen #watch-modal:not(.hidden) .player-shell {
   width: 100vw !important;
   height: 100dvh !important;
 }
 
-#watch-modal.is-fullscreen .player-frame,
-:fullscreen .player-frame,
-.player-frame:fullscreen,
-#watch-modal.is-fullscreen .watch-player-stage,
-:fullscreen .watch-player-stage,
-.watch-player-stage:fullscreen {
+#watch-modal:not(.hidden).is-fullscreen .player-frame,
+:fullscreen #watch-modal:not(.hidden) .player-frame,
+#watch-modal:not(.hidden) .player-frame:fullscreen,
+#watch-modal:not(.hidden).is-fullscreen .watch-player-stage,
+:fullscreen #watch-modal:not(.hidden) .watch-player-stage,
+#watch-modal:not(.hidden) .watch-player-stage:fullscreen {
   position: fixed !important;
   inset: 0 !important;
   width: 100vw !important;
@@ -706,13 +735,13 @@ body {
   z-index: 99999 !important;
 }
 
-#watch-modal.is-fullscreen #watch-bottom-bar {
+#watch-modal:not(.hidden).is-fullscreen #watch-bottom-bar {
   display: none !important;
 }
 
 @media (orientation: landscape) {
-  #watch-modal.is-fullscreen .player-frame,
-  #watch-modal.is-fullscreen .watch-player-stage {
+  #watch-modal:not(.hidden).is-fullscreen .player-frame,
+  #watch-modal:not(.hidden).is-fullscreen .watch-player-stage {
     width: 100vw !important;
     height: 100dvh !important;
     max-height: none !important;

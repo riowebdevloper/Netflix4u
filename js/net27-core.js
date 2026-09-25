@@ -1416,6 +1416,8 @@
       searchInput.addEventListener('focus', function() {
         // Open Net27 search overlay
         if (searchOverlay) {
+          searchOverlay.style.removeProperty('display');
+          searchOverlay.style.display = 'block';
           searchOverlay.classList.remove('hidden');
           searchOverlay.setAttribute('aria-hidden', 'false');
           if (soInput) {
@@ -1476,6 +1478,7 @@
 
   function closeSearchOverlay() {
     if (!searchOverlay) return;
+    searchOverlay.style.setProperty('display', 'none', 'important');
     searchOverlay.classList.add('hidden');
     searchOverlay.setAttribute('aria-hidden', 'true');
     if (soResults) soResults.innerHTML = '';
@@ -1586,6 +1589,21 @@
           window.Netflix4uModal.openTitle(id, mediaType, false);
         }
       }, 400);
+    }
+
+    // 1b. Direct Clean Watch URL path (e.g. /watch/movie/1339713 or /watch/tv/90545/1/1 or /player/1339713)
+    var watchRouteMatch = path.match(/^\/(?:watch|player)\/(?:(movie|tv|series)\/)?([^\/?#]+)(?:\/(\d+))?(?:\/(\d+))?/i);
+    if (watchRouteMatch) {
+      var wType = (watchRouteMatch[1] && watchRouteMatch[1].toLowerCase() === 'movie') ? 'movie' : 'tv';
+      var wId = watchRouteMatch[2];
+      var wSe = watchRouteMatch[3] || 1;
+      var wEp = watchRouteMatch[4] || 1;
+      setTimeout(function() {
+        if (window.Netflix4uModal && window.Netflix4uModal.openWatch) {
+          window.Netflix4uModal.openWatch(wId, wType, wSe, wEp, '');
+        }
+      }, 400);
+      return;
     }
 
     // 2. Policy & Dedicated Content Routing (/about, /privacy, /terms, /dmca, /contact, /editorial-policy, /corrections-policy)
@@ -1794,6 +1812,8 @@
 
   function openReqModal() {
     if (!reqModal) return;
+    reqModal.style.removeProperty('display');
+    reqModal.style.display = 'flex';
     reqModal.classList.remove('hidden');
     reqModal.classList.add('flex');
     document.body.classList.add('modal-open');
@@ -1801,6 +1821,7 @@
 
   function closeReqModal() {
     if (!reqModal) return;
+    reqModal.style.setProperty('display', 'none', 'important');
     reqModal.classList.add('hidden');
     reqModal.classList.remove('flex');
     document.body.classList.remove('modal-open');

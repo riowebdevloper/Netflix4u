@@ -850,12 +850,12 @@ function fetchTmdbCatalogJson(endpoint) {
       return Promise.resolve(entry.data);
     }
   }
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     const sep = endpoint.includes('?') ? '&' : '?';
     const url = `https://api.tmdb.org/3${endpoint}${sep}api_key=${TMDB_API_KEY}`;
-    https.get(url, {
+    const req = https.get(url, {
       headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)', 'Accept': 'application/json' },
-      timeout: 8000
+      timeout: 5000
     }, (res) => {
       let d = '';
       res.on('data', c => d += c);
@@ -865,12 +865,17 @@ function fetchTmdbCatalogJson(endpoint) {
             const parsed = JSON.parse(d);
             net27CatalogCache.set(cacheKey, { at: Date.now(), data: parsed });
             resolve(parsed);
-          } catch (e) { reject(e); }
+          } catch (e) { resolve(null); }
         } else {
-          reject(new Error(`TMDB HTTP ${res.statusCode}`));
+          resolve(null);
         }
       });
-    }).on('error', reject);
+    });
+    req.on('timeout', () => {
+      req.destroy();
+      resolve(null);
+    });
+    req.on('error', () => resolve(null));
   });
 }
 
