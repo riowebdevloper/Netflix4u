@@ -1,0 +1,94 @@
+{
+  "id": "tmdb-series-290720",
+  "canonicalId": "tmdb-series-290720",
+  "externalProvider": "tmdb",
+  "externalId": "290720",
+  "tmdbId": "290720",
+  "imdbId": "tt36832679",
+  "type": "series",
+  "contentType": "series",
+  "title": "The Final Problem",
+  "canonicalTitle": "The Final Problem",
+  "originalTitle": "El problema final",
+  "overview": "In the spring of 1959, a retired actor, who previously played Sherlock Holmes, must investigate a murder at a small hotel on a tiny island near Mallorca.",
+  "description": "In the spring of 1959, a retired actor, who previously played Sherlock Holmes, must investigate a murder at a small hotel on a tiny island near Mallorca.",
+  "shortDescription": "In the spring of 1959, a retired actor, who previously played Sherlock Holmes, must investigate a murder at a small hote",
+  "year": 2026,
+  "releaseDate": "2026-09-25",
+  "rating": 6,
+  "votes": "0.0K",
+  "quality": "FHD",
+  "duration": "57m/ep",
+  "genres": [
+    "Crime",
+    "Mystery"
+  ],
+  "categories": [
+    "Crime",
+    "Mystery"
+  ],
+  "language": "Spanish",
+  "country": "ES",
+  "director": "Director",
+  "poster": "https://image.tmdb.org/t/p/w500/v7LQJ8GUvvvKhGRNp8F4hiRzwiI.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/m9QKL9smb61v1XSYJoHdl7p5yUd.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/yLeja7kWgmU?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/yLeja7kWgmU?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "110129",
+      "name": "Jose Coronado",
+      "character": "Basil",
+      "photo": "https://image.tmdb.org/t/p/w185/9xo68HzH8n78Xv6gMzKK7XnjtHd.jpg"
+    },
+    {
+      "id": "77122",
+      "name": "María Valverde",
+      "character": "Adela Figueora",
+      "photo": "https://image.tmdb.org/t/p/w185/8taDDUCiyggIWhq8wGy2v0b9Nt8.jpg"
+    },
+    {
+      "id": "1183859",
+      "name": "Martiño Rivas",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/4qc8bF4OPmoJI8BcAz6HOdI3Xf1.jpg"
+    },
+    {
+      "id": "16971",
+      "name": "Maribel Verdú",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/7hxTsW5CKi2lkz5yGMWShki7DOo.jpg"
+    },
+    {
+      "id": "566330",
+      "name": "Gonzalo de Castro",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/24FPQXdyBtOPbSQRTkE8fXEef4I.jpg"
+    },
+    {
+      "id": "3941447",
+      "name": "Cristina Kovani",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/q4QqK8lmLllrLAjzekYsbuq97k5.jpg"
+    },
+    {
+      "id": "1866671",
+      "name": "José Condessa",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/lgk2AcJPb9Jy2sCXauguX8EqxPf.jpg"
+    },
+    {
+      "id": "118206",
+      "name": "Pepón Nieto",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/9UZ9SJ0e1M6vlzkCBFJAe32XakS.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 4,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-26T03:32:10.322Z",
+  "createdAt": "2026-09-26T03:32:10.322Z",
+  "updatedAt": "2026-09-26T03:32:10.322Z",
+  "links": []
+}

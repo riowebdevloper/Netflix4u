@@ -1,0 +1,94 @@
+{
+  "id": "tmdb-series-292742",
+  "canonicalId": "tmdb-series-292742",
+  "externalProvider": "tmdb",
+  "externalId": "292742",
+  "tmdbId": "292742",
+  "imdbId": "tt36984433",
+  "type": "series",
+  "contentType": "series",
+  "title": "S.W.A.T. Exiles",
+  "canonicalTitle": "S.W.A.T. Exiles",
+  "originalTitle": "S.W.A.T. Exiles",
+  "overview": "After a high-profile mission goes sideways, Daniel 'Hondo' Harrelson is pulled out of forced retirement to lead a last-chance experimental SWAT unit made up of untested, unpredictable young recruits. Hondo must bridge a generational divide, navigate clashing personalities, and turn a squad of outsiders into a team capable of protecting the city and saving the program that made him who he is.",
+  "description": "After a high-profile mission goes sideways, Daniel 'Hondo' Harrelson is pulled out of forced retirement to lead a last-chance experimental SWAT unit made up of untested, unpredictable young recruits. Hondo must bridge a generational divide, navigate clashing personalities, and turn a squad of outsiders into a team capable of protecting the city and saving the program that made him who he is.",
+  "shortDescription": "After a high-profile mission goes sideways, Daniel 'Hondo' Harrelson is pulled out of forced retirement to lead a last-c",
+  "year": 2026,
+  "releaseDate": "2026-09-25",
+  "rating": 8.4,
+  "votes": "0.0K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Drama",
+    "Crime"
+  ],
+  "categories": [
+    "Drama",
+    "Crime"
+  ],
+  "language": "English",
+  "country": "US",
+  "director": "Director",
+  "poster": "https://image.tmdb.org/t/p/w500/pPiEujhVa2MBSowmvnNWqEzxH0x.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/mNIc5QqjBuXHeeyj6P4WSqTCBu9.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/wRbxI9muoIw?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/wRbxI9muoIw?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "50266",
+      "name": "Shemar Moore",
+      "character": "Daniel 'Hondo' Harrelson Jr.",
+      "photo": "https://image.tmdb.org/t/p/w185/epkv0UiwrPfCK3c0sHemSMi2jeh.jpg"
+    },
+    {
+      "id": "108889",
+      "name": "Jay Harrington",
+      "character": "David 'Deacon' Kay",
+      "photo": "https://image.tmdb.org/t/p/w185/jsCjf0L0K97dPvSR9yJhoM8pN84.jpg"
+    },
+    {
+      "id": "117437",
+      "name": "Patrick St. Esprit",
+      "character": "Robert 'Bob' Hicks",
+      "photo": "https://image.tmdb.org/t/p/w185/1yrW51oGJEElYqG3BzX0N1Ky7Rd.jpg"
+    },
+    {
+      "id": "1682317",
+      "name": "Lucy Barrett",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/mxBspNMdtRQaWZiy2gAYPqxHZr3.jpg"
+    },
+    {
+      "id": "2120814",
+      "name": "Adain Bradley",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/qPe2AgBrIIOOv4uLK984dxgGzxE.jpg"
+    },
+    {
+      "id": "3174592",
+      "name": "Zyra Gorecki",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/9yyKqEcE8ZOB9qeaIFsXTuwXf6M.jpg"
+    },
+    {
+      "id": "2104687",
+      "name": "Freddy Miyares",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/z0bwInzUA7wPrISWAL2L1zLE3uf.jpg"
+    },
+    {
+      "id": "1140129",
+      "name": "Ronen Rubinstein",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/tmm0HIdszFqPJc3KYuKsWjyHV8f.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 10,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-26T03:32:10.866Z",
+  "createdAt": "2026-09-26T03:32:10.866Z",
+  "updatedAt": "2026-09-26T03:32:10.866Z",
+  "links": []
+}

@@ -1,0 +1,70 @@
+{
+  "id": "tmdb-series-287620",
+  "canonicalId": "tmdb-series-287620",
+  "externalProvider": "tmdb",
+  "externalId": "287620",
+  "tmdbId": "287620",
+  "imdbId": "tt27497393",
+  "type": "series",
+  "contentType": "series",
+  "title": "Stuart Fails to Save the Universe",
+  "canonicalTitle": "Stuart Fails to Save the Universe",
+  "originalTitle": "Stuart Fails to Save the Universe",
+  "overview": "After accidentally creating a new multiverse, comic book store owner Stuart Bloom must locate a quantum-interference device to restore reality.",
+  "description": "After accidentally creating a new multiverse, comic book store owner Stuart Bloom must locate a quantum-interference device to restore reality.",
+  "shortDescription": "After accidentally creating a new multiverse, comic book store owner Stuart Bloom must locate a quantum-interference dev",
+  "year": 2026,
+  "releaseDate": "2026-07-23",
+  "rating": 8.6,
+  "votes": "0.2K",
+  "quality": "FHD",
+  "duration": "24m/ep",
+  "genres": [
+    "Comedy",
+    "Sci-Fi & Fantasy"
+  ],
+  "categories": [
+    "Comedy",
+    "Sci-Fi & Fantasy"
+  ],
+  "language": "English",
+  "country": "US",
+  "director": "Director",
+  "poster": "https://image.tmdb.org/t/p/w500/txj8ujTZwGUjpCdhCsQBnTlh4aS.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/nW7oUFiJrIWwll4mZ8tYays7XRm.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/_blrWb1yZiY?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/_blrWb1yZiY?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "60633",
+      "name": "Kevin Sussman",
+      "character": "Stuart Bloom / Alternate Stuart Bloom",
+      "photo": "https://image.tmdb.org/t/p/w185/tLqrE9uz6GKoeoDC7LU7cE6oF2Q.jpg"
+    },
+    {
+      "id": "591834",
+      "name": "Lauren Lapkus",
+      "character": "Denise / Alternate Denise",
+      "photo": "https://image.tmdb.org/t/p/w185/zevTufkY38eRvWPslh5c1azdhQN.jpg"
+    },
+    {
+      "id": "20405",
+      "name": "Brian Posehn",
+      "character": "Bert Kibbler",
+      "photo": "https://image.tmdb.org/t/p/w185/kg93LNpDQaRoosR4gVt7SsA3oL1.jpg"
+    },
+    {
+      "id": "55425",
+      "name": "John Ross Bowie",
+      "character": "Barry Kripke",
+      "photo": "https://image.tmdb.org/t/p/w185/XAv1RilHZu7qiGGIOgikrLgHeD.jpg"
+    }
+  ],
+  "seasons": 2,
+  "episodes": 10,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-26T03:32:10.581Z",
+  "createdAt": "2026-09-26T03:32:10.581Z",
+  "updatedAt": "2026-09-26T03:32:10.581Z",
+  "links": []
+}

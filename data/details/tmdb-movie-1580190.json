@@ -1,0 +1,88 @@
+{
+  "id": "tmdb-movie-1580190",
+  "canonicalId": "tmdb-movie-1580190",
+  "externalProvider": "tmdb",
+  "externalId": "1580190",
+  "tmdbId": "1580190",
+  "imdbId": "",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "The Scavenger",
+  "canonicalTitle": "The Scavenger",
+  "originalTitle": "除暴之路",
+  "overview": "When his aspiring-celebrity sister becomes trapped in a criminal scheme within an entertainment company, a devoted brother teams up with local police to uncover the truth and take down the powerful underworld behind it.",
+  "description": "When his aspiring-celebrity sister becomes trapped in a criminal scheme within an entertainment company, a devoted brother teams up with local police to uncover the truth and take down the powerful underworld behind it.",
+  "shortDescription": "When his aspiring-celebrity sister becomes trapped in a criminal scheme within an entertainment company, a devoted broth",
+  "year": 2026,
+  "releaseDate": "2026-09-23",
+  "rating": 8,
+  "votes": "1.2K",
+  "quality": "FHD",
+  "duration": "2h 00m",
+  "genres": [
+    "Drama",
+    "Crime"
+  ],
+  "categories": [
+    "Drama",
+    "Crime"
+  ],
+  "language": "Mandarin",
+  "country": "CN",
+  "director": "Qin Pengfei",
+  "poster": "https://image.tmdb.org/t/p/w500/oaZbbcJUKgw95EGIT7VTPLEzuB3.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/w500/oaZbbcJUKgw95EGIT7VTPLEzuB3.jpg",
+  "trailerUrl": null,
+  "trailer": null,
+  "cast": [
+    {
+      "id": "2430202",
+      "name": "Liu Fengchao",
+      "character": "Liao Qixian",
+      "photo": "https://image.tmdb.org/t/p/w185/uVxSCAmbA33JidS7Tf9ScDa19Wg.jpg"
+    },
+    {
+      "id": "2359960",
+      "name": "Fang Yan",
+      "character": "Zha Ren",
+      "photo": "https://image.tmdb.org/t/p/w185/qW0sdh4rLHnHZquFTyUghMVCoeR.jpg"
+    },
+    {
+      "id": "2950162",
+      "name": "Huang Tao",
+      "character": "Pu Jinghao",
+      "photo": "https://image.tmdb.org/t/p/w185/hdDvTSyrQN95uRuq0AgcoCDJuDc.jpg"
+    },
+    {
+      "id": "5627035",
+      "name": "Yao Zhen",
+      "character": "Liao Wanning",
+      "photo": null
+    },
+    {
+      "id": "4222870",
+      "name": "Guo Feng",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/ya9WTsaY9L8I7UaZy4mI8p2s1sx.jpg"
+    },
+    {
+      "id": "2739198",
+      "name": "Sun Cailun",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/7odKlvtvxKZE5oDa9m0FlxA1GnP.jpg"
+    },
+    {
+      "id": "1457880",
+      "name": "Chunyu Shanshan",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/soMA9uxdUFUZyXK94vSaeiEcJjJ.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 1,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-26T03:32:10.958Z",
+  "createdAt": "2026-09-26T03:32:10.958Z",
+  "updatedAt": "2026-09-26T03:32:10.958Z",
+  "links": []
+}

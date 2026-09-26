@@ -1,0 +1,120 @@
+{
+  "id": "tmdb-movie-1492640",
+  "canonicalId": "tmdb-movie-1492640",
+  "externalProvider": "tmdb",
+  "externalId": "1492640",
+  "tmdbId": "1492640",
+  "imdbId": "tt6933238",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "UNABOMBER",
+  "canonicalTitle": "UNABOMBER",
+  "originalTitle": "UNABOMBER",
+  "overview": "Follow Ted Kaczynski's transformation from Harvard prodigy into the infamous Unabomber. Subjected to controversial psychological experiments by Professor Henry Murray, Kaczynski's troubled past resurfaces decades later when his manhunt, led by FBI agent Joanne Miller, brings to light the chilling consequences of ambition and isolation.",
+  "description": "Follow Ted Kaczynski's transformation from Harvard prodigy into the infamous Unabomber. Subjected to controversial psychological experiments by Professor Henry Murray, Kaczynski's troubled past resurfaces decades later when his manhunt, led by FBI agent Joanne Miller, brings to light the chilling consequences of ambition and isolation.",
+  "shortDescription": "Follow Ted Kaczynski's transformation from Harvard prodigy into the infamous Unabomber. Subjected to controversial psych",
+  "year": 2026,
+  "releaseDate": "2026-09-25",
+  "rating": 7,
+  "votes": "0.0K",
+  "quality": "FHD",
+  "duration": "1h 41m",
+  "genres": [
+    "Drama",
+    "Crime",
+    "Thriller"
+  ],
+  "categories": [
+    "Drama",
+    "Crime",
+    "Thriller"
+  ],
+  "language": "English",
+  "country": "US",
+  "director": "Janus Metz",
+  "poster": "https://image.tmdb.org/t/p/w500/39aMkR8Y5vhCG9dTkjiqRl8AVqp.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/58D9nalUYW5L5K0guw7hcpsEJBH.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/B3tR6qQjbgI?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/B3tR6qQjbgI?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "934",
+      "name": "Russell Crowe",
+      "character": "Henry Murray",
+      "photo": "https://image.tmdb.org/t/p/w185/3IBZF0qCZMZ7zJYlgrH0sQzNZV.jpg"
+    },
+    {
+      "id": "94185",
+      "name": "Shailene Woodley",
+      "character": "Joanne Miller",
+      "photo": "https://image.tmdb.org/t/p/w185/gL2NvHKW9wAH3qkZuJ76ULUiArB.jpg"
+    },
+    {
+      "id": "1277188",
+      "name": "Jacob Tremblay",
+      "character": "Ted Kaczynski",
+      "photo": "https://image.tmdb.org/t/p/w185/h8CXDp86Y36CUENF4SXJq5ZRTsf.jpg"
+    },
+    {
+      "id": "82809",
+      "name": "Annabelle Wallis",
+      "character": "Christiana Morgan",
+      "photo": "https://image.tmdb.org/t/p/w185/2ZmO2Zz9TcR0rmSJHOkivcu0heR.jpg"
+    },
+    {
+      "id": "23498",
+      "name": "Alexander Ludwig",
+      "character": "Leo Driver",
+      "photo": "https://image.tmdb.org/t/p/w185/3KpzKT4iGhNivSISQMe6EwpAmCi.jpg"
+    },
+    {
+      "id": "212776",
+      "name": "Marc Menchaca",
+      "character": "Eddie Turrell",
+      "photo": "https://image.tmdb.org/t/p/w185/fL0LmdBwau30M4AFPVJrpLRXXsU.jpg"
+    },
+    {
+      "id": "1336329",
+      "name": "Steven Ogg",
+      "character": "Dean Kaplan",
+      "photo": "https://image.tmdb.org/t/p/w185/dorBNAwR8qpB13pe0zd3OkFjqWR.jpg"
+    },
+    {
+      "id": "7013",
+      "name": "Mark Camacho",
+      "character": "Bill Ford",
+      "photo": null
+    },
+    {
+      "id": "2358880",
+      "name": "David Webster",
+      "character": "Roy",
+      "photo": "https://image.tmdb.org/t/p/w185/gWQ9r3s8fAsmEs0hvKBSgZppWEQ.jpg"
+    },
+    {
+      "id": "7039",
+      "name": "Bruce Ramsay",
+      "character": "Turk Kaczynski",
+      "photo": "https://image.tmdb.org/t/p/w185/xvVbXMzHqZ0kMs77EScQ76S4gWH.jpg"
+    },
+    {
+      "id": "1674952",
+      "name": "Michelle Leblanc",
+      "character": "Wanda Kaczynski",
+      "photo": null
+    },
+    {
+      "id": "1560344",
+      "name": "Gus Halper",
+      "character": "Mr. C",
+      "photo": "https://image.tmdb.org/t/p/w185/50KfZII4TVqgYngoAjPgdxhwESP.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 1,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-26T03:32:10.227Z",
+  "createdAt": "2026-09-26T03:32:10.227Z",
+  "updatedAt": "2026-09-26T03:32:10.227Z",
+  "links": []
+}

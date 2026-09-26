@@ -1,0 +1,116 @@
+{
+  "id": "tmdb-series-288385",
+  "canonicalId": "tmdb-series-288385",
+  "externalProvider": "tmdb",
+  "externalId": "288385",
+  "tmdbId": "288385",
+  "imdbId": "tt40407840",
+  "type": "series",
+  "contentType": "series",
+  "title": "Paolo",
+  "canonicalTitle": "Paolo",
+  "originalTitle": "Paolo",
+  "overview": "Follow working-class Paolo's unsettling intrusion into the life of Téophane Tolbiac, a young and up-and-coming politician.",
+  "description": "Follow working-class Paolo's unsettling intrusion into the life of Téophane Tolbiac, a young and up-and-coming politician.",
+  "shortDescription": "Follow working-class Paolo's unsettling intrusion into the life of Téophane Tolbiac, a young and up-and-coming politicia",
+  "year": 2026,
+  "releaseDate": "2026-09-25",
+  "rating": 10,
+  "votes": "0.0K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Mystery"
+  ],
+  "categories": [
+    "Mystery"
+  ],
+  "language": "French",
+  "country": "FR",
+  "director": "Sébastien Marnier",
+  "poster": "https://image.tmdb.org/t/p/w500/kyHSVyHD4gbfdJe443ywGwYIaKM.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/2kZsDfhTAAEAwcIsCbbgxOFqWN3.jpg",
+  "trailerUrl": null,
+  "trailer": null,
+  "cast": [
+    {
+      "id": "1446210",
+      "name": "Jérôme Niel",
+      "character": "Paolo",
+      "photo": "https://image.tmdb.org/t/p/w185/2gCaopWoxvPaL3gyPkYyZnzAY9U.jpg"
+    },
+    {
+      "id": "2991787",
+      "name": "Yoann Gasiorowski",
+      "character": "Téophane",
+      "photo": "https://image.tmdb.org/t/p/w185/1gvUSMBkNRdZwd7CUa9aCWuYQvt.jpg"
+    },
+    {
+      "id": "559581",
+      "name": "Magalie Lépine-Blondeau",
+      "character": "Géraldine",
+      "photo": "https://image.tmdb.org/t/p/w185/ci7DL2C39iZmb86tLVAzAkorozY.jpg"
+    },
+    {
+      "id": "3534522",
+      "name": "Marie Oppert",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/7uRzdGQgqT1k6DJtdCXPXnNAc5A.jpg"
+    },
+    {
+      "id": "2852439",
+      "name": "Léo Chalié",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/vmuNIVYP9lbuMcxNa4i3CgXLWuU.jpg"
+    },
+    {
+      "id": "1630513",
+      "name": "Véronique Ruggia Saura",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/pJwDIbaLYDdwgEq15X7owYDUP67.jpg"
+    },
+    {
+      "id": "1360307",
+      "name": "Guslagie Malanda",
+      "character": "Winnie",
+      "photo": "https://image.tmdb.org/t/p/w185/fjGrRcK4SoGLptulNbqMKxm39Am.jpg"
+    },
+    {
+      "id": "2541773",
+      "name": "Salif Cissé",
+      "character": "Jean Baptiste",
+      "photo": "https://image.tmdb.org/t/p/w185/h0EzP4ZCdNK6ouMjQBSYDsSLPb7.jpg"
+    },
+    {
+      "id": "236639",
+      "name": "Françoise Lebrun",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/djbPgHqOI1J7thLTTnJIEQNfnZj.jpg"
+    },
+    {
+      "id": "4447979",
+      "name": "Léa Lopez",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/59Io4bDOrlEAko8YNijPkenfdeS.jpg"
+    },
+    {
+      "id": "119501",
+      "name": "Philippe Katerine",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/vGo21vRILgGPT5Q3TTwzLxANemF.jpg"
+    },
+    {
+      "id": "22307",
+      "name": "Guilaine Londez",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/mJcfcAJAbIbbQNhxHw2KAa37Pd5.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 7,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-26T03:32:10.674Z",
+  "createdAt": "2026-09-26T03:32:10.674Z",
+  "updatedAt": "2026-09-26T03:32:10.674Z",
+  "links": []
+}

@@ -1,0 +1,78 @@
+{
+  "id": "tmdb-series-45790",
+  "canonicalId": "tmdb-series-45790",
+  "externalProvider": "tmdb",
+  "externalId": "45790",
+  "tmdbId": "45790",
+  "imdbId": "tt2359704",
+  "type": "series",
+  "contentType": "series",
+  "title": "JoJo's Bizarre Adventure",
+  "canonicalTitle": "JoJo's Bizarre Adventure",
+  "originalTitle": "ジョジョの奇妙な冒険",
+  "overview": "Follow the intergenerational feud between the Joestar Family and various forces of evil, the most prominent of which is Dio Brando and his followers.",
+  "description": "Follow the intergenerational feud between the Joestar Family and various forces of evil, the most prominent of which is Dio Brando and his followers.",
+  "shortDescription": "Follow the intergenerational feud between the Joestar Family and various forces of evil, the most prominent of which is ",
+  "year": 2012,
+  "releaseDate": "2012-10-06",
+  "rating": 8.6,
+  "votes": "1.7K",
+  "quality": "FHD",
+  "duration": "24m/ep",
+  "genres": [
+    "Animation",
+    "Action & Adventure",
+    "Sci-Fi & Fantasy"
+  ],
+  "categories": [
+    "Animation",
+    "Action & Adventure",
+    "Sci-Fi & Fantasy"
+  ],
+  "language": "Japanese",
+  "country": "JP",
+  "director": "Director",
+  "poster": "https://image.tmdb.org/t/p/w500/ogAWwbh3frWtiTyyXrZaVFtqCgp.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/5mUYDoFjDlPmDvnUWSknhYjGBBh.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/fOvrr5izejw?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/fOvrr5izejw?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "2812912",
+      "name": "Shogo Sakata",
+      "character": "Johnny Joestar (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/fRRPNBz3OCNRdmLdUTdpq7dGqxM.jpg"
+    },
+    {
+      "id": "2220797",
+      "name": "Yohei Azakami",
+      "character": "Gyro Zeppeli (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/rLIqw8pIjVIxPb5engrTbu9iOex.jpg"
+    },
+    {
+      "id": "1324666",
+      "name": "Kaito Ishikawa",
+      "character": "Diego Brando (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/fzjIkotjUHHs3wgftM9tqdsG8ph.jpg"
+    },
+    {
+      "id": "1492982",
+      "name": "Rie Takahashi",
+      "character": "Lucy Steel (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/aeB7z0cBTASdjKOjQriBAO6hYq4.jpg"
+    },
+    {
+      "id": "225603",
+      "name": "Kenta Miyake",
+      "character": "Steven Steel (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/7YL8vM2KYzPMeQqTpHWmNj6s1AP.jpg"
+    }
+  ],
+  "seasons": 6,
+  "episodes": 202,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-26T03:32:10.451Z",
+  "createdAt": "2026-09-26T03:32:10.451Z",
+  "updatedAt": "2026-09-26T03:32:10.451Z",
+  "links": []
+}
