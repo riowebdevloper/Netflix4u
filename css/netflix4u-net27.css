@@ -1,10 +1,20 @@
 /* Netflix4U Net27 Edition - Custom Styles & Enhancements */
 
 :root {
-  --color-brand: #ff3b3b;
+  --color-brand: #ff2b2b;
   --color-brand-dark: #e50914;
+  --color-brand-glow: rgba(229, 9, 20, 0.45);
+  --color-brand-gradient: linear-gradient(135deg, #e50914 0%, #ff3b3b 50%, #ff7050 100%);
   --color-accent: #ff3b3b;
   --accent: #ff6b00;
+  --bg-base: #0a0a0f;
+  --bg-surface: #11121a;
+  --bg-surface-elevated: #161722;
+  --glass-bg: rgba(18, 19, 28, 0.75);
+  --glass-border: rgba(255, 255, 255, 0.09);
+  --glass-border-hover: rgba(255, 255, 255, 0.22);
+  --card-shadow: 0 10px 24px -6px rgba(0, 0, 0, 0.75), 0 0 1px 1px rgba(255, 255, 255, 0.05);
+  --card-hover-shadow: 0 20px 36px -8px rgba(0, 0, 0, 0.9), 0 0 24px -4px rgba(229, 9, 20, 0.4);
   --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
@@ -16,6 +26,22 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* ─── Brand Typography & Logo Glow ─── */
+.brand-logo-text {
+  font-family: var(--font-sans);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  background: var(--color-brand-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 10px rgba(229, 9, 20, 0.5));
+  transition: filter 0.3s ease, transform 0.2s ease;
+}
+.brand-logo-text:hover {
+  filter: drop-shadow(0 4px 18px rgba(229, 9, 20, 0.8));
+  transform: scale(1.02);
+}
+
 /* ─── Honeycomb Hex Loader (Net27 Authentic Branded Experience) ─── */
 #nm-loader {
   position: fixed;
@@ -23,10 +49,11 @@ body {
   z-index: 99999;
   background: #0a0a0f;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   pointer-events: none;
-  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.4s;
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.35s;
 }
 #nm-loader.nm-hide,
 #nm-loader.nm-hidden {
@@ -37,49 +64,54 @@ body {
 }
 .nm-hive {
   position: relative;
-  width: 210px;
-  height: 210px;
+  width: 160px;
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .nm-hex {
   position: absolute;
-  width: 27px;
-  height: 31px;
+  width: 22px;
+  height: 25px;
   transform: translate(-50%, -50%);
   clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
-  background: #ff3b3b;
-  opacity: 0.15;
+  background: #e50914;
+  opacity: 0.18;
   will-change: transform, opacity;
-  animation: nmHexPulse 1.5s ease-in-out infinite;
-  box-shadow: 0 0 12px rgba(255, 59, 59, 0.4);
+  animation: nmHexPulse 1.4s ease-in-out infinite;
+  box-shadow: 0 0 12px rgba(229, 9, 20, 0.45);
 }
-.nm-hex:nth-child(1)  { left: 49.6px; top: 105px; animation-delay: 0.32s; }
-.nm-hex:nth-child(2)  { left: 63.4px; top: 129px; animation-delay: 0.32s; }
-.nm-hex:nth-child(3)  { left: 77.3px; top: 153px; animation-delay: 0.32s; }
-.nm-hex:nth-child(4)  { left: 63.4px; top: 81px;  animation-delay: 0.32s; }
-.nm-hex:nth-child(5)  { left: 77.3px; top: 105px; animation-delay: 0.16s; }
-.nm-hex:nth-child(6)  { left: 91.1px; top: 129px; animation-delay: 0.16s; }
-.nm-hex:nth-child(7)  { left: 105px;  top: 153px; animation-delay: 0.32s; }
-.nm-hex:nth-child(8)  { left: 77.3px; top: 57px;  animation-delay: 0.32s; }
-.nm-hex:nth-child(9)  { left: 91.1px; top: 81px;  animation-delay: 0.16s; }
-.nm-hex:nth-child(10) { left: 105px;  top: 105px; animation-delay: 0s; }
-.nm-hex:nth-child(11) { left: 118.9px; top: 129px; animation-delay: 0.16s; }
-.nm-hex:nth-child(12) { left: 132.7px; top: 153px; animation-delay: 0.32s; }
-.nm-hex:nth-child(13) { left: 105px;  top: 57px;  animation-delay: 0.32s; }
-.nm-hex:nth-child(14) { left: 118.9px; top: 81px;  animation-delay: 0.16s; }
-.nm-hex:nth-child(15) { left: 132.7px; top: 105px; animation-delay: 0.16s; }
-.nm-hex:nth-child(16) { left: 146.6px; top: 129px; animation-delay: 0.32s; }
-.nm-hex:nth-child(17) { left: 132.7px; top: 57px;  animation-delay: 0.32s; }
-.nm-hex:nth-child(18) { left: 146.6px; top: 81px;  animation-delay: 0.32s; }
-.nm-hex:nth-child(19) { left: 160.4px; top: 105px; animation-delay: 0.32s; }
+.nm-hex:nth-child(1)  { left: 39px; top: 80px; animation-delay: 0.32s; }
+.nm-hex:nth-child(2)  { left: 49px; top: 98px; animation-delay: 0.32s; }
+.nm-hex:nth-child(3)  { left: 59px; top: 116px; animation-delay: 0.32s; }
+.nm-hex:nth-child(4)  { left: 49px; top: 62px;  animation-delay: 0.32s; }
+.nm-hex:nth-child(5)  { left: 59px; top: 80px; animation-delay: 0.16s; }
+.nm-hex:nth-child(6)  { left: 70px; top: 98px; animation-delay: 0.16s; }
+.nm-hex:nth-child(7)  { left: 80px;  top: 116px; animation-delay: 0.32s; }
+.nm-hex:nth-child(8)  { left: 59px; top: 44px;  animation-delay: 0.32s; }
+.nm-hex:nth-child(9)  { left: 70px; top: 62px;  animation-delay: 0.16s; }
+.nm-hex:nth-child(10) { left: 80px;  top: 80px; animation-delay: 0s; }
+.nm-hex:nth-child(11) { left: 91px; top: 98px; animation-delay: 0.16s; }
+.nm-hex:nth-child(12) { left: 101px; top: 116px; animation-delay: 0.32s; }
+.nm-hex:nth-child(13) { left: 80px;  top: 44px;  animation-delay: 0.32s; }
+.nm-hex:nth-child(14) { left: 91px; top: 62px;  animation-delay: 0.16s; }
+.nm-hex:nth-child(15) { left: 101px; top: 80px; animation-delay: 0.16s; }
+.nm-hex:nth-child(16) { left: 112px; top: 98px; animation-delay: 0.32s; }
+.nm-hex:nth-child(17) { left: 101px; top: 44px;  animation-delay: 0.32s; }
+.nm-hex:nth-child(18) { left: 112px; top: 62px;  animation-delay: 0.32s; }
+.nm-hex:nth-child(19) { left: 122px; top: 80px; animation-delay: 0.32s; }
 .nm-loader-n {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   font-weight: 900;
-  font-size: 46px;
-  color: #ff3b3b;
-  text-shadow: 0 0 24px rgba(255, 59, 59, 0.7);
+  font-size: 40px;
+  background: var(--color-brand-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 20px rgba(229, 9, 20, 0.75));
   font-family: system-ui, -apple-system, sans-serif;
   letter-spacing: -2px;
   pointer-events: none;
@@ -87,12 +119,12 @@ body {
 }
 @keyframes nmHexPulse {
   0%, 100% {
-    opacity: 0.14;
+    opacity: 0.15;
     transform: translate(-50%, -50%) scale(0.92);
   }
   50% {
     opacity: 1;
-    transform: translate(-50%, -50%) scale(1.06);
+    transform: translate(-50%, -50%) scale(1.08);
     background: #ff2222;
   }
 }
@@ -104,14 +136,14 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 22px;
-  padding: 60px 20px;
-  background: radial-gradient(circle at center, rgba(229, 9, 20, 0.08) 0%, transparent 70%);
+  gap: 20px;
+  padding: 50px 20px;
+  background: radial-gradient(circle at center, rgba(229, 9, 20, 0.12) 0%, transparent 70%);
 }
 .nm-loader-box {
   position: relative;
-  width: 210px;
-  height: 210px;
+  width: 160px;
+  height: 160px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -120,25 +152,50 @@ body {
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 1.5px;
-  color: rgba(255, 255, 255, 0.75);
+  color: rgba(255, 255, 255, 0.85);
   text-transform: uppercase;
   animation: nmTextPulse 1.5s ease-in-out infinite;
 }
 @keyframes nmTextPulse {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 1; }
+  0%, 100% { opacity: 0.45; }
+  50% { opacity: 1; text-shadow: 0 0 12px rgba(255, 255, 255, 0.5); }
 }
 
 /* ─── Header Scrolled Glass ─── */
 #home-header {
   border-bottom: 1px solid transparent;
-  transition: background-color 0.3s ease, backdrop-filter 0.3s ease, border-color 0.3s ease;
+  transition: background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), backdrop-filter 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
 }
 #home-header.scrolled {
-  background-color: rgba(10, 10, 15, 0.88);
-  -webkit-backdrop-filter: blur(16px);
-  backdrop-filter: blur(16px);
+  background-color: rgba(10, 10, 15, 0.86);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
   border-bottom-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* ─── Search Bar Glassmorphism & Ambient Focus ─── */
+.netflix4u-search-wrap {
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.netflix4u-search-input {
+  background: rgba(255, 255, 255, 0.07);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  color: #ffffff;
+}
+.netflix4u-search-input:hover {
+  background: rgba(255, 255, 255, 0.11);
+  border-color: rgba(255, 255, 255, 0.22);
+}
+.netflix4u-search-input:focus {
+  background: rgba(16, 17, 24, 0.95);
+  border-color: rgba(229, 9, 20, 0.65);
+  box-shadow: 0 0 0 3px rgba(229, 9, 20, 0.25), 0 8px 24px rgba(0, 0, 0, 0.5);
 }
 
 /* ─── GPU-Composited Hero Carousel Dots (Zero Layout Recalculation) ─── */
@@ -1718,6 +1775,182 @@ body.modal-open {
 #aadsstickymtz6up6x:checked + div {
   display: none !important;
 }
+
+/* ─── Elevated Modern OTT Design Enhancements ─── */
+
+/* 1. Hero Buttons & Visual Controls */
+.hero-btn-play {
+  background: #ffffff !important;
+  color: #050508 !important;
+  font-weight: 800 !important;
+  border-radius: 10px !important;
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.35) !important;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  border: none !important;
+}
+.hero-btn-play:hover {
+  background: #f4f4f4 !important;
+  transform: scale(1.04) translateY(-1px) !important;
+  box-shadow: 0 8px 30px rgba(255, 255, 255, 0.5) !important;
+}
+.hero-btn-play:active {
+  transform: scale(0.97) !important;
+}
+
+.hero-btn-info {
+  background: rgba(255, 255, 255, 0.14) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  border-radius: 10px !important;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3) !important;
+}
+.hero-btn-info:hover {
+  background: rgba(255, 255, 255, 0.24) !important;
+  border-color: rgba(255, 255, 255, 0.35) !important;
+  transform: scale(1.04) translateY(-1px) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45) !important;
+}
+.hero-btn-info:active {
+  transform: scale(0.97) !important;
+}
+
+.hero-btn-download {
+  background: linear-gradient(135deg, #e50914 0%, #b20710 100%) !important;
+  color: #ffffff !important;
+  font-weight: 800 !important;
+  border-radius: 10px !important;
+  box-shadow: 0 4px 20px rgba(229, 9, 20, 0.45) !important;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+.hero-btn-download:hover {
+  background: linear-gradient(135deg, #ff1f2a 0%, #e50914 100%) !important;
+  transform: scale(1.04) translateY(-1px) !important;
+  box-shadow: 0 8px 30px rgba(229, 9, 20, 0.7) !important;
+}
+.hero-btn-download:active {
+  transform: scale(0.97) !important;
+}
+
+/* Floating Hero Navigation Arrows */
+.hero-nav {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  cursor: pointer !important;
+}
+.hero-nav:hover {
+  transform: translateY(-50%) scale(1.08) !important;
+  color: #ffffff !important;
+  background-color: rgba(0, 0, 0, 0.8) !important;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.7) !important;
+}
+.hero-nav:active {
+  transform: translateY(-50%) scale(0.95) !important;
+}
+
+/* 2. Platform Pills Modernization */
+.platform-btn {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+.platform-btn:hover {
+  transform: translateY(-1.5px) !important;
+  border-color: rgba(255, 255, 255, 0.25) !important;
+  background-color: rgba(255, 255, 255, 0.12) !important;
+  color: #ffffff !important;
+}
+.platform-btn.is-active {
+  background-color: rgba(255, 255, 255, 0.16) !important;
+  border-color: var(--pc, #e50914) !important;
+  box-shadow: 0 4px 16px -2px rgba(0, 0, 0, 0.6), 0 0 16px -2px var(--pc, #e50914) !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+}
+
+/* 3. Movie Card Hover Depth & Glow */
+.nm-card {
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s ease !important;
+}
+.nm-card:hover {
+  transform: translateY(-5px) scale(1.03) !important;
+}
+.nm-card-inner {
+  border-radius: 12px !important;
+  overflow: hidden !important;
+  box-shadow: 0 10px 24px -6px rgba(0, 0, 0, 0.75), 0 0 1px 1px rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease !important;
+}
+.nm-card:hover .nm-card-inner {
+  border-color: rgba(229, 9, 20, 0.65) !important;
+  box-shadow: 0 20px 36px -8px rgba(0, 0, 0, 0.9), 0 0 24px -4px rgba(229, 9, 20, 0.4) !important;
+}
+
+/* 4. Rail Wrap Fade Masks & Arrows */
+.rail-wrap {
+  position: relative;
+}
+.rail-arrow-btn {
+  background: rgba(14, 15, 22, 0.8) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6) !important;
+}
+.rail-arrow-btn:hover {
+  background: rgba(229, 9, 20, 0.9) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  box-shadow: 0 0 20px rgba(229, 9, 20, 0.6) !important;
+}
+
+/* 5. Title Modal Glassmorphism */
+#title-modal-card {
+  background: rgba(15, 16, 24, 0.98) !important;
+  -webkit-backdrop-filter: blur(28px) !important;
+  backdrop-filter: blur(28px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 25px 60px -10px rgba(0, 0, 0, 0.9), 0 0 40px -15px rgba(229, 9, 20, 0.3) !important;
+}
+#title-modal-header {
+  background: rgba(15, 16, 24, 0.92) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  backdrop-filter: blur(20px) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+/* 6. Download Cards in Modal */
+.dl-card {
+  background: rgba(255, 255, 255, 0.03) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 12px !important;
+  padding: 12px 16px !important;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+.dl-card:hover {
+  background: rgba(255, 255, 255, 0.07) !important;
+  border-color: rgba(229, 9, 20, 0.45) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.6), 0 0 16px -4px rgba(229, 9, 20, 0.25) !important;
+}
+
+/* 7. Watch Streaming Player Modal Shell */
+#watch-top-bar {
+  background: linear-gradient(180deg, rgba(8, 8, 12, 0.98) 0%, rgba(8, 8, 12, 0.8) 60%, transparent 100%) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  backdrop-filter: blur(16px) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+#watch-server-menu, #watch-audio-menu {
+  background: rgba(15, 16, 24, 0.98) !important;
+  -webkit-backdrop-filter: blur(24px) !important;
+  backdrop-filter: blur(24px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  box-shadow: 0 20px 40px -8px rgba(0, 0, 0, 0.85) !important;
+}
+
 
 
 

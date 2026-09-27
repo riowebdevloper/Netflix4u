@@ -488,12 +488,6 @@
           '<div id="ad-slot-modal-cloud" class="nm-ad-slot nm-ad-modal"></div>' +
         '</div>' +
 
-        '<!-- In-Modal Dedicated Ad Section 3: Cloud Server Sponsor -->' +
-        '<div class="nm-ad-container !my-3" data-ad-container="ad-slot-modal-cloud">' +
-          '<div class="nm-ad-label">Sponsored Server</div>' +
-          '<div id="ad-slot-modal-cloud" class="nm-ad-slot nm-ad-modal"></div>' +
-        '</div>' +
-
         cloudSectionHtml +
         (function() {
           var streamableUrl = resolveStreamableVideoUrl(data, isTv, data.initialSeason || 1, 1);
