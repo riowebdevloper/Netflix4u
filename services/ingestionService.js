@@ -16,6 +16,7 @@
 const fs = require('fs');
 const path = require('path');
 const https = require('https');
+const { filterCatalogByCategory } = require('./categoryFilters');
 
 const ROOT = path.resolve(__dirname, '..');
 const DATA_DIR = path.join(ROOT, 'data');
@@ -150,11 +151,22 @@ async function discoverCandidates() {
 function verifyPosterUrl(posterUrl) {
   if (!posterUrl || typeof posterUrl !== 'string') return false;
   const p = posterUrl.trim().toLowerCase();
-  if (p.includes('no-poster') || p.includes('placeholder') || p.includes('placehold') || p.includes('undefined')) {
+  if (p.includes('no-poster') || p.includes('placeholder') || p.includes('placehold') || p.includes('undefined') || p.includes('null')) {
     return false;
   }
   // Must be an approved domain or valid local path
-  if (p.startsWith('https://image.tmdb.org/') || p.startsWith('https://storage.hicine.sbs/') || p.startsWith('/uploads/')) {
+  if (
+    p.startsWith('https://image.tmdb.org/') ||
+    p.startsWith('http://image.tmdb.org/') ||
+    p.startsWith('https://media.themoviedb.org/') ||
+    p.startsWith('https://storage.hicine.sbs/') ||
+    p.startsWith('https://wsrv.nl/') ||
+    p.startsWith('https://images.weserv.nl/') ||
+    p.startsWith('/uploads/') ||
+    p.startsWith('/images/') ||
+    p.startsWith('https://m.media-amazon.com/') ||
+    p.startsWith('https://i.imgur.com/')
+  ) {
     return true;
   }
   return false;
@@ -585,37 +597,15 @@ function rebuildCategories(catalogList) {
     .filter(item => item.status === 'PUBLISHED' && verifyPosterUrl(item.poster))
     .map(normalizeFeedItem);
 
-  const movies = published.filter(i => i.type === 'movie').slice(0, 100);
-  const series = published.filter(i => i.type === 'series').slice(0, 100);
-  const anime = published.filter(i => i.type === 'anime' || (i.categories && i.categories.some(c => /anime/i.test(c)))).slice(0, 100);
-  const kdrama = published.filter(i => i.type === 'kdrama' || (i.categories && i.categories.some(c => /korean|kdrama/i.test(c)))).slice(0, 100);
-  const trending = published.slice(0, 100);
-
-  const bollywood = published.filter(x => {
-    const hay = ((x.language||'')+' '+(x.originalTitle||'')+' '+(x.rawTitle||'')+' '+(x.title||'')+' '+(x.categories||[]).join(' ')+' '+(x.country||'')).toLowerCase();
-    const isSouth = hay.includes('south') || hay.includes('tamil') || hay.includes('telugu') || hay.includes('malayalam') || hay.includes('kannada') || hay.includes('tollywood') || hay.includes('kollywood');
-    if (isSouth) return false;
-    const isHollywood = (Array.isArray(x.categories) && x.categories.some(c => /hollywood/i.test(c))) || hay.includes('hollywood');
-    if (isHollywood) return false;
-    return hay.includes('bollywood') || (!hay.includes('english') && hay.includes('hindi')) || ((x.country||'').toLowerCase().includes('india') && !hay.includes('english'));
-  }).slice(0, 100);
-
-  const hollywood = published.filter(x => {
-    const hay = ((x.language||'')+' '+(x.originalTitle||'')+' '+(x.rawTitle||'')+' '+(x.title||'')+' '+(x.categories||[]).join(' ')).toLowerCase();
-    const isHollywood = (Array.isArray(x.categories) && x.categories.some(c => /hollywood/i.test(c))) || hay.includes('hollywood');
-    const isEnglish = (x.language||'').toLowerCase().includes('english') || hay.includes('english');
-    return isHollywood || (isEnglish && !hay.includes('bollywood') && !hay.includes('punjabi'));
-  }).slice(0, 100);
-
-  const southIndian = published.filter(x => {
-    const hay = ((x.language||'')+' '+(x.originalTitle||'')+' '+(x.rawTitle||'')+' '+(x.title||'')+' '+(x.categories||[]).join(' ')).toLowerCase();
-    return hay.includes('south') || hay.includes('tamil') || hay.includes('telugu') || hay.includes('malayalam') || hay.includes('kannada') || hay.includes('tollywood') || hay.includes('kollywood');
-  }).slice(0, 100);
-
-  const hindiDubbed = published.filter(x => {
-    const hay = ((x.language||'')+' '+(x.originalTitle||'')+' '+(x.rawTitle||'')+' '+(x.title||'')+' '+(x.categories||[]).join(' ')).toLowerCase();
-    return hay.includes('dual audio') || hay.includes('hindi dubbed') || hay.includes('dubbed') || hay.includes('multi audio');
-  }).slice(0, 100);
+  const movies = filterCatalogByCategory(published, 'movies').slice(0, 100);
+  const series = filterCatalogByCategory(published, 'series').slice(0, 100);
+  const anime = filterCatalogByCategory(published, 'anime').slice(0, 100);
+  const kdrama = filterCatalogByCategory(published, 'kdrama').slice(0, 100);
+  const trending = filterCatalogByCategory(published, 'trending').slice(0, 100);
+  const bollywood = filterCatalogByCategory(published, 'bollywood').slice(0, 100);
+  const hollywood = filterCatalogByCategory(published, 'hollywood').slice(0, 100);
+  const southIndian = filterCatalogByCategory(published, 'south-indian').slice(0, 100);
+  const hindiDubbed = filterCatalogByCategory(published, 'hindi-dubbed').slice(0, 100);
 
   fs.writeFileSync(path.join(DATA_DIR, 'movies.json'), JSON.stringify(movies, null, 2), 'utf8');
   fs.writeFileSync(path.join(DATA_DIR, 'series.json'), JSON.stringify(series, null, 2), 'utf8');

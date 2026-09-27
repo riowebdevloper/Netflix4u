@@ -1,6 +1,6 @@
 
 // PWA Shell & Offline Support (Network-First for HTML to guarantee fresh updates)
-var CACHE_NAME = 'n4u-pwa-v9';
+var CACHE_NAME = 'n4u-pwa-v10';
 var STATIC_ASSETS = [
   '/',
   '/index.html',
@@ -12,6 +12,7 @@ var STATIC_ASSETS = [
   '/js/net27-modal.js',
   '/js/player-resolver.js',
   '/js/download-resolver.js',
+  '/js/ads-manager.js',
   '/js/version-checker.js',
   '/manifest.json',
   '/favicon.ico',

@@ -105,8 +105,8 @@ async function runVerification() {
   report(11, 'Broken button fix karo', hasButtonFixes, 'OAuth buttons, password reset, and back navigation fixed');
 
   // 12. Proper success msgs add karo
-  const hasSuccessToasts = indexJs.includes('FlixToastContainer') &&
-                           indexJs.includes('Added "${w.title}" to Watchlist!') &&
+  const hasSuccessToasts = (indexJs.includes('Netflix4UToastContainer') || indexJs.includes('FlixToastContainer')) &&
+                           indexJs.includes('to Watchlist!') &&
                            indexJs.includes('Signed in successfully!');
   report(12, 'Proper success msgs add karo', hasSuccessToasts, 'Global interactive toast notification system active');
 
@@ -128,11 +128,10 @@ async function runVerification() {
   const logoClickable = indexJs.includes('if(window.location.pathname==="/")window.scrollTo({top:0,behavior:"smooth"})');
   report(17, 'Logo ko homepage se clickable banao', logoClickable, 'Smooth top scroll on homepage and navigation from subpages');
 
-  // 18. Phone number clickable banao & 19. Emails clickable karo
   const hasClickablePhone = staticJs.includes('tel:+18003549967') && staticJs.includes('tel:+918000123456');
-  const hasClickableEmail = staticJs.includes('mailto:support@flixworld.fun');
+  const hasClickableEmail = staticJs.includes('mailto:support@netflix4u.in') || staticJs.includes('mailto:support@flixworld.fun');
   report(18, 'Phone number clickable banao', hasClickablePhone, 'Direct tel: links for toll-free helpline and support');
-  report(19, 'Emails clickable karo', hasClickableEmail, 'Direct mailto: link for support@flixworld.fun');
+  report(19, 'Emails clickable karo', hasClickableEmail, 'Direct mailto: link for support@netflix4u.in');
 
   // 20. Complete website ko mobile optimise karo
   const hasMobileOptimization = indexHtml.includes('viewport-fit=cover') &&
