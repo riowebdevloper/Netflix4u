@@ -820,6 +820,29 @@
       "publishedAt": "2022-08-28T13:22:56.000Z"
     },
     {
+      "id": "tmdb-series-316197",
+      "canonicalId": "tmdb-series-316197",
+      "title": "Dive into You",
+      "rawTitle": "Dive into You",
+      "slug": "tmdb-series-316197-dive-into-you",
+      "type": "series",
+      "year": 2026,
+      "quality": "FHD",
+      "provider": "tmdb",
+      "rating": 8,
+      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2F6OAuQOGqjYY1JXbkTlWz4Mm2Kmi.jpg&output=webp",
+      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FjseW3HucgNjN2CwJa3MiOlF4xMO.jpg&output=webp",
+      "imdbId": "tt43088191",
+      "tmdbId": "316197",
+      "categories": [
+        "Comedy",
+        "Drama",
+        "Sci-Fi & Fantasy"
+      ],
+      "status": "PUBLISHED",
+      "publishedAt": "2026-09-27T03:40:47.609Z"
+    },
+    {
       "id": "tmdb-movie-1580190",
       "canonicalId": "tmdb-movie-1580190",
       "title": "The Scavenger",
@@ -939,7 +962,7 @@
       "year": 2026,
       "quality": "FHD",
       "provider": "tmdb",
-      "rating": 6,
+      "rating": 6.3,
       "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2Fv7LQJ8GUvvvKhGRNp8F4hiRzwiI.jpg&output=webp",
       "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2Fm9QKL9smb61v1XSYJoHdl7p5yUd.jpg&output=webp",
       "imdbId": "tt36832679",
@@ -961,7 +984,7 @@
       "year": 2026,
       "quality": "FHD",
       "provider": "tmdb",
-      "rating": 7,
+      "rating": 7.4,
       "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2F39aMkR8Y5vhCG9dTkjiqRl8AVqp.jpg&output=webp",
       "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F58D9nalUYW5L5K0guw7hcpsEJBH.jpg&output=webp",
       "imdbId": "tt6933238",
@@ -1125,28 +1148,6 @@
       ],
       "status": "PUBLISHED",
       "publishedAt": "2026-09-24T03:09:43.958Z"
-    },
-    {
-      "id": "tmdb-movie-1032863",
-      "canonicalId": "tmdb-movie-1032863",
-      "title": "The Love Hypothesis",
-      "rawTitle": "The Love Hypothesis",
-      "slug": "tmdb-movie-1032863-the-love-hypothesis",
-      "type": "movie",
-      "year": 2026,
-      "quality": "FHD",
-      "provider": "tmdb",
-      "rating": 8.3,
-      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FvfZxVHextAGC70zrNhS8lsROqP1.jpg&output=webp",
-      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2Fc8hvRzN5nijvp1VcSs8nqHly1bK.jpg&output=webp",
-      "imdbId": "tt22526100",
-      "tmdbId": "1032863",
-      "categories": [
-        "Romance",
-        "Comedy"
-      ],
-      "status": "PUBLISHED",
-      "publishedAt": "2026-09-24T03:09:43.927Z"
     }
   ],
   "featured": [
@@ -4287,6 +4288,29 @@
       "publishedAt": "2022-08-28T13:22:56.000Z"
     },
     {
+      "id": "tmdb-series-316197",
+      "canonicalId": "tmdb-series-316197",
+      "title": "Dive into You",
+      "rawTitle": "Dive into You",
+      "slug": "tmdb-series-316197-dive-into-you",
+      "type": "series",
+      "year": 2026,
+      "quality": "FHD",
+      "provider": "tmdb",
+      "rating": 8,
+      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2F6OAuQOGqjYY1JXbkTlWz4Mm2Kmi.jpg&output=webp",
+      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FjseW3HucgNjN2CwJa3MiOlF4xMO.jpg&output=webp",
+      "imdbId": "tt43088191",
+      "tmdbId": "316197",
+      "categories": [
+        "Comedy",
+        "Drama",
+        "Sci-Fi & Fantasy"
+      ],
+      "status": "PUBLISHED",
+      "publishedAt": "2026-09-27T03:40:47.609Z"
+    },
+    {
       "id": "tmdb-movie-1580190",
       "canonicalId": "tmdb-movie-1580190",
       "title": "The Scavenger",
@@ -4406,7 +4430,7 @@
       "year": 2026,
       "quality": "FHD",
       "provider": "tmdb",
-      "rating": 6,
+      "rating": 6.3,
       "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2Fv7LQJ8GUvvvKhGRNp8F4hiRzwiI.jpg&output=webp",
       "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2Fm9QKL9smb61v1XSYJoHdl7p5yUd.jpg&output=webp",
       "imdbId": "tt36832679",
@@ -4428,7 +4452,7 @@
       "year": 2026,
       "quality": "FHD",
       "provider": "tmdb",
-      "rating": 7,
+      "rating": 7.4,
       "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2F39aMkR8Y5vhCG9dTkjiqRl8AVqp.jpg&output=webp",
       "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F58D9nalUYW5L5K0guw7hcpsEJBH.jpg&output=webp",
       "imdbId": "tt6933238",
@@ -4505,29 +4529,7 @@
       ],
       "status": "PUBLISHED",
       "publishedAt": "2026-09-25T03:26:44.331Z"
-    },
-    {
-      "id": "tmdb-series-305357",
-      "canonicalId": "tmdb-series-305357",
-      "title": "A Different World",
-      "rawTitle": "A Different World",
-      "slug": "tmdb-series-305357-a-different-world",
-      "type": "series",
-      "year": 2026,
-      "quality": "FHD",
-      "provider": "tmdb",
-      "rating": 6.3,
-      "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FmmE4RNbsPOwwRo5rnVRd1IXzgcZ.jpg&output=webp",
-      "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F1lVbKPOVjTV02FtLqiPk9F9z1Fh.jpg&output=webp",
-      "imdbId": "tt33081352",
-      "tmdbId": "305357",
-      "categories": [
-        "Comedy",
-        "Drama"
-      ],
-      "status": "PUBLISHED",
-      "publishedAt": "2026-09-25T03:26:44.319Z"
     }
   ],
-  "updatedAt": "2026-09-26T03:32:11.550Z"
+  "updatedAt": "2026-09-27T03:40:48.288Z"
 }

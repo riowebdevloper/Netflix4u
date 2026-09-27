@@ -1,0 +1,96 @@
+{
+  "id": "tmdb-series-316197",
+  "canonicalId": "tmdb-series-316197",
+  "externalProvider": "tmdb",
+  "externalId": "316197",
+  "tmdbId": "316197",
+  "imdbId": "tt43088191",
+  "type": "series",
+  "contentType": "series",
+  "title": "Dive into You",
+  "canonicalTitle": "Dive into You",
+  "originalTitle": "너에게 다이브",
+  "overview": "An actress and her twin brother slip through time – and swap bodies – to save their friend's life.",
+  "description": "An actress and her twin brother slip through time – and swap bodies – to save their friend's life.",
+  "shortDescription": "An actress and her twin brother slip through time – and swap bodies – to save their friend's life.",
+  "year": 2026,
+  "releaseDate": "2026-09-26",
+  "rating": 8,
+  "votes": "1.2K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Comedy",
+    "Drama",
+    "Sci-Fi & Fantasy"
+  ],
+  "categories": [
+    "Comedy",
+    "Drama",
+    "Sci-Fi & Fantasy"
+  ],
+  "language": "Korean",
+  "country": "KR",
+  "director": "Director",
+  "poster": "https://image.tmdb.org/t/p/w500/6OAuQOGqjYY1JXbkTlWz4Mm2Kmi.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/jseW3HucgNjN2CwJa3MiOlF4xMO.jpg",
+  "trailerUrl": null,
+  "trailer": null,
+  "cast": [
+    {
+      "id": "1881078",
+      "name": "Bona",
+      "character": "Yoon Ha-na",
+      "photo": "https://image.tmdb.org/t/p/w185/zXVHkg4CxGjDGK6N4SIwZERmbhc.jpg"
+    },
+    {
+      "id": "3212104",
+      "name": "Park Seo-ham",
+      "character": "Jeong Woo-jae",
+      "photo": "https://image.tmdb.org/t/p/w185/vndtKSldmy4keg1NQx3wU0kqP2m.jpg"
+    },
+    {
+      "id": "5333883",
+      "name": "Jang Se-hyuk",
+      "character": "Yoon Ha-ru",
+      "photo": "https://image.tmdb.org/t/p/w185/ykRH93PNSuX3GxaxO3QuyCEdQqW.jpg"
+    },
+    {
+      "id": "3742977",
+      "name": "Moon Seung-you",
+      "character": "Seo Ye-rang",
+      "photo": "https://image.tmdb.org/t/p/w185/iakMVmUvYtUq4iaqe5BmQSS02h5.jpg"
+    },
+    {
+      "id": "2774992",
+      "name": "Ha Do-kwon",
+      "character": "Yun Chang-sik",
+      "photo": "https://image.tmdb.org/t/p/w185/lOiNEmbHhMkX8mICJfu9R1kzC36.jpg"
+    },
+    {
+      "id": "564846",
+      "name": "Park Mi-hyeon",
+      "character": "Jung Yeong-suk",
+      "photo": "https://image.tmdb.org/t/p/w185/cykvf76gDVlIhxFKO9xX7VY1HxW.jpg"
+    },
+    {
+      "id": "5129203",
+      "name": "Kim Han-yeong",
+      "character": "Hyung-won",
+      "photo": "https://image.tmdb.org/t/p/w185/42CuoZC6Mx4cU91H1Y83HxlV1nb.jpg"
+    },
+    {
+      "id": "3229192",
+      "name": "Kang Hyung-suk",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/xclHffQgjyMTCO0KWTopkkDHvX5.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 12,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-27T03:40:47.609Z",
+  "createdAt": "2026-09-27T03:40:47.609Z",
+  "updatedAt": "2026-09-27T03:40:47.609Z",
+  "links": []
+}
