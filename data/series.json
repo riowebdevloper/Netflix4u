@@ -1,5 +1,52 @@
 [
   {
+    "id": "tmdb-series-280042",
+    "canonicalId": "tmdb-series-280042",
+    "title": "A Wild Last Boss Appeared!",
+    "rawTitle": "A Wild Last Boss Appeared!",
+    "slug": "tmdb-series-280042-a-wild-last-boss-appeared-",
+    "type": "series",
+    "year": 2025,
+    "quality": "FHD",
+    "provider": "tmdb",
+    "rating": 7.3,
+    "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FsDb5USp0nknvs3mHmyurgH8y3z6.jpg&output=webp",
+    "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FgNYmU3RUlCb6dVqkiPCT7vglMfg.jpg&output=webp",
+    "imdbId": "tt33258199",
+    "tmdbId": "280042",
+    "categories": [
+      "Animation",
+      "Action & Adventure",
+      "Sci-Fi & Fantasy",
+      "Drama"
+    ],
+    "status": "PUBLISHED",
+    "publishedAt": "2026-09-27T03:40:47.644Z"
+  },
+  {
+    "id": "tmdb-series-316197",
+    "canonicalId": "tmdb-series-316197",
+    "title": "Dive into You",
+    "rawTitle": "Dive into You",
+    "slug": "tmdb-series-316197-dive-into-you",
+    "type": "series",
+    "year": 2026,
+    "quality": "FHD",
+    "provider": "tmdb",
+    "rating": 8,
+    "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2F6OAuQOGqjYY1JXbkTlWz4Mm2Kmi.jpg&output=webp",
+    "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FjseW3HucgNjN2CwJa3MiOlF4xMO.jpg&output=webp",
+    "imdbId": "tt43088191",
+    "tmdbId": "316197",
+    "categories": [
+      "Comedy",
+      "Drama",
+      "Sci-Fi & Fantasy"
+    ],
+    "status": "PUBLISHED",
+    "publishedAt": "2026-09-27T03:40:47.609Z"
+  },
+  {
     "id": "tmdb-series-292742",
     "canonicalId": "tmdb-series-292742",
     "title": "S.W.A.T. Exiles",

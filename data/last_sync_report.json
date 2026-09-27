@@ -1,797 +1,162 @@
 {
   "status": "SUCCESS",
   "metrics": {
-    "discovered": 92,
-    "added": 8,
+    "discovered": 90,
+    "added": 2,
     "updated": 6,
-    "skipped": 78,
-    "published": 8,
+    "skipped": 82,
+    "published": 2,
     "poster_pending": 0,
     "failed": 0,
-    "durationMs": 2407
+    "durationMs": 1353
   },
   "newItems": [
     {
-      "id": "tmdb-movie-1492640",
-      "canonicalId": "tmdb-movie-1492640",
+      "id": "tmdb-series-316197",
+      "canonicalId": "tmdb-series-316197",
       "externalProvider": "tmdb",
-      "externalId": "1492640",
-      "tmdbId": "1492640",
-      "imdbId": "tt6933238",
-      "type": "movie",
-      "contentType": "movie",
-      "title": "UNABOMBER",
-      "canonicalTitle": "UNABOMBER",
-      "originalTitle": "UNABOMBER",
-      "overview": "Follow Ted Kaczynski's transformation from Harvard prodigy into the infamous Unabomber. Subjected to controversial psychological experiments by Professor Henry Murray, Kaczynski's troubled past resurfaces decades later when his manhunt, led by FBI agent Joanne Miller, brings to light the chilling consequences of ambition and isolation.",
-      "description": "Follow Ted Kaczynski's transformation from Harvard prodigy into the infamous Unabomber. Subjected to controversial psychological experiments by Professor Henry Murray, Kaczynski's troubled past resurfaces decades later when his manhunt, led by FBI agent Joanne Miller, brings to light the chilling consequences of ambition and isolation.",
-      "shortDescription": "Follow Ted Kaczynski's transformation from Harvard prodigy into the infamous Unabomber. Subjected to controversial psych",
-      "year": 2026,
-      "releaseDate": "2026-09-25",
-      "rating": 7,
-      "votes": "0.0K",
-      "quality": "FHD",
-      "duration": "1h 41m",
-      "genres": [
-        "Drama",
-        "Crime",
-        "Thriller"
-      ],
-      "categories": [
-        "Drama",
-        "Crime",
-        "Thriller"
-      ],
-      "language": "English",
-      "country": "US",
-      "director": "Janus Metz",
-      "poster": "https://image.tmdb.org/t/p/w500/39aMkR8Y5vhCG9dTkjiqRl8AVqp.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/original/58D9nalUYW5L5K0guw7hcpsEJBH.jpg",
-      "trailerUrl": "https://www.youtube-nocookie.com/embed/B3tR6qQjbgI?rel=0&modestbranding=1",
-      "trailer": "https://www.youtube-nocookie.com/embed/B3tR6qQjbgI?rel=0&modestbranding=1",
-      "cast": [
-        {
-          "id": "934",
-          "name": "Russell Crowe",
-          "character": "Henry Murray",
-          "photo": "https://image.tmdb.org/t/p/w185/3IBZF0qCZMZ7zJYlgrH0sQzNZV.jpg"
-        },
-        {
-          "id": "94185",
-          "name": "Shailene Woodley",
-          "character": "Joanne Miller",
-          "photo": "https://image.tmdb.org/t/p/w185/gL2NvHKW9wAH3qkZuJ76ULUiArB.jpg"
-        },
-        {
-          "id": "1277188",
-          "name": "Jacob Tremblay",
-          "character": "Ted Kaczynski",
-          "photo": "https://image.tmdb.org/t/p/w185/h8CXDp86Y36CUENF4SXJq5ZRTsf.jpg"
-        },
-        {
-          "id": "82809",
-          "name": "Annabelle Wallis",
-          "character": "Christiana Morgan",
-          "photo": "https://image.tmdb.org/t/p/w185/2ZmO2Zz9TcR0rmSJHOkivcu0heR.jpg"
-        },
-        {
-          "id": "23498",
-          "name": "Alexander Ludwig",
-          "character": "Leo Driver",
-          "photo": "https://image.tmdb.org/t/p/w185/3KpzKT4iGhNivSISQMe6EwpAmCi.jpg"
-        },
-        {
-          "id": "212776",
-          "name": "Marc Menchaca",
-          "character": "Eddie Turrell",
-          "photo": "https://image.tmdb.org/t/p/w185/fL0LmdBwau30M4AFPVJrpLRXXsU.jpg"
-        },
-        {
-          "id": "1336329",
-          "name": "Steven Ogg",
-          "character": "Dean Kaplan",
-          "photo": "https://image.tmdb.org/t/p/w185/dorBNAwR8qpB13pe0zd3OkFjqWR.jpg"
-        },
-        {
-          "id": "7013",
-          "name": "Mark Camacho",
-          "character": "Bill Ford",
-          "photo": null
-        },
-        {
-          "id": "2358880",
-          "name": "David Webster",
-          "character": "Roy",
-          "photo": "https://image.tmdb.org/t/p/w185/gWQ9r3s8fAsmEs0hvKBSgZppWEQ.jpg"
-        },
-        {
-          "id": "7039",
-          "name": "Bruce Ramsay",
-          "character": "Turk Kaczynski",
-          "photo": "https://image.tmdb.org/t/p/w185/xvVbXMzHqZ0kMs77EScQ76S4gWH.jpg"
-        },
-        {
-          "id": "1674952",
-          "name": "Michelle Leblanc",
-          "character": "Wanda Kaczynski",
-          "photo": null
-        },
-        {
-          "id": "1560344",
-          "name": "Gus Halper",
-          "character": "Mr. C",
-          "photo": "https://image.tmdb.org/t/p/w185/50KfZII4TVqgYngoAjPgdxhwESP.jpg"
-        }
-      ],
-      "seasons": 1,
-      "episodes": 1,
-      "status": "PUBLISHED",
-      "publishedAt": "2026-09-26T03:32:10.227Z",
-      "createdAt": "2026-09-26T03:32:10.227Z",
-      "updatedAt": "2026-09-26T03:32:10.227Z",
-      "links": []
-    },
-    {
-      "id": "tmdb-series-290720",
-      "canonicalId": "tmdb-series-290720",
-      "externalProvider": "tmdb",
-      "externalId": "290720",
-      "tmdbId": "290720",
-      "imdbId": "tt36832679",
+      "externalId": "316197",
+      "tmdbId": "316197",
+      "imdbId": "tt43088191",
       "type": "series",
       "contentType": "series",
-      "title": "The Final Problem",
-      "canonicalTitle": "The Final Problem",
-      "originalTitle": "El problema final",
-      "overview": "In the spring of 1959, a retired actor, who previously played Sherlock Holmes, must investigate a murder at a small hotel on a tiny island near Mallorca.",
-      "description": "In the spring of 1959, a retired actor, who previously played Sherlock Holmes, must investigate a murder at a small hotel on a tiny island near Mallorca.",
-      "shortDescription": "In the spring of 1959, a retired actor, who previously played Sherlock Holmes, must investigate a murder at a small hote",
+      "title": "Dive into You",
+      "canonicalTitle": "Dive into You",
+      "originalTitle": "너에게 다이브",
+      "overview": "An actress and her twin brother slip through time – and swap bodies – to save their friend's life.",
+      "description": "An actress and her twin brother slip through time – and swap bodies – to save their friend's life.",
+      "shortDescription": "An actress and her twin brother slip through time – and swap bodies – to save their friend's life.",
       "year": 2026,
-      "releaseDate": "2026-09-25",
-      "rating": 6,
-      "votes": "0.0K",
+      "releaseDate": "2026-09-26",
+      "rating": 8,
+      "votes": "1.2K",
       "quality": "FHD",
-      "duration": "57m/ep",
+      "duration": "45m/ep",
       "genres": [
-        "Crime",
-        "Mystery"
+        "Comedy",
+        "Drama",
+        "Sci-Fi & Fantasy"
       ],
       "categories": [
-        "Crime",
-        "Mystery"
+        "Comedy",
+        "Drama",
+        "Sci-Fi & Fantasy"
       ],
-      "language": "Spanish",
-      "country": "ES",
+      "language": "Korean",
+      "country": "KR",
       "director": "Director",
-      "poster": "https://image.tmdb.org/t/p/w500/v7LQJ8GUvvvKhGRNp8F4hiRzwiI.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/original/m9QKL9smb61v1XSYJoHdl7p5yUd.jpg",
-      "trailerUrl": "https://www.youtube-nocookie.com/embed/yLeja7kWgmU?rel=0&modestbranding=1",
-      "trailer": "https://www.youtube-nocookie.com/embed/yLeja7kWgmU?rel=0&modestbranding=1",
+      "poster": "https://image.tmdb.org/t/p/w500/6OAuQOGqjYY1JXbkTlWz4Mm2Kmi.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/original/jseW3HucgNjN2CwJa3MiOlF4xMO.jpg",
+      "trailerUrl": null,
+      "trailer": null,
       "cast": [
         {
-          "id": "110129",
-          "name": "Jose Coronado",
-          "character": "Basil",
-          "photo": "https://image.tmdb.org/t/p/w185/9xo68HzH8n78Xv6gMzKK7XnjtHd.jpg"
+          "id": "1881078",
+          "name": "Bona",
+          "character": "Yoon Ha-na",
+          "photo": "https://image.tmdb.org/t/p/w185/zXVHkg4CxGjDGK6N4SIwZERmbhc.jpg"
         },
         {
-          "id": "77122",
-          "name": "María Valverde",
-          "character": "Adela Figueora",
-          "photo": "https://image.tmdb.org/t/p/w185/8taDDUCiyggIWhq8wGy2v0b9Nt8.jpg"
+          "id": "3212104",
+          "name": "Park Seo-ham",
+          "character": "Jeong Woo-jae",
+          "photo": "https://image.tmdb.org/t/p/w185/vndtKSldmy4keg1NQx3wU0kqP2m.jpg"
         },
         {
-          "id": "1183859",
-          "name": "Martiño Rivas",
+          "id": "5333883",
+          "name": "Jang Se-hyuk",
+          "character": "Yoon Ha-ru",
+          "photo": "https://image.tmdb.org/t/p/w185/ykRH93PNSuX3GxaxO3QuyCEdQqW.jpg"
+        },
+        {
+          "id": "3742977",
+          "name": "Moon Seung-you",
+          "character": "Seo Ye-rang",
+          "photo": "https://image.tmdb.org/t/p/w185/iakMVmUvYtUq4iaqe5BmQSS02h5.jpg"
+        },
+        {
+          "id": "2774992",
+          "name": "Ha Do-kwon",
+          "character": "Yun Chang-sik",
+          "photo": "https://image.tmdb.org/t/p/w185/lOiNEmbHhMkX8mICJfu9R1kzC36.jpg"
+        },
+        {
+          "id": "564846",
+          "name": "Park Mi-hyeon",
+          "character": "Jung Yeong-suk",
+          "photo": "https://image.tmdb.org/t/p/w185/cykvf76gDVlIhxFKO9xX7VY1HxW.jpg"
+        },
+        {
+          "id": "5129203",
+          "name": "Kim Han-yeong",
+          "character": "Hyung-won",
+          "photo": "https://image.tmdb.org/t/p/w185/42CuoZC6Mx4cU91H1Y83HxlV1nb.jpg"
+        },
+        {
+          "id": "3229192",
+          "name": "Kang Hyung-suk",
           "character": "",
-          "photo": "https://image.tmdb.org/t/p/w185/4qc8bF4OPmoJI8BcAz6HOdI3Xf1.jpg"
-        },
-        {
-          "id": "16971",
-          "name": "Maribel Verdú",
-          "character": "",
-          "photo": "https://image.tmdb.org/t/p/w185/7hxTsW5CKi2lkz5yGMWShki7DOo.jpg"
-        },
-        {
-          "id": "566330",
-          "name": "Gonzalo de Castro",
-          "character": "",
-          "photo": "https://image.tmdb.org/t/p/w185/24FPQXdyBtOPbSQRTkE8fXEef4I.jpg"
-        },
-        {
-          "id": "3941447",
-          "name": "Cristina Kovani",
-          "character": "",
-          "photo": "https://image.tmdb.org/t/p/w185/q4QqK8lmLllrLAjzekYsbuq97k5.jpg"
-        },
-        {
-          "id": "1866671",
-          "name": "José Condessa",
-          "character": "",
-          "photo": "https://image.tmdb.org/t/p/w185/lgk2AcJPb9Jy2sCXauguX8EqxPf.jpg"
-        },
-        {
-          "id": "118206",
-          "name": "Pepón Nieto",
-          "character": "",
-          "photo": "https://image.tmdb.org/t/p/w185/9UZ9SJ0e1M6vlzkCBFJAe32XakS.jpg"
+          "photo": "https://image.tmdb.org/t/p/w185/xclHffQgjyMTCO0KWTopkkDHvX5.jpg"
         }
       ],
       "seasons": 1,
-      "episodes": 4,
+      "episodes": 12,
       "status": "PUBLISHED",
-      "publishedAt": "2026-09-26T03:32:10.322Z",
-      "createdAt": "2026-09-26T03:32:10.322Z",
-      "updatedAt": "2026-09-26T03:32:10.322Z",
+      "publishedAt": "2026-09-27T03:40:47.609Z",
+      "createdAt": "2026-09-27T03:40:47.609Z",
+      "updatedAt": "2026-09-27T03:40:47.609Z",
       "links": []
     },
     {
-      "id": "tmdb-series-45790",
-      "canonicalId": "tmdb-series-45790",
+      "id": "tmdb-series-280042",
+      "canonicalId": "tmdb-series-280042",
       "externalProvider": "tmdb",
-      "externalId": "45790",
-      "tmdbId": "45790",
-      "imdbId": "tt2359704",
+      "externalId": "280042",
+      "tmdbId": "280042",
+      "imdbId": "tt33258199",
       "type": "series",
       "contentType": "series",
-      "title": "JoJo's Bizarre Adventure",
-      "canonicalTitle": "JoJo's Bizarre Adventure",
-      "originalTitle": "ジョジョの奇妙な冒険",
-      "overview": "Follow the intergenerational feud between the Joestar Family and various forces of evil, the most prominent of which is Dio Brando and his followers.",
-      "description": "Follow the intergenerational feud between the Joestar Family and various forces of evil, the most prominent of which is Dio Brando and his followers.",
-      "shortDescription": "Follow the intergenerational feud between the Joestar Family and various forces of evil, the most prominent of which is ",
-      "year": 2012,
-      "releaseDate": "2012-10-06",
-      "rating": 8.6,
-      "votes": "1.7K",
+      "title": "A Wild Last Boss Appeared!",
+      "canonicalTitle": "A Wild Last Boss Appeared!",
+      "originalTitle": "野生のラスボスが現れた！",
+      "overview": "An MMO gamer awakens as the Black-Winged Tyrant, Lufas Maphaahl, rising from her sealed fate—only to find this is very real. Her defeat 200 years ago unleashed monsters of death, and the legend is one of terror. Now, trapped in the body of history's most feared conqueror, he must survive a world that wants her dead…and uncover why he's here.",
+      "description": "An MMO gamer awakens as the Black-Winged Tyrant, Lufas Maphaahl, rising from her sealed fate—only to find this is very real. Her defeat 200 years ago unleashed monsters of death, and the legend is one of terror. Now, trapped in the body of history's most feared conqueror, he must survive a world that wants her dead…and uncover why he's here.",
+      "shortDescription": "An MMO gamer awakens as the Black-Winged Tyrant, Lufas Maphaahl, rising from her sealed fate—only to find this is very r",
+      "year": 2025,
+      "releaseDate": "2025-10-04",
+      "rating": 7.3,
+      "votes": "0.0K",
       "quality": "FHD",
-      "duration": "24m/ep",
+      "duration": "45m/ep",
       "genres": [
         "Animation",
         "Action & Adventure",
-        "Sci-Fi & Fantasy"
+        "Sci-Fi & Fantasy",
+        "Drama"
       ],
       "categories": [
         "Animation",
         "Action & Adventure",
-        "Sci-Fi & Fantasy"
+        "Sci-Fi & Fantasy",
+        "Drama"
       ],
       "language": "Japanese",
       "country": "JP",
       "director": "Director",
-      "poster": "https://image.tmdb.org/t/p/w500/ogAWwbh3frWtiTyyXrZaVFtqCgp.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/original/5mUYDoFjDlPmDvnUWSknhYjGBBh.jpg",
-      "trailerUrl": "https://www.youtube-nocookie.com/embed/fOvrr5izejw?rel=0&modestbranding=1",
-      "trailer": "https://www.youtube-nocookie.com/embed/fOvrr5izejw?rel=0&modestbranding=1",
-      "cast": [
-        {
-          "id": "2812912",
-          "name": "Shogo Sakata",
-          "character": "Johnny Joestar (voice)",
-          "photo": "https://image.tmdb.org/t/p/w185/fRRPNBz3OCNRdmLdUTdpq7dGqxM.jpg"
-        },
-        {
-          "id": "2220797",
-          "name": "Yohei Azakami",
-          "character": "Gyro Zeppeli (voice)",
-          "photo": "https://image.tmdb.org/t/p/w185/rLIqw8pIjVIxPb5engrTbu9iOex.jpg"
-        },
-        {
-          "id": "1324666",
-          "name": "Kaito Ishikawa",
-          "character": "Diego Brando (voice)",
-          "photo": "https://image.tmdb.org/t/p/w185/fzjIkotjUHHs3wgftM9tqdsG8ph.jpg"
-        },
-        {
-          "id": "1492982",
-          "name": "Rie Takahashi",
-          "character": "Lucy Steel (voice)",
-          "photo": "https://image.tmdb.org/t/p/w185/aeB7z0cBTASdjKOjQriBAO6hYq4.jpg"
-        },
-        {
-          "id": "225603",
-          "name": "Kenta Miyake",
-          "character": "Steven Steel (voice)",
-          "photo": "https://image.tmdb.org/t/p/w185/7YL8vM2KYzPMeQqTpHWmNj6s1AP.jpg"
-        }
-      ],
-      "seasons": 6,
-      "episodes": 202,
-      "status": "PUBLISHED",
-      "publishedAt": "2026-09-26T03:32:10.451Z",
-      "createdAt": "2026-09-26T03:32:10.451Z",
-      "updatedAt": "2026-09-26T03:32:10.451Z",
-      "links": []
-    },
-    {
-      "id": "tmdb-series-287620",
-      "canonicalId": "tmdb-series-287620",
-      "externalProvider": "tmdb",
-      "externalId": "287620",
-      "tmdbId": "287620",
-      "imdbId": "tt27497393",
-      "type": "series",
-      "contentType": "series",
-      "title": "Stuart Fails to Save the Universe",
-      "canonicalTitle": "Stuart Fails to Save the Universe",
-      "originalTitle": "Stuart Fails to Save the Universe",
-      "overview": "After accidentally creating a new multiverse, comic book store owner Stuart Bloom must locate a quantum-interference device to restore reality.",
-      "description": "After accidentally creating a new multiverse, comic book store owner Stuart Bloom must locate a quantum-interference device to restore reality.",
-      "shortDescription": "After accidentally creating a new multiverse, comic book store owner Stuart Bloom must locate a quantum-interference dev",
-      "year": 2026,
-      "releaseDate": "2026-07-23",
-      "rating": 8.6,
-      "votes": "0.2K",
-      "quality": "FHD",
-      "duration": "24m/ep",
-      "genres": [
-        "Comedy",
-        "Sci-Fi & Fantasy"
-      ],
-      "categories": [
-        "Comedy",
-        "Sci-Fi & Fantasy"
-      ],
-      "language": "English",
-      "country": "US",
-      "director": "Director",
-      "poster": "https://image.tmdb.org/t/p/w500/txj8ujTZwGUjpCdhCsQBnTlh4aS.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/original/nW7oUFiJrIWwll4mZ8tYays7XRm.jpg",
-      "trailerUrl": "https://www.youtube-nocookie.com/embed/_blrWb1yZiY?rel=0&modestbranding=1",
-      "trailer": "https://www.youtube-nocookie.com/embed/_blrWb1yZiY?rel=0&modestbranding=1",
-      "cast": [
-        {
-          "id": "60633",
-          "name": "Kevin Sussman",
-          "character": "Stuart Bloom / Alternate Stuart Bloom",
-          "photo": "https://image.tmdb.org/t/p/w185/tLqrE9uz6GKoeoDC7LU7cE6oF2Q.jpg"
-        },
-        {
-          "id": "591834",
-          "name": "Lauren Lapkus",
-          "character": "Denise / Alternate Denise",
-          "photo": "https://image.tmdb.org/t/p/w185/zevTufkY38eRvWPslh5c1azdhQN.jpg"
-        },
-        {
-          "id": "20405",
-          "name": "Brian Posehn",
-          "character": "Bert Kibbler",
-          "photo": "https://image.tmdb.org/t/p/w185/kg93LNpDQaRoosR4gVt7SsA3oL1.jpg"
-        },
-        {
-          "id": "55425",
-          "name": "John Ross Bowie",
-          "character": "Barry Kripke",
-          "photo": "https://image.tmdb.org/t/p/w185/XAv1RilHZu7qiGGIOgikrLgHeD.jpg"
-        }
-      ],
+      "poster": "https://image.tmdb.org/t/p/w500/sDb5USp0nknvs3mHmyurgH8y3z6.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/original/gNYmU3RUlCb6dVqkiPCT7vglMfg.jpg",
+      "trailerUrl": "https://www.youtube-nocookie.com/embed/Y_G0A8ohFLo?rel=0&modestbranding=1",
+      "trailer": "https://www.youtube-nocookie.com/embed/Y_G0A8ohFLo?rel=0&modestbranding=1",
+      "cast": [],
       "seasons": 2,
-      "episodes": 10,
+      "episodes": 23,
       "status": "PUBLISHED",
-      "publishedAt": "2026-09-26T03:32:10.581Z",
-      "createdAt": "2026-09-26T03:32:10.581Z",
-      "updatedAt": "2026-09-26T03:32:10.581Z",
-      "links": []
-    },
-    {
-      "id": "tmdb-series-288385",
-      "canonicalId": "tmdb-series-288385",
-      "externalProvider": "tmdb",
-      "externalId": "288385",
-      "tmdbId": "288385",
-      "imdbId": "tt40407840",
-      "type": "series",
-      "contentType": "series",
-      "title": "Paolo",
-      "canonicalTitle": "Paolo",
-      "originalTitle": "Paolo",
-      "overview": "Follow working-class Paolo's unsettling intrusion into the life of Téophane Tolbiac, a young and up-and-coming politician.",
-      "description": "Follow working-class Paolo's unsettling intrusion into the life of Téophane Tolbiac, a young and up-and-coming politician.",
-      "shortDescription": "Follow working-class Paolo's unsettling intrusion into the life of Téophane Tolbiac, a young and up-and-coming politicia",
-      "year": 2026,
-      "releaseDate": "2026-09-25",
-      "rating": 10,
-      "votes": "0.0K",
-      "quality": "FHD",
-      "duration": "45m/ep",
-      "genres": [
-        "Mystery"
-      ],
-      "categories": [
-        "Mystery"
-      ],
-      "language": "French",
-      "country": "FR",
-      "director": "Sébastien Marnier",
-      "poster": "https://image.tmdb.org/t/p/w500/kyHSVyHD4gbfdJe443ywGwYIaKM.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/original/2kZsDfhTAAEAwcIsCbbgxOFqWN3.jpg",
-      "trailerUrl": null,
-      "trailer": null,
-      "cast": [
-        {
-          "id": "1446210",
-          "name": "Jérôme Niel",
-          "character": "Paolo",
-          "photo": "https://image.tmdb.org/t/p/w185/2gCaopWoxvPaL3gyPkYyZnzAY9U.jpg"
-        },
-        {
-          "id": "2991787",
-          "name": "Yoann Gasiorowski",
-          "character": "Téophane",
-          "photo": "https://image.tmdb.org/t/p/w185/1gvUSMBkNRdZwd7CUa9aCWuYQvt.jpg"
-        },
-        {
-          "id": "559581",
-          "name": "Magalie Lépine-Blondeau",
-          "character": "Géraldine",
-          "photo": "https://image.tmdb.org/t/p/w185/ci7DL2C39iZmb86tLVAzAkorozY.jpg"
-        },
-        {
-          "id": "3534522",
-          "name": "Marie Oppert",
-          "character": "",
-          "photo": "https://image.tmdb.org/t/p/w185/7uRzdGQgqT1k6DJtdCXPXnNAc5A.jpg"
-        },
-        {
-          "id": "2852439",
-          "name": "Léo Chalié",
-          "character": "",
-          "photo": "https://image.tmdb.org/t/p/w185/vmuNIVYP9lbuMcxNa4i3CgXLWuU.jpg"
-        },
-        {
-          "id": "1630513",
-          "name": "Véronique Ruggia Saura",
-          "character": "",
-          "photo": "https://image.tmdb.org/t/p/w185/pJwDIbaLYDdwgEq15X7owYDUP67.jpg"
-        },
-        {
-          "id": "1360307",
-          "name": "Guslagie Malanda",
-          "character": "Winnie",
-          "photo": "https://image.tmdb.org/t/p/w185/fjGrRcK4SoGLptulNbqMKxm39Am.jpg"
-        },
-        {
-          "id": "2541773",
-          "name": "Salif Cissé",
-          "character": "Jean Baptiste",
-          "photo": "https://image.tmdb.org/t/p/w185/h0EzP4ZCdNK6ouMjQBSYDsSLPb7.jpg"
-        },
-        {
-          "id": "236639",
-          "name": "Françoise Lebrun",
-          "character": "",
-          "photo": "https://image.tmdb.org/t/p/w185/djbPgHqOI1J7thLTTnJIEQNfnZj.jpg"
-        },
-        {
-          "id": "4447979",
-          "name": "Léa Lopez",
-          "character": "",
-          "photo": "https://image.tmdb.org/t/p/w185/59Io4bDOrlEAko8YNijPkenfdeS.jpg"
-        },
-        {
-          "id": "119501",
-          "name": "Philippe Katerine",
-          "character": "",
-          "photo": "https://image.tmdb.org/t/p/w185/vGo21vRILgGPT5Q3TTwzLxANemF.jpg"
-        },
-        {
-          "id": "22307",
-          "name": "Guilaine Londez",
-          "character": "",
-          "photo": "https://image.tmdb.org/t/p/w185/mJcfcAJAbIbbQNhxHw2KAa37Pd5.jpg"
-        }
-      ],
-      "seasons": 1,
-      "episodes": 7,
-      "status": "PUBLISHED",
-      "publishedAt": "2026-09-26T03:32:10.674Z",
-      "createdAt": "2026-09-26T03:32:10.674Z",
-      "updatedAt": "2026-09-26T03:32:10.674Z",
-      "links": []
-    },
-    {
-      "id": "tmdb-movie-1003596",
-      "canonicalId": "tmdb-movie-1003596",
-      "externalProvider": "tmdb",
-      "externalId": "1003596",
-      "tmdbId": "1003596",
-      "imdbId": "tt21357150",
-      "type": "movie",
-      "contentType": "movie",
-      "title": "Avengers: Doomsday",
-      "canonicalTitle": "Avengers: Doomsday",
-      "originalTitle": "Avengers: Doomsday",
-      "overview": "Beloved heroes from three distinct universes are set on a deadly collision course and face an existential threat unlike anything they've ever encountered.",
-      "description": "Beloved heroes from three distinct universes are set on a deadly collision course and face an existential threat unlike anything they've ever encountered.",
-      "shortDescription": "Beloved heroes from three distinct universes are set on a deadly collision course and face an existential threat unlike ",
-      "year": 2026,
-      "releaseDate": "2026-12-16",
-      "rating": 8,
-      "votes": "1.2K",
-      "quality": "FHD",
-      "duration": "2h 45m",
-      "genres": [
-        "Science Fiction",
-        "Action",
-        "Adventure"
-      ],
-      "categories": [
-        "Science Fiction",
-        "Action",
-        "Adventure"
-      ],
-      "language": "English",
-      "country": "US",
-      "director": "Joe Russo",
-      "poster": "https://image.tmdb.org/t/p/w500/jzPwsojjFStf5lR5Nm07w2hH56G.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/original/s4v0UX1anfXm0UvloLsTTJ4v222.jpg",
-      "trailerUrl": "https://www.youtube-nocookie.com/embed/X1aFkAkFASk?rel=0&modestbranding=1",
-      "trailer": "https://www.youtube-nocookie.com/embed/X1aFkAkFASk?rel=0&modestbranding=1",
-      "cast": [
-        {
-          "id": "3223",
-          "name": "Robert Downey Jr.",
-          "character": "Victor von Doom  / Doctor Doom",
-          "photo": "https://image.tmdb.org/t/p/w185/5qHNjhtjMD4YWH3UP0rm4tKwxCL.jpg"
-        },
-        {
-          "id": "16828",
-          "name": "Chris Evans",
-          "character": "Steve Rogers",
-          "photo": "https://image.tmdb.org/t/p/w185/3bOGNsHlrswhyW79uvIHH1V43JI.jpg"
-        },
-        {
-          "id": "74568",
-          "name": "Chris Hemsworth",
-          "character": "Thor",
-          "photo": "https://image.tmdb.org/t/p/w185/piQGdoIQOF3C1EI5cbYZLAW1gfj.jpg"
-        },
-        {
-          "id": "1253360",
-          "name": "Pedro Pascal",
-          "character": "Reed Richards / Mister Fantastic",
-          "photo": "https://image.tmdb.org/t/p/w185/oKcMbVn0NJTNzQt0ClKKvVXkm60.jpg"
-        },
-        {
-          "id": "22226",
-          "name": "Paul Rudd",
-          "character": "Scott Lang / Ant-Man",
-          "photo": "https://image.tmdb.org/t/p/w185/6jtwNOLKy0LdsRAKwZqgYMAfd5n.jpg"
-        },
-        {
-          "id": "53650",
-          "name": "Anthony Mackie",
-          "character": "Sam Wilson / Captain America",
-          "photo": "https://image.tmdb.org/t/p/w185/vecvTm7SimizluJkyIwBxeLbvRm.jpg"
-        },
-        {
-          "id": "1373737",
-          "name": "Florence Pugh",
-          "character": "Yelena Belova",
-          "photo": "https://image.tmdb.org/t/p/w185/ejgQXt1fAvPueAvacDsGwG00aA.jpg"
-        },
-        {
-          "id": "556356",
-          "name": "Vanessa Kirby",
-          "character": "Sue Storm / Invisible Woman",
-          "photo": "https://image.tmdb.org/t/p/w185/5fbvIkZ02RdcXfZHUUk4cQ9kILK.jpg"
-        },
-        {
-          "id": "21042",
-          "name": "Ebon Moss-Bachrach",
-          "character": "Ben Grimm / The Thing",
-          "photo": "https://image.tmdb.org/t/p/w185/xD8GVNayMpiTZxLfahy2DseYcQq.jpg"
-        },
-        {
-          "id": "986808",
-          "name": "Wyatt Russell",
-          "character": "John Walker",
-          "photo": "https://image.tmdb.org/t/p/w185/zIldBzXdBWskPZB7x35G2hYEVDo.jpg"
-        },
-        {
-          "id": "38673",
-          "name": "Channing Tatum",
-          "character": "Gambit",
-          "photo": "https://image.tmdb.org/t/p/w185/4TpgnS6l8YUXSne9Av9nda6mjxY.jpg"
-        },
-        {
-          "id": "1489211",
-          "name": "Simu Liu",
-          "character": "Shaun / Shang-Chi",
-          "photo": "https://image.tmdb.org/t/p/w185/cCx2OghLj9KN73oyRZe92i2p3Ih.jpg"
-        }
-      ],
-      "seasons": 1,
-      "episodes": 1,
-      "status": "PUBLISHED",
-      "publishedAt": "2026-09-26T03:32:10.768Z",
-      "createdAt": "2026-09-26T03:32:10.768Z",
-      "updatedAt": "2026-09-26T03:32:10.768Z",
-      "links": []
-    },
-    {
-      "id": "tmdb-series-292742",
-      "canonicalId": "tmdb-series-292742",
-      "externalProvider": "tmdb",
-      "externalId": "292742",
-      "tmdbId": "292742",
-      "imdbId": "tt36984433",
-      "type": "series",
-      "contentType": "series",
-      "title": "S.W.A.T. Exiles",
-      "canonicalTitle": "S.W.A.T. Exiles",
-      "originalTitle": "S.W.A.T. Exiles",
-      "overview": "After a high-profile mission goes sideways, Daniel 'Hondo' Harrelson is pulled out of forced retirement to lead a last-chance experimental SWAT unit made up of untested, unpredictable young recruits. Hondo must bridge a generational divide, navigate clashing personalities, and turn a squad of outsiders into a team capable of protecting the city and saving the program that made him who he is.",
-      "description": "After a high-profile mission goes sideways, Daniel 'Hondo' Harrelson is pulled out of forced retirement to lead a last-chance experimental SWAT unit made up of untested, unpredictable young recruits. Hondo must bridge a generational divide, navigate clashing personalities, and turn a squad of outsiders into a team capable of protecting the city and saving the program that made him who he is.",
-      "shortDescription": "After a high-profile mission goes sideways, Daniel 'Hondo' Harrelson is pulled out of forced retirement to lead a last-c",
-      "year": 2026,
-      "releaseDate": "2026-09-25",
-      "rating": 8.4,
-      "votes": "0.0K",
-      "quality": "FHD",
-      "duration": "45m/ep",
-      "genres": [
-        "Drama",
-        "Crime"
-      ],
-      "categories": [
-        "Drama",
-        "Crime"
-      ],
-      "language": "English",
-      "country": "US",
-      "director": "Director",
-      "poster": "https://image.tmdb.org/t/p/w500/pPiEujhVa2MBSowmvnNWqEzxH0x.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/original/mNIc5QqjBuXHeeyj6P4WSqTCBu9.jpg",
-      "trailerUrl": "https://www.youtube-nocookie.com/embed/wRbxI9muoIw?rel=0&modestbranding=1",
-      "trailer": "https://www.youtube-nocookie.com/embed/wRbxI9muoIw?rel=0&modestbranding=1",
-      "cast": [
-        {
-          "id": "50266",
-          "name": "Shemar Moore",
-          "character": "Daniel 'Hondo' Harrelson Jr.",
-          "photo": "https://image.tmdb.org/t/p/w185/epkv0UiwrPfCK3c0sHemSMi2jeh.jpg"
-        },
-        {
-          "id": "108889",
-          "name": "Jay Harrington",
-          "character": "David 'Deacon' Kay",
-          "photo": "https://image.tmdb.org/t/p/w185/jsCjf0L0K97dPvSR9yJhoM8pN84.jpg"
-        },
-        {
-          "id": "117437",
-          "name": "Patrick St. Esprit",
-          "character": "Robert 'Bob' Hicks",
-          "photo": "https://image.tmdb.org/t/p/w185/1yrW51oGJEElYqG3BzX0N1Ky7Rd.jpg"
-        },
-        {
-          "id": "1682317",
-          "name": "Lucy Barrett",
-          "character": "",
-          "photo": "https://image.tmdb.org/t/p/w185/mxBspNMdtRQaWZiy2gAYPqxHZr3.jpg"
-        },
-        {
-          "id": "2120814",
-          "name": "Adain Bradley",
-          "character": "",
-          "photo": "https://image.tmdb.org/t/p/w185/qPe2AgBrIIOOv4uLK984dxgGzxE.jpg"
-        },
-        {
-          "id": "3174592",
-          "name": "Zyra Gorecki",
-          "character": "",
-          "photo": "https://image.tmdb.org/t/p/w185/9yyKqEcE8ZOB9qeaIFsXTuwXf6M.jpg"
-        },
-        {
-          "id": "2104687",
-          "name": "Freddy Miyares",
-          "character": "",
-          "photo": "https://image.tmdb.org/t/p/w185/z0bwInzUA7wPrISWAL2L1zLE3uf.jpg"
-        },
-        {
-          "id": "1140129",
-          "name": "Ronen Rubinstein",
-          "character": "",
-          "photo": "https://image.tmdb.org/t/p/w185/tmm0HIdszFqPJc3KYuKsWjyHV8f.jpg"
-        }
-      ],
-      "seasons": 1,
-      "episodes": 10,
-      "status": "PUBLISHED",
-      "publishedAt": "2026-09-26T03:32:10.866Z",
-      "createdAt": "2026-09-26T03:32:10.866Z",
-      "updatedAt": "2026-09-26T03:32:10.866Z",
-      "links": []
-    },
-    {
-      "id": "tmdb-movie-1580190",
-      "canonicalId": "tmdb-movie-1580190",
-      "externalProvider": "tmdb",
-      "externalId": "1580190",
-      "tmdbId": "1580190",
-      "imdbId": "",
-      "type": "movie",
-      "contentType": "movie",
-      "title": "The Scavenger",
-      "canonicalTitle": "The Scavenger",
-      "originalTitle": "除暴之路",
-      "overview": "When his aspiring-celebrity sister becomes trapped in a criminal scheme within an entertainment company, a devoted brother teams up with local police to uncover the truth and take down the powerful underworld behind it.",
-      "description": "When his aspiring-celebrity sister becomes trapped in a criminal scheme within an entertainment company, a devoted brother teams up with local police to uncover the truth and take down the powerful underworld behind it.",
-      "shortDescription": "When his aspiring-celebrity sister becomes trapped in a criminal scheme within an entertainment company, a devoted broth",
-      "year": 2026,
-      "releaseDate": "2026-09-23",
-      "rating": 8,
-      "votes": "1.2K",
-      "quality": "FHD",
-      "duration": "2h 00m",
-      "genres": [
-        "Drama",
-        "Crime"
-      ],
-      "categories": [
-        "Drama",
-        "Crime"
-      ],
-      "language": "Mandarin",
-      "country": "CN",
-      "director": "Qin Pengfei",
-      "poster": "https://image.tmdb.org/t/p/w500/oaZbbcJUKgw95EGIT7VTPLEzuB3.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/w500/oaZbbcJUKgw95EGIT7VTPLEzuB3.jpg",
-      "trailerUrl": null,
-      "trailer": null,
-      "cast": [
-        {
-          "id": "2430202",
-          "name": "Liu Fengchao",
-          "character": "Liao Qixian",
-          "photo": "https://image.tmdb.org/t/p/w185/uVxSCAmbA33JidS7Tf9ScDa19Wg.jpg"
-        },
-        {
-          "id": "2359960",
-          "name": "Fang Yan",
-          "character": "Zha Ren",
-          "photo": "https://image.tmdb.org/t/p/w185/qW0sdh4rLHnHZquFTyUghMVCoeR.jpg"
-        },
-        {
-          "id": "2950162",
-          "name": "Huang Tao",
-          "character": "Pu Jinghao",
-          "photo": "https://image.tmdb.org/t/p/w185/hdDvTSyrQN95uRuq0AgcoCDJuDc.jpg"
-        },
-        {
-          "id": "5627035",
-          "name": "Yao Zhen",
-          "character": "Liao Wanning",
-          "photo": null
-        },
-        {
-          "id": "4222870",
-          "name": "Guo Feng",
-          "character": "",
-          "photo": "https://image.tmdb.org/t/p/w185/ya9WTsaY9L8I7UaZy4mI8p2s1sx.jpg"
-        },
-        {
-          "id": "2739198",
-          "name": "Sun Cailun",
-          "character": "",
-          "photo": "https://image.tmdb.org/t/p/w185/7odKlvtvxKZE5oDa9m0FlxA1GnP.jpg"
-        },
-        {
-          "id": "1457880",
-          "name": "Chunyu Shanshan",
-          "character": "",
-          "photo": "https://image.tmdb.org/t/p/w185/soMA9uxdUFUZyXK94vSaeiEcJjJ.jpg"
-        }
-      ],
-      "seasons": 1,
-      "episodes": 1,
-      "status": "PUBLISHED",
-      "publishedAt": "2026-09-26T03:32:10.958Z",
-      "createdAt": "2026-09-26T03:32:10.958Z",
-      "updatedAt": "2026-09-26T03:32:10.958Z",
+      "publishedAt": "2026-09-27T03:40:47.644Z",
+      "createdAt": "2026-09-27T03:40:47.644Z",
+      "updatedAt": "2026-09-27T03:40:47.644Z",
       "links": []
     }
   ],
-  "duration": "2.42",
-  "timestamp": "2026-09-26T03:32:11.654Z"
+  "duration": "1.35",
+  "timestamp": "2026-09-27T03:40:48.379Z"
 }
