@@ -459,5 +459,54 @@ Result: **16 PASSED, 0 FAILED (100% SUCCESS)**
 - **Series Player S1:E2 (Synchronized Transition, Live Playing Badge):** `screenshots/series_player_s1e2_390px.png`
 - **Server Selector (Non-blocking pill controls):** `screenshots/server_selector_modal_390px.png`
 
+---
+
+## Phase 2: Homepage Routing — Strict Route Isolation & Session History Architecture
+
+**Active Branch:** `recovery/phase2-homepage-routing`  
+**Rollback Checkpoint:** `phase2-rollback-checkpoint` (`8fac8f5`)  
+**Status:** **100% COMPLETE & EMPIRICALLY VERIFIED**
+
+### Objectives & Remediation Summary
+
+1. **Subframe History Trap Elimination:**
+   - **Root Cause:** In Chromium browsers, setting `iframe.src = url` or `iframe.src = 'about:blank'` on an existing iframe element registers subframe navigation entries in the parent window's session history. Subsequent `history.back()` calls would pop the internal iframe navigation rather than navigating the top-level application route, causing the user to be "trapped" in player mode requiring double or triple back presses.
+   - **Remediation:** In `js/net27-modal.js`, implemented `setWatchIframeSrc(url)` using clean DOM replacement (`cloneNode(false)` + `parentNode.replaceChild`). This guarantees Chromium treats the player frame as a fresh element without adding subframe entries to the joint session history stack.
+   - **Result:** Calling `history.back()` from `#w=...` or clicking the in-player Back button exits the player instantly in a single operation.
+
+2. **In-Player Multi-Path Back Controller:**
+   - **Root Cause:** In-player Back buttons (`#watch-back-btn`, `.player-inframe-back-btn`, `#watch-modal-close`, Escape key) were hardcoded to `closeWatchAndReturnToDetails()`. When a user directly opened a watch route from the homepage or an external link without visiting `#title=...`, clicking back would erroneously force the title details modal to open over the homepage.
+   - **Remediation:** Implemented `handleInPlayerBack()` in `js/net27-modal.js`. It checks whether the user arrived via Details (`wasTitleModalOpenBeforeWatch`) or directly from Homepage/URL (`location.hash.startsWith('#w=')` or history). If from Details, it restores Details; if from Homepage, it cleanly closes all modals, removes `watch-active` and `modal-open`, restores body scrolling, and returns cleanly to `/`.
+   - **Result:** Back navigation respects genuine user origin with zero route confusion.
+
+3. **Direct One-Tap Logo Navigation:**
+   - **Root Cause:** Users playing full-width video had no direct way to return immediately to the Homepage without stepping back through preceding history states.
+   - **Remediation:** Added `<a href="/" id="watch-home-logo">` in `index.html` and `public/index.html`. Attached a direct click handler that closes watch modal, clears hash without page refresh, restores the homepage layout, and scrolls to top smoothly.
+   - **Result:** Instant one-tap escape hatch to the homepage from any video stream.
+
+4. **Movie vs TV Hash Format Standardization:**
+   - **Root Cause:** Movies were having `-1-1` season and episode numbers appended in the hash (`#w=tmdbId-movie-1-1`), which mismatched the canonical `#w=tmdbId-movie` format and triggered duplicate hash changes and pushState events.
+   - **Remediation:** Restricted `-season-episode` suffix appending strictly behind `if (isTv)`. Movies now cleanly use `#w=tmdbId-movie`.
+   - **Result:** Strict 1:1 route-to-entity mapping.
+
+5. **Persisted State & Query Parameter Isolation:**
+   - **Root Cause:** Prior logic risked auto-opening playback state or modal components if query parameters or continue-watching items existed.
+   - **Remediation:** Verified and enforced that `n4u_continue_watching` and query parameters (`?ref=...`, `?utm_source=...`) populate the continue rail on the homepage while keeping `#watch-modal` and `#title-modal` strictly `display: none !important`.
+   - **Result:** Homepage (`/`) is 100% clean under all cold start, warm start, and deep-link scenarios.
+
+### Empirical Test Matrix (`scripts/test_phase2_homepage_routing.js`)
+
+| Test Suite / Inspection Scenario | Steps / Assertions | Result | Evidence |
+| :--- | :--- | :---: | :--- |
+| **Test 1: Fresh Browser (Initial Route `/`)** | Root layout, `#watch-modal` display none, zero player components | **PASS** | `display: none !important`, `hasHero: true`, `bodyWatchActive: false` |
+| **Test 2: Watch Route Activation** | `#w=1399-tv-1-1` direct navigation, embed load, episode list | **PASS** | `watchDisplay: flex`, `hasIframeSrc: true`, `bodyWatchActive: true` |
+| **Test 3: Browser Back Navigation** | `history.back()` from Watch directly to Homepage | **PASS** | `currentHash: ''`, `watchDisplay: none`, `iframe: about:blank`, Hero height > 100px |
+| **Test 4: Page Refresh on Homepage** | `location.reload()` on `/` | **PASS** | `pathname: '/'`, `hash: ''`, `watchDisplay: none` |
+| **Test 5: Returning Browser w/ LocalStorage** | Reload with `n4u_continue_watching` & `n4u_my_list` in storage | **PASS** | Continue rail rendered, `watchDisplay: none`, zero auto-play |
+| **Test 6: Title Details -> Watch -> Multi-Step Back** | Details `#title=...` -> Watch `#w=...` -> Back (Details) -> Back (Home) | **PASS** | 4-step multi-level history stack traversed with 100% accuracy |
+| **Test 7: In-Player Brand Logo Click** | Click `#watch-home-logo` during active playback | **PASS** | Instant modal teardown, `hash: ''`, clean homepage restoration |
+| **Test 8: Query Parameters Isolation** | Navigate to `/?ref=twitter&utm_source=test&filter=trending` | **PASS** | Zero modal leakage, hero intact, standard homepage rendered |
+
+
 
 

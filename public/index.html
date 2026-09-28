@@ -719,15 +719,15 @@
     <header id="watch-top-bar" class="shrink-0 flex items-center justify-between px-3 sm:px-6 py-2.5 bg-[#0f111a] border-b border-white/10 z-[75]">
       <!-- Left: Back Button + Netflix4U Branding -->
       <div class="flex items-center gap-2 sm:gap-3 min-w-0">
-        <button id="watch-back-btn" type="button" aria-label="Back to details" title="Back to Details" class="inline-flex items-center justify-center h-9 px-3 rounded-full bg-white/10 hover:bg-white/20 active:scale-95 text-white font-medium text-xs sm:text-sm border border-white/15 transition cursor-pointer shrink-0">
-          <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+        <button id="watch-back-btn" type="button" aria-label="Back" title="Back" class="inline-flex items-center justify-center h-9 px-3.5 rounded-full bg-white/10 hover:bg-white/20 active:scale-95 text-white font-semibold text-xs sm:text-sm border border-white/15 transition cursor-pointer shrink-0">
+          <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
           </svg>
           <span>Back</span>
         </button>
-        <span class="text-sm sm:text-base font-black tracking-tight text-white hidden xs:inline">
+        <a href="/" id="watch-home-logo" aria-label="Return to Netflix4U Home" class="text-sm sm:text-base font-black tracking-tight text-white hidden xs:inline hover:opacity-90 transition">
           <span class="text-[color:var(--color-brand)]">Netflix</span>4U
-        </span>
+        </a>
       </div>
 
       <!-- Right: Server Selector + Audio + Reload + Fullscreen + Close -->

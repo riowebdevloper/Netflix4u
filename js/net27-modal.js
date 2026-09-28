@@ -45,6 +45,7 @@
   var activeWatchServers = {};
   var currentWatchServer = 's1';
   var activeWatchParams = null;
+  var wasTitleModalOpenBeforeWatch = false;
 
   // Direct High-Speed Cloud File Download Handlers
   if (!window.getFastCloudDownloadHref) {
@@ -1181,6 +1182,40 @@
   var watchAudioMenu = document.getElementById('watch-audio-menu');
   var watchCurrentAudioLabel = document.getElementById('watch-current-audio-label');
 
+  function handleWatchIframeLoad() {
+    if (watchModalIframe && watchModalIframe.src && watchModalIframe.src !== 'about:blank') {
+      currentPlayerState = PLAYER_STATES.EMBED_LOADED;
+      hideInframeLoader();
+      var cfg = SERVERS_CONFIG.find(function(s) { return s.id === currentWatchServer; }) || SERVERS_CONFIG[0];
+      setWatchStatus('Connected to ' + cfg.name, 'Player loaded — playback status unverified');
+    }
+    setTimeout(hideWatchBackdrop, 400);
+  }
+
+  function setWatchIframeSrc(url) {
+    if (!watchModalIframe) return;
+    var targetUrl = url || 'about:blank';
+    try {
+      if (watchModalIframe.parentNode) {
+        var clone = watchModalIframe.cloneNode(false);
+        clone.src = targetUrl;
+        if (targetUrl !== 'about:blank') {
+          clone.addEventListener('load', handleWatchIframeLoad);
+        }
+        watchModalIframe.parentNode.replaceChild(clone, watchModalIframe);
+        watchModalIframe = clone;
+        return;
+      }
+    } catch(e) {}
+    try {
+      if (watchModalIframe.contentWindow && watchModalIframe.contentWindow.location) {
+        watchModalIframe.contentWindow.location.replace(targetUrl);
+        return;
+      }
+    } catch(e) {}
+    watchModalIframe.src = targetUrl;
+  }
+
   function showInframeLoader(status, substatus) {
     if (watchInframeLoader) {
       watchInframeLoader.classList.remove('opacity-0', 'pointer-events-none');
@@ -1348,10 +1383,10 @@
     showInframeLoader('Loading S' + targetSe + ' · E' + targetEp + '…', 'Connecting ' + (srvCfg.shortName || srvCfg.name));
 
     if (watchModalIframe && targetUrl) {
-      watchModalIframe.src = 'about:blank';
+      setWatchIframeSrc('about:blank');
       watchModalIframe.title = (activeWatchParams.title || 'Series') + ' Season ' + targetSe + ' Episode ' + targetEp + ' player';
       setTimeout(function() {
-        if (watchModalIframe) watchModalIframe.src = targetUrl;
+        setWatchIframeSrc(targetUrl);
       }, 40);
     }
 
@@ -1887,7 +1922,7 @@
       }
 
       // Load the iframe URL only when verified reachable
-      watchModalIframe.src = serverUrl;
+      setWatchIframeSrc(serverUrl);
       currentPlayerState = PLAYER_STATES.SOURCE_RESOLVED;
       setWatchStatus('Connecting ' + cfg.name + '…', 'Loading player embed…');
     });
@@ -2258,13 +2293,15 @@
     if (window.__closeSearchOverlay) window.__closeSearchOverlay();
     if (!watchModal || !watchModalIframe) return;
 
+    wasTitleModalOpenBeforeWatch = !!(titleModal && !titleModal.classList.contains('hidden'));
+
     type = type || 'movie';
     season = Number(season) || 1;
     episode = Number(episode) || 1;
     var isTv = type === 'tv' || type === 'series';
 
     function showUnavailableBanner(streamTitle) {
-      watchModalIframe.src = 'about:blank';
+      setWatchIframeSrc('about:blank');
       watchModal.style.removeProperty('display');
       watchModal.style.display = 'flex';
       watchModal.classList.remove('hidden');
@@ -2384,7 +2421,7 @@
     if (chosenServer && activeWatchServers[chosenServer]) {
       var chosenCfg = SERVERS_CONFIG.find(function(s) { return s.id === chosenServer; }) || SERVERS_CONFIG[0];
       showInframeLoader('Connecting ' + (chosenCfg.shortName || chosenCfg.name) + '…', 'Loading playback embed…');
-      watchModalIframe.src = activeWatchServers[chosenServer];
+      setWatchIframeSrc(activeWatchServers[chosenServer]);
       currentPlayerState = PLAYER_STATES.SOURCE_RESOLVED;
       setWatchStatus('Connecting ' + (chosenCfg.shortName || chosenCfg.name), 'Loading player embed…');
     } else {
@@ -2411,17 +2448,14 @@
       });
     }
 
-    // Ensure history reflects More Info page state before Watch state so Back always returns to Details
-    var returnTargetId = canonicalId || tmdbId;
-    var titleHash = '#title=' + returnTargetId + '-' + type;
+    // Ensure history reflects watch state cleanly without clobbering root route
     var watchHash = '#w=' + tmdbId + '-' + type;
-    if (season) watchHash += '-' + season;
-    if (episode) watchHash += '-' + episode;
+    if (isTv) {
+      if (season) watchHash += '-' + season;
+      if (episode) watchHash += '-' + episode;
+    }
 
     try {
-      if (!location.hash || (!location.hash.startsWith('#title=') && !location.hash.startsWith('#w='))) {
-        history.replaceState({ modal: 'title', tmdbId: returnTargetId, type: type }, '', titleHash);
-      }
       if (location.hash !== watchHash) {
         history.pushState({ modal: 'watch', tmdbId: tmdbId, type: type, se: season, ep: episode, title: title, year: year, imdbId: imdbId }, '', watchHash);
       }
@@ -2602,7 +2636,7 @@
 
     var activeUrl = activeWatchServers[activeSrv] || newPeachifyUrl || newVidsrcUrl;
     hideWatchFailoverCard();
-    watchModalIframe.src = activeUrl;
+    setWatchIframeSrc(activeUrl);
 
     var activeCfg = SERVERS_CONFIG.find(function(s) { return s.id === activeSrv; }) || SERVERS_CONFIG[0];
     setWatchStatus('Audio: ' + langCfg.label + ' (' + (activeCfg.shortName || activeCfg.name) + ')', 'Multi-Audio Stream Active');
@@ -2666,7 +2700,7 @@
         return;
       }
 
-      watchModalIframe.src = serverUrl;
+      setWatchIframeSrc(serverUrl);
       setWatchStatus('Connecting ' + (cfg.shortName || cfg.name) + '…', 'Stream verified • Loading playback…');
       setTimeout(function() {
         if (seqToken === currentAutoSwitchToken) {
@@ -2815,7 +2849,7 @@
       showWatchBackdrop(activeWatchParams.backdrop);
     }
     var cur = activeWatchServers[currentWatchServer];
-    watchModalIframe.src = cur;
+    setWatchIframeSrc(cur);
   }
 
   function showWatchBackdrop(backdropUrl) {
@@ -2882,7 +2916,7 @@
       watchPortraitHint.classList.add('hidden');
     }
     if (watchModalIframe) {
-      watchModalIframe.src = 'about:blank';
+      setWatchIframeSrc('about:blank');
     }
     watchModal.style.setProperty('display', 'none', 'important');
     watchModal.classList.add('hidden');
@@ -2938,17 +2972,23 @@
 
   function closeWatchModal(shouldReturnToTitle) {
     if (shouldReturnToTitle !== false) {
-      closeWatchAndReturnToDetails();
-      return;
+      if (wasTitleModalOpenBeforeWatch) {
+        closeWatchAndReturnToDetails();
+        return;
+      }
     }
     if (!watchModal) return;
     if (autoSwitchTimer) {
       clearTimeout(autoSwitchTimer);
       autoSwitchTimer = null;
     }
-    if (watchTopBarTimer) {
-      clearTimeout(watchTopBarTimer);
-      watchTopBarTimer = null;
+    if (watchTopBarHideTimeout) {
+      clearTimeout(watchTopBarHideTimeout);
+      watchTopBarHideTimeout = null;
+    }
+    if (activeProbeController) {
+      try { activeProbeController.abort(); } catch(e) {}
+      activeProbeController = null;
     }
     currentAutoSwitchToken++;
     currentWatchSeasonLoaded = null;
@@ -2956,12 +2996,13 @@
     if (epListEl2) epListEl2.innerHTML = '';
     if (watchTopBar) watchTopBar.classList.remove('watch-bar-hidden');
     if (watchPortraitHint) watchPortraitHint.classList.add('hidden');
-    if (watchModalIframe) watchModalIframe.src = 'about:blank';
+    if (watchModalIframe) setWatchIframeSrc('about:blank');
     watchModal.style.setProperty('display', 'none', 'important');
     watchModal.classList.add('hidden');
     watchModal.classList.remove('flex', 'is-fullscreen');
     watchModal.setAttribute('aria-hidden', 'true');
-    document.body.classList.remove('watch-active');
+    document.body.classList.remove('watch-active', 'is-fullscreen');
+    document.body.style.overflow = '';
     if (document.fullscreenElement) {
       try { document.exitFullscreen(); } catch(e) {}
     }
@@ -2976,6 +3017,21 @@
       try {
         history.replaceState(null, '', location.pathname + location.search);
       } catch(e) {}
+    }
+  }
+
+  function handleInPlayerBack() {
+    if (location.hash && location.hash.startsWith('#w=')) {
+      if (window.history.length > 1) {
+        window.history.back();
+        return;
+      }
+    }
+    if (wasTitleModalOpenBeforeWatch) {
+      closeWatchAndReturnToDetails();
+    } else {
+      closeWatchModal(false);
+      enforceInitialRouteState();
     }
   }
 
@@ -3218,14 +3274,27 @@
     }
   });
 
-  // Net27 Player Header Listeners - Return to More Info Page
-  if (watchBackBtn) watchBackBtn.addEventListener('click', closeWatchAndReturnToDetails);
-  if (playerInframeBackBtn) playerInframeBackBtn.addEventListener('click', closeWatchAndReturnToDetails);
+  // Net27 Player Header Listeners - Return to More Info Page or Homepage
+  if (watchBackBtn) watchBackBtn.addEventListener('click', handleInPlayerBack);
+  if (playerInframeBackBtn) playerInframeBackBtn.addEventListener('click', handleInPlayerBack);
   if (watchReloadBtn) watchReloadBtn.addEventListener('click', reloadWatchStream);
   if (watchServerToggle) {
     watchServerToggle.addEventListener('click', function(e) {
       e.stopPropagation();
       toggleServerMenu();
+    });
+  }
+
+  var watchHomeLogo = document.getElementById('watch-home-logo');
+  if (watchHomeLogo) {
+    watchHomeLogo.addEventListener('click', function(e) {
+      e.preventDefault();
+      closeWatchModal(false);
+      if (location.hash) {
+        try { history.replaceState(null, '', location.pathname + location.search); } catch(err) {}
+      }
+      enforceInitialRouteState();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   }
 
@@ -3255,7 +3324,7 @@
 
   if (titleModalBack) titleModalBack.addEventListener('click', goBackTitleModal);
   if (titleModalClose) titleModalClose.addEventListener('click', closeTitleModal);
-  if (watchModalClose) watchModalClose.addEventListener('click', closeWatchAndReturnToDetails);
+  if (watchModalClose) watchModalClose.addEventListener('click', handleInPlayerBack);
   if (trailerModalClose) trailerModalClose.addEventListener('click', closeTrailerModal);
 
   if (titleModal) {
@@ -3270,15 +3339,7 @@
   }
 
   if (watchModalIframe) {
-    watchModalIframe.addEventListener('load', function() {
-      if (watchModalIframe.src && watchModalIframe.src !== 'about:blank') {
-        currentPlayerState = PLAYER_STATES.EMBED_LOADED;
-        hideInframeLoader();
-        var cfg = SERVERS_CONFIG.find(function(s) { return s.id === currentWatchServer; }) || SERVERS_CONFIG[0];
-        setWatchStatus('Connected to ' + cfg.name, 'Player loaded — playback status unverified');
-      }
-      setTimeout(hideWatchBackdrop, 400);
-    });
+    watchModalIframe.addEventListener('load', handleWatchIframeLoad);
   }
 
   if (watchModal) {
@@ -3305,14 +3366,14 @@
       }
       if (policyModal && !policyModal.classList.contains('hidden')) { closePolicyModal(); return; }
       if (trailerModal && !trailerModal.classList.contains('hidden')) { closeTrailerModal(); return; }
-      if (watchModal && !watchModal.classList.contains('hidden')) { closeWatchAndReturnToDetails(); return; }
+      if (watchModal && !watchModal.classList.contains('hidden')) { handleInPlayerBack(); return; }
       if (titleModal && !titleModal.classList.contains('hidden')) { closeTitleModal(); return; }
     }
   });
 
   window.addEventListener('message', function(e) {
     if (e.data === 'netmirror:close-watch' || e.data === 'netflix4u:close-watch') {
-      closeWatchAndReturnToDetails();
+      handleInPlayerBack();
     }
   });
 
@@ -3322,15 +3383,21 @@
     var isTitleOpen = titleModal && !titleModal.classList.contains('hidden');
     var currentHash = window.location.hash || '';
 
-    // If streaming player was active and user navigated back: return to More Info page
+    // If streaming player was active and user navigated back:
     if (isWatchOpen && !currentHash.startsWith('#w=')) {
-      closeWatchAndReturnToDetails();
-      return;
+      if (currentHash.startsWith('#title=')) {
+        closeWatchModal(false);
+      } else {
+        closeWatchModal(false);
+        enforceInitialRouteState();
+        return;
+      }
     }
 
     // If on More Info page and user navigated back: return to Homepage
     if (isTitleOpen && !currentHash.startsWith('#title=') && !currentHash.startsWith('#w=')) {
       closeTitleModal();
+      enforceInitialRouteState();
       return;
     }
 
@@ -3385,7 +3452,7 @@
         watchModal.classList.remove('flex', 'is-fullscreen');
         watchModal.style.setProperty('display', 'none', 'important');
         watchModal.setAttribute('aria-hidden', 'true');
-        if (watchModalIframe) watchModalIframe.src = 'about:blank';
+        if (watchModalIframe) setWatchIframeSrc('about:blank');
       }
       document.body.classList.remove('watch-active');
     }
