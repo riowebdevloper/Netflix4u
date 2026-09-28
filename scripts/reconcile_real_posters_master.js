@@ -6,7 +6,7 @@ const ROOT = path.resolve(__dirname, '..');
 const DATA_DIR = path.join(ROOT, 'data');
 
 // Load environment variables for TMDB key
-let tmdbKey = '445f2b5a8941c1d4bd5a869761a916e3';
+let tmdbKey = process.env.TMDB_API_KEY || '';
 try {
   const envContent = fs.readFileSync(path.join(ROOT, '.env'), 'utf8');
   const m = envContent.match(/TMDB_API_KEY=([a-zA-Z0-9_-]+)/);

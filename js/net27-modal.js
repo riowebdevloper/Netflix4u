@@ -1149,6 +1149,18 @@
     { id: 'multi', label: 'Multi Audio', code: '', tag: '100% ALL' }
   ];
 
+  // Distinct Player Availability States (Section 7 Mandate)
+  var PLAYER_STATES = {
+    INITIALIZING: 'INITIALIZING',
+    SOURCE_RESOLVED: 'SOURCE_RESOLVED',
+    EMBED_LOADED: 'EMBED_LOADED',
+    PLAYBACK_CONFIRMED: 'PLAYBACK_CONFIRMED',
+    BUFFERING: 'BUFFERING',
+    UNAVAILABLE: 'UNAVAILABLE',
+    ERROR: 'ERROR'
+  };
+  var currentPlayerState = PLAYER_STATES.INITIALIZING;
+
   // Auto-failover & orientation state
   var isAutoSwitchEnabled = true;
   var autoSwitchTimer = null;
@@ -1793,6 +1805,7 @@
   function confirmPlaybackActive() {
     if (isPlaybackConfirmed) return;
     isPlaybackConfirmed = true;
+    currentPlayerState = PLAYER_STATES.PLAYBACK_CONFIRMED;
     hideInframeLoader();
     isAutoSwitchEnabled = false;
     updateAutoSwitchToggleUi(false);
@@ -1801,7 +1814,7 @@
       autoSwitchTimer = null;
     }
     var cfg = SERVERS_CONFIG.find(function(s) { return s.id === currentWatchServer; }) || SERVERS_CONFIG[0];
-    setWatchStatus('Connected to ' + cfg.name, 'Playback stream running');
+    setWatchStatus('Connected to ' + cfg.name, 'Playback confirmed');
     setTimeout(function() {
       hideWatchBackdrop();
     }, 400);
@@ -1819,15 +1832,16 @@
     }
     
     if (index >= autoSwitchOrder.length) {
-      var fallbackServer = autoSwitchOrder[0] || 's1';
-      var fallbackCfg = SERVERS_CONFIG.find(function(s) { return s.id === fallbackServer; }) || SERVERS_CONFIG[0];
-      setWatchStatus('Connected to ' + fallbackCfg.name, 'Manual server switching available');
-      currentWatchServer = fallbackServer;
-      updateActiveServerUi(fallbackServer);
-      if (activeWatchServers && activeWatchServers[fallbackServer]) {
-        watchModalIframe.src = activeWatchServers[fallbackServer];
+      currentPlayerState = PLAYER_STATES.UNAVAILABLE;
+      isAutoSwitchEnabled = false;
+      updateAutoSwitchToggleUi(false);
+      hideInframeLoader();
+      if (autoSwitchTimer) {
+        clearTimeout(autoSwitchTimer);
+        autoSwitchTimer = null;
       }
-      confirmPlaybackActive();
+      setWatchStatus('Streaming source unavailable on this server.', 'Select another server or retry');
+      showWatchFailoverCard(currentWatchServer || autoSwitchOrder[0], 'All automatic sources exhausted');
       return;
     }
 
@@ -1838,6 +1852,7 @@
     currentWatchServer = serverId;
     updateActiveServerUi(serverId);
     
+    currentPlayerState = PLAYER_STATES.BUFFERING;
     showInframeLoader('Connecting ' + cfg.name + '…', 'Scanning for verified stream');
     if (activeWatchParams && activeWatchParams.backdrop) {
       showWatchBackdrop(activeWatchParams.backdrop);
@@ -1858,7 +1873,7 @@
 
       if (!isHealthy && statusCode === 404) {
         console.warn('[Netflix4U AutoSwitch] Server ' + serverId + ' returned 404 (File Not Found). Switching immediately.');
-        setWatchStatus(cfg.name + ' returned 404 (File Not Found)', 'Auto-switching to next server…');
+        setWatchStatus(cfg.name + ' returned 404 (File Not Found)', 'Switching to next server…');
         if (autoSwitchTimer) clearTimeout(autoSwitchTimer);
         autoSwitchTimer = setTimeout(function() {
           if (seqToken === currentAutoSwitchToken && isAutoSwitchEnabled && !isPlaybackConfirmed) {
@@ -1870,11 +1885,8 @@
 
       // Load the iframe URL only when verified reachable
       watchModalIframe.src = serverUrl;
-      setWatchStatus('Connected to ' + cfg.name, 'Stream verified • Playback ready');
-
-      // Stop auto-switch immediately on the verified working player!
-      // "jis player par content chal jaye us par ruk jao. Aur uspe woh content chala do."
-      confirmPlaybackActive();
+      currentPlayerState = PLAYER_STATES.SOURCE_RESOLVED;
+      setWatchStatus('Connecting ' + cfg.name + '…', 'Loading player embed…');
     });
   }
 
@@ -2215,10 +2227,10 @@
 
     if (chosenServer && activeWatchServers[chosenServer]) {
       var chosenCfg = SERVERS_CONFIG.find(function(s) { return s.id === chosenServer; }) || SERVERS_CONFIG[0];
-      showInframeLoader('Connecting ' + (chosenCfg.shortName || chosenCfg.name) + '…', 'Stream verified • Loading playback…');
+      showInframeLoader('Connecting ' + (chosenCfg.shortName || chosenCfg.name) + '…', 'Loading playback embed…');
       watchModalIframe.src = activeWatchServers[chosenServer];
-      setWatchStatus('Connected to ' + (chosenCfg.shortName || chosenCfg.name), 'Stream verified • Playback ready');
-      confirmPlaybackActive();
+      currentPlayerState = PLAYER_STATES.SOURCE_RESOLVED;
+      setWatchStatus('Connecting ' + (chosenCfg.shortName || chosenCfg.name), 'Loading player embed…');
     } else {
       // Start auto switch sequence from index 0
       startAutoSwitchSequence(0);
@@ -3096,7 +3108,10 @@
   if (watchModalIframe) {
     watchModalIframe.addEventListener('load', function() {
       if (watchModalIframe.src && watchModalIframe.src !== 'about:blank') {
-        confirmPlaybackActive();
+        currentPlayerState = PLAYER_STATES.EMBED_LOADED;
+        hideInframeLoader();
+        var cfg = SERVERS_CONFIG.find(function(s) { return s.id === currentWatchServer; }) || SERVERS_CONFIG[0];
+        setWatchStatus('Connected to ' + cfg.name, 'Player loaded — playback status unverified');
       }
       setTimeout(hideWatchBackdrop, 400);
     });
@@ -3104,7 +3119,7 @@
 
   if (watchModal) {
     watchModal.addEventListener('pointerdown', function() {
-      confirmPlaybackActive();
+      resetWatchTopBarTimer();
     }, { passive: true });
   }
 

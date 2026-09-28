@@ -87,17 +87,18 @@ for (const file of indexFiles) {
   // Find mapHicineItem function and add trailer lookup helper
   const trailerHelperMarker = 'async function getTrailerForTitle(title, year, type) {';
   if (!code.includes(trailerHelperMarker)) {
+    const apiKey = process.env.TMDB_API_KEY || '';
     const helperCode = `
 async function getTrailerForTitle(title, year, type = "movie") {
   try {
     const clean = title.replace(/\\(\\d{4}\\)/g, "").replace(/^(NetFlix|Prime|Disney\\+|Hotstar|SonyLIV|ZEE5)\\s+/i, "").trim();
     const endpoint = (type === "series" || type === "kdrama" || type === "anime") ? "tv" : "movie";
-    const searchRes = await fetch("https://api.tmdb.org/3/search/" + endpoint + "?api_key=445f2b5a8941c1d4bd5a869761a916e3&query=" + encodeURIComponent(clean));
+    const searchRes = await fetch("https://api.tmdb.org/3/search/" + endpoint + "?api_key=" + ${JSON.stringify(apiKey)} + "&query=" + encodeURIComponent(clean));
     if (searchRes.ok) {
       const searchData = await searchRes.json();
       const first = searchData.results && searchData.results[0];
       if (first && first.id) {
-        const vidRes = await fetch("https://api.tmdb.org/3/" + endpoint + "/" + first.id + "/videos?api_key=445f2b5a8941c1d4bd5a869761a916e3");
+        const vidRes = await fetch("https://api.tmdb.org/3/" + endpoint + "/" + first.id + "/videos?api_key=" + ${JSON.stringify(apiKey)});
         if (vidRes.ok) {
           const vidData = await vidRes.json();
           const tr = (vidData.results && vidData.results.find(x => x.type === "Trailer" && x.site === "YouTube"))

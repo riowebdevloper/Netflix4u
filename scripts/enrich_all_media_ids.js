@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const https = require('https');
 
-const TMDB_KEY = '445f2b5a8941c1d4bd5a869761a916e3';
+const TMDB_KEY = process.env.TMDB_API_KEY || '';
 const DATA_DIR = path.resolve(__dirname, '..', 'data');
 const HOME_FEED_PATH = path.join(DATA_DIR, 'home_feed.json');
 const DETAILS_DIR = path.join(DATA_DIR, 'details');

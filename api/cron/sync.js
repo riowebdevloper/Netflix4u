@@ -1,17 +1,20 @@
 const { runIngestionPipeline } = require('../../services/ingestionService');
 
 module.exports = async (req, res) => {
-  // Optional CRON_SECRET authorization check
+  // Mandatory CRON_SECRET authorization check (Fail closed if not configured)
   const cronSecret = process.env.CRON_SECRET;
-  if (cronSecret) {
-    const authHeader = req.headers.authorization;
-    if (!authHeader || authHeader !== `Bearer ${cronSecret}`) {
-      return res.status(401).json({ error: 'Unauthorized cron request' });
-    }
+  if (!cronSecret) {
+    console.error('[CronSync] CRON_SECRET environment variable is not configured. Failing closed.');
+    return res.status(500).json({ error: 'Server configuration error' });
+  }
+
+  const authHeader = (req.headers && (req.headers.authorization || req.headers.Authorization)) || '';
+  if (!authHeader || authHeader !== `Bearer ${cronSecret}`) {
+    return res.status(401).json({ error: 'Unauthorized' });
   }
 
   try {
-    console.log('[CronSync] Initiating automated catalog sync...');
+    console.log('[CronSync] Initiating authorized catalog sync...');
     const result = await runIngestionPipeline({ maxDiscovery: 30, concurrency: 3 });
     try {
       const { sendDiscordNotification } = require('../../scripts/notify_discord');
@@ -23,10 +26,10 @@ module.exports = async (req, res) => {
       result
     });
   } catch (err) {
-    console.error('[CronSync] Error running automated sync:', err);
+    console.error('[CronSync] Error running automated sync:', err.message);
     return res.status(500).json({
       success: false,
-      error: err.message
+      error: 'Ingestion pipeline execution failed'
     });
   }
 };

@@ -3,11 +3,17 @@ header('Content-Type: application/json; charset=utf-8');
 header('Access-Control-Allow-Origin: *');
 header('Cache-Control: public, max-age=86400');
 
-$tmdbApiKey = getenv('TMDB_API_KEY') ?: '445f2b5a8941c1d4bd5a869761a916e3';
+$tmdbApiKey = getenv('TMDB_API_KEY') ?: '';
 $title = isset($_GET['title']) ? trim($_GET['title']) : '';
 $tmdbId = isset($_GET['tmdbId']) ? trim($_GET['tmdbId']) : '';
 $type = isset($_GET['type']) ? trim($_GET['type']) : 'movie';
 $cleanType = ($type === 'series' || $type === 'anime' || $type === 'kdrama' || $type === 'tv') ? 'tv' : 'movie';
+
+if (empty($tmdbApiKey)) {
+    http_response_code(500);
+    echo json_encode(['error' => 'TMDB_API_KEY environment variable is not configured', 'trailerUrl' => null]);
+    exit;
+}
 
 if (!$title && !$tmdbId) {
     echo json_encode(['error' => 'Missing title or tmdbId', 'trailerUrl' => null]);

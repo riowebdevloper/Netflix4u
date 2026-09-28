@@ -201,14 +201,18 @@ runTest('Extracted provider adapters construct exact Movie and TV URLs', () => {
   const frenchTv = pm.resolvePlayerUrl({ type: 'tv', tmdbId: 79744, season: 1, episode: 2 }, 'frembed');
   assert.strictEqual(frenchTv, 'https://frembed.asia/api/serie.php?id=79744&sa=1&epi=2');
 
-  // Italian (VixSrc)
-  const italianMovie = pm.resolvePlayerUrl({ type: 'movie', tmdbId: 533535 }, 'vixsrc');
+  // Italian (VixSrc) - Disabled by default in production, verified with allowDisabled in dev
+  const vixSrcDefault = pm.resolvePlayerUrl({ type: 'movie', tmdbId: 533535 }, 'vixsrc');
+  assert.strictEqual(vixSrcDefault, null, 'Disabled provider vixsrc must return null by default');
+  const italianMovie = pm.resolvePlayerUrl({ type: 'movie', tmdbId: 533535 }, 'vixsrc', { allowDisabled: true });
   assert.strictEqual(italianMovie, 'https://vixsrc.to/movie/533535?autoplay=true&lang=it');
 
-  // Portuguese (Superflix)
-  const ptMovie = pm.resolvePlayerUrl({ type: 'movie', tmdbId: 533535 }, 'superflix');
+  // Portuguese (Superflix) - Disabled by default in production, verified with allowDisabled in dev
+  const ptDefault = pm.resolvePlayerUrl({ type: 'movie', tmdbId: 533535 }, 'superflix');
+  assert.strictEqual(ptDefault, null, 'Disabled provider superflix must return null by default');
+  const ptMovie = pm.resolvePlayerUrl({ type: 'movie', tmdbId: 533535 }, 'superflix', { allowDisabled: true });
   assert.strictEqual(ptMovie, 'https://superflixapi.beer/filme/533535');
-  const ptTv = pm.resolvePlayerUrl({ type: 'tv', tmdbId: 79744, season: 3, episode: 1 }, 'superflix');
+  const ptTv = pm.resolvePlayerUrl({ type: 'tv', tmdbId: 79744, season: 3, episode: 1 }, 'superflix', { allowDisabled: true });
   assert.strictEqual(ptTv, 'https://superflixapi.beer/serie/79744/3/1');
 });
 
@@ -216,12 +220,12 @@ runTest('Multi-Server Switching strictly locks canonical content identity (Movie
   const pm = resolver.providerManager;
   const inputMovie = { canonicalId: 'tmdb-movie-533535', contentType: 'movie', tmdbId: 533535 };
   
-  // Switching between servers must retain exact TMDB ID 533535
+  // Switching between servers must retain exact TMDB ID 533535 across all active servers
   const s1 = pm.resolvePlayerUrl(inputMovie, 'vidsrc_sbs');
-  const s2 = pm.resolvePlayerUrl(inputMovie, 'peachify');
-  const s3 = pm.resolvePlayerUrl(inputMovie, 'allmovieland');
-  const s4 = pm.resolvePlayerUrl(inputMovie, 'vidlink');
-  const s5 = pm.resolvePlayerUrl(inputMovie, 'wootly');
+  const s2 = pm.resolvePlayerUrl(inputMovie, 'vidlink');
+  const s3 = pm.resolvePlayerUrl(inputMovie, 'wootly');
+  const s4 = pm.resolvePlayerUrl(inputMovie, 'videasy');
+  const s5 = pm.resolvePlayerUrl(inputMovie, 'vidbolt');
 
   assert.match(s1, /533535/);
   assert.match(s2, /533535/);
@@ -229,16 +233,16 @@ runTest('Multi-Server Switching strictly locks canonical content identity (Movie
   assert.match(s4, /533535/);
   assert.match(s5, /533535/);
 
-  // TV server switching preserves exact series TMDB ID, season, and episode
+  // TV server switching preserves exact series TMDB ID, season, and episode across all active servers
   const inputTv = { canonicalId: 'tmdb-series-79744', contentType: 'tv', tmdbId: 79744, season: 2, episode: 7 };
   const tvS1 = pm.resolvePlayerUrl(inputTv, 'vidsrc_sbs');
-  const tvS2 = pm.resolvePlayerUrl(inputTv, 'peachify');
-  const tvS3 = pm.resolvePlayerUrl(inputTv, 'allmovieland');
+  const tvS2 = pm.resolvePlayerUrl(inputTv, 'vidlink');
+  const tvS3 = pm.resolvePlayerUrl(inputTv, 'wootly');
   const tvS4 = pm.resolvePlayerUrl(inputTv, 'braflix');
 
   assert.match(tvS1, /79744\/2\/7/);
   assert.match(tvS2, /79744\/2\/7/);
-  assert.match(tvS3, /79744\?s=2&e=7/);
+  assert.match(tvS3, /79744\/2\/7/);
   assert.match(tvS4, /79744\/2\/7/);
 });
 
@@ -254,13 +258,20 @@ runTest('Universal player resolver directly resolves all reverse-engineered vids
   const testMovie = { type: 'movie', tmdbId: 533535 };
   const testTv = { type: 'tv', tmdbId: 79744, season: 1, episode: 1 };
 
+  // Phase 6 Safety: Disabled providers must strictly return null without allowDisabled
+  const disabledList = ['moviesapi', 'club', 'vixsrc'];
+  disabledList.forEach(dp => {
+    assert.strictEqual(resolver.resolvePlayerUrl(testMovie, dp), null, `Disabled provider ${dp} must resolve to null by default`);
+  });
+
+  // Verify all URL builders resolve valid syntax and match ALLOWED_ORIGINS
   providersToTest.forEach(p => {
-    const movieUrl = resolver.resolvePlayerUrl(testMovie, p);
+    const movieUrl = resolver.resolvePlayerUrl(testMovie, p, { allowDisabled: true });
     assert.ok(movieUrl, `Provider ${p} must resolve Movie URL`);
     assert.match(movieUrl, /533535/, `Provider ${p} Movie URL must contain canonical TMDB ID`);
     assert.strictEqual(resolver.isAllowedOrigin(movieUrl), true, `Provider ${p} origin must be in ALLOWED_ORIGINS`);
 
-    const tvUrl = resolver.resolvePlayerUrl(testTv, p);
+    const tvUrl = resolver.resolvePlayerUrl(testTv, p, { allowDisabled: true });
     assert.ok(tvUrl, `Provider ${p} must resolve TV URL`);
     assert.match(tvUrl, /79744/, `Provider ${p} TV URL must contain canonical series TMDB ID`);
     assert.strictEqual(resolver.isAllowedOrigin(tvUrl), true, `Provider ${p} TV origin must be in ALLOWED_ORIGINS`);

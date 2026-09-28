@@ -10,7 +10,7 @@ const targetFiles = [
   path.resolve(__dirname, '..', 'assets', 'real-poster-resolver.js')
 ];
 
-const TMDB_KEY = '445f2b5a8941c1d4bd5a869761a916e3';
+const TMDB_KEY = process.env.TMDB_API_KEY || '';
 const HICINE_KEY = 'hicine_website_secret_2025_exi9epdmrns';
 const UNLICENSED_PLAYER_KEY = 'nx_bc4a3fc0ea9461c6e5baf0153d8e768d';
 

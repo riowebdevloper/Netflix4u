@@ -57,7 +57,9 @@ if (empty($apiKey)) {
     }
 }
 if (empty($apiKey)) {
-    $apiKey = '445f2b5a8941c1d4bd5a869761a916e3';
+    http_response_code(500);
+    echo json_encode(['error' => 'TMDB_API_KEY environment variable is not configured']);
+    exit;
 }
 
 // Disk cache

@@ -1,5 +1,9 @@
 const https = require('https');
-const key = '445f2b5a8941c1d4bd5a869761a916e3';
+const key = process.env.TMDB_API_KEY || '';
+if (!key) {
+  console.error('TMDB_API_KEY environment variable required');
+  process.exit(0);
+}
 
 async function testTitle(query, type = 'movie') {
   console.log('\n--- Testing TMDB for:', query, '---');

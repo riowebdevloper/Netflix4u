@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "dev": "node dev-server.js",
-    "build": "node scripts/sync_public.js",
+    "build": "node scripts/generate_category_pages.js && node scripts/sync_public.js",
     "test": "node scripts/verify_release_gate.js && node scripts/test_player_identity.js && node scripts/test_filter_and_player_suite.js",
     "audit": "node scripts/comprehensive_qa_runner.js",
     "verify": "node scripts/verify_all_requirements.js",

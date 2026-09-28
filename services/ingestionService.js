@@ -27,7 +27,8 @@ const SITEMAP_PATH = path.join(ROOT, 'sitemap.xml');
 const AUDIT_LOG_PATH = path.join(DATA_DIR, 'audit_log.json');
 const LOCK_FILE_PATH = path.join(DATA_DIR, '.sync.lock');
 
-const TMDB_API_KEY = process.env.TMDB_API_KEY || '445f2b5a8941c1d4bd5a869761a916e3';
+// 🔐 Secure TMDB API Key (Environment variable only - never hardcoded in source)
+const TMDB_API_KEY = process.env.TMDB_API_KEY || null;
 const BASE_URL = 'https://netflix4u.in';
 
 // ----------------------------------------------------
@@ -182,6 +183,12 @@ async function runIngestionPipeline(options = {}) {
   if (!acquireLock()) {
     console.log('[IngestionPipeline] Another sync job is currently active. Aborting.');
     return { status: 'LOCKED', message: 'Job already in progress' };
+  }
+
+  if (!TMDB_API_KEY) {
+    console.error('[IngestionPipeline] TMDB_API_KEY environment variable is not configured. Aborting.');
+    releaseLock();
+    return { status: 'CONFIG_ERROR', error: 'TMDB_API_KEY is not configured' };
   }
 
   const metrics = {

@@ -27,7 +27,7 @@ process.on('unhandledRejection', (reason) => {
 // 🔐 SERVER-SIDE SECRETS (NEVER SENT TO CLIENT)
 // ==========================================
 const SECRETS = {
-  TMDB_API_KEY: process.env.TMDB_API_KEY || '445f2b5a8941c1d4bd5a869761a916e3'
+  TMDB_API_KEY: process.env.TMDB_API_KEY || ''
 };
 
 // ==========================================
@@ -693,7 +693,7 @@ const server = http.createServer(async (req, res) => {
   if (reqPath === '/api/netmirror' || reqPath.startsWith('/api/netmirror/')) {
     const NM_BASE = 'https://api2.imdb3.shop/api';
     const NM_SEARCH_BASE = 'https://api2.imdb4.shop/api/search2';
-    const NM_TMDB_KEY = '445f2b5a8941c1d4bd5a869761a916e3'; // same key as apiCore
+    const NM_TMDB_KEY = process.env.TMDB_API_KEY || '';
     const NM_UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36';
 
     // ── TMDB Title Resolution Cache (survives server lifecycle) ──

@@ -456,12 +456,20 @@
     }
 
     var s = validation.sanitized;
+    var isExplicitProvider = !!provider;
     var p = (provider || 'vidsrc_sbs').toLowerCase().trim();
     var opt = options || {};
 
     // Absolute Exclusion Guard: Rivestream / Fade must strictly never resolve
     if (/rivestream|fade/i.test(p)) {
       console.warn('[Netflix4U Security] Blocked attempt to resolve excluded Rivestream / Fade provider');
+      return null;
+    }
+
+    // Explicit Disabled Providers Guard (Cloudflare 403 or unapproved)
+    var DISABLED_PROVIDERS = ['moviesapi', 'club', 'vixsrc'];
+    if (DISABLED_PROVIDERS.indexOf(p) !== -1 && !opt.allowDisabled) {
+      console.warn('[Netflix4U Security] Blocked attempt to resolve disabled provider: ' + p);
       return null;
     }
 
@@ -493,7 +501,12 @@
       }
     } catch(e) {}
 
-    // Fallback to Primary Reference Provider
+    // If an explicit provider was requested and failed to resolve, do NOT silently substitute another provider
+    if (isExplicitProvider) {
+      return null;
+    }
+
+    // Fallback to Primary Reference Provider only when no provider was requested
     return PROVIDER_BUILDERS.vidsrc_sbs(s, opt);
   }
 

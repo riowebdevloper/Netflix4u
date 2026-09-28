@@ -26,7 +26,7 @@ This option runs the built-in Node.js server with all features: dynamic TMDB tra
 4. (Optional) Under **Environment variables**, you can add:
    - `PORT`: Leave default or let cPanel assign port/socket automatically.
    - `NODE_ENV`: `production`
-   - `TMDB_API_KEY`: `445f2b5a8941c1d4bd5a869761a916e3` (or your own TMDB key).
+   - `TMDB_API_KEY`: `<your_tmdb_api_key_here>` (Your private TMDB API key).
 5. Click **Create**.
 6. If asked to run `npm install`, you don't need external packages because Netflix4U runs completely on native Node.js core modules.
 7. Click **Restart Application**.

@@ -39,8 +39,11 @@ class ProviderManager {
     if (!provider) {
       return null;
     }
-    if (!provider.enabled && !providerIdOrName && !options.allowDisabled) {
-      return null;
+    if (!provider.enabled) {
+      const isDevOrTest = process.env.NODE_ENV !== 'production';
+      if (!options.allowDisabled || !isDevOrTest) {
+        return null;
+      }
     }
 
     const cType = (input.contentType || input.type || '').toLowerCase();

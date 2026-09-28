@@ -164,13 +164,14 @@ const CATEGORY_FILTERS = {
     if (!item) return false;
     const cats = item.categories || [];
     const raw = (item.rawTitle || '') + ' ' + (item.title || '');
-    const isBollyCat = cats.includes('Bollywood');
+    const isBollyCat = cats.includes('Bollywood') || cats.includes('Bollywood Movies') || cats.includes('Bollywood Series');
     if (!isBollyCat) {
-      return /\b(bollywood|hindi\s*cinema|desi|mumbai|zee5|shemaroo|t-series|yash\s*raj|dharma)\b/i.test(raw);
+      return /\b(?:bollywood|hindi\s*cinema|desi|mumbai|zee5|shemaroo|t-series|yash\s*raj|dharma)\b/i.test(raw);
     }
-    // If tagged Bollywood, filter out titles that are Hollywood productions with only Hindi dubbing
-    if (cats.includes('Hollywood') || cats.includes('Hollywood Series')) {
-      return /\b(hindi\s*movie|bollywood|desi|dhurandhar|stree|jawan|pathaan|animal|fitoor|shona|raakaasa|sati\s*ki\s*golmaal|shiddat|badhaai|shubh|dangal|pk|bajrangi|sultan|dabangg|golmaal|housefull|baaghi|heropanti|bhool\s*bhulaiyaa|bhool|singham|gadar|drishyam|kashmir|cirkus|brahmastra|bhediya|omg|dream\s*girl|fukrey|chhatrapati|tu\s*jhoothi|satya\s*prem|zara\s*hatke|samrat\s*prithviraj|shamshera|vikram\s*vedha|lal\s*singh|raksha\s*bandhan|ek\s*villain|sooryavanshi|radhe|bell\s*bottom|antim|chandigarh|atrangi|jersey|heropanti\s*2|jayeshbhai|nikamma|hit\s*the\s*first|rashtra\s*kavach|shabaash|phone\s*bhoot|mili|govinda\s*naam|an_action_hero|an\s*action\s*hero|kuttey|mission\s*majnu|shehzada|selfiee|mrs\s*chatterjee|bheed|gumraah|kisi\s*ka\s*bhai|afwaah|the\s*kerala\s*story|ib71|bloody\s*daddy|neeyat|tarla|adipurush|bawaal|rocky\s*aur\s*rani|ghoomer|akelli|jaane\s*jaan|sukhee|the\s*great\s*indian\s*family|mission\s*raniganj|khufiya|thank\s*you\s*for\s*coming|ganapath|tejas|aankh\s*micholi|apoorva|khichdi\s*2|farrey|the\s*archies|salaar|merry\s*christmas|main\s*atal\s*hoon|fighter|teri\s*baaton\s*mein|crakk|article\s*370|laapataa\s*ladies|yodha|swatantrya\s*veer|crew|maidaan|bade\s*miyan|srikanth|mr\s*and\s*mrs\s*mahi|chandu\s*champion|ishq\s*vishk|kalki|kill|sarfira|bad\s*newz|auron\s*mein|ulajh|khel\s*khel\s*mein|vedaa|emergency|yudhra|devara|jigra|vicky\s*vidya|baby\s*john|welcome\s*to\s*the\s*jungle)\b/i.test(raw);
+    // If tagged Bollywood alongside Hollywood or English, verify it is an authentic Hindi production rather than a dubbed Western release
+    const isHollywood = cats.includes('Hollywood') || cats.includes('Hollywood Series') || cats.includes('English');
+    if (isHollywood) {
+      return cats.includes('Bollywood Movies') || /\b(?:bollywood|hindi\s*movie|hindi\s*cinema)\b/i.test(raw);
     }
     return true;
   },
@@ -189,9 +190,9 @@ const CATEGORY_FILTERS = {
     const cats = item.categories || [];
     const raw = (item.rawTitle || '') + ' ' + (item.title || '');
     const isSouthCat = cats.some(c => /south|tamil|telugu|malayalam|kannada/i.test(c));
-    const isSouthText = /\b(?:South\s*Indian|South\s*Hindi|Tamil|Telugu|Malayalam|Kannada|Tollywood|Kollywood|Mollywood|Sandalwood|Pushpa|KGF|Kalki|Devara|RRR|Baahubali|Srirastu|Thellavarithe|Aashiq\s*3|Varisu|Thunivu|Jailer|Leo|Ponniyin|Vikram|Kantara|Salaar|HanuMan|Captain\s*Miller|Ayalaan|Guntur\s*Kaaram|Saindhav|Eagle|Ooru\s*Peru|Tillu|Bhimaa|Gaami|The\s*GOAT|Vettaiyan|Kanguva|Amaran|Pushpa\s*2|Game\s*Changer|Viduthalai|Manjummel|Premalu|Aavesham|Aadujeevitham|Bramayugam|Turbo|ARM|Bougainvillea)\b/i.test(raw);
+    const isSouthLang = /\b(?:South\s*Indian|South\s*Hindi|Tamil|Telugu|Malayalam|Kannada|Tollywood|Kollywood|Mollywood|Sandalwood)\b/i.test(raw);
     const isExcluded = /\b(?:South\s*Park|South\s*Beach)\b/i.test(item.title || '');
-    return (isSouthCat || isSouthText) && !isExcluded;
+    return (isSouthCat || isSouthLang) && !isExcluded;
   },
 
   'hindi-dubbed': (item) => {

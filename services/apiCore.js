@@ -12,8 +12,8 @@ const path = require('path');
 const { resolveContentId, fetchTmdbRecord, findMatchingCatalogLinks, normalizeRawLinks, unwrapImageUrl } = require('./canonicalResolver');
 const { filterCatalogByCategory } = require('./categoryFilters');
 
-// 🔐 Secure TMDB API Key (Environment variable or fallback)
-const TMDB_API_KEY = process.env.TMDB_API_KEY || '445f2b5a8941c1d4bd5a869761a916e3';
+// 🔐 Secure TMDB API Key (Environment variable only - never hardcoded in source)
+const TMDB_API_KEY = process.env.TMDB_API_KEY || null;
 
 const ROOT = path.resolve(__dirname, '..');
 const DATA_DIR = path.join(ROOT, 'data');
@@ -745,6 +745,10 @@ async function handleTmdb(req, res, customSubPath = '') {
     return sendJson(res, 400, { error: 'TMDB subpath required' });
   }
 
+  if (!TMDB_API_KEY) {
+    return sendJson(res, 503, { error: 'TMDB service unavailable (unconfigured)' });
+  }
+
   const clientQuery = new URLSearchParams(q);
   clientQuery.delete('slug');
   clientQuery.delete('api_key');
@@ -1201,10 +1205,11 @@ function isHicineDownloadUrl(url) {
     return (
       host === 'vcloud.fit' ||
       host.endsWith('.vcloud.fit') ||
-      host.endsWith('.workers.dev') ||
       host === 'hicine.sbs' ||
       host.endsWith('.hicine.sbs') ||
-      host.endsWith('.r2.dev')
+      host.endsWith('.r2.dev') ||
+      host === 'wild-sun-9376.oriue.workers.dev' ||
+      host === 'crimson-sea-a1e5.hekoy.workers.dev'
     );
   } catch (e) {
     return false;

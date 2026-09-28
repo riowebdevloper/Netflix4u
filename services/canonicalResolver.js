@@ -19,8 +19,8 @@ const DETAILS_DIR = path.join(DATA_DIR, 'details');
 const CATALOG_SUMMARY_PATH = path.join(DATA_DIR, 'catalog_summary.json');
 const COMPLETE_CATALOG_PATH = path.join(DATA_DIR, 'dotmobiz_complete_catalog.json');
 const DETAILS_MAP_PATH = path.join(DATA_DIR, 'details_map.json');
-const HARVESTED_PATH = path.join(DATA_DIR, 'dotmobiz_harvested.json');
-const TMDB_API_KEY = process.env.TMDB_API_KEY || '445f2b5a8941c1d4bd5a869761a916e3';
+// 🔐 Secure TMDB API Key (Environment variable only - never hardcoded in source)
+const TMDB_API_KEY = process.env.TMDB_API_KEY || null;
 
 // In-Memory Fast Lookup Index
 let catalogIndex = null;
@@ -503,6 +503,9 @@ function fetchTmdbRecord(mediaType, tmdbId) {
   }
 
   const isTv = (mediaType === 'tv' || mediaType === 'series' || mediaType === 'anime' || mediaType === 'kdrama');
+  if (!TMDB_API_KEY) {
+    return Promise.resolve(null);
+  }
   const endpoint = isTv ? 'tv' : 'movie';
   const url = `https://api.tmdb.org/3/${endpoint}/${tmdbId}?api_key=${TMDB_API_KEY}&append_to_response=credits,videos,external_ids`;
 

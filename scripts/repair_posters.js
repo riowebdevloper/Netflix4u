@@ -22,7 +22,7 @@ if (dns.setDefaultResultOrder) {
 const ROOT = path.resolve(__dirname, '..');
 const CATALOG_PATH = path.join(ROOT, 'data', 'catalog_summary.json');
 const DETAILS_DIR = path.join(ROOT, 'data', 'details');
-const TMDB_API_KEY = process.env.TMDB_API_KEY || '445f2b5a8941c1d4bd5a869761a916e3';
+const TMDB_API_KEY = process.env.TMDB_API_KEY || '';
 
 const {
   verifyPosterUrl,

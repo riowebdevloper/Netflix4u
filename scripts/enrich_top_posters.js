@@ -2,7 +2,7 @@ const fs = require('fs');
 const https = require('https');
 const path = require('path');
 
-const TMDB_API_KEY = '445f2b5a8941c1d4bd5a869761a916e3';
+const TMDB_API_KEY = process.env.TMDB_API_KEY || '';
 const catalogPath = path.join(__dirname, '..', 'data', 'catalog_summary.json');
 const catalog = JSON.parse(fs.readFileSync(catalogPath, 'utf8'));
 

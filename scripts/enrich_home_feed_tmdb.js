@@ -3,7 +3,7 @@ const path = require('path');
 const https = require('https');
 
 const DATA_DIR = path.resolve(__dirname, '../data');
-const TMDB_API_KEY = '445f2b5a8941c1d4bd5a869761a916e3';
+const TMDB_API_KEY = process.env.TMDB_API_KEY || '';
 
 function cleanTitle(raw) {
   if (!raw) return '';
