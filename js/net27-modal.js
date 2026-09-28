@@ -19,6 +19,7 @@
   // Net27 Floating Player Header Elements
   var watchTopBar = document.getElementById('watch-top-bar');
   var watchBackBtn = document.getElementById('watch-back-btn');
+  var playerInframeBackBtn = document.getElementById('player-inframe-back-btn');
   var watchReloadBtn = document.getElementById('watch-reload-btn');
   var watchReloadIcon = document.getElementById('watch-reload-icon');
   var watchServerToggle = document.getElementById('watch-server-toggle');
@@ -324,7 +325,7 @@
       return '<button type="button" class="nm-lang-tab shrink-0' + (idx === 0 ? ' nm-lang-active' : '') + '">' + escapeHtml(lang) + '</button>';
     }).join('');
 
-    // Authorized Hicine Download links only
+    // Authorized Download links (Separated Adapters for Hicine & DotMovies)
     var rawDownloadLinks = data.downloadLinks || data.links || [];
     var downloadLinks = rawDownloadLinks;
 
@@ -335,7 +336,19 @@
       return Boolean(l.isCloud || s.includes('fast cloud') || s.includes('hicine') || u.includes('vcloud') || u.includes('workers.dev') || u.includes('r2.dev') || u.includes('hicine.sbs'));
     });
 
-    var cloudSectionHtml = renderCloudSection(hicineLinks, data.title, isTv, tmdbId);
+    var dotmoviesLinks = rawDownloadLinks.filter(function(l) {
+      if (!l || !l.url) return false;
+      var u = String(l.url || '').toLowerCase();
+      var s = String(l.source || '').toLowerCase();
+      return Boolean(s.includes('dotmovies') || s.includes('hubcloud') || u.includes('dotmovies') || u.includes('hubcloud') || u.includes('drivehub'));
+    });
+
+    // If neither tag matched but raw links exist, keep in general download adapter
+    if (!hicineLinks.length && !dotmoviesLinks.length && rawDownloadLinks.length) {
+      hicineLinks = rawDownloadLinks;
+    }
+
+    var cloudSectionHtml = renderCloudSection(hicineLinks, data.title, isTv, tmdbId, dotmoviesLinks);
 
     // Episodes for TV Series
     var episodesSectionHtml = '';
@@ -865,22 +878,60 @@
     }).join('');
   }
 
-  function renderCloudSection(links, title, isTv, tmdbId) {
-    return '<section id="download-mirrors-section" class="dl-section">' +
-      '<div class="flex items-center justify-between mb-3.5">' +
+  function renderCloudSection(links, title, isTv, tmdbId, dotLinks) {
+    var hasHicine = links && links.length > 0;
+    var hasDot = dotLinks && dotLinks.length > 0;
+
+    if (!hasHicine && !hasDot) {
+      return '<section id="download-mirrors-section" class="dl-section">' +
+        '<div class="flex items-center justify-between mb-3.5">' +
+          '<div class="flex items-center gap-2.5">' +
+            '<div class="w-1.5 h-5 rounded-full bg-red-600"></div>' +
+            '<h3 class="text-lg sm:text-xl font-bold tracking-tight text-white">Direct Downloads</h3>' +
+          '</div>' +
+        '</div>' +
+        '<div class="p-6 rounded-xl bg-white/[0.03] border border-white/10 text-center space-y-2">' +
+          '<div class="text-sm text-white/80 font-medium">Download currently unavailable.</div>' +
+          '<div class="text-xs text-white/40">Verified high-speed downloads are not available for this title yet. You can stream it using the "Watch Now" button above.</div>' +
+        '</div>' +
+      '</section>';
+    }
+
+    var html = '<section id="download-mirrors-section" class="dl-section">';
+    if (hasHicine) {
+      html += '<div class="flex items-center justify-between mb-3.5">' +
         '<div class="flex items-center gap-2.5">' +
           '<div class="w-1.5 h-5 rounded-full bg-red-600"></div>' +
           '<h3 class="text-lg sm:text-xl font-bold tracking-tight text-white">Hicine Fast Downloads</h3>' +
         '</div>' +
         '<span class="text-xs text-green-400 font-semibold flex items-center gap-1">' +
           '<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>' +
-          'Verified CDN Active' +
+          'Verified Fast CDN' +
         '</span>' +
       '</div>' +
       '<div id="modal-download-links" class="space-y-2.5">' +
         renderDownloadMirrors(links, title, isTv, tmdbId) +
+      '</div>';
+    }
+
+    if (hasDot) {
+      html += '<div class="flex items-center justify-between ' + (hasHicine ? 'mt-6 ' : '') + 'mb-3.5">' +
+        '<div class="flex items-center gap-2.5">' +
+          '<div class="w-1.5 h-5 rounded-full bg-blue-600"></div>' +
+          '<h3 class="text-lg sm:text-xl font-bold tracking-tight text-white">DotMovies Verified Mirrors</h3>' +
+        '</div>' +
+        '<span class="text-xs text-blue-400 font-semibold flex items-center gap-1">' +
+          '<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>' +
+          'DotMovies Hub' +
+        '</span>' +
       '</div>' +
-    '</section>';
+      '<div id="modal-dotmovies-download-links" class="space-y-2.5">' +
+        renderDownloadMirrors(dotLinks, title, isTv, tmdbId) +
+      '</div>';
+    }
+
+    html += '</section>';
+    return html;
   }
 
   function resolveStreamableVideoUrl(data, isTv, season, episode) {
@@ -1564,11 +1615,18 @@
 
         pickerList.innerHTML = html;
 
+        // Prevent wheel event bubbling to body or backdrop
+        pickerList.onwheel = function(e) {
+          e.stopPropagation();
+        };
+
         pickerList.querySelectorAll('[data-select-server]').forEach(function(card) {
           card.addEventListener('click', function(e) {
             e.stopPropagation();
             var serverId = card.dataset.selectServer;
+            pickerModal.style.setProperty('display', 'none', 'important');
             pickerModal.classList.add('hidden');
+            pickerModal.classList.remove('flex');
             pickerModal.setAttribute('aria-hidden', 'true');
             openWatchModal(tmdbId, type, season, episode, backdrop, title, year, imdbId, canonicalId, poster, serverId);
           });
@@ -1596,29 +1654,33 @@
     pickerModal.classList.remove('hidden');
     pickerModal.classList.add('flex');
     pickerModal.setAttribute('aria-hidden', 'false');
+    lockBodyScroll();
+  }
+
+  function closeServerPicker() {
+    var pickerModal = document.getElementById('watch-server-picker-modal');
+    if (pickerModal) {
+      pickerModal.style.setProperty('display', 'none', 'important');
+      pickerModal.classList.add('hidden');
+      pickerModal.classList.remove('flex');
+      pickerModal.setAttribute('aria-hidden', 'true');
+      var watchModalEl = document.getElementById('watch-modal');
+      if (!watchModalEl || watchModalEl.classList.contains('hidden') || watchModalEl.style.display === 'none') {
+        unlockBodyScroll();
+      }
+    }
   }
 
   var pickerCloseBtn = document.getElementById('watch-server-picker-close');
   if (pickerCloseBtn) {
-    pickerCloseBtn.addEventListener('click', function() {
-      var pickerModal = document.getElementById('watch-server-picker-modal');
-      if (pickerModal) {
-        pickerModal.style.setProperty('display', 'none', 'important');
-        pickerModal.classList.add('hidden');
-        pickerModal.classList.remove('flex');
-        pickerModal.setAttribute('aria-hidden', 'true');
-      }
-    });
+    pickerCloseBtn.addEventListener('click', closeServerPicker);
   }
 
   var pickerModalEl = document.getElementById('watch-server-picker-modal');
   if (pickerModalEl) {
     pickerModalEl.addEventListener('click', function(e) {
       if (e.target === pickerModalEl) {
-        pickerModalEl.style.setProperty('display', 'none', 'important');
-        pickerModalEl.classList.add('hidden');
-        pickerModalEl.classList.remove('flex');
-        pickerModalEl.setAttribute('aria-hidden', 'true');
+        closeServerPicker();
       }
     });
   }
@@ -2622,6 +2684,24 @@
     }
     currentAutoSwitchToken++;
 
+    // Automatically save Continue Watching progress upon exiting player
+    if (activeWatchParams && window.__saveContinueWatching) {
+      try {
+        window.__saveContinueWatching({
+          tmdbId: activeWatchParams.tmdbId,
+          canonicalId: activeWatchParams.canonicalId || activeWatchParams.tmdbId,
+          title: activeWatchParams.title,
+          type: activeWatchParams.type,
+          year: activeWatchParams.year,
+          se: activeWatchParams.season || 1,
+          ep: activeWatchParams.episode || 1,
+          poster: activeWatchParams.poster || '',
+          backdrop: activeWatchParams.backdrop || '',
+          progress: 50
+        });
+      } catch(e) {}
+    }
+
     if (watchTopBar) {
       watchTopBar.classList.remove('watch-bar-hidden');
     }
@@ -2964,6 +3044,7 @@
 
   // Net27 Player Header Listeners - Return to More Info Page
   if (watchBackBtn) watchBackBtn.addEventListener('click', closeWatchAndReturnToDetails);
+  if (playerInframeBackBtn) playerInframeBackBtn.addEventListener('click', closeWatchAndReturnToDetails);
   if (watchReloadBtn) watchReloadBtn.addEventListener('click', reloadWatchStream);
   if (watchServerToggle) {
     watchServerToggle.addEventListener('click', function(e) {

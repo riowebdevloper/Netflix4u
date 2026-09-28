@@ -10,6 +10,7 @@ const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
 const { resolveContentId, fetchTmdbRecord, findMatchingCatalogLinks, normalizeRawLinks, unwrapImageUrl } = require('./canonicalResolver');
+const { filterCatalogByCategory } = require('./categoryFilters');
 
 // 🔐 Secure TMDB API Key (Environment variable or fallback)
 const TMDB_API_KEY = process.env.TMDB_API_KEY || '445f2b5a8941c1d4bd5a869761a916e3';
@@ -1441,6 +1442,8 @@ const CATEGORY_FILES = {
   'popular-series': 'series.json',
   'anime': 'anime.json',
   'kdrama': 'kdrama.json',
+  'trending': 'trending.json',
+  'trending-today': 'trending.json',
   'recently-added': 'home_feed.json',
   'recommended': 'trending.json'
 };
@@ -1487,20 +1490,10 @@ function handleCategoryFeed(req, res, rawCat) {
     } catch (e) { }
   }
 
-  // Fallback: filter from catalog_summary.json
+  // Fallback: filter from catalog_summary.json using normalized filterCatalogByCategory (no silent fallback)
   const catalog = getCatalogSummary();
-  const filtered = catalog.filter(it => {
-    const hay = ((it.categories || []).join(' ') + ' ' + (it.title || '') + ' ' + (it.language || '')).toLowerCase();
-    if (norm === 'bollywood') return hay.includes('bollywood') || hay.includes('hindi');
-    if (norm === 'hollywood') return hay.includes('hollywood') || hay.includes('english');
-    if (norm === 'south-indian' || norm === 'south') return hay.includes('tamil') || hay.includes('telugu') || hay.includes('south') || hay.includes('malayalam');
-    if (norm === 'hindi-dubbed') return hay.includes('dual') || hay.includes('dubbed') || hay.includes('hindi');
-    if (norm === 'anime') return it.type === 'anime' || hay.includes('anime');
-    if (norm === 'kdrama') return it.type === 'kdrama' || hay.includes('korean') || hay.includes('kdrama');
-    if (norm === 'movies' || norm === 'popular-movies') return it.type === 'movie';
-    if (norm === 'series' || norm === 'popular-series') return it.type === 'series' || it.type === 'tv';
-    return true;
-  }).slice(0, 30).map(it => ({
+  const matched = filterCatalogByCategory(catalog, norm);
+  const filtered = matched.slice(0, 36).map(it => ({
     id: it.canonicalId || it.id,
     canonicalId: it.canonicalId || it.id,
     tmdbId: it.tmdbId || null,
@@ -2363,6 +2356,10 @@ async function handleStreamPlayer(req, res) {
 
   const displayTitle = (title || 'Stream') + (isMovie ? '' : ` • S${actualSe} E${actualEp}`);
   const directDlHref = rawCloudUrl ? `/api/download-file?url=${encodeURIComponent(rawCloudUrl)}` : (cloudStream?.url ? `/api/download-file?url=${encodeURIComponent(cloudStream.url)}` : '');
+  const canonicalTargetId = id || (cleanId ? (cleanId.startsWith('tmdb-') ? cleanId : 'tmdb-' + cleanId) : '');
+  const fallbackDetailPath = isMovie
+    ? (canonicalTargetId ? `/movie/${canonicalTargetId}` : '/')
+    : (canonicalTargetId ? `/series/${canonicalTargetId}` : '/');
 
   // Default initial server: PvrPlay Hindi Dub (for Hindi/regional dub) or VidSrc (for English original) or Fast Cloud
   const isDubLang = (lang === 'hi' || lang === 'ta' || lang === 'te');
@@ -2508,6 +2505,7 @@ async function handleStreamPlayer(req, res) {
     <div class="player-frame">
       <div id="top-bar">
         <div class="title-area">
+          <a href="${fallbackDetailPath}" id="player-back-btn" class="pill" style="text-decoration:none;font-weight:700;background:rgba(255,255,255,0.18);" title="Back to Details" onclick="if(window.history.length > 1) { window.history.back(); return false; }">← Back</a>
           <span class="badge-ep">${isMovie ? 'MOVIE' : 'S' + actualSe + ' E' + actualEp}</span>
           <span class="title-text">${escapeHtml(displayTitle)}</span>
           ${!isMovie ? `

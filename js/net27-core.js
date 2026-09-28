@@ -670,9 +670,19 @@
     var buttons = document.querySelectorAll('.platform-btn');
     var themeWash = document.getElementById('theme-wash');
 
+    function findPlatformBtn(targetKey) {
+      if (!targetKey) return null;
+      var norm = targetKey.toLowerCase().trim();
+      return Array.from(buttons).find(function(b) {
+        var p = (b.dataset.platform || '').toLowerCase().trim();
+        return p === norm || (norm === 'latest' && p === 'latestrelease') || (norm === 'latestrelease' && p === 'latest');
+      });
+    }
+
     function activateTab(btn, updateUrl) {
       if (!btn) return;
-      var platform = btn.dataset.platform;
+      var rawPlatform = btn.dataset.platform || 'trending';
+      var platform = rawPlatform.toLowerCase().trim();
       var color = btn.dataset.color || '#e50914';
 
       buttons.forEach(function(b) {
@@ -699,18 +709,18 @@
           if (platform === 'trending') {
             curUrl.searchParams.delete('feed');
             curUrl.searchParams.delete('provider');
-          } else if (platform === 'LatestRelease') {
+          } else if (platform === 'latestrelease' || platform === 'latest') {
             curUrl.searchParams.delete('provider');
             curUrl.searchParams.set('feed', 'latest');
           } else if (platform === 'mylist') {
             curUrl.searchParams.delete('provider');
             curUrl.searchParams.set('feed', 'mylist');
-          } else if (platform === 'Kids') {
+          } else if (platform === 'kids') {
             curUrl.searchParams.delete('provider');
             curUrl.searchParams.set('feed', 'kids');
           } else {
             curUrl.searchParams.delete('feed');
-            curUrl.searchParams.set('provider', platform.toLowerCase());
+            curUrl.searchParams.set('provider', platform);
           }
           var newUrlStr = curUrl.toString();
           if (newUrlStr !== window.location.href) {
@@ -742,18 +752,13 @@
       var params = new URLSearchParams(window.location.search);
       var prov = params.get('provider');
       var feed = params.get('feed');
-      var targetPlatform = 'trending';
+      var targetBtn = null;
       if (prov) {
-        var found = Array.from(buttons).find(function(b) {
-          return b.dataset.platform.toLowerCase() === prov.toLowerCase();
-        });
-        if (found) targetPlatform = found.dataset.platform;
+        targetBtn = findPlatformBtn(prov);
       } else if (feed) {
-        if (feed === 'latest') targetPlatform = 'LatestRelease';
-        else if (feed === 'mylist') targetPlatform = 'mylist';
-        else if (feed === 'kids') targetPlatform = 'Kids';
+        targetBtn = findPlatformBtn(feed);
       }
-      var targetBtn = document.querySelector('[data-platform="' + targetPlatform + '"]');
+      if (!targetBtn) targetBtn = findPlatformBtn('trending');
       if (targetBtn) activateTab(targetBtn, false);
     });
 
@@ -762,21 +767,13 @@
     var initProv = initParams.get('provider');
     var initFeed = initParams.get('feed');
     if (initProv || initFeed) {
-      var initialPlatform = 'trending';
+      var initialBtn = null;
       if (initProv) {
-        var matchBtn = Array.from(buttons).find(function(b) {
-          return b.dataset.platform.toLowerCase() === initProv.toLowerCase();
-        });
-        if (matchBtn) initialPlatform = matchBtn.dataset.platform;
+        initialBtn = findPlatformBtn(initProv);
       } else if (initFeed) {
-        if (initFeed === 'latest') initialPlatform = 'LatestRelease';
-        else if (initFeed === 'mylist') initialPlatform = 'mylist';
-        else if (initFeed === 'kids') initialPlatform = 'Kids';
+        initialBtn = findPlatformBtn(initFeed);
       }
-      var initBtn = document.querySelector('[data-platform="' + initialPlatform + '"]');
-      if (initBtn && initialPlatform !== 'trending') {
-        activateTab(initBtn, false);
-      }
+      if (initialBtn) activateTab(initialBtn, false);
     }
   }
 
@@ -995,7 +992,7 @@
     var curData = curatedFeedCache[curKey];
     if (!curData) {
       try {
-        var curRes = await fetch('/api/catalog/curated/' + encodeURIComponent(platform)).catch(function() {});
+        var curRes = await fetch('/api/catalog/curated/' + encodeURIComponent(curKey)).catch(function() {});
         if (curRes && curRes.ok) {
           curData = await curRes.json().catch(function() {});
         }
@@ -1728,25 +1725,35 @@
           '</button>' +
           '<div class="flex gap-3 sm:gap-4 overflow-x-auto scrollbar-none rail-scroll" data-rail-content>' +
             items.map(function(item) {
-              var poster = item.poster ? unwrapImageUrl(item.poster) : getPosterFallback(item.title);
               var isTv = item.type === 'tv' || item.type === 'series';
               var epLabel = isTv ? 'S' + (item.se || 1) + ':E' + (item.ep || 1) : '';
-              return '<div class="shrink-0 w-[160px] sm:w-[210px]">' +
-                '<div class="nm-continue-card group cursor-pointer" data-modal="watch" data-tmdbid="' + item.tmdbId + '" data-canonical-id="' + escapeHtml(item.canonicalId || item.tmdbId) + '" data-type="' + (isTv ? 'tv' : 'movie') + '" data-title="' + escapeHtml(item.title) + '" data-year="' + (item.year || '') + '"' + (isTv ? ' data-se="' + (item.se || 1) + '" data-ep="' + (item.ep || 1) + '"' : '') + '>' +
+              var imgUrl = item.backdrop ? unwrapImageUrl(item.backdrop) : (item.poster ? unwrapImageUrl(item.poster) : getPosterFallback(item.title));
+              var rawProg = typeof item.progress === 'number' ? item.progress : parseFloat(item.progress);
+              if (isNaN(rawProg)) {
+                if (item.position && item.duration && item.duration > 0) {
+                  rawProg = (item.position / item.duration) * 100;
+                } else {
+                  rawProg = 50;
+                }
+              }
+              var clampedProgress = Math.min(100, Math.max(0, Math.round(rawProg)));
+
+              return '<div class="nm-continue-wrapper">' +
+                '<div class="nm-continue-card group cursor-pointer" data-modal="watch" data-tmdbid="' + item.tmdbId + '" data-canonical-id="' + escapeHtml(item.canonicalId || item.tmdbId) + '" data-type="' + (isTv ? 'tv' : 'movie') + '" data-title="' + escapeHtml(item.title) + '" data-year="' + (item.year || '') + '" data-poster="' + escapeHtml(item.poster || '') + '" data-backdrop="' + escapeHtml(item.backdrop || '') + '"' + (isTv ? ' data-se="' + (item.se || 1) + '" data-ep="' + (item.ep || 1) + '"' : '') + '>' +
                   '<button type="button" aria-label="Remove from Continue Watching" data-remove-cw="' + item.tmdbId + '" class="nm-continue-remove" title="Remove">✕</button>' +
-                  '<div class="relative aspect-[16/9] sm:aspect-[2/3] overflow-hidden bg-white/5 rounded-t-lg">' +
-                    '<img src="' + poster + '" alt="' + escapeHtml(item.title) + '" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="window.__healPoster(this);" />' +
-                    '<div class="absolute inset-0 bg-black/30 group-hover:bg-black/10 flex items-center justify-center transition">' +
+                  '<div class="nm-continue-thumb">' +
+                    '<img src="' + imgUrl + '" alt="' + escapeHtml(item.title) + '" loading="lazy" decoding="async" onerror="window.__healPoster(this);" />' +
+                    '<div class="absolute inset-0 bg-black/35 group-hover:bg-black/15 flex items-center justify-center transition">' +
                       '<div class="w-10 h-10 rounded-full bg-white/90 group-hover:bg-white text-black flex items-center justify-center shadow-2xl group-hover:scale-110 transition">' +
                         '<svg class="w-5 h-5 ml-0.5" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>' +
                       '</div>' +
                     '</div>' +
                     '<div class="nm-continue-progress-wrap">' +
-                      '<div class="nm-continue-progress-bar" style="width: ' + (item.progress || 50) + '%;"></div>' +
+                      '<div class="nm-continue-progress-bar" style="width: ' + clampedProgress + '%;"></div>' +
                     '</div>' +
                   '</div>' +
-                  '<div class="p-2 bg-[#121218] rounded-b-lg flex items-center justify-between gap-1.5">' +
-                    '<div class="truncate text-xs font-semibold text-white/90">' + escapeHtml(item.title) + '</div>' +
+                  '<div class="nm-continue-meta">' +
+                    '<div class="truncate text-xs font-semibold text-white/90 flex-1">' + escapeHtml(item.title) + '</div>' +
                     (epLabel ? '<span class="shrink-0 px-1.5 py-0.5 rounded bg-white/15 text-[10px] font-bold text-white/80">' + epLabel + '</span>' : '') +
                   '</div>' +
                 '</div>' +

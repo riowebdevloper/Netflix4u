@@ -837,6 +837,39 @@ body {
   box-shadow: 0 0 10px rgba(229, 9, 20, 0.4);
 }
 
+#watch-server-picker-modal {
+  touch-action: pan-y;
+  overscroll-behavior: contain;
+}
+
+#picker-server-list {
+  max-height: calc(80vh - 140px);
+  overflow-y: auto !important;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
+  padding-bottom: 24px;
+}
+
+#picker-server-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+#picker-server-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+#picker-server-list::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 9999px;
+}
+
+#picker-server-list::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.45);
+}
+
 .picker-server-card {
   display: flex;
   align-items: center;
@@ -1330,17 +1363,53 @@ body.modal-open {
 }
 
 /* ─── Continue Watching Rail Styles ─── */
+.nm-continue-wrapper {
+  flex-shrink: 0;
+  width: 220px;
+}
+@media (min-width: 640px) {
+  .nm-continue-wrapper {
+    width: 260px;
+  }
+}
+@media (min-width: 1024px) {
+  .nm-continue-wrapper {
+    width: 280px;
+  }
+}
 .nm-continue-card {
   position: relative;
+  width: 100%;
   border-radius: 8px;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.04);
+  background: #14141c;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 4px 16px rgba(0,0,0,0.5);
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s, border-color 0.2s;
+  display: flex;
+  flex-direction: column;
 }
 .nm-continue-card:hover {
   transform: translateY(-3px) scale(1.02);
+  border-color: rgba(229, 9, 20, 0.5);
   box-shadow: 0 10px 24px rgba(0,0,0,0.8), 0 0 16px rgba(229, 9, 20, 0.3);
+}
+.nm-continue-thumb {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
+}
+.nm-continue-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.3s ease;
+}
+.nm-continue-card:hover .nm-continue-thumb img {
+  transform: scale(1.05);
 }
 .nm-continue-progress-wrap {
   position: absolute;
@@ -1350,38 +1419,56 @@ body.modal-open {
   height: 4px;
   background: rgba(255, 255, 255, 0.25);
   z-index: 10;
+  overflow: hidden;
 }
 .nm-continue-progress-bar {
   height: 100%;
   background: #e50914;
   box-shadow: 0 0 8px #e50914;
+  transition: width 0.3s ease;
 }
 .nm-continue-remove {
   position: absolute;
-  top: 6px;
-  right: 6px;
-  z-index: 15;
-  width: 22px;
-  height: 22px;
+  top: 8px;
+  right: 8px;
+  z-index: 20;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(4px);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 10px;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 11px;
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0;
-  transition: opacity 0.15s, background 0.15s;
+  transition: opacity 0.15s, background 0.15s, transform 0.15s;
   cursor: pointer;
 }
 .nm-continue-card:hover .nm-continue-remove {
   opacity: 1;
 }
+@media (hover: none) {
+  .nm-continue-remove {
+    opacity: 0.85;
+  }
+}
 .nm-continue-remove:hover {
   background: #e50914;
   color: #ffffff;
   border-color: transparent;
+  transform: scale(1.1);
+}
+.nm-continue-meta {
+  padding: 10px 12px;
+  background: #121218;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 44px;
 }
 
 /* ─── My List (Watchlist) Buttons & Indicators ─── */
@@ -1951,7 +2038,34 @@ body.modal-open {
   box-shadow: 0 20px 40px -8px rgba(0, 0, 0, 0.85) !important;
 }
 
-
-
-
-
+/* 8. Persistent In-Player Top-Left Back Button */
+.player-inframe-back-btn {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 45;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  background: rgba(10, 10, 15, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  pointer-events: auto;
+}
+.player-inframe-back-btn:hover {
+  background: rgba(229, 9, 20, 0.9);
+  border-color: rgba(229, 9, 20, 1);
+  transform: scale(1.05);
+}
+.player-inframe-back-btn:active {
+  transform: scale(0.95);
+}

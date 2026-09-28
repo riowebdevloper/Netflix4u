@@ -4,9 +4,14 @@ const fs = require('fs');
 const path = require('path');
 const os = require('os');
 
-const CHROME_PATH = fs.existsSync('C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe')
-  ? 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe'
-  : 'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe';
+const candidates = [
+  '/Users/laptopbazaar/Library/Caches/ms-playwright/chromium-1243/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing',
+  '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+  '/Applications/Brave Browser.app/Contents/MacOS/Brave Browser',
+  'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
+  'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe'
+];
+const CHROME_PATH = candidates.find(c => fs.existsSync(c)) || 'google-chrome';
 
 const CDP_PORT = 9258;
 const SERVER_PORT = 4208;
@@ -374,7 +379,9 @@ async function runLighthouseMaster() {
     desktop: desktopRuns
   };
 
-  fs.writeFileSync('D:/Users/nickrio007/.gemini/antigravity-ide/brain/62f460e8-9cba-4b5a-932f-b05675ffc86c/scratch/final_lighthouse_runs.json', JSON.stringify(report, null, 2));
+  const dataDir = path.join(__dirname, '../data');
+  if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
+  fs.writeFileSync(path.join(dataDir, 'final_lighthouse_runs.json'), JSON.stringify(report, null, 2));
 
   console.log('\n====================================================');
   console.log('FINAL AUDIT SUMMARY COMPLETED SUCCESSFULLY');

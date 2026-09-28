@@ -213,7 +213,7 @@ function filterCatalogByCategory(items, categoryKey) {
   const normalizedKey = String(categoryKey || '').toLowerCase().trim();
   const filterFn = CATEGORY_FILTERS[normalizedKey];
   if (!filterFn) {
-    return items.slice(0, 36);
+    return [];
   }
   return items.filter(filterFn);
 }

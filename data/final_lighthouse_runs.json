@@ -1,0 +1,139 @@
+{
+  "timestamp": "2026-09-28T06:58:22.079Z",
+  "mobile": [
+    {
+      "iteration": 1,
+      "perfScore": 100,
+      "a11yScore": 100,
+      "bpScore": 100,
+      "seoScore": 100,
+      "a11yDetails": {
+        "missingAlts": 0,
+        "missingButtonLabels": 0,
+        "iframesWithoutTitles": 0,
+        "unTitledInfo": [],
+        "hasLang": true,
+        "hasViewport": true
+      },
+      "fcp": 144,
+      "lcp": 144,
+      "cls": 0,
+      "tbt": 0,
+      "domNodes": 817,
+      "failedRequests": 0,
+      "consoleErrors": 0
+    },
+    {
+      "iteration": 2,
+      "perfScore": 100,
+      "a11yScore": 100,
+      "bpScore": 100,
+      "seoScore": 100,
+      "a11yDetails": {
+        "missingAlts": 0,
+        "missingButtonLabels": 0,
+        "iframesWithoutTitles": 0,
+        "unTitledInfo": [],
+        "hasLang": true,
+        "hasViewport": true
+      },
+      "fcp": 128,
+      "lcp": 128,
+      "cls": 0,
+      "tbt": 0,
+      "domNodes": 881,
+      "failedRequests": 0,
+      "consoleErrors": 0
+    },
+    {
+      "iteration": 3,
+      "perfScore": 100,
+      "a11yScore": 100,
+      "bpScore": 100,
+      "seoScore": 100,
+      "a11yDetails": {
+        "missingAlts": 0,
+        "missingButtonLabels": 0,
+        "iframesWithoutTitles": 0,
+        "unTitledInfo": [],
+        "hasLang": true,
+        "hasViewport": true
+      },
+      "fcp": 172,
+      "lcp": 172,
+      "cls": 0,
+      "tbt": 0,
+      "domNodes": 883,
+      "failedRequests": 0,
+      "consoleErrors": 0
+    }
+  ],
+  "desktop": [
+    {
+      "iteration": 1,
+      "perfScore": 100,
+      "a11yScore": 100,
+      "bpScore": 100,
+      "seoScore": 100,
+      "a11yDetails": {
+        "missingAlts": 0,
+        "missingButtonLabels": 0,
+        "iframesWithoutTitles": 0,
+        "unTitledInfo": [],
+        "hasLang": true,
+        "hasViewport": true
+      },
+      "fcp": 100,
+      "lcp": 100,
+      "cls": 0,
+      "tbt": 0,
+      "domNodes": 895,
+      "failedRequests": 0,
+      "consoleErrors": 0
+    },
+    {
+      "iteration": 2,
+      "perfScore": 100,
+      "a11yScore": 100,
+      "bpScore": 100,
+      "seoScore": 100,
+      "a11yDetails": {
+        "missingAlts": 0,
+        "missingButtonLabels": 0,
+        "iframesWithoutTitles": 0,
+        "unTitledInfo": [],
+        "hasLang": true,
+        "hasViewport": true
+      },
+      "fcp": 108,
+      "lcp": 108,
+      "cls": 0,
+      "tbt": 0,
+      "domNodes": 895,
+      "failedRequests": 0,
+      "consoleErrors": 0
+    },
+    {
+      "iteration": 3,
+      "perfScore": 100,
+      "a11yScore": 100,
+      "bpScore": 100,
+      "seoScore": 100,
+      "a11yDetails": {
+        "missingAlts": 0,
+        "missingButtonLabels": 0,
+        "iframesWithoutTitles": 0,
+        "unTitledInfo": [],
+        "hasLang": true,
+        "hasViewport": true
+      },
+      "fcp": 76,
+      "lcp": 76,
+      "cls": 0,
+      "tbt": 0,
+      "domNodes": 895,
+      "failedRequests": 0,
+      "consoleErrors": 0
+    }
+  ]
+}
