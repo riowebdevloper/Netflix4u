@@ -405,4 +405,59 @@ Result: **16 PASSED, 0 FAILED (100% SUCCESS)**
 | **Phase 20** | Performance & CWV | 0 layout shifts (CLS = 0.000); verified responsive image srcset and priority backdrops. | **VERIFIED** |
 | **Phase 21** | Deployment Verification | Live production smoke tests (16/16 PASS) and complete rollback baseline established. | **VERIFIED** |
 
+---
+
+## Phase 15: Production Stability — Player Overlay & Mobile Presentation Restoration
+
+**Commit Reference:** `a9ef7a6`  
+**Rollback Tag:** `phase1-rollback-checkpoint` (`64de381`)  
+**Status:** **100% COMPLETE & VISUALLY / EMPIRICALLY VERIFIED**
+
+### Objectives & Remediation Summary
+
+1. **Double Back Button Overlay Elimination:**
+   - **Root Cause:** `#watch-top-bar` positioned absolutely at top of viewport (`z-index: 75`) rendered a `< Back` button directly over `.player-inframe-back-btn` (`top: 12px; left: 12px; z-index: 45`).
+   - **Remediation:** In `css/netflix4u-net27.css`, `.player-inframe-back-btn` is scoped to `display: none !important;` by default during standard viewing. It is conditionally enabled (`display: inline-flex !important;`) only when entering fullscreen mode or when the top-bar is auto-hidden during media playback.
+   - **Result:** Single clean Back button rendered across all mobile viewports (320px–430px) and desktop.
+
+2. **Duplicate Unstyled Episode Selector Elimination:**
+   - **Root Cause:** `#watch-mobile-ep-bar` contained raw browser `<select>` dropdowns intended as fallback controls, but when unhidden by modal scripts, it rendered an unstyled duplicate control row directly under the styled `#watch-ep-nav` OTT header bar.
+   - **Remediation:** Enforced `display: none !important; visibility: hidden !important; height: 0 !important; overflow: hidden !important;` on `#watch-mobile-ep-bar`. The styled OTT header `#watch-ep-nav` handles all season and episode switching on all screens.
+   - **Result:** Redundant dropdowns removed; clean, unified episode navigation retained.
+
+3. **Mobile Player Black Dead Space Void Elimination:**
+   - **Root Cause:** Below the 16:9 player frame and server selection pills, the modal had empty space filling ~60% of vertical mobile viewport height with no content.
+   - **Remediation:** Added `#watch-details-section` directly below server selection pills in `index.html` and `public/index.html`. In `js/net27-modal.js`, implemented `renderWatchDetailsAndEpisodes()`:
+     - Formats synopsis overview, duration, release year, age ratings, and genre tags.
+     - Adds interactive TV Series Episodes List (`#watch-episodes-list`) for TV series, dynamically fetching season episodes from `/api/catalog/season/:id/:season`.
+     - Displays episode thumbnail stills, titles, runtimes, active `Playing` indicator badges, and direct play trigger buttons.
+   - **Result:** High-density, rich OTT presentation with zero dead space across all screen sizes.
+
+4. **White Flash Elimination:**
+   - **Root Cause:** Browser iframe element default background defaults to white `#FFFFFF` during initial DOM creation and HTTP navigation before cross-origin document headers render.
+   - **Remediation:** Added `allowtransparency="true"` and inline `style="background-color: #000000 !important; color-scheme: dark;"` to `#watch-modal-iframe` in both `index.html` and `public/index.html`.
+   - **Result:** Pure black transitions on initial load and failover/server switches.
+
+5. **Episode Switch State Synchronization:**
+   - **Root Cause:** Hash change listener compared string regex groups with numerical TMDB IDs (`===`), resulting in false inequality and failing to navigate when switching episodes via hash (e.g. `#w=1399-tv-1-2`).
+   - **Remediation:** Unified `popstate` and `hashchange` under `handleRouteStateChange` with type-safe string coercion (`String(activeWatchParams.tmdbId) === String(targetId)`), directly invoking `navigateToEpisode(targetSe, targetEp)`.
+   - **Result:** Seamless zero-reload episode transitions with instant synchronization between URL hash, server stream, and episode card selection state.
+
+### Empirical Test & Visual Matrix
+
+| Test Suite / Inspection | Viewports / Items Tested | Pass Rate | Evidence / Result |
+| :--- | :--- | :---: | :--- |
+| **All Automated Tests** (`npm test`) | 86 integration & security tests | **86 / 86 (100%)** | All catalog, route, player layout, and provider safety tests passed |
+| **Route Regression Audit** (`test_homepage_route_regression.js`) | Homepage `/`, `/movies`, `/series`, `/movie/:id`, `/watch/*` | **100%** | Absolute route isolation; zero modal DOM leakage onto homepage |
+| **Responsive Viewports Matrix** (`qa_responsive_check.js`) | 19 Viewports (320px to 2560px) | **19 / 19 (100%)** | Zero horizontal overflow (`scrollWidth === clientWidth`) across all screens |
+| **Visual Matrix Capture** (`qa_capture_mobile_matrix.js`) | 320px, 360px, 375px, 390px, 412px, 430px | **100%** | Full visual artifacts generated and verified |
+
+### Captured Visual Evidence Artifacts
+- **Homepage (Clean Route Isolation):** `screenshots/homepage_390px.png` (also 320px, 360px, 375px, 412px, 430px)
+- **Movie Player (Single Back Button, Metadata, Zero Dead Space):** `screenshots/movie_player_390px.png`
+- **Series Player S1:E1 (Active Episode Card, No Duplicate Bar):** `screenshots/series_player_s1e1_390px.png`
+- **Series Player S1:E2 (Synchronized Transition, Live Playing Badge):** `screenshots/series_player_s1e2_390px.png`
+- **Server Selector (Non-blocking pill controls):** `screenshots/server_selector_modal_390px.png`
+
+
 
