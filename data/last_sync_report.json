@@ -1,162 +1,135 @@
 {
   "status": "SUCCESS",
   "metrics": {
-    "discovered": 90,
-    "added": 2,
-    "updated": 6,
-    "skipped": 82,
-    "published": 2,
+    "discovered": 87,
+    "added": 1,
+    "updated": 7,
+    "skipped": 79,
+    "published": 1,
     "poster_pending": 0,
     "failed": 0,
-    "durationMs": 1353
+    "durationMs": 1261
   },
   "newItems": [
     {
-      "id": "tmdb-series-316197",
-      "canonicalId": "tmdb-series-316197",
+      "id": "tmdb-series-33238",
+      "canonicalId": "tmdb-series-33238",
       "externalProvider": "tmdb",
-      "externalId": "316197",
-      "tmdbId": "316197",
-      "imdbId": "tt43088191",
+      "externalId": "33238",
+      "tmdbId": "33238",
+      "imdbId": "tt2185037",
       "type": "series",
       "contentType": "series",
-      "title": "Dive into You",
-      "canonicalTitle": "Dive into You",
-      "originalTitle": "너에게 다이브",
-      "overview": "An actress and her twin brother slip through time – and swap bodies – to save their friend's life.",
-      "description": "An actress and her twin brother slip through time – and swap bodies – to save their friend's life.",
-      "shortDescription": "An actress and her twin brother slip through time – and swap bodies – to save their friend's life.",
-      "year": 2026,
-      "releaseDate": "2026-09-26",
-      "rating": 8,
-      "votes": "1.2K",
+      "title": "Running Man",
+      "canonicalTitle": "Running Man",
+      "originalTitle": "런닝맨",
+      "overview": "These days, as variety shows are gradually disappearing, this is one of Korea’s representative variety shows that has been responsible for Sunday evenings for over 10 years. This program features numerous stars and members going around various places, playing games, and completing missions. In particular, among the many fun elements of variety shows, this one focuses solely on laughter.\n\nOpen your eyes! Big fun is coming in!\n\nOpen your mouth! Big laughter is coming in!\n\nOpen your heart! Useful lessons are coming in!",
+      "description": "These days, as variety shows are gradually disappearing, this is one of Korea’s representative variety shows that has been responsible for Sunday evenings for over 10 years. This program features numerous stars and members going around various places, playing games, and completing missions. In particular, among the many fun elements of variety shows, this one focuses solely on laughter.\n\nOpen your eyes! Big fun is coming in!\n\nOpen your mouth! Big laughter is coming in!\n\nOpen your heart! Useful lessons are coming in!",
+      "shortDescription": "These days, as variety shows are gradually disappearing, this is one of Korea’s representative variety shows that has be",
+      "year": 2010,
+      "releaseDate": "2010-07-11",
+      "rating": 8.2,
+      "votes": "0.2K",
       "quality": "FHD",
-      "duration": "45m/ep",
+      "duration": "85m/ep",
       "genres": [
         "Comedy",
-        "Drama",
-        "Sci-Fi & Fantasy"
+        "Reality"
       ],
       "categories": [
         "Comedy",
-        "Drama",
-        "Sci-Fi & Fantasy"
+        "Reality"
       ],
       "language": "Korean",
       "country": "KR",
-      "director": "Director",
-      "poster": "https://image.tmdb.org/t/p/w500/6OAuQOGqjYY1JXbkTlWz4Mm2Kmi.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/original/jseW3HucgNjN2CwJa3MiOlF4xMO.jpg",
-      "trailerUrl": null,
-      "trailer": null,
+      "director": "안재철",
+      "poster": "https://image.tmdb.org/t/p/w500/2Wmmu1MkqxJ48J7aySET9EKEjXz.jpg",
+      "backdrop": "https://image.tmdb.org/t/p/original/wsHj4oHQJoe7DMYaqNFwVoyLiAh.jpg",
+      "trailerUrl": "https://www.youtube-nocookie.com/embed/v90RObJapJI?rel=0&modestbranding=1",
+      "trailer": "https://www.youtube-nocookie.com/embed/v90RObJapJI?rel=0&modestbranding=1",
       "cast": [
         {
-          "id": "1881078",
-          "name": "Bona",
-          "character": "Yoon Ha-na",
-          "photo": "https://image.tmdb.org/t/p/w185/zXVHkg4CxGjDGK6N4SIwZERmbhc.jpg"
+          "id": "1239240",
+          "name": "Yu Jae-seok",
+          "character": "Self",
+          "photo": "https://image.tmdb.org/t/p/w185/1uktAM7R2Hgc3dynIXvzfACOmnW.jpg"
         },
         {
-          "id": "3212104",
-          "name": "Park Seo-ham",
-          "character": "Jeong Woo-jae",
-          "photo": "https://image.tmdb.org/t/p/w185/vndtKSldmy4keg1NQx3wU0kqP2m.jpg"
+          "id": "1239238",
+          "name": "Jee Seok-jin",
+          "character": "Self",
+          "photo": "https://image.tmdb.org/t/p/w185/mB3mQ3FOqFR5dIrbtyEpvckhCib.jpg"
         },
         {
-          "id": "5333883",
-          "name": "Jang Se-hyuk",
-          "character": "Yoon Ha-ru",
-          "photo": "https://image.tmdb.org/t/p/w185/ykRH93PNSuX3GxaxO3QuyCEdQqW.jpg"
+          "id": "1241035",
+          "name": "Kim Jong-kook",
+          "character": "Self",
+          "photo": "https://image.tmdb.org/t/p/w185/56y9LaL65dbeaWZJt9dB7ifAUhR.jpg"
         },
         {
-          "id": "3742977",
-          "name": "Moon Seung-you",
-          "character": "Seo Ye-rang",
-          "photo": "https://image.tmdb.org/t/p/w185/iakMVmUvYtUq4iaqe5BmQSS02h5.jpg"
+          "id": "138519",
+          "name": "Haha",
+          "character": "Self",
+          "photo": "https://image.tmdb.org/t/p/w185/i3vcj3GI3TCmDlnI3aLA7pWKIuN.jpg"
         },
         {
-          "id": "2774992",
-          "name": "Ha Do-kwon",
-          "character": "Yun Chang-sik",
-          "photo": "https://image.tmdb.org/t/p/w185/lOiNEmbHhMkX8mICJfu9R1kzC36.jpg"
+          "id": "85174",
+          "name": "Song Ji-hyo",
+          "character": "Self",
+          "photo": "https://image.tmdb.org/t/p/w185/f3QRDGEqHkeLBQZfWe3GbmHeuuX.jpg"
         },
         {
-          "id": "564846",
-          "name": "Park Mi-hyeon",
-          "character": "Jung Yeong-suk",
-          "photo": "https://image.tmdb.org/t/p/w185/cykvf76gDVlIhxFKO9xX7VY1HxW.jpg"
+          "id": "1703373",
+          "name": "Yang Se-chan",
+          "character": "Self",
+          "photo": "https://image.tmdb.org/t/p/w185/odyq0zKjgZjX9o9OWZDImsBCDHQ.jpg"
         },
         {
-          "id": "5129203",
-          "name": "Kim Han-yeong",
-          "character": "Hyung-won",
-          "photo": "https://image.tmdb.org/t/p/w185/42CuoZC6Mx4cU91H1Y83HxlV1nb.jpg"
+          "id": "4159889",
+          "name": "Ji Ye-eun",
+          "character": "Self",
+          "photo": "https://image.tmdb.org/t/p/w185/fTJfTdEvOjeKpO4Q4sbFxS7fy6E.jpg"
         },
         {
-          "id": "3229192",
-          "name": "Kang Hyung-suk",
-          "character": "",
-          "photo": "https://image.tmdb.org/t/p/w185/xclHffQgjyMTCO0KWTopkkDHvX5.jpg"
+          "id": "126351",
+          "name": "Jeon So-min",
+          "character": "Self – Former Member",
+          "photo": "https://image.tmdb.org/t/p/w185/eKTdMgKkvMGrrb7Xj8U1EH8ooYu.jpg"
+        },
+        {
+          "id": "1326172",
+          "name": "Lee Kwang-soo",
+          "character": "Self – Former Member",
+          "photo": "https://image.tmdb.org/t/p/w185/eqjZXCV4EutnoVxZwOveK6Nl5W9.jpg"
+        },
+        {
+          "id": "1241034",
+          "name": "Kang Gary",
+          "character": "Self – Former Member",
+          "photo": "https://image.tmdb.org/t/p/w185/1VmcIXECCCXvn4hxHobxFpDplxu.jpg"
+        },
+        {
+          "id": "150698",
+          "name": "Song Joong-ki",
+          "character": "Self – Former Member",
+          "photo": "https://image.tmdb.org/t/p/w185/kgjb5OppOVTh5tz3hhnfDVnTvDv.jpg"
+        },
+        {
+          "id": "1454805",
+          "name": "Park Soo-young",
+          "character": "Self – Former Member",
+          "photo": "https://image.tmdb.org/t/p/w185/lLI3jc288AfCphhNyo8gFsery2V.jpg"
         }
       ],
       "seasons": 1,
-      "episodes": 12,
+      "episodes": 824,
       "status": "PUBLISHED",
-      "publishedAt": "2026-09-27T03:40:47.609Z",
-      "createdAt": "2026-09-27T03:40:47.609Z",
-      "updatedAt": "2026-09-27T03:40:47.609Z",
-      "links": []
-    },
-    {
-      "id": "tmdb-series-280042",
-      "canonicalId": "tmdb-series-280042",
-      "externalProvider": "tmdb",
-      "externalId": "280042",
-      "tmdbId": "280042",
-      "imdbId": "tt33258199",
-      "type": "series",
-      "contentType": "series",
-      "title": "A Wild Last Boss Appeared!",
-      "canonicalTitle": "A Wild Last Boss Appeared!",
-      "originalTitle": "野生のラスボスが現れた！",
-      "overview": "An MMO gamer awakens as the Black-Winged Tyrant, Lufas Maphaahl, rising from her sealed fate—only to find this is very real. Her defeat 200 years ago unleashed monsters of death, and the legend is one of terror. Now, trapped in the body of history's most feared conqueror, he must survive a world that wants her dead…and uncover why he's here.",
-      "description": "An MMO gamer awakens as the Black-Winged Tyrant, Lufas Maphaahl, rising from her sealed fate—only to find this is very real. Her defeat 200 years ago unleashed monsters of death, and the legend is one of terror. Now, trapped in the body of history's most feared conqueror, he must survive a world that wants her dead…and uncover why he's here.",
-      "shortDescription": "An MMO gamer awakens as the Black-Winged Tyrant, Lufas Maphaahl, rising from her sealed fate—only to find this is very r",
-      "year": 2025,
-      "releaseDate": "2025-10-04",
-      "rating": 7.3,
-      "votes": "0.0K",
-      "quality": "FHD",
-      "duration": "45m/ep",
-      "genres": [
-        "Animation",
-        "Action & Adventure",
-        "Sci-Fi & Fantasy",
-        "Drama"
-      ],
-      "categories": [
-        "Animation",
-        "Action & Adventure",
-        "Sci-Fi & Fantasy",
-        "Drama"
-      ],
-      "language": "Japanese",
-      "country": "JP",
-      "director": "Director",
-      "poster": "https://image.tmdb.org/t/p/w500/sDb5USp0nknvs3mHmyurgH8y3z6.jpg",
-      "backdrop": "https://image.tmdb.org/t/p/original/gNYmU3RUlCb6dVqkiPCT7vglMfg.jpg",
-      "trailerUrl": "https://www.youtube-nocookie.com/embed/Y_G0A8ohFLo?rel=0&modestbranding=1",
-      "trailer": "https://www.youtube-nocookie.com/embed/Y_G0A8ohFLo?rel=0&modestbranding=1",
-      "cast": [],
-      "seasons": 2,
-      "episodes": 23,
-      "status": "PUBLISHED",
-      "publishedAt": "2026-09-27T03:40:47.644Z",
-      "createdAt": "2026-09-27T03:40:47.644Z",
-      "updatedAt": "2026-09-27T03:40:47.644Z",
+      "publishedAt": "2026-09-28T03:39:43.888Z",
+      "createdAt": "2026-09-28T03:39:43.888Z",
+      "updatedAt": "2026-09-28T03:39:43.888Z",
       "links": []
     }
   ],
-  "duration": "1.35",
-  "timestamp": "2026-09-27T03:40:48.379Z"
+  "duration": "1.26",
+  "timestamp": "2026-09-28T03:39:44.646Z"
 }

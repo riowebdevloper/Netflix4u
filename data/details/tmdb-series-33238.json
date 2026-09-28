@@ -1,0 +1,118 @@
+{
+  "id": "tmdb-series-33238",
+  "canonicalId": "tmdb-series-33238",
+  "externalProvider": "tmdb",
+  "externalId": "33238",
+  "tmdbId": "33238",
+  "imdbId": "tt2185037",
+  "type": "series",
+  "contentType": "series",
+  "title": "Running Man",
+  "canonicalTitle": "Running Man",
+  "originalTitle": "런닝맨",
+  "overview": "These days, as variety shows are gradually disappearing, this is one of Korea’s representative variety shows that has been responsible for Sunday evenings for over 10 years. This program features numerous stars and members going around various places, playing games, and completing missions. In particular, among the many fun elements of variety shows, this one focuses solely on laughter.\n\nOpen your eyes! Big fun is coming in!\n\nOpen your mouth! Big laughter is coming in!\n\nOpen your heart! Useful lessons are coming in!",
+  "description": "These days, as variety shows are gradually disappearing, this is one of Korea’s representative variety shows that has been responsible for Sunday evenings for over 10 years. This program features numerous stars and members going around various places, playing games, and completing missions. In particular, among the many fun elements of variety shows, this one focuses solely on laughter.\n\nOpen your eyes! Big fun is coming in!\n\nOpen your mouth! Big laughter is coming in!\n\nOpen your heart! Useful lessons are coming in!",
+  "shortDescription": "These days, as variety shows are gradually disappearing, this is one of Korea’s representative variety shows that has be",
+  "year": 2010,
+  "releaseDate": "2010-07-11",
+  "rating": 8.2,
+  "votes": "0.2K",
+  "quality": "FHD",
+  "duration": "85m/ep",
+  "genres": [
+    "Comedy",
+    "Reality"
+  ],
+  "categories": [
+    "Comedy",
+    "Reality"
+  ],
+  "language": "Korean",
+  "country": "KR",
+  "director": "안재철",
+  "poster": "https://image.tmdb.org/t/p/w500/2Wmmu1MkqxJ48J7aySET9EKEjXz.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/wsHj4oHQJoe7DMYaqNFwVoyLiAh.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/v90RObJapJI?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/v90RObJapJI?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "1239240",
+      "name": "Yu Jae-seok",
+      "character": "Self",
+      "photo": "https://image.tmdb.org/t/p/w185/1uktAM7R2Hgc3dynIXvzfACOmnW.jpg"
+    },
+    {
+      "id": "1239238",
+      "name": "Jee Seok-jin",
+      "character": "Self",
+      "photo": "https://image.tmdb.org/t/p/w185/mB3mQ3FOqFR5dIrbtyEpvckhCib.jpg"
+    },
+    {
+      "id": "1241035",
+      "name": "Kim Jong-kook",
+      "character": "Self",
+      "photo": "https://image.tmdb.org/t/p/w185/56y9LaL65dbeaWZJt9dB7ifAUhR.jpg"
+    },
+    {
+      "id": "138519",
+      "name": "Haha",
+      "character": "Self",
+      "photo": "https://image.tmdb.org/t/p/w185/i3vcj3GI3TCmDlnI3aLA7pWKIuN.jpg"
+    },
+    {
+      "id": "85174",
+      "name": "Song Ji-hyo",
+      "character": "Self",
+      "photo": "https://image.tmdb.org/t/p/w185/f3QRDGEqHkeLBQZfWe3GbmHeuuX.jpg"
+    },
+    {
+      "id": "1703373",
+      "name": "Yang Se-chan",
+      "character": "Self",
+      "photo": "https://image.tmdb.org/t/p/w185/odyq0zKjgZjX9o9OWZDImsBCDHQ.jpg"
+    },
+    {
+      "id": "4159889",
+      "name": "Ji Ye-eun",
+      "character": "Self",
+      "photo": "https://image.tmdb.org/t/p/w185/fTJfTdEvOjeKpO4Q4sbFxS7fy6E.jpg"
+    },
+    {
+      "id": "126351",
+      "name": "Jeon So-min",
+      "character": "Self – Former Member",
+      "photo": "https://image.tmdb.org/t/p/w185/eKTdMgKkvMGrrb7Xj8U1EH8ooYu.jpg"
+    },
+    {
+      "id": "1326172",
+      "name": "Lee Kwang-soo",
+      "character": "Self – Former Member",
+      "photo": "https://image.tmdb.org/t/p/w185/eqjZXCV4EutnoVxZwOveK6Nl5W9.jpg"
+    },
+    {
+      "id": "1241034",
+      "name": "Kang Gary",
+      "character": "Self – Former Member",
+      "photo": "https://image.tmdb.org/t/p/w185/1VmcIXECCCXvn4hxHobxFpDplxu.jpg"
+    },
+    {
+      "id": "150698",
+      "name": "Song Joong-ki",
+      "character": "Self – Former Member",
+      "photo": "https://image.tmdb.org/t/p/w185/kgjb5OppOVTh5tz3hhnfDVnTvDv.jpg"
+    },
+    {
+      "id": "1454805",
+      "name": "Park Soo-young",
+      "character": "Self – Former Member",
+      "photo": "https://image.tmdb.org/t/p/w185/lLI3jc288AfCphhNyo8gFsery2V.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 824,
+  "status": "PUBLISHED",
+  "publishedAt": "2026-09-28T03:39:43.888Z",
+  "createdAt": "2026-09-28T03:39:43.888Z",
+  "updatedAt": "2026-09-28T03:39:43.888Z",
+  "links": []
+}

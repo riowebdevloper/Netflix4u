@@ -1,5 +1,29 @@
 [
   {
+    "id": "tmdb-series-280042",
+    "canonicalId": "tmdb-series-280042",
+    "title": "A Wild Last Boss Appeared!",
+    "rawTitle": "A Wild Last Boss Appeared!",
+    "slug": "tmdb-series-280042-a-wild-last-boss-appeared-",
+    "type": "series",
+    "year": 2025,
+    "quality": "FHD",
+    "provider": "tmdb",
+    "rating": 7.3,
+    "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FsDb5USp0nknvs3mHmyurgH8y3z6.jpg&output=webp",
+    "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FgNYmU3RUlCb6dVqkiPCT7vglMfg.jpg&output=webp",
+    "imdbId": "tt33258199",
+    "tmdbId": "280042",
+    "categories": [
+      "Animation",
+      "Action & Adventure",
+      "Sci-Fi & Fantasy",
+      "Drama"
+    ],
+    "status": "PUBLISHED",
+    "publishedAt": "2026-09-27T03:40:47.644Z"
+  },
+  {
     "id": "tmdb-series-45790",
     "canonicalId": "tmdb-series-45790",
     "title": "JoJo's Bizarre Adventure",
@@ -10,8 +34,8 @@
     "quality": "FHD",
     "provider": "tmdb",
     "rating": 8.6,
-    "poster": "https://wsrv.nl/?url=https://image.tmdb.org/t/p/w500/ogAWwbh3frWtiTyyXrZaVFtqCgp.jpg&output=webp",
-    "backdrop": "https://wsrv.nl/?url=https://image.tmdb.org/t/p/original/5mUYDoFjDlPmDvnUWSknhYjGBBh.jpg&output=webp",
+    "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FogAWwbh3frWtiTyyXrZaVFtqCgp.jpg&output=webp",
+    "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F5mUYDoFjDlPmDvnUWSknhYjGBBh.jpg&output=webp",
     "imdbId": "tt2359704",
     "tmdbId": "45790",
     "categories": [
@@ -33,8 +57,8 @@
     "quality": "FHD",
     "provider": "tmdb",
     "rating": 8.3,
-    "poster": "https://wsrv.nl/?url=https://image.tmdb.org/t/p/w500/mCt5qgkOYEvuHSiSwNByMv6LMoB.jpg&output=webp",
-    "backdrop": "https://wsrv.nl/?url=https://image.tmdb.org/t/p/original/crn53sSGWRZ8wAtEGso52nepEkz.jpg&output=webp",
+    "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FmCt5qgkOYEvuHSiSwNByMv6LMoB.jpg&output=webp",
+    "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2Fcrn53sSGWRZ8wAtEGso52nepEkz.jpg&output=webp",
     "imdbId": "tt27432264",
     "tmdbId": "223911",
     "categories": [
@@ -56,8 +80,8 @@
     "quality": "FHD",
     "provider": "tmdb",
     "rating": 7.8,
-    "poster": "https://wsrv.nl/?url=https://image.tmdb.org/t/p/w500/Lr0Ng7Gg02RW1AyfYEL6P0WUvd.jpg&output=webp",
-    "backdrop": "https://wsrv.nl/?url=https://image.tmdb.org/t/p/original/2o9FzuBzCqrDTdlHRuEVnGD2d5h.jpg&output=webp",
+    "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FLr0Ng7Gg02RW1AyfYEL6P0WUvd.jpg&output=webp",
+    "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F2o9FzuBzCqrDTdlHRuEVnGD2d5h.jpg&output=webp",
     "imdbId": "tt36583977",
     "tmdbId": "1465063",
     "categories": [
@@ -81,8 +105,8 @@
     "quality": "FHD",
     "provider": "tmdb",
     "rating": 8,
-    "poster": "https://wsrv.nl/?url=https://image.tmdb.org/t/p/w500/uWpG7GqfKGQqX4YMAo3nv5OrglV.jpg&output=webp",
-    "backdrop": "https://wsrv.nl/?url=https://image.tmdb.org/t/p/original/ncQ8D4j8GSuL9CzncLEXnhHDxHy.jpg&output=webp",
+    "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FuWpG7GqfKGQqX4YMAo3nv5OrglV.jpg&output=webp",
+    "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FncQ8D4j8GSuL9CzncLEXnhHDxHy.jpg&output=webp",
     "imdbId": "tt0096697",
     "tmdbId": "456",
     "categories": [
@@ -103,8 +127,8 @@
     "quality": "FHD",
     "provider": "tmdb",
     "rating": 8.4,
-    "poster": "https://wsrv.nl/?url=https://image.tmdb.org/t/p/w500/5JV6AfPMHbCrtB5oUhKkSiPARQ3.jpg&output=webp",
-    "backdrop": "https://wsrv.nl/?url=https://image.tmdb.org/t/p/original/8NIvQY34tNPc4txNeym2zEYk9ek.jpg&output=webp",
+    "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2F5JV6AfPMHbCrtB5oUhKkSiPARQ3.jpg&output=webp",
+    "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F8NIvQY34tNPc4txNeym2zEYk9ek.jpg&output=webp",
     "imdbId": "tt12879782",
     "tmdbId": "106449",
     "categories": [
@@ -126,8 +150,8 @@
     "quality": "FHD",
     "provider": "tmdb",
     "rating": 8.3,
-    "poster": "https://wsrv.nl/?url=https://image.tmdb.org/t/p/w500/k7n2EVge7G77eMr3brztRGG1fFU.jpg&output=webp",
-    "backdrop": "https://wsrv.nl/?url=https://image.tmdb.org/t/p/original/3UviYOlhn8EgXMBuiT6MnUuo1w9.jpg&output=webp",
+    "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2Fk7n2EVge7G77eMr3brztRGG1fFU.jpg&output=webp",
+    "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F3UviYOlhn8EgXMBuiT6MnUuo1w9.jpg&output=webp",
     "imdbId": "tt0121955",
     "tmdbId": "2190",
     "categories": [
@@ -148,8 +172,8 @@
     "quality": "FHD",
     "provider": "tmdb",
     "rating": 7.6,
-    "poster": "https://wsrv.nl/?url=https://image.tmdb.org/t/p/w500/xyVpiSZNA2fYJUuuagkqiSHJqjr.jpg&output=webp",
-    "backdrop": "https://wsrv.nl/?url=https://image.tmdb.org/t/p/original/ulBGaxq9GmJexyEOi4Xci74g6Vt.jpg&output=webp",
+    "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FxyVpiSZNA2fYJUuuagkqiSHJqjr.jpg&output=webp",
+    "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FulBGaxq9GmJexyEOi4Xci74g6Vt.jpg&output=webp",
     "imdbId": "tt27486290",
     "tmdbId": "224263",
     "categories": [
@@ -172,8 +196,8 @@
     "quality": "FHD",
     "provider": "tmdb",
     "rating": 10,
-    "poster": "https://wsrv.nl/?url=https://image.tmdb.org/t/p/w500/toEwR5VTFzHmxW1pX1HjtTXH6QH.jpg&output=webp",
-    "backdrop": "https://wsrv.nl/?url=https://image.tmdb.org/t/p/original/zOcEo3oQf9KDPPxZueNhReN6TBr.jpg&output=webp",
+    "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FtoEwR5VTFzHmxW1pX1HjtTXH6QH.jpg&output=webp",
+    "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2FzOcEo3oQf9KDPPxZueNhReN6TBr.jpg&output=webp",
     "imdbId": "tt32149571",
     "tmdbId": "252105",
     "categories": [
@@ -194,8 +218,8 @@
     "quality": "FHD",
     "provider": "tmdb",
     "rating": 8.4,
-    "poster": "https://wsrv.nl/?url=https://image.tmdb.org/t/p/w500/eM8bbTn8C8vUwwS6upzzm7gX31u.jpg&output=webp",
-    "backdrop": "https://wsrv.nl/?url=https://image.tmdb.org/t/p/original/4xKG4S1IyLIglHbCYGJDsptgQNh.jpg&output=webp",
+    "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FeM8bbTn8C8vUwwS6upzzm7gX31u.jpg&output=webp",
+    "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2F4xKG4S1IyLIglHbCYGJDsptgQNh.jpg&output=webp",
     "imdbId": "tt0149460",
     "tmdbId": "615",
     "categories": [
@@ -217,8 +241,8 @@
     "quality": "FHD",
     "provider": "tmdb",
     "rating": 8.4,
-    "poster": "https://wsrv.nl/?url=https://image.tmdb.org/t/p/w500/gLKOYIMyKlUHW0SVdskhgf9C0yy.jpg&output=webp",
-    "backdrop": "https://wsrv.nl/?url=https://image.tmdb.org/t/p/original/j9fRIimor0AMFJR9kjZubXcABzZ.jpg&output=webp",
+    "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2FgLKOYIMyKlUHW0SVdskhgf9C0yy.jpg&output=webp",
+    "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2Fj9fRIimor0AMFJR9kjZubXcABzZ.jpg&output=webp",
     "imdbId": "tt13293588",
     "tmdbId": "94664",
     "categories": [
@@ -240,8 +264,8 @@
     "quality": "FHD",
     "provider": "tmdb",
     "rating": 8.3,
-    "poster": "https://wsrv.nl/?url=https://image.tmdb.org/t/p/w500/2EewmxXe72ogD0EaWM8gqa0ccIw.jpg&output=webp",
-    "backdrop": "https://wsrv.nl/?url=https://image.tmdb.org/t/p/original/o0NsbcIvsllg6CJX0FBFY8wWbsn.jpg&output=webp",
+    "poster": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Fw500%2F2EewmxXe72ogD0EaWM8gqa0ccIw.jpg&output=webp",
+    "backdrop": "https://wsrv.nl/?url=https%3A%2F%2Fimage.tmdb.org%2Ft%2Fp%2Foriginal%2Fo0NsbcIvsllg6CJX0FBFY8wWbsn.jpg&output=webp",
     "imdbId": "tt0434665",
     "tmdbId": "30984",
     "categories": [
@@ -2767,33 +2791,5 @@
     ],
     "status": "PUBLISHED",
     "publishedAt": "2025-09-15T03:49:38.000Z"
-  },
-  {
-    "id": "12104221",
-    "canonicalId": "12104221",
-    "title": "Ploey",
-    "rawTitle": "Ploey (2018)",
-    "slug": "ploey-2018",
-    "type": "movie",
-    "year": 2018,
-    "quality": "FHD",
-    "provider": "dotmobiz",
-    "rating": 8,
-    "poster": "https://storage.hicine.sbs/images/Ploey.webp",
-    "backdrop": "https://storage.hicine.sbs/images/Ploey.webp",
-    "categories": [
-      "Hollywood",
-      "1080p",
-      "2018",
-      "480p",
-      "720p",
-      "Adventure",
-      "Animation",
-      "Blu-Ray",
-      "Dual Audio Movies",
-      "Family"
-    ],
-    "status": "PUBLISHED",
-    "publishedAt": "2025-09-10T01:33:21.000Z"
   }
 ]
