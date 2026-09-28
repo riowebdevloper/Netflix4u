@@ -503,16 +503,17 @@ const frembed = createAdapter({
   }
 });
 
-// Club (#34 in ZIP)
+// Club (#34 in ZIP) - DISABLED: Cloudflare 403 Challenge
 const moviesapi = createAdapter({
   id: 'moviesapi',
   name: 'Club',
   label: 'Club (MoviesAPI)',
   baseUrl: 'https://moviesapi.to',
   priority: 35,
-  enabled: true,
+  enabled: false,
   providerGroup: 'moviesapi_cluster',
   requiredIdentifier: 'tmdb',
+  notes: 'DISABLED: Cloudflare 403 Challenge on cross-origin iframe embed',
   customTvBuilder(baseUrl, input) {
     const tid = cleanTmdbId(input.tmdbId);
     const s = parseInt(input.season, 10);

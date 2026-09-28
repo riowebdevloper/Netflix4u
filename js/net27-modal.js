@@ -1122,12 +1122,12 @@
     { id: 'vidrock', name: 'Server 7: Azute (VidRock RU)', shortName: 'Server 7 • Azute', tag: 'VidRock', tagClass: 'tag-multi', category: 'featured', isFeatured: true, desc: 'VidRock Cloud Stream' },
     { id: 'vsembed', name: 'Server 8: Diablo (VSEmbed RU)', shortName: 'Server 8 • Diablo', tag: 'VSEmbed', tagClass: 'tag-multi', category: 'featured', isFeatured: true, desc: 'VSEmbed Cloud Stream' },
     { id: 'twoembed', name: 'Server 9: 2embed (2Embed Stream)', shortName: 'Server 9 • 2Embed', tag: '2Embed', tagClass: 'tag-multi', category: 'featured', isFeatured: true, desc: '2Embed Global TMDB Stream Engine' },
-    { id: 'moviesapi', name: 'Server 10: Club (MoviesAPI TO)', shortName: 'Server 10 • Club', tag: 'MoviesAPI', tagClass: 'tag-multi', category: 'featured', isFeatured: true, desc: 'MoviesAPI Club Direct Player' },
+    { id: 'cinesrc', name: 'Server 10: Cine (CineSrc ST)', shortName: 'Server 10 • Cine', tag: 'CineSrc', tagClass: 'tag-multi', category: 'featured', isFeatured: true, desc: 'CineSrc Media Direct Embed Player' },
 
     // ─── VERIFIED HIGH-SPEED MIRRORS ───
     { id: 'vidnest', name: 'Nest (VidNest Fun)', shortName: 'Nest • VidNest', tag: 'VidNest', tagClass: 'tag-multi', category: 'vidsrc', isFeatured: false, desc: 'VidNest Direct Stream Engine' },
     { id: 'vidcore', name: 'Pass (VidCore Net)', shortName: 'Pass • VidCore', tag: 'VidCore', tagClass: 'tag-multi', category: 'vidsrc', isFeatured: false, desc: 'VidCore Cloud Embed Player' },
-    { id: 'cinesrc', name: 'Cine (CineSrc ST)', shortName: 'Cine • CineSrc', tag: 'CineSrc', tagClass: 'tag-multi', category: 'vidsrc', isFeatured: false, desc: 'CineSrc Media Embed Player' },
+    { id: 'moviesapi', name: 'Club (MoviesAPI TO)', shortName: 'Club • MoviesAPI', tag: 'MoviesAPI', tagClass: 'tag-multi', category: 'vidsrc', isFeatured: false, desc: 'MoviesAPI Club Direct Player' },
     { id: 'vidlux', name: 'Vidmux (VidLux Site)', shortName: 'Vidmux • VidLux', tag: 'VidLux', tagClass: 'tag-multi', category: 'vidsrc', isFeatured: false, desc: 'VidLux High-Speed Stream' },
     { id: 'vidify', name: 'Vidind (Vidify TOP)', shortName: 'Vidind • Vidify', tag: 'Vidify', tagClass: 'tag-multi', category: 'vidsrc', isFeatured: false, desc: 'Vidify Cloud Player' },
     { id: 'mapple', name: '4KHD (Mapple RIP)', shortName: '4KHD • Mapple', tag: '4KHD RIP', tagClass: 'tag-fast', category: 'vidsrc', isFeatured: false, desc: 'Mapple 4K Streaming Engine' },
@@ -1154,7 +1154,7 @@
   var autoSwitchTimer = null;
   var autoSwitchIndex = 0;
   var isPlaybackConfirmed = false;
-  var autoSwitchOrder = ['reelsdownload', 'vidsrc_sbs', 's3', 'braflix', 'videasy', 'vidbolt', 'vidrock', 'vsembed', 'twoembed', 'moviesapi'];
+  var autoSwitchOrder = ['reelsdownload', 'vidsrc_sbs', 's3', 'braflix', 'videasy', 'vidbolt', 'vidrock', 'vsembed', 'twoembed', 'cinesrc'];
   var currentAutoSwitchToken = 0;
   var activeProbeController = null;
   var watchTopBarHideTimeout = null;
@@ -3165,6 +3165,12 @@
     var watchMatch = currentHash.match(/^#w=([^-]+)-(movie|tv)(?:-(\d+)(?:-(\d+))?)?$/i);
     if (watchMatch && !isWatchOpen) {
       openWatchModal(watchMatch[1], watchMatch[2], watchMatch[3] || 1, watchMatch[4] || 1);
+      return;
+    }
+
+    // If navigating back to a state with no modal hash (e.g. homepage or category), enforce initial clean route state
+    if (!titleMatch && !watchMatch) {
+      enforceInitialRouteState();
     }
   });
 
@@ -3230,6 +3236,7 @@
 
   enforceInitialRouteState();
   window.addEventListener('DOMContentLoaded', enforceInitialRouteState);
+  window.addEventListener('pageshow', enforceInitialRouteState);
 
   // Global Exports
   window.Netflix4uModal = {

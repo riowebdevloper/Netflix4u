@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-09-28T06:58:22.079Z",
+  "timestamp": "2026-09-28T14:35:59.038Z",
   "mobile": [
     {
       "iteration": 1,
@@ -15,8 +15,8 @@
         "hasLang": true,
         "hasViewport": true
       },
-      "fcp": 144,
-      "lcp": 144,
+      "fcp": 140,
+      "lcp": 140,
       "cls": 0,
       "tbt": 0,
       "domNodes": 817,
@@ -37,11 +37,11 @@
         "hasLang": true,
         "hasViewport": true
       },
-      "fcp": 128,
-      "lcp": 128,
+      "fcp": 140,
+      "lcp": 140,
       "cls": 0,
       "tbt": 0,
-      "domNodes": 881,
+      "domNodes": 891,
       "failedRequests": 0,
       "consoleErrors": 0
     },
@@ -59,8 +59,8 @@
         "hasLang": true,
         "hasViewport": true
       },
-      "fcp": 172,
-      "lcp": 172,
+      "fcp": 128,
+      "lcp": 128,
       "cls": 0,
       "tbt": 0,
       "domNodes": 883,
@@ -83,8 +83,8 @@
         "hasLang": true,
         "hasViewport": true
       },
-      "fcp": 100,
-      "lcp": 100,
+      "fcp": 92,
+      "lcp": 92,
       "cls": 0,
       "tbt": 0,
       "domNodes": 895,
@@ -105,11 +105,11 @@
         "hasLang": true,
         "hasViewport": true
       },
-      "fcp": 108,
-      "lcp": 108,
+      "fcp": 88,
+      "lcp": 88,
       "cls": 0,
       "tbt": 0,
-      "domNodes": 895,
+      "domNodes": 830,
       "failedRequests": 0,
       "consoleErrors": 0
     },
@@ -127,8 +127,8 @@
         "hasLang": true,
         "hasViewport": true
       },
-      "fcp": 76,
-      "lcp": 76,
+      "fcp": 80,
+      "lcp": 80,
       "cls": 0,
       "tbt": 0,
       "domNodes": 895,

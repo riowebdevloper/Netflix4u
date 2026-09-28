@@ -10,6 +10,7 @@
     { "source": "/api/category", "destination": "/api/category" },
     { "source": "/api/health/:match*", "destination": "/api/health?sub=:match*" },
     { "source": "/api/health", "destination": "/api/health" },
+    { "source": "/api/version", "destination": "/api/version" },
     { "source": "/watch-tmdb/:match*", "destination": "/api/watch-tmdb?id=:match*" },
     { "source": "/watch-tmdb", "destination": "/api/watch-tmdb" },
     { "source": "/api/download-file/:match*", "destination": "/api/download-file?url=:match*" },
