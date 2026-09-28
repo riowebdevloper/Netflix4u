@@ -777,7 +777,7 @@
         </div>
 
         <!-- High-Speed Video Iframe -->
-        <iframe id="watch-modal-iframe" title="High-Speed Video Player" class="absolute inset-0 w-full h-full border-0 bg-black block" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen referrerpolicy="no-referrer"></iframe>
+        <iframe id="watch-modal-iframe" title="High-Speed Video Player" class="absolute inset-0 w-full h-full border-0 bg-black block" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowtransparency="true" style="background-color: #000000 !important; color-scheme: dark;" allowfullscreen referrerpolicy="no-referrer"></iframe>
 
         <!-- In-Player Stream Failover Card (Zero White Box Error Handling) -->
         <div id="watch-failover-card" class="hidden absolute inset-0 z-30 bg-black/95 backdrop-blur-md flex flex-col items-center justify-center p-6 text-center space-y-3">
@@ -844,6 +844,38 @@
         </div>
         <div id="watch-player-bar" class="flex items-center gap-2 overflow-x-auto scrollbar-none py-1">
           <!-- Dynamically populated server pills -->
+        </div>
+      </div>
+
+      <!-- Row 4: Title Details & Interactive Episodes / Content Section (Zero Dead Space) -->
+      <div id="watch-details-section" class="px-3 sm:px-6 py-4 flex flex-col gap-4 border-t border-white/10 bg-[#0a0a0f]">
+        <!-- Overview & Metadata -->
+        <div id="watch-info-container" class="space-y-2.5">
+          <div class="flex items-center justify-between gap-2 flex-wrap">
+            <div id="watch-details-badges" class="flex items-center gap-2 flex-wrap text-xs">
+              <!-- Dynamically populated rating, genre, duration tags -->
+            </div>
+            <div class="flex items-center gap-2">
+              <button id="watch-info-details-btn" type="button" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/15 text-white text-xs font-semibold border border-white/15 transition cursor-pointer">
+                <span>ℹ️</span><span>More Details</span>
+              </button>
+            </div>
+          </div>
+          <p id="watch-overview" class="text-xs sm:text-sm text-white/70 leading-relaxed"></p>
+        </div>
+
+        <!-- TV Series Episodes Rail / List -->
+        <div id="watch-episodes-container" class="hidden space-y-3 pt-2 border-t border-white/10">
+          <div class="flex items-center justify-between">
+            <h3 class="text-sm font-bold text-white tracking-wide uppercase flex items-center gap-2">
+              <span>Episodes</span>
+              <span id="watch-episodes-season-badge" class="px-2 py-0.5 rounded text-[10px] font-bold bg-white/10 text-white/80">Season 1</span>
+            </h3>
+            <span id="watch-episodes-count" class="text-xs text-white/50"></span>
+          </div>
+          <div id="watch-episodes-list" class="flex flex-col gap-2">
+            <!-- Dynamically populated episode cards with stills, names, runtimes, and play triggers -->
+          </div>
         </div>
       </div>
     </div>

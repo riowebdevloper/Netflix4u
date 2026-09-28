@@ -655,13 +655,16 @@ body {
 }
 
 #watch-mobile-ep-bar {
-  padding-bottom: max(14px, env(safe-area-inset-bottom, 14px)) !important;
-  transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1), transform 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  height: 0 !important;
+  overflow: hidden !important;
 }
 
 #watch-mobile-ep-bar.watch-bar-hidden {
-  opacity: 0 !important;
-  transform: translateY(100%) !important;
+  display: none !important;
+  visibility: hidden !important;
   pointer-events: none !important;
 }
 
@@ -745,11 +748,13 @@ body {
     display: flex !important;
     flex-direction: column !important;
     overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
     background: #0a0a0f !important;
   }
   .player-shell {
     width: 100% !important;
     flex: 0 0 auto !important;
+    position: relative !important;
   }
   .player-frame,
   .watch-player-stage {
@@ -759,6 +764,11 @@ body {
     flex: 0 0 auto !important;
     position: relative !important;
     background: #000 !important;
+  }
+  #watch-bottom-bar {
+    flex: 1 0 auto !important;
+    min-height: auto !important;
+    background: #0a0a0f !important;
   }
 }
 
@@ -2040,13 +2050,13 @@ body.modal-open {
   box-shadow: 0 20px 40px -8px rgba(0, 0, 0, 0.85) !important;
 }
 
-/* 8. Persistent In-Player Top-Left Back Button */
+/* 8. Persistent In-Player Top-Left Back Button (Scoped to Fullscreen and Hidden-Top-Bar) */
 .player-inframe-back-btn {
+  display: none !important;
   position: absolute;
   top: 12px;
   left: 12px;
   z-index: 45;
-  display: inline-flex;
   align-items: center;
   gap: 6px;
   padding: 6px 14px;
@@ -2062,6 +2072,12 @@ body.modal-open {
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
   pointer-events: auto;
+}
+#watch-modal:not(.hidden).is-fullscreen .player-inframe-back-btn,
+:fullscreen #watch-modal:not(.hidden) .player-inframe-back-btn,
+:fullscreen .player-inframe-back-btn,
+#watch-modal:not(.hidden) #watch-top-bar.watch-bar-hidden ~ .player-shell .player-inframe-back-btn {
+  display: inline-flex !important;
 }
 .player-inframe-back-btn:hover {
   background: rgba(229, 9, 20, 0.9);

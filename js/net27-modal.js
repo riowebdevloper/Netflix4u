@@ -1320,6 +1320,9 @@
     activeWatchParams.season = targetSe;
     activeWatchParams.episode = targetEp;
     updateEpisodeNavUi();
+    if (typeof updateWatchEpisodesRail === 'function') {
+      updateWatchEpisodesRail(targetSe, targetEp);
+    }
 
     // Rebuild server URLs for target episode across ALL 34 servers via Universal Resolver
     if (window.Netflix4uPlayerResolver) {
@@ -2098,6 +2101,159 @@
     return url;
   }
 
+  var currentWatchSeasonLoaded = null;
+
+  async function renderWatchDetailsAndEpisodes(params) {
+    if (!params) return;
+    var isTv = Boolean(params.isTv || params.type === 'tv' || params.type === 'series');
+    var watchOverview = document.getElementById('watch-overview');
+    var watchDetailsBadges = document.getElementById('watch-details-badges');
+    var watchInfoDetailsBtn = document.getElementById('watch-info-details-btn');
+    var watchEpisodesContainer = document.getElementById('watch-episodes-container');
+
+    if (watchInfoDetailsBtn) {
+      watchInfoDetailsBtn.onclick = function() {
+        if (params.tmdbId) {
+          openTitleModal(params.tmdbId, params.type, false, params.canonicalId, params.imdbId);
+        }
+      };
+    }
+
+    if (watchOverview) {
+      watchOverview.textContent = params.overview || params.plot || 'Loading title details…';
+    }
+
+    // Fetch full metadata for synopsis, genres, duration & rating
+    var targetFetchId = params.canonicalId || params.tmdbId;
+    if (targetFetchId) {
+      fetch('/api/details?id=' + encodeURIComponent(targetFetchId))
+        .then(function(r) { return r.json(); })
+        .then(function(d) {
+          var details = (d && d.data) ? d.data : d;
+          if (details) {
+            if (watchOverview) {
+              watchOverview.textContent = details.overview || details.description || params.overview || ('Enjoy ' + (details.title || params.title || 'this title') + ' in HD on Netflix4U.');
+            }
+            if (watchDetailsBadges) {
+              var badges = [];
+              if (details.rating || details.vote_average) {
+                var rVal = (details.rating || details.vote_average || '').toString().slice(0, 3);
+                badges.push('<span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-400 font-bold border border-amber-500/30">★ ' + escapeHtml(rVal) + '</span>');
+              }
+              if (details.year || params.year) {
+                badges.push('<span class="px-2 py-0.5 rounded bg-white/10 text-white/80 font-medium border border-white/10">' + escapeHtml(String(details.year || params.year)) + '</span>');
+              }
+              if (details.duration) {
+                badges.push('<span class="px-2 py-0.5 rounded bg-white/10 text-white/80 font-medium border border-white/10">' + escapeHtml(String(details.duration)) + '</span>');
+              }
+              if (Array.isArray(details.genres) && details.genres.length) {
+                details.genres.slice(0, 3).forEach(function(g) {
+                  var gName = typeof g === 'string' ? g : (g.name || '');
+                  if (gName) badges.push('<span class="px-2 py-0.5 rounded bg-white/5 text-white/60 border border-white/10">' + escapeHtml(gName) + '</span>');
+                });
+              }
+              if (!isTv && details.links && (details.links['1080p'] || details.links['720p'])) {
+                var dlUrl = details.links['1080p'] || details.links['720p'];
+                badges.push('<a href="' + escapeHtml(dlUrl) + '" target="_blank" rel="noopener noreferrer" class="px-2.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-bold border border-emerald-500/40 hover:bg-emerald-500/30 transition flex items-center gap-1"><span>⚡ Fast Download</span></a>');
+              }
+              watchDetailsBadges.innerHTML = badges.join('');
+            }
+          }
+        }).catch(function() {});
+    }
+
+    if (isTv) {
+      if (watchEpisodesContainer) watchEpisodesContainer.classList.remove('hidden');
+      updateWatchEpisodesRail(params.season || 1, params.episode || 1);
+    } else {
+      if (watchEpisodesContainer) watchEpisodesContainer.classList.add('hidden');
+    }
+  }
+
+  async function updateWatchEpisodesRail(seasonNum, currentEp) {
+    if (!activeWatchParams) return;
+    var tId = activeWatchParams.tmdbId;
+    seasonNum = Number(seasonNum) || 1;
+    currentEp = Number(currentEp) || 1;
+
+    var watchEpisodesContainer = document.getElementById('watch-episodes-container');
+    var watchEpisodesList = document.getElementById('watch-episodes-list');
+    var watchEpisodesCount = document.getElementById('watch-episodes-count');
+    var watchEpisodesSeasonBadge = document.getElementById('watch-episodes-season-badge');
+
+    if (watchEpisodesSeasonBadge) {
+      watchEpisodesSeasonBadge.textContent = 'Season ' + seasonNum;
+    }
+
+    if (!watchEpisodesList) return;
+
+    if (currentWatchSeasonLoaded !== (tId + '-' + seasonNum)) {
+      watchEpisodesList.innerHTML =
+        '<div class="flex items-center justify-center p-6 text-white/50 text-xs gap-2">' +
+          '<div class="w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>' +
+          '<span>Loading Season ' + seasonNum + ' episodes…</span>' +
+        '</div>';
+    }
+
+    try {
+      var res = await fetch('/api/catalog/season/' + encodeURIComponent(tId) + '/' + seasonNum);
+      var data = await res.json();
+      if (data && data.ok && Array.isArray(data.episodes) && data.episodes.length) {
+        currentWatchSeasonLoaded = tId + '-' + seasonNum;
+        if (watchEpisodesCount) {
+          watchEpisodesCount.textContent = data.episodes.length + ' Episodes';
+        }
+        var epsHtml = data.episodes.map(function(ep) {
+          var epNum = ep.episode_number || 1;
+          var isPlaying = Number(epNum) === Number(currentEp);
+          var epTitle = ep.name || ('Episode ' + epNum);
+          var duration = ep.runtime ? (ep.runtime + 'm') : '45m';
+          var rawStill = ep.still_path
+            ? (ep.still_path.indexOf('http') === 0 ? ep.still_path : ('https://image.tmdb.org/t/p/w300' + ep.still_path))
+            : (activeWatchParams.backdrop || '');
+          var still = unwrapImageUrl(rawStill, 300);
+          var safeFallback = unwrapImageUrl(activeWatchParams.backdrop || '');
+
+          return '<div data-watch-ep-card="' + epNum + '" class="flex items-center justify-between gap-3 p-2.5 rounded-xl border transition cursor-pointer ' +
+            (isPlaying ? 'border-red-600 bg-red-600/15 shadow-lg shadow-red-900/20' : 'border-white/10 bg-white/[0.03] hover:bg-white/[0.08]') + '">' +
+            '<div class="flex items-center gap-3 min-w-0 flex-1">' +
+              '<span class="text-xs font-bold ' + (isPlaying ? 'text-red-400' : 'text-white/40') + ' w-5 text-center shrink-0">' + epNum + '</span>' +
+              '<div class="relative w-24 aspect-video rounded-lg overflow-hidden bg-white/5 shrink-0">' +
+                (still ? '<img src="' + still + '" alt="' + escapeHtml(epTitle) + '" class="w-full h-full object-cover" loading="lazy" onerror="this.onerror=null;' + (safeFallback ? 'this.src=\'' + escapeHtml(safeFallback) + '\';' : 'this.style.display=\'none\';') + '" />' : (safeFallback ? '<img src="' + safeFallback + '" alt="' + escapeHtml(epTitle) + '" class="w-full h-full object-cover" />' : '')) +
+                (isPlaying ? '<div class="absolute inset-0 bg-red-600/40 flex items-center justify-center"><span class="w-2.5 h-2.5 rounded-full bg-white animate-ping"></span></div>' : '') +
+              '</div>' +
+              '<div class="min-w-0 flex-1">' +
+                '<div class="flex items-center gap-1.5">' +
+                  '<h4 class="text-xs font-bold text-white truncate">' + escapeHtml(epTitle) + '</h4>' +
+                  (isPlaying ? '<span class="px-1.5 py-0.2 rounded text-[9px] font-black uppercase bg-red-600 text-white shrink-0">Playing</span>' : '') +
+                '</div>' +
+                '<span class="text-[10px] text-white/50">' + duration + '</span>' +
+              '</div>' +
+            '</div>' +
+            '<button type="button" data-play-ep="' + epNum + '" class="px-3 py-1.5 rounded-lg ' + (isPlaying ? 'bg-red-600 text-white' : 'bg-white/10 hover:bg-white/20 text-white') + ' text-xs font-semibold shrink-0 flex items-center gap-1 transition">' +
+              '<span>' + (isPlaying ? '▶' : 'Play') + '</span>' +
+            '</button>' +
+          '</div>';
+        }).join('');
+
+        watchEpisodesList.innerHTML = epsHtml;
+
+        watchEpisodesList.querySelectorAll('[data-watch-ep-card]').forEach(function(card) {
+          card.addEventListener('click', function() {
+            var targetEp = Number(card.getAttribute('data-watch-ep-card'));
+            if (targetEp && activeWatchParams) {
+              navigateToEpisode(activeWatchParams.season || seasonNum, targetEp);
+            }
+          });
+        });
+      } else {
+        watchEpisodesList.innerHTML = '<div class="text-white/40 text-xs p-4 text-center">No episodes available for this season.</div>';
+      }
+    } catch(err) {
+      watchEpisodesList.innerHTML = '<div class="text-white/40 text-xs p-4 text-center">Could not load episodes list.</div>';
+    }
+  }
+
   function openWatchModal(tmdbId, type, season, episode, backdrop, title, year, imdbId, canonicalId, poster, chosenServer) {
     if (window.__closeSearchOverlay) window.__closeSearchOverlay();
     if (!watchModal || !watchModalIframe) return;
@@ -2237,6 +2393,7 @@
     }
 
     resetWatchTopBarTimer();
+    renderWatchDetailsAndEpisodes(activeWatchParams);
 
     // Auto save to Continue Watching
     if (window.__saveContinueWatching) {
@@ -2714,6 +2871,10 @@
       } catch(e) {}
     }
 
+    currentWatchSeasonLoaded = null;
+    var epListEl = document.getElementById('watch-episodes-list');
+    if (epListEl) epListEl.innerHTML = '';
+
     if (watchTopBar) {
       watchTopBar.classList.remove('watch-bar-hidden');
     }
@@ -2790,6 +2951,9 @@
       watchTopBarTimer = null;
     }
     currentAutoSwitchToken++;
+    currentWatchSeasonLoaded = null;
+    var epListEl2 = document.getElementById('watch-episodes-list');
+    if (epListEl2) epListEl2.innerHTML = '';
     if (watchTopBar) watchTopBar.classList.remove('watch-bar-hidden');
     if (watchPortraitHint) watchPortraitHint.classList.add('hidden');
     if (watchModalIframe) watchModalIframe.src = 'about:blank';
@@ -3153,7 +3317,7 @@
   });
 
   // Seamless Browser / Hardware Back Navigation Controller
-  window.addEventListener('popstate', function(e) {
+  function handleRouteStateChange() {
     var isWatchOpen = watchModal && !watchModal.classList.contains('hidden');
     var isTitleOpen = titleModal && !titleModal.classList.contains('hidden');
     var currentHash = window.location.hash || '';
@@ -3178,16 +3342,33 @@
     }
 
     var watchMatch = currentHash.match(/^#w=([^-]+)-(movie|tv)(?:-(\d+)(?:-(\d+))?)?$/i);
-    if (watchMatch && !isWatchOpen) {
-      openWatchModal(watchMatch[1], watchMatch[2], watchMatch[3] || 1, watchMatch[4] || 1);
-      return;
+    if (watchMatch) {
+      var targetId = watchMatch[1];
+      var targetType = watchMatch[2];
+      var targetSe = Number(watchMatch[3]) || 1;
+      var targetEp = Number(watchMatch[4]) || 1;
+      if (!isWatchOpen) {
+        openWatchModal(targetId, targetType, targetSe, targetEp);
+        return;
+      } else if (activeWatchParams && (String(activeWatchParams.tmdbId) === String(targetId) || String(activeWatchParams.canonicalId) === String(targetId))) {
+        if (Number(activeWatchParams.season) !== targetSe || Number(activeWatchParams.episode) !== targetEp) {
+          navigateToEpisode(targetSe, targetEp);
+        }
+        return;
+      } else {
+        openWatchModal(targetId, targetType, targetSe, targetEp);
+        return;
+      }
     }
 
     // If navigating back to a state with no modal hash (e.g. homepage or category), enforce initial clean route state
     if (!titleMatch && !watchMatch) {
       enforceInitialRouteState();
     }
-  });
+  }
+
+  window.addEventListener('popstate', handleRouteStateChange);
+  window.addEventListener('hashchange', handleRouteStateChange);
 
   // ─── Route & Initial State Guard (Prevent Watch UI Leakage on Homepage) ───
   function enforceInitialRouteState() {

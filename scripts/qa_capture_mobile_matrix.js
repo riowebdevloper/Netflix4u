@@ -188,7 +188,9 @@ async function run() {
   console.log('  Series Controls DOM Status:', epUiCheck.result.value);
 
   // Switch to S1 E2
-  await send('Page.navigate', { url: `http://localhost:${SERVER_PORT}/#w=1399-tv-1-2` });
+  await send('Runtime.evaluate', {
+    expression: "location.hash = '#w=1399-tv-1-2';"
+  });
   await new Promise(r => setTimeout(r, 2000));
   await capture('series_player_s1e2_390px.png');
 
