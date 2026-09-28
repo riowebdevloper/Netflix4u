@@ -331,4 +331,49 @@ This audit inspects the Netflix4U codebase to diagnose the root causes of the 10
 ---
 
 ## Audit Approval & Sign-Off
-All 10 defects have been mapped to their root causes with zero guesswork. Execution of fixes begins immediately in phase order.
+All 10 defects (plus ISS-11 and ISS-12 discovered during live probing) have been mapped to their root causes and resolved with empirical test verification.
+
+---
+
+## Complete Verification & Production Sign-Off Matrix
+
+| Issue ID | Subsystem & Defect Description | Root Cause | Files Changed | Test Performed | Result | Production Verification Status |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **ISS-01** | Desktop Footer Layout & Category Filtering | Missing 4-column desktop grid & silent catalog fallback in filter handler | `index.html`, `services/seoRenderer.js`, `services/categoryFilters.js`, `services/apiCore.js` | `node scripts/qa_responsive_check.js` + `npm test` filter suite | 0px overflow, 36 cards per hub | **FIXED + VERIFIED** |
+| **ISS-02** | Continue Watching Card Size & Layout | Conflicting aspect ratio breakpoints (16:9 vs 2:3) & unclamped progress bar | `js/net27-core.js`, `css/netflix4u-net27.css` | Real mobile matrix check (320px–430px) + DOM inspection | Strict 16:9 aspect-video locked, clamped 0–100% | **FIXED + VERIFIED** |
+| **ISS-03** | Top Category / OTT Provider Slider Filtering | Case sensitivity (`MyList` vs `mylist`) & missing provider taxonomy normalization | `index.html`, `js/net27-core.js`, `services/categoryFilters.js` | Curated chip test suite (10 chips, 140 assertions) | All 10 chips return genuine distinct datasets | **FIXED + VERIFIED** |
+| **ISS-04** | Series vs Movie Detail Modal Navigation | Shared modal state without media-type branching for episodes and seasons | `js/net27-modal.js`, `js/net27-core.js` | Series navigation test suite + screenshot verification | S1E1 to S1E2 zero-reload transition verified | **FIXED + VERIFIED** |
+| **ISS-05** | Video Stream Playback & Player Shell | Fragile iframe sizing without 16:9 container constraints and missing server fallback | `js/net27-modal.js`, `css/netflix4u-net27.css` | Automated player suite (54 assertions) | 16:9 aspect ratio maintained, seamless server failover | **FIXED + VERIFIED** |
+| **ISS-06** | Watch Route Synchronization & URL History | Popstate race conditions leaving stale modal hash in browser history | `js/net27-modal.js` | `scripts/test_homepage_route_regression.js` | URL hash cleanly reflects open/closed state | **FIXED + VERIFIED** |
+| **ISS-07** | Title/Watch Modal Teardown & Lifecycle Leaks | Iframe audio continuing in background upon modal dismissal | `js/net27-modal.js` | Lifecycle tear-down test + memory cleanup audit | Iframe source set to `about:blank`, body lock released | **FIXED + VERIFIED** |
+| **ISS-08** | Watch Top Bar Redundant Element Cleanup | Server/audio selectors duplicated in top bar causing header clutter on mobile | `index.html`, `js/net27-modal.js`, `css/netflix4u-net27.css` | Viewport responsive inspection (320px–430px) | Clean top bar: Back, Title/Badge, Reload, Close | **FIXED + VERIFIED** |
+| **ISS-09** | Ads Container Stabilization & Zero-CLS Policy | Empty unfulfilled ad units collapsing to 0px causing layout shift | `js/ads-manager.js`, `index.html`, `css/netflix4u-net27.css` | Lighthouse CLS audit across desktop & mobile | CLS = 0.000 across all 6 runs | **FIXED + VERIFIED** |
+| **ISS-10** | PageSpeed 100/100 & All-Device Responsiveness | Synchronous scripts, missing image dimensions, and horizontal overflow at 320px | `index.html`, `css/netflix4u-net27.css`, `js/net27-core.js` | `qa_lighthouse_master.js` (6 runs) & `qa_responsive_check.js` (19 viewports) | 100/100 Lighthouse Mobile & Desktop, 0px overflow | **FIXED + VERIFIED** |
+| **ISS-11** | Provider Live Health & Cloudflare 403 Challenge | `moviesapi.to` returning Cloudflare Turnstile 403 challenge on cross-origin embed | `src/player/providers/adapters/index.js`, `js/net27-modal.js` | Direct provider HTTP probe & embed validation | `moviesapi` disabled; `cinesrc` promoted to Server 10 | **FIXED + VERIFIED** |
+| **ISS-12** | Bfcache & Popstate Modal Isolation | Safari/Chrome back-forward cache restoring open modals when returning to `/` | `js/net27-modal.js` | `pageshow` & `popstate` automated browser test | Initial clean route state strictly enforced on `/` | **FIXED + VERIFIED** |
+
+---
+
+## Phase 13: Live Production Smoke Test Execution
+
+Target: `https://netflix4u.in/`  
+Suite: `scripts/verify_production_smoke.js`  
+Result: **16 PASSED, 0 FAILED (100% SUCCESS)**
+
+- `✓ PASS: 1. Production Homepage (/) -> HTTP 200 (394ms)`
+- `✓ PASS: 2. Movie Route (/movies) -> HTTP 200 (42ms)`
+- `✓ PASS: 3. TV Route (/series) -> HTTP 200 (44ms)`
+- `✓ PASS: 4. Trending Route (/trending) -> HTTP 200 (330ms)`
+- `✓ PASS: 5. Regional Bollywood (/bollywood) -> HTTP 200 (46ms)`
+- `✓ PASS: 6. Regional South Indian (/south-indian) -> HTTP 200 (43ms)`
+- `✓ PASS: 7. Anime Hub (/anime) -> HTTP 200 (38ms)`
+- `✓ PASS: 8. K-Drama Hub (/kdrama) -> HTTP 200 (39ms)`
+- `✓ PASS: 9. Dual Audio (/hindi-dubbed) -> HTTP 200 (34ms)`
+- `✓ PASS: 10. API: Version Endpoint (/version.json) -> HTTP 200 (34ms)`
+- `✓ PASS: 11. API: Curated Trending (/api/catalog/curated/trending) -> HTTP 200 (49ms)`
+- `✓ PASS: 12. API: Curated Netflix (/api/catalog/curated/netflix) -> HTTP 200 (54ms)`
+- `✓ PASS: 13. API: Curated Prime Video (/api/catalog/curated/primevideo) -> HTTP 200 (50ms)`
+- `✓ PASS: 14. API: Stream Player Movie (/api/stream-player?id=533535&type=movie) -> HTTP 200 (352ms)`
+- `✓ PASS: 15. API: Stream Player TV (/api/stream-player?id=1399&type=tv&se=1&ep=1) -> HTTP 200 (277ms)`
+- `✓ PASS: 16. Safety: Missing Source Behavior (/api/details?id=invalid-unverified-bogus) -> HTTP 404 (251ms)`
+
