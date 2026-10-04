@@ -1,0 +1,135 @@
+{
+  "id": "tmdb-series-65143",
+  "canonicalId": "tmdb-series-65143",
+  "mediaType": "tv",
+  "externalProvider": "tmdb",
+  "externalId": "65143",
+  "tmdbId": "65143",
+  "imdbId": "tt4925000",
+  "type": "series",
+  "contentType": "series",
+  "title": "Descendants of the Sun",
+  "canonicalTitle": "Descendants of the Sun",
+  "originalTitle": "태양의 후예",
+  "overview": "After a chance meeting in a hospital, an ardent soldier falls for a gifted surgeon. Opposing philosophies tear them apart, but fate has other plans.",
+  "description": "After a chance meeting in a hospital, an ardent soldier falls for a gifted surgeon. Opposing philosophies tear them apart, but fate has other plans.",
+  "shortDescription": "After a chance meeting in a hospital, an ardent soldier falls for a gifted surgeon. Opposing philosophies tear them apar",
+  "year": 2016,
+  "releaseYear": 2016,
+  "season": 1,
+  "episode": 1,
+  "rating": 8.3,
+  "votes": "0.8K",
+  "quality": "FHD",
+  "duration": "60m/ep",
+  "genres": [
+    "Drama",
+    "Action & Adventure"
+  ],
+  "categories": [
+    "Drama",
+    "Action & Adventure"
+  ],
+  "language": "English",
+  "country": "KR",
+  "poster": "https://image.tmdb.org/t/p/w500/xxGomfml0x9iyPBS4StBjbRRu65.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/4ODaZrnKT7iM6sfgDB8ud8FdrVr.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/wTGwjDqtfzQ?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/wTGwjDqtfzQ?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "74421",
+      "name": "Song Hye-kyo",
+      "character": "Kang Mo-yeon",
+      "photo": "https://image.tmdb.org/t/p/w185/tlAX3f82Mf5h0rznpVBVK7nD2om.jpg"
+    },
+    {
+      "id": "150698",
+      "name": "Song Joong-ki",
+      "character": "Yoo Shi-jin",
+      "photo": "https://image.tmdb.org/t/p/w185/kgjb5OppOVTh5tz3hhnfDVnTvDv.jpg"
+    },
+    {
+      "id": "582130",
+      "name": "Kim Ji-won",
+      "character": "Yoon Myung-joo",
+      "photo": "https://image.tmdb.org/t/p/w185/lX7W1j9kg4jV6XNn5XEE3rKsd3x.jpg"
+    },
+    {
+      "id": "1299287",
+      "name": "Jin Goo",
+      "character": "Seo Dae-young",
+      "photo": "https://image.tmdb.org/t/p/w185/jL0bhHE8vIEomP1Zdz3a0ryXXgk.jpg"
+    },
+    {
+      "id": "1557700",
+      "name": "Onew",
+      "character": "Lee Chi-hoon",
+      "photo": "https://image.tmdb.org/t/p/w185/f8AQHm38LLm8urDIy6KZsIo1xpR.jpg"
+    },
+    {
+      "id": "109060",
+      "name": "Kang Shin-il",
+      "character": "Lieutenant General Yoon",
+      "photo": "https://image.tmdb.org/t/p/w185/iQhXXV8Wsv2ZHifZqaIm1fJsW7F.jpg"
+    },
+    {
+      "id": "1596584",
+      "name": "Cho Tae-kwan",
+      "character": "Daniel Spencer",
+      "photo": "https://image.tmdb.org/t/p/w185/1rxmYp86Pd0Y5vtd7EZFIDjt6L1.jpg"
+    },
+    {
+      "id": "566375",
+      "name": "Jo Jae-yun",
+      "character": "Jin Young-soo",
+      "photo": "https://image.tmdb.org/t/p/w185/eFAeusBo0tXQ1Ul596YKl5dV4Rv.jpg"
+    },
+    {
+      "id": "572224",
+      "name": "Hyun Jyu-ni",
+      "character": "Doctor Pyo",
+      "photo": "https://image.tmdb.org/t/p/w185/ms8bdUf2EwPiVs4UkFZglP6Xt26.jpg"
+    },
+    {
+      "id": "1575015",
+      "name": "Jeon Soo-jin",
+      "character": "Ri Ye-hwa",
+      "photo": "https://image.tmdb.org/t/p/w185/6YJ6ytaBdXUrHqcoEq0f7mUW4ZO.jpg"
+    },
+    {
+      "id": "1113060",
+      "name": "Lee Seung-joon",
+      "character": "Song Sang-hyun",
+      "photo": "https://image.tmdb.org/t/p/w185/qWfiZhhJaXo0fegGPlChelFkoN6.jpg"
+    },
+    {
+      "id": "1256347",
+      "name": "Kim Min-seok",
+      "character": "Kim Ki-bum",
+      "photo": "https://image.tmdb.org/t/p/w185/oZNJCOMEqFPzN4xSSGulE62gUMZ.jpg"
+    },
+    {
+      "id": "1591491",
+      "name": "Ahn Bo-hyun",
+      "character": "Sergeant Im Gwang-nam",
+      "photo": "https://image.tmdb.org/t/p/w185/2pNNCnjI1TwxjyP3Y4cJln1wOKE.jpg"
+    },
+    {
+      "id": "145360",
+      "name": "David Lee McInnis",
+      "character": "Argus",
+      "photo": "https://image.tmdb.org/t/p/w185/rtv36lS3xKRuuasVIgPIziruCoA.jpg"
+    },
+    {
+      "id": "1330446",
+      "name": "Lee Yi-kyung",
+      "character": "Kang Min-jae",
+      "photo": "https://image.tmdb.org/t/p/w185/arIQjEhzxihRJvkOJjIksPA5EZM.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 16,
+  "status": "PUBLISHED",
+  "links": []
+}

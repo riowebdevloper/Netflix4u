@@ -1,0 +1,137 @@
+{
+  "id": "tmdb-tv-94997",
+  "canonicalId": "tmdb-tv-94997",
+  "mediaType": "tv",
+  "externalProvider": "tmdb",
+  "externalId": "94997",
+  "tmdbId": "94997",
+  "imdbId": "tt11198330",
+  "type": "series",
+  "contentType": "series",
+  "title": "House of the Dragon",
+  "canonicalTitle": "House of the Dragon",
+  "originalTitle": "House of the Dragon",
+  "overview": "The Targaryen dynasty is at the absolute apex of its power, with more than 15 dragons under their yoke. Most empires crumble from such heights. In the case of the Targaryens, their slow fall begins when King Viserys breaks with a century of tradition by naming his daughter Rhaenyra heir to the Iron Throne. But when Viserys later fathers a son, the court is shocked when Rhaenyra retains her status as his heir, and seeds of division sow friction across the realm.",
+  "description": "The Targaryen dynasty is at the absolute apex of its power, with more than 15 dragons under their yoke. Most empires crumble from such heights. In the case of the Targaryens, their slow fall begins when King Viserys breaks with a century of tradition by naming his daughter Rhaenyra heir to the Iron Throne. But when Viserys later fathers a son, the court is shocked when Rhaenyra retains her status as his heir, and seeds of division sow friction across the realm.",
+  "shortDescription": "The Targaryen dynasty is at the absolute apex of its power, with more than 15 dragons under their yoke. Most empires cru",
+  "year": 2022,
+  "releaseYear": 2022,
+  "season": 1,
+  "episode": 1,
+  "rating": 8.4,
+  "votes": "7.2K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Sci-Fi & Fantasy",
+    "Drama",
+    "Action & Adventure"
+  ],
+  "categories": [
+    "Sci-Fi & Fantasy",
+    "Drama",
+    "Action & Adventure"
+  ],
+  "language": "English",
+  "country": "US",
+  "poster": "https://image.tmdb.org/t/p/w500/7V0Ebks0GgpKvQ7QbLAIdX5dos4.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/577eXC8wFQT0eUrJcgznSiFPRmk.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/DotnJ7tTA34?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/DotnJ7tTA34?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "136532",
+      "name": "Matt Smith",
+      "character": "Prince Daemon Targaryen",
+      "photo": "https://image.tmdb.org/t/p/w185/wxMdHj4UA6LgIU5MiA7CKySZeVU.jpg"
+    },
+    {
+      "id": "2121005",
+      "name": "Emma D'Arcy",
+      "character": "Queen Rhaenyra Targaryen",
+      "photo": "https://image.tmdb.org/t/p/w185/9Zlmb7VmtVCxkLq5yqFFRRxCaED.jpg"
+    },
+    {
+      "id": "1173984",
+      "name": "Olivia Cooke",
+      "character": "Queen Alicent Hightower",
+      "photo": "https://image.tmdb.org/t/p/w185/wf71ctooNlVmiT8dxx0QmRAzyiX.jpg"
+    },
+    {
+      "id": "1205278",
+      "name": "James Norton",
+      "character": "Lord Ormund Hightower",
+      "photo": "https://image.tmdb.org/t/p/w185/3i9z9MkUCrlOGdMRw00j2vScxGC.jpg"
+    },
+    {
+      "id": "55412",
+      "name": "Steve Toussaint",
+      "character": "Lord Corlys 'The Sea Snake' Velaryon",
+      "photo": "https://image.tmdb.org/t/p/w185/9rJafPDkQP8YuLy9iY5v19ZfMIW.jpg"
+    },
+    {
+      "id": "2583704",
+      "name": "Fabien Frankel",
+      "character": "Ser Criston Cole",
+      "photo": "https://image.tmdb.org/t/p/w185/nXh1h7KbdeZc41ucwGhzp1cOMnd.jpg"
+    },
+    {
+      "id": "1584566",
+      "name": "Matthew Needham",
+      "character": "Lord Larys 'Clubfoot' Strong",
+      "photo": "https://image.tmdb.org/t/p/w185/sZHT2xFtnBawU3DoaWZACSv15gX.jpg"
+    },
+    {
+      "id": "1457238",
+      "name": "Sonoya Mizuno",
+      "character": "Mysaria 'The White Worm'",
+      "photo": "https://image.tmdb.org/t/p/w185/WVROOHuk6G6QgVe0pU8R2i1fsE.jpg"
+    },
+    {
+      "id": "1765227",
+      "name": "Tom Glynn-Carney",
+      "character": "King Aegon II Targaryen",
+      "photo": "https://image.tmdb.org/t/p/w185/jJ3KqUW8ySGBwHXOCN3x2Wxjm5W.jpg"
+    },
+    {
+      "id": "1829122",
+      "name": "Ewan Mitchell",
+      "character": "Prince Aemond Targaryen",
+      "photo": "https://image.tmdb.org/t/p/w185/v1PqysDnx5umfA2DqGyjwuAxc9C.jpg"
+    },
+    {
+      "id": "1789952",
+      "name": "Harry Collett",
+      "character": "Prince Jacaerys 'Jace' Velaryon",
+      "photo": "https://image.tmdb.org/t/p/w185/nDF4XWPBM5tGzOIHTMMWrTmWQRn.jpg"
+    },
+    {
+      "id": "3594113",
+      "name": "Phia Saban",
+      "character": "Queen Helaena Targaryen",
+      "photo": "https://image.tmdb.org/t/p/w185/fBkNrVyKbsNBTnVxTZWhmVqXznA.jpg"
+    },
+    {
+      "id": "1881108",
+      "name": "Bethany Antonia",
+      "character": "Lady Baela Targaryen",
+      "photo": "https://image.tmdb.org/t/p/w185/rje6QOy7CcYlopZVOzkflfRMa0G.jpg"
+    },
+    {
+      "id": "109322",
+      "name": "Jefferson Hall",
+      "character": "Lord Jason Lannister / Ser Tyland Lannister",
+      "photo": "https://image.tmdb.org/t/p/w185/rUhREsWITBvyoPdLiPJOadAwRYq.jpg"
+    },
+    {
+      "id": "2026407",
+      "name": "Abubakar Salim",
+      "character": "Alyn of Hull",
+      "photo": "https://image.tmdb.org/t/p/w185/cUddJiPnCTDDOBuk7jTmLsiODMb.jpg"
+    }
+  ],
+  "seasons": 3,
+  "episodes": 26,
+  "status": "PUBLISHED",
+  "links": []
+}

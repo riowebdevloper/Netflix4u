@@ -1,0 +1,178 @@
+{
+  "id": "tmdb-movie-129",
+  "canonicalId": "tmdb-movie-129",
+  "mediaType": "movie",
+  "externalProvider": "tmdb",
+  "externalId": "129",
+  "tmdbId": "129",
+  "imdbId": "tt0245429",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "Spirited Away",
+  "canonicalTitle": "Spirited Away",
+  "originalTitle": "千と千尋の神隠し",
+  "overview": "A young girl, Chihiro, becomes trapped in a strange new world of spirits. When her parents undergo a mysterious transformation, she must call upon the courage she never knew she had to free her family.",
+  "description": "A young girl, Chihiro, becomes trapped in a strange new world of spirits. When her parents undergo a mysterious transformation, she must call upon the courage she never knew she had to free her family.",
+  "shortDescription": "A young girl, Chihiro, becomes trapped in a strange new world of spirits. When her parents undergo a mysterious transfor",
+  "year": 2001,
+  "releaseYear": 2001,
+  "rating": 8.5,
+  "votes": "19.0K",
+  "quality": "FHD",
+  "duration": "2h 5m",
+  "genres": [
+    "Animation",
+    "Family",
+    "Fantasy"
+  ],
+  "categories": [
+    "Animation",
+    "Family",
+    "Fantasy"
+  ],
+  "language": "Japanese",
+  "country": "JP",
+  "poster": "https://image.tmdb.org/t/p/w500/jUo8cNmU400WtZiJss45HNXlQ2e.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/dyJvKsNs2KP8qQnAXbRwDjblViy.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/GAp2_0JJskk?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/GAp2_0JJskk?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "19587",
+      "name": "Rumi Hiiragi",
+      "character": "Chihiro (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/nTKM4GgfkrZvAOFL55uhEuckt7M.jpg"
+    },
+    {
+      "id": "19588",
+      "name": "Miyu Irino",
+      "character": "Haku (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/8qEEhHUObNvGQr4e6eqLu5z4qTz.jpg"
+    },
+    {
+      "id": "19589",
+      "name": "Mari Natsuki",
+      "character": "Yubaba / Zeniba (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/MIFzUc77Sx57FQOZsoiGWEbpH2.jpg"
+    },
+    {
+      "id": "19590",
+      "name": "Takashi Naito",
+      "character": "Father (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/xwsm0ygjG79jLIogutwo6r64igy.jpg"
+    },
+    {
+      "id": "19591",
+      "name": "Yasuko Sawaguchi",
+      "character": "Mother (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/rWspusb13VeJowmctnniXYYTcqq.jpg"
+    },
+    {
+      "id": "19592",
+      "name": "Tatsuya Gashuin",
+      "character": "Aogaeru (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/fLqIdkShknsJmZy4EfBWuWyHN4C.jpg"
+    },
+    {
+      "id": "225730",
+      "name": "Ryunosuke Kamiki",
+      "character": "Boh (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/ut7ewXjdgUmgkhJ1EtbOo9tbc7s.jpg"
+    },
+    {
+      "id": "19594",
+      "name": "Yumi Tamai",
+      "character": "Rin (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/x9Td7e5F21cK9S1FCkobfqiJZ1c.jpg"
+    },
+    {
+      "id": "40450",
+      "name": "Yo Oizumi",
+      "character": "Bandai Frog (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/806zNzkNveoqqa6l4Qp7n8eArrl.jpg"
+    },
+    {
+      "id": "554423",
+      "name": "Koba Hayashi",
+      "character": "River Spirit (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/ceQ58tRgqMZ9gePHg8xkKarZm0M.jpg"
+    },
+    {
+      "id": "20334",
+      "name": "Tsunehiko Kamijô",
+      "character": "Chichiyaku (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/v2poQi0qYEWdTaMf2pVTWmcdwZp.jpg"
+    },
+    {
+      "id": "544088",
+      "name": "Takehiko Ono",
+      "character": "Aniyaku (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/8gcT8znk0l3YVZKvL7eVxYublTl.jpg"
+    },
+    {
+      "id": "119243",
+      "name": "Bunta Sugawara",
+      "character": "Kamaji (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/lHPLlP8zNwGMmcUI8rGks5vp8Vn.jpg"
+    },
+    {
+      "id": "1530058",
+      "name": "Shigeru Wakita",
+      "character": "(voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/6iFm0U12QGmKDizbn08WqO1WXCU.jpg"
+    },
+    {
+      "id": "1243817",
+      "name": "Shirou Saitou",
+      "character": "(voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/yJSrzULl9EuXI25E8REdIPY1Lkm.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 1,
+  "status": "PUBLISHED",
+  "links": [
+    {
+      "url": "https://crimson-sea-a1e5.hekoy.workers.dev/?vcloud=https://vcloud.fit/7iasfi8oa3f7j5i",
+      "quality": "480p",
+      "size": "400MB",
+      "label": "Spirited Away 2001 ORG Hindi Dubbed 480p BluRay 400MB",
+      "source": "Fast Cloud",
+      "isCloud": true,
+      "isDotmovies": false,
+      "season": null,
+      "episode": null,
+      "isBatch": false,
+      "canonicalId": "tmdb-movie-129",
+      "isPack": false
+    },
+    {
+      "url": "https://crimson-sea-a1e5.hekoy.workers.dev/?vcloud=https://vcloud.fit/gh1tgmdj1idtor4",
+      "quality": "720p",
+      "size": "1GB",
+      "label": "Spirited Away 2001 ORG Hindi Dubbed 720p BluRay 1GB",
+      "source": "Fast Cloud",
+      "isCloud": true,
+      "isDotmovies": false,
+      "season": null,
+      "episode": null,
+      "isBatch": false,
+      "canonicalId": "tmdb-movie-129",
+      "isPack": false
+    },
+    {
+      "url": "https://crimson-sea-a1e5.hekoy.workers.dev/?vcloud=https://vcloud.fit/ioi4lp1octyonzi",
+      "quality": "1080p",
+      "size": "2GB",
+      "label": "Spirited Away 2001 ORG Hindi Dubbed 1080p BluRay 2GB",
+      "source": "Fast Cloud",
+      "isCloud": true,
+      "isDotmovies": false,
+      "season": null,
+      "episode": null,
+      "isBatch": false,
+      "canonicalId": "tmdb-movie-129",
+      "isPack": false
+    }
+  ]
+}

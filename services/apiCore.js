@@ -387,37 +387,81 @@ async function handlePlayback(req, res) {
   const hasVerifiedTmdb = Boolean(item.externalProvider === 'tmdb' || (item.tmdbId && String(item.tmdbId).length >= 2));
   const hasVerifiedImdb = Boolean(item.imdbId && item.imdbId.startsWith('tt'));
 
-  // 1. Server 1 (VidSrc Global) - Primary canonical TMDB-ID streaming player
   if (hasVerifiedTmdb) {
     const tid = String(item.tmdbId).replace(/^(?:tmdb-(?:movie|series|tv)-|dotmobiz-)/i, '');
-    const vidsrcSbsUrl = isTv
-      ? `https://vidsrc.pm/embed/tv/${tid}/${season}/${episode}`
-      : `https://vidsrc.pm/embed/movie/${tid}`;
 
-    sources.push({
-      id: 'vidsrc_sbs',
-      name: 'Server 1 (VidSrc Global - Primary)',
-      label: 'Server 1 (VidSrc Global)',
-      canonicalId,
-      provider: 'vidsrc_sbs',
-      url: vidsrcSbsUrl,
-      embedUrl: vidsrcSbsUrl,
-      isDirect: false
-    });
-
-    // 2. Server 2 (Peachify Pro) - Ad-free HD with multi-audio
+    // 1. Server 1: Peachify Pro (Requested Priority #1)
     const peachifyUrl = isTv
       ? `https://peachify.pro/embed/tv/${tid}/${season}/${episode}?accent=E50914&autoPlay=true&autoNext=true`
       : `https://peachify.pro/embed/movie/${tid}?accent=E50914&autoPlay=true`;
 
     sources.push({
       id: 'peachify',
-      name: 'Server 2 (Peachify Pro)',
-      label: 'Server 2 (Peachify Pro)',
+      name: 'Server 1 (Peachify Pro)',
+      label: 'Server 1 (Peachify Pro)',
+      priority: 1,
+      status: 'EMBED_BLOCKED',
       canonicalId,
       provider: 'peachify',
       url: peachifyUrl,
       embedUrl: peachifyUrl,
+      isDirect: false,
+      notes: 'Protected by Cloudflare Turnstile (403 on cross-origin iframe embed)'
+    });
+
+    // 2. Server 2: PVRPlay / ReelsDownload (Requested Priority #2)
+    const pvrplayUrl = isTv
+      ? `https://embed.reelsdownload.online/player/${tid}/${season}/${episode}?key=k_bf0ab0853bce46e3d90b256b`
+      : `https://embed.reelsdownload.online/player/${tid}?key=k_bf0ab0853bce46e3d90b256b`;
+
+    sources.push({
+      id: 'reelsdownload',
+      name: 'Server 2 (PVRPlay Hindi Dub)',
+      label: 'Server 2 (PVRPlay)',
+      priority: 2,
+      status: 'AVAILABLE',
+      canonicalId,
+      provider: 'reelsdownload',
+      url: pvrplayUrl,
+      embedUrl: pvrplayUrl,
+      isDirect: false
+    });
+
+    // 3. Server 3: AllMovieLand (Requested Priority #3)
+    const amlMediaId = (hasVerifiedImdb ? item.imdbId : tid);
+    const amlUrl = isTv
+      ? `https://slast430did.com/play/${encodeURIComponent(amlMediaId)}?s=${season}&e=${episode}`
+      : `https://slast430did.com/play/${encodeURIComponent(amlMediaId)}`;
+
+    sources.push({
+      id: 'allmovieland',
+      name: 'Server 3 (AllMovieLand)',
+      label: 'Server 3 (AllMovieLand)',
+      priority: 3,
+      status: 'UNAVAILABLE',
+      canonicalId,
+      provider: 'allmovieland',
+      url: amlUrl,
+      embedUrl: amlUrl,
+      isDirect: false,
+      notes: 'Provider endpoints offline (HTTP 404 / 403)'
+    });
+
+    // 4. Server 4: VidSrc Global (Requested Priority #4)
+    const vidsrcSbsUrl = isTv
+      ? `https://vidsrc.pm/embed/tv/${tid}/${season}/${episode}`
+      : `https://vidsrc.pm/embed/movie/${tid}`;
+
+    sources.push({
+      id: 'vidsrc_sbs',
+      name: 'Server 4 (VidSrc Global)',
+      label: 'Server 4 (VidSrc Global)',
+      priority: 4,
+      status: 'AVAILABLE',
+      canonicalId,
+      provider: 'vidsrc_sbs',
+      url: vidsrcSbsUrl,
+      embedUrl: vidsrcSbsUrl,
       isDirect: false
     });
 
@@ -850,12 +894,12 @@ function fetchTmdbCatalogJson(endpoint) {
       return Promise.resolve(entry.data);
     }
   }
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     const sep = endpoint.includes('?') ? '&' : '?';
     const url = `https://api.tmdb.org/3${endpoint}${sep}api_key=${TMDB_API_KEY}`;
-    https.get(url, {
+    const req = https.get(url, {
       headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)', 'Accept': 'application/json' },
-      timeout: 8000
+      timeout: 5000
     }, (res) => {
       let d = '';
       res.on('data', c => d += c);
@@ -865,12 +909,17 @@ function fetchTmdbCatalogJson(endpoint) {
             const parsed = JSON.parse(d);
             net27CatalogCache.set(cacheKey, { at: Date.now(), data: parsed });
             resolve(parsed);
-          } catch (e) { reject(e); }
+          } catch (e) { resolve(null); }
         } else {
-          reject(new Error(`TMDB HTTP ${res.statusCode}`));
+          resolve(null);
         }
       });
-    }).on('error', reject);
+    });
+    req.on('timeout', () => {
+      req.destroy();
+      resolve(null);
+    });
+    req.on('error', () => resolve(null));
   });
 }
 
@@ -2124,11 +2173,11 @@ async function handleDownloadFile(req, res) {
     }
     if (id && (!resolved || !resolved.directUrl)) {
       try {
-        contentRec = await resolveContentId(id);
+        contentRec = await resolveContentId(id, type);
       } catch (e) {}
     }
 
-    // 3. Fallback: Search Catalog for title / ID to find authentic Hicine direct streams
+    // 3. Exact Identity Resolution: Search Catalog strictly for verified authentic Hicine direct streams
     if (!resolved || !resolved.directUrl) {
       try {
         let catalogLinks = (contentRec && contentRec.links && contentRec.links.length) ? contentRec.links : [];
@@ -2144,16 +2193,16 @@ async function handleDownloadFile(req, res) {
         const hicineCatalogLinks = (catalogLinks || []).filter(l => l && l.url && isHicineDownloadUrl(l.url));
 
         if (hicineCatalogLinks.length > 0) {
-          // Prefer link matching requested quality or episode
           let matched = null;
           if (se && ep) {
-            // STRICT MATCH: Only match when season and episode genuinely match!
+            // STRICT TV MATCH: Only match when season and episode genuinely match requested item
             matched = hicineCatalogLinks.find(l => Number(l.season) === Number(se) && Number(l.episode) === Number(ep) && (l.quality || '').toLowerCase().includes(quality.toLowerCase())) ||
                       hicineCatalogLinks.find(l => Number(l.season) === Number(se) && Number(l.episode) === Number(ep));
           } else {
-            matched = hicineCatalogLinks.find(l => (l.quality || '').toLowerCase().includes(quality.toLowerCase())) ||
-                      hicineCatalogLinks.find(l => l.isCloud || (l.url && (l.url.includes('vcloud') || l.url.includes('workers.dev')))) ||
-                      hicineCatalogLinks[0];
+            // STRICT MOVIE MATCH: Only match non-episodic movie streams (zero random fallback)
+            matched = hicineCatalogLinks.find(l => !l.season && !l.episode && (l.quality || '').toLowerCase().includes(quality.toLowerCase())) ||
+                      hicineCatalogLinks.find(l => !l.season && !l.episode && (l.isCloud || (l.url && (l.url.includes('vcloud') || l.url.includes('workers.dev'))))) ||
+                      hicineCatalogLinks.find(l => !l.season && !l.episode);
           }
 
           if (matched && matched.url) {

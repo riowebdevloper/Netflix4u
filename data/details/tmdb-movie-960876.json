@@ -1,0 +1,135 @@
+{
+  "id": "tmdb-movie-960876",
+  "canonicalId": "tmdb-movie-960876",
+  "mediaType": "movie",
+  "externalProvider": "tmdb",
+  "externalId": "960876",
+  "tmdbId": "960876",
+  "imdbId": "tt15428134",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "Dunki",
+  "canonicalTitle": "Dunki",
+  "originalTitle": "डंकी",
+  "overview": "Four friends from a sleepy little village in Punjab share a common dream: to go to England. Their problem is that they have neither the visa nor the ticket. A soldier alights from a train one day, and their lives change. He gives them a soldier's promise: He will take them to the land of their dreams. What follows is a hilarious and heartwarming tale of a perilous journey through the desert and the sea, but most crucially through the hinterlands of their mind.",
+  "description": "Four friends from a sleepy little village in Punjab share a common dream: to go to England. Their problem is that they have neither the visa nor the ticket. A soldier alights from a train one day, and their lives change. He gives them a soldier's promise: He will take them to the land of their dreams. What follows is a hilarious and heartwarming tale of a perilous journey through the desert and the sea, but most crucially through the hinterlands of their mind.",
+  "shortDescription": "Four friends from a sleepy little village in Punjab share a common dream: to go to England. Their problem is that they h",
+  "year": 2023,
+  "releaseYear": 2023,
+  "rating": 6.3,
+  "votes": "0.1K",
+  "quality": "FHD",
+  "duration": "2h 39m",
+  "genres": [
+    "Adventure",
+    "Comedy",
+    "Drama"
+  ],
+  "categories": [
+    "Adventure",
+    "Comedy",
+    "Drama"
+  ],
+  "language": "Hindi",
+  "country": "IN",
+  "poster": "https://image.tmdb.org/t/p/w500/kPRb1mbVHGop0egQ7153y0lhzGL.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/uuw0PRR4sgGi1IV4CYYpEYtez9y.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/Zd69FfhBmSc?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/Zd69FfhBmSc?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "35742",
+      "name": "Shah Rukh Khan",
+      "character": "Hardayal 'Hardy' Singh Dhillon",
+      "photo": "https://image.tmdb.org/t/p/w185/gc3Ul6EtVYKgjBuYAaD8U2qIcSl.jpg"
+    },
+    {
+      "id": "550167",
+      "name": "Taapsee Pannu",
+      "character": "Manu Randhawa",
+      "photo": "https://image.tmdb.org/t/p/w185/43e24aeOC8AZITo6ShaKKG9aV0Y.jpg"
+    },
+    {
+      "id": "1715408",
+      "name": "Vikram Kochhar",
+      "character": "Buggu Lakhanpal",
+      "photo": "https://image.tmdb.org/t/p/w185/qzwC8ebdicpuoVjfsM3KQSG6J9O.jpg"
+    },
+    {
+      "id": "2258829",
+      "name": "Anil Grover",
+      "character": "Balli Kakkad",
+      "photo": "https://image.tmdb.org/t/p/w185/6ZN0Y3j0oQrkqckYWRC5ixwieZ5.jpg"
+    },
+    {
+      "id": "35779",
+      "name": "Boman Irani",
+      "character": "Geetu Gulati",
+      "photo": "https://image.tmdb.org/t/p/w185/5J7GiiNar9bg9rGYeA2L30JXE2W.jpg"
+    },
+    {
+      "id": "1469935",
+      "name": "Vicky Kaushal",
+      "character": "Sukhi",
+      "photo": "https://image.tmdb.org/t/p/w185/hKSa4DWEAD7DYhABYGwjPmxdpAY.jpg"
+    },
+    {
+      "id": "110292",
+      "name": "Deven Bhojani",
+      "character": "Puru Patel",
+      "photo": "https://image.tmdb.org/t/p/w185/4gKlQ8QD6BtfachIRAXOxB5vidB.jpg"
+    },
+    {
+      "id": "3316221",
+      "name": "Sapna Sand",
+      "character": "Buggu's Mother",
+      "photo": "https://image.tmdb.org/t/p/w185/1FWOLemBx7Wu4JF3r5hozlfs7pE.jpg"
+    },
+    {
+      "id": "4442107",
+      "name": "Komal Sachdeva",
+      "character": "Chameli",
+      "photo": null
+    },
+    {
+      "id": "4442105",
+      "name": "Diwanshu Gambhir",
+      "character": "Pampi",
+      "photo": null
+    },
+    {
+      "id": "3654517",
+      "name": "Vishnu Kaushal",
+      "character": "Gulab",
+      "photo": null
+    },
+    {
+      "id": "1662186",
+      "name": "Jyoti Subhash",
+      "character": "Buggu's Grandmother",
+      "photo": "https://image.tmdb.org/t/p/w185/kyqLKGul0VxHNrEShq7uFOxqacQ.jpg"
+    },
+    {
+      "id": "1948815",
+      "name": "Mahabir Bhullar",
+      "character": "Buggu's Father",
+      "photo": "https://image.tmdb.org/t/p/w185/oLqAyaImBLOIRY4cZLgRCrDmOee.jpg"
+    },
+    {
+      "id": "128734",
+      "name": "Amardeep Jha",
+      "character": "Mannu's Mother",
+      "photo": "https://image.tmdb.org/t/p/w185/elvrWT75OcIK45N6rd9KkEM34Pe.jpg"
+    },
+    {
+      "id": "2364378",
+      "name": "Jatinder Kaur",
+      "character": "Balli's Mother",
+      "photo": null
+    }
+  ],
+  "seasons": 1,
+  "episodes": 1,
+  "status": "PUBLISHED",
+  "links": []
+}

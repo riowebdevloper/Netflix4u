@@ -1,0 +1,137 @@
+{
+  "id": "tmdb-series-119051",
+  "canonicalId": "tmdb-series-119051",
+  "mediaType": "tv",
+  "externalProvider": "tmdb",
+  "externalId": "119051",
+  "tmdbId": "119051",
+  "imdbId": "tt13443470",
+  "type": "series",
+  "contentType": "series",
+  "title": "Wednesday",
+  "canonicalTitle": "Wednesday",
+  "originalTitle": "Wednesday",
+  "overview": "Smart, sarcastic and a little dead inside, Wednesday Addams investigates twisted mysteries while making new friends — and foes — at Nevermore Academy.",
+  "description": "Smart, sarcastic and a little dead inside, Wednesday Addams investigates twisted mysteries while making new friends — and foes — at Nevermore Academy.",
+  "shortDescription": "Smart, sarcastic and a little dead inside, Wednesday Addams investigates twisted mysteries while making new friends — an",
+  "year": 2022,
+  "releaseYear": 2022,
+  "season": 1,
+  "episode": 1,
+  "rating": 8.3,
+  "votes": "10.8K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Sci-Fi & Fantasy",
+    "Mystery",
+    "Comedy"
+  ],
+  "categories": [
+    "Sci-Fi & Fantasy",
+    "Mystery",
+    "Comedy"
+  ],
+  "language": "English",
+  "country": "US",
+  "poster": "https://image.tmdb.org/t/p/w500/9PFonBhy4cQy7Jz20NpMygczOkv.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/iHSwvRVsRyxpX7FE7GbviaDvgGZ.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/Qa5kFRxBkNw?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/Qa5kFRxBkNw?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "974169",
+      "name": "Jenna Ortega",
+      "character": "Wednesday Addams",
+      "photo": "https://image.tmdb.org/t/p/w185/cV4x7jNmsGLdKZn5I6xVF3Ltnmg.jpg"
+    },
+    {
+      "id": "884",
+      "name": "Steve Buscemi",
+      "character": "Barry Dort",
+      "photo": "https://image.tmdb.org/t/p/w185/n0pZumkrcZrAPMoPq684RhYnjPV.jpg"
+    },
+    {
+      "id": "2604515",
+      "name": "Emma Myers",
+      "character": "Enid Sinclair",
+      "photo": "https://image.tmdb.org/t/p/w185/v1Y8RP39135ZOary9M4MbkrCAdn.jpg"
+    },
+    {
+      "id": "1911865",
+      "name": "Hunter Doohan",
+      "character": "Tyler Galpin",
+      "photo": "https://image.tmdb.org/t/p/w185/ihno5ut6ha8TaubQFgl5Ozco2K1.jpg"
+    },
+    {
+      "id": "2189049",
+      "name": "Joy Sunday",
+      "character": "Bianca Barclay",
+      "photo": "https://image.tmdb.org/t/p/w185/phPn3BRW1vZzxkl3hgEy8umzXn.jpg"
+    },
+    {
+      "id": "3235624",
+      "name": "Moosa Mostafa",
+      "character": "Eugene Ottinger",
+      "photo": "https://image.tmdb.org/t/p/w185/k9406KAf3HxF81dres7ZeV3tDZc.jpg"
+    },
+    {
+      "id": "1908241",
+      "name": "Georgie Farmer",
+      "character": "Ajax Petropolus",
+      "photo": "https://image.tmdb.org/t/p/w185/lWhHmiwqvtUIln5OPPVbXqtUofI.jpg"
+    },
+    {
+      "id": "2488176",
+      "name": "Isaac Ordonez",
+      "character": "Pugsley Addams",
+      "photo": "https://image.tmdb.org/t/p/w185/zSNeeC0lKZXvdFWCphVAvMLW4fR.jpg"
+    },
+    {
+      "id": "2724514",
+      "name": "Owen Painter",
+      "character": "Slurp / Isaac Night",
+      "photo": "https://image.tmdb.org/t/p/w185/7x7WhM8eNOK7SRmDuiO2Ld47jZn.jpg"
+    },
+    {
+      "id": "26076",
+      "name": "Billie Piper",
+      "character": "Isadora Capri",
+      "photo": "https://image.tmdb.org/t/p/w185/yCzwrP8iPQac943hW3nNA4ViuDd.jpg"
+    },
+    {
+      "id": "2571568",
+      "name": "Luyanda Unati Lewis-Nyawo",
+      "character": "Sheriff Ritchie Santiago",
+      "photo": "https://image.tmdb.org/t/p/w185/pF82yYPbzJLLVHVar4UKBUPrxBw.jpg"
+    },
+    {
+      "id": "3235628",
+      "name": "Victor Dorobantu",
+      "character": "Thing",
+      "photo": "https://image.tmdb.org/t/p/w185/jjvwYQsqCuG9XhZyZsmw3p8VEKo.jpg"
+    },
+    {
+      "id": "4502345",
+      "name": "Noah B. Taylor",
+      "character": "Bruno Yuson",
+      "photo": "https://image.tmdb.org/t/p/w185/1w3evGYQenWgQZQkP65M4uiTUPm.jpg"
+    },
+    {
+      "id": "3131371",
+      "name": "Evie Templeton",
+      "character": "Agnes DeMille",
+      "photo": "https://image.tmdb.org/t/p/w185/1JV3FEULVnROl4APfkUprqTrFF6.jpg"
+    },
+    {
+      "id": "40481",
+      "name": "Luis Guzmán",
+      "character": "Gomez Addams",
+      "photo": "https://image.tmdb.org/t/p/w185/kSdxUckOJj9R5VKrLUnRy14YhNV.jpg"
+    }
+  ],
+  "seasons": 3,
+  "episodes": 16,
+  "status": "PUBLISHED",
+  "links": []
+}

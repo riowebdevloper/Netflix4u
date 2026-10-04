@@ -1,0 +1,133 @@
+{
+  "id": "tmdb-movie-1234139",
+  "canonicalId": "tmdb-movie-1234139",
+  "mediaType": "movie",
+  "externalProvider": "tmdb",
+  "externalId": "1234139",
+  "tmdbId": "1234139",
+  "imdbId": "tt33318732",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "Jailer 2",
+  "canonicalTitle": "Jailer 2",
+  "originalTitle": "ஜெயிலர் 2",
+  "overview": "Following the events of \"Jailer\",  former ruthless police officer Muthuvel Pandian must come face-to-face with an even larger threat.",
+  "description": "Following the events of \"Jailer\",  former ruthless police officer Muthuvel Pandian must come face-to-face with an even larger threat.",
+  "shortDescription": "Following the events of \"Jailer\",  former ruthless police officer Muthuvel Pandian must come face-to-face with an even l",
+  "year": 2026,
+  "releaseYear": 2026,
+  "rating": 8,
+  "votes": "1.2K",
+  "quality": "FHD",
+  "duration": "2h 00m",
+  "genres": [
+    "Action",
+    "Comedy"
+  ],
+  "categories": [
+    "Action",
+    "Comedy"
+  ],
+  "language": "Tamil",
+  "country": "IN",
+  "poster": "https://image.tmdb.org/t/p/w500/vg6YJ84tiwEGeYSY9SgFkiPWbG9.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/m0ks2o59mOAz6WdCybJ5FAUNTOU.jpg",
+  "trailerUrl": null,
+  "trailer": null,
+  "cast": [
+    {
+      "id": "91555",
+      "name": "Rajinikanth",
+      "character": "Muthuvel 'Tiger' Pandian",
+      "photo": "https://image.tmdb.org/t/p/w185/cQBcrXqcQPfXOQfNfgO3slJM2xi.jpg"
+    },
+    {
+      "id": "292250",
+      "name": "S. J. Suryah",
+      "character": "Bodhi Kalpak",
+      "photo": "https://image.tmdb.org/t/p/w185/7Q8510XwxPU1193cteaFQsiq2rv.jpg"
+    },
+    {
+      "id": "930731",
+      "name": "Suraj Venjaramoodu",
+      "character": "Dileep",
+      "photo": "https://image.tmdb.org/t/p/w185/2FUs0wmR3eHBd8g4GVbCmhkUzeI.jpg"
+    },
+    {
+      "id": "85450",
+      "name": "Mithun Chakraborty",
+      "character": "Champaklal Chaubey",
+      "photo": "https://image.tmdb.org/t/p/w185/4z8c5YAe0TCkEZNHXWlKxNTD8sV.jpg"
+    },
+    {
+      "id": "141701",
+      "name": "Ramya Krishnan",
+      "character": "Vijayalakshmi 'Viji' Pandian",
+      "photo": "https://image.tmdb.org/t/p/w185/7C1bj7z3XhqxjDIGoCs6MFJdSVa.jpg"
+    },
+    {
+      "id": "35068",
+      "name": "Vidya Balan",
+      "character": "Kantha",
+      "photo": "https://image.tmdb.org/t/p/w185/m4bnX5VQs2DfvQsLmfbKbBxUkC9.jpg"
+    },
+    {
+      "id": "1540764",
+      "name": "Yogi Babu",
+      "character": "Vimal",
+      "photo": "https://image.tmdb.org/t/p/w185/4UMOPd8NqGfKp19VQHsnIzlSRUl.jpg"
+    },
+    {
+      "id": "1251828",
+      "name": "Mirnaa",
+      "character": "Shwetha Arjun",
+      "photo": "https://image.tmdb.org/t/p/w185/l4bmtLBuBPEE2Pg3qh5NTdmKFYP.jpg"
+    },
+    {
+      "id": "3590962",
+      "name": "Rithvik",
+      "character": "Rithvik 'Rithu' Pandian",
+      "photo": "https://image.tmdb.org/t/p/w185/9j9GPeTCDcqBW5TMDoQwz30usT7.jpg"
+    },
+    {
+      "id": "1529105",
+      "name": "Jatin Sarna",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/bnKqppKcRxSiEPiq2Fmbriibf5N.jpg"
+    },
+    {
+      "id": "1128068",
+      "name": "Bagavathi Perumal",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/ixK5bTpLOIXc8oJVE1IVMzcJrB2.jpg"
+    },
+    {
+      "id": "591095",
+      "name": "Kottayam Nazeer",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/vN0cHxgDIE5DKUeL2F0nmIhTIoZ.jpg"
+    },
+    {
+      "id": "1162629",
+      "name": "Sunil Sukhada",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/qgamc1v6ROT3zn6bSMs2vS6U7ht.jpg"
+    },
+    {
+      "id": "1620960",
+      "name": "Sujith Sankar",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/n7Z4ezEpDvhG3NyeYN9K1ULjVdW.jpg"
+    },
+    {
+      "id": "2298643",
+      "name": "Hakkim Shajahan",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/reEowrr3Gw4vKFfVUOhIT4EM4Es.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 1,
+  "status": "PUBLISHED",
+  "links": []
+}

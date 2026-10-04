@@ -1,0 +1,99 @@
+{
+  "id": "tmdb-series-136283",
+  "canonicalId": "tmdb-series-136283",
+  "mediaType": "tv",
+  "externalProvider": "tmdb",
+  "externalId": "136283",
+  "tmdbId": "136283",
+  "imdbId": "tt21344706",
+  "type": "series",
+  "contentType": "series",
+  "title": "The Glory",
+  "canonicalTitle": "The Glory",
+  "originalTitle": "더 글로리",
+  "overview": "Years after surviving horrific abuse in high school, a woman puts an elaborate revenge scheme in motion to make the perpetrators pay for their crimes.",
+  "description": "Years after surviving horrific abuse in high school, a woman puts an elaborate revenge scheme in motion to make the perpetrators pay for their crimes.",
+  "shortDescription": "Years after surviving horrific abuse in high school, a woman puts an elaborate revenge scheme in motion to make the perp",
+  "year": 2022,
+  "releaseYear": 2022,
+  "season": 1,
+  "episode": 1,
+  "rating": 8.5,
+  "votes": "1.0K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Drama",
+    "Crime"
+  ],
+  "categories": [
+    "Drama",
+    "Crime"
+  ],
+  "language": "Korean",
+  "country": "KR",
+  "poster": "https://image.tmdb.org/t/p/w500/uUM4LVlPgIrww07OoEKrGWlS1Ej.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/AjwoDj77HLlqcpwEGqsnvMXm5my.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/tqVVrTvrI8U?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/tqVVrTvrI8U?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "74421",
+      "name": "Song Hye-kyo",
+      "character": "Moon Dong-eun",
+      "photo": "https://image.tmdb.org/t/p/w185/tlAX3f82Mf5h0rznpVBVK7nD2om.jpg"
+    },
+    {
+      "id": "2341408",
+      "name": "Lee Do-hyun",
+      "character": "Joo Yeo-jeong",
+      "photo": "https://image.tmdb.org/t/p/w185/8LhhJWLGCoOPt5ygpDlrmfr1VOm.jpg"
+    },
+    {
+      "id": "1329984",
+      "name": "Im Ji-yeon",
+      "character": "Park Yeon-jin",
+      "photo": "https://image.tmdb.org/t/p/w185/gAwwi5fBxCKLnrP9bjOQFtMUs6j.jpg"
+    },
+    {
+      "id": "2084416",
+      "name": "Yeom Hye-ran",
+      "character": "Kang Hyeon-nam",
+      "photo": "https://image.tmdb.org/t/p/w185/xZxVHnbDdNxF6J8UhwBTkJGNKWx.jpg"
+    },
+    {
+      "id": "1140210",
+      "name": "Park Sung-hoon",
+      "character": "Jeon Jae-jun",
+      "photo": "https://image.tmdb.org/t/p/w185/nSF8VW2IoZcAA910gKQxbu01umk.jpg"
+    },
+    {
+      "id": "2804996",
+      "name": "Jung Sung-il",
+      "character": "Ha Do-yeong",
+      "photo": "https://image.tmdb.org/t/p/w185/3VyIhJniatsImjmBJlkclPZJsEE.jpg"
+    },
+    {
+      "id": "3623817",
+      "name": "Kim Hieora",
+      "character": "Lee Sa-ra",
+      "photo": "https://image.tmdb.org/t/p/w185/xeAi9a2wSRBBDsCEJulg8FiAJrK.jpg"
+    },
+    {
+      "id": "1929192",
+      "name": "Cha Joo-young",
+      "character": "Choi Hye-jeong",
+      "photo": "https://image.tmdb.org/t/p/w185/zd5FDsiQkfpjdH5ZH1f3bgcx2Cq.jpg"
+    },
+    {
+      "id": "2042979",
+      "name": "Kim Gun-woo",
+      "character": "Son Myeong-o",
+      "photo": "https://image.tmdb.org/t/p/w185/sdFpIuQwzmbelx7EFLet2XzmGhH.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 16,
+  "status": "PUBLISHED",
+  "links": []
+}

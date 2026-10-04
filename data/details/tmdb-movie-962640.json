@@ -1,0 +1,69 @@
+{
+  "id": "tmdb-movie-962640",
+  "canonicalId": "tmdb-movie-962640",
+  "mediaType": "movie",
+  "externalProvider": "tmdb",
+  "externalId": "962640",
+  "tmdbId": "962640",
+  "imdbId": "tt27128495",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "K.G.F: Chapter 3",
+  "canonicalTitle": "K.G.F: Chapter 3",
+  "originalTitle": "K.G.F: Chapter 3",
+  "overview": "",
+  "description": "",
+  "shortDescription": "",
+  "year": 2026,
+  "releaseYear": 2026,
+  "rating": 8,
+  "votes": "1.2K",
+  "quality": "FHD",
+  "duration": "2h 00m",
+  "genres": [
+    "Action",
+    "Drama",
+    "Thriller"
+  ],
+  "categories": [
+    "Action",
+    "Drama",
+    "Thriller"
+  ],
+  "language": "Kannada",
+  "country": "IN",
+  "poster": "https://image.tmdb.org/t/p/w500/ex2zyM6LVd31h9TlAi9RaR7QARK.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/ex2zyM6LVd31h9TlAi9RaR7QARK.jpg",
+  "trailerUrl": null,
+  "trailer": null,
+  "cast": [
+    {
+      "id": "1293681",
+      "name": "Yash",
+      "character": "Raja Krishnappa Bairya 'Rocky'",
+      "photo": "https://image.tmdb.org/t/p/w185/ixHvgN8hGh8YgWd3j9RqUATvBiy.jpg"
+    },
+    {
+      "id": "2182257",
+      "name": "Srinidhi Shetty",
+      "character": "Reena",
+      "photo": "https://image.tmdb.org/t/p/w185/pTsixKDFS3n2xsvR6wDZ9J6jjfQ.jpg"
+    },
+    {
+      "id": "123180",
+      "name": "Raveena Tandon",
+      "character": "PM Ramika Sen",
+      "photo": "https://image.tmdb.org/t/p/w185/4z0X9ZMgyNZRHfJG4G2Z10rhLpu.jpg"
+    },
+    {
+      "id": "1333834",
+      "name": "Achyuth Kumar",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/zO1MoCgaz0RxILjga8VYXguROMp.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 1,
+  "status": "PUBLISHED",
+  "links": []
+}

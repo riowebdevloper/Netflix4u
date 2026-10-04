@@ -1,0 +1,73 @@
+{
+  "id": "tmdb-movie-1187619",
+  "canonicalId": "tmdb-movie-1187619",
+  "mediaType": "movie",
+  "externalProvider": "tmdb",
+  "externalId": "1187619",
+  "tmdbId": "1187619",
+  "imdbId": "tt27744786",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "Shaitaan",
+  "canonicalTitle": "Shaitaan",
+  "originalTitle": "शैतान",
+  "overview": "Kabir and his family's fun weekend retreat takes terrifying turn when an intruder takes over the control of the  body of his teenage daughter, putting her at the mercy of his increasingly sinister orders.",
+  "description": "Kabir and his family's fun weekend retreat takes terrifying turn when an intruder takes over the control of the  body of his teenage daughter, putting her at the mercy of his increasingly sinister orders.",
+  "shortDescription": "Kabir and his family's fun weekend retreat takes terrifying turn when an intruder takes over the control of the  body of",
+  "year": 2024,
+  "releaseYear": 2024,
+  "rating": 6.3,
+  "votes": "0.1K",
+  "quality": "FHD",
+  "duration": "2h 12m",
+  "genres": [
+    "Thriller",
+    "Horror"
+  ],
+  "categories": [
+    "Thriller",
+    "Horror"
+  ],
+  "language": "Hindi",
+  "country": "IN",
+  "poster": "https://image.tmdb.org/t/p/w500/oRvFzcagAcC6Q317xtV7QXzwBnj.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/yNGAfRd0VZwtSAZiC1WXWqCbvIb.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/A_HQdwRDRrw?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/A_HQdwRDRrw?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "42803",
+      "name": "Ajay Devgn",
+      "character": "Kabir Rishi",
+      "photo": "https://image.tmdb.org/t/p/w185/vnHQQFzTjJ0sv14DGMIoKa3qTxN.jpg"
+    },
+    {
+      "id": "85519",
+      "name": "R. Madhavan",
+      "character": "Vanraj Kashyap",
+      "photo": "https://image.tmdb.org/t/p/w185/gaDrAdXxIrbBRCd9cX8YvJDEuLb.jpg"
+    },
+    {
+      "id": "2106881",
+      "name": "Janki Bodiwala",
+      "character": "Jahnvi Rishi",
+      "photo": "https://image.tmdb.org/t/p/w185/zpOyHZgW79IiYuUu7QSDBznzdqL.jpg"
+    },
+    {
+      "id": "147324",
+      "name": "Jyothika",
+      "character": "Jyoti Rishi",
+      "photo": "https://image.tmdb.org/t/p/w185/n8JVr2ToMbTz3XsJ7uo95J3hgCj.jpg"
+    },
+    {
+      "id": "4306162",
+      "name": "Anngad Raaj",
+      "character": "Dhruv Rishi",
+      "photo": "https://image.tmdb.org/t/p/w185/vxDu6v0eHSTTc1kHLGLzqtkP61Z.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 1,
+  "status": "PUBLISHED",
+  "links": []
+}

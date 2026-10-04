@@ -319,81 +319,46 @@ function findMatchingCatalogLinks(title, year, imdbId, slug) {
     }
   }
 
-  // 3. Check by normalized alphanumeric title and hyphenated slugs
+  // 3. Strict Identity Match: Check by exact title + year or exact canonical slug only
+  // (Zero prefix/suffix substring matching to prevent wrong-content contamination)
   const clean = String(title || '').toLowerCase().replace(/[^a-z0-9]/g, '');
   const titleSlug = String(title || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-  const strippedTitle = String(title || '')
-    .replace(/\b(?:s\d{1,2}\s*e\d{1,2}|season\s*\d{1,2}|episode\s*\d{1,2}|ep\s*\d{1,2})\b.*/i, '')
-    .trim();
-  const strippedClean = strippedTitle.toLowerCase().replace(/[^a-z0-9]/g, '');
-  const strippedSlug = strippedTitle.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-  const primaryTitle = String(title || '').split(/[:\-–—]/)[0].trim().toLowerCase().replace(/[^a-z0-9]/g, '');
-  const primarySlug = String(title || '').split(/[:\-–—]/)[0].trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
-  const candidates = [];
-  if (titleSlug && titleSlug.length >= 3) candidates.push(titleSlug);
-  if (clean && clean.length >= 3 && !candidates.includes(clean)) candidates.push(clean);
-  if (strippedSlug && strippedSlug.length >= 3 && !candidates.includes(strippedSlug)) candidates.push(strippedSlug);
-  if (strippedClean && strippedClean.length >= 3 && !candidates.includes(strippedClean)) candidates.push(strippedClean);
-  if (primarySlug && primarySlug.length >= 3 && !candidates.includes(primarySlug)) candidates.push(primarySlug);
-  if (primaryTitle && primaryTitle.length >= 3 && !candidates.includes(primaryTitle)) candidates.push(primaryTitle);
-
-  for (const c of candidates) {
-    if (c.length >= 3) {
-      // Check harvested Dotmovies index first
-      const hByClean = hIndex.get(c);
-      if (hByClean) {
-        const hLinks = extractLinksFromDetail(hByClean, title);
+  if (clean && clean.length >= 3) {
+    if (year) {
+      const yearKey = clean + year;
+      const hByYear = hIndex.get(yearKey);
+      if (hByYear) {
+        const hLinks = extractLinksFromDetail(hByYear, title);
         if (hLinks.length > 0) return hLinks;
       }
-
-      if (year) {
-        const entryYear = dMap.get(c + year) || dMap.get(c + '-' + year);
-        if (entryYear) {
-          const links = extractLinksFromDetail(entryYear, title);
-          if (links.length > 0) return links;
-        }
-        const fByYear = loadDetailFileByFilename(c + '-' + year, title) || loadDetailFileByFilename(c + year, title);
-        if (fByYear && fByYear.length > 0) return fByYear;
+      const dByYear = dMap.get(yearKey) || dMap.get(titleSlug + '-' + year);
+      if (dByYear) {
+        const dLinks = extractLinksFromDetail(dByYear, title);
+        if (dLinks.length > 0) return dLinks;
       }
-
-      const entry = dMap.get(c);
-      if (entry) {
-        const links = extractLinksFromDetail(entry, title);
-        if (links.length > 0) return links;
-      }
-
-      const fByClean = loadDetailFileByFilename(c, title);
-      if (fByClean && fByClean.length > 0) return fByClean;
-
-      // Safe boundary-aware match for harvested Dotmovies releases (e.g., slug + year or slug + audio suffix)
-      for (const [hKey, hVal] of hIndex.entries()) {
-        if (hVal && typeof hKey === 'string' && hKey.length >= 4) {
-          const isExact = (c === hKey);
-          const isSafePrefix = (hKey.startsWith(c + '-') || hKey.startsWith(c + '_') || (year && hKey === (c + year)));
-          const isSafeSuffix = (c.startsWith(hKey + '-') || c.startsWith(hKey + '_') || (year && c === (hKey + year)));
-          if (isExact || isSafePrefix || isSafeSuffix) {
-            const hLinks = extractLinksFromDetail(hVal, title);
-            if (hLinks.length > 0) return hLinks;
-          }
-        }
-      }
-
-      // Safe boundary-aware match for popular series/movies
-      for (const [key, val] of dMap.entries()) {
-        if (val && typeof key === 'string' && key.length >= 4) {
-          const isExact = (c === key);
-          const isSafePrefix = (key.startsWith(c + '-') || key.startsWith(c + '_') || (year && key === (c + year)));
-          const isSafeSuffix = (c.startsWith(key + '-') || c.startsWith(key + '_') || (year && c === (key + year)));
-          if (isExact || isSafePrefix || isSafeSuffix) {
-            const links = extractLinksFromDetail(val, title);
-            if (links.length > 0) return links;
-          }
-        }
-      }
+      const fByYear = loadDetailFileByFilename(clean + '-' + year, title) || loadDetailFileByFilename(clean + year, title);
+      if (fByYear && fByYear.length > 0) return fByYear;
     }
+
+    // Exact clean title match
+    const hByClean = hIndex.get(clean);
+    if (hByClean && (!year || !hByClean.year || String(hByClean.year) === String(year))) {
+      const hLinks = extractLinksFromDetail(hByClean, title);
+      if (hLinks.length > 0) return hLinks;
+    }
+
+    const dByClean = dMap.get(clean);
+    if (dByClean && (!year || !dByClean.year || String(dByClean.year) === String(year))) {
+      const dLinks = extractLinksFromDetail(dByClean, title);
+      if (dLinks.length > 0) return dLinks;
+    }
+
+    const fByClean = loadDetailFileByFilename(clean, title);
+    if (fByClean && fByClean.length > 0) return fByClean;
   }
 
+  // Strict: Never fall back to prefix, suffix, or random titles
   return [];
 }
 
@@ -496,13 +461,13 @@ function readDetailFile(filename) {
 /**
  * Fetches and normalizes a verified record from TMDB
  */
-function fetchTmdbRecord(mediaType, tmdbId) {
-  const cacheKey = `${mediaType}_${tmdbId}`;
+function fetchTmdbRecord(mediaType, tmdbId, requestedCanonicalId = null) {
+  const isTv = (mediaType === 'tv' || mediaType === 'series' || mediaType === 'anime' || mediaType === 'kdrama');
+  const cacheKey = `${mediaType}_${tmdbId}_${requestedCanonicalId || ''}`;
   if (tmdbMemoryCache.has(cacheKey)) {
     return Promise.resolve(tmdbMemoryCache.get(cacheKey));
   }
 
-  const isTv = (mediaType === 'tv' || mediaType === 'series' || mediaType === 'anime' || mediaType === 'kdrama');
   const endpoint = isTv ? 'tv' : 'movie';
   const url = `https://api.tmdb.org/3/${endpoint}/${tmdbId}?api_key=${TMDB_API_KEY}&append_to_response=credits,videos,external_ids`;
 
@@ -515,7 +480,7 @@ function fetchTmdbRecord(mediaType, tmdbId) {
           if (res.statusCode >= 200 && res.statusCode < 300) {
             const raw = JSON.parse(d);
             const canonicalType = isTv ? 'series' : 'movie';
-            const canonicalId = `tmdb-${canonicalType}-${raw.id}`;
+            const canonicalId = requestedCanonicalId || `tmdb-${canonicalType}-${raw.id}`;
 
             let trailerUrl = null;
             if (raw.videos && Array.isArray(raw.videos.results)) {
@@ -541,6 +506,7 @@ function fetchTmdbRecord(mediaType, tmdbId) {
             const record = {
               id: canonicalId,
               canonicalId,
+              mediaType: isTv ? 'tv' : 'movie',
               externalProvider: 'tmdb',
               externalId: String(raw.id),
               tmdbId: String(raw.id),
@@ -554,6 +520,9 @@ function fetchTmdbRecord(mediaType, tmdbId) {
               description: raw.overview || '',
               shortDescription: (raw.overview || '').slice(0, 120),
               year,
+              releaseYear: year,
+              season: isTv ? 1 : undefined,
+              episode: isTv ? 1 : undefined,
               rating: raw.vote_average ? parseFloat(raw.vote_average.toFixed(1)) : 8.0,
               votes: raw.vote_count ? `${(raw.vote_count / 1000).toFixed(1)}K` : '1.2K',
               quality: 'FHD',
@@ -676,15 +645,18 @@ function standardizeLocalRecord(item, rawId) {
     ...item,
     id: canonicalId,
     canonicalId,
+    mediaType: isSeries ? 'tv' : 'movie',
     externalProvider: item.provider || 'dotmobiz',
     externalId: rawNum || String(item.id || ''),
-    contentType: item.type || (item.seasons || item.season_1 ? 'series' : 'movie'),
-    type: item.type || (item.seasons || item.season_1 ? 'series' : 'movie'),
+    contentType: isSeries ? 'series' : 'movie',
+    type: isSeries ? 'series' : 'movie',
     canonicalTitle: title,
     originalTitle: rawTitle,
     title,
     releaseYear: item.year || parseInt((rawTitle.match(/\b(19\d{2}|20\d{2})\b/) || [0, 2026])[1], 10),
     year: item.year || parseInt((rawTitle.match(/\b(19\d{2}|20\d{2})\b/) || [0, 2026])[1], 10),
+    season: isSeries ? (item.season || 1) : undefined,
+    episode: isSeries ? (item.episode || 1) : undefined,
     slug: item.slug || `${canonicalId}-${title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`,
     poster: item.poster ? unwrapImageUrl(item.poster) : null,
     backdrop: item.backdrop ? unwrapImageUrl(item.backdrop) : (item.poster ? unwrapImageUrl(item.poster) : null),
@@ -697,38 +669,57 @@ function standardizeLocalRecord(item, rawId) {
  * Canonical Content Resolver
  * Resolves any valid identifier representation to the underlying title object
  */
-async function resolveContentId(rawId) {
+async function resolveContentId(rawId, expectedType = null) {
   if (!rawId || typeof rawId !== 'string') return null;
   
   const id = rawId.trim().replace(/^\/+|\/+$/g, '');
   if (!id) return null;
+
+  const normalizedExpectedType = expectedType
+    ? (String(expectedType).toLowerCase() === 'movie' ? 'movie' : 'tv')
+    : null;
 
   // 1. Explicit TMDB canonical ID: tmdb-movie-12345, tmdb-series-90545, tmdb:movie:12345
   const tmdbMatch = id.match(/^tmdb[-:](movie|series|tv|anime|kdrama)[-:]([0-9]+)$/i);
   if (tmdbMatch) {
     const [, typeStr, numStr] = tmdbMatch;
     const mediaType = (typeStr.toLowerCase() === 'movie') ? 'movie' : 'tv';
-    const record = await fetchTmdbRecord(mediaType, numStr);
+    if (normalizedExpectedType && normalizedExpectedType !== mediaType) {
+      return null;
+    }
+    const record = await fetchTmdbRecord(mediaType, numStr, id);
     if (record) return record;
   }
 
   // 2. Direct file lookup with the exact id
   let item = readDetailFile(id);
-  if (item) return standardizeLocalRecord(item, id);
+  if (item) {
+    const rec = standardizeLocalRecord(item, id);
+    if (!normalizedExpectedType || rec.mediaType === normalizedExpectedType) return rec;
+  }
 
   // 3. If ID has 'dotmobiz-' prefix, try without prefix
   if (id.startsWith('dotmobiz-')) {
     const rawNum = id.replace(/^dotmobiz-/, '');
     item = readDetailFile(rawNum);
-    if (item) return standardizeLocalRecord(item, id);
+    if (item) {
+      const rec = standardizeLocalRecord(item, id);
+      if (!normalizedExpectedType || rec.mediaType === normalizedExpectedType) return rec;
+    }
   }
 
   // 4. If ID is numeric, check local catalog FIRST (e.g. dotmobiz-18033)
   if (/^\d+$/.test(id)) {
     item = readDetailFile(`dotmobiz-${id}`);
-    if (item) return standardizeLocalRecord(item, `dotmobiz-${id}`);
+    if (item) {
+      const rec = standardizeLocalRecord(item, `dotmobiz-${id}`);
+      if (!normalizedExpectedType || rec.mediaType === normalizedExpectedType) return rec;
+    }
     item = readDetailFile(id);
-    if (item) return standardizeLocalRecord(item, `dotmobiz-${id}`);
+    if (item) {
+      const rec = standardizeLocalRecord(item, `dotmobiz-${id}`);
+      if (!normalizedExpectedType || rec.mediaType === normalizedExpectedType) return rec;
+    }
   }
 
   // 5. Check memory catalog index for alias mapping (slug, record_id, etc.)
@@ -747,12 +738,16 @@ async function resolveContentId(rawId) {
 
     for (const name of candidateNames) {
       item = readDetailFile(name);
-      if (item) return standardizeLocalRecord(item, catalogEntry.canonicalId || id);
+      if (item) {
+        const rec = standardizeLocalRecord(item, catalogEntry.canonicalId || id);
+        if (!normalizedExpectedType || rec.mediaType === normalizedExpectedType) return rec;
+      }
     }
 
     // If summary catalog entry exists but detail file is missing, return standardized summary entry
     if (catalogEntry.title) {
-      return standardizeLocalRecord(catalogEntry, catalogEntry.canonicalId || id);
+      const rec = standardizeLocalRecord(catalogEntry, catalogEntry.canonicalId || id);
+      if (!normalizedExpectedType || rec.mediaType === normalizedExpectedType) return rec;
     }
   }
 
@@ -761,23 +756,40 @@ async function resolveContentId(rawId) {
   const rawNum = id.replace(/^dotmobiz-/, '');
   const mapEntry = dMap.get(rawNum) || dMap.get(id) || (catalogEntry?.slug ? dMap.get(catalogEntry.slug) : null);
   if (mapEntry) {
-    return standardizeLocalRecord(mapEntry, id);
+    const rec = standardizeLocalRecord(mapEntry, id);
+    if (!normalizedExpectedType || rec.mediaType === normalizedExpectedType) return rec;
   }
 
   // 5c. Check dotmobiz_harvested.json directly
   const hIndex = getHarvestedIndex();
   const hEntry = hIndex.get(id) || hIndex.get(rawNum);
   if (hEntry) {
-    return standardizeLocalRecord(hEntry, id);
+    const rec = standardizeLocalRecord(hEntry, id);
+    if (!normalizedExpectedType || rec.mediaType === normalizedExpectedType) return rec;
   }
 
-  // 6. Fallback for TMDB numeric IDs only if NOT in local catalog (e.g., 90545 for Sandman)
+  // 6. Strict Fallback for TMDB numeric IDs only if NOT in local catalog
   if (/^\d+$/.test(id)) {
-    // Try TV first, then movie
-    const tvRecord = await fetchTmdbRecord('tv', id);
-    if (tvRecord) return tvRecord;
-    const movieRecord = await fetchTmdbRecord('movie', id);
-    if (movieRecord) return movieRecord;
+    if (normalizedExpectedType === 'movie') {
+      const movieRecord = await fetchTmdbRecord('movie', id);
+      if (movieRecord) return movieRecord;
+    } else if (normalizedExpectedType === 'tv') {
+      const tvRecord = await fetchTmdbRecord('tv', id);
+      if (tvRecord) return tvRecord;
+    } else {
+      const num = parseInt(id, 10);
+      if (num > 200000) {
+        const movieRecord = await fetchTmdbRecord('movie', id);
+        if (movieRecord) return movieRecord;
+        const tvRecord = await fetchTmdbRecord('tv', id);
+        if (tvRecord) return tvRecord;
+      } else {
+        const tvRecord = await fetchTmdbRecord('tv', id);
+        if (tvRecord) return tvRecord;
+        const movieRecord = await fetchTmdbRecord('movie', id);
+        if (movieRecord) return movieRecord;
+      }
+    }
   }
 
   return null;

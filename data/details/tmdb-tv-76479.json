@@ -1,0 +1,123 @@
+{
+  "id": "tmdb-tv-76479",
+  "canonicalId": "tmdb-tv-76479",
+  "mediaType": "tv",
+  "externalProvider": "tmdb",
+  "externalId": "76479",
+  "tmdbId": "76479",
+  "imdbId": "tt1190634",
+  "type": "series",
+  "contentType": "series",
+  "title": "The Boys",
+  "canonicalTitle": "The Boys",
+  "originalTitle": "The Boys",
+  "overview": "A group of vigilantes known informally as “The Boys” set out to take down corrupt superheroes with no more than blue-collar grit and a willingness to fight dirty.",
+  "description": "A group of vigilantes known informally as “The Boys” set out to take down corrupt superheroes with no more than blue-collar grit and a willingness to fight dirty.",
+  "shortDescription": "A group of vigilantes known informally as “The Boys” set out to take down corrupt superheroes with no more than blue-col",
+  "year": 2019,
+  "releaseYear": 2019,
+  "season": 1,
+  "episode": 1,
+  "rating": 8.4,
+  "votes": "13.5K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Sci-Fi & Fantasy",
+    "Action & Adventure"
+  ],
+  "categories": [
+    "Sci-Fi & Fantasy",
+    "Action & Adventure"
+  ],
+  "language": "English",
+  "country": "US",
+  "poster": "https://image.tmdb.org/t/p/w500/in1R2dDc421JxsoRWaIIAqVI2KE.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/bq28ajZaoMyzEIm6REelqyqtEDZ.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/tcrNsIaQkb4?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/tcrNsIaQkb4?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "1372",
+      "name": "Karl Urban",
+      "character": "Billy Butcher",
+      "photo": "https://image.tmdb.org/t/p/w185/7Y96dAfg0HcFrcLjlD5eD9N0uj4.jpg"
+    },
+    {
+      "id": "1030513",
+      "name": "Jack Quaid",
+      "character": "Hugh 'Hughie' Campbell",
+      "photo": "https://image.tmdb.org/t/p/w185/320qW5yEbxpmyxQ3evmClJbtKag.jpg"
+    },
+    {
+      "id": "60373",
+      "name": "Antony Starr",
+      "character": "Homelander",
+      "photo": "https://image.tmdb.org/t/p/w185/xx3As5SWcE8vYOKZgtjDjqmT3jc.jpg"
+    },
+    {
+      "id": "990393",
+      "name": "Erin Moriarty",
+      "character": "Annie January / Starlight",
+      "photo": "https://image.tmdb.org/t/p/w185/2tFblvjBRUYwcVT1V1i79Ppd6wG.jpg"
+    },
+    {
+      "id": "10964",
+      "name": "Laz Alonso",
+      "character": "Marvin T. 'Mother's Milk' Milk / M.M.",
+      "photo": "https://image.tmdb.org/t/p/w185/nmgOd3X2Xn3jIp9OLCRJzLExRWN.jpg"
+    },
+    {
+      "id": "60899",
+      "name": "Chace Crawford",
+      "character": "Kevin Moskowitz / The Deep",
+      "photo": "https://image.tmdb.org/t/p/w185/wz7s1JT3bYi2vd4fWwmLT809cnT.jpg"
+    },
+    {
+      "id": "1550587",
+      "name": "Tomer Capone",
+      "character": "Serge / Frenchie",
+      "photo": "https://image.tmdb.org/t/p/w185/3IhYEhV3Tmx2CawG5DvcWQyephv.jpg"
+    },
+    {
+      "id": "1461608",
+      "name": "Karen Fukuhara",
+      "character": "Kimiko Miyashiro",
+      "photo": "https://image.tmdb.org/t/p/w185/sG6CWLdENCtzukNFkFYyPxqyRmS.jpg"
+    },
+    {
+      "id": "229422",
+      "name": "Nathan Mitchell",
+      "character": "Justin / Black Noir II",
+      "photo": "https://image.tmdb.org/t/p/w185/ivaVpN1bU2HzKmncuf1IAG6ohlb.jpg"
+    },
+    {
+      "id": "1157294",
+      "name": "Colby Minifie",
+      "character": "Ashley Barrett",
+      "photo": "https://image.tmdb.org/t/p/w185/56FVZRFdctYhZI8zHNbegkKMwl3.jpg"
+    },
+    {
+      "id": "1422261",
+      "name": "Susan Heyward",
+      "character": "Jessica Bradley / Sister Sage",
+      "photo": "https://image.tmdb.org/t/p/w185/eZhgi03goEs9I44p6y2K9sJ3pjw.jpg"
+    },
+    {
+      "id": "1181426",
+      "name": "Valorie Curry",
+      "character": "Misty Tucker Gray / Firecracker",
+      "photo": "https://image.tmdb.org/t/p/w185/A412c6GHnlNdJe197tcS3WNoYiS.jpg"
+    },
+    {
+      "id": "1652371",
+      "name": "Daveed Diggs",
+      "character": "Aaron / Oh Father",
+      "photo": "https://image.tmdb.org/t/p/w185/codalhZzB4LvJTSGOnOyrTEsqsF.jpg"
+    }
+  ],
+  "seasons": 5,
+  "episodes": 40,
+  "status": "PUBLISHED",
+  "links": []
+}

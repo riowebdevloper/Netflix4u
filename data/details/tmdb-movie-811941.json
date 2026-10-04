@@ -1,0 +1,133 @@
+{
+  "id": "tmdb-movie-811941",
+  "canonicalId": "tmdb-movie-811941",
+  "mediaType": "movie",
+  "externalProvider": "tmdb",
+  "externalId": "811941",
+  "tmdbId": "811941",
+  "imdbId": "tt11821912",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "Devara: Part 1",
+  "canonicalTitle": "Devara: Part 1",
+  "originalTitle": "దేవర",
+  "overview": "A mighty warrior takes a stand against the criminal deeds of his village, while his mild-mannered son grows up to walk his own path.",
+  "description": "A mighty warrior takes a stand against the criminal deeds of his village, while his mild-mannered son grows up to walk his own path.",
+  "shortDescription": "A mighty warrior takes a stand against the criminal deeds of his village, while his mild-mannered son grows up to walk h",
+  "year": 2024,
+  "releaseYear": 2024,
+  "rating": 6.8,
+  "votes": "0.2K",
+  "quality": "FHD",
+  "duration": "2h 58m",
+  "genres": [
+    "Drama",
+    "Action"
+  ],
+  "categories": [
+    "Drama",
+    "Action"
+  ],
+  "language": "Telugu",
+  "country": "IN",
+  "poster": "https://image.tmdb.org/t/p/w500/lQfuaXjANoTsdx5iS0gCXlK9D2L.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/hAQnXxOwCjgYcKRgTdYPRC8neqL.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/S5wQD_0WGTA?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/S5wQD_0WGTA?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "148037",
+      "name": "N.T. Rama Rao Jr.",
+      "character": "Devara / Vara",
+      "photo": "https://image.tmdb.org/t/p/w185/5ycQgZ3SPUa12bq0yn1jpToBq9X.jpg"
+    },
+    {
+      "id": "35747",
+      "name": "Saif Ali Khan",
+      "character": "Bhaira",
+      "photo": "https://image.tmdb.org/t/p/w185/kzOy1DoCeLoKJ07nbYnQDObU3yY.jpg"
+    },
+    {
+      "id": "89153",
+      "name": "Prakash Raj",
+      "character": "Singappa",
+      "photo": "https://image.tmdb.org/t/p/w185/dJvFZOXmZdkYCOUcKTXQAhBcAoH.jpg"
+    },
+    {
+      "id": "1003981",
+      "name": "Srikanth",
+      "character": "Rayappa",
+      "photo": "https://image.tmdb.org/t/p/w185/o10UQ9zvh9cOAUENybde25yrueV.jpg"
+    },
+    {
+      "id": "1413865",
+      "name": "Kalaiyarasan",
+      "character": "Kunjara",
+      "photo": "https://image.tmdb.org/t/p/w185/4xaAqc7EFfcJXIS23yVJb6vZhLt.jpg"
+    },
+    {
+      "id": "3012621",
+      "name": "Shruti Marathe",
+      "character": "Devara's Wife",
+      "photo": "https://image.tmdb.org/t/p/w185/zv7Fs6VMzckhHlcF27x9Z3WpG7k.jpg"
+    },
+    {
+      "id": "1974970",
+      "name": "Janhvi Kapoor",
+      "character": "Thangam",
+      "photo": "https://image.tmdb.org/t/p/w185/2VqBDc19br9CIitXUFkZ52q7V2o.jpg"
+    },
+    {
+      "id": "1296632",
+      "name": "Shine Tom Chacko",
+      "character": "Kora",
+      "photo": "https://image.tmdb.org/t/p/w185/lIfhgkTK8bgM5jS2R91ZvCxKIwj.jpg"
+    },
+    {
+      "id": "586625",
+      "name": "Ajay",
+      "character": "Officer Shiva",
+      "photo": "https://image.tmdb.org/t/p/w185/uByCHJa3eaCL0SgFGDYYLlsVggC.jpg"
+    },
+    {
+      "id": "94567",
+      "name": "Zarina Wahab",
+      "character": "Devara's Mother",
+      "photo": "https://image.tmdb.org/t/p/w185/nY28L0JFjTlpIWdwt9qxO1p2HNn.jpg"
+    },
+    {
+      "id": "587752",
+      "name": "Narain",
+      "character": "Irfan",
+      "photo": "https://image.tmdb.org/t/p/w185/d0ApUGeFuGXpBkODIc6eLbBkb7B.jpg"
+    },
+    {
+      "id": "85588",
+      "name": "Murali Sharma",
+      "character": "Muruga",
+      "photo": "https://image.tmdb.org/t/p/w185/8m4L7L9lK4Z2YK4Jg97pMbA0Le5.jpg"
+    },
+    {
+      "id": "109743",
+      "name": "Abhimanyu Singh",
+      "character": "DSP Tulasi",
+      "photo": "https://image.tmdb.org/t/p/w185/ucGZIeHvG9SsW9B94InteMyOlpD.jpg"
+    },
+    {
+      "id": "1256460",
+      "name": "Rameshwari Talluri",
+      "character": "Jogula",
+      "photo": "https://image.tmdb.org/t/p/w185/koMVqCndgoxcfPzbX2sNBQgTlY6.jpg"
+    },
+    {
+      "id": "1544619",
+      "name": "Sudev Nair",
+      "character": "Samara",
+      "photo": "https://image.tmdb.org/t/p/w185/6x111KVuthpPOGJYTvdXLmh3J3p.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 1,
+  "status": "PUBLISHED",
+  "links": []
+}

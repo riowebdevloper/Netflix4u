@@ -1,0 +1,137 @@
+{
+  "id": "tmdb-tv-71912",
+  "canonicalId": "tmdb-tv-71912",
+  "mediaType": "tv",
+  "externalProvider": "tmdb",
+  "externalId": "71912",
+  "tmdbId": "71912",
+  "imdbId": "tt5180504",
+  "type": "series",
+  "contentType": "series",
+  "title": "The Witcher",
+  "canonicalTitle": "The Witcher",
+  "originalTitle": "The Witcher",
+  "overview": "Geralt of Rivia, a mutated monster-hunter for hire, journeys toward his destiny in a turbulent world where people often prove more wicked than beasts.",
+  "description": "Geralt of Rivia, a mutated monster-hunter for hire, journeys toward his destiny in a turbulent world where people often prove more wicked than beasts.",
+  "shortDescription": "Geralt of Rivia, a mutated monster-hunter for hire, journeys toward his destiny in a turbulent world where people often ",
+  "year": 2019,
+  "releaseYear": 2019,
+  "season": 1,
+  "episode": 1,
+  "rating": 7.9,
+  "votes": "6.9K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Sci-Fi & Fantasy",
+    "Drama",
+    "Action & Adventure"
+  ],
+  "categories": [
+    "Sci-Fi & Fantasy",
+    "Drama",
+    "Action & Adventure"
+  ],
+  "language": "English",
+  "country": "US",
+  "poster": "https://image.tmdb.org/t/p/w500/AoGsDM02UVt0npBA8OvpDcZbaMi.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/foGkPxpw9h8zln81j63mix5B7m8.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/eb90gqGYP9c?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/eb90gqGYP9c?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "96066",
+      "name": "Liam Hemsworth",
+      "character": "Geralt of Rivia",
+      "photo": "https://image.tmdb.org/t/p/w185/As5ujeSSJRQN4TE3odg3kDk0b5o.jpg"
+    },
+    {
+      "id": "2146944",
+      "name": "Anya Chalotra",
+      "character": "Yennefer of Vengerberg",
+      "photo": "https://image.tmdb.org/t/p/w185/c3QiX7znSjTR7u2xj29KH6DAnMs.jpg"
+    },
+    {
+      "id": "2146942",
+      "name": "Freya Allan",
+      "character": "Princess Cirilla 'Ciri' of Cintra",
+      "photo": "https://image.tmdb.org/t/p/w185/8RuLG2mePw8YgFNUjWROBuxMrwT.jpg"
+    },
+    {
+      "id": "1353920",
+      "name": "Joey Batey",
+      "character": "Jaskier / The Sandpiper",
+      "photo": "https://image.tmdb.org/t/p/w185/4uo4JPaK6KpdN7v8C1pbwKpNVJU.jpg"
+    },
+    {
+      "id": "110425",
+      "name": "Eamon Farren",
+      "character": "Cahir",
+      "photo": "https://image.tmdb.org/t/p/w185/f4EX93f9MRCfjJc4kKAKqVqRsUW.jpg"
+    },
+    {
+      "id": "1503072",
+      "name": "Mimî M. Khayisa",
+      "character": "Fringilla Vigo",
+      "photo": "https://image.tmdb.org/t/p/w185/kfwWaxcovzkahqDDhhJwPrGbnny.jpg"
+    },
+    {
+      "id": "234929",
+      "name": "Anna Shaffer",
+      "character": "Triss Merigold",
+      "photo": "https://image.tmdb.org/t/p/w185/te5rydQcq4v5m6Y8CVUT430rh1C.jpg"
+    },
+    {
+      "id": "1386458",
+      "name": "Mahesh Jadu",
+      "character": "Vilgefortz of Roggeveen",
+      "photo": "https://image.tmdb.org/t/p/w185/pugsskE62XbyYRruJk8KGk3JVdC.jpg"
+    },
+    {
+      "id": "2979464",
+      "name": "Zhang Meng'er",
+      "character": "Milva",
+      "photo": "https://image.tmdb.org/t/p/w185/lOJ0EIjNybCDT6J3ZLMDnqpoDXD.jpg"
+    },
+    {
+      "id": "13645",
+      "name": "Danny Woodburn",
+      "character": "Zoltan Chivay",
+      "photo": "https://image.tmdb.org/t/p/w185/wmxPxtUWPr7Vux9nsYpFPRGDlWM.jpg"
+    },
+    {
+      "id": "1700995",
+      "name": "Cassie Clare",
+      "character": "Philippa Eilhart",
+      "photo": "https://image.tmdb.org/t/p/w185/bn18nRKMVGJ2EgUg82aXugtyZz9.jpg"
+    },
+    {
+      "id": "1573807",
+      "name": "Bart Edwards",
+      "character": "Emhyr",
+      "photo": "https://image.tmdb.org/t/p/w185/d3pRjRWJMr6pTdFTpxuv0NXd42z.jpg"
+    },
+    {
+      "id": "3495584",
+      "name": "Christelle Elwin",
+      "character": "Mistle",
+      "photo": "https://image.tmdb.org/t/p/w185/1UXruA5cEqdMACjUMuem8jN1N9G.jpg"
+    },
+    {
+      "id": "2348365",
+      "name": "Ben Radcliffe",
+      "character": "Giselher",
+      "photo": "https://image.tmdb.org/t/p/w185/b24QfBFJw4H83nwxW8hIWTgr8V3.jpg"
+    },
+    {
+      "id": "1109112",
+      "name": "Fabian McCallum",
+      "character": "Kayleigh",
+      "photo": "https://image.tmdb.org/t/p/w185/zVZDLHUovRJG2IZvXqqSFSYOMKn.jpg"
+    }
+  ],
+  "seasons": 4,
+  "episodes": 32,
+  "status": "PUBLISHED",
+  "links": []
+}

@@ -649,25 +649,55 @@ body {
   background: #000;
 }
 
-/* ─── Mobile Portrait: Compact Inline Layout ─── */
+/* ─── Modal Strict Visibility & Isolation (Zero Leakage into Homepage) ─── */
+#watch-modal.hidden,
+#watch-modal[hidden],
+#title-modal.hidden,
+#title-modal[hidden],
+#trailer-modal.hidden,
+#trailer-modal[hidden],
+#policy-modal.hidden,
+#policy-modal[hidden],
+#watch-server-picker-modal.hidden,
+#watch-server-picker-modal[hidden],
+.modal-overlay.hidden,
+.hidden {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+/* ─── Net27 Watch Modal (Desktop & Inline Base) ─── */
+#watch-modal:not(.hidden) {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+/* ─── Mobile Portrait: Compact Inline Layout (ONLY WHEN ACTIVE / NOT HIDDEN) ─── */
 @media (max-width: 768px) and (orientation: portrait) {
-  #watch-modal {
-    height: 100dvh !important;
-    height: 100vh !important;
+  #watch-modal:not(.hidden) {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
     display: flex !important;
     flex-direction: column !important;
     overflow-y: auto !important;
     background: #0a0a0f !important;
+    z-index: 60 !important;
   }
   .player-shell {
     width: 100% !important;
+    max-width: 100% !important;
     flex: 0 0 auto !important;
+    background: #000 !important;
   }
   .player-frame,
   .watch-player-stage {
     width: 100% !important;
     aspect-ratio: 16 / 9 !important;
     height: auto !important;
+    min-height: 0 !important;
     flex: 0 0 auto !important;
     position: relative !important;
     background: #000 !important;
@@ -675,8 +705,8 @@ body {
 }
 
 /* ─── Fullscreen Mode strictly separated (PART 10) ─── */
-#watch-modal.is-fullscreen,
-:fullscreen #watch-modal {
+#watch-modal:not(.hidden).is-fullscreen,
+:fullscreen #watch-modal:not(.hidden) {
   position: fixed !important;
   inset: 0 !important;
   width: 100vw !important;

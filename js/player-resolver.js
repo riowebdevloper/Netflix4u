@@ -146,17 +146,27 @@
 
   /**
    * Generates a canonical cache key.
+   * Movie stream:   stream:{provider}:{movieId}
+   * Movie download: download:{provider}:{movieId}
+   * TV stream:      stream:{provider}:{seriesId}:s{season}:e{episode}
+   * TV download:    download:{provider}:{seriesId}:s{season}:e{episode}
    */
-  function getCanonicalCacheKey(req) {
+  function getCanonicalCacheKey(req, provider, mode) {
     var validation = validatePlaybackRequest(req);
     if (!validation.valid || !validation.sanitized) {
       return null;
     }
     var s = validation.sanitized;
+    var p = (provider || 'vidsrc_sbs').toLowerCase().trim();
+    var prefix = (mode === 'download') ? 'download' : 'stream';
     if (s.type === 'movie') {
-      return 'player:movie:tmdb:' + s.tmdbId;
+      return prefix + ':' + p + ':' + s.tmdbId;
     }
-    return 'player:tv:tmdb:' + s.tmdbId + ':s' + s.season + ':e' + s.episode;
+    return prefix + ':' + p + ':' + s.tmdbId + ':s' + s.season + ':e' + s.episode;
+  }
+
+  function getDownloadCacheKey(req, provider) {
+    return getCanonicalCacheKey(req, provider, 'download');
   }
 
   /**
@@ -522,6 +532,7 @@
     cleanTmdbId: cleanTmdbId,
     validatePlaybackRequest: validatePlaybackRequest,
     getCanonicalCacheKey: getCanonicalCacheKey,
+    getDownloadCacheKey: getDownloadCacheKey,
     getAllmovielandCacheKey: getAllmovielandCacheKey,
     resolvePlayerUrl: resolvePlayerUrl,
     isAllowedOrigin: isAllowedOrigin,

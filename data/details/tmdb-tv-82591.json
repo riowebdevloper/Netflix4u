@@ -1,0 +1,95 @@
+{
+  "id": "tmdb-tv-82591",
+  "canonicalId": "tmdb-tv-82591",
+  "mediaType": "tv",
+  "externalProvider": "tmdb",
+  "externalId": "82591",
+  "tmdbId": "82591",
+  "imdbId": "tt8690728",
+  "type": "series",
+  "contentType": "series",
+  "title": "Goblin Slayer",
+  "canonicalTitle": "Goblin Slayer",
+  "originalTitle": "ゴブリンスレイヤー",
+  "overview": "\"I'm not saving the world. I just kill goblins.\"\n\nRumor has it that, in a certain guild in the middle of nowhere, there is an extraordinary man who has climbed all the way to the Silver rank just by killing goblins. At the same guild, a priestess who's just become a new adventurer has formed her first party... and the man who ends up rescuing that party when they get into trouble is none other than the Goblin Slayer.",
+  "description": "\"I'm not saving the world. I just kill goblins.\"\n\nRumor has it that, in a certain guild in the middle of nowhere, there is an extraordinary man who has climbed all the way to the Silver rank just by killing goblins. At the same guild, a priestess who's just become a new adventurer has formed her first party... and the man who ends up rescuing that party when they get into trouble is none other than the Goblin Slayer.",
+  "shortDescription": "\"I'm not saving the world. I just kill goblins.\"\n\nRumor has it that, in a certain guild in the middle of nowhere, there ",
+  "year": 2018,
+  "releaseYear": 2018,
+  "season": 1,
+  "episode": 1,
+  "rating": 8,
+  "votes": "0.6K",
+  "quality": "FHD",
+  "duration": "24m/ep",
+  "genres": [
+    "Animation",
+    "Action & Adventure",
+    "Sci-Fi & Fantasy"
+  ],
+  "categories": [
+    "Animation",
+    "Action & Adventure",
+    "Sci-Fi & Fantasy"
+  ],
+  "language": "Japanese",
+  "country": "JP",
+  "poster": "https://image.tmdb.org/t/p/w500/x8ZQyxAFjz9jtCGivbOMYUC4Tp3.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/65XyAN0PrUkkfqvGbFRLjk5x3wZ.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/7qnhoB_cHSg?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/7qnhoB_cHSg?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "1483496",
+      "name": "Yuuichirou Umehara",
+      "character": "Goblin Slayer (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/lScrvZi4tKKpk3PbnIjLVjHVNJn.jpg"
+    },
+    {
+      "id": "1057990",
+      "name": "Yui Ogura",
+      "character": "Priestess (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/vUuyLWde2CEd5G0oqeEzzFE6qqA.jpg"
+    },
+    {
+      "id": "1168909",
+      "name": "Nao Toyama",
+      "character": "High Elf Archer (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/6WJDd1z946yFfZBgpC7dWi0FyQw.jpg"
+    },
+    {
+      "id": "1242005",
+      "name": "Yuka Iguchi",
+      "character": "Cow Girl (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/38ZjRGBLD4lvfU3mSMyIBCIq85D.jpg"
+    },
+    {
+      "id": "1296667",
+      "name": "Maaya Uchida",
+      "character": "Guild Girl (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/lrcxZXkIgHU55dMs8C4DKkUohqJ.jpg"
+    },
+    {
+      "id": "1221114",
+      "name": "Yuichi Nakamura",
+      "character": "Dwarf Shaman (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/wb8behVKjBHX9XXrEydvNINCYwH.jpg"
+    },
+    {
+      "id": "144655",
+      "name": "Tomokazu Sugita",
+      "character": "Lizard Priest (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/cv5zuPZySNsHXu24pjKLYCRzJ2J.jpg"
+    },
+    {
+      "id": "223687",
+      "name": "Aya Endo",
+      "character": "Sword Maiden (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/s59Lip4dPC7rI3cz1pHs9vSmuvf.jpg"
+    }
+  ],
+  "seasons": 2,
+  "episodes": 24,
+  "status": "PUBLISHED",
+  "links": []
+}

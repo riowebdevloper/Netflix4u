@@ -1,0 +1,135 @@
+{
+  "id": "tmdb-movie-579974",
+  "canonicalId": "tmdb-movie-579974",
+  "mediaType": "movie",
+  "externalProvider": "tmdb",
+  "externalId": "579974",
+  "tmdbId": "579974",
+  "imdbId": "tt8178634",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "RRR",
+  "canonicalTitle": "RRR",
+  "originalTitle": "రౌద్రం రణం రుధిరం",
+  "overview": "A fictional history of two legendary revolutionaries' journey away from home before they began fighting for their country in the 1920s.",
+  "description": "A fictional history of two legendary revolutionaries' journey away from home before they began fighting for their country in the 1920s.",
+  "shortDescription": "A fictional history of two legendary revolutionaries' journey away from home before they began fighting for their countr",
+  "year": 2022,
+  "releaseYear": 2022,
+  "rating": 7.7,
+  "votes": "1.7K",
+  "quality": "FHD",
+  "duration": "3h 7m",
+  "genres": [
+    "Action",
+    "History",
+    "Drama"
+  ],
+  "categories": [
+    "Action",
+    "History",
+    "Drama"
+  ],
+  "language": "English",
+  "country": "IN",
+  "poster": "https://image.tmdb.org/t/p/w500/wE0I6efAW4cDDmZQWtwZMOW44EJ.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/i0Y0wP8H6SRgjr6QmuwbtQbS24D.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/i4pjiLGUTtk?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/i4pjiLGUTtk?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "148037",
+      "name": "N.T. Rama Rao Jr.",
+      "character": "Komaram Bheem",
+      "photo": "https://image.tmdb.org/t/p/w185/5ycQgZ3SPUa12bq0yn1jpToBq9X.jpg"
+    },
+    {
+      "id": "147023",
+      "name": "Ram Charan",
+      "character": "Alluri Sitarama Raju",
+      "photo": "https://image.tmdb.org/t/p/w185/twGqYUCR0Yh33j3TcgRTZRBRhTd.jpg"
+    },
+    {
+      "id": "2462673",
+      "name": "Olivia Morris",
+      "character": "Jennifer 'Jenny' Buxton",
+      "photo": "https://image.tmdb.org/t/p/w185/iAzUTXzFWwEkRx6Ygudqnx4DmtW.jpg"
+    },
+    {
+      "id": "56614",
+      "name": "Ray Stevenson",
+      "character": "Scott Buxton",
+      "photo": "https://image.tmdb.org/t/p/w185/9QCVNDgTgDEbGsa6w3JuECEPuQz.jpg"
+    },
+    {
+      "id": "739",
+      "name": "Alison Doody",
+      "character": "Cassandra Buxton",
+      "photo": "https://image.tmdb.org/t/p/w185/q5CpMFAjLP40JHgwS6qWku6arSC.jpg"
+    },
+    {
+      "id": "42803",
+      "name": "Ajay Devgn",
+      "character": "Alluri Venkatarama Raju",
+      "photo": "https://image.tmdb.org/t/p/w185/vnHQQFzTjJ0sv14DGMIoKa3qTxN.jpg"
+    },
+    {
+      "id": "1108120",
+      "name": "Alia Bhatt",
+      "character": "Sita",
+      "photo": "https://image.tmdb.org/t/p/w185/lAgBZgHKTo6amIO9CfNxUbm1usH.jpg"
+    },
+    {
+      "id": "585397",
+      "name": "Samuthirakani",
+      "character": "Alluri Venkateshwarulu",
+      "photo": "https://image.tmdb.org/t/p/w185/z8mU71yAUfVLgKWHorsTIsyQwnt.jpg"
+    },
+    {
+      "id": "3482249",
+      "name": "Twinkle Sharma",
+      "character": "Malli",
+      "photo": "https://image.tmdb.org/t/p/w185/xYGDBO8uE6SK8n1wqUcrBBYMmrX.jpg"
+    },
+    {
+      "id": "145628",
+      "name": "Shriya Saran",
+      "character": "Alluri Sarojini",
+      "photo": "https://image.tmdb.org/t/p/w185/ioOgKBSCJhOdKoZpg86ld7zANbf.jpg"
+    },
+    {
+      "id": "3030527",
+      "name": "Chatrapathi Sekhar",
+      "character": "Jangu",
+      "photo": "https://image.tmdb.org/t/p/w185/sLP6V1McdVPwp3smHzEzuXs8ubM.jpg"
+    },
+    {
+      "id": "130990",
+      "name": "Makrand Deshpande",
+      "character": "Peddanna",
+      "photo": "https://image.tmdb.org/t/p/w185/aGA9mjohVWWTeTmutXikSSCYq9x.jpg"
+    },
+    {
+      "id": "1882128",
+      "name": "Rahul Ramakrishna",
+      "character": "Lacchu",
+      "photo": "https://image.tmdb.org/t/p/w185/jsRbEXcUgR8zniBb3UTGOqrtxV9.jpg"
+    },
+    {
+      "id": "2684809",
+      "name": "Varun Buddhadev",
+      "character": "Young Alluri Sitarama Raju",
+      "photo": "https://image.tmdb.org/t/p/w185/u5TGHF81UZwCBuDrv7D3x3DPYuC.jpg"
+    },
+    {
+      "id": "1936126",
+      "name": "Edward Sonnenblick",
+      "character": "Edwards",
+      "photo": "https://image.tmdb.org/t/p/w185/8RAG0dhQp1L50zMpP0sh1rLP3tf.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 1,
+  "status": "PUBLISHED",
+  "links": []
+}

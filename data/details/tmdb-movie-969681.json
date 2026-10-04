@@ -1,0 +1,206 @@
+{
+  "id": "tmdb-movie-969681",
+  "canonicalId": "tmdb-movie-969681",
+  "mediaType": "movie",
+  "externalProvider": "tmdb",
+  "externalId": "969681",
+  "tmdbId": "969681",
+  "imdbId": "tt22084616",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "Spider-Man: Brand New Day",
+  "canonicalTitle": "Spider-Man: Brand New Day",
+  "originalTitle": "Spider-Man: Brand New Day",
+  "overview": "Fighting crime full-time as Spider-Man in a world that doesn't remember him—and the pressure of seeing his old friends move on without him—sparks a change in Peter Parker he may not have the power to control. But that transformation might also be the only thing that can stop a shocking new threat to the city and those he loves - a powerful villain no one can even see.",
+  "description": "Fighting crime full-time as Spider-Man in a world that doesn't remember him—and the pressure of seeing his old friends move on without him—sparks a change in Peter Parker he may not have the power to control. But that transformation might also be the only thing that can stop a shocking new threat to the city and those he loves - a powerful villain no one can even see.",
+  "shortDescription": "Fighting crime full-time as Spider-Man in a world that doesn't remember him—and the pressure of seeing his old friends m",
+  "year": 2026,
+  "releaseYear": 2026,
+  "rating": 7.9,
+  "votes": "3.0K",
+  "quality": "FHD",
+  "duration": "2h 25m",
+  "genres": [
+    "Science Fiction",
+    "Action",
+    "Adventure"
+  ],
+  "categories": [
+    "Science Fiction",
+    "Action",
+    "Adventure"
+  ],
+  "language": "English",
+  "country": "US",
+  "poster": "https://image.tmdb.org/t/p/w500/bjiS5ipwxb9JFy3XRRN4OAilSeX.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/qeQJx07rK2xm8SD2sJxFKhE7gs0.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/P3uI5sLosKU?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/P3uI5sLosKU?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "1136406",
+      "name": "Tom Holland",
+      "character": "Peter Parker / Spider-Man",
+      "photo": "https://image.tmdb.org/t/p/w185/xKBAaPIa1c7tzZD3Y0MhBLv4hPE.jpg"
+    },
+    {
+      "id": "505710",
+      "name": "Zendaya",
+      "character": "MJ",
+      "photo": "https://image.tmdb.org/t/p/w185/1qup8tSt95HLbcy2c2xrx4iJNxv.jpg"
+    },
+    {
+      "id": "103",
+      "name": "Mark Ruffalo",
+      "character": "Bruce Banner / Hulk",
+      "photo": "https://image.tmdb.org/t/p/w185/5GilHMOt5PAQh6rlUKZzGmaKEI7.jpg"
+    },
+    {
+      "id": "19498",
+      "name": "Jon Bernthal",
+      "character": "Frank Castle / Punisher",
+      "photo": "https://image.tmdb.org/t/p/w185/bjcglF1IpDcZNs1HwFxakGpzBo6.jpg"
+    },
+    {
+      "id": "1649152",
+      "name": "Jacob Batalon",
+      "character": "Ned Leeds",
+      "photo": "https://image.tmdb.org/t/p/w185/53YhaL4xw4Sb1ssoHkeSSBaO29c.jpg"
+    },
+    {
+      "id": "1590797",
+      "name": "Sadie Sink",
+      "character": "Jean Grey",
+      "photo": "https://image.tmdb.org/t/p/w185/92FddzBfK50XOUbtwjqHPraoGHy.jpg"
+    },
+    {
+      "id": "1373737",
+      "name": "Florence Pugh",
+      "character": "Yelena Belova / Black Widow",
+      "photo": "https://image.tmdb.org/t/p/w185/2URrZb95t3kY6pLroKny3Enmabp.jpg"
+    },
+    {
+      "id": "59693",
+      "name": "Liza Colón-Zayas",
+      "character": "Detective Jean DeWolff",
+      "photo": "https://image.tmdb.org/t/p/w185/q2gHcef0wckji0AS8ZEO6cYx065.jpg"
+    },
+    {
+      "id": "2028037",
+      "name": "Tramell Tillman",
+      "character": "William 'Bill' Metzger",
+      "photo": "https://image.tmdb.org/t/p/w185/bEA15zMnkcXlRroYjKrFUWiiK7y.jpg"
+    },
+    {
+      "id": "3141",
+      "name": "Marisa Tomei",
+      "character": "May Parker",
+      "photo": "https://image.tmdb.org/t/p/w185/5NCCKQooVCQD36R6JL3a1hOeBVn.jpg"
+    },
+    {
+      "id": "3489",
+      "name": "Naomi Watts",
+      "character": "E.V. (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/7ysvff7ZhW388SIh2YjQ0XIryOn.jpg"
+    },
+    {
+      "id": "829372",
+      "name": "Michael Mando",
+      "character": "Mac Gargan / Scorpion",
+      "photo": "https://image.tmdb.org/t/p/w185/gvM2wG66bjEpiirdeQdyG9EzUfv.jpg"
+    },
+    {
+      "id": "65827",
+      "name": "Keith David",
+      "character": "Narrator of Spider Video (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/1x0QXavmIy3QmhyrOsV7gMnJaEx.jpg"
+    },
+    {
+      "id": "1962692",
+      "name": "Marvin Jones III",
+      "character": "Tombstone",
+      "photo": "https://image.tmdb.org/t/p/w185/nS4X8TP3idFsxDdV9UqTRbz585g.jpg"
+    },
+    {
+      "id": "3226127",
+      "name": "Olivia Booth-Ford",
+      "character": "Sara",
+      "photo": "https://image.tmdb.org/t/p/w185/nBerjq4BKbhxQeTgVKaD4zvmRKs.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 1,
+  "status": "PUBLISHED",
+  "links": [
+    {
+      "url": "https://crimson-sea-a1e5.hekoy.workers.dev/?vcloud=https://vcloud.fit/j_arnejeraexou3",
+      "quality": "720p",
+      "size": "470MB",
+      "label": "Spider-Man: Brand New Day (2026) {HiNDi-English} 480p PREHD x264 [470MB]",
+      "source": "Fast Cloud",
+      "isCloud": true,
+      "isDotmovies": false,
+      "season": null,
+      "episode": null,
+      "isBatch": false,
+      "canonicalId": "tmdb-movie-969681",
+      "isPack": false
+    },
+    {
+      "url": "https://crimson-sea-a1e5.hekoy.workers.dev/?vcloud=https://vcloud.fit/19rf5qgrzx-untl",
+      "quality": "720p",
+      "size": "780MB",
+      "label": "Spider-Man: Brand New Day (2026) {HiNDi-English} 720p 10Bit PREHD x265 [780MB]",
+      "source": "Fast Cloud",
+      "isCloud": true,
+      "isDotmovies": false,
+      "season": null,
+      "episode": null,
+      "isBatch": false,
+      "canonicalId": "tmdb-movie-969681",
+      "isPack": false
+    },
+    {
+      "url": "https://crimson-sea-a1e5.hekoy.workers.dev/?vcloud=https://vcloud.fit/iwupwi5ydnwdhct",
+      "quality": "720p",
+      "size": "1.2GB",
+      "label": "Spider-Man: Brand New Day (2026) {HiNDi-English} 720p PREHD x264 [1.2GB]",
+      "source": "Fast Cloud",
+      "isCloud": true,
+      "isDotmovies": false,
+      "season": null,
+      "episode": null,
+      "isBatch": false,
+      "canonicalId": "tmdb-movie-969681",
+      "isPack": false
+    },
+    {
+      "url": "https://crimson-sea-a1e5.hekoy.workers.dev/?vcloud=https://vcloud.fit/cdszlrfzvfj2jmh",
+      "quality": "1080p",
+      "size": "2.7GB",
+      "label": "Spider-Man: Brand New Day (2026) {HiNDi-English} 1080p PREHD x264 [2.7GB]",
+      "source": "Fast Cloud",
+      "isCloud": true,
+      "isDotmovies": false,
+      "season": null,
+      "episode": null,
+      "isBatch": false,
+      "canonicalId": "tmdb-movie-969681",
+      "isPack": false
+    },
+    {
+      "url": "https://crimson-sea-a1e5.hekoy.workers.dev/?vcloud=https://vcloud.fit/9loo8mhecw1oq9h",
+      "quality": "1080p",
+      "size": "8.2GB",
+      "label": "Spider-Man: Brand New Day (2026) {HiNDi-English} HQ 1080p PREHD x264 [8.2GB]",
+      "source": "Fast Cloud",
+      "isCloud": true,
+      "isDotmovies": false,
+      "season": null,
+      "episode": null,
+      "isBatch": false,
+      "canonicalId": "tmdb-movie-969681",
+      "isPack": false
+    }
+  ]
+}

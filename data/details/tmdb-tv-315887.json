@@ -1,0 +1,63 @@
+{
+  "id": "tmdb-tv-315887",
+  "canonicalId": "tmdb-tv-315887",
+  "mediaType": "tv",
+  "externalProvider": "tmdb",
+  "externalId": "315887",
+  "tmdbId": "315887",
+  "imdbId": "tt39216418",
+  "type": "series",
+  "contentType": "series",
+  "title": "Vikram On Duty",
+  "canonicalTitle": "Vikram On Duty",
+  "originalTitle": "Vikram On Duty",
+  "overview": "Battling his past and personal demons, a disgraced but brilliant supercop will stop at nothing to solve crimes and earn back the uniform that defined him.",
+  "description": "Battling his past and personal demons, a disgraced but brilliant supercop will stop at nothing to solve crimes and earn back the uniform that defined him.",
+  "shortDescription": "Battling his past and personal demons, a disgraced but brilliant supercop will stop at nothing to solve crimes and earn ",
+  "year": 2026,
+  "releaseYear": 2026,
+  "season": 1,
+  "episode": 1,
+  "rating": 8,
+  "votes": "1.2K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Crime",
+    "Mystery"
+  ],
+  "categories": [
+    "Crime",
+    "Mystery"
+  ],
+  "language": "Telugu",
+  "country": "IN",
+  "poster": "https://image.tmdb.org/t/p/w500/rx7WfinVmSkKbhaxw5oYHU9e5uI.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/t1m63PDxcbkivjUZK2y9dQBzcRB.jpg",
+  "trailerUrl": null,
+  "trailer": null,
+  "cast": [
+    {
+      "id": "6426552",
+      "name": "Nikhil Maliyakkal",
+      "character": "Vikram Vasu",
+      "photo": "https://image.tmdb.org/t/p/w185/3uPQQH10hotM6IIpsKvGEnA3Y6u.jpg"
+    },
+    {
+      "id": "4277851",
+      "name": "Gayatri Chaganti",
+      "character": "Akhila",
+      "photo": "https://image.tmdb.org/t/p/w185/soK3JGY911hombgnQqnPKcFFE1a.jpg"
+    },
+    {
+      "id": "1639893",
+      "name": "Sameer Hasan",
+      "character": "IG",
+      "photo": "https://image.tmdb.org/t/p/w185/mNKhHh2OSejWrEXNzPVkF7pnWRr.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 100,
+  "status": "PUBLISHED",
+  "links": []
+}

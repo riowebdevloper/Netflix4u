@@ -1,0 +1,137 @@
+{
+  "id": "tmdb-series-46260",
+  "canonicalId": "tmdb-series-46260",
+  "mediaType": "tv",
+  "externalProvider": "tmdb",
+  "externalId": "46260",
+  "tmdbId": "46260",
+  "imdbId": "tt0409591",
+  "type": "series",
+  "contentType": "series",
+  "title": "Naruto",
+  "canonicalTitle": "Naruto",
+  "originalTitle": "ナルト",
+  "overview": "Naruto Uzumaki, a mischievous adolescent ninja, struggles as he searches for recognition and dreams of becoming the Hokage, the village's leader and strongest ninja.",
+  "description": "Naruto Uzumaki, a mischievous adolescent ninja, struggles as he searches for recognition and dreams of becoming the Hokage, the village's leader and strongest ninja.",
+  "shortDescription": "Naruto Uzumaki, a mischievous adolescent ninja, struggles as he searches for recognition and dreams of becoming the Hoka",
+  "year": 2002,
+  "releaseYear": 2002,
+  "season": 1,
+  "episode": 1,
+  "rating": 8.4,
+  "votes": "6.1K",
+  "quality": "FHD",
+  "duration": "24m/ep",
+  "genres": [
+    "Animation",
+    "Action & Adventure",
+    "Sci-Fi & Fantasy"
+  ],
+  "categories": [
+    "Animation",
+    "Action & Adventure",
+    "Sci-Fi & Fantasy"
+  ],
+  "language": "Japanese",
+  "country": "JP",
+  "poster": "https://image.tmdb.org/t/p/w500/xppeysfvDKVx775MFuH8Z9BlpMk.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/5F0HVEgkgP99fEWDjPyikGt9jQi.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/-G9BqkgZXRA?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/-G9BqkgZXRA?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "82055",
+      "name": "Junko Takeuchi",
+      "character": "Naruto Uzumaki (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/zNjrblq3xS1idpCsmSl5P5eTon7.jpg"
+    },
+    {
+      "id": "82056",
+      "name": "Noriaki Sugiyama",
+      "character": "Sasuke Uchiha (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/szqqQ8T0gzuSxjU2rnWcthsaSJT.jpg"
+    },
+    {
+      "id": "82057",
+      "name": "Chie Nakamura",
+      "character": "Sakura Haruno (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/evB6vKUbm0CKgBcgikPeFXdwd29.jpg"
+    },
+    {
+      "id": "89968",
+      "name": "Kazuhiko Inoue",
+      "character": "Kakashi Hatake (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/3BpYtYRiLAmTNbCm2LXlXnkMRit.jpg"
+    },
+    {
+      "id": "1213848",
+      "name": "Hidekatsu Shibata",
+      "character": "Hiruzen Sarutobi (3º Hokage) (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/hnKQe1GpuLAZY8pDnJc6eXIQzfv.jpg"
+    },
+    {
+      "id": "550662",
+      "name": "Koichi Tochika",
+      "character": "Neji Hyuga (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/wZYe5RmOLYIhpesKEaFIxz7YN7G.jpg"
+    },
+    {
+      "id": "111531",
+      "name": "Masashi Ebara",
+      "character": "Might Guy (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/xJPCatQLQi75zc9YfWZo0gSpynq.jpg"
+    },
+    {
+      "id": "89971",
+      "name": "Yōichi Masukawa",
+      "character": "Rock Lee (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/sE664CcqM1pvoWsYsca7szlIzl5.jpg"
+    },
+    {
+      "id": "203268",
+      "name": "Yukari Tamura",
+      "character": "Tenten (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/AigHQPetpcKee62ekHsYFSpQeWE.jpg"
+    },
+    {
+      "id": "114906",
+      "name": "Ryoka Yuzuki",
+      "character": "Ino Yamanaka (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/kRiagleTO13MWYXl77xGDBDerxM.jpg"
+    },
+    {
+      "id": "9714",
+      "name": "Showtaro Morikubo",
+      "character": "Shikamaru Nara (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/mSTqMg8fls9pJO3Qwe47nawJ4vX.jpg"
+    },
+    {
+      "id": "81363",
+      "name": "Kentaro Ito",
+      "character": "Choji Akimichi (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/fIoreUBVEWcRLZanJlHUSQAjpeE.jpg"
+    },
+    {
+      "id": "1244721",
+      "name": "Shinji Kawada",
+      "character": "Shino Aburame (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/bynL2ngE9ieW8tSDRUuQM8NmRAE.jpg"
+    },
+    {
+      "id": "24651",
+      "name": "Nana Mizuki",
+      "character": "Hinata Hyuga (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/rQBo7HyjTIqeB7hIofb7uJFhiVs.jpg"
+    },
+    {
+      "id": "122647",
+      "name": "Kohsuke Toriumi",
+      "character": "Kiba Inuzuka (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/vlRQ77taCCKh7itCZn3IWJUiYQr.jpg"
+    }
+  ],
+  "seasons": 4,
+  "episodes": 220,
+  "status": "PUBLISHED",
+  "links": []
+}

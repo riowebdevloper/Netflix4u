@@ -1,0 +1,192 @@
+{
+  "id": "tmdb-movie-98",
+  "canonicalId": "tmdb-movie-98",
+  "mediaType": "movie",
+  "externalProvider": "tmdb",
+  "externalId": "98",
+  "tmdbId": "98",
+  "imdbId": "tt0172495",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "Gladiator",
+  "canonicalTitle": "Gladiator",
+  "originalTitle": "Gladiator",
+  "overview": "After the death of Emperor Marcus Aurelius, his devious son takes power and demotes Maximus, one of Rome's most capable generals who Marcus preferred. Eventually, Maximus is forced to become a gladiator and battle to the death against other men for the amusement of paying audiences.",
+  "description": "After the death of Emperor Marcus Aurelius, his devious son takes power and demotes Maximus, one of Rome's most capable generals who Marcus preferred. Eventually, Maximus is forced to become a gladiator and battle to the death against other men for the amusement of paying audiences.",
+  "shortDescription": "After the death of Emperor Marcus Aurelius, his devious son takes power and demotes Maximus, one of Rome's most capable ",
+  "year": 2000,
+  "releaseYear": 2000,
+  "rating": 8.2,
+  "votes": "21.6K",
+  "quality": "FHD",
+  "duration": "2h 35m",
+  "genres": [
+    "Action",
+    "Drama",
+    "Adventure"
+  ],
+  "categories": [
+    "Action",
+    "Drama",
+    "Adventure"
+  ],
+  "language": "English",
+  "country": "US",
+  "poster": "https://image.tmdb.org/t/p/w500/wN2xWp1eIwCKOD0BHTcErTBv1Uq.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/Ar7QuJ7sJEiC0oP3I8fKBKIQD9u.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/P5ieIbInFpg?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/P5ieIbInFpg?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "934",
+      "name": "Russell Crowe",
+      "character": "Maximus",
+      "photo": "https://image.tmdb.org/t/p/w185/3IBZF0qCZMZ7zJYlgrH0sQzNZV.jpg"
+    },
+    {
+      "id": "73421",
+      "name": "Joaquin Phoenix",
+      "character": "Commodus",
+      "photo": "https://image.tmdb.org/t/p/w185/u38k3hQBDwNX0VA22aQceDp9Iyv.jpg"
+    },
+    {
+      "id": "935",
+      "name": "Connie Nielsen",
+      "character": "Lucilla",
+      "photo": "https://image.tmdb.org/t/p/w185/gSQ3O3PJ6ly6nT63joOtfZyscFP.jpg"
+    },
+    {
+      "id": "936",
+      "name": "Oliver Reed",
+      "character": "Proximo",
+      "photo": "https://image.tmdb.org/t/p/w185/dWfotc1X71wNCGyPO9hXpv8U9Gw.jpg"
+    },
+    {
+      "id": "194",
+      "name": "Richard Harris",
+      "character": "Marcus Aurelius",
+      "photo": "https://image.tmdb.org/t/p/w185/oJIS8QUOCfLUhsfK7kROkLHVyJh.jpg"
+    },
+    {
+      "id": "937",
+      "name": "Derek Jacobi",
+      "character": "Gracchus",
+      "photo": "https://image.tmdb.org/t/p/w185/yHENzHZSVpnNrqsoATuDSMiQflf.jpg"
+    },
+    {
+      "id": "938",
+      "name": "Djimon Hounsou",
+      "character": "Juba",
+      "photo": "https://image.tmdb.org/t/p/w185/tpvtxxvCx2Mb5DV632hmuYlHoiY.jpg"
+    },
+    {
+      "id": "939",
+      "name": "David Schofield",
+      "character": "Falco",
+      "photo": "https://image.tmdb.org/t/p/w185/2Dlxu9pqbjKA0dbfy4yMUFjiqeW.jpg"
+    },
+    {
+      "id": "940",
+      "name": "John Shrapnel",
+      "character": "Gaius",
+      "photo": "https://image.tmdb.org/t/p/w185/A4Wmltbkz3sz79GcBkLeTqwfkvE.jpg"
+    },
+    {
+      "id": "941",
+      "name": "Tomas Arana",
+      "character": "Quintus",
+      "photo": "https://image.tmdb.org/t/p/w185/qMuQWxUQ2sXDiN2d9EDVT5VXHo2.jpg"
+    },
+    {
+      "id": "942",
+      "name": "Ralf Moeller",
+      "character": "Hagen",
+      "photo": "https://image.tmdb.org/t/p/w185/lfx7pAL0einahCePvn10SmMCfoU.jpg"
+    },
+    {
+      "id": "4012",
+      "name": "Spencer Treat Clark",
+      "character": "Lucius",
+      "photo": "https://image.tmdb.org/t/p/w185/8qb2Unu2907rU7k6UxmF9PFamau.jpg"
+    },
+    {
+      "id": "15196",
+      "name": "David Hemmings",
+      "character": "Cassius",
+      "photo": "https://image.tmdb.org/t/p/w185/xU0DylXHjiRTJlZ3czZ6luFF7uZ.jpg"
+    },
+    {
+      "id": "2478",
+      "name": "Tommy Flanagan",
+      "character": "Cicero",
+      "photo": "https://image.tmdb.org/t/p/w185/5OnvT1KpEk3juZavqOCSAEYOtwl.jpg"
+    },
+    {
+      "id": "20761",
+      "name": "Sven-Ole Thorsen",
+      "character": "Tiger",
+      "photo": "https://image.tmdb.org/t/p/w185/7uhBGHXs6xLwFwzWbLEsHDgYzHP.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 1,
+  "status": "PUBLISHED",
+  "links": [
+    {
+      "url": "https://crimson-sea-a1e5.hekoy.workers.dev/?vcloud=https://vcloud.fit/evy7bzyym2frnym",
+      "quality": "480p",
+      "size": "550MB",
+      "label": "Server Stream (480p)",
+      "source": "Fast Cloud",
+      "isCloud": true,
+      "isDotmovies": false,
+      "season": null,
+      "episode": null,
+      "isBatch": false,
+      "canonicalId": "tmdb-movie-98",
+      "isPack": false
+    },
+    {
+      "url": "https://crimson-sea-a1e5.hekoy.workers.dev/?vcloud=https://vcloud.fit/vs4dyxkg6eqqxzn",
+      "quality": "720p",
+      "size": "900MB",
+      "label": "Server Stream (720p)",
+      "source": "Fast Cloud",
+      "isCloud": true,
+      "isDotmovies": false,
+      "season": null,
+      "episode": null,
+      "isBatch": false,
+      "canonicalId": "tmdb-movie-98",
+      "isPack": false
+    },
+    {
+      "url": "https://crimson-sea-a1e5.hekoy.workers.dev/?vcloud=https://vcloud.fit/7nzucqe4syq4m41",
+      "quality": "720p",
+      "size": "17GB",
+      "label": "Server Stream (720p)",
+      "source": "Fast Cloud",
+      "isCloud": true,
+      "isDotmovies": false,
+      "season": null,
+      "episode": null,
+      "isBatch": false,
+      "canonicalId": "tmdb-movie-98",
+      "isPack": false
+    },
+    {
+      "url": "https://crimson-sea-a1e5.hekoy.workers.dev/?vcloud=https://vcloud.fit/0bt1xg1g0vro1vt",
+      "quality": "1080p",
+      "size": "4GB",
+      "label": "Server Stream (1080p)",
+      "source": "Fast Cloud",
+      "isCloud": true,
+      "isDotmovies": false,
+      "season": null,
+      "episode": null,
+      "isBatch": false,
+      "canonicalId": "tmdb-movie-98",
+      "isPack": false
+    }
+  ]
+}

@@ -1,0 +1,162 @@
+{
+  "id": "tmdb-movie-1153576",
+  "canonicalId": "tmdb-movie-1153576",
+  "mediaType": "movie",
+  "externalProvider": "tmdb",
+  "externalId": "1153576",
+  "tmdbId": "1153576",
+  "imdbId": "tt27419420",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "Street Fighter",
+  "canonicalTitle": "Street Fighter",
+  "originalTitle": "Street Fighter",
+  "overview": "In 1993, estranged Street Fighters Ryu and Ken Masters are thrown back into combat when the mysterious Chun-Li recruits them for the next World Warrior Tournament: a brutal clash of fists, fate, and fury. But behind this battle royale lies a deadly conspiracy that forces them to face off against each other and the demons of their past. And if they don't, it's GAME OVER!",
+  "description": "In 1993, estranged Street Fighters Ryu and Ken Masters are thrown back into combat when the mysterious Chun-Li recruits them for the next World Warrior Tournament: a brutal clash of fists, fate, and fury. But behind this battle royale lies a deadly conspiracy that forces them to face off against each other and the demons of their past. And if they don't, it's GAME OVER!",
+  "shortDescription": "In 1993, estranged Street Fighters Ryu and Ken Masters are thrown back into combat when the mysterious Chun-Li recruits ",
+  "year": 2026,
+  "releaseYear": 2026,
+  "rating": 8,
+  "votes": "1.2K",
+  "quality": "FHD",
+  "duration": "2h 0m",
+  "genres": [
+    "Action",
+    "Fantasy"
+  ],
+  "categories": [
+    "Action",
+    "Fantasy"
+  ],
+  "language": "English",
+  "country": "US",
+  "poster": "https://image.tmdb.org/t/p/w500/dJPT2Uf12X6aFg8i5N67NTpIZ9t.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/zDE9hd1SG9695YncbZGjSf7Z9Jk.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/U6sbm1OaJb8?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/U6sbm1OaJb8?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "1658375",
+      "name": "Andrew Koji",
+      "character": "Ryu",
+      "photo": "https://image.tmdb.org/t/p/w185/oU53nWLQ6wFHzERwSi1fD53LxZB.jpg"
+    },
+    {
+      "id": "1253353",
+      "name": "Noah Centineo",
+      "character": "Ken Masters",
+      "photo": "https://image.tmdb.org/t/p/w185/p1bcst401RyxfDGykx2iQLI7CV5.jpg"
+    },
+    {
+      "id": "3775598",
+      "name": "Callina Liang",
+      "character": "Chun-Li",
+      "photo": "https://image.tmdb.org/t/p/w185/yiajT9WAsvuxF9uNJrkSuzVv3On.jpg"
+    },
+    {
+      "id": "1170011",
+      "name": "Joe Anoa'i",
+      "character": "Akuma",
+      "photo": "https://image.tmdb.org/t/p/w185/6BKc77eAUBQdL9MmgBorBc4SMdE.jpg"
+    },
+    {
+      "id": "83854",
+      "name": "David Dastmalchian",
+      "character": "M. Bison",
+      "photo": "https://image.tmdb.org/t/p/w185/nER1Vzhk51pGHb60KBF1Ja5tEXA.jpg"
+    },
+    {
+      "id": "222912",
+      "name": "Cody Rhodes",
+      "character": "Guile",
+      "photo": "https://image.tmdb.org/t/p/w185/m9hfLcsQuESprcb7dJUj5lQLWCv.jpg"
+    },
+    {
+      "id": "1880755",
+      "name": "Andrew Schulz",
+      "character": "Dan Hibiki",
+      "photo": "https://image.tmdb.org/t/p/w185/fdeYq1EraYvlYM3VmGXjIaSGoTz.jpg"
+    },
+    {
+      "id": "934159",
+      "name": "Eric Andre",
+      "character": "Don Sauvage",
+      "photo": "https://image.tmdb.org/t/p/w185/e9XlcFnZQiBSQ1vISQVyTOrkIaq.jpg"
+    },
+    {
+      "id": "1118194",
+      "name": "Vidyut Jammwal",
+      "character": "Dhalsim",
+      "photo": "https://image.tmdb.org/t/p/w185/9iBEIKvn1GGzymF3kVPBHtaMkWy.jpg"
+    },
+    {
+      "id": "2637828",
+      "name": "Mel Jarnson",
+      "character": "Cammy",
+      "photo": "https://image.tmdb.org/t/p/w185/8m0gnlADmLXkMkvSzDR2OhBfsCB.jpg"
+    },
+    {
+      "id": "3135936",
+      "name": "Orville Peck",
+      "character": "Vega",
+      "photo": "https://image.tmdb.org/t/p/w185/oW989m8J8gWGCBDkjplkqQoMob6.jpg"
+    },
+    {
+      "id": "2074238",
+      "name": "Olivier Richters",
+      "character": "Zangief",
+      "photo": "https://image.tmdb.org/t/p/w185/8Zz5WYE1Muc3AX9daxCxgNTRE5.jpg"
+    },
+    {
+      "id": "62644",
+      "name": "50 Cent",
+      "character": "Balrog",
+      "photo": "https://image.tmdb.org/t/p/w185/7VfwFIwBxy7qBUErosWRDQOovl9.jpg"
+    },
+    {
+      "id": "117642",
+      "name": "Jason Momoa",
+      "character": "Blanka",
+      "photo": "https://image.tmdb.org/t/p/w185/3troAR6QbSb6nUFMDu61YCCWLKa.jpg"
+    },
+    {
+      "id": "1281805",
+      "name": "Hirooki Goto",
+      "character": "E. Honda",
+      "photo": "https://image.tmdb.org/t/p/w185/uzqLC7AbKClQzcDPHZVRCyxacLx.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 1,
+  "status": "PUBLISHED",
+  "links": [
+    {
+      "url": "https://crimson-sea-a1e5.hekoy.workers.dev/?vcloud=https://vcloud.fit/ccqd1vdybjceqgr",
+      "quality": "480p",
+      "size": "400MB",
+      "label": "Street Fighter 1994 English With Subtitles 480p BluRay x264 400MB",
+      "source": "Fast Cloud",
+      "isCloud": true,
+      "isDotmovies": false,
+      "season": 480,
+      "episode": null,
+      "isBatch": false,
+      "canonicalId": "tmdb-movie-1153576",
+      "isPack": false
+    },
+    {
+      "url": "https://crimson-sea-a1e5.hekoy.workers.dev/?vcloud=https://vcloud.fit/3fwb85ptgbvgmfh",
+      "quality": "720p",
+      "size": "850MB",
+      "label": "Street Fighter 1994 English With Subtitles 720p BluRay x264 850MB",
+      "source": "Fast Cloud",
+      "isCloud": true,
+      "isDotmovies": false,
+      "season": 720,
+      "episode": null,
+      "isBatch": false,
+      "canonicalId": "tmdb-movie-1153576",
+      "isPack": false
+    }
+  ]
+}

@@ -1,0 +1,194 @@
+{
+  "id": "tmdb-tv-2883",
+  "canonicalId": "tmdb-tv-2883",
+  "mediaType": "tv",
+  "externalProvider": "tmdb",
+  "externalId": "2883",
+  "tmdbId": "2883",
+  "imdbId": "tt0059978",
+  "type": "series",
+  "contentType": "series",
+  "title": "Dark Shadows",
+  "canonicalTitle": "Dark Shadows",
+  "originalTitle": "Dark Shadows",
+  "overview": "Dark Shadows is an American gothic soap opera that originally aired weekdays on the ABC television network, from June 27, 1966, to April 2, 1971. The show was created by Dan Curtis. The story bible, which was written by Art Wallace, does not mention any supernatural elements. It was unprecedented in daytime television when ghosts were introduced about six months after it began.\n\nThe series became hugely popular when vampire Barnabas Collins appeared a year into its run. Dark Shadows also featured werewolves, zombies, man-made monsters, witches, warlocks, time travel, and a parallel universe. A small company of actors each played many roles; indeed, as actors came and went, some characters were played by more than one actor. Major writers besides Art Wallace included Malcolm Marmorstein, Sam Hall, Gordon Russell, and Violet Welles.",
+  "description": "Dark Shadows is an American gothic soap opera that originally aired weekdays on the ABC television network, from June 27, 1966, to April 2, 1971. The show was created by Dan Curtis. The story bible, which was written by Art Wallace, does not mention any supernatural elements. It was unprecedented in daytime television when ghosts were introduced about six months after it began.\n\nThe series became hugely popular when vampire Barnabas Collins appeared a year into its run. Dark Shadows also featured werewolves, zombies, man-made monsters, witches, warlocks, time travel, and a parallel universe. A small company of actors each played many roles; indeed, as actors came and went, some characters were played by more than one actor. Major writers besides Art Wallace included Malcolm Marmorstein, Sam Hall, Gordon Russell, and Violet Welles.",
+  "shortDescription": "Dark Shadows is an American gothic soap opera that originally aired weekdays on the ABC television network, from June 27",
+  "year": 1966,
+  "releaseYear": 1966,
+  "season": 1,
+  "episode": 1,
+  "rating": 7.3,
+  "votes": "0.1K",
+  "quality": "FHD",
+  "duration": "22m/ep",
+  "genres": [
+    "Drama",
+    "Sci-Fi & Fantasy",
+    "Soap"
+  ],
+  "categories": [
+    "Drama",
+    "Sci-Fi & Fantasy",
+    "Soap"
+  ],
+  "language": "English",
+  "country": "US",
+  "poster": "https://image.tmdb.org/t/p/w500/eRtnI7qTJIiPUmlY3J8TTM3jlT7.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/fmFsm4dq02k2Xxs7M887unPAiXd.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/6TIWbe9iXXg?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/6TIWbe9iXXg?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "105061",
+      "name": "Jonathan Frid",
+      "character": "Barnabas Collins / Bramwell Collins",
+      "photo": "https://image.tmdb.org/t/p/w185/sx4MSfurXq3CWY8JXA14pw7TX70.jpg"
+    },
+    {
+      "id": "236465",
+      "name": "Grayson Hall",
+      "character": "Julia Hoffman",
+      "photo": "https://image.tmdb.org/t/p/w185/1McqlvFNPZC9PYIqUXy8xq7CF0N.jpg"
+    },
+    {
+      "id": "1217687",
+      "name": "Nancy Barrett",
+      "character": "Carolyn Stoddard",
+      "photo": "https://image.tmdb.org/t/p/w185/4SHoE8LdFK4IIfgNEhjvyEbj2RT.jpg"
+    },
+    {
+      "id": "56930",
+      "name": "David Selby",
+      "character": "Quentin Collins",
+      "photo": "https://image.tmdb.org/t/p/w185/w7OUsn0tXFV3p056704eP7DkrcP.jpg"
+    },
+    {
+      "id": "7639",
+      "name": "Joan Bennett",
+      "character": "Elizabeth Collins Stoddard / Naomi Collins",
+      "photo": "https://image.tmdb.org/t/p/w185/3xKU8SKCytMMBeIXzfZXvwaq0oO.jpg"
+    },
+    {
+      "id": "117627",
+      "name": "Lara Parker",
+      "character": "Angelique Bouchard Collins",
+      "photo": "https://image.tmdb.org/t/p/w185/mWy0df6zLfswFJfpUikuDGsKbz5.jpg"
+    },
+    {
+      "id": "1232993",
+      "name": "David Henesy",
+      "character": "David Collins",
+      "photo": "https://image.tmdb.org/t/p/w185/f45RuxwunfpIQMnDN2IxoAcr4CD.jpg"
+    },
+    {
+      "id": "101336",
+      "name": "Kathryn Leigh Scott",
+      "character": "Maggie Evans",
+      "photo": "https://image.tmdb.org/t/p/w185/2gzZdVdXjVB8uGg0qousKn0JsD6.jpg"
+    },
+    {
+      "id": "16524",
+      "name": "Thayer David",
+      "character": "Matthew Morgan/Ben Stokes/Dr. Timothy Stokes",
+      "photo": "https://image.tmdb.org/t/p/w185/gAkmthly4dMu2Az8SNVWNSeRsYy.jpg"
+    },
+    {
+      "id": "129048",
+      "name": "Roger Davis",
+      "character": "Jeff Clark / Peter Bradford",
+      "photo": "https://image.tmdb.org/t/p/w185/su6nzaFNH4oqQL60aTYotot5uIg.jpg"
+    },
+    {
+      "id": "179426",
+      "name": "Louis Edmonds",
+      "character": "Roger Collins / Joshua Collins",
+      "photo": "https://image.tmdb.org/t/p/w185/5Rucx7mKYyyYU2U1MxWGeMgzz38.jpg"
+    },
+    {
+      "id": "70013",
+      "name": "Jerry Lacy",
+      "character": "Reverend Trask/Gregory Trask",
+      "photo": "https://image.tmdb.org/t/p/w185/7CTTjm8Wh2SKH6Cb4RIpNjjn1zn.jpg"
+    },
+    {
+      "id": "30048",
+      "name": "John Karlen",
+      "character": "Willie Loomis",
+      "photo": "https://image.tmdb.org/t/p/w185/tqjoBHykYoYpAJ9LbylcXid7Rg7.jpg"
+    },
+    {
+      "id": "179433",
+      "name": "Clarice Blackburn",
+      "character": "Mrs. Sarah Johnson",
+      "photo": "https://image.tmdb.org/t/p/w185/aNzJ7fwvi8HSn4vR8A7Njhwmmlo.jpg"
+    },
+    {
+      "id": "134768",
+      "name": "Dennis Patrick",
+      "character": "Paul Stoddard",
+      "photo": "https://image.tmdb.org/t/p/w185/qYcwGGInSt3ZlSL4WsQJqaMdevF.jpg"
+    }
+  ],
+  "seasons": 12,
+  "episodes": 1225,
+  "status": "PUBLISHED",
+  "links": [
+    {
+      "url": "https://crimson-sea-a1e5.hekoy.workers.dev/?vcloud=https://vcloud.fit/dpub3ocob01vvd1",
+      "quality": "480p",
+      "size": "400MB",
+      "label": "Server Stream (480p)",
+      "source": "Fast Cloud",
+      "isCloud": true,
+      "isDotmovies": false,
+      "season": 1,
+      "episode": null,
+      "isBatch": false,
+      "canonicalId": "tmdb-tv-2883",
+      "isPack": false
+    },
+    {
+      "url": "https://crimson-sea-a1e5.hekoy.workers.dev/?vcloud=https://vcloud.fit/yf2bhg1jfw16nww",
+      "quality": "720p",
+      "size": "1GB",
+      "label": "Server Stream (720p)",
+      "source": "Fast Cloud",
+      "isCloud": true,
+      "isDotmovies": false,
+      "season": 1,
+      "episode": null,
+      "isBatch": false,
+      "canonicalId": "tmdb-tv-2883",
+      "isPack": false
+    },
+    {
+      "url": "https://crimson-sea-a1e5.hekoy.workers.dev/?vcloud=https://vcloud.fit/vpgfpgvhinvfof3",
+      "quality": "1080p",
+      "size": "34GB",
+      "label": "Server Stream (1080p)",
+      "source": "Fast Cloud",
+      "isCloud": true,
+      "isDotmovies": false,
+      "season": 1,
+      "episode": null,
+      "isBatch": false,
+      "canonicalId": "tmdb-tv-2883",
+      "isPack": false
+    },
+    {
+      "url": "https://crimson-sea-a1e5.hekoy.workers.dev/?vcloud=https://vcloud.fit/g_ruxe9t4zpvncj",
+      "quality": "1080p",
+      "size": "31GB",
+      "label": "Server Stream (1080p)",
+      "source": "Fast Cloud",
+      "isCloud": true,
+      "isDotmovies": false,
+      "season": 1,
+      "episode": null,
+      "isBatch": false,
+      "canonicalId": "tmdb-tv-2883",
+      "isPack": false
+    }
+  ]
+}

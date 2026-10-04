@@ -1,0 +1,135 @@
+{
+  "id": "tmdb-movie-864692",
+  "canonicalId": "tmdb-movie-864692",
+  "mediaType": "movie",
+  "externalProvider": "tmdb",
+  "externalId": "864692",
+  "tmdbId": "864692",
+  "imdbId": "tt12844910",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "Pathaan",
+  "canonicalTitle": "Pathaan",
+  "originalTitle": "पठान",
+  "overview": "A soldier caught by enemies and presumed dead comes back to complete his mission, accompanied by old companions and foes.",
+  "description": "A soldier caught by enemies and presumed dead comes back to complete his mission, accompanied by old companions and foes.",
+  "shortDescription": "A soldier caught by enemies and presumed dead comes back to complete his mission, accompanied by old companions and foes",
+  "year": 2023,
+  "releaseYear": 2023,
+  "rating": 6.4,
+  "votes": "0.3K",
+  "quality": "FHD",
+  "duration": "2h 26m",
+  "genres": [
+    "Action",
+    "Adventure",
+    "Thriller"
+  ],
+  "categories": [
+    "Action",
+    "Adventure",
+    "Thriller"
+  ],
+  "language": "Hindi",
+  "country": "IN",
+  "poster": "https://image.tmdb.org/t/p/w500/arf00BkwvXo0CFKbaD9OpqdE4Nu.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/9wRAIQeOv2qzcgpfvA4dYZKeezl.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/yswBxKPFSvA?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/yswBxKPFSvA?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "35742",
+      "name": "Shah Rukh Khan",
+      "character": "Pathaan",
+      "photo": "https://image.tmdb.org/t/p/w185/gc3Ul6EtVYKgjBuYAaD8U2qIcSl.jpg"
+    },
+    {
+      "id": "53975",
+      "name": "Deepika Padukone",
+      "character": "Rubina Mohsin",
+      "photo": "https://image.tmdb.org/t/p/w185/rzvvBQ0r6oiqDdzcsdTRB7jN4Rx.jpg"
+    },
+    {
+      "id": "52971",
+      "name": "John Abraham",
+      "character": "Jim",
+      "photo": "https://image.tmdb.org/t/p/w185/xqOzxrbBkgbzT0pgAR2k03Hvd30.jpg"
+    },
+    {
+      "id": "78921",
+      "name": "Dimple Kapadia",
+      "character": "Nandini",
+      "photo": "https://image.tmdb.org/t/p/w185/nZoVs8drMLefoBN7PZ49slHuJe7.jpg"
+    },
+    {
+      "id": "86508",
+      "name": "Ashutosh Rana",
+      "character": "Sunil Luthra",
+      "photo": "https://image.tmdb.org/t/p/w185/jFlhAoEP3KGEXO3SXCA4YLM2Goc.jpg"
+    },
+    {
+      "id": "1543146",
+      "name": "Prakash Belawadi",
+      "character": "Dr. Sahani",
+      "photo": "https://image.tmdb.org/t/p/w185/bECb7W5XUSFVOgN0z9Ob1ludIha.jpg"
+    },
+    {
+      "id": "1730661",
+      "name": "Manish Wadhwa",
+      "character": "General Qadir",
+      "photo": "https://image.tmdb.org/t/p/w185/dtYKUHR1kZuOBX2Ud2mEhpnTS3x.jpg"
+    },
+    {
+      "id": "230416",
+      "name": "Akash Bhatija",
+      "character": "Amol",
+      "photo": "https://image.tmdb.org/t/p/w185/oB6bkmmbqRKbPzt8gQbT0gqmWnE.jpg"
+    },
+    {
+      "id": "2176503",
+      "name": "Shaji Choudhary",
+      "character": "Raza",
+      "photo": "https://image.tmdb.org/t/p/w185/xCH1ZS91zEouivjt4atJjvLTaYe.jpg"
+    },
+    {
+      "id": "2229209",
+      "name": "Viraf Patel",
+      "character": "Rishi",
+      "photo": "https://image.tmdb.org/t/p/w185/PPmfooP4eUBA2GzpBZHOLE2m70.jpg"
+    },
+    {
+      "id": "3769373",
+      "name": "Ekta Kaul",
+      "character": "Shweta",
+      "photo": null
+    },
+    {
+      "id": "2140634",
+      "name": "Diganta Hazarika",
+      "character": "Joseph",
+      "photo": null
+    },
+    {
+      "id": "1471176",
+      "name": "Rajat Kaul",
+      "character": "Raafe",
+      "photo": null
+    },
+    {
+      "id": "3891102",
+      "name": "Prem Jhangiani",
+      "character": "Dr. Farooqui",
+      "photo": null
+    },
+    {
+      "id": "42802",
+      "name": "Salman Khan",
+      "character": "Avinash Singh 'Tiger' Rathore",
+      "photo": "https://image.tmdb.org/t/p/w185/gxKwCCcs777HzsXRpdGsBV87pXn.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 1,
+  "status": "PUBLISHED",
+  "links": []
+}

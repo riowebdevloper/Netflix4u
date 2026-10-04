@@ -1,0 +1,135 @@
+{
+  "id": "tmdb-movie-117691",
+  "canonicalId": "tmdb-movie-117691",
+  "mediaType": "movie",
+  "externalProvider": "tmdb",
+  "externalId": "117691",
+  "tmdbId": "117691",
+  "imdbId": "tt1954470",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "Gangs of Wasseypur - Part 1",
+  "canonicalTitle": "Gangs of Wasseypur - Part 1",
+  "originalTitle": "गैंग्स ऑफ़ वास्सेपुर पार्ट - १",
+  "overview": "In 1970s India, Sardar Khan vows to take revenge on the man who killed his father decades earlier.",
+  "description": "In 1970s India, Sardar Khan vows to take revenge on the man who killed his father decades earlier.",
+  "shortDescription": "In 1970s India, Sardar Khan vows to take revenge on the man who killed his father decades earlier.",
+  "year": 2012,
+  "releaseYear": 2012,
+  "rating": 7.1,
+  "votes": "0.5K",
+  "quality": "FHD",
+  "duration": "2h 40m",
+  "genres": [
+    "Action",
+    "Thriller",
+    "Crime"
+  ],
+  "categories": [
+    "Action",
+    "Thriller",
+    "Crime"
+  ],
+  "language": "Hindi",
+  "country": "IN",
+  "poster": "https://image.tmdb.org/t/p/w500/4nbvLoPDftqXV14w5Mv14iqgVrt.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/riwwiv2BMD9D6L3NM4sJjHCMVsm.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/cSfNfckoXPc?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/cSfNfckoXPc?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "35782",
+      "name": "Manoj Bajpayee",
+      "character": "Sardar Khan",
+      "photo": "https://image.tmdb.org/t/p/w185/hBiAldG2BGMVoZUPbvK3FNDSw22.jpg"
+    },
+    {
+      "id": "150471",
+      "name": "Richa Chadha",
+      "character": "Nagma",
+      "photo": "https://image.tmdb.org/t/p/w185/cb15PLOeRNt7uxsiymjHfnJPm3i.jpg"
+    },
+    {
+      "id": "545084",
+      "name": "Tigmanshu Dhulia",
+      "character": "Ramadhir Singh",
+      "photo": "https://image.tmdb.org/t/p/w185/2CRk2UX3KfqMythuLBleMwQ7bQr.jpg"
+    },
+    {
+      "id": "85047",
+      "name": "Nawazuddin Siddiqui",
+      "character": "Faizal Khan",
+      "photo": "https://image.tmdb.org/t/p/w185/w1eXF7T60QlEC2gNfr99J3n8CgX.jpg"
+    },
+    {
+      "id": "86225",
+      "name": "Reema Sen",
+      "character": "Durga",
+      "photo": "https://image.tmdb.org/t/p/w185/f5Xe92gA1BXa4BddAxnysRZwnjf.jpg"
+    },
+    {
+      "id": "1108805",
+      "name": "Huma Qureshi",
+      "character": "Mohsina Hamid",
+      "photo": "https://image.tmdb.org/t/p/w185/nJWauZQdRjMJxwY3UP4SXrqh9CM.jpg"
+    },
+    {
+      "id": "127790",
+      "name": "Piyush Mishra",
+      "character": "Nasir",
+      "photo": "https://image.tmdb.org/t/p/w185/2nDekGUGEjPJ6Kymme0wp55emwl.jpg"
+    },
+    {
+      "id": "113686",
+      "name": "Jameel Khan",
+      "character": "Asghar",
+      "photo": "https://image.tmdb.org/t/p/w185/cyezX9i1wLduoixoTIi6VID8lGA.jpg"
+    },
+    {
+      "id": "973402",
+      "name": "Jaideep Ahlawat",
+      "character": "Shahid Khan",
+      "photo": "https://image.tmdb.org/t/p/w185/uILn4y8EWbMdeu71laMsh8zHY0M.jpg"
+    },
+    {
+      "id": "1179460",
+      "name": "Pankaj Tripathi",
+      "character": "Sultan Qureshi",
+      "photo": "https://image.tmdb.org/t/p/w185/f3Vxz0QB7PHeyPcXrfJX14Xkxnu.jpg"
+    },
+    {
+      "id": "52768",
+      "name": "Vipin Sharma",
+      "character": "Ehsaan Qureshi",
+      "photo": "https://image.tmdb.org/t/p/w185/3TZHbQ1Zi3z1B721jwwTKxAMXqI.jpg"
+    },
+    {
+      "id": "1427894",
+      "name": "Vineet Kumar Singh",
+      "character": "Danish Khan",
+      "photo": "https://image.tmdb.org/t/p/w185/8mDoHcQQ82f7FYK8B22VK9DLkLA.jpg"
+    },
+    {
+      "id": "1551242",
+      "name": "Satyakam Anand",
+      "character": "JP Singh",
+      "photo": null
+    },
+    {
+      "id": "1471187",
+      "name": "Anurita Jha",
+      "character": "Shama Parveen",
+      "photo": "https://image.tmdb.org/t/p/w185/btodAd5jAA3oQ5ZGRzVlQT1pvKi.jpg"
+    },
+    {
+      "id": "1489833",
+      "name": "Pramod Pathak",
+      "character": "Shareef Qureshi AKA Sultana Daaku / Badoor Qureshi",
+      "photo": "https://image.tmdb.org/t/p/w185/1bGesMEYH2LylER18k6kbSltAmu.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 1,
+  "status": "PUBLISHED",
+  "links": []
+}

@@ -1,0 +1,135 @@
+{
+  "id": "tmdb-movie-770906",
+  "canonicalId": "tmdb-movie-770906",
+  "mediaType": "movie",
+  "externalProvider": "tmdb",
+  "externalId": "770906",
+  "tmdbId": "770906",
+  "imdbId": "tt13927994",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "Salaar: Part 1 - Ceasefire",
+  "canonicalTitle": "Salaar: Part 1 - Ceasefire",
+  "originalTitle": "సలార్: పార్ట్‌ 1 – సీజ్‌ఫైర్‌",
+  "overview": "Set in the fictional dystopian city-state of Khansaar, the film follows the friendship between Deva, a tribesman, and Varadha, the prince of Khansaar. When a coup d'état is planned by his father's ministers and his relatives, Varadha enlists Deva's help to become Khansaar's undisputed ruler.",
+  "description": "Set in the fictional dystopian city-state of Khansaar, the film follows the friendship between Deva, a tribesman, and Varadha, the prince of Khansaar. When a coup d'état is planned by his father's ministers and his relatives, Varadha enlists Deva's help to become Khansaar's undisputed ruler.",
+  "shortDescription": "Set in the fictional dystopian city-state of Khansaar, the film follows the friendship between Deva, a tribesman, and Va",
+  "year": 2023,
+  "releaseYear": 2023,
+  "rating": 6.8,
+  "votes": "0.1K",
+  "quality": "FHD",
+  "duration": "2h 55m",
+  "genres": [
+    "Action",
+    "Crime",
+    "Drama"
+  ],
+  "categories": [
+    "Action",
+    "Crime",
+    "Drama"
+  ],
+  "language": "Telugu",
+  "country": "IN",
+  "poster": "https://image.tmdb.org/t/p/w500/nlu9WbcetNFRGXXPWITr30ob7W6.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/xtOCTmGemASooRkAxRorYODig1p.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/9Im1q4gvk1M?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/9Im1q4gvk1M?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "237045",
+      "name": "Prabhas",
+      "character": "Devaratha \"Deva\" Raisaar",
+      "photo": "https://image.tmdb.org/t/p/w185/u6RVP8ukgLaymeoi5VmX0JRAcCn.jpg"
+    },
+    {
+      "id": "117690",
+      "name": "Prithviraj Sukumaran",
+      "character": "Vardharaja Mannar / Siva Mannar",
+      "photo": "https://image.tmdb.org/t/p/w185/1xhG42QU8tMQRTDdP1Ed3y9GRvm.jpg"
+    },
+    {
+      "id": "85883",
+      "name": "Shruti Haasan",
+      "character": "Aadya Krishnakanth",
+      "photo": "https://image.tmdb.org/t/p/w185/1zYJuSccSA45VVBdgozpRcL99Rd.jpg"
+    },
+    {
+      "id": "1275608",
+      "name": "Easwari Rao",
+      "character": "Deva's Mother",
+      "photo": "https://image.tmdb.org/t/p/w185/fjyvQ45YZcovy2Egj2eux8UiuHU.jpg"
+    },
+    {
+      "id": "465273",
+      "name": "Jagapati Babu",
+      "character": "Raja Mannar",
+      "photo": "https://image.tmdb.org/t/p/w185/bm72k6FmDxhxtZsl1xvxoz88Hkm.jpg"
+    },
+    {
+      "id": "1187399",
+      "name": "Bobby Simha",
+      "character": "Bhaarava",
+      "photo": "https://image.tmdb.org/t/p/w185/4luN7NwlKvenAkSDwjzZeWpWuoP.jpg"
+    },
+    {
+      "id": "574772",
+      "name": "Sriya Reddy",
+      "character": "Radha Rama Mannar",
+      "photo": "https://image.tmdb.org/t/p/w185/6AwGUf0uj7Dr6cwZkC53KNihPdj.jpg"
+    },
+    {
+      "id": "2262423",
+      "name": "Ramachandra Raju",
+      "character": "Rudra Raja Mannar",
+      "photo": "https://image.tmdb.org/t/p/w185/kU1a4H8o1IQA25Lyq3cW70aufhT.jpg"
+    },
+    {
+      "id": "1511161",
+      "name": "Mime Gopi",
+      "character": "Bilal",
+      "photo": "https://image.tmdb.org/t/p/w185/gglNAjJMlCb0p7ig3OVpgsXMkMD.jpg"
+    },
+    {
+      "id": "85733",
+      "name": "Tinnu Anand",
+      "character": "Gaikwad \"Baba\"",
+      "photo": "https://image.tmdb.org/t/p/w185/6fkEiZKNp6jnOQmfQKEjVinhUeL.jpg"
+    },
+    {
+      "id": "3205334",
+      "name": "Pramod Panju",
+      "character": "Baachi Raja Mannar",
+      "photo": "https://image.tmdb.org/t/p/w185/2URHh4gn72VYlgrrZrNaEyXjpPh.jpg"
+    },
+    {
+      "id": "969886",
+      "name": "Ramana",
+      "character": "Rinda",
+      "photo": "https://image.tmdb.org/t/p/w185/fQcMvPYyCr2FwAP4YwhElUsbgrZ.jpg"
+    },
+    {
+      "id": "509737",
+      "name": "John Vijay",
+      "character": "Ranga",
+      "photo": "https://image.tmdb.org/t/p/w185/1H4uUEI32DmZWfTGmWnXyu0BrU7.jpg"
+    },
+    {
+      "id": "3727453",
+      "name": "M. S. Chowdhary",
+      "character": "Narang",
+      "photo": null
+    },
+    {
+      "id": "4446132",
+      "name": "Vajrang Shetty",
+      "character": "Vishnu",
+      "photo": null
+    }
+  ],
+  "seasons": 1,
+  "episodes": 1,
+  "status": "PUBLISHED",
+  "links": []
+}
