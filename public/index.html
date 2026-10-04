@@ -257,8 +257,12 @@
       touch-action: pan-y !important;
       -webkit-text-size-adjust: 100%;
       -moz-text-size-adjust: 100%;
-      text-size-adjust: 100%;
       -webkit-font-smoothing: antialiased;
+    }
+    @supports (text-size-adjust: 100%) {
+      body {
+        text-size-adjust: 100%;
+      }
     }
     .safe-area-pb {
       padding-bottom: env(safe-area-inset-bottom, 16px);

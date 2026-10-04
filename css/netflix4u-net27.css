@@ -864,9 +864,14 @@ body {
   overflow-y: auto !important;
   overscroll-behavior: contain;
   touch-action: pan-y;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
   padding-bottom: 24px;
+}
+
+@supports (scrollbar-width: thin) {
+  #picker-server-list {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
+  }
 }
 
 #picker-server-list::-webkit-scrollbar {
