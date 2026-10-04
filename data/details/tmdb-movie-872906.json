@@ -1,0 +1,133 @@
+{
+  "id": "tmdb-movie-872906",
+  "canonicalId": "tmdb-movie-872906",
+  "mediaType": "movie",
+  "externalProvider": "tmdb",
+  "externalId": "872906",
+  "tmdbId": "872906",
+  "imdbId": "tt15354916",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "Jawan",
+  "canonicalTitle": "Jawan",
+  "originalTitle": "जवान",
+  "overview": "An emotional journey of a prison warden, driven by a personal vendetta while keeping up to a promise made years ago, recruits inmates to commit outrageous crimes that shed light on corruption and injustice, in an attempt to get even with his past,  and that leads him to an unexpected reunion.",
+  "description": "An emotional journey of a prison warden, driven by a personal vendetta while keeping up to a promise made years ago, recruits inmates to commit outrageous crimes that shed light on corruption and injustice, in an attempt to get even with his past,  and that leads him to an unexpected reunion.",
+  "shortDescription": "An emotional journey of a prison warden, driven by a personal vendetta while keeping up to a promise made years ago, rec",
+  "year": 2023,
+  "releaseYear": 2023,
+  "rating": 7,
+  "votes": "0.4K",
+  "quality": "FHD",
+  "duration": "2h 49m",
+  "genres": [
+    "Action",
+    "Thriller"
+  ],
+  "categories": [
+    "Action",
+    "Thriller"
+  ],
+  "language": "Hindi",
+  "country": "IN",
+  "poster": "https://image.tmdb.org/t/p/w500/jFt1gS4BGHlK8xt76Y81Alp4dbt.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/5LtSjMNw6j3LkG29Oa4O0iY5U8.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/MWOlnZSnXJo?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/MWOlnZSnXJo?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "35742",
+      "name": "Shah Rukh Khan",
+      "character": "Vikram Rathore / Azad",
+      "photo": "https://image.tmdb.org/t/p/w185/gc3Ul6EtVYKgjBuYAaD8U2qIcSl.jpg"
+    },
+    {
+      "id": "91548",
+      "name": "Nayanthara",
+      "character": "Narmada",
+      "photo": "https://image.tmdb.org/t/p/w185/sYUzvjsSsqeOgBblSzda6ZwwbEa.jpg"
+    },
+    {
+      "id": "1123766",
+      "name": "Vijay Sethupathi",
+      "character": "Kalee Gaikwad",
+      "photo": "https://image.tmdb.org/t/p/w185/a3HWdfCAbplrvoMNEJCjnkbqqOo.jpg"
+    },
+    {
+      "id": "53975",
+      "name": "Deepika Padukone",
+      "character": "Aishwarya Rathore",
+      "photo": "https://image.tmdb.org/t/p/w185/rzvvBQ0r6oiqDdzcsdTRB7jN4Rx.jpg"
+    },
+    {
+      "id": "85881",
+      "name": "Sanjay Dutt",
+      "character": "Madhavan Naik",
+      "photo": "https://image.tmdb.org/t/p/w185/oq4pnvWhl1HxKpp0KVlSfAr3Tiu.jpg"
+    },
+    {
+      "id": "1107197",
+      "name": "Priyamani",
+      "character": "Laxmi",
+      "photo": "https://image.tmdb.org/t/p/w185/grcW2eMm77Q2Kj1xX0HvZlRpGRR.jpg"
+    },
+    {
+      "id": "1756851",
+      "name": "Sanya Malhotra",
+      "character": "Eeram",
+      "photo": "https://image.tmdb.org/t/p/w185/sQ0VIqGLecfpwYayO05Z7NC32yN.jpg"
+    },
+    {
+      "id": "897996",
+      "name": "Girija Oak",
+      "character": "Ishkra",
+      "photo": "https://image.tmdb.org/t/p/w185/f10HPTExCVQ8mZXShctpWPsxxaw.jpg"
+    },
+    {
+      "id": "1128415",
+      "name": "Lehar Khan",
+      "character": "Kalki",
+      "photo": "https://image.tmdb.org/t/p/w185/qkGtsYbXbdppzNLTsqhBpKiDeme.jpg"
+    },
+    {
+      "id": "3136041",
+      "name": "Sanjeeta Bhattacharya",
+      "character": "Helena",
+      "photo": "https://image.tmdb.org/t/p/w185/5R43ctB6aRYvXEpS5DkiAxkfnkW.jpg"
+    },
+    {
+      "id": "3472624",
+      "name": "Aaliyah Qureishi",
+      "character": "Janvi",
+      "photo": "https://image.tmdb.org/t/p/w185/2XGVTcnSoEJAOjk1aA8bW9uugIh.jpg"
+    },
+    {
+      "id": "1485723",
+      "name": "Sunil Grover",
+      "character": "Irani",
+      "photo": "https://image.tmdb.org/t/p/w185/ing2HJHnpvl7uzEQpv5M7NP4XK8.jpg"
+    },
+    {
+      "id": "1252084",
+      "name": "Ridhi Dogra",
+      "character": "Kaveri",
+      "photo": "https://image.tmdb.org/t/p/w185/7uSK4fvDDPtpKcTBfR0ogKhl3DN.jpg"
+    },
+    {
+      "id": "4358439",
+      "name": "Seeza Saroj",
+      "character": "Suji",
+      "photo": "https://image.tmdb.org/t/p/w185/xUbYYFHlIuGQw8ScBg7hfRFzxKd.jpg"
+    },
+    {
+      "id": "1540764",
+      "name": "Yogi Babu",
+      "character": "Pappu (Tamil)",
+      "photo": "https://image.tmdb.org/t/p/w185/4UMOPd8NqGfKp19VQHsnIzlSRUl.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 1,
+  "status": "PUBLISHED",
+  "links": []
+}

@@ -1,0 +1,69 @@
+{
+  "id": "tmdb-tv-60574",
+  "canonicalId": "tmdb-tv-60574",
+  "mediaType": "tv",
+  "externalProvider": "tmdb",
+  "externalId": "60574",
+  "tmdbId": "60574",
+  "imdbId": "tt2442560",
+  "type": "series",
+  "contentType": "series",
+  "title": "Peaky Blinders",
+  "canonicalTitle": "Peaky Blinders",
+  "originalTitle": "Peaky Blinders",
+  "overview": "A gangster family epic set in 1919 Birmingham, England and centered on a gang who sew razor blades in the peaks of their caps, and their fierce boss Tommy Shelby, who means to move up in the world.",
+  "description": "A gangster family epic set in 1919 Birmingham, England and centered on a gang who sew razor blades in the peaks of their caps, and their fierce boss Tommy Shelby, who means to move up in the world.",
+  "shortDescription": "A gangster family epic set in 1919 Birmingham, England and centered on a gang who sew razor blades in the peaks of their",
+  "year": 2013,
+  "releaseYear": 2013,
+  "season": 1,
+  "episode": 1,
+  "rating": 8.5,
+  "votes": "11.4K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Drama",
+    "Crime"
+  ],
+  "categories": [
+    "Drama",
+    "Crime"
+  ],
+  "language": "English",
+  "country": "GB",
+  "poster": "https://image.tmdb.org/t/p/w500/vUUqzWa2LnHIVqkaKVlVGkVcZIW.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/dzq83RHwQcnP6WGJ6YkenIqeaa5.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/EM12mcTEI88?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/EM12mcTEI88?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "2037",
+      "name": "Cillian Murphy",
+      "character": "Thomas Shelby",
+      "photo": "https://image.tmdb.org/t/p/w185/2lKs67r7FI4bPu0AXxMUJZxmUXn.jpg"
+    },
+    {
+      "id": "220448",
+      "name": "Paul Anderson",
+      "character": "Arthur Shelby",
+      "photo": "https://image.tmdb.org/t/p/w185/nds5rTBZvJ4rEsP4N6OaoEgQDkW.jpg"
+    },
+    {
+      "id": "1088620",
+      "name": "Sophie Rundle",
+      "character": "Ada Shelby",
+      "photo": "https://image.tmdb.org/t/p/w185/8kZTjHZcvmGo1W53DXM2mjXex2A.jpg"
+    },
+    {
+      "id": "1167897",
+      "name": "Natasha O'Keeffe",
+      "character": "Lizzie Stark",
+      "photo": "https://image.tmdb.org/t/p/w185/tOX10C02tSFnOSra8a8rGuA6QZ5.jpg"
+    }
+  ],
+  "seasons": 6,
+  "episodes": 36,
+  "status": "PUBLISHED",
+  "links": []
+}

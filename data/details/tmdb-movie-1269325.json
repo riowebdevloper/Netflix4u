@@ -1,0 +1,137 @@
+{
+  "id": "tmdb-movie-1269325",
+  "canonicalId": "tmdb-movie-1269325",
+  "mediaType": "movie",
+  "externalProvider": "tmdb",
+  "externalId": "1269325",
+  "tmdbId": "1269325",
+  "imdbId": "tt27050858",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "Drishyam: The Conclusion",
+  "canonicalTitle": "Drishyam: The Conclusion",
+  "originalTitle": "दृश्यम्: द कन्क्लूजन",
+  "overview": "Years after outsmarting the police, Vijay Salgaonkar's past resurfaces when a new evidence threatens to expose his secret. As the investigation reopens, he must outwit the system once again to save his family.",
+  "description": "Years after outsmarting the police, Vijay Salgaonkar's past resurfaces when a new evidence threatens to expose his secret. As the investigation reopens, he must outwit the system once again to save his family.",
+  "shortDescription": "Years after outsmarting the police, Vijay Salgaonkar's past resurfaces when a new evidence threatens to expose his secre",
+  "year": 2026,
+  "releaseYear": 2026,
+  "rating": 10,
+  "votes": "0.0K",
+  "quality": "FHD",
+  "duration": "2h 28m",
+  "genres": [
+    "Thriller",
+    "Drama",
+    "Mystery",
+    "Crime"
+  ],
+  "categories": [
+    "Thriller",
+    "Drama",
+    "Mystery",
+    "Crime"
+  ],
+  "language": "Hindi",
+  "country": "IN",
+  "poster": "https://image.tmdb.org/t/p/w500/yyWYi1VDg15mk9JlWldmmR7yf9C.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/nq73eRdEooripf3k0XHLtX14zyC.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/MFQFxsDWbA8?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/MFQFxsDWbA8?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "42803",
+      "name": "Ajay Devgn",
+      "character": "Vijay Salgaonkar",
+      "photo": "https://image.tmdb.org/t/p/w185/vnHQQFzTjJ0sv14DGMIoKa3qTxN.jpg"
+    },
+    {
+      "id": "55062",
+      "name": "Tabu",
+      "character": "Meera Deshmukh",
+      "photo": "https://image.tmdb.org/t/p/w185/cvt5nvCHr1ICf5u8A2mlzLQ8LsV.jpg"
+    },
+    {
+      "id": "145628",
+      "name": "Shriya Saran",
+      "character": "Nandini Salgaonkar",
+      "photo": "https://image.tmdb.org/t/p/w185/ioOgKBSCJhOdKoZpg86ld7zANbf.jpg"
+    },
+    {
+      "id": "78922",
+      "name": "Rajat Kapoor",
+      "character": "Mahesh Deshmukh",
+      "photo": "https://image.tmdb.org/t/p/w185/8IF24mMUSspmXHbxCMMbMaz3WRj.jpg"
+    },
+    {
+      "id": "973402",
+      "name": "Jaideep Ahlawat",
+      "character": "SP Rajiv Singh Tomar",
+      "photo": "https://image.tmdb.org/t/p/w185/uILn4y8EWbMdeu71laMsh8zHY0M.jpg"
+    },
+    {
+      "id": "89153",
+      "name": "Prakash Raj",
+      "character": "Public Prosecutor Indrajith Shetty",
+      "photo": "https://image.tmdb.org/t/p/w185/dJvFZOXmZdkYCOUcKTXQAhBcAoH.jpg"
+    },
+    {
+      "id": "1527501",
+      "name": "Ishita Dutta",
+      "character": "Anju Salgaonkar",
+      "photo": "https://image.tmdb.org/t/p/w185/fO1yfVsuy5z71SFJUvNtS2rcp8m.jpg"
+    },
+    {
+      "id": "3127564",
+      "name": "Mrunal Jadhav",
+      "character": "Anu Salgaonkar",
+      "photo": "https://image.tmdb.org/t/p/w185/h5zDVyqGheKpMTKY5khKsTv23Gv.jpg"
+    },
+    {
+      "id": "494552",
+      "name": "Kamlesh Sawant",
+      "character": "Laxmikant Gaitonde",
+      "photo": "https://image.tmdb.org/t/p/w185/wtw6SSvi5TINvjF7q9n2yFPN37h.jpg"
+    },
+    {
+      "id": "76789",
+      "name": "Saurabh Shukla",
+      "character": "Murad Ali",
+      "photo": "https://image.tmdb.org/t/p/w185/uFGVBmRIHLAQkYYSI2lSXOxMi4f.jpg"
+    },
+    {
+      "id": "2291068",
+      "name": "Samvedna Suwalka",
+      "character": "Adv. Gayathri Mohan",
+      "photo": "https://image.tmdb.org/t/p/w185/rWjPUFehWY5NFiEnrI1ZzpVDVmN.jpg"
+    },
+    {
+      "id": "3851260",
+      "name": "Nishant Singh",
+      "character": "Shiv Kulkarni",
+      "photo": null
+    },
+    {
+      "id": "582494",
+      "name": "Neha Joshi",
+      "character": "Jenny Thomas",
+      "photo": "https://image.tmdb.org/t/p/w185/dILuR3RU863sD6GnroCO7opx91s.jpg"
+    },
+    {
+      "id": "3152042",
+      "name": "Ajeeth Singh",
+      "character": "Raghu",
+      "photo": null
+    },
+    {
+      "id": "3851410",
+      "name": "Ramchandra Singh",
+      "character": "Savio",
+      "photo": null
+    }
+  ],
+  "seasons": 1,
+  "episodes": 1,
+  "status": "PUBLISHED",
+  "links": []
+}

@@ -1,0 +1,135 @@
+{
+  "id": "tmdb-movie-1224364",
+  "canonicalId": "tmdb-movie-1224364",
+  "mediaType": "movie",
+  "externalProvider": "tmdb",
+  "externalId": "1224364",
+  "tmdbId": "1224364",
+  "imdbId": "tt30497782",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "Shivrayancha Chhava",
+  "canonicalTitle": "Shivrayancha Chhava",
+  "originalTitle": "शिवरायांचा छावा",
+  "overview": "Aurangzeb wished to turn Burhanpur into the capital city and appointed Bahadur Khan as the Subhedar who made the lives of its residents miserable. Unable to tolerate this, Chhatrapati Sambhaji Maharaj raids the city and saves the people from the unjust rule.",
+  "description": "Aurangzeb wished to turn Burhanpur into the capital city and appointed Bahadur Khan as the Subhedar who made the lives of its residents miserable. Unable to tolerate this, Chhatrapati Sambhaji Maharaj raids the city and saves the people from the unjust rule.",
+  "shortDescription": "Aurangzeb wished to turn Burhanpur into the capital city and appointed Bahadur Khan as the Subhedar who made the lives o",
+  "year": 2024,
+  "releaseYear": 2024,
+  "rating": 7,
+  "votes": "0.0K",
+  "quality": "FHD",
+  "duration": "2h 25m",
+  "genres": [
+    "History",
+    "Drama",
+    "Action"
+  ],
+  "categories": [
+    "History",
+    "Drama",
+    "Action"
+  ],
+  "language": "Marathi",
+  "country": "IN",
+  "poster": "https://image.tmdb.org/t/p/w500/6sQzGwxf3FoJMgmUdBTEjHsctJJ.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/edMI53Y33OArXA35pOfvKFrj5kb.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/Yic36szyogs?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/Yic36szyogs?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "4198380",
+      "name": "Bhushan Patil",
+      "character": "Chhatrapati Sambhaji Maharaj",
+      "photo": null
+    },
+    {
+      "id": "1168524",
+      "name": "Mrinal Kulkarni",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/ieSjGEhHK5DlRO8XGEstQBmhFWl.jpg"
+    },
+    {
+      "id": "582492",
+      "name": "Chinmay Mandlekar",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/56MoFlRq5yZvBIYfqRxC1WeImA3.jpg"
+    },
+    {
+      "id": "2096593",
+      "name": "Trupti Toradmal",
+      "character": "",
+      "photo": null
+    },
+    {
+      "id": "1770294",
+      "name": "Prasanna Ketkar",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/r7bWysIC7qK6Ssm1EGyuh6PDpC1.jpg"
+    },
+    {
+      "id": "4455854",
+      "name": "Abhijeet Shwetachandra",
+      "character": "",
+      "photo": null
+    },
+    {
+      "id": "2372969",
+      "name": "Vikram Gaikwad",
+      "character": "",
+      "photo": null
+    },
+    {
+      "id": "4521493",
+      "name": "Bhushan Shivtare",
+      "character": "",
+      "photo": null
+    },
+    {
+      "id": "4521495",
+      "name": "Amit Deshmukh",
+      "character": "",
+      "photo": null
+    },
+    {
+      "id": "3429121",
+      "name": "Avadhoot Gandhi",
+      "character": "",
+      "photo": null
+    },
+    {
+      "id": "86251",
+      "name": "Ravi Kale",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/7QWF6ine4pE2RdCHJpXa2shQVCK.jpg"
+    },
+    {
+      "id": "37234",
+      "name": "Rahul Dev",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/e4v690w2cgoGzRTyIit7E23DrFA.jpg"
+    },
+    {
+      "id": "4521496",
+      "name": "Dnyanesh Wadekar",
+      "character": "",
+      "photo": null
+    },
+    {
+      "id": "2112723",
+      "name": "Isha Keskar",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/z0YktwZalmltTmFjz6IX8QFbrpP.jpg"
+    },
+    {
+      "id": "4521497",
+      "name": "Nandini Kanhere",
+      "character": "",
+      "photo": null
+    }
+  ],
+  "seasons": 1,
+  "episodes": 1,
+  "status": "PUBLISHED",
+  "links": []
+}

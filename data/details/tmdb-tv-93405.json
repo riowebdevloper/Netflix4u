@@ -1,0 +1,137 @@
+{
+  "id": "tmdb-tv-93405",
+  "canonicalId": "tmdb-tv-93405",
+  "mediaType": "tv",
+  "externalProvider": "tmdb",
+  "externalId": "93405",
+  "tmdbId": "93405",
+  "imdbId": "tt10919420",
+  "type": "series",
+  "contentType": "series",
+  "title": "Squid Game",
+  "canonicalTitle": "Squid Game",
+  "originalTitle": "오징어 게임",
+  "overview": "Hundreds of cash-strapped players accept a strange invitation to compete in children's games. Inside, a tempting prize awaits — with deadly high stakes.",
+  "description": "Hundreds of cash-strapped players accept a strange invitation to compete in children's games. Inside, a tempting prize awaits — with deadly high stakes.",
+  "shortDescription": "Hundreds of cash-strapped players accept a strange invitation to compete in children's games. Inside, a tempting prize a",
+  "year": 2021,
+  "releaseYear": 2021,
+  "season": 1,
+  "episode": 1,
+  "rating": 7.9,
+  "votes": "17.8K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Action & Adventure",
+    "Mystery",
+    "Drama"
+  ],
+  "categories": [
+    "Action & Adventure",
+    "Mystery",
+    "Drama"
+  ],
+  "language": "English",
+  "country": "KR",
+  "poster": "https://image.tmdb.org/t/p/w500/1QdXdRYfktUSONkl1oD5gc6Be0s.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/2meX1nMdScFOoV4370rqHWKmXhY.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/oqxAJKy0ii4?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/oqxAJKy0ii4?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "73249",
+      "name": "Lee Jung-jae",
+      "character": "Seong Gi-hun / Player 456",
+      "photo": "https://image.tmdb.org/t/p/w185/lx8oiTXL9lIx78KOXlrlvNfoz43.jpg"
+    },
+    {
+      "id": "1296713",
+      "name": "Yim Si-wan",
+      "character": "Lee Myung-gi / Player 333",
+      "photo": "https://image.tmdb.org/t/p/w185/xhItkYqo5DnFunTLBe65npwi0Me.jpg"
+    },
+    {
+      "id": "1557181",
+      "name": "Wi Ha-jun",
+      "character": "Detective Hwang Jun-ho",
+      "photo": "https://image.tmdb.org/t/p/w185/tEZuIaMESdBw4LfNq3vshGR4VlP.jpg"
+    },
+    {
+      "id": "2359937",
+      "name": "Jo Yuri",
+      "character": "Kim Jun-hee / Player 222",
+      "photo": "https://image.tmdb.org/t/p/w185/4GwoDQFPwpaKldOTpGrIJUzBa9h.jpg"
+    },
+    {
+      "id": "25002",
+      "name": "Lee Byung-hun",
+      "character": "Front Man / Hwang In-ho",
+      "photo": "https://image.tmdb.org/t/p/w185/5p5LDbZtnKhXDZL5227ExukbnRo.jpg"
+    },
+    {
+      "id": "1983073",
+      "name": "Park Gyu-young",
+      "character": "Kang No-eul / Guard 011",
+      "photo": "https://image.tmdb.org/t/p/w185/8VWU3V1omprZmqk3Jk8EhDvwF6D.jpg"
+    },
+    {
+      "id": "2523069",
+      "name": "Kang Ae-sim",
+      "character": "Jang Geum-ja / Player 149",
+      "photo": "https://image.tmdb.org/t/p/w185/mnUozozJf3VUpgi91ysfyxlRqs1.jpg"
+    },
+    {
+      "id": "1299479",
+      "name": "Lee Jin-uk",
+      "character": "Park Gyeong-seok / Player 246",
+      "photo": "https://image.tmdb.org/t/p/w185/uqzreNzDqiiSFCMv8bhzfSttHyk.jpg"
+    },
+    {
+      "id": "1297749",
+      "name": "Yang Dong-geun",
+      "character": "Park Yong-sik / Player 007",
+      "photo": "https://image.tmdb.org/t/p/w185/jlUJ6i91HYBs2QmcVKe1x3ByuaD.jpg"
+    },
+    {
+      "id": "1140210",
+      "name": "Park Sung-hoon",
+      "character": "Cho Hyun-ju / Player 120",
+      "photo": "https://image.tmdb.org/t/p/w185/nSF8VW2IoZcAA910gKQxbu01umk.jpg"
+    },
+    {
+      "id": "557133",
+      "name": "David Lee",
+      "character": "Park Min-su / Player 125",
+      "photo": "https://image.tmdb.org/t/p/w185/qWGDFlr47d2AJLtJsOEmfmaC21l.jpg"
+    },
+    {
+      "id": "1257899",
+      "name": "Kang Ha-neul",
+      "character": "Kang Dae-ho / Player 388",
+      "photo": "https://image.tmdb.org/t/p/w185/wkSSMlvNNH4uAy3wcQ9xVZ4yHfW.jpg"
+    },
+    {
+      "id": "88298",
+      "name": "Song Young-chang",
+      "character": "Im Jeong-dae / Player 100",
+      "photo": "https://image.tmdb.org/t/p/w185/gcidJKlJtyr7mAlI3ffMRxBj0qG.jpg"
+    },
+    {
+      "id": "2627786",
+      "name": "Chae Kook-hee",
+      "character": "Seon-nyeo / Player 044",
+      "photo": null
+    },
+    {
+      "id": "1418581",
+      "name": "Choi Gwi-hwa",
+      "character": "Kim Gi-min / Player 203",
+      "photo": "https://image.tmdb.org/t/p/w185/aYiS6jQNNmOSfzcobDs12pLOOjj.jpg"
+    }
+  ],
+  "seasons": 3,
+  "episodes": 22,
+  "status": "PUBLISHED",
+  "links": []
+}

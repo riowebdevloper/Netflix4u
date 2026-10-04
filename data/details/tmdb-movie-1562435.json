@@ -1,0 +1,121 @@
+{
+  "id": "tmdb-movie-1562435",
+  "canonicalId": "tmdb-movie-1562435",
+  "mediaType": "movie",
+  "externalProvider": "tmdb",
+  "externalId": "1562435",
+  "tmdbId": "1562435",
+  "imdbId": "tt1394313",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "Brahmastra",
+  "canonicalTitle": "Brahmastra",
+  "originalTitle": "Brahmastra",
+  "overview": "A 1986 Kannada Action movie by Perala",
+  "description": "A 1986 Kannada Action movie by Perala",
+  "shortDescription": "A 1986 Kannada Action movie by Perala",
+  "year": 1986,
+  "releaseYear": 1986,
+  "rating": 8,
+  "votes": "1.2K",
+  "quality": "FHD",
+  "duration": "2h 28m",
+  "genres": [
+    "Action",
+    "Drama"
+  ],
+  "categories": [
+    "Action",
+    "Drama"
+  ],
+  "language": "Kannada",
+  "country": "IN",
+  "poster": "https://image.tmdb.org/t/p/w500/mxJxyHoc8OqYK1f7YtbhRTLOl0k.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/mxJxyHoc8OqYK1f7YtbhRTLOl0k.jpg",
+  "trailerUrl": null,
+  "trailer": null,
+  "cast": [
+    {
+      "id": "1333844",
+      "name": "Ambareesh",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/p36xkhggoi5SA0i4NfPrqIvchAx.jpg"
+    },
+    {
+      "id": "86015",
+      "name": "Lakshmi",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/ddJU483vxl0kqPL9O30LDWDBj1J.jpg"
+    },
+    {
+      "id": "1268412",
+      "name": "T. N. Balakrishna",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/wCTtJBpnAIeemTcb3N4Y2wtNFL3.jpg"
+    },
+    {
+      "id": "3356168",
+      "name": "Sudheer",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/t0w6m6k0K8dChUUaVegPRk4J84n.jpg"
+    },
+    {
+      "id": "2059904",
+      "name": "M. S. Umesh",
+      "character": "",
+      "photo": null
+    },
+    {
+      "id": "2643591",
+      "name": "Kunigal Nagabhushan",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/dV2p1oTbcAYZOEbsp7cFZIfAcdQ.jpg"
+    },
+    {
+      "id": "584627",
+      "name": "Vajramuni",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/4wlqfIeakQh7CuFNYVjXZDCwEuO.jpg"
+    },
+    {
+      "id": "4331904",
+      "name": "N.S. Rao",
+      "character": "",
+      "photo": null
+    },
+    {
+      "id": "1270689",
+      "name": "Mukhyamantri Chandru",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/svMYanFwrUagGDTZQ1b0DW9f7oI.jpg"
+    },
+    {
+      "id": "5551609",
+      "name": "Thriveni",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/um3Fgrp9WiD6ioTT1f87SAOlaCe.jpg"
+    },
+    {
+      "id": "1115876",
+      "name": "Tara",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/MsEYsbgbrDyuxc6V8gDIEHJ80v.jpg"
+    },
+    {
+      "id": "3377942",
+      "name": "Shanthamma",
+      "character": "",
+      "photo": null
+    },
+    {
+      "id": "1270690",
+      "name": "Umashree",
+      "character": "",
+      "photo": "https://image.tmdb.org/t/p/w185/kL7dSBgUFoaVhTzpVLFrHrfyEyO.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 1,
+  "status": "PUBLISHED",
+  "links": []
+}

@@ -1,0 +1,101 @@
+{
+  "id": "tmdb-series-1429",
+  "canonicalId": "tmdb-series-1429",
+  "mediaType": "tv",
+  "externalProvider": "tmdb",
+  "externalId": "1429",
+  "tmdbId": "1429",
+  "imdbId": "tt2560140",
+  "type": "series",
+  "contentType": "series",
+  "title": "Attack on Titan",
+  "canonicalTitle": "Attack on Titan",
+  "originalTitle": "進撃の巨人",
+  "overview": "100 years ago, the last remnants of humanity were forced to retreat behind the towering walls of a fortified city to escape the massive, man-eating Titans that roamed the land outside their fortress. Only the members of the Scouting Legion dared to stray beyond the safety of the walls – but even those brave warriors seldom returned alive. Those within the city clung to the illusion of a peaceful existence until the day that dream was shattered, and their slim chance at survival was reduced to one horrifying choice: kill – or be devoured!",
+  "description": "100 years ago, the last remnants of humanity were forced to retreat behind the towering walls of a fortified city to escape the massive, man-eating Titans that roamed the land outside their fortress. Only the members of the Scouting Legion dared to stray beyond the safety of the walls – but even those brave warriors seldom returned alive. Those within the city clung to the illusion of a peaceful existence until the day that dream was shattered, and their slim chance at survival was reduced to one horrifying choice: kill – or be devoured!",
+  "shortDescription": "100 years ago, the last remnants of humanity were forced to retreat behind the towering walls of a fortified city to esc",
+  "year": 2013,
+  "releaseYear": 2013,
+  "season": 1,
+  "episode": 1,
+  "rating": 8.7,
+  "votes": "7.7K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Animation",
+    "Sci-Fi & Fantasy",
+    "Action & Adventure"
+  ],
+  "categories": [
+    "Animation",
+    "Sci-Fi & Fantasy",
+    "Action & Adventure"
+  ],
+  "language": "Japanese",
+  "country": "JP",
+  "poster": "https://image.tmdb.org/t/p/w500/hTP1DtLGFamjfu8WqjnuQdP1n4i.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/rqbCbjB19amtOtFQbb3K2lgm2zv.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/HJaUvV9Hwgs?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/HJaUvV9Hwgs?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "90135",
+      "name": "Marina Inoue",
+      "character": "Armin Arlert (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/f7PuEx1h2g4FLgMzk9wCrWuS9Eu.jpg"
+    },
+    {
+      "id": "119145",
+      "name": "Hiro Shimono",
+      "character": "Connie Springer (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/yrSDcgFefHtWkFmLnTrcw2t0MV.jpg"
+    },
+    {
+      "id": "149894",
+      "name": "Yuki Kaji",
+      "character": "Eren Yeager (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/8wKdPV11IwowfwoqGqMMNt9hmp6.jpg"
+    },
+    {
+      "id": "1256603",
+      "name": "Natsuki Hanae",
+      "character": "Falco Grice (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/alTb0DlcPIbcwM08WSmxFai58sd.jpg"
+    },
+    {
+      "id": "992869",
+      "name": "Ayane Sakura",
+      "character": "Gabi Braun (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/yPbTmntASE9psPIMhNGU5oo6vIH.jpg"
+    },
+    {
+      "id": "553959",
+      "name": "Kisho Taniyama",
+      "character": "Jean Kirstein (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/9lOnUF6C6xEhZ0FQmYNzNZhcUpd.jpg"
+    },
+    {
+      "id": "1224288",
+      "name": "Yui Ishikawa",
+      "character": "Mikasa Ackerman (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/zptGIN1iklKJL1xrfHKOpxR2qJ9.jpg"
+    },
+    {
+      "id": "1253008",
+      "name": "Yoshimasa Hosoya",
+      "character": "Reiner Braun (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/lUR5oN1LrqGgp25IOcI1qOH1Ud5.jpg"
+    },
+    {
+      "id": "84508",
+      "name": "Takehito Koyasu",
+      "character": "Zeke (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/8uBkNDKPNmp9JWgMUI02NVyfhi1.jpg"
+    }
+  ],
+  "seasons": 4,
+  "episodes": 87,
+  "status": "PUBLISHED",
+  "links": []
+}

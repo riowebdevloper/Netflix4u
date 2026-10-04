@@ -1,0 +1,119 @@
+{
+  "id": "tmdb-series-203769",
+  "canonicalId": "tmdb-series-203769",
+  "mediaType": "tv",
+  "externalProvider": "tmdb",
+  "externalId": "203769",
+  "tmdbId": "203769",
+  "imdbId": "tt20872936",
+  "type": "series",
+  "contentType": "series",
+  "title": "Pushpa Impossible",
+  "canonicalTitle": "Pushpa Impossible",
+  "originalTitle": "Pushpa Impossible",
+  "overview": "Pushpa Impossible is the story about a feisty middle-aged woman having studied until grade 9 in a Gujarati medium school and going back to school at the age of 44! She is boisterous, uncouth, impulsive, hardworking and an endearingly loveable mother of three children. She is Pushpa Patel hailing from a small town Patan in Gujarat and now residing at Bapodra Chawl in Mumbai. The show is a peek into her day-to-day struggles, her small victories, her Juggad, her shortcomings, and her constant pursuit of living a good life while struggling as a full-time mother and part-time businesswoman. The show is an autobiography of a mother, who decides to go back to school and change her life by impacting many lives!",
+  "description": "Pushpa Impossible is the story about a feisty middle-aged woman having studied until grade 9 in a Gujarati medium school and going back to school at the age of 44! She is boisterous, uncouth, impulsive, hardworking and an endearingly loveable mother of three children. She is Pushpa Patel hailing from a small town Patan in Gujarat and now residing at Bapodra Chawl in Mumbai. The show is a peek into her day-to-day struggles, her small victories, her Juggad, her shortcomings, and her constant pursuit of living a good life while struggling as a full-time mother and part-time businesswoman. The show is an autobiography of a mother, who decides to go back to school and change her life by impacting many lives!",
+  "shortDescription": "Pushpa Impossible is the story about a feisty middle-aged woman having studied until grade 9 in a Gujarati medium school",
+  "year": 2022,
+  "releaseYear": 2022,
+  "season": 1,
+  "episode": 1,
+  "rating": 7,
+  "votes": "0.0K",
+  "quality": "FHD",
+  "duration": "23m/ep",
+  "genres": [
+    "Family",
+    "Drama",
+    "Comedy"
+  ],
+  "categories": [
+    "Family",
+    "Drama",
+    "Comedy"
+  ],
+  "language": "Hindi",
+  "country": "IN",
+  "poster": "https://image.tmdb.org/t/p/w500/jInpgPiN2KnTFAu2mtIbFJtFp7A.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/4vw2auyqSnxlXRb0NP1Z3nZ59TP.jpg",
+  "trailerUrl": null,
+  "trailer": null,
+  "cast": [
+    {
+      "id": "3617103",
+      "name": "Karuna Pandey",
+      "character": "As:- Pushpa Patel",
+      "photo": null
+    },
+    {
+      "id": "3617105",
+      "name": "Naveen Pandit",
+      "character": "As:- Ashwin Patel (Pushpa’s Son)",
+      "photo": null
+    },
+    {
+      "id": "3617106",
+      "name": "Garima Parihar",
+      "character": "As:- Deepti Parikh (Ashwin’s Love Interest)",
+      "photo": null
+    },
+    {
+      "id": "3617107",
+      "name": "Bhakti Rathod",
+      "character": "As:- Sonalben Parikh",
+      "photo": null
+    },
+    {
+      "id": "3617109",
+      "name": "Sarita Joshi",
+      "character": "As:- Radha Limaye",
+      "photo": null
+    },
+    {
+      "id": "3617111",
+      "name": "Mansi Jain",
+      "character": "As:- Bhairavi Mehta",
+      "photo": null
+    },
+    {
+      "id": "3617112",
+      "name": "Jayesh Barbhaya",
+      "character": "As:- Narhari Bhai",
+      "photo": null
+    },
+    {
+      "id": "3617114",
+      "name": "Dhara Jani",
+      "character": "",
+      "photo": null
+    },
+    {
+      "id": "3617115",
+      "name": "Amish Tanna",
+      "character": "",
+      "photo": null
+    },
+    {
+      "id": "3617116",
+      "name": "Sachin Parikh",
+      "character": "",
+      "photo": null
+    },
+    {
+      "id": "2609090",
+      "name": "Deshna Dugad",
+      "character": "As:- Rashi Patel (Pushpa’s Daughter)",
+      "photo": "https://image.tmdb.org/t/p/w185/aBVAlR0ce81SLxqUUq5cNxDrS9V.jpg"
+    },
+    {
+      "id": "2361928",
+      "name": "Darshan Gurjar",
+      "character": "As:- Chirag Patel (Pushpa’s Son)",
+      "photo": null
+    }
+  ],
+  "seasons": 1,
+  "episodes": 1157,
+  "status": "PUBLISHED",
+  "links": []
+}

@@ -117,12 +117,18 @@ runTest('AllMovieLand multi-server provider generates valid Movie & TV URLs', ()
   assert.strictEqual(imdbMovieUrl, 'https://slast430did.com/play/tt33379543');
 });
 
-runTest('Cache key isolation: Movie and TV produce unique canonical cache keys', () => {
-  const movieKey = resolver.getCanonicalCacheKey({ type: 'movie', tmdbId: 533535 });
-  const tvKey = resolver.getCanonicalCacheKey({ type: 'tv', tmdbId: 79744, season: 1, episode: 1 });
-  assert.strictEqual(movieKey, 'player:movie:tmdb:533535');
-  assert.strictEqual(tvKey, 'player:tv:tmdb:79744:s1:e1');
+runTest('Cache key isolation: Movie and TV produce unique canonical cache keys (Section 4)', () => {
+  const movieKey = resolver.getCanonicalCacheKey({ type: 'movie', tmdbId: 533535 }, 'vidsrc_sbs');
+  const tvKey = resolver.getCanonicalCacheKey({ type: 'tv', tmdbId: 79744, season: 1, episode: 1 }, 'vidsrc_sbs');
+  const dlMovieKey = resolver.getDownloadCacheKey({ type: 'movie', tmdbId: 533535 }, 'reelsdownload');
+  const dlTvKey = resolver.getDownloadCacheKey({ type: 'tv', tmdbId: 79744, season: 2, episode: 3 }, 'reelsdownload');
+
+  assert.strictEqual(movieKey, 'stream:vidsrc_sbs:533535');
+  assert.strictEqual(tvKey, 'stream:vidsrc_sbs:79744:s1:e1');
+  assert.strictEqual(dlMovieKey, 'download:reelsdownload:533535');
+  assert.strictEqual(dlTvKey, 'download:reelsdownload:79744:s2:e3');
   assert.notStrictEqual(movieKey, tvKey);
+  assert.notStrictEqual(movieKey, dlMovieKey);
 });
 
 runTest('Iframe security allowlist authorizes approved origins and blocks untrusted', () => {

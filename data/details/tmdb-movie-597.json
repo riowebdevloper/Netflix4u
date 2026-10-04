@@ -1,0 +1,218 @@
+{
+  "id": "tmdb-movie-597",
+  "canonicalId": "tmdb-movie-597",
+  "mediaType": "movie",
+  "externalProvider": "tmdb",
+  "externalId": "597",
+  "tmdbId": "597",
+  "imdbId": "tt0120338",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "Titanic",
+  "canonicalTitle": "Titanic",
+  "originalTitle": "Titanic",
+  "overview": "101-year-old Rose DeWitt Bukater tells the story of her life aboard the Titanic, 84 years later. A young Rose boards the ship with her mother and fiancé. Meanwhile, Jack Dawson and Fabrizio De Rossi win third-class tickets aboard the ship. Rose tells the whole story from Titanic's departure through to its death—on its first and last voyage—on April 15, 1912.",
+  "description": "101-year-old Rose DeWitt Bukater tells the story of her life aboard the Titanic, 84 years later. A young Rose boards the ship with her mother and fiancé. Meanwhile, Jack Dawson and Fabrizio De Rossi win third-class tickets aboard the ship. Rose tells the whole story from Titanic's departure through to its death—on its first and last voyage—on April 15, 1912.",
+  "shortDescription": "101-year-old Rose DeWitt Bukater tells the story of her life aboard the Titanic, 84 years later. A young Rose boards the",
+  "year": 1997,
+  "releaseYear": 1997,
+  "rating": 7.9,
+  "votes": "27.8K",
+  "quality": "FHD",
+  "duration": "3h 14m",
+  "genres": [
+    "Drama",
+    "Romance"
+  ],
+  "categories": [
+    "Drama",
+    "Romance"
+  ],
+  "language": "English",
+  "country": "US",
+  "poster": "https://image.tmdb.org/t/p/w500/9xjZS2rlVxm8SFx8kPC3aIGCOYQ.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/xXCuto8YVp5RFqBJ7yKmVmLOWpF.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/wO44qBPBG4c?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/wO44qBPBG4c?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "6193",
+      "name": "Leonardo DiCaprio",
+      "character": "Jack Dawson",
+      "photo": "https://image.tmdb.org/t/p/w185/wo2hJpn04vbtmh0B9utCFdsQhxM.jpg"
+    },
+    {
+      "id": "204",
+      "name": "Kate Winslet",
+      "character": "Rose DeWitt Bukater",
+      "photo": "https://image.tmdb.org/t/p/w185/6qNnMsKtKz9si5rabpUEG85UfHp.jpg"
+    },
+    {
+      "id": "1954",
+      "name": "Billy Zane",
+      "character": "Cal Hockley",
+      "photo": "https://image.tmdb.org/t/p/w185/wr4fuwLzQvW1G0MS7cmQ3ObFjvL.jpg"
+    },
+    {
+      "id": "8534",
+      "name": "Kathy Bates",
+      "character": "Molly Brown",
+      "photo": "https://image.tmdb.org/t/p/w185/qZRTzTjV4OC1Ii9a0n8QBS9zMOd.jpg"
+    },
+    {
+      "id": "3713",
+      "name": "Frances Fisher",
+      "character": "Ruth DeWitt Bukater",
+      "photo": "https://image.tmdb.org/t/p/w185/3iNDgd54IIj8g8hGqhhUjM6TeWd.jpg"
+    },
+    {
+      "id": "8535",
+      "name": "Gloria Stuart",
+      "character": "Old Rose",
+      "photo": "https://image.tmdb.org/t/p/w185/9aG7UUX3PWIGGf1KRY5TsBSoNz9.jpg"
+    },
+    {
+      "id": "2053",
+      "name": "Bill Paxton",
+      "character": "Brock Lovett",
+      "photo": "https://image.tmdb.org/t/p/w185/aLdNe6mt1cSi2zWlUYRregzfis5.jpg"
+    },
+    {
+      "id": "1369",
+      "name": "Bernard Hill",
+      "character": "Captain Smith",
+      "photo": "https://image.tmdb.org/t/p/w185/5i8bj2nsTrFU2ddSynleOjapxor.jpg"
+    },
+    {
+      "id": "2076",
+      "name": "David Warner",
+      "character": "Spicer Lovejoy",
+      "photo": "https://image.tmdb.org/t/p/w185/AlsZcAY2c4chfOxMW69gHQzH1B2.jpg"
+    },
+    {
+      "id": "8536",
+      "name": "Victor Garber",
+      "character": "Thomas Andrews",
+      "photo": "https://image.tmdb.org/t/p/w185/FdhXl8qxsKgj22Ip99SRM9jUx1.jpg"
+    },
+    {
+      "id": "8537",
+      "name": "Jonathan Hyde",
+      "character": "Bruce Ismay",
+      "photo": "https://image.tmdb.org/t/p/w185/1uhT5uzPkBRCb57RtR6C9MvgteC.jpg"
+    },
+    {
+      "id": "2179",
+      "name": "Suzy Amis",
+      "character": "Lizzy Calvert",
+      "photo": "https://image.tmdb.org/t/p/w185/q8aPLY9CjCl7tp60neddbJl4ZfW.jpg"
+    },
+    {
+      "id": "8538",
+      "name": "Lewis Abernathy",
+      "character": "Lewis Bodine",
+      "photo": "https://image.tmdb.org/t/p/w185/bkFz6dgGCjIEvreB2G3Yj49a6QD.jpg"
+    },
+    {
+      "id": "8539",
+      "name": "Nicholas Cascone",
+      "character": "Bobby Buell",
+      "photo": null
+    },
+    {
+      "id": "93215",
+      "name": "Anatoly M. Sagalevitch",
+      "character": "Anatoly Milkailavich",
+      "photo": "https://image.tmdb.org/t/p/w185/apoz1iXhYVvyfRBnPcfN6R15Ztu.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 1,
+  "status": "PUBLISHED",
+  "links": [
+    {
+      "url": "https://crimson-sea-a1e5.hekoy.workers.dev/?vcloud=https://vcloud.fit/fdvw1qdblsjntci",
+      "quality": "480p",
+      "size": "550MB",
+      "label": "Titanic 1997 HindiEnglish 480p BluRay x264 550MB",
+      "source": "Fast Cloud",
+      "isCloud": true,
+      "isDotmovies": false,
+      "season": null,
+      "episode": null,
+      "isBatch": false,
+      "canonicalId": "tmdb-movie-597",
+      "isPack": false
+    },
+    {
+      "url": "https://crimson-sea-a1e5.hekoy.workers.dev/?vcloud=https://vcloud.fit/bqa1aavffppae8a",
+      "quality": "720p",
+      "size": "1GB",
+      "label": "Titanic 1997 HindiEnglish 720p BluRay x264 1GB",
+      "source": "Fast Cloud",
+      "isCloud": true,
+      "isDotmovies": false,
+      "season": null,
+      "episode": null,
+      "isBatch": false,
+      "canonicalId": "tmdb-movie-597",
+      "isPack": false
+    },
+    {
+      "url": "https://crimson-sea-a1e5.hekoy.workers.dev/?vcloud=https://vcloud.fit/pgpnlanzzpyz1hs",
+      "quality": "1080p",
+      "size": "23GB",
+      "label": "Titanic 1997 HindiEnglish 1080p BluRay x264 23GB",
+      "source": "Fast Cloud",
+      "isCloud": true,
+      "isDotmovies": false,
+      "season": null,
+      "episode": null,
+      "isBatch": false,
+      "canonicalId": "tmdb-movie-597",
+      "isPack": false
+    },
+    {
+      "url": "https://crimson-sea-a1e5.hekoy.workers.dev/?vcloud=https://vcloud.fit/wnnllubazu_ltzx",
+      "quality": "1080p",
+      "size": "6GB",
+      "label": "Server Stream (1080p)",
+      "source": "Fast Cloud",
+      "isCloud": true,
+      "isDotmovies": false,
+      "season": null,
+      "episode": null,
+      "isBatch": false,
+      "canonicalId": "tmdb-movie-597",
+      "isPack": false
+    },
+    {
+      "url": "https://crimson-sea-a1e5.hekoy.workers.dev/?vcloud=https://vcloud.fit/4w-aap5a9o4p-eg",
+      "quality": "2160p / 4K",
+      "size": "95GB",
+      "label": "Server Stream (2160p)",
+      "source": "Fast Cloud",
+      "isCloud": true,
+      "isDotmovies": false,
+      "season": null,
+      "episode": null,
+      "isBatch": false,
+      "canonicalId": "tmdb-movie-597",
+      "isPack": false
+    },
+    {
+      "url": "https://crimson-sea-a1e5.hekoy.workers.dev/?vcloud=https://vcloud.fit/-yf1xxfn6xw66y-",
+      "quality": "2160p / 4K",
+      "size": "239GB",
+      "label": "Server Stream (2160p)",
+      "source": "Fast Cloud",
+      "isCloud": true,
+      "isDotmovies": false,
+      "season": null,
+      "episode": null,
+      "isBatch": false,
+      "canonicalId": "tmdb-movie-597",
+      "isPack": false
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "id": "tmdb-tv-71819",
+  "canonicalId": "tmdb-tv-71819",
+  "mediaType": "tv",
+  "externalProvider": "tmdb",
+  "externalId": "71819",
+  "tmdbId": "71819",
+  "imdbId": "tt5523460",
+  "type": "series",
+  "contentType": "series",
+  "title": "Baahubali: The Lost Legends",
+  "canonicalTitle": "Baahubali: The Lost Legends",
+  "originalTitle": "Baahubali: The Lost Legends",
+  "overview": "Animated series set before the Kalakeya invasion depicted in the movie, when Baahubali and Bhallaladeva are still both young princes of Mahizhmati.",
+  "description": "Animated series set before the Kalakeya invasion depicted in the movie, when Baahubali and Bhallaladeva are still both young princes of Mahizhmati.",
+  "shortDescription": "Animated series set before the Kalakeya invasion depicted in the movie, when Baahubali and Bhallaladeva are still both y",
+  "year": 2017,
+  "releaseYear": 2017,
+  "season": 1,
+  "episode": 1,
+  "rating": 6.8,
+  "votes": "0.0K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Action & Adventure",
+    "Animation"
+  ],
+  "categories": [
+    "Action & Adventure",
+    "Animation"
+  ],
+  "language": "Tamil",
+  "country": "IN",
+  "poster": "https://image.tmdb.org/t/p/w500/rvBvJls25aMyYr2B1wIeCxBL5Wc.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/ekiHuVoptEMgRkQ2L5KOesJKhgP.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/w3myC8RexQ0?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/w3myC8RexQ0?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "2389918",
+      "name": "Viraj Adhav",
+      "character": "Amarendra Bahubali (Voice)",
+      "photo": null
+    },
+    {
+      "id": "2469792",
+      "name": "Manoj Pandey",
+      "character": "Bhallaladeva (Voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/5lxgHH0KJQFDeMO1pvxBvYXZS2q.jpg"
+    }
+  ],
+  "seasons": 5,
+  "episodes": 71,
+  "status": "PUBLISHED",
+  "links": []
+}

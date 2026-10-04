@@ -1,0 +1,133 @@
+{
+  "id": "tmdb-movie-1112426",
+  "canonicalId": "tmdb-movie-1112426",
+  "mediaType": "movie",
+  "externalProvider": "tmdb",
+  "externalId": "1112426",
+  "tmdbId": "1112426",
+  "imdbId": "tt27510174",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "Stree 2",
+  "canonicalTitle": "Stree 2",
+  "originalTitle": "स्त्री 2: सरकटे का आतंक",
+  "overview": "Following the events of 'Stree', the town of Chanderi is being haunted again. This time, women are mysteriously abducted by a terrifying headless entity. Once again, it's up to Vicky and friends to save their town and loved ones.",
+  "description": "Following the events of 'Stree', the town of Chanderi is being haunted again. This time, women are mysteriously abducted by a terrifying headless entity. Once again, it's up to Vicky and friends to save their town and loved ones.",
+  "shortDescription": "Following the events of 'Stree', the town of Chanderi is being haunted again. This time, women are mysteriously abducted",
+  "year": 2024,
+  "releaseYear": 2024,
+  "rating": 6.7,
+  "votes": "0.1K",
+  "quality": "FHD",
+  "duration": "2h 23m",
+  "genres": [
+    "Horror",
+    "Comedy"
+  ],
+  "categories": [
+    "Horror",
+    "Comedy"
+  ],
+  "language": "Hindi",
+  "country": "IN",
+  "poster": "https://image.tmdb.org/t/p/w500/nfnhwfUEFuSOxxf4jDdBlY6Lccw.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/fVV0A67kDjTTQ4CvUn8LoletRmI.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/VlvOgk5BHS4?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/VlvOgk5BHS4?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "117727",
+      "name": "Rajkummar Rao",
+      "character": "Vicky",
+      "photo": "https://image.tmdb.org/t/p/w185/ttBY7Y8x4NCpXfGS9Tc1NN8ISos.jpg"
+    },
+    {
+      "id": "130991",
+      "name": "Shraddha Kapoor",
+      "character": "Unnamed Woman",
+      "photo": "https://image.tmdb.org/t/p/w185/tFx6DRETklfkFIUu5Sl5TCN1gD9.jpg"
+    },
+    {
+      "id": "1756890",
+      "name": "Aparshakti Khurana",
+      "character": "Bittu",
+      "photo": "https://image.tmdb.org/t/p/w185/w7OEkPAaweO1JU105Qqvg073yW8.jpg"
+    },
+    {
+      "id": "1708061",
+      "name": "Abhishek Banerjee",
+      "character": "'Jana' Janardan",
+      "photo": "https://image.tmdb.org/t/p/w185/cfyRkFBFfodBbNKbsTc8eG9YtVj.jpg"
+    },
+    {
+      "id": "1179460",
+      "name": "Pankaj Tripathi",
+      "character": "Rudra",
+      "photo": "https://image.tmdb.org/t/p/w185/f3Vxz0QB7PHeyPcXrfJX14Xkxnu.jpg"
+    },
+    {
+      "id": "1891368",
+      "name": "Anya Singh",
+      "character": "Chitti",
+      "photo": "https://image.tmdb.org/t/p/w185/epszHS7QSn7FjcCv4z2sWR1KBb0.jpg"
+    },
+    {
+      "id": "85721",
+      "name": "Tamannaah Bhatia",
+      "character": "Shama",
+      "photo": "https://image.tmdb.org/t/p/w185/t4WYoKiFAyO1Rhjv7O03EKmJHp4.jpg"
+    },
+    {
+      "id": "4890655",
+      "name": "Sunil Kumar",
+      "character": "Sarkata / Udaybhan",
+      "photo": null
+    },
+    {
+      "id": "4420825",
+      "name": "Bhumi Rajgor",
+      "character": "Stree",
+      "photo": null
+    },
+    {
+      "id": "1108119",
+      "name": "Varun Dhawan",
+      "character": "Bhaskar",
+      "photo": "https://image.tmdb.org/t/p/w185/gvvXYTpvO0Tu7naCDLL3tInyN2R.jpg"
+    },
+    {
+      "id": "35070",
+      "name": "Akshay Kumar",
+      "character": "Udaybhan's Descendent",
+      "photo": "https://image.tmdb.org/t/p/w185/sR8nASRtTpiwXqkFHjG2jdRBZ7a.jpg"
+    },
+    {
+      "id": "1945925",
+      "name": "Atul Srivastava",
+      "character": "Vicky's Father",
+      "photo": "https://image.tmdb.org/t/p/w185/nbOoces0ukl1abKnPzjtyrBFChO.jpg"
+    },
+    {
+      "id": "2163264",
+      "name": "Sunita Rajwar",
+      "character": "Jana's Mother",
+      "photo": "https://image.tmdb.org/t/p/w185/cEhnGiU6arxA4vxZCUspFWDP76F.jpg"
+    },
+    {
+      "id": "32335",
+      "name": "Mushtaq Khan",
+      "character": "Sarpanch",
+      "photo": "https://image.tmdb.org/t/p/w185/xj2fPOfGRiQCFp7V9MUAlshNGZH.jpg"
+    },
+    {
+      "id": "4890652",
+      "name": "Arvind Bilgaiyan",
+      "character": "Jana's Father",
+      "photo": null
+    }
+  ],
+  "seasons": 1,
+  "episodes": 1,
+  "status": "PUBLISHED",
+  "links": []
+}

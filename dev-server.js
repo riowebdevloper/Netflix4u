@@ -985,7 +985,7 @@ const server = http.createServer(async (req, res) => {
 
     let cleanTitle = title || '';
     if (id && !cleanTitle) {
-      const item = await resolveContentId(id);
+      const item = await resolveContentId(id, type);
       if (item) {
         cleanTitle = item.title || '';
         if (item.tmdbId) tmdbId = item.tmdbId;
@@ -1635,7 +1635,8 @@ const server = http.createServer(async (req, res) => {
     let item = getTitleDetails(rId);
     if (!item) {
       try {
-        item = await resolveContentId(rId);
+        const expectedType = (rType.toLowerCase() === 'movie') ? 'movie' : 'tv';
+        item = await resolveContentId(rId, expectedType);
       } catch (e) {}
     }
     if (item && isPublicRecord(item)) {

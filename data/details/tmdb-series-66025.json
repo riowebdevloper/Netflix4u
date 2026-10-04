@@ -1,0 +1,75 @@
+{
+  "id": "tmdb-series-66025",
+  "canonicalId": "tmdb-series-66025",
+  "mediaType": "tv",
+  "externalProvider": "tmdb",
+  "externalId": "66025",
+  "tmdbId": "66025",
+  "imdbId": "tt5574490",
+  "type": "series",
+  "contentType": "series",
+  "title": "Animal Kingdom",
+  "canonicalTitle": "Animal Kingdom",
+  "originalTitle": "Animal Kingdom",
+  "overview": "17-year-old Joshua \"J\" Cody moves in with his freewheeling relatives in their Southern California beach town after his mother dies of a heroin overdose. Headed by boot-tough matriarch Janine \"Smurf\" Cody and her right-hand Baz, who runs the business and calls the shots, the clan also consists of Pope, the oldest and most dangerous of the Cody boys; Craig, the tough and fearless middle son; and Deran, the troubled, suspicious \"baby\" of the family.",
+  "description": "17-year-old Joshua \"J\" Cody moves in with his freewheeling relatives in their Southern California beach town after his mother dies of a heroin overdose. Headed by boot-tough matriarch Janine \"Smurf\" Cody and her right-hand Baz, who runs the business and calls the shots, the clan also consists of Pope, the oldest and most dangerous of the Cody boys; Craig, the tough and fearless middle son; and Deran, the troubled, suspicious \"baby\" of the family.",
+  "shortDescription": "17-year-old Joshua \"J\" Cody moves in with his freewheeling relatives in their Southern California beach town after his m",
+  "year": 2016,
+  "releaseYear": 2016,
+  "season": 1,
+  "episode": 1,
+  "rating": 7.8,
+  "votes": "0.6K",
+  "quality": "FHD",
+  "duration": "50m/ep",
+  "genres": [
+    "Crime",
+    "Drama"
+  ],
+  "categories": [
+    "Crime",
+    "Drama"
+  ],
+  "language": "English",
+  "country": "US",
+  "poster": "https://image.tmdb.org/t/p/w500/rzvdKrnSRKPFI0pgqMQknDPpRC9.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/eQJwfyMqSra10ck8HOoiCrbQR32.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/gTZwd0f92YE?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/gTZwd0f92YE?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "1508313",
+      "name": "Finn Cole",
+      "character": "Joshua \"J\" Cody",
+      "photo": "https://image.tmdb.org/t/p/w185/yVWop3BSHbjIecYGqI1ToZIPR3T.jpg"
+    },
+    {
+      "id": "52647",
+      "name": "Shawn Hatosy",
+      "character": "Andrew \"Pope\" Cody",
+      "photo": "https://image.tmdb.org/t/p/w185/hm3KRxmotbJ93fJQJvE0G0EGONw.jpg"
+    },
+    {
+      "id": "1383389",
+      "name": "Ben Robson",
+      "character": "Craig Cody",
+      "photo": "https://image.tmdb.org/t/p/w185/5PC13qMbigvYXd4rhay6VgHJXhX.jpg"
+    },
+    {
+      "id": "133980",
+      "name": "Jake Weary",
+      "character": "Deran Cody",
+      "photo": "https://image.tmdb.org/t/p/w185/it7L53eTBaYNTJdFQ6PKQE2mjwP.jpg"
+    },
+    {
+      "id": "1681867",
+      "name": "Leila George",
+      "character": "Janine Cody",
+      "photo": "https://image.tmdb.org/t/p/w185/s46DMiPDGSMq6qad5TL8mG5qfdy.jpg"
+    }
+  ],
+  "seasons": 6,
+  "episodes": 75,
+  "status": "PUBLISHED",
+  "links": []
+}

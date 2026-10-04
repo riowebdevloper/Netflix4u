@@ -1,0 +1,135 @@
+{
+  "id": "tmdb-movie-858485",
+  "canonicalId": "tmdb-movie-858485",
+  "mediaType": "movie",
+  "externalProvider": "tmdb",
+  "externalId": "858485",
+  "tmdbId": "858485",
+  "imdbId": "tt15327088",
+  "type": "movie",
+  "contentType": "movie",
+  "title": "Kantara",
+  "canonicalTitle": "Kantara",
+  "originalTitle": "ಕಾಂತಾರ",
+  "overview": "Shiva, a tribal vagabond lives with his mother in hamlet, stays away from the traditional Daivaradhane and Bhoota Kola legacy due to an unforgettable childhood incident. He is happy loafing around with his friends and doing petty jobs for his landlord. When Forest officer Murali enters the scene, it gives a fresh dimension to the man-vs-nature fight. Can Shiva save the forest from Murali? Or is Murali just a dummy bait cast by bigger fish?",
+  "description": "Shiva, a tribal vagabond lives with his mother in hamlet, stays away from the traditional Daivaradhane and Bhoota Kola legacy due to an unforgettable childhood incident. He is happy loafing around with his friends and doing petty jobs for his landlord. When Forest officer Murali enters the scene, it gives a fresh dimension to the man-vs-nature fight. Can Shiva save the forest from Murali? Or is Murali just a dummy bait cast by bigger fish?",
+  "shortDescription": "Shiva, a tribal vagabond lives with his mother in hamlet, stays away from the traditional Daivaradhane and Bhoota Kola l",
+  "year": 2022,
+  "releaseYear": 2022,
+  "rating": 7.2,
+  "votes": "0.2K",
+  "quality": "FHD",
+  "duration": "2h 27m",
+  "genres": [
+    "Action",
+    "Adventure",
+    "Thriller"
+  ],
+  "categories": [
+    "Action",
+    "Adventure",
+    "Thriller"
+  ],
+  "language": "Kannada",
+  "country": "IN",
+  "poster": "https://image.tmdb.org/t/p/w500/jIsKmkxMzdCZ0Ux1GVSnu8m6Na6.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/kXElm7wt2kAXEVwJqW4cFhP43nW.jpg",
+  "trailerUrl": null,
+  "trailer": null,
+  "cast": [
+    {
+      "id": "1752058",
+      "name": "Rishab Shetty",
+      "character": "Kaadubettu Shiva / Shiva's Father",
+      "photo": "https://image.tmdb.org/t/p/w185/eRaOUg2B02XH1l6P4juGzaPDr3u.jpg"
+    },
+    {
+      "id": "2547382",
+      "name": "Sapthami Gowda",
+      "character": "Leela",
+      "photo": "https://image.tmdb.org/t/p/w185/kmWJZ7Fz2RCvOcMTuaqIxOhzKGd.jpg"
+    },
+    {
+      "id": "550166",
+      "name": "Kishore",
+      "character": "Murali",
+      "photo": "https://image.tmdb.org/t/p/w185/qDKUEHZRsVgbXKJjuziUnZcOC1L.jpg"
+    },
+    {
+      "id": "1333834",
+      "name": "Achyuth Kumar",
+      "character": "Devendra Suttooru",
+      "photo": "https://image.tmdb.org/t/p/w185/zO1MoCgaz0RxILjga8VYXguROMp.jpg"
+    },
+    {
+      "id": "1752069",
+      "name": "Pramod Shetty",
+      "character": "Sudhakar",
+      "photo": "https://image.tmdb.org/t/p/w185/86EdpeMO9V7tQt1tgIk3MpnKSTH.jpg"
+    },
+    {
+      "id": "2116059",
+      "name": "Prakash Thuminad",
+      "character": "Raampa",
+      "photo": "https://image.tmdb.org/t/p/w185/ujBnBxV2UQGufTkQTlf05qFzx5l.jpg"
+    },
+    {
+      "id": "3742676",
+      "name": "Manasi Sudhir",
+      "character": "Shiva's Mother",
+      "photo": null
+    },
+    {
+      "id": "3471891",
+      "name": "Naveen D. Padil",
+      "character": "Lawyer",
+      "photo": null
+    },
+    {
+      "id": "5279356",
+      "name": "Suchan Shetty",
+      "character": "Ravi",
+      "photo": null
+    },
+    {
+      "id": "5279360",
+      "name": "Swaraj Shetty",
+      "character": "Guruva",
+      "photo": "https://image.tmdb.org/t/p/w185/fwGFT3i72k1P0gdlWdTuXgBPzhH.jpg"
+    },
+    {
+      "id": "3026625",
+      "name": "Deepak Rai Panaje",
+      "character": "Sundara",
+      "photo": "https://image.tmdb.org/t/p/w185/sKDSBchwG85XdhUulFzDVsxopIz.jpg"
+    },
+    {
+      "id": "3721566",
+      "name": "Shanil Guru",
+      "character": "Bulla",
+      "photo": null
+    },
+    {
+      "id": "5279364",
+      "name": "Pradeep Shetty Bellala",
+      "character": "Mohana",
+      "photo": null
+    },
+    {
+      "id": "5279367",
+      "name": "Rakshith Ramachandra Shetty",
+      "character": "Devendra's Henchman",
+      "photo": null
+    },
+    {
+      "id": "3020578",
+      "name": "Prabhakar Kunder",
+      "character": "Madhavacharya",
+      "photo": "https://image.tmdb.org/t/p/w185/FK2FJamigk1Jpq3T9L1DyaQuDk.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 1,
+  "status": "PUBLISHED",
+  "links": []
+}

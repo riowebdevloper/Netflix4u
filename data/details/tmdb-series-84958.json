@@ -1,0 +1,93 @@
+{
+  "id": "tmdb-series-84958",
+  "canonicalId": "tmdb-series-84958",
+  "mediaType": "tv",
+  "externalProvider": "tmdb",
+  "externalId": "84958",
+  "tmdbId": "84958",
+  "imdbId": "tt9140554",
+  "type": "series",
+  "contentType": "series",
+  "title": "Loki",
+  "canonicalTitle": "Loki",
+  "originalTitle": "Loki",
+  "overview": "After stealing the Tesseract during the events of “Avengers: Endgame,” an alternate version of Loki is brought to the mysterious Time Variance Authority, a bureaucratic organization that exists outside of time and space and monitors the timeline. They give Loki a choice: face being erased from existence due to being a “time variant” or help fix the timeline and stop a greater threat.",
+  "description": "After stealing the Tesseract during the events of “Avengers: Endgame,” an alternate version of Loki is brought to the mysterious Time Variance Authority, a bureaucratic organization that exists outside of time and space and monitors the timeline. They give Loki a choice: face being erased from existence due to being a “time variant” or help fix the timeline and stop a greater threat.",
+  "shortDescription": "After stealing the Tesseract during the events of “Avengers: Endgame,” an alternate version of Loki is brought to the my",
+  "year": 2021,
+  "releaseYear": 2021,
+  "season": 1,
+  "episode": 1,
+  "rating": 8.2,
+  "votes": "12.8K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Drama",
+    "Sci-Fi & Fantasy"
+  ],
+  "categories": [
+    "Drama",
+    "Sci-Fi & Fantasy"
+  ],
+  "language": "English",
+  "country": "US",
+  "poster": "https://image.tmdb.org/t/p/w500/kEl2t3OhXc3Zb9FBh1AuYzRTgZp.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/q3jHCb4dMfYF6ojikKuHd6LscxC.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/nW948Va-l10?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/nW948Va-l10?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "91606",
+      "name": "Tom Hiddleston",
+      "character": "Loki Laufeyson",
+      "photo": "https://image.tmdb.org/t/p/w185/mclHxMm8aPlCPKptP67257F5GPo.jpg"
+    },
+    {
+      "id": "1252533",
+      "name": "Sophia Di Martino",
+      "character": "Sylvie / The Variant",
+      "photo": "https://image.tmdb.org/t/p/w185/qZdFp18btpQJfDoknxr7DgfRpcB.jpg"
+    },
+    {
+      "id": "1216606",
+      "name": "Gugu Mbatha-Raw",
+      "character": "Judge Ravonna Renslayer",
+      "photo": "https://image.tmdb.org/t/p/w185/sHAnv0kw5JHzWBOP7gAezwqgl8J.jpg"
+    },
+    {
+      "id": "134774",
+      "name": "Wunmi Mosaku",
+      "character": "Hunter B-15",
+      "photo": "https://image.tmdb.org/t/p/w185/vp7qDA7cYZj0MDYk1k4wysmznnN.jpg"
+    },
+    {
+      "id": "1370567",
+      "name": "Eugene Cordero",
+      "character": "Casey / Hunter K-5E",
+      "photo": "https://image.tmdb.org/t/p/w185/waruLSR8lXBjhAFL0J6ihuVY62d.jpg"
+    },
+    {
+      "id": "690",
+      "name": "Ke Huy Quan",
+      "character": "Ouroboros 'OB'",
+      "photo": "https://image.tmdb.org/t/p/w185/iestHyn7PLuVowj5Jaa1SGPboQ4.jpg"
+    },
+    {
+      "id": "887",
+      "name": "Owen Wilson",
+      "character": "Mobius M. Mobius",
+      "photo": "https://image.tmdb.org/t/p/w185/5A46lNOwmpX77jAdhyKxU7e2Hub.jpg"
+    },
+    {
+      "id": "1674162",
+      "name": "Jonathan Majors",
+      "character": "He Who Remains/Victor Timely",
+      "photo": "https://image.tmdb.org/t/p/w185/nsxnMbkl9Lpc12AmYwKi9SmsJ7e.jpg"
+    }
+  ],
+  "seasons": 2,
+  "episodes": 12,
+  "status": "PUBLISHED",
+  "links": []
+}

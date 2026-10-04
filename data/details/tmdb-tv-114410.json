@@ -1,0 +1,156 @@
+{
+  "id": "tmdb-tv-114410",
+  "canonicalId": "tmdb-tv-114410",
+  "mediaType": "tv",
+  "externalProvider": "tmdb",
+  "externalId": "114410",
+  "tmdbId": "114410",
+  "imdbId": "tt13616990",
+  "type": "series",
+  "contentType": "series",
+  "title": "Chainsaw Man",
+  "canonicalTitle": "Chainsaw Man",
+  "originalTitle": "チェンソーマン",
+  "overview": "Denji has a simple dream—to live a happy and peaceful life, spending time with a girl he likes. This is a far cry from reality, however, as Denji is forced by the yakuza into killing devils in order to pay off his crushing debts. Using his pet devil Pochita as a weapon, he is ready to do anything for a bit of cash.",
+  "description": "Denji has a simple dream—to live a happy and peaceful life, spending time with a girl he likes. This is a far cry from reality, however, as Denji is forced by the yakuza into killing devils in order to pay off his crushing debts. Using his pet devil Pochita as a weapon, he is ready to do anything for a bit of cash.",
+  "shortDescription": "Denji has a simple dream—to live a happy and peaceful life, spending time with a girl he likes. This is a far cry from r",
+  "year": 2022,
+  "releaseYear": 2022,
+  "season": 1,
+  "episode": 1,
+  "rating": 8.5,
+  "votes": "2.3K",
+  "quality": "FHD",
+  "duration": "24m/ep",
+  "genres": [
+    "Animation",
+    "Action & Adventure",
+    "Sci-Fi & Fantasy"
+  ],
+  "categories": [
+    "Animation",
+    "Action & Adventure",
+    "Sci-Fi & Fantasy"
+  ],
+  "language": "Japanese",
+  "country": "JP",
+  "poster": "https://image.tmdb.org/t/p/w500/npdB6eFzizki0WaZ1OvKcJrWe97.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/5DUMPBSnHOZsbBv81GFXZXvDpo6.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/j9sSzNmB5po?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/j9sSzNmB5po?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "3651176",
+      "name": "Kikunosuke Toya",
+      "character": "Denji (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/tSAHe7tjN7luUD1Tx5yPSCuCnuD.jpg"
+    },
+    {
+      "id": "2004086",
+      "name": "Tomori Kusunoki",
+      "character": "Makima (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/iiGJPsLAnOoqmkNjLWCvbbDJw50.jpg"
+    },
+    {
+      "id": "2812912",
+      "name": "Shogo Sakata",
+      "character": "Aki Hayakawa (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/fRRPNBz3OCNRdmLdUTdpq7dGqxM.jpg"
+    },
+    {
+      "id": "2359492",
+      "name": "Fairouz Ai",
+      "character": "Power (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/coFu6WOVBZvqd1fw89vbHkiC0zB.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 12,
+  "status": "PUBLISHED",
+  "links": [
+    {
+      "url": "https://crimson-sea-a1e5.hekoy.workers.dev/?vcloud=https://vcloud.fit/vaad1gtyyafwugt",
+      "quality": "480p",
+      "size": "200MB",
+      "label": "Server Stream (480p)",
+      "source": "Fast Cloud",
+      "isCloud": true,
+      "isDotmovies": false,
+      "season": 1,
+      "episode": null,
+      "isBatch": false,
+      "canonicalId": "tmdb-tv-114410",
+      "isPack": false
+    },
+    {
+      "url": "https://crimson-sea-a1e5.hekoy.workers.dev/?vcloud=https://vcloud.fit/sggohuwqm-2bgbx",
+      "quality": "720p",
+      "size": "820MB",
+      "label": "Server Stream (720p)",
+      "source": "Fast Cloud",
+      "isCloud": true,
+      "isDotmovies": false,
+      "season": 1,
+      "episode": null,
+      "isBatch": false,
+      "canonicalId": "tmdb-tv-114410",
+      "isPack": false
+    },
+    {
+      "url": "https://crimson-sea-a1e5.hekoy.workers.dev/?vcloud=https://vcloud.fit/dmvqqculrw800hq",
+      "quality": "1080p",
+      "size": "17GB",
+      "label": "Server Stream (1080p)",
+      "source": "Fast Cloud",
+      "isCloud": true,
+      "isDotmovies": false,
+      "season": 1,
+      "episode": null,
+      "isBatch": false,
+      "canonicalId": "tmdb-tv-114410",
+      "isPack": false
+    },
+    {
+      "url": "https://crimson-sea-a1e5.hekoy.workers.dev/?vcloud=https://vcloud.fit/skqyuxyzgk6e61y",
+      "quality": "480p",
+      "size": "385MB",
+      "label": "Server Stream (480p)",
+      "source": "Fast Cloud",
+      "isCloud": true,
+      "isDotmovies": false,
+      "season": 1,
+      "episode": null,
+      "isBatch": false,
+      "canonicalId": "tmdb-tv-114410",
+      "isPack": false
+    },
+    {
+      "url": "https://crimson-sea-a1e5.hekoy.workers.dev/?vcloud=https://vcloud.fit/lylfzol4m2ozh4y",
+      "quality": "720p",
+      "size": "725MB",
+      "label": "Server Stream (720p)",
+      "source": "Fast Cloud",
+      "isCloud": true,
+      "isDotmovies": false,
+      "season": 1,
+      "episode": null,
+      "isBatch": false,
+      "canonicalId": "tmdb-tv-114410",
+      "isPack": false
+    },
+    {
+      "url": "https://crimson-sea-a1e5.hekoy.workers.dev/?vcloud=https://vcloud.fit/ptzkxaxoyxut4mz",
+      "quality": "1080p",
+      "size": "2GB",
+      "label": "Server Stream (1080p)",
+      "source": "Fast Cloud",
+      "isCloud": true,
+      "isDotmovies": false,
+      "season": 1,
+      "episode": null,
+      "isBatch": false,
+      "canonicalId": "tmdb-tv-114410",
+      "isPack": false
+    }
+  ]
+}

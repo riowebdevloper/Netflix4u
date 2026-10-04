@@ -1,0 +1,65 @@
+{
+  "id": "tmdb-tv-90802",
+  "canonicalId": "tmdb-tv-90802",
+  "mediaType": "tv",
+  "externalProvider": "tmdb",
+  "externalId": "90802",
+  "tmdbId": "90802",
+  "imdbId": "tt1751634",
+  "type": "series",
+  "contentType": "series",
+  "title": "The Sandman",
+  "canonicalTitle": "The Sandman",
+  "originalTitle": "The Sandman",
+  "overview": "After years of imprisonment, Morpheus — the King of Dreams — embarks on a journey across worlds to find what was stolen from him and restore his power.",
+  "description": "After years of imprisonment, Morpheus — the King of Dreams — embarks on a journey across worlds to find what was stolen from him and restore his power.",
+  "shortDescription": "After years of imprisonment, Morpheus — the King of Dreams — embarks on a journey across worlds to find what was stolen ",
+  "year": 2022,
+  "releaseYear": 2022,
+  "season": 1,
+  "episode": 1,
+  "rating": 7.8,
+  "votes": "2.8K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Sci-Fi & Fantasy",
+    "Drama",
+    "Action & Adventure"
+  ],
+  "categories": [
+    "Sci-Fi & Fantasy",
+    "Drama",
+    "Action & Adventure"
+  ],
+  "language": "English",
+  "country": "US",
+  "poster": "https://image.tmdb.org/t/p/w500/q54qEgagGOYCq5D1903eBVMNkbo.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/i8taDLjpF8cCbp53N8kOFt1LSkW.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/ZJXamnPUm0I?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/ZJXamnPUm0I?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "90451",
+      "name": "Tom Sturridge",
+      "character": "Morpheus / Dream",
+      "photo": "https://image.tmdb.org/t/p/w185/dm5GA0xwJwvPsAU6YBPCfyvvWSb.jpg"
+    },
+    {
+      "id": "1619294",
+      "name": "Vivienne Acheampong",
+      "character": "Lucienne",
+      "photo": "https://image.tmdb.org/t/p/w185/1VqJnnimdMwuje0ttU2SsKSuy3S.jpg"
+    },
+    {
+      "id": "10872",
+      "name": "Patton Oswalt",
+      "character": "Matthew the Raven (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/ljQvjbPmcIAl205Lb2Mu4CW8WO7.jpg"
+    }
+  ],
+  "seasons": 2,
+  "episodes": 23,
+  "status": "PUBLISHED",
+  "links": []
+}

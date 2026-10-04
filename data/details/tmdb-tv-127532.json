@@ -1,0 +1,95 @@
+{
+  "id": "tmdb-tv-127532",
+  "canonicalId": "tmdb-tv-127532",
+  "mediaType": "tv",
+  "externalProvider": "tmdb",
+  "externalId": "127532",
+  "tmdbId": "127532",
+  "imdbId": "tt21209876",
+  "type": "series",
+  "contentType": "series",
+  "title": "Solo Leveling",
+  "canonicalTitle": "Solo Leveling",
+  "originalTitle": "俺だけレベルアップな件",
+  "overview": "They say whatever doesn’t kill you makes you stronger, but that’s not the case for the world’s weakest hunter Sung Jinwoo. After being brutally slaughtered by monsters in a high-ranking dungeon, Jinwoo came back with the System, a program only he could see, that’s leveling him up in every way. Now, he’s inspired to discover the secrets behind his powers and the dungeon that spawned them.",
+  "description": "They say whatever doesn’t kill you makes you stronger, but that’s not the case for the world’s weakest hunter Sung Jinwoo. After being brutally slaughtered by monsters in a high-ranking dungeon, Jinwoo came back with the System, a program only he could see, that’s leveling him up in every way. Now, he’s inspired to discover the secrets behind his powers and the dungeon that spawned them.",
+  "shortDescription": "They say whatever doesn’t kill you makes you stronger, but that’s not the case for the world’s weakest hunter Sung Jinwo",
+  "year": 2024,
+  "releaseYear": 2024,
+  "season": 1,
+  "episode": 1,
+  "rating": 8.7,
+  "votes": "2.0K",
+  "quality": "FHD",
+  "duration": "24m/ep",
+  "genres": [
+    "Animation",
+    "Action & Adventure",
+    "Sci-Fi & Fantasy"
+  ],
+  "categories": [
+    "Animation",
+    "Action & Adventure",
+    "Sci-Fi & Fantasy"
+  ],
+  "language": "Japanese",
+  "country": "JP",
+  "poster": "https://image.tmdb.org/t/p/w500/geCRueV3ElhRTr0xtJuEWJt6dJ1.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/xMNH87maNLt9n2bMDYeI6db5VFm.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/HkIKAnwLZCw?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/HkIKAnwLZCw?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "2106489",
+      "name": "Taito Ban",
+      "character": "Shun Mizushino (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/pSExEOVmjAujKUyJJJSxC1WEzOM.jpg"
+    },
+    {
+      "id": "2784795",
+      "name": "Genta Nakamura",
+      "character": "Kenta Morobishi (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/bl3pu2fsaNfHqnZQSDugY4V1CE0.jpg"
+    },
+    {
+      "id": "3279626",
+      "name": "Haruna Mikawa",
+      "character": "Aoi Mizushino (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/nsrFjmDDzo4FDMhxyvuVk4mPEH3.jpg"
+    },
+    {
+      "id": "1452028",
+      "name": "Reina Ueda",
+      "character": "Shizuku Kousaka (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/2WV61uVU7y6XGYqNHLMpP0sApdu.jpg"
+    },
+    {
+      "id": "1096528",
+      "name": "Daisuke Hirakawa",
+      "character": "Shin Mogami (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/8uDi5NxFdxFvfVyo4n5CeOSLWEf.jpg"
+    },
+    {
+      "id": "89832",
+      "name": "Hiroki Touchi",
+      "character": "Taiga Shirakawa (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/bU2vogWmnTWiQEwUADWlnBqAPhJ.jpg"
+    },
+    {
+      "id": "122481",
+      "name": "Banjo Ginga",
+      "character": "Kiyoomi Goto (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/qiXnKaZheMiVyA1U2mX9tPdNA3T.jpg"
+    },
+    {
+      "id": "1319218",
+      "name": "Makoto Furukawa",
+      "character": "Akira Inukai (voice)",
+      "photo": "https://image.tmdb.org/t/p/w185/inLmBZhrqXeE9wlViyK28ocKJSw.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 25,
+  "status": "PUBLISHED",
+  "links": []
+}

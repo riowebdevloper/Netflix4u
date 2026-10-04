@@ -1,0 +1,101 @@
+{
+  "id": "tmdb-series-99966",
+  "canonicalId": "tmdb-series-99966",
+  "mediaType": "tv",
+  "externalProvider": "tmdb",
+  "externalId": "99966",
+  "tmdbId": "99966",
+  "imdbId": "tt14169960",
+  "type": "series",
+  "contentType": "series",
+  "title": "All of Us Are Dead",
+  "canonicalTitle": "All of Us Are Dead",
+  "originalTitle": "지금 우리 학교는",
+  "overview": "A high school becomes ground zero for a zombie virus outbreak. Trapped students must fight their way out — or turn into one of the rabid infected.",
+  "description": "A high school becomes ground zero for a zombie virus outbreak. Trapped students must fight their way out — or turn into one of the rabid infected.",
+  "shortDescription": "A high school becomes ground zero for a zombie virus outbreak. Trapped students must fight their way out — or turn into ",
+  "year": 2022,
+  "releaseYear": 2022,
+  "season": 1,
+  "episode": 1,
+  "rating": 8.3,
+  "votes": "4.5K",
+  "quality": "FHD",
+  "duration": "65m/ep",
+  "genres": [
+    "Action & Adventure",
+    "Drama",
+    "Sci-Fi & Fantasy"
+  ],
+  "categories": [
+    "Action & Adventure",
+    "Drama",
+    "Sci-Fi & Fantasy"
+  ],
+  "language": "Korean",
+  "country": "KR",
+  "poster": "https://image.tmdb.org/t/p/w500/pTEFqAjLd5YTsMD6NSUxV6Dq7A6.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/8hp2CuGnw1iP5dLBVMAPUv23swx.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/IN5TD4VRcSM?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/IN5TD4VRcSM?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "2125084",
+      "name": "Park Ji-hu",
+      "character": "Nam On-jo",
+      "photo": "https://image.tmdb.org/t/p/w185/bZy15WXLhOflOgtQpICbgeeqzm6.jpg"
+    },
+    {
+      "id": "1493898",
+      "name": "Yoon Chan-young",
+      "character": "Lee Cheong-san",
+      "photo": "https://image.tmdb.org/t/p/w185/7Al19wuV9XnjIiiPlsor3MK84Kx.jpg"
+    },
+    {
+      "id": "2185341",
+      "name": "Cho Yi-hyun",
+      "character": "Choi Nam-ra",
+      "photo": "https://image.tmdb.org/t/p/w185/cWCNUAyQ9AFUDBfEskZou4eVbEH.jpg"
+    },
+    {
+      "id": "2074587",
+      "name": "Lomon",
+      "character": "Lee Su-hyeok",
+      "photo": "https://image.tmdb.org/t/p/w185/2MrtBPoE4hKrBMohQ1rxOYl2ABX.jpg"
+    },
+    {
+      "id": "2402531",
+      "name": "Yoo In-soo",
+      "character": "Yoon Gwi-nam",
+      "photo": "https://image.tmdb.org/t/p/w185/9acPcttWXPT2UwTjlxv5lHVscU3.jpg"
+    },
+    {
+      "id": "1985557",
+      "name": "Lee You-mi",
+      "character": "Lee Na-yeon",
+      "photo": "https://image.tmdb.org/t/p/w185/jZgjJqr6pGEegyziY10b4SklqbD.jpg"
+    },
+    {
+      "id": "79577",
+      "name": "Kim Byong-chul",
+      "character": "Lee Byeong-chan",
+      "photo": "https://image.tmdb.org/t/p/w185/ynyE7u1u6SdUBFL1OmmxGVHX6g7.jpg"
+    },
+    {
+      "id": "1916075",
+      "name": "Lee Kyoo-hyung",
+      "character": "Song Jae-ik",
+      "photo": "https://image.tmdb.org/t/p/w185/8F7s9MNKfks21VMTsW8iTc9VK09.jpg"
+    },
+    {
+      "id": "1572347",
+      "name": "Jeon Bae-soo",
+      "character": "Nam So-ju",
+      "photo": "https://image.tmdb.org/t/p/w185/7EhOO3xFN5FvEJwl0b0Eudab5bI.jpg"
+    }
+  ],
+  "seasons": 2,
+  "episodes": 12,
+  "status": "PUBLISHED",
+  "links": []
+}

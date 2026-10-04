@@ -1,0 +1,117 @@
+{
+  "id": "tmdb-series-94796",
+  "canonicalId": "tmdb-series-94796",
+  "mediaType": "tv",
+  "externalProvider": "tmdb",
+  "externalId": "94796",
+  "tmdbId": "94796",
+  "imdbId": "tt10850932",
+  "type": "series",
+  "contentType": "series",
+  "title": "Crash Landing on You",
+  "canonicalTitle": "Crash Landing on You",
+  "originalTitle": "사랑의 불시착",
+  "overview": "A paragliding mishap drops a South Korean heiress in North Korea -- and into the life of an army officer, who decides he will help her hide.",
+  "description": "A paragliding mishap drops a South Korean heiress in North Korea -- and into the life of an army officer, who decides he will help her hide.",
+  "shortDescription": "A paragliding mishap drops a South Korean heiress in North Korea -- and into the life of an army officer, who decides he",
+  "year": 2019,
+  "releaseYear": 2019,
+  "season": 1,
+  "episode": 1,
+  "rating": 8.5,
+  "votes": "1.0K",
+  "quality": "FHD",
+  "duration": "45m/ep",
+  "genres": [
+    "Drama",
+    "Comedy"
+  ],
+  "categories": [
+    "Drama",
+    "Comedy"
+  ],
+  "language": "Korean",
+  "country": "KR",
+  "poster": "https://image.tmdb.org/t/p/w500/fgBNLPr6mC8pxuR79ENAJY4nBmj.jpg",
+  "backdrop": "https://image.tmdb.org/t/p/original/3yEHM2HT2vrUtO93YzTJNgEfiZG.jpg",
+  "trailerUrl": "https://www.youtube-nocookie.com/embed/K58Z1RORRaI?rel=0&modestbranding=1",
+  "trailer": "https://www.youtube-nocookie.com/embed/K58Z1RORRaI?rel=0&modestbranding=1",
+  "cast": [
+    {
+      "id": "544107",
+      "name": "Hyun Bin",
+      "character": "Ri Jeong-hyeok",
+      "photo": "https://image.tmdb.org/t/p/w185/JQFzhO9j8HRiyr7leGPj6cqhvM.jpg"
+    },
+    {
+      "id": "86889",
+      "name": "Son Ye-jin",
+      "character": "Yoon Se-ri",
+      "photo": "https://image.tmdb.org/t/p/w185/i6fASFvO3mUceZJvipn4RiLHA44.jpg"
+    },
+    {
+      "id": "127708",
+      "name": "Seo Ji-hye",
+      "character": "Seo Dan",
+      "photo": "https://image.tmdb.org/t/p/w185/55PUL5Yo6hoD2WJO5ysOiYULopg.jpg"
+    },
+    {
+      "id": "1619435",
+      "name": "Kim Jung-hyun",
+      "character": "Goo Seung-joon",
+      "photo": "https://image.tmdb.org/t/p/w185/6SN5PBj1ycfY4o9HlLK4joS5f1F.jpg"
+    },
+    {
+      "id": "2526744",
+      "name": "Yang Kyung-won",
+      "character": "Pyo Chi-soo",
+      "photo": "https://image.tmdb.org/t/p/w185/yWecuhTOp0b6zF2PdqmiUsrusTL.jpg"
+    },
+    {
+      "id": "2149762",
+      "name": "Yoo Su-bin",
+      "character": "Kim Joo-meok",
+      "photo": "https://image.tmdb.org/t/p/w185/vulO1ngz0s3jUBXQbW2ADuyK3Fa.jpg"
+    },
+    {
+      "id": "2526745",
+      "name": "Lee Sin-young",
+      "character": "Park Gwang-beom",
+      "photo": "https://image.tmdb.org/t/p/w185/uoWBneDhIbgaH7lmeSccGCiOgPj.jpg"
+    },
+    {
+      "id": "2123570",
+      "name": "Tang Joon-sang",
+      "character": "Geum Eun-dong",
+      "photo": "https://image.tmdb.org/t/p/w185/oEP7orwukWSKoZwyzzXyJf7CYXw.jpg"
+    },
+    {
+      "id": "1352930",
+      "name": "Kim Sun-young",
+      "character": "Na Wol-sook",
+      "photo": "https://image.tmdb.org/t/p/w185/9aFsdy8tAZkoP33qG8CH6y3lafP.jpg"
+    },
+    {
+      "id": "1123505",
+      "name": "Kim Jung-nan",
+      "character": "Ma Young-ae",
+      "photo": "https://image.tmdb.org/t/p/w185/guaDtVcObvkRj2Jmku4kGw1HOVD.jpg"
+    },
+    {
+      "id": "463583",
+      "name": "Jang So-yeon",
+      "character": "Hyun Myung-sook",
+      "photo": "https://image.tmdb.org/t/p/w185/f6P6S8MIVAsoyzuqvT63DF1iahy.jpg"
+    },
+    {
+      "id": "1453799",
+      "name": "Joo Ye-rin",
+      "character": "NK Neighborhood Woman",
+      "photo": "https://image.tmdb.org/t/p/w185/uuBddtwzbsLvECgQgekvKS5vuMl.jpg"
+    }
+  ],
+  "seasons": 1,
+  "episodes": 16,
+  "status": "PUBLISHED",
+  "links": []
+}
