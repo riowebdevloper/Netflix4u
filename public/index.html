@@ -3,6 +3,24 @@
 <head>
   <script>
     window.__nmStartTime = Date.now();
+    // 🛡️ Anti-Redirect & Anti-Popunder Security Shield
+    (function() {
+      var originalOpen = window.open;
+      window.open = function(url, target, features) {
+        if (!url || typeof url !== 'string') return null;
+        var u = url.toLowerCase();
+        // Allow authentic user flows (Telegram, VLC/MX player intents, YouTube trailers)
+        if (u.includes('t.me/') || u.startsWith('vlc://') || u.startsWith('intent://') || u.includes('youtube.com') || u.includes('youtu.be')) {
+          return originalOpen.call(window, url, target, features);
+        }
+        // Block known rogue ad networks and unverified popunders
+        if (u.includes('profitableratecpmnetwork') || u.includes('untimely-hello') || u.includes('hilltopads') || u.includes('adsterra') || u.includes('monetag') || u.includes('click') || u.includes('pop')) {
+          console.warn('[Security Shield] Blocked rogue popunder/redirect to:', url);
+          return null;
+        }
+        return originalOpen.call(window, url, target, features);
+      };
+    })();
   </script>
   <meta name="theme-color" content="#0a0a0f">
   <!-- Deferred Google Analytics & AdSense Loader (Interaction-Driven, Zero Render-Blocking) -->
@@ -353,56 +371,56 @@
               <span>My List</span>
             </button>
 
-            <button data-platform="LatestRelease" data-color="#22c55e" class="platform-btn shrink-0 pl-1.5 pr-3.5 py-1 rounded-full text-xs font-semibold border transition flex items-center gap-2 whitespace-nowrap text-white/80">
+            <button data-platform="latestrelease" data-color="#22c55e" class="platform-btn shrink-0 pl-1.5 pr-3.5 py-1 rounded-full text-xs font-semibold border transition flex items-center gap-2 whitespace-nowrap text-white/80">
               <span class="w-7 h-7 rounded-full shrink-0 flex items-center justify-center shadow-sm platform-icon-latest ring-1 ring-white/20">
                 <svg viewBox="0 0 24 24" class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"></path><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path></svg>
               </span>
               <span>Latest Release</span>
             </button>
 
-            <button data-platform="Netflix" data-color="#e50914" class="platform-btn shrink-0 pl-1.5 pr-3.5 py-1 rounded-full text-xs font-semibold border transition flex items-center gap-2 whitespace-nowrap text-white/80">
+            <button data-platform="netflix" data-color="#e50914" class="platform-btn shrink-0 pl-1.5 pr-3.5 py-1 rounded-full text-xs font-semibold border transition flex items-center gap-2 whitespace-nowrap text-white/80">
               <span class="w-7 h-7 rounded-full overflow-hidden shrink-0 ring-1 ring-white/20 bg-zinc-900 flex items-center justify-center">
                 <img src="/images/platforms/FjWTYs9RfCsT.jpg" alt="" width="28" height="28" loading="lazy" decoding="async" class="w-full h-full object-cover">
               </span>
               <span>Netflix</span>
             </button>
 
-            <button data-platform="PrimeVideo" data-color="#00a8e1" class="platform-btn shrink-0 pl-1.5 pr-3.5 py-1 rounded-full text-xs font-semibold border transition flex items-center gap-2 whitespace-nowrap text-white/80">
+            <button data-platform="primevideo" data-color="#00a8e1" class="platform-btn shrink-0 pl-1.5 pr-3.5 py-1 rounded-full text-xs font-semibold border transition flex items-center gap-2 whitespace-nowrap text-white/80">
               <span class="w-7 h-7 rounded-full overflow-hidden shrink-0 ring-1 ring-white/20 bg-zinc-900 flex items-center justify-center">
                 <img src="/images/platforms/teMwgjoxOg9u.jpg" alt="" width="28" height="28" loading="lazy" decoding="async" class="w-full h-full object-cover">
               </span>
               <span>Prime Video</span>
             </button>
 
-            <button data-platform="JioHotstar" data-color="#2b6def" class="platform-btn shrink-0 pl-1.5 pr-3.5 py-1 rounded-full text-xs font-semibold border transition flex items-center gap-2 whitespace-nowrap text-white/80">
+            <button data-platform="jiohotstar" data-color="#2b6def" class="platform-btn shrink-0 pl-1.5 pr-3.5 py-1 rounded-full text-xs font-semibold border transition flex items-center gap-2 whitespace-nowrap text-white/80">
               <span class="w-7 h-7 rounded-full overflow-hidden shrink-0 ring-1 ring-white/20 bg-zinc-900 flex items-center justify-center">
                 <img src="/images/platforms/JmxIsKiiiFkm.jpg" alt="" width="28" height="28" loading="lazy" decoding="async" class="w-full h-full object-cover">
               </span>
               <span>JioHotstar</span>
             </button>
 
-            <button data-platform="SonyLIV" data-color="#9b5de5" class="platform-btn shrink-0 pl-1.5 pr-3.5 py-1 rounded-full text-xs font-semibold border transition flex items-center gap-2 whitespace-nowrap text-white/80">
+            <button data-platform="sonyliv" data-color="#9b5de5" class="platform-btn shrink-0 pl-1.5 pr-3.5 py-1 rounded-full text-xs font-semibold border transition flex items-center gap-2 whitespace-nowrap text-white/80">
               <span class="w-7 h-7 rounded-full overflow-hidden shrink-0 ring-1 ring-white/20 bg-zinc-900 flex items-center justify-center">
                 <img src="/images/platforms/IQHvNlAlUHxi.jpg" alt="" width="28" height="28" loading="lazy" decoding="async" class="w-full h-full object-cover">
               </span>
               <span>SonyLIV</span>
             </button>
 
-            <button data-platform="Crunchyroll" data-color="#f47521" class="platform-btn shrink-0 pl-1.5 pr-3.5 py-1 rounded-full text-xs font-semibold border transition flex items-center gap-2 whitespace-nowrap text-white/80">
+            <button data-platform="crunchyroll" data-color="#f47521" class="platform-btn shrink-0 pl-1.5 pr-3.5 py-1 rounded-full text-xs font-semibold border transition flex items-center gap-2 whitespace-nowrap text-white/80">
               <span class="w-7 h-7 rounded-full overflow-hidden shrink-0 ring-1 ring-white/20 bg-zinc-900 flex items-center justify-center">
                 <img src="/images/platforms/nnYmRNZy6VSX.jpg" alt="" width="28" height="28" loading="lazy" decoding="async" class="w-full h-full object-cover">
               </span>
               <span>Crunchyroll</span>
             </button>
 
-            <button data-platform="Kids" data-color="#ff4fa3" class="platform-btn shrink-0 pl-1.5 pr-3.5 py-1 rounded-full text-xs font-semibold border transition flex items-center gap-2 whitespace-nowrap text-white/80">
+            <button data-platform="kids" data-color="#ff4fa3" class="platform-btn shrink-0 pl-1.5 pr-3.5 py-1 rounded-full text-xs font-semibold border transition flex items-center gap-2 whitespace-nowrap text-white/80">
               <span class="w-7 h-7 rounded-full shrink-0 flex items-center justify-center shadow-sm platform-icon-kids ring-1 ring-white/20">
                 <svg viewBox="0 0 24 24" class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" x2="9.01" y1="9" y2="9"></line><line x1="15" x2="15.01" y1="9" y2="9"></line></svg>
               </span>
               <span>Kids</span>
             </button>
 
-            <button data-platform="MX" data-color="#0085f6" class="platform-btn shrink-0 pl-1.5 pr-3.5 py-1 rounded-full text-xs font-semibold border transition flex items-center gap-2 whitespace-nowrap text-white/80">
+            <button data-platform="mx" data-color="#0085f6" class="platform-btn shrink-0 pl-1.5 pr-3.5 py-1 rounded-full text-xs font-semibold border transition flex items-center gap-2 whitespace-nowrap text-white/80">
               <span class="w-7 h-7 rounded-full overflow-hidden shrink-0 ring-1 ring-white/20 bg-zinc-900 flex items-center justify-center">
                 <img src="/images/platforms/Hoj6RBCM9kDd.jpg" alt="" width="28" height="28" loading="lazy" decoding="async" class="w-full h-full object-cover">
               </span>
@@ -619,9 +637,9 @@
 
           <!-- ─── Comprehensive Semantic Site Footer (AEO, GEO, LLMO & E-E-A-T) ─── -->
           <footer class="pt-12 pb-10 border-t border-white/10 mt-16 text-xs text-slate-400">
-            <div class="max-w-6xl mx-auto space-y-6 text-left">
-              <div class="flex flex-col md:flex-row items-start justify-between gap-8 pb-6 border-b border-white/10">
-                <div class="max-w-sm">
+            <div class="max-w-6xl mx-auto space-y-8 text-left">
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-10 pb-8 border-b border-white/10 items-start">
+                <div class="sm:col-span-2 lg:col-span-4 max-w-sm">
                   <div class="text-xl font-black text-white tracking-tight mb-2">
                     <span class="text-[color:var(--color-brand,#ff6b00)]">Netflix</span>4U
                   </div>
@@ -629,38 +647,36 @@
                     Ultra-fast entertainment discovery portal and catalog index delivering verified media metadata, streaming guidance, and direct cloud downloads across global cinema traditions.
                   </p>
                 </div>
-                <div class="grid grid-cols-2 sm:grid-cols-3 gap-6 text-xs flex-1">
-                  <div>
-                    <h4 class="font-bold text-white mb-2.5 uppercase tracking-wider text-[11px]">Media Hubs</h4>
-                    <ul class="space-y-1.5">
-                      <li><a href="/movies" class="hover:text-white transition">Movies</a></li>
-                      <li><a href="/series" class="hover:text-white transition">Web Series</a></li>
-                      <li><a href="/trending" class="hover:text-white transition">Trending Today</a></li>
-                      <li><a href="/anime" class="hover:text-white transition">Anime</a></li>
-                      <li><a href="/kdrama" class="hover:text-white transition">K-Drama</a></li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h4 class="font-bold text-white mb-2.5 uppercase tracking-wider text-[11px]">Regional Cinema</h4>
-                    <ul class="space-y-1.5">
-                      <li><a href="/bollywood" class="hover:text-white transition">Bollywood (Hindi)</a></li>
-                      <li><a href="/hollywood" class="hover:text-white transition">Hollywood</a></li>
-                      <li><a href="/south-indian" class="hover:text-white transition">South Indian Cinema</a></li>
-                      <li><a href="/hindi-dubbed" class="hover:text-white transition">Dual Audio Dubbed</a></li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h4 class="font-bold text-white mb-2.5 uppercase tracking-wider text-[11px]">Trust &amp; Legal</h4>
-                    <ul class="space-y-1.5">
-                      <li><a href="/about" class="hover:text-white transition">About Us</a></li>
-                      <li><a href="/contact" class="hover:text-white transition">Contact Support</a></li>
-                      <li><a href="/editorial-policy" class="hover:text-white transition">Editorial Policy</a></li>
-                      <li><a href="/corrections-policy" class="hover:text-white transition">Corrections Policy</a></li>
-                      <li><a href="/privacy" class="hover:text-white transition">Privacy Policy</a></li>
-                      <li><a href="/terms" class="hover:text-white transition">Terms of Service</a></li>
-                      <li><a href="/dmca" class="hover:text-white transition">DMCA Disclaimer</a></li>
-                    </ul>
-                  </div>
+                <div class="min-w-[150px] lg:col-span-3">
+                  <h4 class="font-bold text-white mb-3 uppercase tracking-wider text-[11px] whitespace-nowrap">Media Hubs</h4>
+                  <ul class="space-y-2">
+                    <li><a href="/movies" class="hover:text-white transition">Movies</a></li>
+                    <li><a href="/series" class="hover:text-white transition">Web Series</a></li>
+                    <li><a href="/trending" class="hover:text-white transition">Trending Today</a></li>
+                    <li><a href="/anime" class="hover:text-white transition">Anime</a></li>
+                    <li><a href="/kdrama" class="hover:text-white transition">K-Drama</a></li>
+                  </ul>
+                </div>
+                <div class="min-w-[170px] lg:col-span-3">
+                  <h4 class="font-bold text-white mb-3 uppercase tracking-wider text-[11px] whitespace-nowrap">Regional Cinema</h4>
+                  <ul class="space-y-2">
+                    <li><a href="/bollywood" class="hover:text-white transition">Bollywood (Hindi)</a></li>
+                    <li><a href="/hollywood" class="hover:text-white transition">Hollywood</a></li>
+                    <li><a href="/south-indian" class="hover:text-white transition">South Indian Cinema</a></li>
+                    <li><a href="/hindi-dubbed" class="hover:text-white transition">Dual Audio Dubbed</a></li>
+                  </ul>
+                </div>
+                <div class="min-w-[140px] lg:col-span-2">
+                  <h4 class="font-bold text-white mb-3 uppercase tracking-wider text-[11px] whitespace-nowrap">Trust &amp; Legal</h4>
+                  <ul class="space-y-2">
+                    <li><a href="/about" class="hover:text-white transition">About Us</a></li>
+                    <li><a href="/contact" class="hover:text-white transition">Contact Support</a></li>
+                    <li><a href="/editorial-policy" class="hover:text-white transition">Editorial Policy</a></li>
+                    <li><a href="/corrections-policy" class="hover:text-white transition">Corrections Policy</a></li>
+                    <li><a href="/privacy" class="hover:text-white transition">Privacy Policy</a></li>
+                    <li><a href="/terms" class="hover:text-white transition">Terms of Service</a></li>
+                    <li><a href="/dmca" class="hover:text-white transition">DMCA Disclaimer</a></li>
+                  </ul>
                 </div>
               </div>
 
@@ -730,60 +746,18 @@
         </a>
       </div>
 
-      <!-- Right: Server Selector + Audio + Reload + Fullscreen + Close -->
-      <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
-        <!-- Server Switcher Pill Dropdown -->
-        <div class="relative" id="watch-server-dropdown-wrap">
-          <button id="watch-server-toggle" type="button" aria-expanded="false" class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full bg-black/70 hover:bg-black/90 border border-white/20 hover:border-white/40 text-xs font-semibold text-white transition cursor-pointer shadow-lg" title="Switch Streaming Server">
-            <span id="watch-server-indicator" class="w-2 h-2 rounded-full bg-emerald-400 shrink-0"></span>
-            <span id="watch-current-server-label" class="truncate max-w-[85px] sm:max-w-[140px]">Server 1</span>
-            <svg id="watch-server-arrow" class="w-3 h-3 text-white/60 shrink-0 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/>
-            </svg>
-          </button>
-
-          <!-- Dropdown Menu -->
-          <div id="watch-server-menu" class="hidden absolute right-0 mt-2 w-72 sm:w-80 rounded-2xl bg-[#0f0f17]/98 border border-white/15 backdrop-blur-2xl shadow-2xl p-2 z-[80] space-y-1">
-            <div class="px-2.5 py-1.5 border-b border-white/10 flex items-center justify-between text-xs text-white/80">
-              <span class="font-bold text-white/90">Switch Streaming Server</span>
-              <button id="watch-autoswitch-toggle-btn" type="button" class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/30 transition cursor-pointer">
-                AUTO
-              </button>
-            </div>
-            <div id="watch-servers-list-container" class="space-y-1 max-h-[55vh] overflow-y-auto pr-1">
-              <!-- Dynamically populated servers -->
-            </div>
-          </div>
-        </div>
-
-        <!-- Audio Language Selector Pill -->
-        <div class="relative" id="watch-audio-dropdown-wrap">
-          <button id="watch-audio-toggle" type="button" aria-expanded="false" class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full bg-amber-500/15 hover:bg-amber-500/25 border border-amber-500/30 hover:border-amber-500/50 text-xs font-semibold text-amber-300 transition cursor-pointer shadow-lg" title="Select Audio Language">
-            <svg class="w-3.5 h-3.5 text-amber-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg>
-            <span id="watch-current-audio-label" class="hidden xs:inline truncate max-w-[55px] sm:max-w-none">Hindi</span>
-            <svg class="w-2.5 h-2.5 text-amber-400/70 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></svg>
-          </button>
-          <div id="watch-audio-menu" class="hidden absolute right-0 mt-2 w-48 rounded-xl bg-[#0f0f17]/98 border border-white/15 backdrop-blur-2xl shadow-2xl p-1.5 z-[80] space-y-1">
-            <div class="px-2.5 py-1 text-[11px] font-bold text-white/60 uppercase tracking-wider border-b border-white/10">Audio Track</div>
-            <div id="watch-audio-list-container" class="space-y-1">
-              <!-- Dynamically populated audio languages -->
-            </div>
-          </div>
-        </div>
+      <!-- Right: Official Telegram CTA + Reload Stream + Close Player -->
+      <div class="flex items-center gap-2 shrink-0">
+        <a href="https://t.me/netflix4u_website" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full bg-[#0088cc]/20 hover:bg-[#0088cc]/35 border border-[#0088cc]/40 text-xs font-semibold text-[#38bdf8] transition cursor-pointer shadow-lg" title="Join Official Netflix4U Telegram Channel">
+          <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
+          <span class="hidden sm:inline">Join Telegram</span>
+        </a>
 
         <!-- Reload Button -->
         <button id="watch-reload-btn" type="button" aria-label="Reload stream" title="Reload Stream" class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 active:scale-90 text-white flex items-center justify-center transition cursor-pointer shrink-0">
           <svg id="watch-reload-icon" class="w-4 h-4 text-white/90 transition-transform duration-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67" />
           </svg>
-        </button>
-
-        <!-- Expand / Fullscreen Button -->
-        <button id="watch-rotate-btn" type="button" aria-label="Expand Fullscreen" title="Expand Fullscreen / Landscape" class="inline-flex items-center gap-1.5 h-9 px-3 rounded-full bg-white/10 hover:bg-white/20 active:scale-90 text-white text-xs font-semibold border border-white/15 transition cursor-pointer shrink-0">
-          <svg class="w-3.5 h-3.5 text-white/90" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3" />
-          </svg>
-          <span class="hidden sm:inline">Expand</span>
         </button>
 
         <!-- Close Player Button -->
@@ -794,6 +768,14 @@
     <!-- MAIN VIDEO AREA: Clean 16:9 Player Shell (Zero Letterbox Void, Zero White Block) -->
     <div class="player-shell w-full bg-black relative flex flex-col shrink-0">
       <div class="player-frame w-full aspect-video bg-black relative overflow-hidden flex items-center justify-center">
+        <!-- Persistent In-Player Top-Left Back Button (Always available in Normal & Fullscreen Mode) -->
+        <button id="player-inframe-back-btn" type="button" aria-label="Back to details" title="Back to Details" class="player-inframe-back-btn absolute top-3 left-3 sm:top-4 sm:left-4 z-40 inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-black/80 hover:bg-black/95 active:scale-95 text-white font-semibold text-xs border border-white/25 hover:border-white/50 backdrop-blur-md shadow-2xl transition-all cursor-pointer">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+          </svg>
+          <span>Back</span>
+        </button>
+
         <!-- In-Frame Honeycomb Loader -->
         <div id="watch-inframe-loader" class="absolute inset-0 z-20 flex flex-col items-center justify-center bg-black transition-opacity duration-300 pointer-events-none">
           <div class="nm-hive nm-hive-sm mb-3">
@@ -808,8 +790,12 @@
           <div class="text-xs font-semibold text-white/80 animate-pulse flex items-center gap-2">
             <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
             <span id="watch-stream-status-text">Loading Stream…</span>
-            <!-- High-Speed Video Iframe -->
-        <iframe id="watch-modal-iframe" title="High-Speed Video Player" class="absolute inset-0 w-full h-full border-0 bg-black block" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowtransparency="true" style="background-color: #000000 !important; color-scheme: dark;" allowfullscreen referrerpolicy="no-referrer"></iframe>
+          </div>
+          <span id="watch-stream-substatus-text" class="text-[10px] text-white/50 mt-1">Connecting verified cloud mirror</span>
+        </div>
+
+        <!-- High-Speed Video Iframe (Strictly sandboxed: blocks top-level external redirects & popunders) -->
+        <iframe id="watch-modal-iframe" title="High-Speed Video Player" class="absolute inset-0 w-full h-full border-0 bg-black block" sandbox="allow-scripts allow-same-origin allow-forms allow-presentation" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowtransparency="true" style="background-color: #000000 !important; color-scheme: dark;" allowfullscreen referrerpolicy="no-referrer"></iframe>
 
         <!-- In-Player Stream Failover Card (Zero White Box Error Handling) -->
         <div id="watch-failover-card" class="hidden absolute inset-0 z-30 bg-black/95 backdrop-blur-md flex flex-col items-center justify-center p-6 text-center space-y-3">
@@ -907,6 +893,8 @@
           </div>
           <div id="watch-episodes-list" class="flex flex-col gap-2">
             <!-- Dynamically populated episode cards with stills, names, runtimes, and play triggers -->
+          </div>
+        </div>
       </div>
     </div>
   </div>

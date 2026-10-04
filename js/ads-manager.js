@@ -15,9 +15,6 @@
   var slotConfigs = {};
   var STICKY_DISMISSED_KEY = 'nm_sticky_ad_dismissed';
 
-  var ADSTERRA_NATIVE_SRC = 'https://pl31315274.profitableratecpmnetwork.com/bb6db87840ef2c647140600c50c30ab2/invoke.js';
-  var ADSTERRA_CONTAINER_ID = 'container-bb6db87840ef2c647140600c50c30ab2';
-  var HILLTOP_BANNER_SRC = '//untimely-hello.com/b-X.VMsrdsGml/0CYPWfcM/JeVm/9euyZRUqlKkuPVToc/0AMFj/E_2-N/D/UftxNqzTQ/yYMST/YK0POXQY';
   var AADS_UNIT_ID = '2455136';
   var AADS_ADAPTIVE_URL = 'https://acceptable.a-ads.com/2455136/?size=Adaptive';
 
@@ -34,134 +31,35 @@
   };
 
   /**
-   * Monitor Adsterra native container in #ad-slot-home-top.
-   * If AdBlock blocks it or no ad is filled after timeout, show fallback so slot is NEVER blank.
-   */
-  function setupAdsterraFallbackMonitor() {
-    var container = document.getElementById(ADSTERRA_CONTAINER_ID);
-    var parentSlot = document.getElementById('ad-slot-home-top');
-    if (!container || !parentSlot) return;
-
-    var filled = false;
-    var observer = new MutationObserver(function(mutations) {
-      if (container.children.length > 0 && !container.querySelector('.nm-ad-placeholder')) {
-        filled = true;
-        observer.disconnect();
-      }
-    });
-    observer.observe(container, { childList: true, subtree: true });
-
-    setTimeout(function() {
-      if (!filled && (container.children.length === 0 || !container.querySelector('iframe, div[class*="native"], a:not(.nm-ad-placeholder)'))) {
-        if (!container.querySelector('.nm-ad-placeholder')) {
-          container.innerHTML = DEFAULT_SPONSOR_HTML('Featured Streaming Sponsor', 'Direct 4K Servers & Fast Downloads', 'Join');
-        }
-      }
-      observer.disconnect();
-    }, 2800);
-  }
-
-  /**
-   * Verified Sponsor Banner Loader (Zero failing external requests, Zero CLS)
+   * Safe Verified Sponsor Banner Loader (Zero failing external requests, Zero redirects)
    */
   function loadAdsterraScript() {
-    var container = document.getElementById(ADSTERRA_CONTAINER_ID);
-    if (!container) return;
-    if (document.querySelector('script[src*="profitableratecpmnetwork.com"]')) return;
-    try {
-      var s = document.createElement('script');
-      s.async = true;
-      s.setAttribute('data-cfasync', 'false');
-      s.src = ADSTERRA_NATIVE_SRC;
-      container.parentNode.insertBefore(s, container);
-      setupAdsterraFallbackMonitor();
-    } catch(e) {}
+    var parentSlot = document.getElementById('ad-slot-home-top');
+    if (!parentSlot) return;
+    parentSlot.innerHTML = DEFAULT_SPONSOR_HTML('Featured Streaming Sponsor', 'Direct 4K Servers & Fast Downloads', 'Join');
   }
 
   /**
-   * Render A-ADS Adaptive Unit inside a responsive, bounded container
+   * Render A-ADS Adaptive Unit inside a responsive, strictly sandboxed container
+   * Strictly omits allow-top-navigation to prevent any external redirect
    */
   function renderAadsUnit(slotEl, minH, maxH) {
     if (!slotEl) return;
     var hMin = minH || 60;
     var hMax = maxH || 90;
     slotEl.innerHTML = '<div style="width:100%;max-width:728px;margin:auto;position:relative;border-radius:10px;overflow:hidden;background:rgba(255,255,255,0.02);">' +
-      '<iframe data-aa="' + AADS_UNIT_ID + '" title="Sponsored Advertisement" src="' + AADS_ADAPTIVE_URL + '" style="border:0;padding:0;width:100%;min-height:' + hMin + 'px;max-height:' + hMax + 'px;overflow:hidden;margin:auto;display:block;background:transparent;"></iframe>' +
+      '<iframe data-aa="' + AADS_UNIT_ID + '" title="Sponsored Advertisement" src="' + AADS_ADAPTIVE_URL + '" sandbox="allow-scripts allow-same-origin allow-popups allow-forms" style="border:0;padding:0;width:100%;min-height:' + hMin + 'px;max-height:' + hMax + 'px;overflow:hidden;margin:auto;display:block;background:transparent;"></iframe>' +
     '</div>';
   }
 
-  /**
-   * Render Adsterra Native Banner inside an isolated sandboxed iframe to allow multiple placements without ID clash
-   */
   function renderAdsterraSandboxed(slotEl) {
     if (!slotEl) return;
-    var iframe = document.createElement('iframe');
-    iframe.style.width = '100%';
-    iframe.style.minHeight = '90px';
-    iframe.style.border = 'none';
-    iframe.style.overflow = 'hidden';
-    iframe.scrolling = 'no';
-    iframe.setAttribute('title', 'Advertisement');
-    iframe.setAttribute('loading', 'lazy');
-
-    var html = '<!DOCTYPE html><html><head><meta charset="utf-8">' +
-      '<style>' +
-        'body { margin: 0; padding: 4px; background: transparent; display: flex; align-items: center; justify-content: center; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; overflow: hidden; }' +
-        '#' + ADSTERRA_CONTAINER_ID + ' { width: 100%; display: flex; justify-content: center; }' +
-      '</style>' +
-      '</head><body>' +
-      '<script async="async" data-cfasync="false" src="' + ADSTERRA_NATIVE_SRC + '"><\/script>' +
-      '<div id="' + ADSTERRA_CONTAINER_ID + '"></div>' +
-      '</body></html>';
-
-    iframe.srcdoc = html;
-    slotEl.innerHTML = '';
-    slotEl.appendChild(iframe);
-
-    // Fallback if blocked
-    setTimeout(function() {
-      try {
-        if (!iframe.contentDocument || !iframe.contentDocument.body || iframe.contentDocument.body.children.length <= 1) {
-          slotEl.innerHTML = DEFAULT_SPONSOR_HTML('Featured Cloud Partner', 'Ultra-fast CDN playback & multi-audio support', 'Explore');
-        }
-      } catch(e) {}
-    }, 2800);
+    slotEl.innerHTML = DEFAULT_SPONSOR_HTML('Featured Cloud Partner', 'Ultra-fast CDN playback & multi-audio support', 'Explore');
   }
 
-  /**
-   * Render HilltopAds 300x250 Banner in an isolated sandbox with fallback
-   */
   function renderHilltopBanner(slotEl) {
     if (!slotEl) return;
-    var iframe = document.createElement('iframe');
-    iframe.style.width = '100%';
-    iframe.style.maxWidth = '728px';
-    iframe.style.minHeight = '90px';
-    iframe.style.border = 'none';
-    iframe.style.overflow = 'hidden';
-    iframe.scrolling = 'no';
-    iframe.setAttribute('title', 'Sponsored');
-    iframe.setAttribute('loading', 'lazy');
-
-    var html = '<!DOCTYPE html><html><head><meta charset="utf-8">' +
-      '<style>' +
-        'body { margin: 0; padding: 0; background: transparent; display: flex; align-items: center; justify-content: center; overflow: hidden; }' +
-      '</style>' +
-      '</head><body>' +
-      '<script src="' + HILLTOP_BANNER_SRC + '" async referrerpolicy="no-referrer-when-downgrade"><\/script>' +
-      '</body></html>';
-
-    iframe.srcdoc = html;
-    slotEl.innerHTML = '';
-    slotEl.appendChild(iframe);
-
-    setTimeout(function() {
-      try {
-        if (!iframe.contentDocument || !iframe.contentDocument.body || iframe.contentDocument.body.children.length <= 1) {
-          slotEl.innerHTML = DEFAULT_SPONSOR_HTML('Fast Cloud Servers', 'Direct High-Speed Cloud Downloads & APKs', 'Join');
-        }
-      } catch(e) {}
-    }, 2800);
+    slotEl.innerHTML = DEFAULT_SPONSOR_HTML('Fast Cloud Servers', 'Direct High-Speed Cloud Downloads & APKs', 'Join');
   }
 
   var AdsManager = {
@@ -229,15 +127,9 @@
 
       // ─── HOMEPAGE AD PLACEMENTS ───
 
-      // 1. Under Hero Carousel (#ad-slot-home-top) -> Adsterra Native Banner
+      // 1. Under Hero Carousel (#ad-slot-home-top) -> Verified Partner Unit
       if (slotId === 'ad-slot-home-top') {
-        var container = el.querySelector('#' + ADSTERRA_CONTAINER_ID);
-        if (!container) {
-          el.innerHTML = '<div id="' + ADSTERRA_CONTAINER_ID + '">' +
-            DEFAULT_SPONSOR_HTML('Featured Streaming Sponsor', 'Direct 4K Servers & Fast Downloads', 'Join') +
-          '</div>';
-        }
-        loadAdsterraScript();
+        el.innerHTML = DEFAULT_SPONSOR_HTML('Featured Streaming Sponsor', 'Direct 4K Servers & Fast Downloads', 'Join');
         return;
       }
 
