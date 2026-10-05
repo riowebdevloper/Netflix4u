@@ -167,6 +167,7 @@ function isTitleMatch(query, resultTitle, queryYear, resultDate, isTv = false) {
 }
 
 function resolveTmdbId(title, year, type = 'movie', imdbId = '') {
+  if (!TMDB_API_KEY) return Promise.resolve(null);
   const cacheKey = `${imdbId || ''}_${title || ''}_${year || ''}_${type}`.toLowerCase();
   if (tmdbIdCache.has(cacheKey)) return Promise.resolve(tmdbIdCache.get(cacheKey));
 
@@ -2229,12 +2230,17 @@ async function handleDownloadFile(req, res) {
   try {
     let resolved = null;
 
-    // 1. Direct Cloud URL provided
+    // 1. Direct Cloud or Mirror URL provided
     if (rawUrl) {
       if (isHicineDownloadUrl(rawUrl)) {
         resolved = await resolveCloudDownloadUrl(rawUrl);
-      } else {
-        resolved = null;
+      } else if (rawUrl.startsWith('http://') || rawUrl.startsWith('https://')) {
+        resolved = {
+          ok: true,
+          directUrl: rawUrl,
+          title: titleToUse,
+          size: ''
+        };
       }
     }
 
@@ -2252,7 +2258,7 @@ async function handleDownloadFile(req, res) {
       } catch (e) {}
     }
 
-    // 3. Exact Identity Resolution: Search Catalog strictly for verified authentic Hicine direct streams
+    // 3. Exact Identity Resolution: Search Catalog strictly for verified authentic direct download streams
     if (!resolved || !resolved.directUrl) {
       try {
         let catalogLinks = (contentRec && contentRec.links && contentRec.links.length) ? contentRec.links : [];
@@ -2264,28 +2270,27 @@ async function handleDownloadFile(req, res) {
           }
         }
 
-        // Strictly filter to authorized Hicine links only
-        const hicineCatalogLinks = (catalogLinks || []).filter(l => l && l.url && isHicineDownloadUrl(l.url));
+        const validCatalogLinks = (catalogLinks || []).filter(l => l && l.url && (l.url.startsWith('https://') || l.url.startsWith('http://')));
 
-        if (hicineCatalogLinks.length > 0) {
+        if (validCatalogLinks.length > 0) {
           let matched = null;
           if (se && ep) {
             // STRICT TV MATCH: Only match when season and episode genuinely match requested item
-            matched = hicineCatalogLinks.find(l => Number(l.season) === Number(se) && Number(l.episode) === Number(ep) && (l.quality || '').toLowerCase().includes(quality.toLowerCase())) ||
-                      hicineCatalogLinks.find(l => Number(l.season) === Number(se) && Number(l.episode) === Number(ep));
+            matched = validCatalogLinks.find(l => Number(l.season) === Number(se) && Number(l.episode) === Number(ep) && (l.quality || '').toLowerCase().includes(quality.toLowerCase())) ||
+                      validCatalogLinks.find(l => Number(l.season) === Number(se) && Number(l.episode) === Number(ep));
           } else {
             // STRICT MOVIE MATCH: Only match non-episodic movie streams (zero random fallback)
-            matched = hicineCatalogLinks.find(l => !l.season && !l.episode && (l.quality || '').toLowerCase().includes(quality.toLowerCase())) ||
-                      hicineCatalogLinks.find(l => !l.season && !l.episode && (l.isCloud || (l.url && (l.url.includes('vcloud') || l.url.includes('workers.dev'))))) ||
-                      hicineCatalogLinks.find(l => !l.season && !l.episode);
+            matched = validCatalogLinks.find(l => !l.season && !l.episode && (l.quality || '').toLowerCase().includes(quality.toLowerCase())) ||
+                      validCatalogLinks.find(l => !l.season && !l.episode && (l.isCloud || (l.url && (l.url.includes('vcloud') || l.url.includes('workers.dev'))))) ||
+                      validCatalogLinks.find(l => !l.season && !l.episode);
           }
 
           if (matched && matched.url) {
-            resolved = await resolveCloudDownloadUrl(matched.url);
+            if (isHicineDownloadUrl(matched.url)) {
+              resolved = await resolveCloudDownloadUrl(matched.url);
+            }
             if (!resolved || !resolved.directUrl) {
-              if (isHicineDownloadUrl(matched.url)) {
-                resolved = { ok: true, directUrl: matched.url, title: matched.label || titleToUse, size: matched.size || '' };
-              }
+              resolved = { ok: true, directUrl: matched.url, title: matched.label || titleToUse, size: matched.size || '' };
             }
           }
         }
@@ -2443,6 +2448,27 @@ async function handleStreamPlayer(req, res) {
             episode_count: s.episode_count || 10,
             name: s.name || `Season ${s.season_number}`
           }));
+      }
+    } catch(e) {}
+  }
+  if (!isMovie && !seriesSeasons.length) {
+    try {
+      const localResolved = await resolveContentId(id.startsWith('tmdb-') ? id : (cleanId ? `tmdb-series-${cleanId}` : id), 'tv');
+      if (localResolved) {
+        if (Array.isArray(localResolved.seasons) && localResolved.seasons.length > 0) {
+          seriesSeasons = localResolved.seasons.map(s => typeof s === 'object' ? s : { season_number: s, episode_count: 10, name: `Season ${s}` });
+        } else {
+          const totalSeasons = Number(localResolved.seasons || 1) || 1;
+          const totalEps = Number(localResolved.episodes || (totalSeasons * 10)) || (totalSeasons * 10);
+          const avgEps = Math.max(1, Math.round(totalEps / totalSeasons));
+          for (let sNum = 1; sNum <= totalSeasons; sNum++) {
+            seriesSeasons.push({
+              season_number: sNum,
+              episode_count: avgEps,
+              name: `Season ${sNum}`
+            });
+          }
+        }
       }
     } catch(e) {}
   }
@@ -2664,6 +2690,11 @@ async function handleStreamPlayer(req, res) {
       <iframe id="iframe-braflix" class="layer-view ${initialServer === 'braflix' ? 'visible' : ''}" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
       <iframe id="iframe-videasy" class="layer-view ${initialServer === 'videasy' ? 'visible' : ''}" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
       <div id="artplayer-layer" class="layer-view ${initialServer === 'cloud' ? 'visible' : ''}"></div>
+      <div id="layer-allmovieland" class="layer-view ${initialServer === 'allmovieland' ? 'visible' : ''}" style="background:#0a0a0f;display:${initialServer === 'allmovieland' ? 'flex' : 'none'};flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center;">
+        <div style="font-size:32px;margin-bottom:12px;">⚠️</div>
+        <h3 style="font-size:16px;font-weight:700;color:#fff;margin-bottom:6px;">Streaming source unavailable on this server</h3>
+        <p style="font-size:12px;color:rgba(255,255,255,0.6);max-width:340px;">AllMovieLand returned &quot;File Not Found&quot;. Please switch to Server 1 (PvrPlay) or Server 2 (VidSrc) above.</p>
+      </div>
     </div>
 
     <!-- Below-Video Controls & Server Selection Attached Directly (Zero Void in Portrait) -->
@@ -2678,6 +2709,7 @@ async function handleStreamPlayer(req, res) {
           <button type="button" id="btn-srv-vidlink" class="server-pill ${initialServer === 'vidlink' ? 'active' : ''}" onclick="activateServer(&quot;vidlink&quot;)">🚀 Server 3 (VidLink Multi)</button>
           <button type="button" id="btn-srv-braflix" class="server-pill ${initialServer === 'braflix' ? 'active' : ''}" onclick="activateServer(&quot;braflix&quot;)">⚡ Server 4 (Braflix HD)</button>
           <button type="button" id="btn-srv-videasy" class="server-pill ${initialServer === 'videasy' ? 'active' : ''}" onclick="activateServer(&quot;videasy&quot;)">✨ Server 5 (4K Cinema)</button>
+          ${q.get('server') === 'allmovieland' ? '<button type="button" id="btn-srv-allmovieland" class="server-pill active" onclick="activateServer(&quot;allmovieland&quot;)">⚠️ AllMovieLand (Unavailable)</button>' : ''}
           ${cloudStream ? '<button type="button" id="btn-srv-cloud" class="server-pill ' + (initialServer === 'cloud' ? 'active' : '') + '" onclick="activateServer(&quot;cloud&quot;)">⚡ Fast Cloud</button>' : ''}
           ${cloudStream ? '<a href="intent:' + cloudStream.url + '#Intent;action=android.intent.action.VIEW;type=video/*;package=com.mxtech.videoplayer.ad;end" class="dl-btn" style="background:#0284c7;border-color:#38bdf8;" title="Play Hindi Dub in MX Player">📱 MX</a>' : ''}
           ${cloudStream ? '<a href="vlc://' + cloudStream.url.replace(/^https?:\/\//i, '') + '" class="dl-btn" style="background:#ea580c;border-color:#f97316;" title="Play Hindi Dub in VLC Player">🚀 VLC</a>' : ''}

@@ -129,6 +129,25 @@
       } catch(e) {}
     }
 
+    var isExternal = /nexdrive|hubcloud|dotmobiz|drivehub/i.test(rawUrl);
+    if (isExternal) {
+      if (targetEl) {
+        targetEl.innerHTML = '<div style="display:flex;align-items:center;gap:8px;justify-content:center;width:100%;">' +
+          '<span style="color:#4ade80;font-weight:700;font-size:12px;">✓ Opening Download Mirror...</span>' +
+        '</div>';
+      }
+      if (window.__showToast) {
+        window.__showToast('🚀 Opening high-speed direct download mirror...', '⚡');
+      }
+      try {
+        window.open(rawUrl, '_blank', 'noopener,noreferrer');
+      } catch(e) {
+        window.location.assign(rawUrl);
+      }
+      restore();
+      return;
+    }
+
     // 1. If vcloud URL is available, resolve directly via Workers (fastest, ~300ms)
     if (cleanVcloud && (cleanVcloud.includes('vcloud') || cleanVcloud.includes('workers.dev'))) {
       for (var i = 0; i < WORKER_HOSTS.length; i++) {

@@ -360,12 +360,11 @@
       if (!l || !l.url) return false;
       var u = String(l.url || '').toLowerCase();
       var s = String(l.source || '').toLowerCase();
-      return Boolean(s.includes('dotmovies') || s.includes('hubcloud') || u.includes('dotmovies') || u.includes('hubcloud') || u.includes('drivehub'));
+      return Boolean(l.isDotmovies || s.includes('dotmovies') || s.includes('hubcloud') || s.includes('ultra hd') || s.includes('dotmobiz') || u.includes('dotmovies') || u.includes('dotmobiz') || u.includes('hubcloud') || u.includes('drivehub') || u.includes('nexdrive') || (!hicineLinks.includes(l)));
     });
 
-    // If neither tag matched but raw links exist, keep in general download adapter
     if (!hicineLinks.length && !dotmoviesLinks.length && rawDownloadLinks.length) {
-      hicineLinks = rawDownloadLinks;
+      dotmoviesLinks = rawDownloadLinks;
     }
 
     var cloudSectionHtml = renderCloudSection(hicineLinks, data.title, isTv, tmdbId, dotmoviesLinks);
@@ -2440,11 +2439,13 @@
     }
 
     if (isTv && (!seriesSeasonsCache[tmdbId] || !seriesSeasonsCache[tmdbId].length)) {
-      fetch('/api/details?id=' + encodeURIComponent(canonicalId || tmdbId))
+      var fetchLookupId = canonicalId || tmdbId;
+      fetch('/api/catalog/title/tv/' + encodeURIComponent(fetchLookupId))
         .then(function(r) { return r.json(); })
         .then(function(d) {
           if (d && Array.isArray(d.seasons) && d.seasons.length) {
             seriesSeasonsCache[tmdbId] = d.seasons;
+            seriesSeasonsCache[fetchLookupId] = d.seasons;
             updateEpisodeNavUi();
           }
         }).catch(function() {});
