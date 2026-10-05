@@ -3304,7 +3304,7 @@ async function handleStreamPlayer(req, res) {
       <iframe id="iframe-braflix" class="layer-view ${initialServer === 'braflix' ? 'visible' : ''}" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
       <iframe id="iframe-videasy" class="layer-view ${initialServer === 'videasy' ? 'visible' : ''}" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
       <div id="artplayer-layer" class="layer-view ${initialServer === 'cloud' ? 'visible' : ''}"></div>
-      <iframe id="iframe-allmovieland" class="layer-view ${initialServer === 'allmovieland' ? 'visible' : ''}" src="${initialServer === 'allmovieland' ? allmovielandUrl : ''}" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+      <iframe id="iframe-allmovieland" class="layer-view ${initialServer === 'allmovieland' ? 'visible' : ''}" src="${initialServer === 'allmovieland' ? allmovielandUrl : ''}" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
     </div>
 
     <!-- Below-Video Controls & Server Selection Attached Directly (Zero Void in Portrait) -->
