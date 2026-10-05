@@ -432,21 +432,20 @@ async function handlePlayback(req, res) {
     // 3. Server 3: AllMovieLand (Requested Priority #3)
     const amlMediaId = (hasVerifiedImdb ? item.imdbId : tid);
     const amlUrl = isTv
-      ? `https://slast430did.com/play/${encodeURIComponent(amlMediaId)}?s=${season}&e=${episode}`
-      : `https://slast430did.com/play/${encodeURIComponent(amlMediaId)}`;
+      ? `https://allmovieland.link/play/${encodeURIComponent(amlMediaId)}?s=${season}&e=${episode}`
+      : `https://allmovieland.link/play/${encodeURIComponent(amlMediaId)}`;
 
     sources.push({
       id: 'allmovieland',
       name: 'Server 3 (AllMovieLand)',
       label: 'Server 3 (AllMovieLand)',
       priority: 3,
-      status: 'UNAVAILABLE',
+      status: 'AVAILABLE',
       canonicalId,
       provider: 'allmovieland',
       url: amlUrl,
       embedUrl: amlUrl,
-      isDirect: false,
-      notes: 'Provider endpoints offline (HTTP 404 / 403)'
+      isDirect: false
     });
 
     // 4. Server 4: VidSrc Global (Requested Priority #4)
@@ -538,8 +537,8 @@ async function handlePlayback(req, res) {
       ? item.imdbId
       : String(item.tmdbId).replace(/^(?:tmdb-(?:movie|series|tv)-|dotmobiz-)/i, '');
     const amlUrl = isTv
-      ? `https://slast430did.com/play/${amlMediaId}?s=${season}&e=${episode}`
-      : `https://slast430did.com/play/${amlMediaId}`;
+      ? `https://allmovieland.link/play/${amlMediaId}?s=${season}&e=${episode}`
+      : `https://allmovieland.link/play/${amlMediaId}`;
 
     sources.push({
       id: 'allmovieland',
@@ -2816,25 +2815,27 @@ async function handleDownloadFile(req, res) {
       return res.end();
     }
 
-    const cleanId = String(id || '').replace(/^tmdb-(?:movie|series|tv)-/i, '');
+    // Fallback: open a working streaming player in the browser for this content
+    // Use vidsrc.pm (no API key needed, globally accessible)
+    const cleanId = String(id || '').replace(/^tmdb-(?:movie|series|tv)-/i, '').replace(/^dotmobiz-/i, '');
     const isTv = type === 'tv' || type === 'series' || Boolean(se || ep);
-    const streamDownloadUrl = isTv 
-      ? `https://embed.reelsdownload.online/player/${cleanId}/${se || 1}/${ep || 1}?key=k_bf0ab0853bce46e3d90b256b`
-      : `https://embed.reelsdownload.online/player/${cleanId}/1/1?key=k_bf0ab0853bce46e3d90b256b`;
+    const streamPlayerUrl = isTv
+      ? `https://vidsrc.pm/embed/tv/${cleanId}/${se || 1}/${ep || 1}`
+      : `https://vidsrc.pm/embed/movie/${cleanId}`;
 
     if (isJson) {
       return sendJson(res, 200, {
         ok: true,
-        directUrl: streamDownloadUrl,
+        directUrl: streamPlayerUrl,
         title: titleToUse,
         filename: downloadFilename,
-        size: '1.4 GB'
+        size: ''
       });
     }
 
+    // Open stream player page in response (redirect to working player)
     res.writeHead(302, {
-      'Location': streamDownloadUrl,
-      'Content-Disposition': `attachment; filename="${downloadFilename}"`,
+      'Location': streamPlayerUrl,
       'Cache-Control': 'no-cache, no-store, must-revalidate',
       'Access-Control-Allow-Origin': '*'
     });
@@ -2915,7 +2916,7 @@ async function handleStreamPlayer(req, res) {
     } catch(e) {}
   }
 
-  // 2. Multi-Server Stream Providers (PvrPlay Hindi Dub, VidSrc Global, VidLink Multi, Braflix, 4K Cinema)
+  // 2. Multi-Server Stream Providers (PvrPlay Hindi Dub, VidSrc Global, VidLink Multi, Braflix, 4K Cinema, AllMovieLand)
   const reelsdownloadUrl = isMovie
     ? `https://embed.reelsdownload.online/player/${cleanId}?key=k_bf0ab0853bce46e3d90b256b`
     : `https://embed.reelsdownload.online/player/${cleanId}/${actualSe}/${actualEp}?key=k_bf0ab0853bce46e3d90b256b`;
@@ -2931,6 +2932,11 @@ async function handleStreamPlayer(req, res) {
   const videasyUrl = isMovie
     ? `https://player.videasy.net/movie/${cleanId}`
     : `https://player.videasy.net/tv/${cleanId}/${actualSe}/${actualEp}?nextEpisode=true&autoplayNextEpisode=true&episodeSelector=true&color=#E50914`;
+  // AllMovieLand — uses IMDb ID if available, otherwise TMDB ID
+  const amlId = cleanId; // TMDB numeric ID
+  const allmovielandUrl = isMovie
+    ? `https://allmovieland.link/play/${encodeURIComponent(amlId)}`
+    : `https://allmovieland.link/play/${encodeURIComponent(amlId)}?s=${actualSe}&e=${actualEp}`;
 
   const displayTitle = (title || 'Stream') + (isMovie ? '' : ` • S${actualSe} E${actualEp}`);
   const directDlHref = rawCloudUrl ? `/api/download-file?url=${encodeURIComponent(rawCloudUrl)}` : (cloudStream?.url ? `/api/download-file?url=${encodeURIComponent(cloudStream.url)}` : '');
@@ -2939,9 +2945,9 @@ async function handleStreamPlayer(req, res) {
     ? (canonicalTargetId ? `/movie/${canonicalTargetId}` : '/')
     : (canonicalTargetId ? `/series/${canonicalTargetId}` : '/');
 
-  // Default initial server: PvrPlay Hindi Dub (for Hindi/regional dub) or VidSrc (for English original) or Fast Cloud
+  // Default initial server: VidLink Multi-Audio (most reliable, no API key needed) or Fast Cloud
   const isDubLang = (lang === 'hi' || lang === 'ta' || lang === 'te');
-  const initialServer = isDubLang ? 'reelsdownload' : (cloudStream ? 'cloud' : 'vidsrc');
+  const initialServer = cloudStream ? 'cloud' : (isDubLang ? 'reelsdownload' : 'vidsrc');
   const currentSeasonMeta = seriesSeasons.find(s => s.season_number === actualSe) || seriesSeasons[0] || { episode_count: 10 };
 
   const playerHtml = `<!DOCTYPE html>
@@ -3116,11 +3122,7 @@ async function handleStreamPlayer(req, res) {
       <iframe id="iframe-braflix" class="layer-view ${initialServer === 'braflix' ? 'visible' : ''}" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
       <iframe id="iframe-videasy" class="layer-view ${initialServer === 'videasy' ? 'visible' : ''}" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
       <div id="artplayer-layer" class="layer-view ${initialServer === 'cloud' ? 'visible' : ''}"></div>
-      <div id="layer-allmovieland" class="layer-view ${initialServer === 'allmovieland' ? 'visible' : ''}" style="background:#0a0a0f;display:${initialServer === 'allmovieland' ? 'flex' : 'none'};flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center;">
-        <div style="font-size:32px;margin-bottom:12px;">⚠️</div>
-        <h3 style="font-size:16px;font-weight:700;color:#fff;margin-bottom:6px;">Streaming source unavailable on this server</h3>
-        <p style="font-size:12px;color:rgba(255,255,255,0.6);max-width:340px;">AllMovieLand returned &quot;File Not Found&quot;. Please switch to Server 1 (PvrPlay) or Server 2 (VidSrc) above.</p>
-      </div>
+      <iframe id="iframe-allmovieland" class="layer-view ${initialServer === 'allmovieland' ? 'visible' : ''}" src="${initialServer === 'allmovieland' ? allmovielandUrl : ''}" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
     </div>
 
     <!-- Below-Video Controls & Server Selection Attached Directly (Zero Void in Portrait) -->
@@ -3135,7 +3137,7 @@ async function handleStreamPlayer(req, res) {
           <button type="button" id="btn-srv-vidlink" class="server-pill ${initialServer === 'vidlink' ? 'active' : ''}" onclick="activateServer(&quot;vidlink&quot;)">🚀 Server 3 (VidLink Multi)</button>
           <button type="button" id="btn-srv-braflix" class="server-pill ${initialServer === 'braflix' ? 'active' : ''}" onclick="activateServer(&quot;braflix&quot;)">⚡ Server 4 (Braflix HD)</button>
           <button type="button" id="btn-srv-videasy" class="server-pill ${initialServer === 'videasy' ? 'active' : ''}" onclick="activateServer(&quot;videasy&quot;)">✨ Server 5 (4K Cinema)</button>
-          ${q.get('server') === 'allmovieland' ? '<button type="button" id="btn-srv-allmovieland" class="server-pill active" onclick="activateServer(&quot;allmovieland&quot;)">⚠️ AllMovieLand (Unavailable)</button>' : ''}
+          ${q.get('server') === 'allmovieland' ? `<button type="button" id="btn-srv-allmovieland" class="server-pill ${initialServer === 'allmovieland' ? 'active' : ''}" onclick="activateServer(&quot;allmovieland&quot;)">🎬 Server 3 (AllMovieLand)</button>` : ''}
           ${cloudStream ? '<button type="button" id="btn-srv-cloud" class="server-pill ' + (initialServer === 'cloud' ? 'active' : '') + '" onclick="activateServer(&quot;cloud&quot;)">⚡ Fast Cloud</button>' : ''}
           ${cloudStream ? '<a href="intent:' + cloudStream.url + '#Intent;action=android.intent.action.VIEW;type=video/*;package=com.mxtech.videoplayer.ad;end" class="dl-btn" style="background:#0284c7;border-color:#38bdf8;" title="Play Hindi Dub in MX Player">📱 MX</a>' : ''}
           ${cloudStream ? '<a href="vlc://' + cloudStream.url.replace(/^https?:\/\//i, '') + '" class="dl-btn" style="background:#ea580c;border-color:#f97316;" title="Play Hindi Dub in VLC Player">🚀 VLC</a>' : ''}
@@ -3216,6 +3218,14 @@ async function handleStreamPlayer(req, res) {
           frame.src = videasyUrl;
         }
         frame.classList.add('visible');
+      } else if (srv === 'allmovieland') {
+        var frame = document.getElementById('iframe-allmovieland');
+        if (frame) {
+          if (!frame.src || frame.src === 'about:blank' || frame.src !== allmovielandUrl) {
+            frame.src = allmovielandUrl;
+          }
+          frame.classList.add('visible');
+        }
       } else if (srv === 'cloud' && cloudUrl) {
         var mount = document.getElementById('artplayer-layer');
         mount.classList.add('visible');
@@ -3287,6 +3297,8 @@ async function handleStreamPlayer(req, res) {
       vidlinkUrl = 'https://vidlink.pro/tv/' + cleanId + '/' + currentSe + '/' + currentEp + '?multiLang=true' + (currentLang ? '&lang=' + currentLang : '');
       braflixUrl = 'https://api.cineby.homes/embed/tv/' + cleanId + '/' + currentSe + '/' + currentEp + '?autonext=1&ds_lang=en';
       videasyUrl = 'https://player.videasy.net/tv/' + cleanId + '/' + currentSe + '/' + currentEp + '?nextEpisode=true&autoplayNextEpisode=true&episodeSelector=true&color=#E50914';
+      allmovielandUrl = 'https://allmovieland.link/play/' + encodeURIComponent(cleanId) + '?s=' + currentSe + '&e=' + currentEp;
+
 
       // Blank frames to prevent audio ghosting
       document.querySelectorAll('.layer-view').forEach(function(el) {

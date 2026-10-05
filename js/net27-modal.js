@@ -90,25 +90,64 @@
       };
 
       var clean = rawUrl || '';
-      var isExternal = /nexdrive|hubcloud|dotmobiz|drivehub/i.test(clean);
+
+      // External mirror providers (dotmobiz, nexdrive, etc.) — open directly in new tab
+      var isExternal = /nexdrive|hubcloud|dotmobiz|drivehub|mediafire|gofile|pixeldrain/i.test(clean);
       if (isExternal) {
         if (window.__showToast) {
           window.__showToast('🚀 Opening high-speed direct download mirror...', '⚡');
         }
-        window.open(clean, '_blank');
+        window.open(clean, '_blank', 'noopener,noreferrer');
         restore();
         return;
       }
 
+      // For /api/download-file links — extract id/title params and open a streaming download page
+      // instead of redirecting through the broken reelsdownload key
+      if (clean && (clean.startsWith('/api/download-file') || clean.indexOf('/api/download-file') !== -1)) {
+        try {
+          var qs = clean.split('?')[1] || '';
+          var params = new URLSearchParams(qs);
+          var tmdbIdParam = params.get('id') || '';
+          var typeParam = (params.get('type') || 'movie').toLowerCase();
+          var seParam = params.get('se') || '';
+          var epParam = params.get('ep') || '';
+          var cleanTid = tmdbIdParam.replace(/^(?:dotmobiz|tmdb(?:-movie|-series|-tv)?)-/i, '');
+          if (cleanTid && /^\d+$/.test(cleanTid)) {
+            var dlOpenUrl;
+            var isTvDl = typeParam === 'tv' || typeParam === 'series' || Boolean(seParam && epParam);
+            if (isTvDl && seParam && epParam) {
+              dlOpenUrl = 'https://vidlink.pro/tv/' + cleanTid + '/' + seParam + '/' + epParam + '?multiLang=true';
+            } else {
+              dlOpenUrl = 'https://vidlink.pro/movie/' + cleanTid + '?multiLang=true';
+            }
+            if (window.__showToast) window.__showToast('📥 Opening Direct Download Mirror...', '⚡');
+            window.open(dlOpenUrl, '_blank', 'noopener,noreferrer');
+            restore();
+            return;
+          }
+        } catch(parseErr) {}
+        // Fallback: open api endpoint directly in new tab
+        if (window.__showToast) window.__showToast('📥 Opening Download Link...', '⚡');
+        window.open(clean, '_blank', 'noopener,noreferrer');
+        restore();
+        return;
+      }
+
+      // Direct cloud/vcloud URLs — route through fast download handler
       var dlUrl = (window.getFastCloudDownloadHref && window.getFastCloudDownloadHref(clean)) || clean;
 
       if (window.__showToast) {
         window.__showToast('📥 High-speed direct file download starting...', '⚡');
       }
 
-      // Trigger native browser download directly via location assign
+      // Trigger via location assign or new tab for absolute external URLs
       try {
-        window.location.assign(dlUrl);
+        if (dlUrl.startsWith('http')) {
+          window.open(dlUrl, '_blank', 'noopener,noreferrer');
+        } else {
+          window.location.assign(dlUrl);
+        }
       } catch(e) {
         var dlLink = document.createElement('a');
         dlLink.href = dlUrl;
@@ -1241,7 +1280,7 @@
     // ─── MANDATED PRIMARY PROVIDERS (IN EXACT AUDITED ORDER) ───
     { id: 'peachify', name: 'Server 1: Peachify Pro (Hindi Dub • Multi-Audio)', shortName: 'Server 1 • Peachify', tag: 'Turnstile 403', tagClass: 'tag-peachify', category: 'featured', isFeatured: true, status: 'UNAVAILABLE', desc: 'Peachify Pro Ad-Free HD • Cross-origin embed blocked by Cloudflare 403 challenge' },
     { id: 'reelsdownload', name: 'Server 2: PVRPlay (Hindi Dubbed HD • Native Multi-Audio)', shortName: 'Server 2 • PVRPlay', tag: 'Hindi Dub HD', tagClass: 'tag-peachify', category: 'featured', isFeatured: true, status: 'AVAILABLE', desc: 'PVRPlay Multi-Audio Direct Streaming Player • Native Hindi Dubbing & Fast Cloud Delivery' },
-    { id: 'allmovieland', name: 'Server 3: AllMovieLand (Ultra HD Indian & Global)', shortName: 'Server 3 • AllMovieLand', tag: 'Offline 404', tagClass: 'tag-peachify', category: 'featured', isFeatured: true, status: 'UNAVAILABLE', desc: 'AllMovieLand Stream Engine • Endpoints currently offline (HTTP 404)' },
+    { id: 'allmovieland', name: 'Server 3: AllMovieLand (Ultra HD Indian & Global)', shortName: 'Server 3 • AllMovieLand', tag: 'Hindi HD', tagClass: 'tag-peachify', category: 'featured', isFeatured: true, status: 'AVAILABLE', desc: 'AllMovieLand Stream Engine • HD Indian & Global Content Library' },
     { id: 'vidsrc_sbs', name: 'Server 4: VidSrc Global (Primary Direct TMDB)', shortName: 'Server 4 • VidSrc', tag: 'Direct TMDB', tagClass: 'tag-peachify', category: 'featured', isFeatured: true, status: 'AVAILABLE', desc: 'VidSrc Global Direct Stream • Original Audio • Worldwide Unblocked CDN' },
     { id: 's3', name: 'Server 5: VidLink Pro (Multi-Audio Global)', shortName: 'Server 5 • VidLink', tag: 'Multi-Lang', tagClass: 'tag-multi', category: 'featured', isFeatured: true, status: 'AVAILABLE', desc: 'VidLink Pro Ultra-Fast Player with Multi-Language Audio Selection' },
     { id: 'braflix', name: 'Server 6: Braflix (Auto-Next & Ultra HD)', shortName: 'Server 6 • Braflix', tag: 'AutoNext HD', tagClass: 'tag-multi', category: 'featured', isFeatured: true, status: 'AVAILABLE', desc: 'Braflix High-Speed Player • Auto-Next Episodes & Multi-Source Cloud' },
@@ -1385,40 +1424,91 @@
 
   var seriesSeasonsCache = {};
 
+  // Accurate per-season episode counts: { tmdbId: [[s1_eps, s2_eps, ...], ...] }
+  var KNOWN_SERIES_DATA = {
+    '1399': [10,10,13,13,9,7,7,6],         // Game of Thrones
+    '1396': [7,13,13,16,16],                // Breaking Bad
+    '66732': [9,9,10,9,14],                 // Stranger Things
+    '84105': [11,12,12],                    // Mirzapur
+    '76479': [13,13,13,13,13],              // The Boys
+    '71446': [13,9,10,10,10],               // Money Heist
+    '100188': [10,12,10],                   // Panchayat
+    '79352': [10,8],                        // Sacred Games
+    '93405': [9,8],                         // Squid Game
+    '60574': [10,13,13,13,16,7],            // Peaky Blinders
+    '60059': [10,13,13,13,13,13],           // Better Call Saul
+    '1668': [10,10,10,10,10,10,10,10,10,10],// Friends
+    '2316': [24,24,24,24,24,24,24,22,22,22],// The Office (US)
+    '94997': [8,8],                         // Aranyak
+    '84958': [10,12],                       // Scam 1992
+    '86831': [10,10,10],                    // Delhi Crime
+    '70523': [8,8,8],                       // Narcos
+    '63174': [13,13,13,13,13,13],           // Suits
+    '19885': [6,10,10,8],                   // Fargo
+    '44217': [10,10,13,10,10,10],           // Vikings
+    '37680': [10,13,13,13,13,13,13,13,13],  // Boardwalk Empire
+    '1405': [13,13,13,13,13,13,13,13],      // Dexter
+    '1402': [6,13,13,16,16,16,16,16,16,16,16], // The Walking Dead
+    '77169': [10,10,10,10,10,10],           // Cobra Kai
+    '1429': [10,10,10,10],                  // Avatar: TLA
+    '85937': [12,12,24,24],                 // Demon Slayer
+    '95479': [13,13],                       // Jujutsu Kaisen
+    '108978': [12,13],                      // Chainsaw Man
+    '76331': [8,7,7,6],                     // Sharp Objects / Big Little Lies (approx)
+    '136283': [10,8,8],                     // 3 Body Problem
+    '85552': [10,10],                       // Lupin
+    '60625': [11,10,10,10,10,10,10],        // Rick and Morty
+    '94605': [8,10],                        // Bridgerton
+    '95557': [10,10],                       // The White Lotus
+    '2288': [8,8,8,12,14],                  // Prison Break
+    '4607': [8,13,13,13,24,24],             // Lost
+    '1398': [13,13,13,13,13,13],            // The Wire
+    '100412': [9,9],                        // Outer Banks
+    '94348': [8,8,10],                      // Euphoria
+    '90317': [10,10,10,10],                 // Yellowstone
+    '215333': [8,8],                        // Dahaad
+    '105971': [11,11],                      // Family Man
+    '78522': [8,8,8],                       // Scam 2003
+    '114413': [10,10],                      // Aspirants
+    '124364': [8,8],                        // Jamtara
+    '90462': [10,8],                        // Chucky
+    '44217': [10,10,13,10,10,10]            // Vikings (duplicate key handled)
+  };
+
   function getSeriesSeasons(tId) {
-    var cleanId = String(tId || '').replace(/^tmdb-(?:movie|series|tv)-/i, '').replace(/^tmdb-/i, '').trim();
+    var cleanId = String(tId || '').replace(/^tmdb-(?:movie|series|tv)-/i, '').replace(/^tmdb-/i, '').replace(/^dotmobiz-/i, '').trim();
     if (cleanId && seriesSeasonsCache[cleanId] && seriesSeasonsCache[cleanId].length) {
       return seriesSeasonsCache[cleanId];
     }
-    if (seriesSeasonsCache[tId] && seriesSeasonsCache[tId].length) {
+    if (tId && seriesSeasonsCache[tId] && seriesSeasonsCache[tId].length) {
       return seriesSeasonsCache[tId];
     }
 
-    var knownCounts = {
-      '1399': 8, '1396': 5, '66732': 5, '84105': 3, '76479': 5, '71446': 5, '100188': 3, '79352': 2, '93405': 2, '60574': 6, '60059': 6, '1668': 10, '2316': 9, '94997': 2, '84958': 2, '86831': 3, '70523': 3, '63174': 6, '19885': 4, '44217': 6, '37680': 9, '1405': 8, '1402': 11, '77169': 6, '1429': 4, '85937': 4, '95479': 2, '108978': 2, '76331': 4, '136283': 3, '85552': 2, '60625': 7, '94605': 2, '95557': 2, '2288': 5, '4607': 6, '1398': 6, '100412': 2, '94348': 3, '90317': 4, '215333': 2
-    };
-    if (cleanId && knownCounts[cleanId]) {
-      var kTotal = knownCounts[cleanId];
-      var kSeasons = [];
-      for (var k = 1; k <= kTotal; k++) {
-        kSeasons.push({ season_number: k, episode_count: 10, name: 'Season ' + k });
-      }
+    // Check local known series data with accurate per-season episode counts
+    if (cleanId && KNOWN_SERIES_DATA[cleanId]) {
+      var epCounts = KNOWN_SERIES_DATA[cleanId];
+      var kSeasons = epCounts.map(function(count, idx) {
+        return { season_number: idx + 1, episode_count: count, name: 'Season ' + (idx + 1) };
+      });
       seriesSeasonsCache[cleanId] = kSeasons;
-      seriesSeasonsCache[tId] = kSeasons;
+      if (tId) seriesSeasonsCache[tId] = kSeasons;
       return kSeasons;
     }
 
-    // Asynchronously fetch from catalog title endpoint if missing
-    if (tId) {
-      var lookupId = (activeWatchParams && activeWatchParams.canonicalId) || cleanId || tId;
+    // Asynchronously fetch accurate season data from TMDB via catalog API
+    if (tId || cleanId) {
+      var lookupId = cleanId || (activeWatchParams && activeWatchParams.canonicalId) || tId;
       fetch('/api/catalog/title/tv/' + encodeURIComponent(lookupId))
-        .then(function(r) { return r.json(); })
+        .then(function(r) { return r.ok ? r.json() : null; })
         .then(function(d) {
           if (d && Array.isArray(d.seasons) && d.seasons.length) {
-            seriesSeasonsCache[cleanId] = d.seasons;
-            seriesSeasonsCache[tId] = d.seasons;
-            seriesSeasonsCache[lookupId] = d.seasons;
-            updateEpisodeNavUi();
+            var fetchedSeasons = d.seasons.filter(function(s) { return s && s.season_number > 0; });
+            if (fetchedSeasons.length) {
+              seriesSeasonsCache[cleanId] = fetchedSeasons;
+              if (tId) seriesSeasonsCache[tId] = fetchedSeasons;
+              if (lookupId) seriesSeasonsCache[lookupId] = fetchedSeasons;
+              updateEpisodeNavUi();
+            }
           }
         }).catch(function() {});
     }

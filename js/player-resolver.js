@@ -422,7 +422,7 @@
     azute: function(s, opt) { return PROVIDER_BUILDERS.vidrock(s, opt); },
     // 33. AllMovieLand
     allmovieland: function(s, opt) {
-      var amlBase = (opt && opt.domain) ? ('https://' + opt.domain + '/play/') : 'https://slast430did.com/play/';
+      var amlBase = (opt && opt.domain) ? ('https://' + opt.domain + '/play/') : 'https://allmovieland.link/play/';
       var mediaId = (opt && opt.imdbId && String(opt.imdbId).startsWith('tt')) ? opt.imdbId : s.tmdbId;
       return s.type === 'movie'
         ? amlBase + encodeURIComponent(mediaId)
