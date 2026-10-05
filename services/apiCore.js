@@ -379,6 +379,46 @@ async function handleDetails(req, res) {
   sendJson(res, 200, { success: true, data: item, ...item }, { 'Cache-Control': 'public, max-age=1800' });
 }
 
+/**
+ * Helper: Safely resolve authentic IMDb ID (tt...) for AllMovieLand Player
+ * AllMovieLand ONLY works with IMDb IDs starting with 'tt' (returns 404 for numeric TMDB IDs)
+ */
+async function resolveImdbIdForContent(item, tmdbId, type = 'movie') {
+  if (item && item.imdbId && typeof item.imdbId === 'string' && item.imdbId.startsWith('tt')) {
+    return item.imdbId;
+  }
+
+  const cleanNum = tmdbId ? String(tmdbId).replace(/^(?:tmdb-(?:movie|series|tv)-|dotmobiz-)/i, '') : '';
+  const mediaType = (type === 'tv' || type === 'series' || item?.type === 'series' || item?.type === 'tv') ? 'tv' : 'movie';
+  const lookupTitle = item?.title || item?.canonicalTitle || '';
+
+  // 1. Try resolving via Vegamovies service first (fastest for Indian & Dual Audio releases)
+  if (lookupTitle) {
+    try {
+      const vegaRes = await resolveVegamoviesForTitle(lookupTitle, item?.year);
+      if (vegaRes && vegaRes.imdbId && vegaRes.imdbId.startsWith('tt')) {
+        if (item) item.imdbId = vegaRes.imdbId;
+        return vegaRes.imdbId;
+      }
+    } catch (e) {}
+  }
+
+  // 2. Try fetching TMDB record with external_ids
+  if (cleanNum && /^\d+$/.test(cleanNum)) {
+    try {
+      const endpoint = mediaType === 'tv' ? `/tv/${cleanNum}` : `/movie/${cleanNum}`;
+      const tmdbRaw = await fetchTmdbCatalogJson(`${endpoint}?append_to_response=external_ids`);
+      const fetchedImdb = tmdbRaw?.imdb_id || tmdbRaw?.external_ids?.imdb_id;
+      if (fetchedImdb && typeof fetchedImdb === 'string' && fetchedImdb.startsWith('tt')) {
+        if (item) item.imdbId = fetchedImdb;
+        return fetchedImdb;
+      }
+    } catch (e) {}
+  }
+
+  return null;
+}
+
 // 2. Playback Sources Endpoint (/api/playback/:id or /api/playback?id=...)
 async function handlePlayback(req, res) {
   if (handleCors(req, res)) return;
@@ -453,24 +493,26 @@ async function handlePlayback(req, res) {
       isDirect: false
     });
 
-    // 3. Server 3: AllMovieLand (Requested Priority #3)
-    const amlMediaId = (hasVerifiedImdb ? item.imdbId : tid);
-    const amlUrl = isTv
-      ? `https://slast430did.com/play/${encodeURIComponent(amlMediaId)}?s=${season}&e=${episode}`
-      : `https://slast430did.com/play/${encodeURIComponent(amlMediaId)}`;
+    // 3. Server 3: AllMovieLand (Strictly requires IMDb ID starting with 'tt')
+    const amlMediaId = await resolveImdbIdForContent(item, tid, isTv ? 'tv' : 'movie');
+    if (amlMediaId && String(amlMediaId).startsWith('tt')) {
+      const amlUrl = isTv
+        ? `https://slast430did.com/play/${encodeURIComponent(amlMediaId)}?s=${season}&e=${episode}`
+        : `https://slast430did.com/play/${encodeURIComponent(amlMediaId)}`;
 
-    sources.push({
-      id: 'allmovieland',
-      name: 'Server 3 (AllMovieLand)',
-      label: 'Server 3 (AllMovieLand)',
-      priority: 3,
-      status: 'AVAILABLE',
-      canonicalId,
-      provider: 'allmovieland',
-      url: amlUrl,
-      embedUrl: amlUrl,
-      isDirect: false
-    });
+      sources.push({
+        id: 'allmovieland',
+        name: 'Server 3 (AllMovieLand)',
+        label: 'Server 3 (AllMovieLand)',
+        priority: 3,
+        status: 'AVAILABLE',
+        canonicalId,
+        provider: 'allmovieland',
+        url: amlUrl,
+        embedUrl: amlUrl,
+        isDirect: false
+      });
+    }
 
     // 4. Server 4: VidSrc Global (Requested Priority #4)
     const vidsrcSbsUrl = isTv
@@ -555,25 +597,25 @@ async function handlePlayback(req, res) {
     });
   }
 
-  // 4. Server 3/4 (AllMovieLand) - If not already present and verified TMDB or IMDb ID exists
-  if (!sources.some(s => s.id === 'allmovieland') && (hasVerifiedImdb || hasVerifiedTmdb)) {
-    const amlMediaId = (item.imdbId && item.imdbId.startsWith('tt'))
-      ? item.imdbId
-      : String(item.tmdbId).replace(/^(?:tmdb-(?:movie|series|tv)-|dotmobiz-)/i, '');
-    const amlUrl = isTv
-      ? `https://slast430did.com/play/${amlMediaId}?s=${season}&e=${episode}`
-      : `https://slast430did.com/play/${amlMediaId}`;
+  // 4. Server 3/4 (AllMovieLand) - Strictly requires IMDb ID starting with 'tt'
+  if (!sources.some(s => s.id === 'allmovieland')) {
+    const amlMediaId = await resolveImdbIdForContent(item, item.tmdbId, isTv ? 'tv' : 'movie');
+    if (amlMediaId && String(amlMediaId).startsWith('tt')) {
+      const amlUrl = isTv
+        ? `https://slast430did.com/play/${amlMediaId}?s=${season}&e=${episode}`
+        : `https://slast430did.com/play/${amlMediaId}`;
 
-    sources.push({
-      id: 'allmovieland',
-      name: 'Server 3 (AllMovieLand)',
-      label: 'Server 3 (AllMovieLand)',
-      canonicalId,
-      provider: 'allmovieland',
-      url: amlUrl,
-      embedUrl: amlUrl,
-      isDirect: false
-    });
+      sources.push({
+        id: 'allmovieland',
+        name: 'Server 3 (AllMovieLand)',
+        label: 'Server 3 (AllMovieLand)',
+        canonicalId,
+        provider: 'allmovieland',
+        url: amlUrl,
+        embedUrl: amlUrl,
+        isDirect: false
+      });
+    }
   }
 
   // 5. Fast Cloud Stream
@@ -3065,24 +3107,14 @@ async function handleStreamPlayer(req, res) {
   const videasyUrl = isMovie
     ? `https://player.videasy.net/movie/${cleanId}`
     : `https://player.videasy.net/tv/${cleanId}/${actualSe}/${actualEp}?nextEpisode=true&autoplayNextEpisode=true&episodeSelector=true&color=#E50914`;
-  // AllMovieLand — uses IMDb ID if available, otherwise TMDB ID on slast430did.com
-  let amlId = q.get('imdbId') || (rec && rec.imdbId) || '';
-  if (!amlId && cleanId) {
-    try {
-      const detailRec = await resolveContentId(cleanId);
-      if (detailRec && detailRec.imdbId) amlId = detailRec.imdbId;
-    } catch(e) {}
+  // AllMovieLand — strictly requires IMDb ID starting with 'tt' (returns 404 for numeric IDs)
+  let amlId = await resolveImdbIdForContent(rec, cleanId, isMovie ? 'movie' : 'tv');
+  let allmovielandUrl = null;
+  if (amlId && String(amlId).startsWith('tt')) {
+    allmovielandUrl = isMovie
+      ? `https://slast430did.com/play/${encodeURIComponent(amlId)}`
+      : `https://slast430did.com/play/${encodeURIComponent(amlId)}?s=${actualSe}&e=${actualEp}`;
   }
-  if (!amlId && (title || (rec && rec.title))) {
-    try {
-      const vegaRec = await resolveVegamoviesForTitle(title || rec?.title, year || rec?.year);
-      if (vegaRec && vegaRec.imdbId) amlId = vegaRec.imdbId;
-    } catch(e) {}
-  }
-  if (!amlId) amlId = cleanId;
-  const allmovielandUrl = isMovie
-    ? `https://slast430did.com/play/${encodeURIComponent(amlId)}`
-    : `https://slast430did.com/play/${encodeURIComponent(amlId)}?s=${actualSe}&e=${actualEp}`;
 
   const displayTitle = (title || 'Stream') + (isMovie ? '' : ` • S${actualSe} E${actualEp}`);
   const directDlHref = rawCloudUrl ? `/api/download-file?url=${encodeURIComponent(rawCloudUrl)}` : (cloudStream?.url ? `/api/download-file?url=${encodeURIComponent(cloudStream.url)}` : '');
@@ -3448,8 +3480,12 @@ async function handleStreamPlayer(req, res) {
       var currentLang = ${JSON.stringify(lang)};
       vidlinkUrl = 'https://vidlink.pro/tv/' + cleanId + '/' + currentSe + '/' + currentEp + '?multiLang=true' + (currentLang ? '&lang=' + currentLang : '');
       braflixUrl = 'https://api.cineby.homes/embed/tv/' + cleanId + '/' + currentSe + '/' + currentEp + '?autonext=1&ds_lang=en';
-      videasyUrl = 'https://player.videasy.net/tv/' + cleanId + '/' + currentSe + '/' + currentEp + '?nextEpisode=true&autoplayNextEpisode=true&episodeSelector=true&color=#E50914';
-      allmovielandUrl = 'https://slast430did.com/play/' + encodeURIComponent(${JSON.stringify(amlId)}) + '?s=' + currentSe + '&e=' + currentEp;
+      var rawAmlId = ${JSON.stringify(amlId)};
+      if (rawAmlId && String(rawAmlId).startsWith('tt')) {
+        allmovielandUrl = 'https://slast430did.com/play/' + encodeURIComponent(rawAmlId) + '?s=' + currentSe + '&e=' + currentEp;
+      } else {
+        allmovielandUrl = null;
+      }
 
 
       // Blank frames to prevent audio ghosting
