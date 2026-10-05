@@ -379,6 +379,9 @@ async function handleDetails(req, res) {
   sendJson(res, 200, { success: true, data: item, ...item }, { 'Cache-Control': 'public, max-age=1800' });
 }
 
+// In-memory cache for resolved authentic IMDb IDs to prevent redundant network lookups
+const imdbIdMemoryCache = new Map();
+
 /**
  * Helper: Safely resolve authentic IMDb ID (tt...) for AllMovieLand Player
  * AllMovieLand ONLY works with IMDb IDs starting with 'tt' (returns 404 for numeric TMDB IDs)
@@ -389,29 +392,69 @@ async function resolveImdbIdForContent(item, tmdbId, type = 'movie') {
   }
 
   const cleanNum = tmdbId ? String(tmdbId).replace(/^(?:tmdb-(?:movie|series|tv)-|dotmobiz-)/i, '') : '';
-  const mediaType = (type === 'tv' || type === 'series' || item?.type === 'series' || item?.type === 'tv') ? 'tv' : 'movie';
-  const lookupTitle = item?.title || item?.canonicalTitle || '';
+  const isTv = (type === 'tv' || type === 'series' || item?.type === 'series' || item?.type === 'tv' || item?.isSeries);
+  const mediaType = isTv ? 'series' : 'movie';
+  const lookupTitle = (item?.title || item?.canonicalTitle || '').replace(/\s+/g, ' ').trim();
+  const cacheKey = `${mediaType}_${lookupTitle.toLowerCase()}_${item?.year || ''}`;
 
-  // 1. Try resolving via Vegamovies service first (fastest for Indian & Dual Audio releases)
+  if (imdbIdMemoryCache.has(cacheKey)) {
+    const cached = imdbIdMemoryCache.get(cacheKey);
+    if (item && !item.imdbId) item.imdbId = cached;
+    return cached;
+  }
+
+  // 1. Try Cinemeta Open Metadata API (fastest, authentic tt IMDb IDs globally, no API key needed)
   if (lookupTitle) {
     try {
-      const vegaRes = await resolveVegamoviesForTitle(lookupTitle, item?.year);
-      if (vegaRes && vegaRes.imdbId && vegaRes.imdbId.startsWith('tt')) {
-        if (item) item.imdbId = vegaRes.imdbId;
-        return vegaRes.imdbId;
+      const cinemetaUrl = `https://v3-cinemeta.strem.io/catalog/${mediaType}/top/search=${encodeURIComponent(lookupTitle)}.json`;
+      const cinemetaData = await new Promise(resolve => {
+        https.get(cinemetaUrl, { headers: { 'User-Agent': 'Mozilla/5.0' }, timeout: 4000 }, res => {
+          let buf = '';
+          res.on('data', c => buf += c);
+          res.on('end', () => {
+            try { resolve(JSON.parse(buf)); } catch(e) { resolve(null); }
+          });
+        }).on('error', () => resolve(null));
+      });
+
+      if (cinemetaData && Array.isArray(cinemetaData.metas) && cinemetaData.metas.length > 0) {
+        const best = cinemetaData.metas.find(m => {
+          if (!m.id || !m.id.startsWith('tt')) return false;
+          if (item?.year && m.year && Math.abs(Number(m.year) - Number(item.year)) > 1) return false;
+          return true;
+        }) || cinemetaData.metas[0];
+
+        if (best && best.id && best.id.startsWith('tt')) {
+          imdbIdMemoryCache.set(cacheKey, best.id);
+          if (item) item.imdbId = best.id;
+          return best.id;
+        }
       }
     } catch (e) {}
   }
 
-  // 2. Try fetching TMDB record with external_ids
-  if (cleanNum && /^\d+$/.test(cleanNum)) {
+  // 2. Try fetching TMDB record with external_ids if API key is present
+  if (cleanNum && /^\d+$/.test(cleanNum) && TMDB_API_KEY) {
     try {
-      const endpoint = mediaType === 'tv' ? `/tv/${cleanNum}` : `/movie/${cleanNum}`;
-      const tmdbRaw = await fetchTmdbCatalogJson(`${endpoint}?append_to_response=external_ids`);
-      const fetchedImdb = tmdbRaw?.imdb_id || tmdbRaw?.external_ids?.imdb_id;
+      const endpoint = isTv ? `/tv/${cleanNum}/external_ids` : `/movie/${cleanNum}/external_ids`;
+      const tmdbRaw = await fetchTmdbCatalogJson(endpoint);
+      const fetchedImdb = tmdbRaw?.imdb_id;
       if (fetchedImdb && typeof fetchedImdb === 'string' && fetchedImdb.startsWith('tt')) {
+        imdbIdMemoryCache.set(cacheKey, fetchedImdb);
         if (item) item.imdbId = fetchedImdb;
         return fetchedImdb;
+      }
+    } catch (e) {}
+  }
+
+  // 3. Try resolving via Vegamovies with strict title and year matching
+  if (lookupTitle) {
+    try {
+      const vegaRes = await resolveVegamoviesForTitle(lookupTitle, item?.year, null, isTv);
+      if (vegaRes && vegaRes.imdbId && vegaRes.imdbId.startsWith('tt')) {
+        imdbIdMemoryCache.set(cacheKey, vegaRes.imdbId);
+        if (item) item.imdbId = vegaRes.imdbId;
+        return vegaRes.imdbId;
       }
     } catch (e) {}
   }
@@ -638,9 +681,11 @@ async function handlePlayback(req, res) {
   // 5b. Dynamic HiCine Fast Cloud stream resolution if missing
   if (!sources.some(s => s.id === 'hicine') && item.title) {
     try {
-      const hicineData = await resolveHicineForTitle(item.title, item.year);
+      const hicineData = await resolveHicineForTitle(item.title, item.year, isTv);
       if (hicineData && hicineData.links && hicineData.links.length > 0) {
-        const bestCloud = hicineData.links.find(l => /1080|720|HD/i.test(l.quality)) || hicineData.links[0];
+        const bestCloud = isTv
+          ? (hicineData.links.find(l => Number(l.season) === Number(season) && Number(l.episode) === Number(episode)) || hicineData.links.find(l => /1080|720|HD/i.test(l.quality)) || hicineData.links[0])
+          : (hicineData.links.find(l => /1080|720|HD/i.test(l.quality)) || hicineData.links[0]);
         if (bestCloud && bestCloud.url) {
           sources.push({
             id: 'hicine',
@@ -660,7 +705,7 @@ async function handlePlayback(req, res) {
   // 6. Dynamic Vegamovies AllMovieLand stream resolution if missing
   if (!sources.some(s => s.id === 'allmovieland') && item.title) {
     try {
-      const vegaData = await resolveVegamoviesForTitle(item.title, item.year, item.imdbId);
+      const vegaData = await resolveVegamoviesForTitle(item.title, item.year, item.imdbId, isTv);
       if (vegaData && vegaData.streamUrl) {
         sources.push({
           id: 'allmovieland',
@@ -1971,12 +2016,14 @@ async function handleCatalogTitle(req, res) {
     downloadLinks = normalizeRawLinks(localItem.links || localItem.download_links || localItem.downloads, targetCanonicalId, type === 'tv');
   }
 
-  // Dynamic resolution from HiCine and Vegamovies if downloadLinks is still empty
-  if (!downloadLinks.length && title) {
+  // Dynamic resolution from HiCine and Vegamovies if downloadLinks is empty or lacks episodes for TV
+  const isTvType = (type === 'tv');
+  const needsLinks = (!downloadLinks.length || (isTvType && !downloadLinks.some(l => l.episode))) && title;
+  if (needsLinks) {
     try {
       const [hicineRes, vegaRes] = await Promise.allSettled([
-        resolveHicineForTitle(title, year),
-        resolveVegamoviesForTitle(title, year, resolvedImdbId)
+        resolveHicineForTitle(title, year, isTvType),
+        resolveVegamoviesForTitle(title, year, resolvedImdbId, isTvType)
       ]);
 
       const extraLinks = [];
@@ -1988,7 +2035,18 @@ async function handleCatalogTitle(req, res) {
       }
 
       if (extraLinks.length > 0) {
-        downloadLinks = normalizeRawLinks(extraLinks, targetCanonicalId, type === 'tv');
+        const normalized = normalizeRawLinks(extraLinks, targetCanonicalId, isTvType);
+        if (!downloadLinks.length) {
+          downloadLinks = normalized;
+        } else {
+          const existingUrls = new Set(downloadLinks.map(l => l.url));
+          for (const nl of normalized) {
+            if (!existingUrls.has(nl.url)) {
+              downloadLinks.push(nl);
+              existingUrls.add(nl.url);
+            }
+          }
+        }
       }
     } catch (e) {}
   }
@@ -2907,12 +2965,14 @@ async function handleDownloadFile(req, res) {
           }
         }
 
-        // Dynamically resolve from HiCine and Vegamovies if catalog has no direct download links
-        if (!catalogLinks.length && titleToUse) {
+        // Dynamically resolve from HiCine and Vegamovies if catalog has no direct download links or lacks requested TV episode
+        const isTvDownload = Boolean(type === 'tv' || type === 'series' || se || ep);
+        const needsDownloadResolution = (!catalogLinks.length || (isTvDownload && se && ep && !catalogLinks.some(l => Number(l.season) === Number(se) && Number(l.episode) === Number(ep)))) && titleToUse;
+        if (needsDownloadResolution) {
           try {
             const [hicineRes, vegaRes] = await Promise.allSettled([
-              resolveHicineForTitle(titleToUse, q.get('year') || (contentRec && contentRec.year)),
-              resolveVegamoviesForTitle(titleToUse, q.get('year') || (contentRec && contentRec.year), q.get('imdbId') || (contentRec && contentRec.imdbId))
+              resolveHicineForTitle(titleToUse, q.get('year') || (contentRec && contentRec.year), isTvDownload),
+              resolveVegamoviesForTitle(titleToUse, q.get('year') || (contentRec && contentRec.year), q.get('imdbId') || (contentRec && contentRec.imdbId), isTvDownload)
             ]);
             if (hicineRes.status === 'fulfilled' && hicineRes.value && hicineRes.value.links) {
               catalogLinks = [...catalogLinks, ...hicineRes.value.links];
@@ -3108,7 +3168,10 @@ async function handleStreamPlayer(req, res) {
     ? `https://player.videasy.net/movie/${cleanId}`
     : `https://player.videasy.net/tv/${cleanId}/${actualSe}/${actualEp}?nextEpisode=true&autoplayNextEpisode=true&episodeSelector=true&color=#E50914`;
   // AllMovieLand — strictly requires IMDb ID starting with 'tt' (returns 404 for numeric IDs)
-  let amlId = await resolveImdbIdForContent(rec, cleanId, isMovie ? 'movie' : 'tv');
+  const effectiveItem = rec || { title, year, imdbId: q.get('imdbId') };
+  if (!effectiveItem.title && title) effectiveItem.title = title;
+  if (!effectiveItem.year && year) effectiveItem.year = year;
+  let amlId = await resolveImdbIdForContent(effectiveItem, cleanId, isMovie ? 'movie' : 'tv');
   let allmovielandUrl = null;
   if (amlId && String(amlId).startsWith('tt')) {
     allmovielandUrl = isMovie
@@ -3717,5 +3780,6 @@ module.exports = {
   getQueryParams,
   sendJson,
   handleCors,
+  resolveImdbIdForContent,
   isHicineDownloadUrl
 };

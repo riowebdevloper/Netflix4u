@@ -18,9 +18,12 @@ function cleanTitle(raw) {
     .replace(/\b(19\d{2}|20\d{2})\b/g, '')
     .replace(/[\[\(].*?[\]\)]/g, '')
     .replace(/&/g, ' and ')
+    .replace(/\b(season\s*\d+|episode\s*\d+|ep\s*\d+|s\d+|e\d+|part\s*\d+|vol\s*\d+)\b/gi, '')
+    .replace(/\b(hindi|english|tamil|telugu|malayalam|kannada|dual|audio|web\s*dl|bluray|hdrip|hevc|x264|x265|dvdrip|webrip)\b/gi, '')
+    .replace(/\b(\d{3,4}p|4k|2k|hd|sd|fhd|uhd)\b/gi, '')
     .replace(/[:\-–—.,!?_]/g, ' ')
     .replace(/\b(and|the|a|an)\b/gi, ' ')
-    .replace(/\b(hindi|english|tamil|telugu|malayalam|kannada|dual|audio|web-?dl|bluray|hdrip|hevc|x264|x265)\b/gi, '')
+    .replace(/\b(hindi|english|tamil|telugu|malayalam|kannada|dual|audio|web\s*dl|bluray|hdrip|hevc|x264|x265|dvdrip|webrip|web|dl)\b/gi, '')
     .replace(/\s+/g, ' ')
     .trim()
     .toLowerCase();
@@ -187,9 +190,91 @@ async function resolveHicineR2Url(vcloudWorkerUrl, preferredType = 'fsl') {
 }
 
 /**
- * Match and resolve HiCine content for a given title and year
+ * Parse HiCine TV series records containing season_1..season_15 and season_zip
  */
-async function resolveHicineForTitle(title, year = null) {
+function parseHicineSeriesRecord(series, defaultTitle = 'Series') {
+  const parsed = [];
+  if (!series) return parsed;
+
+  // 1. Parse individual episodes from season_1 through season_15
+  for (let s = 1; s <= 15; s++) {
+    const sField = `season_${s}`;
+    if (!series[sField] || typeof series[sField] !== 'string') continue;
+    const lines = series[sField].split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+    for (const line of lines) {
+      const epMatch = line.match(/^Episode\s*(\d+)\s*:/i);
+      if (!epMatch) continue;
+      const epNum = parseInt(epMatch[1], 10);
+      const rest = line.slice(epMatch[0].length);
+      const segments = rest.split(/\s*:\s*(?=https:\/\/)/i);
+      for (const seg of segments) {
+        const urlMatch = seg.match(/https:\/\/[^\s,]+/);
+        if (!urlMatch) continue;
+        const url = urlMatch[0];
+        let q = 'HD';
+        if (/2160|4k/i.test(seg)) q = '4K';
+        else if (/1080p/i.test(seg)) q = '1080p';
+        else if (/720p/i.test(seg)) q = '720p';
+        else if (/480p/i.test(seg)) q = '480p';
+        const sizeMatch = seg.match(/([\d\.]+\s*(?:mb|gb))/i);
+        parsed.push({
+          url,
+          season: s,
+          episode: epNum,
+          quality: q,
+          size: sizeMatch ? sizeMatch[1] : '',
+          label: `${defaultTitle} S${s} E${epNum} [${q}]`,
+          isCloud: true,
+          source: 'Fast Cloud (HiCine)',
+          provider: 'hicine'
+        });
+      }
+    }
+  }
+
+  // 2. Parse batch / full season zip links from season_zip
+  if (series.season_zip && typeof series.season_zip === 'string') {
+    const lines = series.season_zip.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+    for (const line of lines) {
+      const sMatch = line.match(/^Season\s*(\d+)\s*:/i);
+      if (!sMatch) continue;
+      const sNum = parseInt(sMatch[1], 10);
+      const rest = line.slice(sMatch[0].length);
+      const segments = rest.split(/\s*:\s*(?=https:\/\/)/i);
+      for (const seg of segments) {
+        const urlMatch = seg.match(/https:\/\/[^\s,]+/);
+        if (!urlMatch) continue;
+        const url = urlMatch[0];
+        let q = 'Batch Pack';
+        if (/2160|4k/i.test(seg)) q = '4K Full Zip';
+        else if (/1080p/i.test(seg)) q = '1080p Full Zip';
+        else if (/720p/i.test(seg)) q = '720p Full Zip';
+        else if (/480p/i.test(seg)) q = '480p Full Zip';
+        const sizeMatch = seg.match(/([\d\.]+\s*(?:mb|gb))/i);
+        parsed.push({
+          url,
+          season: sNum,
+          episode: null,
+          isBatch: true,
+          isPack: true,
+          quality: q,
+          size: sizeMatch ? sizeMatch[1] : '',
+          label: `${defaultTitle} Season ${sNum} Complete Pack [${q}]`,
+          isCloud: true,
+          source: 'Fast Cloud (HiCine)',
+          provider: 'hicine'
+        });
+      }
+    }
+  }
+
+  return parsed;
+}
+
+/**
+ * Match and resolve HiCine content for a given title, year, and media type
+ */
+async function resolveHicineForTitle(title, year = null, isTv = false) {
   if (!title) return null;
   const results = await searchHicine(title);
   if (!results || !results.length) return null;
@@ -198,48 +283,85 @@ async function resolveHicineForTitle(title, year = null) {
   let bestMatch = null;
   let sourceTable = null;
 
+  const targetWords = cleanTarget.split(' ').filter(w => w.length > 1);
+
   for (const item of results) {
     const data = item.data || item;
     const itemTitle = cleanTitle(data.title || '');
     if (!itemTitle) continue;
+    const table = String(item.source_table || '').toLowerCase();
 
-    const targetWords = cleanTarget.split(' ').filter(Boolean);
-    const matchesName = itemTitle.includes(cleanTarget) || cleanTarget.includes(itemTitle) ||
-      (targetWords.length > 1 && targetWords.every(w => itemTitle.includes(w)));
-    if (!matchesName) continue;
+    // Respect media type preference: series vs movies
+    if (isTv && table && !table.includes('series') && !table.includes('anime')) {
+      continue;
+    }
+    if (!isTv && table && table.includes('series')) {
+      continue;
+    }
 
+    // Exact clean title match
+    const isExact = (itemTitle === cleanTarget);
+
+    // Word boundary check
+    const allWordsMatch = targetWords.length > 0 && targetWords.every(tw => {
+      const rx = new RegExp(`\\b${tw}\\b`, 'i');
+      return rx.test(itemTitle);
+    });
+
+    if (!isExact && !allWordsMatch) continue;
+
+    // Disallow single-word titles matching complex unrelated titles
+    const itemWords = itemTitle.split(' ').filter(Boolean);
+    if (!isExact && targetWords.length === 1 && itemWords.length > 2) {
+      continue;
+    }
+
+    // Release year verification (within 1 year)
     if (year && data.title) {
       const yearMatch = data.title.match(/\b(19\d{2}|20\d{2})\b/);
-      if (yearMatch && Math.abs(parseInt(yearMatch[1], 10) - parseInt(year, 10)) <= 1) {
-        bestMatch = data;
-        sourceTable = item.source_table;
-        break;
+      if (yearMatch) {
+        const itemY = parseInt(yearMatch[1], 10);
+        const targetY = parseInt(year, 10);
+        if (Math.abs(itemY - targetY) > 1) {
+          continue;
+        }
       }
     }
 
-    if (!bestMatch) {
-      bestMatch = data;
-      sourceTable = item.source_table;
-    }
+    bestMatch = data;
+    sourceTable = item.source_table;
+    if (isExact) break;
   }
 
   if (!bestMatch) return null;
 
-  // If search only returned summary fields without raw links, fetch full record
-  if (!bestMatch.links && sourceTable && bestMatch.record_id) {
+  // If search only returned summary fields without raw links or season data, fetch full record
+  if (!bestMatch.links && !bestMatch.season_1 && sourceTable && bestMatch.record_id) {
     const full = await getHicineFullRecord(sourceTable, bestMatch.record_id);
-    if (full && full.links) {
+    if (full) {
       bestMatch = { ...bestMatch, ...full };
     }
   }
 
-  const parsedLinks = parseHicineRawLinks(bestMatch.links, bestMatch.title);
+  let parsedLinks = [];
+  const isSeriesRecord = Boolean(
+    isTv || (sourceTable && sourceTable.includes('series')) || bestMatch.season_1 || bestMatch.season_zip
+  );
+
+  if (isSeriesRecord) {
+    parsedLinks = parseHicineSeriesRecord(bestMatch, bestMatch.title || title);
+  }
+  if (!parsedLinks.length && bestMatch.links) {
+    parsedLinks = parseHicineRawLinks(bestMatch.links, bestMatch.title || title);
+  }
+
   return {
     source: 'hicine',
     title: bestMatch.title,
     featuredImage: bestMatch.featured_image,
     links: parsedLinks,
-    recordId: bestMatch.record_id || bestMatch._id
+    recordId: bestMatch.record_id || bestMatch._id,
+    isSeries: isSeriesRecord
   };
 }
 
@@ -249,6 +371,7 @@ module.exports = {
   searchHicine,
   getHicineFullRecord,
   parseHicineRawLinks,
+  parseHicineSeriesRecord,
   resolveHicineR2Url,
   resolveHicineForTitle
 };

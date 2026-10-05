@@ -14,9 +14,12 @@ function cleanTitle(raw) {
     .replace(/\b(19\d{2}|20\d{2})\b/g, '')
     .replace(/[\[\(].*?[\]\)]/g, '')
     .replace(/&/g, ' and ')
+    .replace(/\b(season\s*\d+|episode\s*\d+|ep\s*\d+|s\d+|e\d+|part\s*\d+|vol\s*\d+)\b/gi, '')
+    .replace(/\b(hindi|english|tamil|telugu|malayalam|kannada|dual|audio|web\s*dl|bluray|hdrip|hevc|x264|x265|dvdrip|webrip)\b/gi, '')
+    .replace(/\b(\d{3,4}p|4k|2k|hd|sd|fhd|uhd)\b/gi, '')
     .replace(/[:\-–—.,!?_]/g, ' ')
     .replace(/\b(and|the|a|an)\b/gi, ' ')
-    .replace(/\b(hindi|english|tamil|telugu|malayalam|kannada|dual|audio|web-?dl|bluray|hdrip|hevc|x264|x265)\b/gi, '')
+    .replace(/\b(hindi|english|tamil|telugu|malayalam|kannada|dual|audio|web\s*dl|bluray|hdrip|hevc|x264|x265|dvdrip|webrip|web|dl)\b/gi, '')
     .replace(/\s+/g, ' ')
     .trim()
     .toLowerCase();
@@ -106,9 +109,50 @@ async function searchVegamovies(query) {
 }
 
 /**
+ * Parse individual episodes from a NexDrive series page
+ */
+async function fetchNexdriveEpisodes(nexdriveUrl, quality = 'HD', season = 1) {
+  if (!nexdriveUrl || !nexdriveUrl.includes('nexdrive')) return [];
+  const html = await fetchHtml(nexdriveUrl);
+  if (!html) return [];
+
+  const epBlocks = html.split(/-:\s*Episodes?:\s*(\d+)\s*:-/i);
+  if (epBlocks.length < 2) return [];
+
+  const episodes = [];
+  for (let i = 1; i < epBlocks.length; i += 2) {
+    const epNum = parseInt(epBlocks[i], 10);
+    const blockContent = epBlocks[i + 1] || '';
+    const linkMatches = [...blockContent.matchAll(/<a[^>]*class="[^"]*btn-ep[^"]*"[^>]*href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/gi)];
+    for (const lm of linkMatches) {
+      const href = lm[1].trim();
+      const text = lm[2].replace(/<[^>]+>/g, '').trim();
+      const isDirect = /g-?direct|instant/i.test(text);
+      const isCloud = /v-?cloud|v-?gmlinks|resumable/i.test(text);
+      const sizeMatch = text.match(/\((.*?)\)/);
+      const size = sizeMatch ? sizeMatch[1].trim() : '';
+
+      episodes.push({
+        url: href,
+        season,
+        episode: epNum,
+        quality,
+        size,
+        label: `S${season} E${epNum} [${quality}] - ${isDirect ? 'G-Direct' : (isCloud ? 'V-Cloud' : 'Direct')}`,
+        isCloud,
+        isDotmovies: true,
+        source: isCloud ? 'V-Cloud' : 'G-Direct',
+        provider: 'vegamovies'
+      });
+    }
+  }
+  return episodes;
+}
+
+/**
  * Extract streaming player & download links from a Vegamovies post HTML
  */
-function extractVegamoviesPostData(postHtml, postUrl) {
+async function extractVegamoviesPostData(postHtml, postUrl, isTv = false) {
   if (!postHtml) return null;
 
   // 1. Extract IMDb ID / Stream source
@@ -125,8 +169,13 @@ function extractVegamoviesPostData(postHtml, postUrl) {
   // 2. Extract Streaming URL (Server 3: AllMovieLand / slast430did.com)
   const streamUrl = imdbId ? `https://slast430did.com/play/${encodeURIComponent(imdbId)}` : null;
 
-  // 3. Extract Download Links from download-links-div / post content
-  const downloads = [];
+  // 3. Extract Season number if TV Series
+  let detectedSeason = 1;
+  const sMatch = (postHtml.match(/Season\s*(\d{1,2})/i) || postUrl.match(/season-(\d{1,2})/i));
+  if (sMatch) detectedSeason = parseInt(sMatch[1], 10);
+
+  // 4. Extract Download Links from download-links-div / post content
+  const rawDownloads = [];
   const btnRegex = /<a class="btn"[^>]*href="([^"]+)"[\s\S]*?<button class="dwd-button">([\s\S]*?)<\/button>/gi;
   let bm;
   while ((bm = btnRegex.exec(postHtml)) !== null) {
@@ -154,7 +203,7 @@ function extractVegamoviesPostData(postHtml, postUrl) {
       }
     }
 
-    downloads.push({
+    rawDownloads.push({
       url: href,
       quality,
       size,
@@ -165,45 +214,72 @@ function extractVegamoviesPostData(postHtml, postUrl) {
     });
   }
 
+  // 5. Expand NexDrive Series Links if post is TV Series
+  const isSeriesPost = Boolean(isTv || /season|series|episode|ep-\d+/i.test(postUrl) || /season\s*\d+/i.test(postHtml));
+  const finalDownloads = [];
+
+  if (isSeriesPost) {
+    for (const dl of rawDownloads) {
+      if (dl.url.includes('nexdrive') && (dl.url.includes('genxfm') || dl.url.includes('episode'))) {
+        try {
+          const eps = await fetchNexdriveEpisodes(dl.url, dl.quality, detectedSeason);
+          if (eps && eps.length > 0) {
+            finalDownloads.push(...eps);
+            continue;
+          }
+        } catch(e) {}
+      }
+      // If expansion not applicable, mark with detected season
+      finalDownloads.push({
+        ...dl,
+        season: detectedSeason,
+        isBatch: true,
+        label: `Season ${detectedSeason} Pack [${dl.quality}]`
+      });
+    }
+  } else {
+    finalDownloads.push(...rawDownloads);
+  }
+
   return {
     url: postUrl,
     imdbId,
     streamUrl,
-    downloads
+    downloads: finalDownloads
   };
 }
 
 /**
  * Fetch and extract details for a specific Vegamovies post URL
  */
-async function fetchVegamoviesPostDetails(postUrl) {
+async function fetchVegamoviesPostDetails(postUrl, isTv = false) {
   if (!postUrl) return null;
-  if (vegamoviesPostCache.has(postUrl)) {
-    const hit = vegamoviesPostCache.get(postUrl);
+  const cacheKey = `${postUrl}_${isTv ? 'tv' : 'm'}`;
+  if (vegamoviesPostCache.has(cacheKey)) {
+    const hit = vegamoviesPostCache.get(cacheKey);
     if (Date.now() - hit.timestamp < 3600 * 1000) return hit.data;
   }
 
   const html = await fetchHtml(postUrl);
   if (!html) return null;
 
-  const data = extractVegamoviesPostData(html, postUrl);
+  const data = await extractVegamoviesPostData(html, postUrl, isTv);
   if (data) {
-    vegamoviesPostCache.set(postUrl, { timestamp: Date.now(), data });
+    vegamoviesPostCache.set(cacheKey, { timestamp: Date.now(), data });
   }
   return data;
 }
 
 /**
- * Match and resolve Vegamovies streaming and download links for a title
+ * Match and resolve Vegamovies streaming and download links for a title with STRICT matching
  */
-async function resolveVegamoviesForTitle(title, year = null, knownImdbId = null) {
+async function resolveVegamoviesForTitle(title, year = null, knownImdbId = null, isTv = false) {
   if (!title && !knownImdbId) return null;
 
   // Search by title or known IMDb ID
   const query = title || knownImdbId;
   const results = await searchVegamovies(query);
   if (!results || !results.length) {
-    // If no search results found by full title, try known IMDb ID if present
     if (knownImdbId && knownImdbId.startsWith('tt')) {
       return {
         source: 'vegamovies',
@@ -216,31 +292,56 @@ async function resolveVegamoviesForTitle(title, year = null, knownImdbId = null)
   }
 
   const cleanTarget = cleanTitle(title);
+  const targetWords = cleanTarget.split(' ').filter(w => w.length > 1);
   let bestPost = null;
 
   for (const item of results) {
     const itemTitle = cleanTitle(item.title);
     if (!itemTitle) continue;
 
-    const targetWords = cleanTarget.split(' ').filter(Boolean);
-    const matchesName = itemTitle.includes(cleanTarget) || cleanTarget.includes(itemTitle) ||
-      (targetWords.length > 1 && targetWords.every(w => itemTitle.includes(w)));
-    if (!matchesName) continue;
+    const isSeriesItem = Boolean(/season|series|episode|ep-\d+/i.test(item.url) || /season\s*\d+/i.test(item.title));
+    if (isTv && !isSeriesItem) continue;
+    if (!isTv && isSeriesItem) continue;
 
+    // Strict exact title match
+    const isExact = (itemTitle === cleanTarget);
+
+    // Word boundary check (all target words must match as whole words)
+    const allWordsMatch = targetWords.length > 0 && targetWords.every(tw => {
+      const rx = new RegExp(`\\b${tw}\\b`, 'i');
+      return rx.test(itemTitle);
+    });
+
+    if (!isExact && !allWordsMatch) continue;
+
+    // Disallow single-word titles matching complex unrelated titles
+    const itemWords = itemTitle.split(' ').filter(Boolean);
+    if (!isExact && targetWords.length === 1 && itemWords.length > 2) {
+      continue;
+    }
+
+    // Release year check (within 1 year)
     if (year && item.title) {
       const yearMatch = item.title.match(/\b(19\d{2}|20\d{2})\b/);
-      if (yearMatch && Math.abs(parseInt(yearMatch[1], 10) - parseInt(year, 10)) <= 1) {
-        bestPost = item;
-        break;
+      if (yearMatch) {
+        const itemY = parseInt(yearMatch[1], 10);
+        const targetY = parseInt(year, 10);
+        if (Math.abs(itemY - targetY) > 1) {
+          continue;
+        }
       }
     }
 
-    if (!bestPost) bestPost = item;
+    bestPost = item;
+    if (isExact) break;
   }
 
-  if (!bestPost) bestPost = results[0];
+  // STRICT RULE: If no result matches genuinely, DO NOT pick results[0]!
+  if (!bestPost) {
+    return null;
+  }
 
-  const postDetails = await fetchVegamoviesPostDetails(bestPost.url);
+  const postDetails = await fetchVegamoviesPostDetails(bestPost.url, isTv);
   if (!postDetails) return null;
 
   const effectiveImdbId = postDetails.imdbId || knownImdbId || null;
@@ -261,5 +362,6 @@ module.exports = {
   searchVegamovies,
   fetchVegamoviesPostDetails,
   extractVegamoviesPostData,
+  fetchNexdriveEpisodes,
   resolveVegamoviesForTitle
 };

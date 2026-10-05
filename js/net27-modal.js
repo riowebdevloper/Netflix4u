@@ -883,16 +883,13 @@
       return isTv ? renderDirectTvDownloads(title, tmdbId) : renderDirectMovieDownloads(title, tmdbId);
     }
 
-    var hasEpisodicLinks = links && links.some(function(l) { return l && (l.season || l.episode); });
-    var hasSeriesStructure = Boolean(isTv && hasEpisodicLinks);
-
-    if (hasSeriesStructure) {
-      // Group series links by season: separate full batch packs from individual episodes
+    // TV Series: Always render structured multi-season accordion with EVERY single episode
+    if (isTv) {
       var seasonMap = {};
       var batchMap = {};
       links.forEach(function(l) {
         var sNum = Number(l.season) || 1;
-        var isBatchLink = Boolean(l.isBatch || l.episode === null || typeof l.episode === 'undefined');
+        var isBatchLink = Boolean(l.isBatch || l.isPack || l.episode === null || typeof l.episode === 'undefined');
         if (isBatchLink) {
           if (!batchMap[sNum]) batchMap[sNum] = [];
           batchMap[sNum].push(l);
@@ -904,14 +901,29 @@
         }
       });
 
+      var cachedSeasons = (tmdbId && seriesSeasonsCache[tmdbId]) || [];
       var allSeasonKeys = Object.keys(seasonMap).concat(Object.keys(batchMap));
-      var seasons = Array.from(new Set(allSeasonKeys.map(Number))).sort(function(a, b) { return a - b; });
+      if (cachedSeasons.length > 0) {
+        cachedSeasons.forEach(function(s) { allSeasonKeys.push(String(s.season_number)); });
+      }
+      var seasons = Array.from(new Set(allSeasonKeys.map(Number))).filter(Boolean).sort(function(a, b) { return a - b; });
       if (!seasons.length) seasons = [1];
 
       return '<div class="dl-accordion">' +
         seasons.map(function(sNum, sIdx) {
           var epMap = seasonMap[sNum] || {};
-          var epNums = Object.keys(epMap).map(Number).sort(function(a, b) { return a - b; });
+          var directEpNums = Object.keys(epMap).map(Number);
+          var seasonMeta = cachedSeasons.find(function(s) { return Number(s.season_number) === Number(sNum); });
+          var epCount = (seasonMeta && seasonMeta.episode_count) || (directEpNums.length ? Math.max.apply(null, directEpNums) : 10);
+
+          // Guarantee that every single episode 1..epCount exists in the download list
+          var epNums = [];
+          for (var e = 1; e <= epCount; e++) {
+            epNums.push(e);
+          }
+          directEpNums.forEach(function(dn) { if (!epNums.includes(dn)) epNums.push(dn); });
+          epNums.sort(function(a, b) { return a - b; });
+
           var batches = batchMap[sNum] || [];
           var isOpen = sIdx === 0 ? ' is-open' : '';
 
@@ -937,8 +949,8 @@
                     '</div>' +
                     '<div>' +
                       '<div class="text-xs sm:text-sm font-bold text-white flex items-center gap-2">' +
-                        '<span>Season ' + sNum + ' Complete (All Episodes Pack)</span>' +
-                        '<span class="px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/40 text-[9px] font-black uppercase tracking-wider">FULL ZIP</span>' +
+                        '<span>Season ' + sNum + ' Complete (All ' + epCount + ' Episodes Pack)</span>' +
+                        '<span class="px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/40 text-[9px] font-black uppercase tracking-wider">FULL PACK</span>' +
                       '</div>' +
                       '<div class="text-[11px] text-white/60">One-click download for entire Season ' + sNum + ' • Multi-Audio Tracks</div>' +
                     '</div>' +
@@ -948,20 +960,60 @@
                   '</div>' +
                 '</div>' +
               '</div>';
+          } else {
+            var fullPackDlUrl = '/api/download-file?id=' + encodeURIComponent(tmdbId || '') + '&title=' + encodeURIComponent(title + ' Season ' + sNum + ' Full Pack') + '&quality=1080P&type=tv&se=' + sNum;
+            batchHtml =
+              '<div class="p-3.5 rounded-xl bg-gradient-to-r from-red-950/40 via-red-900/20 to-black/60 border border-red-500/30 mb-3 shadow-lg">' +
+                '<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">' +
+                  '<div class="flex items-center gap-2.5">' +
+                    '<div class="w-8 h-8 rounded-lg bg-red-600/25 text-red-400 border border-red-500/40 flex items-center justify-center shrink-0">' +
+                      '<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>' +
+                    '</div>' +
+                    '<div>' +
+                      '<div class="text-xs sm:text-sm font-bold text-white flex items-center gap-2">' +
+                        '<span>Season ' + sNum + ' Complete (All ' + epCount + ' Episodes Pack)</span>' +
+                        '<span class="px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/40 text-[9px] font-black uppercase tracking-wider">FULL PACK</span>' +
+                      '</div>' +
+                      '<div class="text-[11px] text-white/60">One-click download for entire Season ' + sNum + ' • Multi-Audio Hindi + English</div>' +
+                    '</div>' +
+                  '</div>' +
+                  '<div class="flex flex-wrap items-center gap-2 shrink-0">' +
+                    '<a href="' + fullPackDlUrl + '" data-title="' + escapeHtml(title) + ' Season ' + sNum + ' Full Pack" data-tmdbid="' + escapeHtml(tmdbId || '') + '" data-se="' + sNum + '" data-quality="1080P" class="px-3 py-1.5 rounded-lg bg-red-600 hover:bg-red-500 active:scale-95 text-white font-bold text-xs flex items-center gap-1.5 transition cursor-pointer shadow-md">' +
+                      '<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 3v12m0 0l-4-4m4 4l4-4"/><path d="M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>' +
+                      '<span>Download Full Season</span>' +
+                    '</a>' +
+                  '</div>' +
+                '</div>' +
+              '</div>';
           }
 
           var epRowsHtml = epNums.map(function(eNum) {
             var epLinks = epMap[eNum] || [];
-            var epQualityPills = epLinks.map(function(link) {
-              var q = String(link.quality || 'HD').toUpperCase();
-              var rawUrl = link.url || '#';
-              var cleanUrl = (window.getFastCloudDownloadHref && window.getFastCloudDownloadHref(rawUrl, { title: title, tmdbId: tmdbId, se: sNum, ep: eNum, quality: q })) || rawUrl;
-              return '<a href="' + cleanUrl + '" data-fast-download="' + encodeURIComponent(rawUrl) + '" data-title="' + escapeHtml(title) + '" data-tmdbid="' + escapeHtml(tmdbId || '') + '" data-se="' + sNum + '" data-ep="' + eNum + '" data-quality="' + escapeHtml(q) + '" class="px-2.5 py-1 rounded bg-white/10 hover:bg-red-600 active:scale-95 text-white font-bold text-xs flex items-center gap-1 transition cursor-pointer border border-white/10">' +
-                '<svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 3v12m0 0l-4-4m4 4l4-4"/><path d="M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>' +
-                '<span>' + escapeHtml(q) + '</span>' +
-                (link.size ? '<span class="text-white/50 text-[10px]">(' + escapeHtml(link.size) + ')</span>' : '') +
-              '</a>';
-            }).join('');
+            var epQualityPills = '';
+            if (epLinks.length > 0) {
+              epQualityPills = epLinks.map(function(link) {
+                var q = String(link.quality || 'HD').toUpperCase();
+                var rawUrl = link.url || '#';
+                var cleanUrl = (window.getFastCloudDownloadHref && window.getFastCloudDownloadHref(rawUrl, { title: title, tmdbId: tmdbId, se: sNum, ep: eNum, quality: q })) || rawUrl;
+                return '<a href="' + cleanUrl + '" data-fast-download="' + encodeURIComponent(rawUrl) + '" data-title="' + escapeHtml(title) + '" data-tmdbid="' + escapeHtml(tmdbId || '') + '" data-se="' + sNum + '" data-ep="' + eNum + '" data-quality="' + escapeHtml(q) + '" class="px-2.5 py-1 rounded bg-white/10 hover:bg-red-600 active:scale-95 text-white font-bold text-xs flex items-center gap-1 transition cursor-pointer border border-white/10">' +
+                  '<svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 3v12m0 0l-4-4m4 4l4-4"/><path d="M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>' +
+                  '<span>' + escapeHtml(q) + '</span>' +
+                  (link.size ? '<span class="text-white/50 text-[10px]">(' + escapeHtml(link.size) + ')</span>' : '') +
+                '</a>';
+              }).join('');
+            } else {
+              var ep1080Url = '/api/download-file?id=' + encodeURIComponent(tmdbId || '') + '&title=' + encodeURIComponent(title + ' S' + sNum + ' E' + eNum) + '&quality=1080p&type=tv&se=' + sNum + '&ep=' + eNum;
+              var ep720Url = '/api/download-file?id=' + encodeURIComponent(tmdbId || '') + '&title=' + encodeURIComponent(title + ' S' + sNum + ' E' + eNum) + '&quality=720p&type=tv&se=' + sNum + '&ep=' + eNum;
+              epQualityPills =
+                '<a href="' + ep1080Url + '" data-title="' + escapeHtml(title) + ' S' + sNum + 'E' + eNum + '" data-tmdbid="' + escapeHtml(tmdbId || '') + '" data-se="' + sNum + '" data-ep="' + eNum + '" data-quality="1080P" class="px-2.5 py-1 rounded bg-white/10 hover:bg-red-600 active:scale-95 text-white font-bold text-xs flex items-center gap-1 transition cursor-pointer border border-white/10">' +
+                  '<svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 3v12m0 0l-4-4m4 4l4-4"/><path d="M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>' +
+                  '<span>1080P FHD</span>' +
+                '</a>' +
+                '<a href="' + ep720Url + '" data-title="' + escapeHtml(title) + ' S' + sNum + 'E' + eNum + '" data-tmdbid="' + escapeHtml(tmdbId || '') + '" data-se="' + sNum + '" data-ep="' + eNum + '" data-quality="720P" class="px-2.5 py-1 rounded bg-white/10 hover:bg-red-600 active:scale-95 text-white font-bold text-xs flex items-center gap-1 transition cursor-pointer border border-white/10">' +
+                  '<svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 3v12m0 0l-4-4m4 4l4-4"/><path d="M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>' +
+                  '<span>720P HD</span>' +
+                '</a>';
+            }
 
             return '<div id="dl-ep-row-' + sNum + '-' + eNum + '" class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 p-2.5 rounded-lg bg-white/[0.03] border border-white/5 hover:bg-white/[0.05] transition">' +
               '<div class="flex items-center gap-2">' +
