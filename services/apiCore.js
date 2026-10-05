@@ -892,6 +892,9 @@ async function handleRecommendations(req, res) {
 const net27CatalogCache = new Map();
 
 function fetchTmdbCatalogJson(endpoint) {
+  if (!TMDB_API_KEY) {
+    return Promise.resolve(null);
+  }
   const cacheKey = `tmdb_cat_${endpoint}`;
   if (net27CatalogCache.has(cacheKey)) {
     const entry = net27CatalogCache.get(cacheKey);
@@ -1306,44 +1309,81 @@ async function handleCatalogTitle(req, res) {
     raw = await fetchTmdbCatalogJson(`${endpoint}?append_to_response=credits,videos,release_dates,content_ratings,recommendations,similar,external_ids`);
   } catch (e) { }
 
+  let localResolved = null;
+  try {
+    localResolved = await resolveContentId(id.startsWith('tmdb-') ? id : (tmdbId ? `tmdb-${type === 'tv' ? 'series' : 'movie'}-${tmdbId}` : id), type);
+  } catch (e) { }
+
+  if (!raw && localResolved) {
+    raw = {
+      title: localResolved.title,
+      name: localResolved.title,
+      overview: localResolved.overview || localResolved.description,
+      vote_average: localResolved.rating || 8.0,
+      release_date: String(localResolved.year || localResolved.releaseYear || ''),
+      first_air_date: String(localResolved.year || localResolved.releaseYear || ''),
+      genres: (localResolved.genres || localResolved.categories || []).map((g, idx) => typeof g === 'string' ? { id: idx, name: g } : g),
+      cast: localResolved.cast || [],
+      credits: { cast: localResolved.cast || [] },
+      number_of_seasons: localResolved.seasons || 1,
+      number_of_episodes: localResolved.episodes || 10,
+      seasons: typeof localResolved.seasons === 'number' ? undefined : localResolved.seasons,
+      poster_path: localResolved.poster,
+      backdrop_path: localResolved.backdrop
+    };
+  }
+
   const queryTitle = q.get('title') || '';
   const queryYear = q.get('year') || '';
   const queryPoster = q.get('poster') || '';
   const queryBackdrop = q.get('backdrop') || '';
 
-  const title = raw?.title || raw?.name || localItem?.title || queryTitle || 'Unknown Title';
-  const year = String(raw?.release_date || raw?.first_air_date || localItem?.year || queryYear || '').slice(0, 4);
-  const resolvedImdbId = raw?.imdb_id || raw?.external_ids?.imdb_id || localItem?.imdbId || null;
+  const title = raw?.title || raw?.name || localResolved?.title || localItem?.title || queryTitle || 'Unknown Title';
+  const year = String(raw?.release_date || raw?.first_air_date || localResolved?.year || localItem?.year || queryYear || '').slice(0, 4);
+  const resolvedImdbId = raw?.imdb_id || raw?.external_ids?.imdb_id || localResolved?.imdbId || localItem?.imdbId || null;
 
-  // Authenticate and fetch verified Hicine direct download links ONLY (Section A1, A6, C)
+  // Authenticate and fetch verified direct download links
   let downloadLinks = [];
-  const targetCanonicalId = localItem?.canonicalId || (id.startsWith('tmdb-') ? id : (tmdbId ? `tmdb-${type}-${tmdbId}` : id));
-  try {
-    const canonical = await resolveContentId(id);
-    if (canonical && Array.isArray(canonical.links) && canonical.links.length > 0) {
-      downloadLinks = normalizeRawLinks(canonical.links, canonical.canonicalId || targetCanonicalId, type === 'tv');
-    }
-  } catch (e) { }
+  const targetCanonicalId = localResolved?.canonicalId || localItem?.canonicalId || (id.startsWith('tmdb-') ? id : (tmdbId ? `tmdb-${type}-${tmdbId}` : id));
+  if (localResolved && Array.isArray(localResolved.links) && localResolved.links.length > 0) {
+    downloadLinks = normalizeRawLinks(localResolved.links, targetCanonicalId, type === 'tv');
+  }
 
   if (!downloadLinks.length) {
-    const slug = localItem?.slug;
+    const slug = localResolved?.slug || localItem?.slug;
     const matched = findMatchingCatalogLinks(title, year, resolvedImdbId, slug);
     if (matched && matched.length > 0) {
       downloadLinks = normalizeRawLinks(matched, targetCanonicalId, type === 'tv');
     }
   }
 
-  if (!downloadLinks.length && localItem && (localItem.links || localItem.download_links)) {
-    downloadLinks = normalizeRawLinks(localItem.links || localItem.download_links, targetCanonicalId, type === 'tv');
+  if (!downloadLinks.length && localItem && (localItem.links || localItem.download_links || localItem.downloads)) {
+    downloadLinks = normalizeRawLinks(localItem.links || localItem.download_links || localItem.downloads, targetCanonicalId, type === 'tv');
   }
 
-  // Filter STRICTLY to verified Hicine cloud downloads (removes all unverified third-party hosts)
-  downloadLinks = downloadLinks.filter(l => l && l.url && isHicineDownloadUrl(l.url)).map(l => ({
-    ...l,
-    source: 'Hicine Fast Cloud',
-    isCloud: true,
-    isDotmovies: false
-  }));
+  // Multi-Season and Episode Taxonomy Alignment
+  let seasonsList = [];
+  if (type === 'tv') {
+    if (Array.isArray(raw?.seasons) && raw.seasons.length > 0) {
+      seasonsList = raw.seasons.filter(s => s && s.season_number > 0).map(s => ({
+        season_number: s.season_number,
+        episode_count: s.episode_count || 10,
+        name: s.name || `Season ${s.season_number}`
+      }));
+    }
+    if (!seasonsList.length) {
+      const totalSeasons = Number(raw?.number_of_seasons || localResolved?.seasons || localItem?.seasons || 1) || 1;
+      const totalEps = Number(raw?.number_of_episodes || localResolved?.episodes || localItem?.episodes || (totalSeasons * 10)) || (totalSeasons * 10);
+      const avgEps = Math.max(1, Math.round(totalEps / totalSeasons));
+      for (let sNum = 1; sNum <= totalSeasons; sNum++) {
+        seasonsList.push({
+          season_number: sNum,
+          episode_count: avgEps,
+          name: `Season ${sNum}`
+        });
+      }
+    }
+  }
 
   // Initial episodes for TV
   let initialEpisodes = [];
@@ -1363,6 +1403,22 @@ async function handleCatalogTitle(req, res) {
         }));
       }
     } catch (e) { }
+
+    if (!initialEpisodes.length) {
+      const s1Count = (seasonsList[0] && seasonsList[0].episode_count) || 10;
+      for (let epNum = 1; epNum <= s1Count; epNum++) {
+        initialEpisodes.push({
+          id: `ep-1-${epNum}`,
+          season_number: 1,
+          episode_number: epNum,
+          name: `Episode ${epNum}`,
+          overview: `${title} Season 1 Episode ${epNum}.`,
+          still_path: null,
+          vote_average: 8.0,
+          runtime: 45
+        });
+      }
+    }
   }
 
   // Cert extraction
@@ -1404,15 +1460,15 @@ async function handleCatalogTitle(req, res) {
     type: type,
     title: title,
     year: year || '2025',
-    rating: raw?.vote_average ? Number(raw.vote_average.toFixed(1)) : 8.0,
-    runtime: raw?.runtime || (raw?.episode_run_time ? raw.episode_run_time[0] : 120),
+    rating: raw?.vote_average ? Number(raw.vote_average.toFixed(1)) : (localResolved?.rating || 8.0),
+    runtime: raw?.runtime || (raw?.episode_run_time ? raw.episode_run_time[0] : (localResolved?.runtime || 120)),
     certification: { rating: cert },
-    overview: raw?.overview || localItem?.description || (queryTitle ? `Watch ${queryTitle} online in high definition on Netflix4U.` : ''),
-    poster: raw?.poster_path ? unwrapImageUrl(`https://image.tmdb.org/t/p/w500${raw.poster_path}`, 400) : (unwrapImageUrl(localItem?.poster) || (queryPoster ? unwrapImageUrl(queryPoster) : null)),
-    backdrop: raw?.backdrop_path ? unwrapImageUrl(`https://image.tmdb.org/t/p/original${raw.backdrop_path}`, 1280) : (unwrapImageUrl(localItem?.backdrop) || (queryBackdrop ? unwrapImageUrl(queryBackdrop) : null) || (localItem?.poster ? unwrapImageUrl(localItem.poster) : (queryPoster ? unwrapImageUrl(queryPoster) : null))),
-    genres: raw?.genres || (localItem?.categories || []).map((c, idx) => ({ id: idx, name: c })),
-    cast: (raw?.credits?.cast || []).slice(0, 16).map(c => {
-      const photo = c.profile_path ? unwrapImageUrl(`https://image.tmdb.org/t/p/w185${c.profile_path}`, 185) : null;
+    overview: raw?.overview || localResolved?.overview || localResolved?.description || localItem?.description || (queryTitle ? `Watch ${queryTitle} online in high definition on Netflix4U.` : ''),
+    poster: raw?.poster_path ? (raw.poster_path.startsWith('http') ? unwrapImageUrl(raw.poster_path, 400) : unwrapImageUrl(`https://image.tmdb.org/t/p/w500${raw.poster_path}`, 400)) : (unwrapImageUrl(localResolved?.poster) || unwrapImageUrl(localItem?.poster) || (queryPoster ? unwrapImageUrl(queryPoster) : null)),
+    backdrop: raw?.backdrop_path ? (raw.backdrop_path.startsWith('http') ? unwrapImageUrl(raw.backdrop_path, 1280) : unwrapImageUrl(`https://image.tmdb.org/t/p/original${raw.backdrop_path}`, 1280)) : (unwrapImageUrl(localResolved?.backdrop) || unwrapImageUrl(localItem?.backdrop) || (queryBackdrop ? unwrapImageUrl(queryBackdrop) : null) || (localResolved?.poster ? unwrapImageUrl(localResolved.poster) : null)),
+    genres: raw?.genres || (localResolved?.genres || localItem?.categories || []).map((c, idx) => typeof c === 'string' ? ({ id: idx, name: c }) : c),
+    cast: (raw?.credits?.cast || raw?.cast || localResolved?.cast || []).slice(0, 16).map(c => {
+      const photo = c.profile_path ? (c.profile_path.startsWith('http') ? unwrapImageUrl(c.profile_path, 185) : unwrapImageUrl(`https://image.tmdb.org/t/p/w185${c.profile_path}`, 185)) : (c.photo ? unwrapImageUrl(c.photo, 185) : null);
       return {
         id: c.id,
         name: c.name,
@@ -1421,11 +1477,7 @@ async function handleCatalogTitle(req, res) {
         photo: photo
       };
     }),
-    seasons: (raw?.seasons || []).filter(s => s.season_number > 0).map(s => ({
-      season_number: s.season_number,
-      episode_count: s.episode_count || 10,
-      name: s.name || `Season ${s.season_number}`
-    })),
+    seasons: seasonsList,
     recommendations: (raw?.recommendations?.results || raw?.similar?.results || []).slice(0, 12).map(r => ({
       tmdbId: r.id,
       title: r.title || r.name,
@@ -1465,16 +1517,41 @@ async function handleCatalogSeason(req, res) {
     raw = await fetchTmdbCatalogJson(`/tv/${id}/season/${seasonNum}`);
   } catch (e) { }
 
-  const episodes = (raw?.episodes || []).map(ep => ({
-    id: ep.id,
-    season_number: ep.season_number,
-    episode_number: ep.episode_number,
-    name: ep.name,
-    overview: ep.overview,
-    still_path: ep.still_path ? `https://image.tmdb.org/t/p/w300${ep.still_path}` : null,
-    vote_average: ep.vote_average ? Number(ep.vote_average.toFixed(1)) : 7.8,
-    runtime: ep.runtime || 45
-  }));
+  let episodes = [];
+  if (raw && Array.isArray(raw.episodes) && raw.episodes.length > 0) {
+    episodes = raw.episodes.map(ep => ({
+      id: ep.id,
+      season_number: ep.season_number,
+      episode_number: ep.episode_number,
+      name: ep.name,
+      overview: ep.overview,
+      still_path: ep.still_path ? (ep.still_path.startsWith('http') ? unwrapImageUrl(ep.still_path, 300) : unwrapImageUrl(`https://image.tmdb.org/t/p/w300${ep.still_path}`, 300)) : null,
+      vote_average: ep.vote_average ? Number(ep.vote_average.toFixed(1)) : 7.8,
+      runtime: ep.runtime || 45
+    }));
+  } else {
+    // Generate fallback episodes for requested season
+    let epCount = 10;
+    try {
+      const localResolved = await resolveContentId(id.startsWith('tmdb-') ? id : `tmdb-series-${id}`, 'tv');
+      if (localResolved && localResolved.episodes) {
+        epCount = Math.max(1, Math.round(Number(localResolved.episodes) / Math.max(1, Number(localResolved.seasons || 1))));
+      }
+    } catch(e) {}
+
+    for (let epIdx = 1; epIdx <= epCount; epIdx++) {
+      episodes.push({
+        id: `ep-${seasonNum}-${epIdx}`,
+        season_number: seasonNum,
+        episode_number: epIdx,
+        name: `Episode ${epIdx}`,
+        overview: `Season ${seasonNum} Episode ${epIdx}.`,
+        still_path: null,
+        vote_average: 8.0,
+        runtime: 45
+      });
+    }
+  }
 
   sendJson(res, 200, { ok: true, episodes }, { 'Cache-Control': 'public, max-age=3600' });
 }

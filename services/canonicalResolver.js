@@ -18,6 +18,7 @@ const DATA_DIR = path.resolve(__dirname, '..', 'data');
 const DETAILS_DIR = path.join(DATA_DIR, 'details');
 const CATALOG_SUMMARY_PATH = path.join(DATA_DIR, 'catalog_summary.json');
 const COMPLETE_CATALOG_PATH = path.join(DATA_DIR, 'dotmobiz_complete_catalog.json');
+const HARVESTED_PATH = path.join(DATA_DIR, 'dotmobiz_harvested.json');
 const DETAILS_MAP_PATH = path.join(DATA_DIR, 'details_map.json');
 // 🔐 Secure TMDB API Key (Environment variable only - never hardcoded in source)
 const TMDB_API_KEY = process.env.TMDB_API_KEY || null;
@@ -178,7 +179,7 @@ function getDetailsDirIndex() {
 
 const detailFileCache = new Map();
 
-function normalizeDetailLinks(links, title) {
+function normalizeDetailLinks(links, title, isSeries = false) {
   if (!Array.isArray(links)) return [];
   return links.map(l => {
     if (!l) return null;
@@ -197,14 +198,21 @@ function normalizeDetailLinks(links, title) {
     let episode = l.episode !== undefined && l.episode !== null ? Number(l.episode) : null;
     let isBatch = Boolean(l.isBatch || l.isPack);
 
-    if (season === null) {
-      const sMatch = label.match(/(?:season|s)\s*(\d+)/i);
-      if (sMatch) season = parseInt(sMatch[1], 10);
-    }
-    if (episode === null) {
-      const epMatch = label.match(/(?:episode|ep|e)\s*(\d+)/i);
-      if (epMatch) episode = parseInt(epMatch[1], 10);
-      else if (/complete|pack|zip|batch|full\s*season/i.test(label)) isBatch = true;
+    if (isSeries) {
+      if (season === null) {
+        const sMatch = label.match(/\b(?:season|s)\s*(\d{1,2})\b/i);
+        if (sMatch) season = parseInt(sMatch[1], 10);
+        else season = 1;
+      }
+      if (episode === null) {
+        const epMatch = label.match(/\b(?:episode|ep)\s*(\d{1,3})\b/i) || label.match(/\b[eE](\d{1,3})\b/);
+        if (epMatch) episode = parseInt(epMatch[1], 10);
+        else if (/complete|pack|zip|batch|full\s*season/i.test(label)) isBatch = true;
+      }
+    } else {
+      season = null;
+      episode = null;
+      isBatch = false;
     }
 
     return {
@@ -222,8 +230,9 @@ function normalizeDetailLinks(links, title) {
   }).filter(Boolean);
 }
 
-function extractLinksFromDetail(detail, title) {
+function extractLinksFromDetail(detail, title, isSeries = false) {
   if (!detail) return [];
+  const seriesCheck = Boolean(isSeries || detail.isSeries || detail.type === 'series' || detail.type === 'tv');
   if (Array.isArray(detail.downloads) && detail.downloads.length > 0) {
     const converted = detail.downloads.map(opt => ({
       url: opt.url,
@@ -234,10 +243,10 @@ function extractLinksFromDetail(detail, title) {
       isDotmovies: true,
       isCloud: false
     }));
-    return normalizeDetailLinks(converted, title || detail.title);
+    return normalizeDetailLinks(converted, title || detail.title, seriesCheck);
   }
   if (Array.isArray(detail.links) && detail.links.length > 0) {
-    return normalizeDetailLinks(detail.links, title || detail.title);
+    return normalizeDetailLinks(detail.links, title || detail.title, seriesCheck);
   }
   if (Array.isArray(detail.downloadOptions) && detail.downloadOptions.length > 0) {
     const converted = detail.downloadOptions.map(opt => ({
@@ -249,7 +258,7 @@ function extractLinksFromDetail(detail, title) {
       isDotmovies: Boolean(opt.url && (opt.url.includes('nexdrive') || opt.url.includes('dotmobiz'))),
       isCloud: Boolean(opt.url && (opt.url.includes('workers.dev') || opt.url.includes('vcloud')))
     }));
-    return normalizeDetailLinks(converted, title || detail.title);
+    return normalizeDetailLinks(converted, title || detail.title, seriesCheck);
   }
   return [];
 }
@@ -442,12 +451,8 @@ function buildCatalogIndex() {
 function readDetailFile(filename) {
   if (!filename) return null;
   const safeFile = filename.replace(/[/\\?%*:|"<>]/g, '_');
-  const targetPath = path.join(DETAILS_DIR, safeFile.endsWith('.json') ? safeFile : `${safeFile}.json`);
+  let targetPath = path.join(DETAILS_DIR, safeFile.endsWith('.json') ? safeFile : `${safeFile}.json`);
   
-  if (!path.resolve(targetPath).startsWith(DETAILS_DIR)) {
-    return null;
-  }
-
   if (fs.existsSync(targetPath)) {
     try {
       return JSON.parse(fs.readFileSync(targetPath, 'utf8'));
@@ -455,6 +460,34 @@ function readDetailFile(filename) {
       return null;
     }
   }
+
+  // Fallback 1: check detailsDirIndex
+  const dIndex = getDetailsDirIndex();
+  const indexedFile = dIndex.get(safeFile) || dIndex.get(safeFile.replace(/\.json$/, ''));
+  if (indexedFile) {
+    targetPath = path.join(DETAILS_DIR, indexedFile);
+    if (fs.existsSync(targetPath)) {
+      try {
+        return JSON.parse(fs.readFileSync(targetPath, 'utf8'));
+      } catch (e) {
+        return null;
+      }
+    }
+  }
+
+  // Fallback 2: try common prefixes
+  const cleanStem = safeFile.replace(/\.json$/, '');
+  for (const prefix of ['tmdb-movie-', 'tmdb-tv-', 'tmdb-series-', 'dotmobiz-']) {
+    const candidate = path.join(DETAILS_DIR, `${prefix}${cleanStem}.json`);
+    if (fs.existsSync(candidate)) {
+      try {
+        return JSON.parse(fs.readFileSync(candidate, 'utf8'));
+      } catch (e) {
+        return null;
+      }
+    }
+  }
+
   return null;
 }
 
@@ -466,6 +499,26 @@ function fetchTmdbRecord(mediaType, tmdbId, requestedCanonicalId = null) {
   const cacheKey = `${mediaType}_${tmdbId}_${requestedCanonicalId || ''}`;
   if (tmdbMemoryCache.has(cacheKey)) {
     return Promise.resolve(tmdbMemoryCache.get(cacheKey));
+  }
+
+  // Try local cached detail file first
+  const localCandidates = [
+    `tmdb-${isTv ? 'tv' : 'movie'}-${tmdbId}`,
+    `tmdb-${isTv ? 'series' : 'movie'}-${tmdbId}`,
+    `tmdb-movie-${tmdbId}`,
+    `tmdb-tv-${tmdbId}`,
+    `tmdb-series-${tmdbId}`,
+    String(tmdbId)
+  ];
+  for (const cand of localCandidates) {
+    const local = readDetailFile(cand);
+    if (local) {
+      const rec = standardizeLocalRecord(local, requestedCanonicalId || `tmdb-${isTv ? 'series' : 'movie'}-${tmdbId}`);
+      if (rec) {
+        tmdbMemoryCache.set(cacheKey, rec);
+        return Promise.resolve(rec);
+      }
+    }
   }
 
   if (!TMDB_API_KEY) {
@@ -580,20 +633,26 @@ function normalizeRawLinks(links, canonicalId, isSeries = false) {
     const isDotmovies = Boolean(l.isDotmovies || (l.url && (l.url.includes('nexdrive') || l.url.includes('dotmobiz'))) || l.source === 'dotmobiz' || l.source === 'Dotmovies' || l.source === 'Direct Ultra HD');
     const source = isDotmovies ? 'Direct Ultra HD' : (isCloud ? 'Fast Cloud' : (l.source || 'Direct Mirror'));
 
-    let season = l.season !== undefined ? l.season : null;
-    let episode = l.episode !== undefined ? l.episode : null;
-    let isPack = Boolean(l.isPack);
+    let season = l.season !== undefined && l.season !== null ? Number(l.season) : null;
+    let episode = l.episode !== undefined && l.episode !== null ? Number(l.episode) : null;
+    let isPack = Boolean(l.isPack || l.isBatch);
 
     const label = l.label || '';
-    if (season === null) {
-      const sMatch = label.match(/(?:season|s)\s*(\d+)/i);
-      if (sMatch) season = parseInt(sMatch[1], 10);
-      else if (isSeries) season = 1;
-    }
-    if (episode === null) {
-      const epMatch = label.match(/(?:episode|ep|e)\s*(\d+)/i);
-      if (epMatch) episode = parseInt(epMatch[1], 10);
-      else if (/complete|pack|zip|batch|full\s*season/i.test(label)) isPack = true;
+    if (isSeries) {
+      if (season === null) {
+        const sMatch = label.match(/\b(?:season|s)\s*(\d{1,2})\b/i);
+        if (sMatch) season = parseInt(sMatch[1], 10);
+        else season = 1;
+      }
+      if (episode === null) {
+        const epMatch = label.match(/\b(?:episode|ep)\s*(\d{1,3})\b/i) || label.match(/\b[eE](\d{1,3})\b/);
+        if (epMatch) episode = parseInt(epMatch[1], 10);
+        else if (/complete|pack|zip|batch|full\s*season/i.test(label)) isPack = true;
+      }
+    } else {
+      season = null;
+      episode = null;
+      isPack = false;
     }
 
     return {
@@ -615,8 +674,9 @@ function normalizeRawLinks(links, canonicalId, isSeries = false) {
  */
 function standardizeLocalRecord(item, rawId) {
   if (!item) return null;
-  const rawNum = String(item.record_id || item.id || '').replace(/^dotmobiz-/, '');
-  const canonicalId = `dotmobiz-${rawNum || String(rawId || '').replace(/^dotmobiz-/, '')}`;
+  const isSeries = item.mediaType === 'tv' || item.type === 'series' || item.type === 'tv' || item.type === 'anime' || item.type === 'kdrama' || Boolean(item.isSeries);
+  const rawNum = String(item.record_id || item.id || '').replace(/^dotmobiz-/, '').replace(/^tmdb-(?:movie|series|tv)-/, '');
+  const canonicalId = item.canonicalId || (String(rawId || '').startsWith('tmdb-') ? rawId : (item.tmdbId ? `tmdb-${isSeries ? 'series' : 'movie'}-${item.tmdbId}` : `dotmobiz-${rawNum || String(rawId || '').replace(/^dotmobiz-/, '')}`));
   const rawTitle = item.rawTitle || item.title || 'Untitled';
   
   // Clean title for display
@@ -641,7 +701,6 @@ function standardizeLocalRecord(item, rawId) {
     }
   }
 
-  const isSeries = item.type === 'series' || item.type === 'anime' || item.type === 'kdrama' || Boolean(item.seasons || item.season_1);
   const normalizedLinks = normalizeRawLinks(links, canonicalId, isSeries);
 
   return {
@@ -649,7 +708,7 @@ function standardizeLocalRecord(item, rawId) {
     id: canonicalId,
     canonicalId,
     mediaType: isSeries ? 'tv' : 'movie',
-    externalProvider: item.provider || 'dotmobiz',
+    externalProvider: item.provider || (String(canonicalId).startsWith('tmdb-') ? 'tmdb' : 'dotmobiz'),
     externalId: rawNum || String(item.id || ''),
     contentType: isSeries ? 'series' : 'movie',
     type: isSeries ? 'series' : 'movie',

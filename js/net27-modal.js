@@ -742,7 +742,7 @@
       '</div>';
     }
 
-    var hasSeriesStructure = isTv || links.some(function(l) { return l.season || l.episode; });
+    var hasSeriesStructure = Boolean(isTv);
 
     if (hasSeriesStructure) {
       // Group series links by season: separate full batch packs from individual episodes
@@ -1277,6 +1277,19 @@
     if (seriesSeasonsCache[tId] && seriesSeasonsCache[tId].length) {
       return seriesSeasonsCache[tId];
     }
+    // Asynchronously fetch from catalog title endpoint if missing
+    if (tId && activeWatchParams && (activeWatchParams.isTv || activeWatchParams.type === 'tv' || activeWatchParams.type === 'series')) {
+      var lookupId = activeWatchParams.canonicalId || tId;
+      fetch('/api/catalog/title/tv/' + encodeURIComponent(lookupId))
+        .then(function(r) { return r.json(); })
+        .then(function(d) {
+          if (d && Array.isArray(d.seasons) && d.seasons.length) {
+            seriesSeasonsCache[tId] = d.seasons;
+            seriesSeasonsCache[lookupId] = d.seasons;
+            updateEpisodeNavUi();
+          }
+        }).catch(function() {});
+    }
     return [{ season_number: 1, episode_count: 10, name: 'Season 1' }];
   }
 
@@ -1306,24 +1319,24 @@
 
     // Populate Season Dropdowns
     var seOptions = seasons.map(function(s) {
-      return '<option value="' + s.season_number + '"' + (s.season_number === curSe ? ' selected' : '') + '>' +
+      return '<option value="' + s.season_number + '"' + (Number(s.season_number) === Number(curSe) ? ' selected' : '') + '>' +
         escapeHtml(s.name || ('Season ' + s.season_number)) + '</option>';
     }).join('');
 
-    if (watchSeasonSelect && watchSeasonSelect.innerHTML !== seOptions) {
+    if (watchSeasonSelect) {
       watchSeasonSelect.innerHTML = seOptions;
+      watchSeasonSelect.value = String(curSe);
     }
-    if (watchSeasonSelect) watchSeasonSelect.value = String(curSe);
 
-    if (watchMobileSeasonSelect && watchMobileSeasonSelect.innerHTML !== seOptions) {
+    if (watchMobileSeasonSelect) {
       watchMobileSeasonSelect.innerHTML = seOptions;
+      watchMobileSeasonSelect.value = String(curSe);
     }
-    if (watchMobileSeasonSelect) watchMobileSeasonSelect.value = String(curSe);
 
     // Populate Episode Dropdowns
     var epOptions = '';
     for (var i = 1; i <= totalEps; i++) {
-      epOptions += '<option value="' + i + '"' + (i === curEp ? ' selected' : '') + '>Ep ' + i + '</option>';
+      epOptions += '<option value="' + i + '"' + (Number(i) === Number(curEp) ? ' selected' : '') + '>Ep ' + i + '</option>';
     }
 
     if (watchEpisodeSelect) {
