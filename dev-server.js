@@ -1493,7 +1493,7 @@ const server = http.createServer(async (req, res) => {
     if (isSafePath(path.join(ROOT, 'css'), reqPath.replace(/^\/css\//, '')) && fs.existsSync(cssFilePath) && fs.statSync(cssFilePath).isFile()) {
       res.writeHead(200, {
         'Content-Type': 'text/css; charset=utf-8',
-        'Cache-Control': 'public, max-age=604800, immutable'
+        'Cache-Control': 'public, max-age=0, must-revalidate'
       });
       fs.createReadStream(cssFilePath).pipe(res);
       return;
@@ -1510,7 +1510,7 @@ const server = http.createServer(async (req, res) => {
       const ext = path.extname(jsFilePath).toLowerCase();
       res.writeHead(200, {
         'Content-Type': MIME_TYPES[ext] || 'text/javascript; charset=utf-8',
-        'Cache-Control': 'public, max-age=604800, immutable'
+        'Cache-Control': 'public, max-age=0, must-revalidate'
       });
       fs.createReadStream(jsFilePath).pipe(res);
       return;
@@ -1527,7 +1527,7 @@ const server = http.createServer(async (req, res) => {
       const ext = path.extname(assetFilePath).toLowerCase();
       res.writeHead(200, {
         'Content-Type': MIME_TYPES[ext] || 'application/octet-stream',
-        'Cache-Control': 'public, max-age=604800, immutable'
+        'Cache-Control': 'public, max-age=0, must-revalidate'
       });
       fs.createReadStream(assetFilePath).pipe(res);
       return;

@@ -798,7 +798,7 @@
         </div>
 
         <!-- High-Speed Video Iframe -->
-        <iframe id="watch-modal-iframe" title="High-Speed Video Player" class="absolute inset-0 w-full h-full border-0 bg-black block" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowtransparency="true" allowfullscreen referrerpolicy="no-referrer"></iframe>
+        <iframe id="watch-modal-iframe" title="High-Speed Video Player" class="absolute inset-0 w-full h-full border-0 bg-black block" allow="autoplay; encrypted-media; fullscreen; picture-in-picture; cross-origin-isolated" allowtransparency="true" allowfullscreen referrerpolicy="no-referrer"></iframe>
 
         <!-- In-Player Stream Failover Card (Zero White Box Error Handling) -->
         <div id="watch-failover-card" class="hidden absolute inset-0 z-30 bg-black/95 backdrop-blur-md flex flex-col items-center justify-center p-6 text-center space-y-3">
@@ -1129,14 +1129,27 @@
   <!-- ─── END AADS AD UNIT 2455136 ─── -->
 
   <!-- Client Application Core Scripts (Deferred for Fast, Non-Blocking Parallel Load) -->
-  <script defer src="/js/version-checker.js?v=3.5.0"></script>
-  <script defer src="/js/ads-manager.js?v=3.5.0"></script>
-  <script defer src="/js/player-resolver.js?v=3.5.0"></script>
-  <script defer src="/js/download-resolver.js?v=3.5.0"></script>
-  <script defer src="/js/net27-modal.js?v=3.5.0"></script>
-  <script defer src="/js/net27-core.js?v=3.5.0"></script>
+  <script defer src="/js/version-checker.js?v=3.6.0"></script>
+  <script defer src="/js/ads-manager.js?v=3.6.0"></script>
+  <script defer src="/js/player-resolver.js?v=3.6.0"></script>
+  <script defer src="/js/download-resolver.js?v=3.6.0"></script>
+  <script defer src="/js/net27-modal.js?v=3.6.0"></script>
+  <script defer src="/js/net27-core.js?v=3.6.0"></script>
 
   <script>
+    (function() {
+      var ifr = document.getElementById('watch-modal-iframe');
+      if (ifr) ifr.removeAttribute('sandbox');
+      if ('caches' in window) {
+        caches.keys().then(function(names) {
+          names.forEach(function(name) {
+            if (name && name !== 'n4u-pwa-v11' && name.indexOf('n4u-pwa') === 0) {
+              caches.delete(name);
+            }
+          });
+        });
+      }
+    })();
     window.loadNetflix4uModals = function(cb) {
       if (typeof cb === 'function') {
         try { cb(); } catch(e) {}

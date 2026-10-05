@@ -1,6 +1,6 @@
 
 // PWA Shell & Offline Support (Network-First for HTML to guarantee fresh updates)
-var CACHE_NAME = 'n4u-pwa-v10';
+var CACHE_NAME = 'n4u-pwa-v11';
 var STATIC_ASSETS = [
   '/',
   '/index.html',
