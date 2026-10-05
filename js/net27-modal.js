@@ -1031,7 +1031,7 @@
           '</div>' +
         '</div>' +
         '<div class="shrink-0">' +
-          '<a href="' + cleanUrl + '" data-fast-download="' + encodeURIComponent(rawUrl) + '" data-title="' + escapeHtml(title) + '" data-tmdbid="' + escapeHtml(tmdbId || '') + '" data-quality="' + escapeHtml(rawQual) + '" class="dl-btn dl-cloud-btn cursor-pointer">' +
+          '<a href="' + cleanUrl + '" target="_blank" rel="noopener noreferrer" data-fast-download="' + encodeURIComponent(rawUrl) + '" data-title="' + escapeHtml(title) + '" data-tmdbid="' + escapeHtml(tmdbId || '') + '" data-quality="' + escapeHtml(rawQual) + '" class="dl-btn dl-cloud-btn cursor-pointer">' +
             '<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 3v12m0 0l-4-4m4 4l4-4"/><path d="M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>' +
             '<span>Fast Download</span>' +
           '</a>' +
@@ -2644,6 +2644,13 @@
       fetch('/api/playback/' + encodeURIComponent(targetPlayId) + '?season=' + encodeURIComponent(season || 1) + '&episode=' + encodeURIComponent(episode || 1))
         .then(function(res) { return res.json(); })
         .then(function(pbData) {
+          if (pbData && pbData.imdbId && !activeWatchParams.imdbId) {
+            activeWatchParams.imdbId = pbData.imdbId;
+            activeWatchServers.allmovieland = buildAllMovieLandUrl(activeWatchParams);
+            if (currentWatchServer === 'allmovieland') {
+              setWatchIframeSrc(activeWatchServers.allmovieland);
+            }
+          }
           if (pbData && pbData.sources && Array.isArray(pbData.sources)) {
             var direct = pbData.sources.find(function(s) { return s.isDirect && s.url; });
             if (direct && direct.url) {
@@ -2686,11 +2693,14 @@
     activeWatchServers = {};
     SERVERS_CONFIG.forEach(function(s) {
       if (window.Netflix4uPlayerResolver) {
-        activeWatchServers[s.id] = window.Netflix4uPlayerResolver.resolvePlayerUrl(activeWatchParams, s.id, { lang: currentWatchLang });
+        activeWatchServers[s.id] = window.Netflix4uPlayerResolver.resolvePlayerUrl(activeWatchParams, s.id, { lang: currentWatchLang, imdbId: activeWatchParams.imdbId });
       } else {
         activeWatchServers[s.id] = 'https://vidsrc.pm/embed/' + (isTv ? ('tv/' + tmdbId + '/' + season + '/' + episode) : ('movie/' + tmdbId));
       }
     });
+    if (!activeWatchServers.allmovieland && activeWatchParams) {
+      activeWatchServers.allmovieland = buildAllMovieLandUrl(activeWatchParams);
+    }
 
     var startingServer = chosenServer || 'vidsrc_sbs';
     currentWatchServer = startingServer;
@@ -2955,8 +2965,40 @@
   }
 
   function switchWatchServer(serverId, isManual) {
-    if (!activeWatchServers[serverId] && window.Netflix4uPlayerResolver && activeWatchParams) {
-      activeWatchServers[serverId] = window.Netflix4uPlayerResolver.resolvePlayerUrl(activeWatchParams, serverId, { lang: currentWatchLang });
+    if (activeWatchParams) {
+      if (serverId === 'allmovieland' && (!activeWatchParams.imdbId || !String(activeWatchParams.imdbId).startsWith('tt'))) {
+        var targetId = activeWatchParams.canonicalId || activeWatchParams.tmdbId;
+        if (targetId) {
+          updateActiveServerUi('allmovieland');
+          showInframeLoader('Connecting AllMovieLand…', 'Resolving verified IMDb stream source…');
+          setWatchStatus('Connecting Server 3 (AllMovieLand)…', 'Resolving IMDb stream identifier…');
+          fetch('/api/playback/' + encodeURIComponent(targetId) + '?season=' + encodeURIComponent(activeWatchParams.season || 1) + '&episode=' + encodeURIComponent(activeWatchParams.episode || 1))
+            .then(function(res) { return res.json(); })
+            .then(function(pbData) {
+              if (pbData && pbData.imdbId && String(pbData.imdbId).startsWith('tt')) {
+                activeWatchParams.imdbId = pbData.imdbId;
+                activeWatchServers.allmovieland = buildAllMovieLandUrl(activeWatchParams);
+                switchWatchServer('allmovieland', isManual);
+              } else {
+                setWatchStatus('AllMovieLand requires IMDb ID', 'IMDb source unavailable for this title');
+                showWatchFailoverCard('allmovieland', 'AllMovieLand requires a verified IMDb ID for this title.');
+              }
+            })
+            .catch(function() {
+              setWatchStatus('AllMovieLand unavailable', 'Could not resolve stream source');
+              showWatchFailoverCard('allmovieland', 'Source lookup failed');
+            });
+          return;
+        }
+      }
+      if (!activeWatchServers[serverId] || (serverId === 'allmovieland' && (!activeWatchServers[serverId] || !activeWatchServers[serverId].includes('tt')))) {
+        if (window.Netflix4uPlayerResolver) {
+          activeWatchServers[serverId] = window.Netflix4uPlayerResolver.resolvePlayerUrl(activeWatchParams, serverId, { lang: currentWatchLang, imdbId: activeWatchParams.imdbId });
+        }
+        if (!activeWatchServers[serverId] && serverId === 'allmovieland') {
+          activeWatchServers.allmovieland = buildAllMovieLandUrl(activeWatchParams);
+        }
+      }
     }
     if (!activeWatchServers[serverId]) return;
     var cfg = SERVERS_CONFIG.find(function(s) { return s.id === serverId; }) || SERVERS_CONFIG[0];
@@ -3512,8 +3554,14 @@
         if (!poster && img && img.src) poster = img.src;
         if (!backdrop && poster) backdrop = poster;
         if (!title && img && img.alt) title = img.alt;
+        var parentWithData = modalTrigger.closest('[data-tmdbid], [data-tmdb-id], [data-canonical-id], [data-subject]');
+        if (!imdbId && parentWithData) {
+          imdbId = parentWithData.dataset.imdbid || parentWithData.getAttribute('data-imdbid') || '';
+        }
+        if (!imdbId && card && card !== modalTrigger) {
+          imdbId = card.dataset.imdbid || card.getAttribute('data-imdbid') || '';
+        }
         if (!tmdbId && !canonicalId) {
-          var parentWithData = modalTrigger.closest('[data-tmdbid], [data-tmdb-id], [data-canonical-id], [data-subject]');
           if (parentWithData) {
             tmdbId = parentWithData.dataset.tmdbid || parentWithData.dataset.tmdbId || parentWithData.getAttribute('data-tmdbid') || parentWithData.getAttribute('data-tmdb-id');
             canonicalId = parentWithData.dataset.canonicalId || parentWithData.dataset.canonicalid || parentWithData.getAttribute('data-canonical-id') || parentWithData.dataset.subject;

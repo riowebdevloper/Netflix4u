@@ -115,6 +115,90 @@
   "status": "PUBLISHED",
   "publishedAt": "2026-09-14T03:23:17.308Z",
   "createdAt": "2026-09-14T03:23:17.308Z",
-  "updatedAt": "2026-09-14T03:23:17.308Z",
-  "links": []
+  "updatedAt": "2026-10-05T11:09:05.240Z",
+  "links": [
+    {
+      "url": "https://white-bush-34ba.grekot.workers.dev/?vcloud=https://vcloud.fit/uh1rfrr00uk80tl",
+      "quality": "1080p",
+      "size": "3 GB",
+      "label": "Vishwanath & Sons (2026) [Hindi + Telugu] 1080p Fast Cloud",
+      "audio": "Hindi + Telugu [Dual-Audio]",
+      "isCloud": true,
+      "source": "Fast Cloud (HiCine)",
+      "provider": "hicine",
+      "canonicalId": "tmdb-movie-1408162"
+    },
+    {
+      "url": "https://white-bush-34ba.grekot.workers.dev/?vcloud=https://vcloud.fit/uxxa04bsje9_mua",
+      "quality": "720p",
+      "size": "1.2 GB",
+      "label": "Vishwanath & Sons (2026) [Hindi + Telugu] 720p Fast Cloud",
+      "audio": "Hindi + Telugu [Dual-Audio]",
+      "isCloud": true,
+      "source": "Fast Cloud (HiCine)",
+      "provider": "hicine",
+      "canonicalId": "tmdb-movie-1408162"
+    },
+    {
+      "url": "https://white-bush-34ba.grekot.workers.dev/?vcloud=https://vcloud.fit/qoteqq03oyoq1pz",
+      "quality": "480p",
+      "size": "500 MB",
+      "label": "Vishwanath & Sons (2026) [Hindi + Telugu] 480p Fast Cloud",
+      "audio": "Hindi + Telugu [Dual-Audio]",
+      "isCloud": true,
+      "source": "Fast Cloud (HiCine)",
+      "provider": "hicine",
+      "canonicalId": "tmdb-movie-1408162"
+    },
+    {
+      "url": "https://nexdrive.you/genxfm978983236522861/",
+      "quality": "1080p",
+      "size": "3.00 GB",
+      "label": "Vishwanath & Sons (2026) {Hindi-Telugu} 1080p WEB-DL [3.00GB]",
+      "audio": "Hindi - Telugu [Dual-Audio]",
+      "isCloud": false,
+      "source": "vegamovies",
+      "canonicalId": "tmdb-movie-1408162"
+    },
+    {
+      "url": "https://nexdrive.you/genxfm530841716489186/",
+      "quality": "720p",
+      "size": "2.06 GB",
+      "label": "Vishwanath & Sons (2026) {Hindi-Telugu} 720p WEB-DL [2.06GB]",
+      "audio": "Hindi - Telugu [Dual-Audio]",
+      "isCloud": false,
+      "source": "vegamovies",
+      "canonicalId": "tmdb-movie-1408162"
+    },
+    {
+      "url": "https://nexdrive.you/genxfm780498043647183/",
+      "quality": "720p",
+      "size": "1.16 GB",
+      "label": "Vishwanath & Sons (2026) {Hindi-Telugu} 720p HEVC 10-Bit [1.16GB]",
+      "audio": "Hindi - Telugu [Dual-Audio]",
+      "isCloud": false,
+      "source": "vegamovies",
+      "canonicalId": "tmdb-movie-1408162"
+    },
+    {
+      "url": "https://nexdrive.you/genxfm878882315558297/",
+      "quality": "480p",
+      "size": "654 MB",
+      "label": "Vishwanath & Sons (2026) {Hindi-Telugu} 480p WEB-DL [654MB]",
+      "audio": "Hindi - Telugu [Dual-Audio]",
+      "isCloud": false,
+      "source": "vegamovies",
+      "canonicalId": "tmdb-movie-1408162"
+    },
+    {
+      "url": "https://nexdrive.you/genxfm371029487580062/",
+      "quality": "480p",
+      "size": "499 MB",
+      "label": "Vishwanath & Sons (2026) {Hindi-Telugu} 480p HEVC [499MB]",
+      "audio": "Hindi - Telugu [Dual-Audio]",
+      "isCloud": false,
+      "source": "vegamovies",
+      "canonicalId": "tmdb-movie-1408162"
+    }
+  ]
 }

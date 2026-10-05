@@ -11,6 +11,8 @@ const fs = require('fs');
 const path = require('path');
 const { resolveContentId, fetchTmdbRecord, findMatchingCatalogLinks, normalizeRawLinks, unwrapImageUrl } = require('./canonicalResolver');
 const { filterCatalogByCategory } = require('./categoryFilters');
+const { resolveHicineForTitle, resolveHicineR2Url } = require('./hicineService');
+const { resolveVegamoviesForTitle } = require('./vegamoviesService');
 
 // 🔐 Secure TMDB API Key (Environment variable only - never hardcoded in source)
 const TMDB_API_KEY = process.env.TMDB_API_KEY || null;
@@ -350,6 +352,28 @@ async function handleDetails(req, res) {
         item.links = normalizeRawLinks(matched, canonicalId, isTv);
       }
     } catch (e) { }
+
+    // If still empty, dynamically query HiCine and Vegamovies providers
+    if ((!item.links || item.links.length === 0) && item.title) {
+      try {
+        const [hicineRes, vegaRes] = await Promise.allSettled([
+          resolveHicineForTitle(item.title, item.year),
+          resolveVegamoviesForTitle(item.title, item.year, item.imdbId)
+        ]);
+
+        const extraLinks = [];
+        if (hicineRes.status === 'fulfilled' && hicineRes.value && hicineRes.value.links) {
+          extraLinks.push(...hicineRes.value.links);
+        }
+        if (vegaRes.status === 'fulfilled' && vegaRes.value && vegaRes.value.downloads) {
+          extraLinks.push(...vegaRes.value.downloads);
+        }
+
+        if (extraLinks.length > 0) {
+          item.links = normalizeRawLinks(extraLinks, canonicalId, isTv);
+        }
+      } catch (e) { }
+    }
   }
 
   sendJson(res, 200, { success: true, data: item, ...item }, { 'Cache-Control': 'public, max-age=1800' });
@@ -432,8 +456,8 @@ async function handlePlayback(req, res) {
     // 3. Server 3: AllMovieLand (Requested Priority #3)
     const amlMediaId = (hasVerifiedImdb ? item.imdbId : tid);
     const amlUrl = isTv
-      ? `https://allmovieland.link/play/${encodeURIComponent(amlMediaId)}?s=${season}&e=${episode}`
-      : `https://allmovieland.link/play/${encodeURIComponent(amlMediaId)}`;
+      ? `https://slast430did.com/play/${encodeURIComponent(amlMediaId)}?s=${season}&e=${episode}`
+      : `https://slast430did.com/play/${encodeURIComponent(amlMediaId)}`;
 
     sources.push({
       id: 'allmovieland',
@@ -531,19 +555,19 @@ async function handlePlayback(req, res) {
     });
   }
 
-  // 4. Server 4 (AllMovieLand) - If verified TMDB or IMDb ID exists
-  if (hasVerifiedImdb || hasVerifiedTmdb) {
+  // 4. Server 3/4 (AllMovieLand) - If not already present and verified TMDB or IMDb ID exists
+  if (!sources.some(s => s.id === 'allmovieland') && (hasVerifiedImdb || hasVerifiedTmdb)) {
     const amlMediaId = (item.imdbId && item.imdbId.startsWith('tt'))
       ? item.imdbId
       : String(item.tmdbId).replace(/^(?:tmdb-(?:movie|series|tv)-|dotmobiz-)/i, '');
     const amlUrl = isTv
-      ? `https://allmovieland.link/play/${amlMediaId}?s=${season}&e=${episode}`
-      : `https://allmovieland.link/play/${amlMediaId}`;
+      ? `https://slast430did.com/play/${amlMediaId}?s=${season}&e=${episode}`
+      : `https://slast430did.com/play/${amlMediaId}`;
 
     sources.push({
       id: 'allmovieland',
-      name: 'Server 4 (AllMovieLand)',
-      label: 'Server 4 (AllMovieLand)',
+      name: 'Server 3 (AllMovieLand)',
+      label: 'Server 3 (AllMovieLand)',
       canonicalId,
       provider: 'allmovieland',
       url: amlUrl,
@@ -569,10 +593,52 @@ async function handlePlayback(req, res) {
     }
   }
 
+  // 5b. Dynamic HiCine Fast Cloud stream resolution if missing
+  if (!sources.some(s => s.id === 'hicine') && item.title) {
+    try {
+      const hicineData = await resolveHicineForTitle(item.title, item.year);
+      if (hicineData && hicineData.links && hicineData.links.length > 0) {
+        const bestCloud = hicineData.links.find(l => /1080|720|HD/i.test(l.quality)) || hicineData.links[0];
+        if (bestCloud && bestCloud.url) {
+          sources.push({
+            id: 'hicine',
+            name: 'Server 4 (Fast Cloud - HiCine)',
+            label: 'Fast Cloud (HiCine)',
+            canonicalId,
+            provider: 'direct',
+            url: bestCloud.url,
+            embedUrl: bestCloud.url,
+            isDirect: true
+          });
+        }
+      }
+    } catch (e) {}
+  }
+
+  // 6. Dynamic Vegamovies AllMovieLand stream resolution if missing
+  if (!sources.some(s => s.id === 'allmovieland') && item.title) {
+    try {
+      const vegaData = await resolveVegamoviesForTitle(item.title, item.year, item.imdbId);
+      if (vegaData && vegaData.streamUrl) {
+        sources.push({
+          id: 'allmovieland',
+          name: 'Server 3 (AllMovieLand - Vegamovies)',
+          label: 'Server 3 (Vegamovies Stream)',
+          canonicalId,
+          provider: 'allmovieland',
+          url: vegaData.streamUrl,
+          embedUrl: vegaData.streamUrl,
+          isDirect: false
+        });
+      }
+    } catch (e) {}
+  }
+
   sendJson(res, 200, {
     success: true,
     canonicalId,
     title: item.title,
+    imdbId: item.imdbId || null,
     season,
     episode,
     sources,
@@ -1755,6 +1821,8 @@ function isHicineDownloadUrl(url) {
       host === 'hicine.sbs' ||
       host.endsWith('.hicine.sbs') ||
       host.endsWith('.r2.dev') ||
+      host.endsWith('.workers.dev') ||
+      host === 'white-bush-34ba.grekot.workers.dev' ||
       host === 'wild-sun-9376.oriue.workers.dev' ||
       host === 'crimson-sea-a1e5.hekoy.workers.dev'
     );
@@ -1859,6 +1927,28 @@ async function handleCatalogTitle(req, res) {
 
   if (!downloadLinks.length && localItem && (localItem.links || localItem.download_links || localItem.downloads)) {
     downloadLinks = normalizeRawLinks(localItem.links || localItem.download_links || localItem.downloads, targetCanonicalId, type === 'tv');
+  }
+
+  // Dynamic resolution from HiCine and Vegamovies if downloadLinks is still empty
+  if (!downloadLinks.length && title) {
+    try {
+      const [hicineRes, vegaRes] = await Promise.allSettled([
+        resolveHicineForTitle(title, year),
+        resolveVegamoviesForTitle(title, year, resolvedImdbId)
+      ]);
+
+      const extraLinks = [];
+      if (hicineRes.status === 'fulfilled' && hicineRes.value && hicineRes.value.links) {
+        extraLinks.push(...hicineRes.value.links);
+      }
+      if (vegaRes.status === 'fulfilled' && vegaRes.value && vegaRes.value.downloads) {
+        extraLinks.push(...vegaRes.value.downloads);
+      }
+
+      if (extraLinks.length > 0) {
+        downloadLinks = normalizeRawLinks(extraLinks, targetCanonicalId, type === 'tv');
+      }
+    } catch (e) {}
   }
 
   // Multi-Season and Episode Taxonomy Alignment
@@ -2604,6 +2694,17 @@ async function resolveCloudDownloadUrl(rawUrl) {
     return cached.data;
   }
 
+  // Try the new HiCine Cloudflare R2 worker engine first if it has vcloud or worker parameters
+  if (clean.includes('vcloud') || clean.includes('workers.dev')) {
+    try {
+      const hicineR2 = await resolveHicineR2Url(rawUrl);
+      if (hicineR2 && hicineR2.ok && hicineR2.directUrl) {
+        cloudDownloadCache.set(cacheKey, { timestamp: Date.now(), data: hicineR2 });
+        return hicineR2;
+      }
+    } catch (e) {}
+  }
+
   return new Promise((resolve) => {
     const linksApiUrl = 'https://wild-sun-9376.oriue.workers.dev/api/links?vcloud=' + encodeURIComponent(clean);
     https.get(linksApiUrl, { headers: { 'User-Agent': 'Mozilla/5.0' }, timeout: 5000 }, res => {
@@ -2764,6 +2865,22 @@ async function handleDownloadFile(req, res) {
           }
         }
 
+        // Dynamically resolve from HiCine and Vegamovies if catalog has no direct download links
+        if (!catalogLinks.length && titleToUse) {
+          try {
+            const [hicineRes, vegaRes] = await Promise.allSettled([
+              resolveHicineForTitle(titleToUse, q.get('year') || (contentRec && contentRec.year)),
+              resolveVegamoviesForTitle(titleToUse, q.get('year') || (contentRec && contentRec.year), q.get('imdbId') || (contentRec && contentRec.imdbId))
+            ]);
+            if (hicineRes.status === 'fulfilled' && hicineRes.value && hicineRes.value.links) {
+              catalogLinks = [...catalogLinks, ...hicineRes.value.links];
+            }
+            if (vegaRes.status === 'fulfilled' && vegaRes.value && vegaRes.value.downloads) {
+              catalogLinks = [...catalogLinks, ...vegaRes.value.downloads];
+            }
+          } catch (e) {}
+        }
+
         const validCatalogLinks = (catalogLinks || []).filter(l => l && l.url && (l.url.startsWith('https://') || l.url.startsWith('http://')));
 
         if (validCatalogLinks.length > 0) {
@@ -2865,25 +2982,41 @@ async function handleStreamPlayer(req, res) {
   // 1. Resolve Cloud Stream if available (Prioritizes Dual-Audio Hindi + English streams)
   let cloudStream = null;
   let rawCloudUrl = passedVcloud;
-  if (!rawCloudUrl && id) {
+  let rec = null;
+  if (id) {
     try {
-      let rec = await resolveContentId(id);
-      if (!rec || !rec.links || !rec.links.length) {
-        const matched = findMatchingCatalogLinks(title, year, null, null);
-        if (matched && matched.length) {
-          rec = { links: matched };
+      rec = await resolveContentId(id);
+      if (!rawCloudUrl) {
+        if (!rec || !rec.links || !rec.links.length) {
+          const matched = findMatchingCatalogLinks(title, year, null, null);
+          if (matched && matched.length) {
+            rec = rec ? Object.assign({}, rec, { links: matched }) : { links: matched };
+          }
+        }
+        if (!type && rec) {
+          type = (rec.type || rec.contentType || '').toLowerCase();
+        }
+        const isMovieCheck = (type === 'movie' || (!type && !q.get('se') && !q.get('season')));
+        if (rec && rec.links) {
+          const matchingLink = isMovieCheck
+            ? (rec.links.find(l => l.isCloud || (l.url && (l.url.includes('vcloud') || l.url.includes('workers.dev') || l.url.includes('r2.dev')))) || rec.links[0])
+            : (rec.links.find(l => (Number(l.season) === Number(se) && Number(l.episode) === Number(ep)) && (l.isCloud || (l.url && (l.url.includes('vcloud') || l.url.includes('workers.dev') || l.url.includes('r2.dev'))))) || rec.links.find(l => Number(l.season) === Number(se) && Number(l.episode) === Number(ep)) || rec.links[0]);
+          if (matchingLink && matchingLink.url) {
+            rawCloudUrl = matchingLink.url;
+          }
         }
       }
-      if (!type && rec) {
-        type = (rec.type || rec.contentType || '').toLowerCase();
-      }
-      const isMovie = (type === 'movie' || (!type && !q.get('se') && !q.get('season')));
-      if (rec && rec.links) {
-        const matchingLink = isMovie
-          ? (rec.links.find(l => l.isCloud || (l.url && (l.url.includes('vcloud') || l.url.includes('workers.dev') || l.url.includes('r2.dev')))) || rec.links[0])
-          : (rec.links.find(l => (Number(l.season) === Number(se) && Number(l.episode) === Number(ep)) && (l.isCloud || (l.url && (l.url.includes('vcloud') || l.url.includes('workers.dev') || l.url.includes('r2.dev'))))) || rec.links.find(l => Number(l.season) === Number(se) && Number(l.episode) === Number(ep)) || rec.links[0]);
-        if (matchingLink && matchingLink.url) {
-          rawCloudUrl = matchingLink.url;
+    } catch(e) {}
+  }
+
+  // Dynamic HiCine check for Fast Cloud stream if not found
+  if (!rawCloudUrl && (title || (rec && rec.title))) {
+    try {
+      const hicineData = await resolveHicineForTitle(title || rec?.title, year || rec?.year);
+      if (hicineData && hicineData.links && hicineData.links.length > 0) {
+        const bestCloud = hicineData.links.find(l => /1080|720|HD/i.test(l.quality)) || hicineData.links[0];
+        if (bestCloud && bestCloud.url) {
+          rawCloudUrl = bestCloud.url;
         }
       }
     } catch(e) {}
@@ -2932,11 +3065,24 @@ async function handleStreamPlayer(req, res) {
   const videasyUrl = isMovie
     ? `https://player.videasy.net/movie/${cleanId}`
     : `https://player.videasy.net/tv/${cleanId}/${actualSe}/${actualEp}?nextEpisode=true&autoplayNextEpisode=true&episodeSelector=true&color=#E50914`;
-  // AllMovieLand — uses IMDb ID if available, otherwise TMDB ID
-  const amlId = cleanId; // TMDB numeric ID
+  // AllMovieLand — uses IMDb ID if available, otherwise TMDB ID on slast430did.com
+  let amlId = q.get('imdbId') || (rec && rec.imdbId) || '';
+  if (!amlId && cleanId) {
+    try {
+      const detailRec = await resolveContentId(cleanId);
+      if (detailRec && detailRec.imdbId) amlId = detailRec.imdbId;
+    } catch(e) {}
+  }
+  if (!amlId && (title || (rec && rec.title))) {
+    try {
+      const vegaRec = await resolveVegamoviesForTitle(title || rec?.title, year || rec?.year);
+      if (vegaRec && vegaRec.imdbId) amlId = vegaRec.imdbId;
+    } catch(e) {}
+  }
+  if (!amlId) amlId = cleanId;
   const allmovielandUrl = isMovie
-    ? `https://allmovieland.link/play/${encodeURIComponent(amlId)}`
-    : `https://allmovieland.link/play/${encodeURIComponent(amlId)}?s=${actualSe}&e=${actualEp}`;
+    ? `https://slast430did.com/play/${encodeURIComponent(amlId)}`
+    : `https://slast430did.com/play/${encodeURIComponent(amlId)}?s=${actualSe}&e=${actualEp}`;
 
   const displayTitle = (title || 'Stream') + (isMovie ? '' : ` • S${actualSe} E${actualEp}`);
   const directDlHref = rawCloudUrl ? `/api/download-file?url=${encodeURIComponent(rawCloudUrl)}` : (cloudStream?.url ? `/api/download-file?url=${encodeURIComponent(cloudStream.url)}` : '');
@@ -2945,9 +3091,13 @@ async function handleStreamPlayer(req, res) {
     ? (canonicalTargetId ? `/movie/${canonicalTargetId}` : '/')
     : (canonicalTargetId ? `/series/${canonicalTargetId}` : '/');
 
-  // Default initial server: VidLink Multi-Audio (most reliable, no API key needed) or Fast Cloud
+  // Default initial server: VidLink Multi-Audio (most reliable, no API key needed) or Fast Cloud, or query server
   const isDubLang = (lang === 'hi' || lang === 'ta' || lang === 'te');
-  const initialServer = cloudStream ? 'cloud' : (isDubLang ? 'reelsdownload' : 'vidsrc');
+  const reqServer = (q.get('server') || '').toLowerCase();
+  const validServers = ['reelsdownload', 'vidsrc', 'allmovieland', 'vidlink', 'braflix', 'videasy', 'cloud'];
+  const initialServer = (validServers.includes(reqServer) && (reqServer !== 'cloud' || cloudStream))
+    ? reqServer
+    : (cloudStream ? 'cloud' : (isDubLang ? 'reelsdownload' : 'vidsrc'));
   const currentSeasonMeta = seriesSeasons.find(s => s.season_number === actualSe) || seriesSeasons[0] || { episode_count: 10 };
 
   const playerHtml = `<!DOCTYPE html>
@@ -3137,7 +3287,7 @@ async function handleStreamPlayer(req, res) {
           <button type="button" id="btn-srv-vidlink" class="server-pill ${initialServer === 'vidlink' ? 'active' : ''}" onclick="activateServer(&quot;vidlink&quot;)">🚀 Server 3 (VidLink Multi)</button>
           <button type="button" id="btn-srv-braflix" class="server-pill ${initialServer === 'braflix' ? 'active' : ''}" onclick="activateServer(&quot;braflix&quot;)">⚡ Server 4 (Braflix HD)</button>
           <button type="button" id="btn-srv-videasy" class="server-pill ${initialServer === 'videasy' ? 'active' : ''}" onclick="activateServer(&quot;videasy&quot;)">✨ Server 5 (4K Cinema)</button>
-          ${q.get('server') === 'allmovieland' ? `<button type="button" id="btn-srv-allmovieland" class="server-pill ${initialServer === 'allmovieland' ? 'active' : ''}" onclick="activateServer(&quot;allmovieland&quot;)">🎬 Server 3 (AllMovieLand)</button>` : ''}
+          ${(allmovielandUrl || q.get('server') === 'allmovieland') ? `<button type="button" id="btn-srv-allmovieland" class="server-pill ${initialServer === 'allmovieland' ? 'active' : ''}" onclick="activateServer(&quot;allmovieland&quot;)">🎬 Server 3 (AllMovieLand)</button>` : ''}
           ${cloudStream ? '<button type="button" id="btn-srv-cloud" class="server-pill ' + (initialServer === 'cloud' ? 'active' : '') + '" onclick="activateServer(&quot;cloud&quot;)">⚡ Fast Cloud</button>' : ''}
           ${cloudStream ? '<a href="intent:' + cloudStream.url + '#Intent;action=android.intent.action.VIEW;type=video/*;package=com.mxtech.videoplayer.ad;end" class="dl-btn" style="background:#0284c7;border-color:#38bdf8;" title="Play Hindi Dub in MX Player">📱 MX</a>' : ''}
           ${cloudStream ? '<a href="vlc://' + cloudStream.url.replace(/^https?:\/\//i, '') + '" class="dl-btn" style="background:#ea580c;border-color:#f97316;" title="Play Hindi Dub in VLC Player">🚀 VLC</a>' : ''}
@@ -3160,12 +3310,14 @@ async function handleStreamPlayer(req, res) {
     var vidlinkUrl = ${JSON.stringify(vidlinkUrl)};
     var braflixUrl = ${JSON.stringify(braflixUrl)};
     var videasyUrl = ${JSON.stringify(videasyUrl)};
+    var allmovielandUrl = ${JSON.stringify(allmovielandUrl)};
     var cloudUrl = ${JSON.stringify(cloudStream ? cloudStream.url : '')};
     var currentServer = ${JSON.stringify(initialServer)};
     var art = null;
     var failoverIndex = 0;
-    var serverSequence = ['reelsdownload', 'vidsrc', 'vidlink', 'braflix', 'videasy', 'cloud'].filter(function(s) {
+    var serverSequence = ['reelsdownload', 'vidsrc', 'allmovieland', 'vidlink', 'braflix', 'videasy', 'cloud'].filter(function(s) {
       if (s === 'cloud' && !cloudUrl) return false;
+      if (s === 'allmovieland' && !allmovielandUrl) return false;
       return true;
     });
 
@@ -3297,7 +3449,7 @@ async function handleStreamPlayer(req, res) {
       vidlinkUrl = 'https://vidlink.pro/tv/' + cleanId + '/' + currentSe + '/' + currentEp + '?multiLang=true' + (currentLang ? '&lang=' + currentLang : '');
       braflixUrl = 'https://api.cineby.homes/embed/tv/' + cleanId + '/' + currentSe + '/' + currentEp + '?autonext=1&ds_lang=en';
       videasyUrl = 'https://player.videasy.net/tv/' + cleanId + '/' + currentSe + '/' + currentEp + '?nextEpisode=true&autoplayNextEpisode=true&episodeSelector=true&color=#E50914';
-      allmovielandUrl = 'https://allmovieland.link/play/' + encodeURIComponent(cleanId) + '?s=' + currentSe + '&e=' + currentEp;
+      allmovielandUrl = 'https://slast430did.com/play/' + encodeURIComponent(${JSON.stringify(amlId)}) + '?s=' + currentSe + '&e=' + currentEp;
 
 
       // Blank frames to prevent audio ghosting

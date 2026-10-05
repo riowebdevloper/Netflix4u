@@ -105,12 +105,15 @@
       };
     }
 
+    var cleanImdb = (req && req.imdbId && String(req.imdbId).startsWith('tt')) ? String(req.imdbId).trim() : null;
+
     if (canonicalType === 'movie') {
       return {
         valid: true,
         sanitized: {
           type: 'movie',
-          tmdbId: tmdbId
+          tmdbId: tmdbId,
+          imdbId: cleanImdb
         }
       };
     }
@@ -139,7 +142,8 @@
         type: 'tv',
         tmdbId: tmdbId,
         season: season,
-        episode: episode
+        episode: episode,
+        imdbId: cleanImdb
       }
     };
   }
@@ -420,10 +424,12 @@
         : 'https://vidrock.ru/tv/' + s.tmdbId + '/' + s.season + '/' + s.episode;
     },
     azute: function(s, opt) { return PROVIDER_BUILDERS.vidrock(s, opt); },
-    // 33. AllMovieLand
+    // 33. AllMovieLand (Ultra HD Indian & Global Stream on slast430did.com)
     allmovieland: function(s, opt) {
-      var amlBase = (opt && opt.domain) ? ('https://' + opt.domain + '/play/') : 'https://allmovieland.link/play/';
-      var mediaId = (opt && opt.imdbId && String(opt.imdbId).startsWith('tt')) ? opt.imdbId : s.tmdbId;
+      var amlBase = (opt && opt.domain) ? ('https://' + opt.domain + '/play/') : 'https://slast430did.com/play/';
+      var mediaId = (opt && opt.imdbId && String(opt.imdbId).startsWith('tt'))
+        ? opt.imdbId
+        : ((s && s.imdbId && String(s.imdbId).startsWith('tt')) ? s.imdbId : s.tmdbId);
       return s.type === 'movie'
         ? amlBase + encodeURIComponent(mediaId)
         : amlBase + encodeURIComponent(mediaId) + '?s=' + s.season + '&e=' + s.episode;
@@ -469,6 +475,9 @@
     var isExplicitProvider = !!provider;
     var p = (provider || 'vidsrc_sbs').toLowerCase().trim();
     var opt = options || {};
+    if (!opt.imdbId && (req.imdbId || (s && s.imdbId))) {
+      opt.imdbId = req.imdbId || (s && s.imdbId);
+    }
 
     // Absolute Exclusion Guard: Rivestream / Fade must strictly never resolve
     if (/rivestream|fade/i.test(p)) {

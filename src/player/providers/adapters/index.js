@@ -55,18 +55,18 @@ const peachify = createAdapter({
   }
 });
 
-// Server 3: AllMovieLand (Ultra HD Indian & Global Stream)
-// Status: DISABLED / INCOMPATIBLE - Endpoints offline (404 on slast430did.com, 403 on allmovieland.link)
+// Server 3: AllMovieLand (Ultra HD Indian & Global Stream on slast430did.com)
+// Status: ACTIVE - Verified working player endpoint on slast430did.com with IMDb ID
 const allmovieland = createAdapter({
   id: 'allmovieland',
   name: 'AllMovieLand',
   label: 'Server 3 (AllMovieLand)',
   baseUrl: 'https://slast430did.com/play',
   priority: 3,
-  enabled: false,
+  enabled: true,
   providerGroup: 'allmovieland_cluster',
   requiredIdentifier: 'either',
-  notes: 'DISABLED / INCOMPATIBLE: Provider endpoints offline (404 on slast430did.com, 403 Cloudflare challenge on allmovieland.link)',
+  notes: 'AllMovieLand / IndStream streaming engine on slast430did.com (requires IMDb ID tt...)',
   customMovieBuilder(baseUrl, input) {
     const mediaId = cleanImdbId(input.imdbId) || cleanTmdbId(input.tmdbId);
     return `${baseUrl}/${encodeURIComponent(mediaId)}`;

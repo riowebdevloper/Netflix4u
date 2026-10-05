@@ -17,6 +17,9 @@ const fs = require('fs');
 const path = require('path');
 const https = require('https');
 const { filterCatalogByCategory } = require('./categoryFilters');
+const { resolveHicineForTitle } = require('./hicineService');
+const { resolveVegamoviesForTitle } = require('./vegamoviesService');
+const { normalizeRawLinks } = require('./canonicalResolver');
 
 const ROOT = path.resolve(__dirname, '..');
 const DATA_DIR = path.join(ROOT, 'data');
@@ -313,6 +316,21 @@ async function runIngestionPipeline(options = {}) {
         const isPosterValid = verifyPosterUrl(poster);
         const status = isPosterValid ? 'PUBLISHED' : 'POSTER_PENDING';
 
+        // Auto-enrich download and stream links from HiCine and Vegamovies
+        let ingestedLinks = [];
+        try {
+          const [hicineRes, vegaRes] = await Promise.allSettled([
+            resolveHicineForTitle(title, year),
+            resolveVegamoviesForTitle(title, year, raw.imdb_id || raw.external_ids?.imdb_id)
+          ]);
+          if (hicineRes.status === 'fulfilled' && hicineRes.value && hicineRes.value.links) {
+            ingestedLinks.push(...hicineRes.value.links);
+          }
+          if (vegaRes.status === 'fulfilled' && vegaRes.value && vegaRes.value.downloads) {
+            ingestedLinks.push(...vegaRes.value.downloads);
+          }
+        } catch (e) {}
+
         const record = {
           id: canonicalId,
           canonicalId,
@@ -350,7 +368,7 @@ async function runIngestionPipeline(options = {}) {
           publishedAt: new Date().toISOString(),
           createdAt: new Date().toISOString(),
           updatedAt: new Date().toISOString(),
-          links: []
+          links: ingestedLinks.length > 0 ? normalizeRawLinks(ingestedLinks, canonicalId, normType === 'series') : []
         };
 
         // Persist detail file

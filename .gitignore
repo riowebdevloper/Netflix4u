@@ -16,6 +16,7 @@ yarn-error.log*
 temp_cpanel_stage/
 scratch/
 audit_artifacts/
+.temp_sources/
 
 # Archive files & releases
 *.zip
