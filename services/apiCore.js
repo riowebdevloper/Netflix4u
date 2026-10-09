@@ -13,6 +13,7 @@ const { resolveContentId, fetchTmdbRecord, findMatchingCatalogLinks, normalizeRa
 const { filterCatalogByCategory } = require('./categoryFilters');
 const { resolveHicineForTitle, resolveHicineR2Url } = require('./hicineService');
 const { resolveVegamoviesForTitle } = require('./vegamoviesService');
+const { cleanMovieTitle } = require('./dotmobizAdapter');
 
 // 🔐 Secure TMDB API Key (Environment variable only - never hardcoded in source)
 const TMDB_API_KEY = process.env.TMDB_API_KEY || null;
@@ -394,7 +395,8 @@ async function resolveImdbIdForContent(item, tmdbId, type = 'movie') {
   const cleanNum = tmdbId ? String(tmdbId).replace(/^(?:tmdb-(?:movie|series|tv)-|dotmobiz-)/i, '') : '';
   const isTv = (type === 'tv' || type === 'series' || item?.type === 'series' || item?.type === 'tv' || item?.isSeries);
   const mediaType = isTv ? 'series' : 'movie';
-  const lookupTitle = (item?.title || item?.canonicalTitle || '').replace(/\s+/g, ' ').trim();
+  const rawLookup = (item?.title || item?.canonicalTitle || '').replace(/\s+/g, ' ').trim();
+  const lookupTitle = (cleanMovieTitle(rawLookup) || rawLookup).replace(/\s+/g, ' ').trim();
   const cacheKey = `${mediaType}_${lookupTitle.toLowerCase()}_${item?.year || ''}`;
 
   if (imdbIdMemoryCache.has(cacheKey)) {
@@ -493,8 +495,13 @@ async function handlePlayback(req, res) {
   }
 
   const sources = [];
-  const hasVerifiedTmdb = Boolean(item.externalProvider === 'tmdb' || (item.tmdbId && String(item.tmdbId).length >= 2));
-  const hasVerifiedImdb = Boolean(item.imdbId && item.imdbId.startsWith('tt'));
+  const cleanIdStr = String(item.tmdbId || '').replace(/^(?:tmdb-(?:movie|series|tv)-|dotmobiz-)/i, '');
+  const hasVerifiedTmdb = Boolean(item.externalProvider === 'tmdb' || (/^\d+$/.test(cleanIdStr) && Number(cleanIdStr) > 0 && String(item.record_id || '') !== cleanIdStr));
+  let authenticImdbId = (item.imdbId && String(item.imdbId).startsWith('tt')) ? item.imdbId : null;
+  if (!authenticImdbId) {
+    authenticImdbId = await resolveImdbIdForContent(item, item.tmdbId, isTv ? 'tv' : 'movie');
+  }
+  const hasVerifiedImdb = Boolean(authenticImdbId && authenticImdbId.startsWith('tt'));
 
   if (hasVerifiedTmdb) {
     const tid = String(item.tmdbId).replace(/^(?:tmdb-(?:movie|series|tv)-|dotmobiz-)/i, '');
@@ -642,7 +649,7 @@ async function handlePlayback(req, res) {
 
   // 4. Server 3/4 (AllMovieLand) - Strictly requires IMDb ID starting with 'tt'
   if (!sources.some(s => s.id === 'allmovieland')) {
-    const amlMediaId = await resolveImdbIdForContent(item, item.tmdbId, isTv ? 'tv' : 'movie');
+    const amlMediaId = authenticImdbId || await resolveImdbIdForContent(item, item.tmdbId, isTv ? 'tv' : 'movie');
     if (amlMediaId && String(amlMediaId).startsWith('tt')) {
       const amlUrl = isTv
         ? `https://slast430did.com/play/${amlMediaId}?s=${season}&e=${episode}`
@@ -659,6 +666,39 @@ async function handlePlayback(req, res) {
         isDirect: false
       });
     }
+  }
+
+  // 4b. VidSrc Global & 2Embed via authentic IMDb ID
+  if (!sources.some(s => s.id === 'vidsrc_sbs') && authenticImdbId) {
+    const vidsrcUrl = isTv
+      ? `https://vidsrc.pm/embed/tv/${encodeURIComponent(authenticImdbId)}/${season}/${episode}`
+      : `https://vidsrc.pm/embed/movie/${encodeURIComponent(authenticImdbId)}`;
+    sources.push({
+      id: 'vidsrc_sbs',
+      name: 'Server 4 (VidSrc Global)',
+      label: 'Server 4 (VidSrc Global)',
+      canonicalId,
+      provider: 'vidsrc_sbs',
+      url: vidsrcUrl,
+      embedUrl: vidsrcUrl,
+      isDirect: false
+    });
+  }
+
+  if (!sources.some(s => s.id === 'twoembed') && authenticImdbId) {
+    const twoembedUrl = isTv
+      ? `https://www.2embed.stream/embed/tv/${encodeURIComponent(authenticImdbId)}/${season}/${episode}`
+      : `https://www.2embed.stream/embed/movie/${encodeURIComponent(authenticImdbId)}`;
+    sources.push({
+      id: 'twoembed',
+      name: 'Server 2 (2Embed Global)',
+      label: 'Server 2 (2Embed)',
+      canonicalId,
+      provider: 'twoembed',
+      url: twoembedUrl,
+      embedUrl: twoembedUrl,
+      isDirect: false
+    });
   }
 
   // 5. Fast Cloud Stream
@@ -1952,7 +1992,8 @@ async function handleCatalogTitle(req, res) {
     const queryTitle = q.get('title') || '';
     const queryYear = q.get('year') || '';
     const queryImdbId = q.get('imdbId') || '';
-    const lookupTitle = localItem?.title || queryTitle || (String(id).startsWith('nm-') ? '' : id);
+    const rawLookup = localItem?.title || queryTitle || (String(id).startsWith('nm-') ? '' : id);
+    const lookupTitle = (cleanMovieTitle(rawLookup) || rawLookup).replace(/\s+/g, ' ').trim();
     if (lookupTitle) {
       tmdbId = await resolveTmdbId(lookupTitle, localItem?.year || queryYear, type, localItem?.imdbId || queryImdbId);
     }
@@ -2019,19 +2060,30 @@ async function handleCatalogTitle(req, res) {
   // Dynamic resolution from HiCine and Vegamovies if downloadLinks is empty or lacks episodes for TV
   const isTvType = (type === 'tv');
   const needsLinks = (!downloadLinks.length || (isTvType && !downloadLinks.some(l => l.episode))) && title;
+  let dynamicImdbId = resolvedImdbId;
+  let dynamicStreamUrl = null;
   if (needsLinks) {
     try {
+      const cleanLookup = (cleanMovieTitle(title) || title).replace(/\s+/g, ' ').trim();
       const [hicineRes, vegaRes] = await Promise.allSettled([
-        resolveHicineForTitle(title, year, isTvType),
-        resolveVegamoviesForTitle(title, year, resolvedImdbId, isTvType)
+        resolveHicineForTitle(cleanLookup, year, isTvType),
+        resolveVegamoviesForTitle(cleanLookup, year, resolvedImdbId, isTvType)
       ]);
 
       const extraLinks = [];
       if (hicineRes.status === 'fulfilled' && hicineRes.value && hicineRes.value.links) {
         extraLinks.push(...hicineRes.value.links);
       }
-      if (vegaRes.status === 'fulfilled' && vegaRes.value && vegaRes.value.downloads) {
-        extraLinks.push(...vegaRes.value.downloads);
+      if (vegaRes.status === 'fulfilled' && vegaRes.value) {
+        if (vegaRes.value.downloads) {
+          extraLinks.push(...vegaRes.value.downloads);
+        }
+        if (vegaRes.value.imdbId && !dynamicImdbId) {
+          dynamicImdbId = vegaRes.value.imdbId;
+        }
+        if (vegaRes.value.streamUrl && !dynamicStreamUrl) {
+          dynamicStreamUrl = vegaRes.value.streamUrl;
+        }
       }
 
       if (extraLinks.length > 0) {
@@ -2135,14 +2187,54 @@ async function handleCatalogTitle(req, res) {
     audioLangs.push('Hindi', 'English', 'Tamil', 'Telugu');
   }
 
+  const cleanDisplayTitle = (cleanMovieTitle(title) || title).replace(/\s+/g, ' ').trim();
+  const validTmdbId = (typeof tmdbId === 'number' && !isNaN(tmdbId) && tmdbId > 0) ? tmdbId : null;
+  const finalImdbId = dynamicImdbId || resolvedImdbId || null;
+
+  // Persist newly resolved links and metadata into local details file if available
+  if (cleanNum && downloadLinks.length > 0) {
+    try {
+      const detailPath = path.join(DETAILS_DIR, `dotmobiz-${cleanNum}.json`);
+      if (fs.existsSync(detailPath)) {
+        const existingData = JSON.parse(fs.readFileSync(detailPath, 'utf8'));
+        let modified = false;
+        if ((!existingData.links || existingData.links.length === 0) && downloadLinks.length > 0) {
+          existingData.links = downloadLinks;
+          existingData.downloadOptions = downloadLinks;
+          modified = true;
+        }
+        if (!existingData.imdbId && finalImdbId) {
+          existingData.imdbId = finalImdbId;
+          modified = true;
+        }
+        if (dynamicStreamUrl && (!existingData.playbackSources || existingData.playbackSources.length === 0)) {
+          existingData.playbackSources = [{
+            id: 'allmovieland',
+            name: 'Server 3 (AllMovieLand)',
+            url: dynamicStreamUrl
+          }];
+          modified = true;
+        }
+        if (cleanDisplayTitle && existingData.title !== cleanDisplayTitle) {
+          existingData.title = cleanDisplayTitle;
+          modified = true;
+        }
+        if (modified) {
+          fs.writeFileSync(detailPath, JSON.stringify(existingData, null, 2), 'utf8');
+        }
+      }
+    } catch (e) {}
+  }
+
   const result = {
     ok: true,
-    id: tmdbId || id,
+    id: validTmdbId || id,
     canonicalId: targetCanonicalId,
-    tmdbId: tmdbId || id,
-    imdbId: resolvedImdbId,
+    tmdbId: validTmdbId,
+    imdbId: finalImdbId,
+    streamUrl: dynamicStreamUrl || null,
     type: type,
-    title: title,
+    title: cleanDisplayTitle,
     year: year || '2025',
     rating: raw?.vote_average ? Number(raw.vote_average.toFixed(1)) : (localResolved?.rating || 8.0),
     runtime: raw?.runtime || (raw?.episode_run_time ? raw.episode_run_time[0] : (localResolved?.runtime || 120)),
@@ -2177,7 +2269,14 @@ async function handleCatalogTitle(req, res) {
       audioLangs: audioLangs
     },
     downloadLinks: downloadLinks,
-    links: downloadLinks
+    downloadOptions: downloadLinks,
+    links: downloadLinks,
+    playbackSources: finalImdbId ? [
+      { id: 'vidsrc_sbs', name: 'Server 1: VidSrc Global', url: `https://vidsrc.pm/embed/${type === 'tv' ? 'tv' : 'movie'}/${finalImdbId}` },
+      { id: 's3', name: 'Server 2: VidLink Pro', url: `https://vidlink.pro/${type === 'tv' ? 'tv' : 'movie'}/${finalImdbId}?multiLang=true` },
+      { id: 'twoembed', name: 'Server 3: 2Embed Stream', url: `https://www.2embed.stream/embed/${type === 'tv' ? 'tv' : 'movie'}/${finalImdbId}` },
+      { id: 'allmovieland', name: 'Server 4: AllMovieLand', url: `https://slast430did.com/play/${finalImdbId}` }
+    ] : []
   };
 
   sendJson(res, 200, result, { 'Cache-Control': 'public, max-age=3600' });
@@ -2956,7 +3055,9 @@ async function handleDownloadFile(req, res) {
     // 3. Exact Identity Resolution: Search Catalog strictly for verified authentic direct download streams
     if (!resolved || !resolved.directUrl) {
       try {
-        let catalogLinks = (contentRec && contentRec.links && contentRec.links.length) ? contentRec.links : [];
+        let catalogLinks = (contentRec && contentRec.links && contentRec.links.length)
+          ? contentRec.links
+          : ((contentRec && contentRec.downloadOptions && contentRec.downloadOptions.length) ? contentRec.downloadOptions : []);
         if (!catalogLinks.length) {
           const imdbId = q.get('imdbId') || (contentRec && contentRec.imdbId);
           catalogLinks = findMatchingCatalogLinks(titleToUse, q.get('year') || (contentRec && contentRec.year), imdbId, id) || [];
@@ -2970,9 +3071,10 @@ async function handleDownloadFile(req, res) {
         const needsDownloadResolution = (!catalogLinks.length || (isTvDownload && se && ep && !catalogLinks.some(l => Number(l.season) === Number(se) && Number(l.episode) === Number(ep)))) && titleToUse;
         if (needsDownloadResolution) {
           try {
+            const cleanLookup = (cleanMovieTitle(titleToUse) || titleToUse).replace(/\s+/g, ' ').trim();
             const [hicineRes, vegaRes] = await Promise.allSettled([
-              resolveHicineForTitle(titleToUse, q.get('year') || (contentRec && contentRec.year), isTvDownload),
-              resolveVegamoviesForTitle(titleToUse, q.get('year') || (contentRec && contentRec.year), q.get('imdbId') || (contentRec && contentRec.imdbId), isTvDownload)
+              resolveHicineForTitle(cleanLookup, q.get('year') || (contentRec && contentRec.year), isTvDownload),
+              resolveVegamoviesForTitle(cleanLookup, q.get('year') || (contentRec && contentRec.year), q.get('imdbId') || (contentRec && contentRec.imdbId), isTvDownload)
             ]);
             if (hicineRes.status === 'fulfilled' && hicineRes.value && hicineRes.value.links) {
               catalogLinks = [...catalogLinks, ...hicineRes.value.links];
@@ -3034,31 +3136,49 @@ async function handleDownloadFile(req, res) {
       return res.end();
     }
 
-    // Fallback: open a working streaming player in the browser for this content
-    // Use vidsrc.pm (no API key needed, globally accessible)
-    const cleanId = String(id || '').replace(/^tmdb-(?:movie|series|tv)-/i, '').replace(/^dotmobiz-/i, '');
-    const isTv = type === 'tv' || type === 'series' || Boolean(se || ep);
-    const streamPlayerUrl = isTv
-      ? `https://vidsrc.pm/embed/tv/${cleanId}/${se || 1}/${ep || 1}`
-      : `https://vidsrc.pm/embed/movie/${cleanId}`;
-
+    // If direct link could not be resolved, return an honest download response — NEVER hijack downloads into stream player
     if (isJson) {
       return sendJson(res, 200, {
-        ok: true,
-        directUrl: streamPlayerUrl,
+        ok: false,
+        directUrl: '',
         title: titleToUse,
         filename: downloadFilename,
-        size: ''
+        error: 'Direct download stream currently preparing for this title. Please check alternate mirror or refresh shortly.'
       });
     }
 
-    // Open stream player page in response (redirect to working player)
-    res.writeHead(302, {
-      'Location': streamPlayerUrl,
+    res.writeHead(200, {
+      'Content-Type': 'text/html; charset=utf-8',
       'Cache-Control': 'no-cache, no-store, must-revalidate',
       'Access-Control-Allow-Origin': '*'
     });
-    return res.end();
+    return res.end(`<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Download Preparing — Netflix4U</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { margin:0; background:#0b0c10; color:#fff; font-family:system-ui,-apple-system,sans-serif; display:flex; align-items:center; justify-content:center; min-height:100vh; padding:20px; box-sizing:border-box; }
+    .card { background:#161822; border:1px solid #282c3f; border-radius:16px; padding:32px; max-width:480px; text-align:center; box-shadow:0 12px 36px rgba(0,0,0,0.5); }
+    .icon { width:56px; height:56px; margin:0 auto 16px; border-radius:50%; background:rgba(229,9,20,0.15); color:#e50914; display:flex; align-items:center; justify-content:center; }
+    h2 { margin:0 0 10px; font-size:20px; font-weight:700; }
+    p { margin:0 0 24px; color:#9ca3af; font-size:14px; line-height:1.5; }
+    .btn { display:inline-block; padding:12px 24px; background:#e50914; color:#fff; text-decoration:none; font-weight:600; font-size:14px; border-radius:8px; transition:0.2s; }
+    .btn:hover { background:#b80710; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="icon">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 3v12m0 0l-4-4m4 4l4-4"/><path d="M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>
+    </div>
+    <h2>Download Stream Preparing</h2>
+    <p>Direct download mirror for <strong>${titleToUse}</strong> is currently synchronizing with high-speed mirrors. Please return to the title details page and select an alternate download mirror.</p>
+    <a href="/#title=${encodeURIComponent(id || '')}" class="btn">Return to Title</a>
+  </div>
+</body>
+</html>`);
   } catch (err) {
     if (isJson) {
       return sendJson(res, 200, { ok: false, directUrl: '', filename: downloadFilename, error: err.message });

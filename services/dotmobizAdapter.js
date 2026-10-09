@@ -36,21 +36,30 @@ function cleanMovieTitle(raw) {
   t = t.replace(/\bAll\s*Episodes?\b/gi, '');
   t = t.replace(/\bWeb[- ]?Series\b/gi, '');
 
-  // 3. Cut off year and anything after it if year is followed by audio/quality/etc. or end of string
-  t = t.replace(/\b(19\d{2}|20\d{2}|29\d{2})\b\s*(?:Hindi|English|Tamil|Telugu|Dual|Multi|Audio|Dubbed|WEB|HQ|HDTC|720p|1080p|Season|Ep|All|$).*$/gi, '');
+  // 3. Remove video quality & resolution tags with or without spaces, e.g. 1080p, 1080 p, 720p, 480p, 2160p, 4K, FHD
+  t = t.replace(/\b(?:2160|1080|720|480)\s*p\b/gi, '');
+  t = t.replace(/\b(?:WEB[- ]?DL|HQ[- ]?HDTC|HDTC|HDRip|BluRay|BRRip|DVDRip|DVD|Pre[- ]?DVD|HEVC|x264|x265|2160p|1080p|720p|480p|4K|FHD|UHD|HD|SD|HQ|CamRip|CAM|Rip|Line)\b/gi, '');
+
+  // 4. Cut off year and anything after it if year is followed by audio/quality/etc. or end of string
+  t = t.replace(/\b(19\d{2}|20\d{2}|29\d{2})\b\s*(?:Hindi|English|Tamil|Telugu|Malayalam|Kannada|Bengali|Dual|Multi|Audio|Dubbed|WEB|HQ|HDTC|720p|1080p|Season|Ep|All|$).*$/gi, '');
   t = t.replace(/\b(19\d{2}|20\d{2})\s*$/gi, '');
 
-  // 4. Remove Audio & Language tags anywhere at the end or standalone
+  // 5. Remove Audio & Language tags anywhere at the end or standalone
   t = t.replace(/\b(?:Hindi|English|Tamil|Telugu|Malayalam|Kannada|Bengali|Korean|Japanese|Chinese|Marathi|Punjabi|Multi|Dual|Line)\s*(?:-|–|—)?\s*(?:Audio|Dubbed)?\b/gi, '');
   t = t.replace(/\b(?:Audio|Dubbed|Subbed|Original Audio|Clean Audio|Line Audio)\b/gi, '');
 
-  // 5. Remove video quality & release tags
-  t = t.replace(/\b(?:WEB[- ]?DL|HQ[- ]?HDTC|HDTC|HDRip|BluRay|BRRip|DVDRip|DVD|Pre[- ]?DVD|HEVC|x264|x265|2160p|1080p|720p|480p|4K|FHD|UHD|HD|SD|HQ|CamRip|CAM|Rip|Line)\b/gi, '');
+  // 6. Again check video quality tags that might have become exposed
+  t = t.replace(/\b(?:2160|1080|720|480)\s*p\b/gi, '');
+  t = t.replace(/\b(?:WEB[- ]?DL|HQ[- ]?HDTC|HDTC|HDRip|BluRay|BRRip|DVDRip|DVD|Pre[- ]?DVD|HEVC|x264|x265|4K|FHD|UHD|HD|SD|HQ|CamRip|CAM|Rip|Line)\b/gi, '');
 
-  // 6. Remove platform names
+  // 7. Remove platform names and file size tags
   t = t.replace(/\b(?:JioHotstar|Hotstar|Netflix|Amazon|Prime|Zee5|SonyLiv|Disney\+?)\b/gi, '');
+  t = t.replace(/\b\d+(?:mb|gb)\b/gi, '');
 
-  // 7. Clean up trailing/leading punctuation, dangling hyphens/colons, and whitespace
+  // 8. Trailing 4-digit year removal
+  t = t.replace(/\b(19\d{2}|20\d{2})\s*$/gi, '');
+
+  // 9. Clean up trailing/leading punctuation, dangling hyphens/colons, and whitespace
   t = t.replace(/[-–—:|/\\]+\s*$/g, '');
   t = t.replace(/^\s*[-–—:|/\\]+/g, '');
   t = t.replace(/\s{2,}/g, ' ').trim();

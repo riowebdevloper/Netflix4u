@@ -4,7 +4,7 @@
  */
 const https = require('https');
 
-const VEGAMOVIES_BASE = 'https://vegamoviess.io';
+const VEGAMOVIES_BASE = 'https://vegamoviess.build';
 const vegamoviesSearchCache = new Map();
 const vegamoviesPostCache = new Map();
 
@@ -15,11 +15,10 @@ function cleanTitle(raw) {
     .replace(/[\[\(].*?[\]\)]/g, '')
     .replace(/&/g, ' and ')
     .replace(/\b(season\s*\d+|episode\s*\d+|ep\s*\d+|s\d+|e\d+|part\s*\d+|vol\s*\d+)\b/gi, '')
-    .replace(/\b(hindi|english|tamil|telugu|malayalam|kannada|dual|audio|web\s*dl|bluray|hdrip|hevc|x264|x265|dvdrip|webrip)\b/gi, '')
-    .replace(/\b(\d{3,4}p|4k|2k|hd|sd|fhd|uhd)\b/gi, '')
+    .replace(/\b(hindi|english|tamil|telugu|malayalam|kannada|bengali|marathi|punjabi|dual|audio|web\s*dl|bluray|hdrip|hevc|x264|x265|dvdrip|webrip|camrip|hdcam|rip|cam|hq|clean)\b/gi, '')
+    .replace(/\b(\d{3,4}\s*p|4k|2k|hd|sd|fhd|uhd)\b/gi, '')
     .replace(/[:\-–—.,!?_]/g, ' ')
     .replace(/\b(and|the|a|an)\b/gi, ' ')
-    .replace(/\b(hindi|english|tamil|telugu|malayalam|kannada|dual|audio|web\s*dl|bluray|hdrip|hevc|x264|x265|dvdrip|webrip|web|dl)\b/gi, '')
     .replace(/\s+/g, ' ')
     .trim()
     .toLowerCase();
@@ -54,7 +53,11 @@ function fetchHtml(url, postData = null, timeoutMs = 8000) {
 
     const req = https.request(options, res => {
       if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
-        return fetchHtml(res.headers.location, null, timeoutMs).then(resolve);
+        let redirectUrl = res.headers.location;
+        if (redirectUrl.startsWith('/')) {
+          redirectUrl = `${parsed.protocol}//${parsed.host}${redirectUrl}`;
+        }
+        return fetchHtml(redirectUrl, null, timeoutMs).then(resolve);
       }
       let d = '';
       res.on('data', c => d += c);
@@ -78,23 +81,32 @@ async function searchVegamovies(query) {
     if (Date.now() - hit.timestamp < 1800 * 1000) return hit.data;
   }
 
-  // Single or two clean words work best with DLE search
-  const cleanKeywords = query.replace(/[^\w\s]/g, ' ').replace(/\s+/g, ' ').trim();
-  const searchTerms = [cleanKeywords];
-  const words = cleanKeywords.split(' ');
+  // Clean the search query so release tags don't break DLE search
+  const cleanQ = query
+    .replace(/[\[\(].*?[\]\)]/g, ' ')
+    .replace(/\b(19\d{2}|20\d{2})\b/g, ' ')
+    .replace(/\b(hindi|english|tamil|telugu|malayalam|kannada|bengali|marathi|punjabi|dual|audio|web\s*dl|bluray|hdrip|hevc|x264|x265|dvdrip|webrip|camrip|hdcam|rip|cam)\b/gi, ' ')
+    .replace(/\b(\d{3,4}\s*p|4k|2k|hd|sd|fhd|uhd)\b/gi, ' ')
+    .replace(/[^\w\s]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+  const searchTerms = [cleanQ || query];
+  const words = (cleanQ || query).split(' ').filter(w => w.length > 2);
   if (words.length > 2) {
     searchTerms.push(words.slice(0, 2).join(' '));
-  } else if (words[0] && words[0].length >= 3 && words[0] !== cleanKeywords) {
+  } else if (words[0] && words[0].length >= 3 && words[0] !== cleanQ) {
     searchTerms.push(words[0]);
   }
 
   let results = [];
   for (const term of searchTerms) {
+    if (!term || term.trim().length < 2) continue;
     const postData = `do=search&subaction=search&story=${encodeURIComponent(term)}`;
     const html = await fetchHtml(`${VEGAMOVIES_BASE}/index.php?do=search`, postData);
     if (!html) continue;
 
-    const matches = [...html.matchAll(/<a[^>]*href="(https:\/\/vegamoviess\.io\/\d+-[^"]+\.html)"[^>]*title="([^"]+)"/g)];
+    const matches = [...html.matchAll(/<a[^>]*href="(https?:\/\/[^\/]+\/\d+-[^"]+\.html)"[^>]*title="([^"]+)"/gi)];
     if (matches.length > 0) {
       results = matches.map(m => ({
         url: m[1],
@@ -214,8 +226,9 @@ async function extractVegamoviesPostData(postHtml, postUrl, isTv = false) {
     });
   }
 
-  // 5. Expand NexDrive Series Links if post is TV Series
-  const isSeriesPost = Boolean(isTv || /season|series|episode|ep-\d+/i.test(postUrl) || /season\s*\d+/i.test(postHtml));
+  // 5. Expand NexDrive Series Links ONLY if post is genuinely a TV Series
+  // (Do not treat movie posts as series just because "season" appears in sidebar/footer HTML)
+  const isSeriesPost = Boolean(isTv || /season-(\d{1,2})/i.test(postUrl) || /\b(season\s*\d+|series|episodes?)\b/i.test(postUrl));
   const finalDownloads = [];
 
   if (isSeriesPost) {

@@ -52,15 +52,13 @@
     window.getFastCloudDownloadHref = function(rawUrl) {
       if (!rawUrl || typeof rawUrl !== 'string') return '#';
       if (rawUrl.startsWith('/api/download-file')) return rawUrl;
-      var isExternal = /nexdrive|hubcloud|dotmobiz|drivehub/i.test(rawUrl);
+      var isExternal = (/nexdrive|hubcloud|dotmobiz|drivehub|fast-dl|fastcloud|gdflix|mediafire|gofile|pixeldrain/i.test(rawUrl)) ||
+        (/^https?:\/\//i.test(rawUrl) && !rawUrl.includes(window.location.host));
       if (isExternal) {
         return rawUrl;
       }
       // Direct cloud video streams route directly through the fast file download handler
       if (rawUrl.indexOf('workers.dev') !== -1 || rawUrl.indexOf('vcloud') !== -1 || rawUrl.indexOf('r2.dev') !== -1) {
-        return '/api/download-file?url=' + encodeURIComponent(rawUrl);
-      }
-      if (rawUrl.startsWith('http')) {
         return '/api/download-file?url=' + encodeURIComponent(rawUrl);
       }
       return rawUrl;
@@ -91,8 +89,20 @@
 
       var clean = rawUrl || '';
 
-      // External mirror providers (dotmobiz, nexdrive, etc.) — open directly in new tab
-      var isExternal = /nexdrive|hubcloud|dotmobiz|drivehub|mediafire|gofile|pixeldrain/i.test(clean);
+      // Unpack nested /api/download-file?url=... if present
+      if (clean && clean.indexOf('/api/download-file') === 0 && clean.includes('url=')) {
+        try {
+          var innerP = new URLSearchParams(clean.split('?')[1] || '');
+          var innerU = innerP.get('url');
+          if (innerU && /^https?:\/\//i.test(innerU) && !innerU.includes(window.location.host)) {
+            clean = innerU;
+          }
+        } catch(e) {}
+      }
+
+      // External mirror providers (fast-dl, hubcloud, nexdrive, etc.) — open directly in new tab
+      var isExternal = (/nexdrive|hubcloud|dotmobiz|drivehub|fast-dl|fastcloud|gdflix|mediafire|gofile|pixeldrain/i.test(clean)) ||
+        (/^https?:\/\//i.test(clean) && !clean.includes(window.location.host) && !clean.startsWith('/api/download-file'));
       if (isExternal) {
         if (window.__showToast) {
           window.__showToast('🚀 Opening high-speed direct download mirror...', '⚡');
@@ -102,34 +112,21 @@
         return;
       }
 
-      // For /api/download-file links — extract id/title params and open a streaming download page
-      // instead of redirecting through the broken reelsdownload key
+      // For /api/download-file links — trigger direct browser file download
       if (clean && (clean.startsWith('/api/download-file') || clean.indexOf('/api/download-file') !== -1)) {
+        if (window.__showToast) window.__showToast('📥 Starting Direct File Download...', '⚡');
         try {
-          var qs = clean.split('?')[1] || '';
-          var params = new URLSearchParams(qs);
-          var tmdbIdParam = params.get('id') || '';
-          var typeParam = (params.get('type') || 'movie').toLowerCase();
-          var seParam = params.get('se') || '';
-          var epParam = params.get('ep') || '';
-          var cleanTid = tmdbIdParam.replace(/^(?:dotmobiz|tmdb(?:-movie|-series|-tv)?)-/i, '');
-          if (cleanTid && /^\d+$/.test(cleanTid)) {
-            var dlOpenUrl;
-            var isTvDl = typeParam === 'tv' || typeParam === 'series' || Boolean(seParam && epParam);
-            if (isTvDl && seParam && epParam) {
-              dlOpenUrl = 'https://vidlink.pro/tv/' + cleanTid + '/' + seParam + '/' + epParam + '?multiLang=true';
-            } else {
-              dlOpenUrl = 'https://vidlink.pro/movie/' + cleanTid + '?multiLang=true';
-            }
-            if (window.__showToast) window.__showToast('📥 Opening Direct Download Mirror...', '⚡');
-            window.open(dlOpenUrl, '_blank', 'noopener,noreferrer');
-            restore();
-            return;
-          }
-        } catch(parseErr) {}
-        // Fallback: open api endpoint directly in new tab
-        if (window.__showToast) window.__showToast('📥 Opening Download Link...', '⚡');
-        window.open(clean, '_blank', 'noopener,noreferrer');
+          var dlA = document.createElement('a');
+          dlA.href = clean;
+          dlA.download = '';
+          dlA.target = '_blank';
+          dlA.rel = 'noopener noreferrer';
+          document.body.appendChild(dlA);
+          dlA.click();
+          document.body.removeChild(dlA);
+        } catch(e) {
+          window.location.assign(clean);
+        }
         restore();
         return;
       }
@@ -1385,7 +1382,8 @@
   var autoSwitchTimer = null;
   var autoSwitchIndex = 0;
   var isPlaybackConfirmed = false;
-  var autoSwitchOrder = ['reelsdownload', 'vidsrc_sbs', 's3', 'braflix', 'videasy', 'vidbolt', 'vidrock', 'vsembed', 'twoembed', 'cinesrc'];
+  var DEFAULT_AUTO_SWITCH_ORDER = ['reelsdownload', 'vidsrc_sbs', 'allmovieland', 's3', 'braflix', 'videasy', 'vidbolt', 'vidrock', 'vsembed', 'twoembed', 'cinesrc'];
+  var autoSwitchOrder = DEFAULT_AUTO_SWITCH_ORDER.slice();
   var currentAutoSwitchToken = 0;
   var activeProbeController = null;
   var watchTopBarHideTimeout = null;
@@ -2669,10 +2667,10 @@
     }
 
     // Strict Canonical Validation using Centralized Player Resolver
-    var reqPayload = { type: type, tmdbId: tmdbId, season: season, episode: episode };
+    var reqPayload = { type: type, tmdbId: tmdbId, imdbId: imdbId, season: season, episode: episode };
     var validation = window.Netflix4uPlayerResolver
       ? window.Netflix4uPlayerResolver.validatePlaybackRequest(reqPayload)
-      : { valid: (/^\d{1,10}$/.test(String(tmdbId || '')) && Number(tmdbId) > 0) };
+      : { valid: Boolean((/^\d{1,10}$/.test(String(tmdbId || '')) && Number(tmdbId) > 0) || (imdbId && String(imdbId).startsWith('tt'))) };
 
     if (!validation.valid || !validation.sanitized) {
       console.warn('[Netflix4U Player Identity Blocked]', validation.error || 'Invalid canonical ID');
@@ -2684,6 +2682,7 @@
     tmdbId = sRecord.tmdbId;
     season = sRecord.season || season;
     episode = sRecord.episode || episode;
+    if (sRecord.imdbId && !imdbId) imdbId = sRecord.imdbId;
 
     var bannerEl = document.getElementById('watch-unavailable-banner');
     if (bannerEl) bannerEl.style.display = 'none';
@@ -2755,6 +2754,12 @@
     }
 
     var startingServer = chosenServer || 'vidsrc_sbs';
+    if (!tmdbId && imdbId) {
+      startingServer = chosenServer || 'vidsrc_sbs';
+      autoSwitchOrder = ['vidsrc_sbs', 's3', 'twoembed', 'braflix', 'videasy', 'allmovieland'];
+    } else {
+      autoSwitchOrder = (typeof DEFAULT_AUTO_SWITCH_ORDER !== 'undefined') ? DEFAULT_AUTO_SWITCH_ORDER.slice() : ['reelsdownload', 'vidsrc_sbs', 'allmovieland', 's3'];
+    }
     currentWatchServer = startingServer;
     isAutoSwitchEnabled = !chosenServer;
     isPlaybackConfirmed = false;
@@ -3804,13 +3809,13 @@
     }
 
     // Direct hash routing
-    var titleMatch = currentHash.match(/^#title=([^-]+)-(movie|tv)$/i);
+    var titleMatch = currentHash.match(/^#title=(.+)-(movie|tv|series)$/i);
     if (titleMatch && !isTitleOpen && !isWatchOpen) {
       openTitleModal(titleMatch[1], titleMatch[2], false);
       return;
     }
 
-    var watchMatch = currentHash.match(/^#w=([^-]+)-(movie|tv)(?:-(\d+)(?:-(\d+))?)?$/i);
+    var watchMatch = currentHash.match(/^#w=(.+)-(movie|tv|series)(?:-(\d+)(?:-(\d+))?)?$/i);
     if (watchMatch) {
       var targetId = watchMatch[1];
       var targetType = watchMatch[2];

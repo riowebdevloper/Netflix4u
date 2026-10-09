@@ -98,14 +98,14 @@
     var canonicalType = isTv ? 'tv' : 'movie';
 
     var tmdbId = cleanTmdbId(req.tmdbId || req.id);
-    if (!tmdbId) {
+    var cleanImdb = (req && req.imdbId && String(req.imdbId).startsWith('tt')) ? String(req.imdbId).trim() : null;
+
+    if (!tmdbId && !cleanImdb) {
       return {
         valid: false,
-        error: 'Invalid or missing numeric TMDB ID. Title-based resolution is disallowed.'
+        error: 'Invalid or missing numeric TMDB ID or authentic IMDb ID.'
       };
     }
-
-    var cleanImdb = (req && req.imdbId && String(req.imdbId).startsWith('tt')) ? String(req.imdbId).trim() : null;
 
     if (canonicalType === 'movie') {
       return {
@@ -163,10 +163,11 @@
     var s = validation.sanitized;
     var p = (provider || 'vidsrc_sbs').toLowerCase().trim();
     var prefix = (mode === 'download') ? 'download' : 'stream';
+    var targetId = s.tmdbId || s.imdbId;
     if (s.type === 'movie') {
-      return prefix + ':' + p + ':' + s.tmdbId;
+      return prefix + ':' + p + ':' + targetId;
     }
-    return prefix + ':' + p + ':' + s.tmdbId + ':s' + s.season + ':e' + s.episode;
+    return prefix + ':' + p + ':' + targetId + ':s' + s.season + ':e' + s.episode;
   }
 
   function getDownloadCacheKey(req, provider) {
@@ -182,7 +183,7 @@
       return null;
     }
     var s = validation.sanitized;
-    var extId = (opt && opt.imdbId && String(opt.imdbId).startsWith('tt')) ? opt.imdbId : s.tmdbId;
+    var extId = (opt && opt.imdbId && String(opt.imdbId).startsWith('tt')) ? opt.imdbId : (s.imdbId || s.tmdbId);
     if (s.type === 'movie') {
       return 'allmovieland:movie:' + extId;
     }
@@ -195,99 +196,112 @@
     // 1. VidSrc Global Reference
     vidsrc_sbs: function(s, opt) {
       var vHost = (opt && opt.domain) || 'vidsrc.pm';
+      var idToUse = s.tmdbId || s.imdbId;
       return s.type === 'movie'
-        ? 'https://' + vHost + '/embed/movie/' + s.tmdbId
-        : 'https://' + vHost + '/embed/tv/' + s.tmdbId + '/' + s.season + '/' + s.episode;
+        ? 'https://' + vHost + '/embed/movie/' + idToUse
+        : 'https://' + vHost + '/embed/tv/' + idToUse + '/' + s.season + '/' + s.episode;
     },
     // 2. Braflix (api.cineby.homes)
     braflix: function(s, opt) {
+      var idToUse = s.tmdbId || s.imdbId;
       if (s.type === 'movie') {
-        return 'https://api.cineby.homes/embed/movie/' + s.tmdbId;
+        return 'https://api.cineby.homes/embed/movie/' + idToUse;
       }
-      return 'https://api.cineby.homes/embed/tv/' + s.tmdbId + '/' + s.season + '/' + s.episode + '?autonext=1&ds_lang=en';
+      return 'https://api.cineby.homes/embed/tv/' + idToUse + '/' + s.season + '/' + s.episode + '?autonext=1&ds_lang=en';
     },
     // 3. Videasy 4K (player.videasy.net)
     videasy: function(s, opt) {
+      var idToUse = s.tmdbId || s.imdbId;
       var c = 'nextEpisode=true&autoplayNextEpisode=true&episodeSelector=true&color=#E50914';
       if (s.type === 'movie') {
-        return 'https://player.videasy.net/movie/' + s.tmdbId;
+        return 'https://player.videasy.net/movie/' + idToUse;
       }
-      return 'https://player.videasy.net/tv/' + s.tmdbId + '/' + s.season + '/' + s.episode + '?' + c;
+      return 'https://player.videasy.net/tv/' + idToUse + '/' + s.season + '/' + s.episode + '?' + c;
     },
     '4k': function(s, opt) { return PROVIDER_BUILDERS.videasy(s, opt); },
     // 4. VidLink Pro Multi-Audio
     vidlink: function(s, opt) {
+      var idToUse = s.tmdbId || s.imdbId;
       var langParam = (opt && opt.lang) ? '&lang=' + encodeURIComponent(String(opt.lang).toLowerCase()) : '';
       if (s.type === 'movie') {
-        return 'https://vidlink.pro/movie/' + s.tmdbId + '?multiLang=true' + langParam;
+        return 'https://vidlink.pro/movie/' + idToUse + '?multiLang=true' + langParam;
       }
-      return 'https://vidlink.pro/tv/' + s.tmdbId + '/' + s.season + '/' + s.episode + '?multiLang=true' + langParam;
+      return 'https://vidlink.pro/tv/' + idToUse + '/' + s.season + '/' + s.episode + '?multiLang=true' + langParam;
     },
     s3: function(s, opt) { return PROVIDER_BUILDERS.vidlink(s, opt); },
     // 5. Wootly (vidsrc.party)
     wootly: function(s, opt) {
+      var idToUse = s.tmdbId || s.imdbId;
       return s.type === 'movie'
-        ? 'https://www.vidsrc.party/movie/' + s.tmdbId
-        : 'https://www.vidsrc.party/tv/' + s.tmdbId + '/' + s.season + '/' + s.episode;
+        ? 'https://www.vidsrc.party/movie/' + idToUse
+        : 'https://www.vidsrc.party/tv/' + idToUse + '/' + s.season + '/' + s.episode;
     },
     // 6. Bolt & Flix (vidbolt.xyz)
     vidbolt: function(s, opt) {
+      var idToUse = s.tmdbId || s.imdbId;
       return s.type === 'movie'
-        ? 'https://vidbolt.xyz/movie/' + s.tmdbId
-        : 'https://vidbolt.xyz/tv/' + s.tmdbId + '/' + s.season + '/' + s.episode;
+        ? 'https://vidbolt.xyz/movie/' + idToUse
+        : 'https://vidbolt.xyz/tv/' + idToUse + '/' + s.season + '/' + s.episode;
     },
     bolt: function(s, opt) { return PROVIDER_BUILDERS.vidbolt(s, opt); },
     flix: function(s, opt) { return PROVIDER_BUILDERS.vidbolt(s, opt); },
     // 7. Nero (vidfast.pro)
     vidfast: function(s, opt) {
+      var idToUse = s.tmdbId || s.imdbId;
       return s.type === 'movie'
-        ? 'https://vidfast.pro/movie/' + s.tmdbId
-        : 'https://vidfast.pro/tv/' + s.tmdbId + '/' + s.season + '/' + s.episode;
+        ? 'https://vidfast.pro/movie/' + idToUse
+        : 'https://vidfast.pro/tv/' + idToUse + '/' + s.season + '/' + s.episode;
     },
     nero: function(s, opt) { return PROVIDER_BUILDERS.vidfast(s, opt); },
     // 8. Flixify (vidflix.club)
     vidflix: function(s, opt) {
+      var idToUse = s.tmdbId || s.imdbId;
       return s.type === 'movie'
-        ? 'https://vidflix.club/movie/' + s.tmdbId
-        : 'https://vidflix.club/tv/' + s.tmdbId + '/' + s.season + '/' + s.episode;
+        ? 'https://vidflix.club/movie/' + idToUse
+        : 'https://vidflix.club/tv/' + idToUse + '/' + s.season + '/' + s.episode;
     },
     flixify: function(s, opt) { return PROVIDER_BUILDERS.vidflix(s, opt); },
     // 9. Astra (vidsrc.su)
     vidsrc_su: function(s, opt) {
+      var idToUse = s.tmdbId || s.imdbId;
       return s.type === 'movie'
-        ? 'https://vidsrc.su/embed/movie/' + s.tmdbId
-        : 'https://vidsrc.su/embed/tv/' + s.tmdbId + '/' + s.season + '/' + s.episode;
+        ? 'https://vidsrc.su/embed/movie/' + idToUse
+        : 'https://vidsrc.su/embed/tv/' + idToUse + '/' + s.season + '/' + s.episode;
     },
     astra: function(s, opt) { return PROVIDER_BUILDERS.vidsrc_su(s, opt); },
     // 10. Vid (embed.wplay.me)
     wplay: function(s, opt) {
+      var idToUse = s.tmdbId || s.imdbId;
       return s.type === 'movie'
-        ? 'https://embed.wplay.me/embed/movie/' + s.tmdbId
-        : 'https://embed.wplay.me/embed/tv/' + s.tmdbId + '/' + s.season + '/' + s.episode;
+        ? 'https://embed.wplay.me/embed/movie/' + idToUse
+        : 'https://embed.wplay.me/embed/tv/' + idToUse + '/' + s.season + '/' + s.episode;
     },
     vid: function(s, opt) { return PROVIDER_BUILDERS.wplay(s, opt); },
     // 11. Mist (play.xpass.top)
     xpass: function(s, opt) {
+      var idToUse = s.tmdbId || s.imdbId;
       return s.type === 'movie'
-        ? 'https://play.xpass.top/e/movie/' + s.tmdbId
-        : 'https://play.xpass.top/e/tv/' + s.tmdbId + '/' + s.season + '/' + s.episode;
+        ? 'https://play.xpass.top/e/movie/' + idToUse
+        : 'https://play.xpass.top/e/tv/' + idToUse + '/' + s.season + '/' + s.episode;
     },
     mist: function(s, opt) { return PROVIDER_BUILDERS.xpass(s, opt); },
     // 12. Peachify Pro (peachify.pro)
     peachify: function(s, opt) {
+      var idToUse = s.tmdbId || s.imdbId;
       var lang = ((opt && opt.lang) || 'hi').toLowerCase();
       var dub = (lang === 'hi') ? 'Hindi' : (lang === 'ta' ? 'Tamil' : (lang === 'te' ? 'Telugu' : 'English'));
       var dubParam = dub ? '&dub=' + encodeURIComponent(dub) : '';
       if (s.type === 'movie') {
-        return 'https://peachify.pro/embed/movie/' + s.tmdbId + '?accent=E50914&autoPlay=true' + dubParam;
+        return 'https://peachify.pro/embed/movie/' + idToUse + '?accent=E50914&autoPlay=true' + dubParam;
       }
-      return 'https://peachify.pro/embed/tv/' + s.tmdbId + '/' + s.season + '/' + s.episode + '?accent=E50914&autoPlay=true&autoNext=true&showNextBtn=true' + dubParam;
+      return 'https://peachify.pro/embed/tv/' + idToUse + '/' + s.season + '/' + s.episode + '?accent=E50914&autoPlay=true&autoNext=true&showNextBtn=true' + dubParam;
     },
     // 13. Peach (peachify.top)
     peach: function(s, opt) {
+      var idToUse = s.tmdbId || s.imdbId;
       return s.type === 'movie'
-        ? 'https://peachify.top/embed/movie/' + s.tmdbId
-        : 'https://peachify.top/embed/tv/' + s.tmdbId + '/' + s.season + '/' + s.episode;
+        ? 'https://peachify.top/embed/movie/' + idToUse
+        : 'https://peachify.top/embed/tv/' + idToUse + '/' + s.season + '/' + s.episode;
     },
     peachify_top: function(s, opt) { return PROVIDER_BUILDERS.peach(s, opt); },
     // 14. Nest (vidnest.fun)
@@ -384,9 +398,10 @@
     vidsrc2_ru: function(s, opt) { return PROVIDER_BUILDERS.vidsrc2(s, opt); },
     // 27. 2embed (2embed.stream)
     twoembed: function(s, opt) {
+      var idToUse = s.tmdbId || s.imdbId;
       return s.type === 'movie'
-        ? 'https://www.2embed.stream/embed/movie/' + s.tmdbId
-        : 'https://www.2embed.stream/embed/tv/' + s.tmdbId + '/' + s.season + '/' + s.episode;
+        ? 'https://www.2embed.stream/embed/movie/' + idToUse
+        : 'https://www.2embed.stream/embed/tv/' + idToUse + '/' + s.season + '/' + s.episode;
     },
     '2embed': function(s, opt) { return PROVIDER_BUILDERS.twoembed(s, opt); },
     // 28. French (frembed.asia)

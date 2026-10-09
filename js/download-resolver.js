@@ -62,6 +62,12 @@
       return rawUrl;
     }
 
+    var isExternal = (/nexdrive|hubcloud|dotmobiz|drivehub|fast-dl|fastcloud|gdflix|mediafire|gofile|pixeldrain/i.test(rawUrl)) ||
+      (/^https?:\/\//i.test(rawUrl) && !rawUrl.includes(window.location.host));
+    if (isExternal) {
+      return rawUrl;
+    }
+
     var qs = 'url=' + encodeURIComponent(rawUrl);
     if (meta) {
       if (meta.title) qs += '&title=' + encodeURIComponent(meta.title);
@@ -120,6 +126,9 @@
         if (innerUrl && !innerUrl.includes('/api/download-file')) {
           var innerVcloud = extractVcloudUrl(innerUrl);
           if (innerVcloud) cleanVcloud = innerVcloud;
+          if (/^https?:\/\//i.test(innerUrl) && !innerUrl.includes(window.location.host)) {
+            rawUrl = innerUrl;
+          }
         }
         if (!title && innerParams.get('title')) title = innerParams.get('title');
         if (!tmdbId && innerParams.get('id')) tmdbId = innerParams.get('id');
@@ -129,7 +138,8 @@
       } catch(e) {}
     }
 
-    var isExternal = /nexdrive|hubcloud|dotmobiz|drivehub/i.test(rawUrl);
+    var isExternal = (/nexdrive|hubcloud|dotmobiz|drivehub|fast-dl|fastcloud|gdflix|mediafire|gofile|pixeldrain/i.test(rawUrl)) ||
+      (/^https?:\/\//i.test(rawUrl) && !rawUrl.includes(window.location.host) && !rawUrl.startsWith('/api/download-file'));
     if (isExternal) {
       if (targetEl) {
         targetEl.innerHTML = '<div style="display:flex;align-items:center;gap:8px;justify-content:center;width:100%;">' +

@@ -1613,7 +1613,7 @@
 
     // 3. Hash Watch & Title links (e.g. #w=1339713-movie-1-1 or #title=1339713-movie)
     var hash = window.location.hash;
-    var hashMatch = hash.match(/^#w=([^-]+)-(movie|tv)(?:-(\d+)(?:-(\d+))?)?$/i);
+    var hashMatch = hash.match(/^#w=(.+)-(movie|tv|series)(?:-(\d+)(?:-(\d+))?)?$/i);
     if (hashMatch) {
       var wId = hashMatch[1];
       var wType = hashMatch[2];
@@ -1625,7 +1625,7 @@
         }
       }, 400);
     } else {
-      var titleHashMatch = hash.match(/^#title=([^-]+)-(movie|tv)$/i);
+      var titleHashMatch = hash.match(/^#title=(.+)-(movie|tv|series)$/i);
       if (titleHashMatch) {
         var tId = titleHashMatch[1];
         var tType = titleHashMatch[2];
