@@ -1,5 +1,10 @@
 {
   "version": 2,
+  "functions": {
+    "api/**/*.js": {
+      "includeFiles": "data/**"
+    }
+  },
   "cleanUrls": true,
   "rewrites": [
     { "source": "/api/embed-tmdb/:match*", "destination": "/api/embed-tmdb?id=:match*" },
