@@ -48,19 +48,18 @@ function checkRateLimit(ip, maxPerMinute = 150) {
 // ==========================================
 
 function getQueryParams(req) {
+  const [rawPath, queryString] = (req.url || '').split('?');
+  const sp = new URLSearchParams(queryString || '');
   if (req.query && typeof req.query === 'object') {
-    const sp = new URLSearchParams();
     for (const [k, v] of Object.entries(req.query)) {
       if (Array.isArray(v)) {
         v.forEach(val => sp.append(k, val));
-      } else if (v !== undefined && v !== null) {
+      } else if (v !== undefined && v !== null && !sp.has(k)) {
         sp.set(k, String(v));
       }
     }
-    return sp;
   }
-  const [rawPath, queryString] = (req.url || '').split('?');
-  return new URLSearchParams(queryString || '');
+  return sp;
 }
 
 function sendJson(res, statusCode, data, extraHeaders = {}) {
