@@ -3048,7 +3048,21 @@ async function handleDownloadFile(req, res) {
     if (id && (!resolved || !resolved.directUrl)) {
       try {
         contentRec = await resolveContentId(id, type);
+        if (contentRec && contentRec.title && (!passedTitle || passedTitle === 'Netflix4U Video')) {
+          titleToUse = contentRec.title;
+        }
       } catch (e) {}
+      if (!contentRec || !titleToUse || titleToUse === 'Netflix4U Video') {
+        try {
+          const cleanNum = String(id).replace(/^dotmobiz-/, '');
+          const catalog = getCatalogSummary();
+          const found = catalog.find(c => String(c.record_id) === cleanNum || c.id === id || c.id === `dotmobiz-${cleanNum}` || c.slug === id);
+          if (found) {
+            contentRec = contentRec || found;
+            if (found.title) titleToUse = found.title;
+          }
+        } catch (e) {}
+      }
     }
 
     // 3. Exact Identity Resolution: Search Catalog strictly for verified authentic direct download streams
