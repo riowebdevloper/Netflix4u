@@ -1,0 +1,6 @@
+{
+  "status": "CONFIG_ERROR",
+  "error": "TMDB_API_KEY is not configured",
+  "duration": "0.00",
+  "timestamp": "2026-10-10T04:20:28.832Z"
+}

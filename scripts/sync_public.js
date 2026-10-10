@@ -32,8 +32,29 @@ console.log('Synchronizing static assets to public/...');
 copyDirRecursive(path.join(ROOT, 'images'), path.join(PUBLIC_DIR, 'images'));
 copyDirRecursive(path.join(ROOT, 'cf-fonts'), path.join(PUBLIC_DIR, 'cf-fonts'));
 copyDirRecursive(path.join(ROOT, 'icons'), path.join(PUBLIC_DIR, 'icons'));
+copyDirRecursive(path.join(ROOT, 'uploads'), path.join(PUBLIC_DIR, 'uploads'));
+
+// Sync public/data directory for fast edge CDN delivery
+const PUBLIC_DATA_DIR = path.join(PUBLIC_DIR, 'data');
+if (!fs.existsSync(PUBLIC_DATA_DIR)) fs.mkdirSync(PUBLIC_DATA_DIR, { recursive: true });
+
+const DATA_DIR = path.join(ROOT, 'data');
+if (fs.existsSync(DATA_DIR)) {
+  const dataFiles = fs.readdirSync(DATA_DIR);
+  for (const f of dataFiles) {
+    if (!f.endsWith('.json')) continue;
+    // Exclude massive files from static public folder to keep deployment ultra-fast
+    if (f === 'details_map.json' || f === 'dotmobiz_complete_catalog.json') continue;
+    const src = path.join(DATA_DIR, f);
+    const dest = path.join(PUBLIC_DATA_DIR, f);
+    try {
+      fs.copyFileSync(src, dest);
+    } catch(e) {}
+  }
+}
 
 const rootFilesToSync = [
+  'index.html',
   'favicon.ico',
   'favicon.svg',
   'favicon-16x16.png',
