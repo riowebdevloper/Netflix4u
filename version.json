@@ -1,6 +1,6 @@
 {
-  "version": "3.6.0",
-  "build": 1742210000,
-  "updatedAt": "2026-10-05T08:15:00.000Z",
-  "description": "Multi-season and episode synchronization, direct high-speed download mirrors, movie layout isolation, and iframe sandbox removal"
+  "version": "3.7.0",
+  "build": 1742211000,
+  "updatedAt": "2026-10-10T05:30:00.000Z",
+  "description": "Added Thudakkam (2026), AllMovieLand stream player support, and Vegamovies direct download mirrors"
 }
