@@ -1707,14 +1707,19 @@ async function handleSearch(req, res) {
   try {
     const catalog = getCatalogSummary();
     const queryLower = query.toLowerCase();
+    const qWords = queryLower.split(/\s+/).filter(w => w.length > 1);
 
     for (const item of catalog) {
       if (results.length >= 35) break;
-      const matchTitle = item.title && item.title.toLowerCase().includes(queryLower);
-      const matchRaw = item.rawTitle && item.rawTitle.toLowerCase().includes(queryLower);
-      const matchSlug = item.slug && item.slug.toLowerCase().includes(queryLower);
+      const tLower = (item.title || '').toLowerCase();
+      const rLower = (item.rawTitle || '').toLowerCase();
+      const sLower = (item.slug || '').toLowerCase();
+      const matchTitle = tLower.includes(queryLower);
+      const matchRaw = rLower.includes(queryLower);
+      const matchSlug = sLower.includes(queryLower);
+      const matchAllWords = qWords.length > 1 && qWords.every(w => tLower.includes(w) || rLower.includes(w) || sLower.includes(w));
 
-      if (matchTitle || matchRaw || matchSlug) {
+      if (matchTitle || matchRaw || matchSlug || matchAllWords) {
         const itemTitle = item.title || item.rawTitle || '';
         if (seenTitles.has(itemTitle.toLowerCase())) continue;
 
@@ -3319,13 +3324,14 @@ async function handleStreamPlayer(req, res) {
     ? (canonicalTargetId ? `/movie/${canonicalTargetId}` : '/')
     : (canonicalTargetId ? `/series/${canonicalTargetId}` : '/');
 
-  // Default initial server: VidLink Multi-Audio (most reliable, no API key needed) or Fast Cloud, or query server
+  // Default initial server: AllMovieLand (if non-TMDB title with valid tt IMDb ID), Fast Cloud, or VidLink Multi-Audio
   const isDubLang = (lang === 'hi' || lang === 'ta' || lang === 'te');
+  const hasNumericTmdb = /^\d+$/.test(cleanId) && Number(cleanId) > 0;
   const reqServer = (q.get('server') || '').toLowerCase();
   const validServers = ['reelsdownload', 'vidsrc', 'allmovieland', 'vidlink', 'braflix', 'videasy', 'cloud'];
   const initialServer = (validServers.includes(reqServer) && (reqServer !== 'cloud' || cloudStream))
     ? reqServer
-    : (cloudStream ? 'cloud' : (isDubLang ? 'reelsdownload' : 'vidsrc'));
+    : (cloudStream ? 'cloud' : (!hasNumericTmdb && allmovielandUrl ? 'allmovieland' : (isDubLang ? 'reelsdownload' : 'vidsrc')));
   const currentSeasonMeta = seriesSeasons.find(s => s.season_number === actualSe) || seriesSeasons[0] || { episode_count: 10 };
 
   const playerHtml = `<!DOCTYPE html>

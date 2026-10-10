@@ -14,10 +14,10 @@ function cleanTitle(raw) {
     .replace(/\b(19\d{2}|20\d{2})\b/g, '')
     .replace(/[\[\(].*?[\]\)]/g, '')
     .replace(/&/g, ' and ')
-    .replace(/\b(season\s*\d+|episode\s*\d+|ep\s*\d+|s\d+|e\d+|part\s*\d+|vol\s*\d+)\b/gi, '')
-    .replace(/\b(hindi|english|tamil|telugu|malayalam|kannada|bengali|marathi|punjabi|dual|audio|web\s*dl|bluray|hdrip|hevc|x264|x265|dvdrip|webrip|camrip|hdcam|rip|cam|hq|clean)\b/gi, '')
-    .replace(/\b(\d{3,4}\s*p|4k|2k|hd|sd|fhd|uhd)\b/gi, '')
     .replace(/[:\-–—.,!?_]/g, ' ')
+    .replace(/\b(season\s*\d+|episode\s*\d+|ep\s*\d+|s\d+|e\d+|part\s*\d+|vol\s*\d+)\b/gi, '')
+    .replace(/\b(hindi|english|tamil|telugu|malayalam|kannada|bengali|marathi|punjabi|dual|audio|web[\s\-]*dl|webrip|bluray|hdrip|hevc|x264|x265|dvdrip|camrip|hdcam|rip|cam|hq|clean|esub|subs?|remux|imax)\b/gi, '')
+    .replace(/\b(\d{3,4}\s*p|4k|2k|hd|sd|fhd|uhd)\b/gi, '')
     .replace(/\b(and|the|a|an)\b/gi, ' ')
     .replace(/\s+/g, ' ')
     .trim()
@@ -289,6 +289,23 @@ async function fetchVegamoviesPostDetails(postUrl, isTv = false) {
 async function resolveVegamoviesForTitle(title, year = null, knownImdbId = null, isTv = false) {
   if (!title && !knownImdbId) return null;
 
+  // If a direct Vegamovies URL is supplied, resolve directly
+  if (typeof title === 'string' && (/vegamoviess\./i.test(title) || /https?:\/\/[^\/]+\/\d+-[^"]+\.html/i.test(title))) {
+    const postDetails = await fetchVegamoviesPostDetails(title, isTv);
+    if (postDetails) {
+      const effectiveImdbId = postDetails.imdbId || knownImdbId || null;
+      const effectiveStreamUrl = postDetails.streamUrl || (effectiveImdbId ? `https://slast430did.com/play/${encodeURIComponent(effectiveImdbId)}` : null);
+      return {
+        source: 'vegamovies',
+        postTitle: title,
+        postUrl: title,
+        imdbId: effectiveImdbId,
+        streamUrl: effectiveStreamUrl,
+        downloads: postDetails.downloads || []
+      };
+    }
+  }
+
   // Search by title or known IMDb ID
   const query = title || knownImdbId;
   const results = await searchVegamovies(query);
@@ -376,5 +393,6 @@ module.exports = {
   fetchVegamoviesPostDetails,
   extractVegamoviesPostData,
   fetchNexdriveEpisodes,
-  resolveVegamoviesForTitle
+  resolveVegamoviesForTitle,
+  cleanTitle
 };
