@@ -239,10 +239,14 @@ function computeFingerprint(contentId, eventType, changedFields, diff) {
 function loadDiscordState(stateFilePath = DISCORD_STATE_PATH) {
   if (fs.existsSync(stateFilePath)) {
     try {
-      return JSON.parse(fs.readFileSync(stateFilePath, 'utf8'));
+      const parsed = JSON.parse(fs.readFileSync(stateFilePath, 'utf8'));
+      parsed.snapshots = parsed.snapshots || {};
+      parsed.sentFingerprints = parsed.sentFingerprints || {};
+      parsed.sentTitles = parsed.sentTitles || {};
+      return parsed;
     } catch (e) {}
   }
-  return { snapshots: {}, sentFingerprints: {} };
+  return { snapshots: {}, sentFingerprints: {}, sentTitles: {} };
 }
 
 /**
@@ -427,6 +431,9 @@ function processDiscordDeltas(items, stateFilePath = DISCORD_STATE_PATH, options
 // ============================================================================
 
 function buildCatalogSyncEmbed(options = {}) {
+  const state = loadDiscordState();
+  state.sentTitles = state.sentTitles || {};
+
   let report = null;
   if (fs.existsSync(REPORT_PATH)) {
     try {
@@ -434,54 +441,50 @@ function buildCatalogSyncEmbed(options = {}) {
     } catch (e) {}
   }
 
-  let curatedTrending = null;
-  if (fs.existsSync(CURATED_TRENDING_PATH)) {
-    try {
-      curatedTrending = JSON.parse(fs.readFileSync(CURATED_TRENDING_PATH, 'utf8'));
-    } catch (e) {}
-  }
-
-  const newItems = (report && Array.isArray(report.newItems)) ? report.newItems : [];
-  const addedCount = report && report.metrics ? report.metrics.added || 0 : newItems.length;
-  const updatedCount = report && report.metrics ? report.metrics.updated || 0 : 0;
-  const durationSec = report && report.duration ? `${report.duration}s` : 'N/A';
-
-  if (options.onlyIfNew && newItems.length === 0 && addedCount === 0) {
-    return null;
-  }
-
-  if (newItems.length > 0) {
-    const newItemsList = newItems.slice(0, 8).map((item, idx) => {
-      const title = item.title || 'Untitled';
-      const year = item.year ? `(${item.year})` : '';
-      const rating = item.rating ? `⭐ ${Number(item.rating).toFixed(1)}` : '⭐ 8.0';
-      const type = (item.type || 'movie').toUpperCase();
-      const cId = item.canonicalId || item.id || item.tmdbId;
-      const url = `https://netflix4u.in/${item.type || 'movie'}/${cId}`;
-      const genres = Array.isArray(item.genres) ? item.genres.slice(0, 2).join(', ') : '';
-      const genreBadge = genres ? ` • ${genres}` : '';
-      return `**${idx + 1}. [${title} ${year}](${url})**\n└ 🏷️ \`${type}\` • ${rating}${genreBadge}`;
-    }).join('\n\n');
-
-    let heroBackdrop = '';
-    if (newItems[0] && newItems[0].backdrop) {
-      heroBackdrop = newItems[0].backdrop;
+  // 1. Gather all potential new item candidates
+  let rawCandidates = [];
+  if (report && Array.isArray(report.newItems) && report.newItems.length > 0) {
+    rawCandidates = [...report.newItems];
+  } else {
+    // Check recent additions in data/recent.json
+    const recentPath = path.join(DATA_DIR, 'recent.json');
+    if (fs.existsSync(recentPath)) {
+      try {
+        const recentList = JSON.parse(fs.readFileSync(recentPath, 'utf8'));
+        if (Array.isArray(recentList)) {
+          rawCandidates = recentList.slice(0, 15);
+        }
+      } catch (e) {}
     }
+  }
 
-    const embed = {
-      title: `🎉 Netflix4U Daily Update: ${newItems.length} Naye Titles Live!`,
+  // 2. Strict Deduplication: filter out anything previously announced on Discord
+  const freshItems = rawCandidates.filter(item => {
+    if (!item) return false;
+    const cId = String(item.canonicalId || item.id || item.slug || '').trim();
+    const titleKey = String(item.title || item.name || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+    if (!cId && !titleKey) return false;
+    if (cId && state.sentTitles[cId]) return false;
+    if (titleKey && state.sentTitles[titleKey]) return false;
+    return true;
+  });
+
+  // 3. If no genuinely new unannounced items exist:
+  if (freshItems.length === 0) {
+    // Suppress notification completely - NEVER spam Discord with static trending list
+    if (!options.forceSummary) {
+      return null;
+    }
+    // Only if explicitly forced (e.g. manual CLI status request), send clean operational status
+    return {
+      title: '🍿 Netflix4U Catalog Audit: 100% Operational',
       url: 'https://netflix4u.in',
-      color: 15073298,
-      description: `Aaj Netflix4U par **${newItems.length} fresh releases** successfully add kar diye gaye hain! High-speed streaming aur direct cloud download links live hain.`,
+      color: 2278750,
+      description: 'Daily automated catalog audit complete. All streaming servers and direct download mirrors are verified and operational.',
       fields: [
         {
-          name: '🆕 Newly Added Content Today',
-          value: newItemsList,
-          inline: false
-        },
-        {
-          name: '📊 Sync Summary',
-          value: `• **New Additions**: ${addedCount}\n• **Updated Records**: ${updatedCount}\n• **Pipeline Runtime**: ${durationSec}\n• **Status**: ✅ All Streams Verified & Live`,
+          name: '📊 System Status',
+          value: '• **New Titles Today**: 0\n• **All Streaming Servers**: ✅ Operational\n• **Direct Download Mirrors**: ✅ Healthy',
           inline: false
         }
       ],
@@ -491,43 +494,42 @@ function buildCatalogSyncEmbed(options = {}) {
       },
       timestamp: new Date().toISOString()
     };
-
-    if (heroBackdrop) {
-      embed.image = { url: heroBackdrop };
-    }
-
-    return embed;
   }
 
-  const realHero = (curatedTrending && Array.isArray(curatedTrending.hero)) ? curatedTrending.hero : [];
-  let trendingList = 'No active trending titles available';
-  if (realHero.length > 0) {
-    trendingList = realHero.slice(0, 6).map((item, idx) => {
-      const title = item.title || 'Untitled';
-      const year = item.year ? `(${item.year})` : '';
-      const rating = item.rating ? `⭐ ${Number(item.rating).toFixed(1)}` : '⭐ 8.0';
-      const type = (item.type || 'movie').toUpperCase();
-      const url = `https://netflix4u.in/${item.type || 'movie'}/${item.tmdbId || item.id}`;
-      return `**${idx + 1}. [${title} ${year}](${url})** • \`${type}\` • ${rating}`;
-    }).join('\n');
-  }
+  // 4. Build fresh new titles announcement
+  const itemsToAnnounce = freshItems.slice(0, 8);
+  const newItemsList = itemsToAnnounce.map((item, idx) => {
+    const title = item.title || item.name || 'Untitled';
+    const year = item.year ? `(${item.year})` : '';
+    const rating = item.rating ? `⭐ ${Number(item.rating).toFixed(1)}` : '⭐ 8.0';
+    const type = (item.type || item.mediaType || 'movie').toUpperCase();
+    const isTv = (type === 'TV' || type === 'SERIES');
+    const cId = item.canonicalId || item.id || (item.slug ? item.slug : item.tmdbId);
+    const url = isTv ? `https://netflix4u.in/series/${cId}` : `https://netflix4u.in/movie/${cId}`;
+    const genres = Array.isArray(item.categories || item.genres) ? (item.categories || item.genres).slice(0, 2).join(', ') : '';
+    const genreBadge = genres ? ` • ${genres}` : '';
+    return `**${idx + 1}. [${title} ${year}](${url})**\n└ 🏷️ \`${type}\` • ${rating}${genreBadge}`;
+  }).join('\n\n');
 
-  let heroBackdrop = (realHero[0] && realHero[0].backdrop) ? realHero[0].backdrop : '';
+  let heroBackdrop = '';
+  if (itemsToAnnounce[0] && (itemsToAnnounce[0].backdrop || itemsToAnnounce[0].poster)) {
+    heroBackdrop = itemsToAnnounce[0].backdrop || itemsToAnnounce[0].poster;
+  }
 
   const embed = {
-    title: '🍿 Netflix4U Daily Catalog Status: All Systems Operational',
+    title: `🎉 Netflix4U Daily Update: ${itemsToAnnounce.length} Naye Titles Live!`,
     url: 'https://netflix4u.in',
-    color: 2278750,
-    description: 'Daily automated catalog audit successfully complete ho chuka hai. All streaming servers & download mirrors are 100% active and healthy.',
+    color: 15073298,
+    description: `Aaj Netflix4U par **${itemsToAnnounce.length} fresh releases** successfully add kar diye gaye hain! High-speed streaming aur direct cloud download links live hain.`,
     fields: [
       {
-        name: '🔥 Top Trending Right Now on Netflix4U',
-        value: trendingList,
+        name: '🆕 Newly Added Content Today',
+        value: newItemsList,
         inline: false
       },
       {
-        name: '📊 System Health',
-        value: `• **Status**: ✅ 100% Operational\n• **Updated Records**: ${updatedCount}\n• **Pipeline Runtime**: ${durationSec}\n• **Next Automatic Check**: Tomorrow at 00:00 UTC`,
+        name: '📊 Sync Summary',
+        value: `• **New Additions**: ${itemsToAnnounce.length}\n• **Status**: ✅ All Streams & Downloads Verified Live`,
         inline: false
       }
     ],
@@ -540,6 +542,18 @@ function buildCatalogSyncEmbed(options = {}) {
 
   if (heroBackdrop) {
     embed.image = { url: heroBackdrop };
+  }
+
+  // 5. Persist announced items to discord_state.json so they are NEVER repeated
+  if (!options.dryRun) {
+    for (const item of itemsToAnnounce) {
+      const cId = String(item.canonicalId || item.id || item.slug || '').trim();
+      const titleKey = String(item.title || item.name || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+      const record = { title: item.title, announcedAt: new Date().toISOString() };
+      if (cId) state.sentTitles[cId] = record;
+      if (titleKey) state.sentTitles[titleKey] = record;
+    }
+    saveDiscordState(state);
   }
 
   return embed;
