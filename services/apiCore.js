@@ -3017,7 +3017,7 @@ async function handleDownloadFile(req, res) {
     .replace(/[:\-–—]/g, ' ')
     .replace(/\s+/g, ' ')
     .trim();
-  const titleToUse = baseTitle || (passedTitle || 'Netflix4U Video').replace(/[:\-–—]/g, ' ').replace(/\s+/g, ' ').trim();
+  let titleToUse = baseTitle || (passedTitle || 'Netflix4U Video').replace(/[:\-–—]/g, ' ').replace(/\s+/g, ' ').trim();
 
   // Strip duplicate SxxExx from cleanFilenameBase before appending epSuffix
   let cleanFilenameBase = titleToUse.replace(/[^a-zA-Z0-9.\-_ ]/g, '').trim().replace(/\s+/g, '_');
