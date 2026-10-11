@@ -77,7 +77,7 @@
   function cleanTmdbId(raw) {
     if (raw === null || raw === undefined) return null;
     var str = String(raw).trim();
-    str = str.replace(/^(?:tmdb-(?:movie|series|tv)-|tmdb-|dotmobiz-)/i, '');
+    str = str.replace(/^(?:tmdb-(?:movie|series|tv)-|tmdb-|dotmobiz-|movie-|series-|tv-)/i, '');
     if (!/^\d{1,10}$/.test(str)) return null;
     var num = parseInt(str, 10);
     return (num > 0 && !isNaN(num)) ? num : null;
@@ -453,11 +453,17 @@
     aml: function(s, opt) { return PROVIDER_BUILDERS.allmovieland(s, opt); },
     // 34. PvrPlay / ReelsDownload (Native Multi-Audio Hindi Dubbed HD)
     reelsdownload: function(s, opt) {
+      var tid = cleanTmdbId(s.tmdbId || s.id || (opt && opt.tmdbId));
+      if (!tid) return null;
       var key = (opt && opt.key) || 'k_bf0ab0853bce46e3d90b256b';
       if (s.type === 'movie') {
-        return 'https://embed.reelsdownload.online/player/' + s.tmdbId + '?key=' + key;
+        return 'https://embed.reelsdownload.online/player/' + tid + '?key=' + key;
       }
-      return 'https://embed.reelsdownload.online/player/' + s.tmdbId + '/' + s.season + '/' + s.episode + '?key=' + key;
+      var season = parseInt(s.season, 10);
+      var episode = parseInt(s.episode, 10);
+      if (isNaN(season) || season < 1) season = 1;
+      if (isNaN(episode) || episode < 1) episode = 1;
+      return 'https://embed.reelsdownload.online/player/' + tid + '/' + season + '/' + episode + '?key=' + key;
     },
     pvrplay: function(s, opt) { return PROVIDER_BUILDERS.reelsdownload(s, opt); },
     reels: function(s, opt) { return PROVIDER_BUILDERS.reelsdownload(s, opt); },

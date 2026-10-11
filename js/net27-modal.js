@@ -1705,9 +1705,14 @@
       SERVERS_CONFIG.forEach(function(s) {
         activeWatchServers[s.id] = window.Netflix4uPlayerResolver.resolvePlayerUrl(activeWatchParams, s.id, { lang: currentWatchLang });
       });
-    } else {
-      var sTid = String(activeWatchParams.tmdbId || '').replace(/^(?:dotmobiz|tmdb(?:-movie|-series|-tv)?)-/, '');
-      activeWatchServers.reelsdownload = 'https://embed.reelsdownload.online/player/' + sTid + '/' + targetSe + '/' + targetEp + '?key=k_bf0ab0853bce46e3d90b256b';
+      var sTid = String(activeWatchParams.tmdbId || '').replace(/^(?:dotmobiz|tmdb(?:-movie|-series|-tv)?|movie|series|tv)-/, '');
+      if (/^\d+$/.test(sTid) && Number(sTid) > 0) {
+        var cleanSe = parseInt(targetSe, 10) || 1;
+        var cleanEp = parseInt(targetEp, 10) || 1;
+        activeWatchServers.reelsdownload = 'https://embed.reelsdownload.online/player/' + sTid + '/' + cleanSe + '/' + cleanEp + '?key=k_bf0ab0853bce46e3d90b256b';
+      } else {
+        activeWatchServers.reelsdownload = null;
+      }
       activeWatchServers.vidsrc_sbs = 'https://vidsrc.pm/embed/tv/' + sTid + '/' + targetSe + '/' + targetEp;
       activeWatchServers.s3 = buildVidlinkMultiAudioUrl(activeWatchParams, currentWatchLang);
       activeWatchServers.braflix = 'https://api.cineby.homes/embed/tv/' + sTid + '/' + targetSe + '/' + targetEp + '?autonext=1&ds_lang=en';
@@ -2702,6 +2707,20 @@
               setWatchIframeSrc(activeWatchServers.allmovieland);
             }
           }
+          if (pbData && pbData.tmdbId && !activeWatchParams.tmdbId) {
+            var resolvedTmdb = window.Netflix4uPlayerResolver ? window.Netflix4uPlayerResolver.cleanTmdbId(pbData.tmdbId) : parseInt(pbData.tmdbId, 10);
+            if (resolvedTmdb) {
+              activeWatchParams.tmdbId = resolvedTmdb;
+              SERVERS_CONFIG.forEach(function(s) {
+                if (window.Netflix4uPlayerResolver) {
+                  activeWatchServers[s.id] = window.Netflix4uPlayerResolver.resolvePlayerUrl(activeWatchParams, s.id, { lang: currentWatchLang, imdbId: activeWatchParams.imdbId });
+                }
+              });
+              if (currentWatchServer === 'reelsdownload' && activeWatchServers.reelsdownload) {
+                setWatchIframeSrc(activeWatchServers.reelsdownload);
+              }
+            }
+          }
           if (pbData && pbData.sources && Array.isArray(pbData.sources)) {
             var direct = pbData.sources.find(function(s) { return s.isDirect && s.url; });
             if (direct && direct.url) {
@@ -3057,7 +3076,13 @@
         }
       }
     }
-    if (!activeWatchServers[serverId]) return;
+    if (!activeWatchServers[serverId]) {
+      if (serverId === 'reelsdownload') {
+        setWatchStatus('PVRPlay requires verified TMDB ID', 'Streaming source unavailable for non-TMDB title');
+        showWatchFailoverCard('reelsdownload', 'PVRPlay requires a verified numeric TMDB ID for this title. Please choose another server above.');
+      }
+      return;
+    }
     var cfg = SERVERS_CONFIG.find(function(s) { return s.id === serverId; }) || SERVERS_CONFIG[0];
 
     hideWatchFailoverCard();

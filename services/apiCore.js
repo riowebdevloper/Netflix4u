@@ -484,7 +484,7 @@ async function handlePlayback(req, res) {
   }
 
   const canonicalId = item.canonicalId || (item.record_id ? `dotmobiz-${item.record_id}` : `dotmobiz-${item.id}`);
-  const isTv = (item.type === 'series' || item.type === 'anime' || item.type === 'kdrama');
+  const isTv = (item.type === 'series' || item.type === 'anime' || item.type === 'kdrama' || item.type === 'tv');
 
   // Dynamically resolve TMDB ID if missing on this title
   if (!item.tmdbId && (item.title || item.imdbId)) {
@@ -504,10 +504,12 @@ async function handlePlayback(req, res) {
 
   if (hasVerifiedTmdb) {
     const tid = String(item.tmdbId).replace(/^(?:tmdb-(?:movie|series|tv)-|dotmobiz-)/i, '');
+    const cleanSeason = parseInt(season || 1, 10) || 1;
+    const cleanEpisode = parseInt(episode || 1, 10) || 1;
 
     // 1. Server 1: Peachify Pro (Requested Priority #1)
     const peachifyUrl = isTv
-      ? `https://peachify.pro/embed/tv/${tid}/${season}/${episode}?accent=E50914&autoPlay=true&autoNext=true`
+      ? `https://peachify.pro/embed/tv/${tid}/${cleanSeason}/${cleanEpisode}?accent=E50914&autoPlay=true&autoNext=true`
       : `https://peachify.pro/embed/movie/${tid}?accent=E50914&autoPlay=true`;
 
     sources.push({
@@ -525,22 +527,24 @@ async function handlePlayback(req, res) {
     });
 
     // 2. Server 2: PVRPlay / ReelsDownload (Requested Priority #2)
-    const pvrplayUrl = isTv
-      ? `https://embed.reelsdownload.online/player/${tid}/${season}/${episode}?key=k_bf0ab0853bce46e3d90b256b`
-      : `https://embed.reelsdownload.online/player/${tid}?key=k_bf0ab0853bce46e3d90b256b`;
+    if (/^\d+$/.test(tid) && Number(tid) > 0) {
+      const pvrplayUrl = isTv
+        ? `https://embed.reelsdownload.online/player/${tid}/${cleanSeason}/${cleanEpisode}?key=k_bf0ab0853bce46e3d90b256b`
+        : `https://embed.reelsdownload.online/player/${tid}?key=k_bf0ab0853bce46e3d90b256b`;
 
-    sources.push({
-      id: 'reelsdownload',
-      name: 'Server 2 (PVRPlay Hindi Dub)',
-      label: 'Server 2 (PVRPlay)',
-      priority: 2,
-      status: 'AVAILABLE',
-      canonicalId,
-      provider: 'reelsdownload',
-      url: pvrplayUrl,
-      embedUrl: pvrplayUrl,
-      isDirect: false
-    });
+      sources.push({
+        id: 'reelsdownload',
+        name: 'Server 2 (PVRPlay Hindi Dub)',
+        label: 'Server 2 (PVRPlay)',
+        priority: 2,
+        status: 'AVAILABLE',
+        canonicalId,
+        provider: 'reelsdownload',
+        url: pvrplayUrl,
+        embedUrl: pvrplayUrl,
+        isDirect: false
+      });
+    }
 
     // 3. Server 3: AllMovieLand (Strictly requires IMDb ID starting with 'tt')
     const amlMediaId = await resolveImdbIdForContent(item, tid, isTv ? 'tv' : 'movie');
@@ -3268,9 +3272,14 @@ async function handleStreamPlayer(req, res) {
 
   // Resolve Series Seasons for dynamic OTT episode navigation
   let seriesSeasons = [];
-  const cleanId = String(id || '').replace(/^(?:dotmobiz|tmdb(?:-movie|-series|-tv)?)-/, '');
+  const cleanId = String(id || '').replace(/^(?:dotmobiz|tmdb(?:-movie|-series|-tv)?|movie|series|tv)-/, '');
+  let targetTmdbId = (/^\d+$/.test(cleanId) && Number(cleanId) > 0) ? cleanId : '';
+  if (!targetTmdbId && rec && rec.tmdbId) {
+    const recTmdb = String(rec.tmdbId).replace(/^(?:dotmobiz|tmdb(?:-movie|-series|-tv)?|movie|series|tv)-/, '');
+    if (/^\d+$/.test(recTmdb) && Number(recTmdb) > 0) targetTmdbId = recTmdb;
+  }
   if (!isMovie) {
-    seriesSeasons = await resolveSeriesSeasonsData(cleanId || id, title);
+    seriesSeasons = await resolveSeriesSeasonsData(targetTmdbId || cleanId || id, title);
     if (!seriesSeasons || !seriesSeasons.length) {
       seriesSeasons = [{ season_number: 1, episode_count: Math.max(actualEp, 10), name: 'Season 1' }];
     }
@@ -3290,9 +3299,11 @@ async function handleStreamPlayer(req, res) {
   }
 
   // 2. Multi-Server Stream Providers (PvrPlay Hindi Dub, VidSrc Global, VidLink Multi, Braflix, 4K Cinema, AllMovieLand)
-  const reelsdownloadUrl = isMovie
-    ? `https://embed.reelsdownload.online/player/${cleanId}?key=k_bf0ab0853bce46e3d90b256b`
-    : `https://embed.reelsdownload.online/player/${cleanId}/${actualSe}/${actualEp}?key=k_bf0ab0853bce46e3d90b256b`;
+  const reelsdownloadUrl = targetTmdbId
+    ? (isMovie
+        ? `https://embed.reelsdownload.online/player/${targetTmdbId}?key=k_bf0ab0853bce46e3d90b256b`
+        : `https://embed.reelsdownload.online/player/${targetTmdbId}/${actualSe}/${actualEp}?key=k_bf0ab0853bce46e3d90b256b`)
+    : null;
   const vidsrcUrl = isMovie
     ? `https://vidsrc.pm/embed/movie/${cleanId}`
     : `https://vidsrc.pm/embed/tv/${cleanId}/${actualSe}/${actualEp}`;
@@ -3326,12 +3337,12 @@ async function handleStreamPlayer(req, res) {
 
   // Default initial server: AllMovieLand (if non-TMDB title with valid tt IMDb ID), Fast Cloud, or VidLink Multi-Audio
   const isDubLang = (lang === 'hi' || lang === 'ta' || lang === 'te');
-  const hasNumericTmdb = /^\d+$/.test(cleanId) && Number(cleanId) > 0;
+  const hasNumericTmdb = Boolean(targetTmdbId);
   const reqServer = (q.get('server') || '').toLowerCase();
   const validServers = ['reelsdownload', 'vidsrc', 'allmovieland', 'vidlink', 'braflix', 'videasy', 'cloud'];
-  const initialServer = (validServers.includes(reqServer) && (reqServer !== 'cloud' || cloudStream))
+  const initialServer = (validServers.includes(reqServer) && (reqServer !== 'cloud' || cloudStream) && (reqServer !== 'reelsdownload' || reelsdownloadUrl))
     ? reqServer
-    : (cloudStream ? 'cloud' : (!hasNumericTmdb && allmovielandUrl ? 'allmovieland' : (isDubLang ? 'reelsdownload' : 'vidsrc')));
+    : (cloudStream ? 'cloud' : (!hasNumericTmdb && allmovielandUrl ? 'allmovieland' : ((isDubLang && reelsdownloadUrl) ? 'reelsdownload' : 'vidsrc')));
   const currentSeasonMeta = seriesSeasons.find(s => s.season_number === actualSe) || seriesSeasons[0] || { episode_count: 10 };
 
   const playerHtml = `<!DOCTYPE html>
@@ -3575,6 +3586,11 @@ async function handleStreamPlayer(req, res) {
       if (btn) btn.classList.add('active');
 
       if (srv === 'reelsdownload') {
+        if (!reelsdownloadUrl) {
+          showShieldToast('PvrPlay requires a verified TMDB ID for this title');
+          activateServer(serverSequence.find(function(s) { return s !== 'reelsdownload' && s !== 'cloud'; }) || 'vidsrc');
+          return;
+        }
         var frame = document.getElementById('iframe-reelsdownload');
         if (!frame.src || frame.src === 'about:blank' || frame.src !== reelsdownloadUrl) {
           frame.src = reelsdownloadUrl;
@@ -3677,7 +3693,7 @@ async function handleStreamPlayer(req, res) {
       }
 
       // Rebuild streaming server URLs
-      reelsdownloadUrl = 'https://embed.reelsdownload.online/player/' + cleanId + '/' + currentSe + '/' + currentEp + '?key=k_bf0ab0853bce46e3d90b256b';
+      reelsdownloadUrl = targetTmdbId ? ('https://embed.reelsdownload.online/player/' + targetTmdbId + '/' + currentSe + '/' + currentEp + '?key=k_bf0ab0853bce46e3d90b256b') : null;
       vidsrcUrl = 'https://vidsrc.pm/embed/tv/' + cleanId + '/' + currentSe + '/' + currentEp;
       var currentLang = ${JSON.stringify(lang)};
       vidlinkUrl = 'https://vidlink.pro/tv/' + cleanId + '/' + currentSe + '/' + currentEp + '?multiLang=true' + (currentLang ? '&lang=' + currentLang : '');

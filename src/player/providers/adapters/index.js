@@ -125,13 +125,16 @@ const reelsdownload = createAdapter({
   requiredIdentifier: 'tmdb',
   notes: 'Native Multi-Audio Hindi Dubbed Player from PvrPlay engine (saveweb2zip extracted)',
   customMovieBuilder(baseUrl, input) {
-    const tid = cleanTmdbId(input.tmdbId);
+    const tid = cleanTmdbId(input.tmdbId || input.id || input.canonicalId);
+    if (!tid) return null;
     return `${baseUrl}/${encodeURIComponent(tid)}?key=k_bf0ab0853bce46e3d90b256b`;
   },
   customTvBuilder(baseUrl, input) {
-    const tid = cleanTmdbId(input.tmdbId);
-    const s = parseInt(input.season || 1, 10);
-    const e = parseInt(input.episode || 1, 10);
+    const tid = cleanTmdbId(input.tmdbId || input.id || input.canonicalId);
+    if (!tid) return null;
+    const s = parseInt(input.season, 10) || 1;
+    const e = parseInt(input.episode, 10) || 1;
+    if (isNaN(s) || s < 1 || isNaN(e) || e < 1) return null;
     return `${baseUrl}/${encodeURIComponent(tid)}/${s}/${e}?key=k_bf0ab0853bce46e3d90b256b`;
   }
 });

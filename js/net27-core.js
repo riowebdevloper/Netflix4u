@@ -1591,10 +1591,13 @@
     // 1b. Direct Clean Watch URL path (e.g. /watch/movie/1339713 or /watch/tv/90545/1/1 or /player/1339713)
     var watchRouteMatch = path.match(/^\/(?:watch|player)\/(?:(movie|tv|series)\/)?([^\/?#]+)(?:\/(\d+))?(?:\/(\d+))?/i);
     if (watchRouteMatch) {
-      var wType = (watchRouteMatch[1] && watchRouteMatch[1].toLowerCase() === 'movie') ? 'movie' : 'tv';
+      var hasExplicitSeEp = Boolean(watchRouteMatch[3]);
+      var wType = watchRouteMatch[1]
+        ? (watchRouteMatch[1].toLowerCase() === 'movie' ? 'movie' : 'tv')
+        : (hasExplicitSeEp ? 'tv' : 'movie');
       var wId = watchRouteMatch[2];
-      var wSe = watchRouteMatch[3] || 1;
-      var wEp = watchRouteMatch[4] || 1;
+      var wSe = parseInt(watchRouteMatch[3] || '1', 10) || 1;
+      var wEp = parseInt(watchRouteMatch[4] || '1', 10) || 1;
       setTimeout(function() {
         if (window.Netflix4uModal && window.Netflix4uModal.openWatch) {
           window.Netflix4uModal.openWatch(wId, wType, wSe, wEp, '');

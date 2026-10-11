@@ -6,7 +6,7 @@
 function cleanTmdbId(val) {
   if (val === null || val === undefined) return '';
   var s = String(val).trim();
-  s = s.replace(/^(?:dotmobiz|tmdb(?:-movie|-series|-tv)?)-/i, '');
+  s = s.replace(/^(?:dotmobiz|tmdb(?:-movie|-series|-tv)?|movie|series|tv)-/i, '');
   return /^\d+$/.test(s) ? s : '';
 }
 
